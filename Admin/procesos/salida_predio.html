@@ -1,0 +1,861 @@
+﻿<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    
+   <title>REPORTE DE PREDIO</title>
+    
+    <style>        
+    .wrapper {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          grid-gap: 10px;
+          background-color:#454548;
+          grid-template-rows: 50px 500px auto;    
+          grid-auto-rows: minmax(150px, auto);          
+      }
+      
+      .grid-item {
+       background-color: #2b2727;
+       padding: 5px;      
+      }
+
+      .one {
+            font: bold 25px arial;
+            color:#fff;
+            background-color: #000000 ;
+            text-align: center;            
+            grid-column: 1 / span 2;
+            grid-row: 1;             
+                     
+           }
+
+      .two {
+            grid-column: 1;
+            grid-row: 2;            
+           }
+
+      .three {
+              grid-column: 2;
+              grid-row: 2 ;
+              
+            }
+      .four {
+              grid-column: 1 / span 2;
+              grid-row: 3;
+              padding: 8px;    
+           }
+      
+      table tbody tr:nth-child(odd) {
+        	background: #fff5e0;
+            }
+
+      table tbody tr:nth-child(even) {
+	        background: #fdf8ef;
+            }
+
+      table.gral {
+             border-collapse: collapse;
+             width: 100%;
+             height: 100%;
+             font:  bold 20px arial;
+          }
+
+      table.gral td.campo {
+            text-align: right;
+            font-weight: bold;
+        }
+
+      table.gral td.dato {
+            text-align: center;
+            font-weight: normal;
+        }
+      
+      table.gral td.titulo_middle {
+            text-align: center;
+            font-weight: bold;
+            background-color:#454548;
+            color:#fff5e0;
+        }
+     
+    </style>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>    
+    <script type="text/javascript" src="../js/jquery.jqGrid.min.js"></script>      
+    <script type="text/javascript" src="../js/grid.locale-es.js"></script>
+    
+    <script src="../../js/ol/v6.3.1/build/ol.js"></script>
+   <link type="text/css" rel="stylesheet" href="../css/cupertino/jquery-ui-1.7.2.custom.css" />
+   <link type="text/css" rel="stylesheet" href="../css/cupertino/ui.jqgrid.css" />
+   <link rel="stylesheet" href="../js/ol/v6.3.1/css/ol.css" type="text/css"/>
+   
+    
+    
+    <script>
+        function recuperarParametro(campo) {
+            var RE = new RegExp("[&?]" + campo + "=([^&]*)&");
+            var href = location.href + "&";
+            if (RE.test(href)) {
+                RE.exec(href);
+                return unescape(RegExp.$1);
+            }
+        }
+
+        function ConsultaReporteFrente(idusu,fid) {
+            //alert(img);
+            var url1 = "../Procesos/salida_frente.html?ResponseType=Edit&idusu=" + idusu + "&fid=" + fid;
+            newWindow = window.open(url1, "_blank", "top=200,left=900,menubar=no,toolbar=no,location=no,height=720,width=880,status=no,scrollbars=yes,minimizable=no,maxmizable=no,resizable=0,titlebar=no,modal=yes");
+            if (newWindow.focus()) {
+                newWindow.focus()
+            }
+        }
+       
+
+
+        $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/         
+            var f2 = [];
+
+            var misValores = {
+                polygons: {
+                    text: 'normal',
+                    align: 'center',
+                    baseline: 'middle',
+                    rotation: '0',
+                    font: 'Arial',
+                    weight: 'normal',
+                    placement: 'point',
+                    maxangle: '0.7853981633974483',
+                    overflow: 'false',
+                    size: '15px',
+                    offsetX: '-12',
+                    offsetY: '-12',
+                    color: 'black',
+                    outline: '#ffffff',
+                    outlineWidth: '4',
+                    maxreso: '1200'
+                }
+            }
+
+            function etiqueta_obra(att, resolution) {           
+                var text = '';
+                var maxResolution = 23;               
+                var text = att.calle;
+                if (resolution > maxResolution) {
+                    text = '';
+                }
+                return text;
+            }
+
+            function etiqueta_predio(att, resolution) {           
+                var text = '';
+                var maxResolution = 23;               
+                var text =  att.ctapredial;
+                if (resolution > maxResolution) {
+                    text = '';
+                }
+                return text;
+            }
+               
+            function etiqueta_frente(att, resolution) {           
+                var text = '';
+                var maxResolution = 23;               
+                var text =  att.mts_frente + ' mts';
+                if (resolution > maxResolution) {
+                    text = '';
+                }
+                return text;
+            }
+             
+           
+
+            function color_contorno(att) {               
+                var capa = att.capa;
+                var color_contorno = '';
+
+                if (capa == 'obra') {
+                    var estatus_obra = parseInt(att.obr_status);
+                    if (estatus_obra == 5) {
+                        color_contorno = 'red'
+                    }
+                    if (estatus_obra == 4) {
+                        color_contorno = 'yellow'
+                    }
+                    if (estatus_obra == 2) {
+                        color_contorno = 'green'
+                    }
+                    if (estatus_obra == 11) {
+                        color_contorno = 'blue'
+                    }
+                    if (estatus_obra == 8) {
+                        color_contorno='grey'
+                    }
+                }
+
+                if (capa == 'predio') {
+                    var ctapredial = att.ctapredial;
+                    var ctapredial_valida = ctapredial.length;
+                    if (ctapredial_valida == 12) {
+                        color_contorno = 'blue';
+                    }                   
+                    else {
+                        color_contorno = 'red';
+                    }                   
+                }
+
+                if (capa == 'predio_comp') {
+                    color_contorno = 'brown';                    
+                }
+
+                if (capa == 'frente') {
+                    color_contorno = 'red';
+                }
+                var saldo = parseFloat(att.saldo);                   
+                if (saldo>0) {
+                    color_contorno = 'red';
+                }
+                else {
+                    color_contorno = 'blue';
+                }
+                return color_contorno;
+            }
+
+            
+        
+        function color_relleno(att) {               
+            var capa = att.capa;
+            var color_relleno = '';
+          
+
+            if (capa == 'obra') {
+                var estatus_obra = parseInt(att.obr_status);
+                if (estatus_obra == 5) {
+                    color_relleno = 'rgba(102, 0, 102, 0.5)'
+                }
+                if (estatus_obra == 4) {
+                    color_relleno = 'rgba(255,255,0,0.3)'
+                }
+                if (estatus_obra == 2) {
+                    color_relleno = 'rgba(0, 255, 0, 0.3)'
+                }
+                if (estatus_obra == 11) {
+                    color_relleno = 'rgba(0, 0, 255, 0.1'
+                }
+                if (estatus_obra == 8) {
+                    color_relleno = 'rgba(192,192,192,0.3);'
+                }
+            }
+
+            if (capa == 'predio') {
+                var ctapredial = att.ctapredial;
+                var ctapredial_valida = ctapredial.length;
+                if (ctapredial_valida == 12) {
+                    color_relleno = 'rgba(0, 0, 255, 0.1)';
+                }
+                else {
+                    color_relleno = 'rgba(102, 0, 102, 0.5)';
+                }
+            }
+
+            if (capa == 'frente') {
+                var saldo = parseFloat(att.saldo);
+                if (saldo > 0) {
+                    color_relleno = 'red';
+                }
+                else {
+                    color_relleno = 'blue';
+                }
+            }
+
+            if (capa == 'predio_comp') {
+                color_relleno = 'rgba(158, 72, 8, 0.1)';                    
+            }                
+
+            return color_relleno;
+        }
+
+            function styles(feature, resolution) {
+                var campos = feature.getProperties();
+                var capa = campos.capa;
+               
+                var stylegral = {
+                    'frente': new ol.style.Style({
+                        image: new ol.style.Circle({
+                            radius: 5,
+                            fill: new ol.style.Fill({
+                                color: color_relleno(campos)
+                            }),
+                            stroke: new ol.style.Stroke({
+                                color: color_contorno(campos),
+                                width: 1
+                            })
+                        }),
+                        text: new ol.style.Text({
+                            textAlign: misValores.polygons.align == '' ? undefined : misValores.polygons.align,
+                            textBaseline: misValores.polygons.baseline,
+                            font: misValores.polygons.weight + ' ' + misValores.polygons.size + ' ' + misValores.polygons.font,
+                            text: etiqueta_frente(campos, resolution),                           
+                            offsetX: misValores.polygons.offsetX,
+                            offsetY: misValores.polygons.offsetY,
+                            stroke: new ol.style.Stroke({
+                                color: '#000',
+                                width: 1
+                            }),
+                            placement: misValores.polygons.placement ? misValores.polygons.placement : undefined,
+                            maxAngle: misValores.polygons.maxangle ? parseFloat(misValores.polygons.maxangle) : undefined,
+                            overflow: misValores.polygons.overflow ? (misValores.polygons.overflow == 'true') : undefined,
+                            rotation: parseFloat(misValores.polygons.rotation)
+                        })
+                    }),                  
+                    'predio': new ol.style.Style({
+                        stroke: new ol.style.Stroke({
+                            color: color_contorno(campos),
+                            width: 0.8
+                        }),
+                        fill: new ol.style.Fill({
+                            color: color_relleno(campos)
+                        }),
+                        text: new ol.style.Text({
+                            font: '50px Calibri',
+                            text: etiqueta_predio(campos, resolution),
+                            placement: 'line',
+                            fill: new ol.style.Fill({
+                                color: '#000'
+                            })
+                        })
+                    }),
+                    'predio_comp': new ol.style.Style({
+                        stroke: new ol.style.Stroke({
+                            color: color_contorno(campos),
+                            width: 0.8
+                        }),
+                        fill: new ol.style.Fill({
+                            color: color_relleno(campos)
+                        })                        
+                    }),
+                    'obra': new ol.style.Style({
+                        stroke: new ol.style.Stroke({
+                            color: color_contorno(campos),
+                            width: 0.8
+                        }),
+                        fill: new ol.style.Fill({
+                            color: color_relleno(campos)
+                        }),
+                        text: new ol.style.Text({
+                            font: '50px Calibri',
+                            text: etiqueta_obra(campos, resolution),
+                            placement: 'line',
+                            fill: new ol.style.Fill({
+                                color: '#000'
+                            })
+                        })
+                    })
+                }
+                return stylegral[capa];
+            }
+
+
+            var pid_entrada = recuperarParametro("pid");
+            var oid_entrada = recuperarParametro("oid");
+            var idusu_entrada = recuperarParametro("idusu");
+            $("#bodegadatos").data("idusu_entrada", idusu_entrada);
+           
+
+
+                      
+
+            /*Imagen del mapa de google*/
+            var raster = new ol.layer.Tile({
+                source: new ol.source.OSM()
+            });
+
+            var vectorsourceFrente = new ol.source.Vector({
+                format: new ol.format.GeoJSON(),
+                url: function (extent) {
+                    return 'http://localhost:8080/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_frentes_salida1&outputFormat=application%2Fjson&CQL_FILTER=pid=' + pid_entrada
+                }
+            });
+
+            var vectorsourcePredioComp = new ol.source.Vector({
+                format: new ol.format.GeoJSON(),
+                url: function (extent) {
+                    return 'http://localhost:8080/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_frentes_salida2&outputFormat=application%2Fjson&CQL_FILTER=oid=' + oid_entrada
+                }
+            });
+
+            var vectorsourceObra = new ol.source.Vector({
+                format: new ol.format.GeoJSON(),
+                url: function (extent) {
+                    return 'http://localhost:8080/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_frentes_salida1&outputFormat=application%2Fjson&CQL_FILTER=pid=' + pid_entrada
+                }
+            });
+            
+            var vectorsourcePredio = new ol.source.Vector({
+                format: new ol.format.GeoJSON(),
+                url: function (extent) {
+                    return 'http://localhost:8080/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_frentes_salida1&outputFormat=application%2Fjson&CQL_FILTER=pid=' + pid_entrada
+                }
+            });
+
+          
+            var styleFunction = function (feature, resolution) {
+                return styles(feature, resolution);
+            };
+
+            var vectorFrente = new ol.layer.Vector({
+                source: vectorsourceFrente,
+                style: styleFunction
+            });
+
+            var vectorPredio = new ol.layer.Vector({
+                source: vectorsourcePredio,
+                style: styleFunction
+            });
+
+            var vectorObra = new ol.layer.Vector({
+                source: vectorsourceObra,
+                style: styleFunction
+            });
+
+            var vectorPredioComp = new ol.layer.Vector({
+                source: vectorsourcePredioComp,
+                style: styleFunction
+            });
+            
+
+
+            /* Se ejecuta en el lugar 1 */          
+
+            var map = new ol.Map({
+                layers: [raster, vectorPredioComp, vectorPredio, vectorFrente,vectorObra],
+                target: document.getElementById('map'),
+                view: new ol.View({
+                    center: [-11319096.234, 2406669.952],
+                    maxzoom: 28,
+                    zoom: 20
+                })                
+            });
+
+         
+            
+
+            vectorsourcePredio.on('addfeature', function (evt) {
+                if (vectorsourcePredio.getState() == 'ready') {
+                    var num_pid = evt.feature.values_.pid; /*Existen poligonos de factibilidad*/
+                    if (num_pid) {
+                        var feature = evt.feature;
+                        var coords = feature.getGeometry().getCoordinates();
+                        var coord = feature.getGeometry().getExtent();
+                        centro = ol.extent.getCenter(coord);
+                        x = centro[0];
+                        y = centro[1];
+                        map.getView().setCenter(centro);
+                        LlenarDatosPredio(feature.getProperties());
+
+                    }
+                    else {
+                        alert("No se encontró el PREDIO.");
+                        /*window.close();*/
+                    }
+                }
+            });
+
+           
+           vectorFrente.getSource().on('change', function (evt) {
+                var f = [];
+                var att = evt.target.getFeatures();
+                var saldo_predio = 0;
+                evt.target.getFeatures().forEach(function (feature) {
+                    
+                    saldo_predio = saldo_predio + parseFloat(feature.get('saldo'));
+                    f.push({
+                        fid: feature.get('fid'),
+                        oid: feature.get('oid'),
+                        obr_clv_int:feature.get('obr_clv_int'),
+                        obr_clv: feature.get('obr_clv'),
+                        coo_clv2: feature.get('coo_clv2'),
+                        mts_frente: feature.get('mts_frente'),
+                        mnomficha: feature.get('mnomficha'),
+                        calle: feature.get('calle'),
+                        colonia: feature.get('colonia'),
+                        tramo: feature.get('tramo'),
+                        cestatus: feature.get('cestatus'),
+                        saldo: feature.get('saldo'),
+                    });
+                });
+                LlenaJQGridFrentes(f);
+                $("#lbsaldo_predio").html('$' + parseFloat(saldo_predio, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+                $("#lbsaldo_predio").css("font-weight", "bold");
+                if (saldo_predio > 0.49) {
+                    $("#lbsaldo_predio").css("color", "red");                    
+               } else {
+                    $("#lbsaldo_predio").css("color", "blue");
+                }
+           });
+                      
+           
+        });       
+     
+        function VerReporteFrente() {
+            var myGrid = $('#grid');
+            var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+            var obj = myGrid.jqGrid('getRowData', selectedRowId);
+            if (obj.fid) {                
+                ConsultaReporteFrente($("#bodegadatos").data("idusu_entrada"), obj.fid)
+            } else {
+                alert('Selecciona un frente de la lista...')
+            }
+
+        }
+
+
+        function VerReporteObra() {
+            var myGrid = $('#grid2');
+            var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+            var obj = myGrid.jqGrid('getRowData', selectedRowId);
+            if (obj.oid) {
+                alert("PoligonoObra:" + obj.oid + " Obra: " + obj.obr_clv_int + " seleccionado");
+
+            } else {
+                alert('Selecciona una Obra de la lista...')
+            }
+        }
+
+        function LlenaJQGridFrentes(frente) {
+        
+            $("#grid").jqGrid({
+                datatype: "local",
+                data: frente,
+                colNames: ['fid', 'oid', 'obr_clv_int', 'Obra_SIFIDOC', 'Coop_SIFIDOC', 'Mts', 'Nombre_Cooperador', 'Nombre_Calle', 'Colonia', 'Tramo', 'Estatus_Obra', 'Saldo'],
+                colModel: [
+                 {
+                     name: 'fid', index: 'fid', width: 50, align: "center"
+                 },
+                 {
+                     name: 'oid', index: 'oid', width: 40, align: "center", hidden: true
+                 },
+                 {
+                     name: 'obr_clv_int', index: 'obr_clv_int', width: 80, align: "center", hidden: true
+                 },
+                 {
+                     name: 'obr_clv', index: 'Obra_SIFIDOC', width: 120, align: "center"
+                 },
+                 {
+                     name: 'coo_clv2', index: 'Coop_SIFIDOC', width: 150, align: "center"
+                 },
+                 {
+                     name: 'mts_frente', index: 'Mts', width: 50, align: "center"
+                 },
+                 {
+                     name: 'mnomficha', index: 'Nombre_Cooperador', width: 300, align: "center"
+                 },
+                 {
+                     name: 'calle', index: 'Nombre_Calle', width: 200, align: "center"
+                 },
+                 {
+                     name: 'colonia', index: 'Colonia', width: 200, align: "center"
+                 },
+                 {
+                     name: 'tramo', index: 'Tramo', width: 300, align: "center"
+                 },
+                 {
+                     name: 'cestatus', index: 'Estatus_Obra', width: 100, align: "center"
+                 },
+                 {
+                     name: 'saldo', index: 'Saldo', width: 120, align: "center", formatter: 'currency', formatoptions: { prefix: '$', decimalSeparator: '.', thousandsSeparator: ',' }
+                 }],
+                pager: '#pager',
+                rowNum: 3,
+                viewrecords: true,
+                //altRows: true,
+                gridview: true,
+                //autoencode: true,                
+                //sortorder: "asc", //login SortOrder.
+                //width: "auto",
+                //height: "auto",
+                //toolbar: [true,"top"], //THIS IS IMPORTANT!
+                caption: 'RELACION DE FRENTES BENEFICIADOS'
+            }).navGrid('#pager', { edit: false, add: false, search: false, del: false })
+
+            .navButtonAdd('#pager',
+                    {
+                        caption: "VerFrente",
+                        buttonicon: "ui-icon-document",
+                        onClickButton: function () {
+                            var myGrid = $('#grid');
+                            var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                            var obj = myGrid.jqGrid('getRowData', selectedRowId);
+                            if (obj.fid) {
+                                ConsultaReporteFrente($("#bodegadatos").data("idusu_entrada"), obj.fid)
+                            } else {
+                                alert('Selecciona un frente de la lista...')
+                            }                            
+                        },
+                        position: "last",
+                        title: "Ver Frente",
+                        cursor: "pointer"
+                    })
+
+            .navButtonAdd('#pager',
+                    {
+                        caption: "EliminarFte",
+                        buttonicon: "ui-icon-document",
+                        onClickButton: function () {
+                            var myGrid = $('#grid');
+                            var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                            var objRegSel = myGrid.jqGrid('getRowData', selectedRowId);
+                            if (objRegSel.fid) {
+                                var idusu_x = $("#bodegadatos").data("idusu_entrada");
+                                ConsultaPermisoEjecutarTarea(idusu_x, 148, 3)
+                                .done(function (result) {
+                                        var data = result.d;
+                                        var no_tiene_permiso = data.split(":");
+                                        var no_tiene = parseInt(no_tiene_permiso[1]);
+                                        if (!no_tiene) {
+                                            var estatus_obra = objRegSel.cestatus;
+                                                        if (estatus_obra == 'Recaudación') {                                                            
+                                                            var opcion = confirm("¿Deseas eliminar el frente con fid: " + objRegSel.fid + '?   ADVERTENCIA: Los PAGOS correspondientes al frente seleccionado serán eliminados, al igual que los DESCUENTOS aplicados y sin aplicar, además se darán de alta las DEVOLUCIONES pertinentes.');
+                                                                if (opcion == true) {
+                                                                    var objUsuarioTareaAccion = {
+                                                                    "id_accion_tarea": 0,
+                                                                    "fid": parseInt(objRegSel.fid),
+                                                                    "pid": 0,
+                                                                    "oid": parseInt(objRegSel.oid),
+                                                                    "obr_clv_int": parseInt(objRegSel.obr_clv_int),
+                                                                    "cid": 0,
+                                                                    "idtarea": 148, /*Tarea correspondiente a la cancelación de pagos*/
+                                                                    "idusu_solicita": $("#bodegadatos").data("idusu_entrada"),
+                                                                    "idusu_autoriza": $("#bodegadatos").data("idusu_entrada"),
+                                                                    "idusu_rubrica": $("#bodegadatos").data("idusu_entrada"),
+                                                                    "idusu_rubrica2": $("#bodegadatos").data("idusu_entrada"),
+                                                                    "folio_solic": '',
+                                                                    "parametro1": objRegSel.obr_clv + objRegSel.coo_clv2,
+                                                                    "parametro2": '',
+                                                                    "parametro3": '',
+                                                                    "parametro4": '',
+                                                                    "parametro5": '',
+                                                                    "parametro6": '',
+                                                                    "parametro7": '',
+                                                                    "parametro8": '',
+                                                                    "parametro9": '',
+                                                                    "parametro10": '',
+                                                                    "parametro11": '',
+                                                                    "parametro12": '',
+                                                                    "parametro13": '',
+                                                                    "parametro14": '',
+                                                                    "parametro15": '',
+                                                                    "parametro16": '',
+                                                                    "parametro17": '',
+                                                                    "parametro18": '',
+                                                                    "parametro19": '',
+                                                                    "parametro20": ''
+                                                                    };
+
+                                                                    var objHistAct = {
+                                                                        "idactividad": 0,
+                                                                        "estatus_actividad": 0,
+                                                                        "fecha_actividad": '01/01/1900',
+                                                                        "hora_actividad": '00:00:00',
+                                                                        "idusu": $("#bodegadatos").data("idusu_entrada"),
+                                                                        "idaccion": 3
+                                                                    };
+
+                                                                    EliminarFrente(objUsuarioTareaAccion, objHistAct)
+                                                                    .done(function (result) {
+                                                                            var data = result.d;
+                                                                            alert(data);
+                                                                            $("#grid").trigger("reloadGrid");
+                                                                    })
+                                                                    .fail(function (xhr) {
+                                                                            console.log(xhr.responseText);
+                                                                            alert("Falló la tarea de eliminar frente.");
+                                                                    })
+                                                               } else {
+                                                                  console.log('Acción cancelada por el usuario');
+                                                               }                                                        
+                                                    }
+                                                     else {
+                                                            alert('No es posible eliminar frentes  de obras en estaus de PROCESO o TERMINADA VENCIDA');
+                                                    }                                               
+                                        }
+                                        else {
+                                              alert('El usuario ' + idusu_x + ' NO cuenta con el PERMISO de ELIMINAR frentes.');
+                                        }
+                              })
+                              .fail(function (xhr) {
+                                    console.log(xhr.responseText);
+                                    alert("Falló al consultar el permiso de ejecución de tarea.");
+                              })                                                            
+                         } else {
+                                alert('Selecciona un frente de la lista...')
+                         }                            
+                        },
+                        position: "last",
+                        title: "Ver Frente",
+                        cursor: "pointer"
+                    });
+            
+            /*$("#t_grid2").append("<input type='button' value='Ver Frente' onclick=VerReporteFrente() style='height:20px;font-size:10'/>");*/
+            /*$("#t_grid").append("<input type='button' value='Ver Obra' onclick=VerReporteObra() style='height:20px;font-size:14'/>");*/
+            
+        }
+
+        function EliminarFrente(objUsuarioTareaAccion, objHistAct) {
+
+            var stringData = JSON.stringify(objUsuarioTareaAccion);
+            var stringData2 = JSON.stringify(objHistAct);
+
+            return $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json; utf-8',
+                url: "../../WebServices/WebServiceTarea.asmx/RegistraEjecuta_Tarea",
+                data: "{objUsuarioTareaAccion:" + stringData + ",objHistAct:" + stringData2 + "}"
+            });
+        }
+
+
+        function ConsultaPermisoEjecutarTarea(idusu, idtarea, idaccion) {
+            return $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json; utf-8',
+                url: "../../WebServices/WebServiceTarea.asmx/ConsultaPermisoTarea",
+                data: "{'idusu':'" + idusu + "','idtarea':'" + idtarea + "','idaccion':'" + idaccion + "'}"
+            });
+        }
+
+
+        function LlenarDatosPredio(att) {
+            $("#lblpid").html(att.pid);
+            $("#lblctapredial").html(att.ctapredial);
+            $("#lblnooficial").html(att.nooficial);
+            $("#lblctaimuvi").html(att.ctaimuvi);
+            $("#lblctasapal").html(att.sapal);            
+            $("#lblusosuelo").html(att.uso_suelo);            
+            $("#lbllote").html(att.lote);
+            $("#lblmzna").html(att.mzna);
+            var ctapred = att.ctapredial;
+
+            if (ctapred.length == 12) {              
+               callWebServicePred(ctapred);
+            }
+        }
+        
+
+        function callWebServicePred(ctapred) {            
+            if (ctapred) {
+                var urlctapred = "http://201.116.205.135:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
+                try {
+                    $.get(urlctapred, function (xml) {
+                        xmlDoc = $.parseXML(xml),
+                        $xml = $(xmlDoc),
+                        $nomprop = $xml.find("NomProp");
+                        $("#lblnompropmunic").text($.trim($nomprop.text()));
+                        $callenotif = $xml.find("DomProp");
+                        $numoficext = $xml.find("NumExtP");
+                        $letraoficialext = $xml.find("LetraExtP");
+                        $numoficint = $xml.find("NumIntP");
+                        $colnotif = $xml.find("ColProp");
+                        $usosuelo = $xml.find("TipPred");
+                        $("#lblcallepropmunic").text($.trim($callenotif.text()) + " " + $.trim($numoficext.text()) + " " + $.trim($letraoficialext.text()) + " " + $.trim($numoficint.text()));
+                        $("#lblcoloniamunic").text($.trim($colnotif.text()));
+
+                        $callenumpred = $xml.find("DomPred");
+                        $numoficextpred = $xml.find("NumExt");
+                        $letraoficextpred = $xml.find("LetraExt");
+                        $numoficintpred = $xml.find("NumInt");
+                        $coloniapred = $xml.find("ColPred");
+
+                        $("#lblmunicdomprop").text($.trim($callenumpred.text()) + ' ' + $.trim($numoficextpred.text()) + ' ' + $.trim($letraoficextpred.text()) + ' ' + $.trim($numoficintpred.text()));
+                        $("#lblmuniccolprop").text($.trim($coloniapred.text()));
+                        $("#tipousosuelo").text($.trim($usosuelo.text()));                       
+                    });
+                }
+                catch (err) {
+                    alert(err);
+                }
+            }
+            else {
+                $("#lblnompropmunic").text('');
+                $("#lblcallepropmunic").text('');
+                $("#lblcoloniamunic").text('');
+                $("#lblmunicdomprop").text('');
+                $("#lblmuniccolprop").text('');
+                $("#tipousosuelo").text('');
+            }
+        }
+    </script>
+  
+</head>
+<body> 
+ <div id="bodegadatos"></div>
+ <div class="wrapper">
+    <div class="grid-item one">REPORTE DE PREDIO</div>               
+    <div id="map" class="grid-item two map"></div>
+    <div class="grid-item three">
+        <table class="gral">
+            <tbody>
+            <tr>
+                <td class="campo">pid:</td> <td class="dato"><label id="lblpid"/></td>
+            </tr>
+            <tr>
+                <td class="campo">Cta_Predial:</td> <td class="dato"><label id="lblctapredial"/></td>
+            </tr>
+            <tr>
+                <td class="campo">No. Oficial:</td> <td class="dato"><label id="lblnumoficial"/></td>
+            </tr>
+            <tr>
+                <td class="campo">Cta_IMUVI:</td> <td class="dato"><label id="lblctaimuvi"/></td>
+            </tr>
+            <tr>
+                <td class="campo">Cta_SAPAL:</td> <td class="dato"><label id="lblsapal"/></td>
+            </tr>            
+            <tr>
+                <td class="campo">Uso Suelo:</td> <td class="dato"><label id="lblusosuelo"/></td>
+            </tr>
+            <tr>
+                <td class="campo">r20:</td> <td class="dato"><label id="lblr20"/></td>
+            </tr>
+            <tr>
+                <td class="campo">Lote:</td> <td class="dato"><label id="lbllote"/></td>
+            </tr>
+            <tr>
+                <td class="campo">Manzana:</td> <td class="dato"><label id="lblmzna"/></td>
+            </tr>
+            <tr>
+                <td class="campo">Saldo Predio:</td> <td class="dato"><label id="lbsaldo_predio"/></td>
+            </tr>
+            <tr>
+                <td class="titulo_middle" colspan="2"> DATOS EN EL PADRON DE PREDIAL</td> 
+            </tr>
+            <tr>
+                <td class="campo">Nombre Propietario:</td> <td class="dato"><label id="lblnompropmunic"/></td>
+            </tr>
+            <tr>
+                <td class="campo">Calle:</td> <td class="dato"><label id="lblcallepropmunic"/></td>
+            </tr>
+            <tr>
+                <td class="campo">Colonia:</td> <td class="dato"><label id="lblcoloniamunic"/></td>
+            </tr>
+            <tr>
+                <td class="campo">Calle del Dom. Notif.:</td> <td class="dato"><label id="lblmunicdomprop"/></td>
+            </tr>
+            <tr>
+                <td class="campo">Colonia del Dom. Notif.:</td> <td class="dato"><label id="lblmuniccolprop"/></td>
+            </tr>
+            <tr>
+                <td class="campo">Uso de Suelo:</td> <td class="dato"><label id="tipousosuelo"/></td>
+            </tr> 
+            </tbody>          
+        </table>
+    </div>    
+    <div class="four">
+         <table id="grid"></table>
+     <div id="pager"></div>
+    </div>
+     
+</div>    
+   
+         
+</body>    
+</html>

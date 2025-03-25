@@ -1,0 +1,779 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  lang="es" xml:lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    
+    <style type="text/css">
+
+        #mask {
+             z-index:10;
+             background-color:#000;
+             display:none;
+             position: fixed;    
+             left: 0;
+             top: 0;  
+         }
+
+        #boxes .window {  
+            font-size:20px;
+            position:fixed;
+            width:auto;   
+            height:auto;
+            display:none;
+            z-index:9999;
+            padding:20px;             
+        }
+          
+        #titulorecnat {
+            font-size:20px;
+            text-align:right;
+            color:white;            
+        }
+ 
+        #boxes, #dialogorecnat{ 
+           width:auto; 
+           height:auto;
+        }
+
+       .posicion_boton_accion_recnat,.posicion_boton_cancelar_recnat {
+           font-weight: bold;      
+           font-size:30px;   
+           color:white;  
+        }
+               
+       .datos {   
+           font-size:15px;   
+           background:silver;  
+           font-style:italic;
+           font-weight:bold;   
+           border: 3px solid #393939;
+           border-radius: 5px 5px 5px 5px;
+           color: #393939;   
+           padding: 5px; 
+       }
+    </style>
+
+    
+    <link type="text/css" rel="stylesheet" href="../../css/cupertino/jquery-ui-1.7.2.custom.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/ui.jqgrid.css" />
+    
+    
+    <script type="text/javascript" src="../../js/JScript_General.js" ></script>    
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>     
+    <script type="text/javascript" src="../../js/excelexportjs.js"></script>
+    <script type="text/javascript" src="../../js/grid.locale-es.js"></script>
+    <script type="text/javascript" src="../../js/jquery.jqGrid.min.js"></script>
+    <script type="text/javascript" src="../../js/grid.grouping.js"></script>
+    <!--<script type="text/javascript" src="../../js/grid.base.js"></script>-->
+    <!--<script type="text/javascript" src="../../js/grid.common.js"></script>-->
+    <!--<script type="text/javascript" src="../../js/grid.formedit.js"></script>-->
+    <script type="text/javascript" src="../../js/jquery.fmatter.js"></script>
+    <script type="text/javascript" src="../../js/jquery.tablednd.js"></script>
+    <script type="text/javascript" src="../../js/ui.multiselect.js"></script>
+    <!--<script type="text/javascript" src="../../js/grid.inlinedit.js"></script>-->
+    <!--<script type="text/javascript" src="../../js/grid.addons.js"> </script>-->
+    <script type="text/javascript" src="../../js/jquery.searchFilter.js"> </script>
+    <script type="text/javascript" src="../../js/jQDnR.js"></script>
+    <script type="text/javascript" src="../../js/jqModal.js"></script>     
+    <script type="text/javascript" src="../../js/grid.subgrid.js"></script>      
+     
+
+   <script type="text/javascript">
+
+         
+
+       $(document).ready(function () {
+
+            var idusu = recuperarParametro("idusu");
+            var fec_inicial = recuperarParametro("fecini");
+            var fec_final = recuperarParametro("fecfin");
+            var tipo_mov = recuperarParametro("tipomov");
+            var idcoop = recuperarParametro("idcoop");
+
+            
+
+            if (idcoop.indexOf("#") > -1) {
+                idcoop = idcoop.substr(0, idcoop.length - 1);
+            }
+            
+            var fecnotifdet = recuperarParametro("fecnotifdet");
+            var saldoact5  = recuperarParametro("saldoact5");
+
+            $("#bodegadatos").data("tipo_mov",tipo_mov);
+            $("#bodegadatos").data("idcoop", idcoop);
+            $("#bodegadatos").data("idusu", idusu);
+            $("#bodegadatos").data("fecnotifdet", fecnotifdet);
+            $("#bodegadatos").data("saldoact5", saldoact5);
+
+            Relaciona_movimientos(fec_inicial, fec_final, tipo_mov, idcoop);
+
+
+            
+
+
+            $(".posicion_boton_accion_recnat").click(function (e) { //Ver documento 
+                //alert("Agregar registro de recargo");
+                var montorecnat = $("#txtmontorecargo_x").val();
+                var fec_cap = $("#txtfecrec_x").val();
+                AplicarRegistroRecNat(fec_cap,montorecnat,1)
+            });
+
+
+
+            $(".posicion_boton_cancelar_recnat").click(function (e) { //Ver documento 
+                $('#mask, .window').hide();
+            });
+
+            $('#mask').click(function () {
+                $(this).hide();
+                $('.window').hide();
+            });
+
+
+
+
+       });
+
+
+       function isDate(txtDate) {
+           var currVal = $.trim(txtDate);
+           var resp;
+
+           if (currVal == '')
+               resp = false;
+
+           //Declare Regex            
+           var rxDatePattern = /^(\d{1,2})(\/)(\d{1,2})(\/)(\d{4})$/;
+           var dtArray = currVal.match(rxDatePattern); // is format OK?
+
+           if (dtArray == null) {
+               resp = false;
+           }
+           else {
+               dtDay = parseInt(dtArray[1]);
+               dtMonth = parseInt(dtArray[3]);
+               dtYear = parseInt(dtArray[5]);
+               if (dtMonth < 1 || dtMonth > 12)
+                   resp = false;
+               else if (dtDay < 1 || dtDay > 31)
+                   resp = false;
+               else if ((dtMonth == 4 || dtMonth == 6 || dtMonth == 9 || dtMonth == 11) && dtDay == 31)
+                   resp = false;
+               else if (dtMonth == 2) {
+                   var isleap = (dtYear % 4 == 0 && (dtYear % 100 != 0 || dtYear % 400 == 0));
+                   if (dtDay > 29 || (dtDay == 29 && !isleap))
+                       resp = false;
+               }
+               resp = true;
+           }
+
+           //Checks for dd/mm/yyyy format.
+
+           if (!resp) {
+               alert("La fecha capturada como fecha de envío es incorrecta");
+           }
+           return resp;
+       }
+
+    
+       function filterFloat(evt, input) {
+           // Backspace = 8, Enter = 13, ‘0′ = 48, ‘9′ = 57, ‘.’ = 46, ‘-’ = 43
+           var key = window.Event ? evt.which : evt.keyCode;
+           var chark = String.fromCharCode(key);
+           var tempValue = input.value + chark;
+           if (key >= 48 && key <= 57) {
+               if (filter(tempValue) === false) {
+                   return false;
+               } else {
+                   return true;
+               }
+           } else {
+               if (key == 8 || key == 13 || key == 0) {
+                   return true;
+               } else if (key == 46) {
+                   if (filter(tempValue) === false) {
+                       return false;
+                   } else {
+                       return true;
+                   }
+               } else {
+                   return false;
+               }
+           }
+       }
+
+       function filter(__val__) {
+           var preg = /^([0-9]+\.?[0-9]{0,2})$/;
+           if (preg.test(__val__) === true) {
+               return true;
+           } else {
+               return false;
+           }
+
+       }
+
+
+
+       function IsNumeric(valor) {
+
+           var log = valor.length;
+           var sw = "S";
+           for (x = 0; x < log; x++) {
+               v1 = valor.substr(x, 1);
+               v2 = parseInt(v1);
+               //Compruebo si es un valor numérico 
+               if (isNaN(v2)) {
+                   if (v1 != ".") {
+                       sw = "N";
+                       x = log;
+                   }
+               }
+           }
+           if (sw == "S") { return true; } else { return false; }
+       }
+
+       var primerslap = false;
+       var segundoslap = false;
+
+       function formateafecha(fecha) {
+           var long = fecha.length;
+           var dia;
+           var mes;
+           var ano;
+           if ((long >= 2) && (primerslap == false)) {
+               dia = fecha.substr(0, 2);
+               if ((IsNumeric(dia) == true) && (dia <= 31) && (dia != "00")) { fecha = fecha.substr(0, 2) + "/" + fecha.substr(3, 7); primerslap = true; }
+               else { fecha = ""; primerslap = false; }
+           }
+           else {
+               dia = fecha.substr(0, 1);
+               if (IsNumeric(dia) == false)
+               { fecha = ""; }
+               if ((long <= 2) && (primerslap = true)) { fecha = fecha.substr(0, 1); primerslap = false; }
+           }
+           if ((long >= 5) && (segundoslap == false)) {
+               mes = fecha.substr(3, 2);
+               if ((IsNumeric(mes) == true) && (mes <= 12) && (mes != "00")) { fecha = fecha.substr(0, 5) + "/" + fecha.substr(6, 4); segundoslap = true; }
+               else { fecha = fecha.substr(0, 3);; segundoslap = false; }
+           }
+           else { if ((long <= 5) && (segundoslap = true)) { fecha = fecha.substr(0, 4); segundoslap = false; } }
+           if (long >= 7) {
+               ano = fecha.substr(6, 4);
+               if (IsNumeric(ano) == false) { fecha = fecha.substr(0, 6); }
+               else { if (long == 10) { if ((ano == 0) || (ano < 1900) || (ano > 2100)) { fecha = fecha.substr(0, 6); } } }
+           }
+           if (long >= 10) {
+               fecha = fecha.substr(0, 10);
+               dia = fecha.substr(0, 2);
+               mes = fecha.substr(3, 2);
+               ano = fecha.substr(6, 4);
+               // Año no viciesto y es febrero y el dia es mayor a 28 
+               if ((ano % 4 != 0) && (mes == 02) && (dia > 28)) { fecha = fecha.substr(0, 2) + "/"; }
+           }
+           return (fecha);
+       }
+
+
+       function ConvertirCadenaToFecha(cadenafec) {
+           if (cadenafec != "") {
+               var from = cadenafec.split("/");
+               var fecha = new Date(from[2], from[1] - 1, from[0]);
+           }
+           else {
+               /*var fecha = new Date('2200', '01', '01');*/
+               var fecha = '01/01/1900';
+           }
+
+           return fecha;
+       }
+
+
+
+        function recuperarParametro(campo) {
+            var RE = new RegExp("[&?]" + campo + "=([^&]*)&");
+            var href = location.href + "&";
+            if (RE.test(href)) {
+                RE.exec(href);
+                return unescape(RegExp.$1);
+            }
+        }
+
+
+
+        function RedibujarGrid() {
+            //    jQuery("#grid").jqGrid('setGridParam',
+            //        {
+            //          datatype: function () { ObtenerDatos(ObtenerFiltro()) }                
+            //        })
+            //.trigger("reloadGrid");
+            $("#grid").trigger("reloadGrid");
+        }
+
+
+
+        function AplicarRegistroRecNat(fec_cap,montomov,accion) {
+
+            var date = new Date();
+
+            if (isDate(fec_cap) && ConvertirCadenaToFecha(fec_cap) > ConvertirCadenaToFecha('01/01/1900') && ConvertirCadenaToFecha(fec_cap) <= date) {
+                if (parseFloat(montomov) > 0) {
+                    var hoy = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
+
+                    var mov_obr = $("#bodegadatos").data("mov_obr");
+                    var mov_coop = $("#bodegadatos").data("mov_coop");
+                    var mov_fecha = ConvertirCadenaToFecha(fec_cap); //Fecha vieja
+                    var mov_usu = $("#lblusu_x").html();
+                    var mov_monto = parseFloat(montomov);
+                    var mov_fecha_cap = date;   // Fecha nueva
+                    var mov_ndep = fec_cap + ':' + $("#lblcoop_x").html();
+                    var mov_devolver = 0;
+                    var idmov = 0;
+                    var obr_clv_int = parseInt($("#bodegadatos").data("obr_clv_int"));
+                    var coo_clv2 = parseInt($("#lblcoop_x").html());
+                    var mov_tipo_int = parseInt($("#lsttipomov").val());
+                    var mov_descrip = '';
+                    
+
+
+
+                    InsertaMovFinanc(mov_obr, mov_coop, mov_fecha, mov_usu, mov_monto, mov_fecha_cap, mov_ndep, mov_devolver, idmov, obr_clv_int, coo_clv2, mov_tipo_int, mov_descrip, accion)
+                                                   .done(function (r) { /*Si se tiene éxito al guardar la factibilidad*/
+                                                      
+                                                       alert("Movimiento financiero guardado correctamente");                                                      
+                                                       $('#mask, .window').hide();                                                       
+                                                       RedibujarGrid();
+
+                                                   })
+                                                   .fail(function (xhr) {
+                                                       console.log(xhr.responseText);
+                                                       alert("No es posible guardar el registro financiero...");
+                                                   });
+                }
+                else {
+                    alert("La cantidad del recargo capturado es inválido.");
+                }
+
+            }
+            else {
+
+                alert("La fecha capturada no es válida.")
+            }
+        }
+
+
+
+        function InsertaMovFinanc(mov_obr, mov_coop, mov_fecha, mov_usu, mov_monto, mov_fecha_cap, mov_ndep, mov_devolver, idmov, obr_clv_int, coo_clv2, mov_tipo_int, mov_descrip, accion) { /*Inserta los registros de los documentos en la tabla de mDocumento*/
+
+
+            var enviarObj = {
+                "mov_obr": mov_obr,
+                "mov_coop": mov_coop,
+                "mov_fecha": mov_fecha,
+                "mov_usu": mov_usu,
+                "mov_monto": mov_monto,
+                "mov_fecha_cap": mov_fecha_cap,
+                "mov_ndep": mov_ndep,
+                "mov_devolver": mov_devolver,
+                "id": idmov,
+                "obr_clv_int": obr_clv_int,
+                "coo_clv2": coo_clv2,
+                "mov_tipo_int": mov_tipo_int,
+                "mov_descrip": mov_descrip,
+                "accion": accion,
+            }
+
+            var stringData = JSON.stringify(enviarObj);
+
+            return $.ajax({
+                type: 'POST',
+                url: "../../WebServices/WebServiceMovs.asmx/RegMov",
+                data: "{objMovFinanc:" + stringData + "}",
+                contentType: 'application/json; utf-8',
+                dataType: 'json',
+                success: function (data) {
+                    if (data.d != null) {
+                        console.log(data.d);
+                    }
+                },
+                error: function (responseText, textStatus, errorThrown) {
+                    alert(textStatus + responseText + errorThrown);
+                }
+            });
+        }
+
+
+
+        function MostrarModalRecNat() {
+            var maskHeight = $(document).height();
+            var maskWidth = $(window).width();
+
+
+            //Set height and width to mask to fill up the whole screen
+            $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+
+            //transition effect             
+            $('#mask').fadeIn(1000);
+            $('#mask').fadeTo("slow", 0.8);
+
+            //Get the window height and width
+            var winH = $(window).height();
+            var winW = $(window).width();
+
+            //Set the popup window to center
+            $("#dialogorecnat").css('top', winH / 2 - $("#dialogorecnat").height() / 2);
+            $("#dialogorecnat").css('left', winW / 2 - $("#dialogorecnat").width() / 2);
+
+            //transition effect
+            $("#dialogorecnat").fadeIn(2000);
+        }
+
+
+        function OperacionMovFinanc(idusu,idcoop, tipo_mov, accion) {
+
+            var date = new Date();
+            var hoy = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
+
+            if (accion == 1) {              
+                
+                
+                $("#lblusu_x").text(idusu);                
+                $("#lblcoop_x").text(idcoop);
+                $("#lblfechoy_x").text(hoy);
+                $("#lblaccion_x").text(accion);                
+                llenarTipoMov(parseInt(tipo_mov));
+                MostrarModalRecNat();
+            }
+
+            if (accion == 2) { //Eliminar recargo, (se introduce un registro de cancelación de recargo)
+
+                var mov_obr=$("#bodegadatos").data("mov_obr");
+                var mov_coop=$("#bodegadatos").data("mov_coop");
+                var mov_fecha=date;
+                var mov_usu=idusu;
+                var mov_monto = $("#bodegadatos").data("mov_monto");
+                var mov_fecha_cap=date;
+                var mov_ndep = hoy + ':' + tipo_mov.toString();
+                var mov_devolver=0
+                var idmov = $("#bodegadatos").data("idmov");
+                var obr_clv_int = $("#bodegadatos").data("obr_clv_int")
+                var coo_clv2=idcoop;
+                var mov_tipo_int=tipo_mov; //Tipo de recargo a cancelar
+                var mov_descrip='';                                                    
+  
+                if (tipo_mov == 5 || tipo_mov == 8 || tipo_mov == 10) {
+                    InsertaMovFinanc(mov_obr, mov_coop, mov_fecha, mov_usu, mov_monto, mov_fecha_cap, mov_ndep, mov_devolver, idmov, obr_clv_int, coo_clv2, mov_tipo_int, mov_descrip, accion);
+                    alert("Movimiento cancelado");
+                    location.reload();                    
+                }
+                else {
+                    alert("No es posible eliminar el movimiento financiero");
+                }
+            }
+            
+            
+        }
+
+
+
+
+
+            function RedibujarGrid() {
+                //    jQuery("#grid").jqGrid('setGridParam',
+                //        {
+                //          datatype: function () { ObtenerDatos(ObtenerFiltro()) }                
+                //        })
+                //.trigger("reloadGrid");
+                $("#grid").trigger("reloadGrid");
+            }
+
+
+
+            function Relaciona_movimientos(fec_inicial,fec_final,tipo_mov,idcoop) {
+
+                var tituloventana = '';
+
+                if (tipo_mov == 1) {
+                    tituloventana = 'Relacion de PAGOS'
+                }
+
+                if (tipo_mov == 5) {
+                    tituloventana = 'Relacion de Recargos Naturales'
+                }
+
+                if (tipo_mov == 3) {
+                    tituloventana = 'Relacion de Descuentos sobre Recargos'
+                }
+
+                if (tipo_mov == 2) {
+                    tituloventana = 'Relacion de Bonificaciones'
+                }
+
+                if ($("#grid")[0].grid) {
+                    $.jgrid.gridUnload("#grid");
+                    //$("#grid").jqGrid("clearGridData", true).trigger("reloadGrid");
+                }               
+
+                    $("#grid").jqGrid(
+                     {
+                         datatype: function () {
+                             $.ajax(
+                               {
+                                   url: "../../WebServices/WebServiceMovs.asmx/GetMovs_psql", //PageMethod
+                                   data: "{'pPageSize':'" + $('#grid').getGridParam("rowNum") +
+                                   "','pCurrentPage':'" + $('#grid').getGridParam("page") +
+                                   "','pSortColumn':'" + $('#grid').getGridParam("sortname") +
+                                   "','pSortOrder':'" + $('#grid').getGridParam("sortorder") +
+                                   "','fecini':'" + fec_inicial +
+                                   "','fecfin':'" + fec_final +
+                                   "','movtipo':'" + tipo_mov +
+                                   "','idcoop':'" + idcoop + "'}", //PageMethod Parametros de entrada
+                                   dataType: "json",
+                                   type: "post",
+                                   contentType: "application/json; charset=utf-8",
+                                   complete: function (jsondata, stat) {
+                                       if (stat == "success") {
+                                           jQuery("#grid")[0].addJSONData(JSON.parse(jsondata.responseText).d);
+                                           
+                                           var objeto = JSON.parse(jsondata.responseText).d;
+                                           var regs= objeto.RecordCount;
+                                           if (regs == 0) {
+                                               alert('No se encontraron registros...');
+                                           }
+                                           else {
+                                               $("#bodegadatos").data("mov_obr", objeto.Items[0].row[2]);
+                                               $("#bodegadatos").data("mov_coop", objeto.Items[0].row[3]);
+                                               $("#bodegadatos").data("obr_clv_int", objeto.Items[0].row[7])                                               
+                                           }
+                                                                                  }
+                                       else {
+                                           alert(JSON.parse(jsondata.responseText).Message);
+                                       }
+                                   }
+                               });
+                         },
+                         jsonReader: //Set the jsonReader to the JQGridJSonResponse squema to bind the data.
+                         {
+                             root: "Items",
+                             page: "CurrentPage",
+                             total: "PageCount",
+                             records: "RecordCount",
+                             repeatitems: true,
+                             cell: "row",
+                             id: "coo_clv2"
+                         },
+                         colModel: [
+                        {
+                            index: 'coo_clv2', width: 30, align: 'Center', name: 'ClvCoopInt'
+                        },
+                        {
+                            index: 'mov_fecha_cap', width: 100, align: 'Center', name: 'FecCap', hidden: true
+                        },
+                        {
+                            index: 'mov_obr', width: 50, align: 'Center', name: 'ClvObra',hidden: true
+                        },              
+                        {
+                            index: 'mov_coop', width: 30, align: 'Center', name: 'ClvCoop', hidden: true
+                        },
+                        {
+                            index: 'mov_fecha', width: 50, align: 'Center', name: 'FecMov', datefmt: 'd/m/Y'
+                        },
+                        {
+                            index: 'mov_mov', width: 50, align: 'Center', name: 'MontoMov', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',' , decimalSeparator:'.'}, sorttype: 'number', summaryType: 'sum'
+                        },                        
+                        {
+                            index: 'mov_ndep', width: 50, align: 'Center', name: 'Folio'
+                        },
+                        {
+                           index: 'obr_clv_int', width: 200, align: 'Center', name: 'ClvObraInt', hidden: true
+                        },
+                        {
+                            index: 'id', width: 50, align: 'Center', name: 'IdMov', hidden: true
+                        },
+                        {
+                            index: 'mov_descrip', width: 50, align: 'Center', name: 'TipoMov'
+                        },
+                        {
+                            index: 'mov_tipo_int', width: 50, align: 'Center', name: 'TipoMovInt', hidden: true
+                        }
+                        ],
+                         pager: "#pager", //Pager.                 
+                         loadtext: 'Cargando datos...',
+                         recordtext: "{0} - {1} de {2} elementos",
+                         emptyrecords: 'No hay resultados',
+                         pgtext: 'Pág:{0} de {1}', //Paging input control text format.
+                         rowNum: "30", // PageSize.
+                         rowList: [5, 10, 20], //Variable PageSize DropDownList. 
+                         viewrecords: true, //Show the RecordCount in the pager.
+                         multiselect: false,
+                         sortname: "mov_fecha", //login SortColumn
+                         sortorder: "asc", //login SortOrder.
+                         width: "1000",
+                         height: "600",
+                         grouping:true,
+                         groupingView : {
+                             groupField: ['ClvCoopInt'],
+                             groupColumnShow : [true],
+                             groupText: ['<b>IdCoop:{0} - Total: ${MontoMov}</b>'],
+                             groupCollapse : true,
+                             groupOrder: ['desc'] },	
+                         caption: tituloventana               
+
+                     }).navGrid('#pager', { edit: false, add: false, search: false, del: false })
+
+                      .navButtonAdd('#pager',
+                                {
+                                    caption: "AltaMovFinanc",
+                                    buttonicon: "ui-icon-document",
+                                    onClickButton: function () {
+                                        var idcoop = parseInt($("#bodegadatos").data("idcoop"));
+                                        var tipo_mov = parseInt($("#bodegadatos").data("tipo_mov"));
+                                        var usuario = $("#bodegadatos").data("idusu");
+                                        var idusu = parseInt(usuario.split(":")[1]);
+                                        var accion = 1;                                        
+                                        if (tipo_mov == 5) {
+                                            if (idusu == 46) {
+                                                var fec_notif_det = ConvertirCadenaToFecha($("#bodegadatos").data("fecnotifdet"));                                                
+                                                var saldoact5 = parseFloat($("#bodegadatos").data("saldoact5"));
+                                                if (fec_notif_det > ConvertirCadenaToFecha('01/01/1900')) {
+                                                    if (saldoact5 > 20) {
+                                                        OperacionMovFinanc(idusu, idcoop, tipo_mov, accion);
+                                                    }
+                                                    else {
+                                                        alert("La cuenta se encuentra saldada, no es permitido generar recargos");
+                                                    }
+                                                }
+                                                else {
+                                                    alert('La fecha de notificación del determinante de crédito no es válida, por lo tanto no es posible registrar recargos naturales');
+                                                }                                             
+                                            } else {
+                                                alert("Usuario sin privilegios para registrar recargos naturales");
+                                            }
+                                        } else { 
+                                            if (tipo_mov == 3) {
+                                                if (idusu == 46) {
+                                                    OperacionMovFinanc(idusu, idcoop, tipo_mov, accion);
+                                                }
+                                                else {
+                                                    alert("Usuario sin privilegios para registrar descuentos sobre recargos");
+                                                }
+                                            }
+                                            else {
+                                                alert("No se dan de alta movimientos de éste tipo...");
+                                            }
+                                        }                                     
+                                    },
+                                    position: "last",
+                                    title: "AltaRecNat",
+                                    cursor: "pointer"
+                                })
+
+                    .navButtonAdd('#pager',
+                                {
+                                    caption: "EliminarMovFinanc",
+                                    buttonicon: "ui-icon-document",
+                                    onClickButton: function () {                                        
+                                        var myGrid = $('#grid');
+                                        var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                                        var idcoop = myGrid.jqGrid('getCell', selectedRowId, 'ClvCoopInt');
+                                        var tipo_mov = myGrid.jqGrid('getCell', selectedRowId, 'TipoMovInt');
+                                        var mov_monto = myGrid.jqGrid('getCell', selectedRowId, 'MontoMov');
+                                        var idmov = myGrid.jqGrid('getCell', selectedRowId, 'IdMov');
+                                        $("#bodegadatos").data("idmov",idmov);                                        
+                                        $("#bodegadatos").data("mov_monto",mov_monto);
+                                        var accion = 2;  //Accion de eliminar un movimiento financiero                                       
+                                        var usuario = $("#bodegadatos").data("idusu");
+                                        var idusu = parseInt(usuario.split(":")[1]);
+                                        var saldoact5 = parseFloat($("#bodegadatos").data("saldoact5"));
+
+                                        if (idcoop) {
+                                            if (tipo_mov == 5 || tipo_mov == 8 || tipo_mov == 10) { //Tipos de movimientos
+                                                if (idusu == 46) { // Permisos de usuario                                                                                                
+                                                    if (saldoact5 > 20) {
+                                                        OperacionMovFinanc(idusu, idcoop, tipo_mov, accion);                                                       
+                                                    }
+                                                    else {
+                                                        alert("La cuenta se encuentra saldada, no es permitido elminar recargos");
+                                                    }
+                                                } else {
+                                                    alert("Usuario sin privilegios para registrar recargos naturales");
+                                                }
+                                            } else {
+                                                alert("No es posible eliminar movmientos de éste tipo...");
+                                            }
+                                        }
+                                        else {
+                                            alert("Selecciona un recargo para cancelar...");
+                                        }
+                                    },
+                                    position: "last",
+                                    title: "AltaRecNat",
+                                    cursor: "pointer"
+                                });
+
+                }
+                
+
+
+            function llenarTipoMov(tipo_mov) {
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    url: "../../WebServices/WebServiceMovs.asmx/GetTipoMov",
+                    data: "{'tipo_mov':'" + tipo_mov + "'}",
+                    success: function (data) {
+                        var elementos = 0;
+                        $("#lsttipomov").html('');
+                        $(data.d).find("tipomov").each(function () {
+                            var option = $(document.createElement('option'));
+                            var clvtipomov = $(this).find("idtipomovr").text();
+                            var descrip_tipomov = $(this).find("titulomovr").text();
+                            option.html(descrip_tipomov);
+                            option.val(clvtipomov);
+                            $("#lsttipomov").append(option);
+                        });
+                       
+                    },
+                    error: function (xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            }
+
+
+
+    </script>
+</head>
+<body>    
+
+    <table id="grid"></table>
+    <div id="pager"></div>&nbsp    
+
+        <div id="bodegadatos"></div>
+            <div id="boxes">                        
+                  <div id="dialogorecnat" class="window"> 
+                     <div id="titulorecnat" class="titulo"> 
+                        <p style="text-align:center"></p>
+                        Usuario:<label for="usuario" id="lblusu_x"></label><br/>                       
+                        No. de Coop:<label for="coopclv2" id="lblcoop_x"></label><br/>
+                        Fecha del día de hoy: <label for="fecactual" id="lblfechoy_x"></label><br/>                                                   
+                        Acción:<label for="accion" id="lblaccion_x"></label><br/> 
+                     </div>
+                     <div class="datos" id="bodyrecargonatural">                                           
+                          <label for="name" id="lblmonto_rec_x">*MONTO RECARGO:</label><input type="text" name="montorecargo" id="txtmontorecargo_x" size="10" value="10" onkeypress="return filterFloat(event,this)";/><br/><br/><br/>  
+                          <label for="name" id="lblfec_rec_x">*FECHA RECARGO:</label><input type="text" name="fecharecargo" id="txtfecrec_x" size="10" maxlength="10" onkeyup = "this.value=formateafecha(this.value);"/><br/><br/>          
+                          <label for="name" id="lbltipomov_x">*TIPO DE MOVIMIENTO:</label><select name="tipoobra" id="lsttipomov"></select><br/><br/>
+                     </div>                  
+                     <div class="botonesA" id="botonesX">
+                        <p style="text-align:right"><a href="#" class ="posicion_boton_accion_recnat">Aceptar</a>&nbsp&nbsp&nbsp<a href="#" class="posicion_boton_cancelar_recnat">Cancelar</a></p>                
+                     </div>
+                  </div>     
+                <div id="mask"></div>    
+            </div>
+ </body>    
+</html>

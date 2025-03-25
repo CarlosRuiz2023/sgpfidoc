@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/powerful_pdf_viewer/js/pdfviewer.jquery.js"></script>        
+    <script type="text/javascript" src="../../js/pdfjs-4.2.67-legacy-dist/build/pdf.mjs"></script>        
+    <script src="../js/moment.js"></script>                  
+    <link type="text/css" rel="stylesheet" href="../../js/powerful_pdf_viewer/css/pdfviewer.jquery.css" />
+    
+    <script>
+       function recuperarParametro(campo) {
+            var RE = new RegExp("[&?]" + campo + "=([^&]*)&");
+            var href = location.href + "&";
+            if (RE.test(href)) {
+                RE.exec(href);
+                return unescape(RegExp.$1);
+            }
+       }
+
+       $(document).ready(function () {
+
+           var nom_archivo = recuperarParametro("nombre_docto");
+           var nom_archivo = '\'' + nom_archivo + '\'';
+       
+
+
+           $('#pdfviewer').pdfViewer(nom_archivo);
+
+
+       });
+
+
+
+
+    </script>
+    
+</head>
+<body>      
+
+       <div id="pdfviewer"></div>
+</body>
+</html>

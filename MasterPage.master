@@ -1,0 +1,496 @@
+﻿
+<%@ Master Language="VB" CodeFile="MasterPage.master.vb" Inherits="MasterPage"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+   
+    <title></title>
+    
+   
+
+
+    <style type="text/css">
+        .style2
+        {
+            width: 372px;
+            height: 122px;
+        }
+        http://localhost:53009/MasterPage.master
+        .style3 {
+            height: 25px;
+        }
+        .style4
+        {            height: 122px;
+            width: 658px;
+        }
+        .auto-style1 {
+            height: 44px;
+        }
+
+        
+        
+        
+
+
+        .auto-style100 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            color:black;        
+            text-decoration:initial;   
+        }
+
+        .auto-style101 {
+            text-align: center;
+            font-weight: bold;
+            font-size : 15px;
+            color:blue;        
+            text-decoration:initial;   
+        }
+
+        .auto-style102 {
+            text-align: center;
+            font-weight: bold;
+            font-size : 15px;
+            color:red;        
+            text-decoration:initial;   
+        }
+        
+
+
+  th.sortasc a  
+  {
+    display:block; padding:0 4px 0 15px; 
+    background:url(~/Admin/imagenes/asc.gif) no-repeat;  
+  }
+  th.sortdesc a 
+  {
+    display:block; padding:0 4px 0 15px; 
+    background:url(~/Admin/imagenes/asc.gif) no-repeat;
+  }
+
+#mask {
+  z-index:10;
+  background-color:#000;
+  display:none;
+  position: fixed;    
+  left: 0;
+  top: 0;  
+}
+
+.posicion_boton_cancelar_sol, .posicion_boton_cancelar_fact, .posicion_boton_cancelar_S, .posicion_boton_cancelar_dcto, .posicion_boton_cancelar_anu, .posicion_boton_cancelar_lev,.posicion_boton_cancelar_obraS,.posicion_boton_cancelar_det,.posicion_boton_cancelar_pub,.posicion_boton_cancelar_procobra,.posicion_boton_cancelar_entregaobra,.posicion_boton_cancelar_obra, .posicion_boton_cancelar_fpocdet, .posicion_boton_cancelar_convenio,.posicion_boton_cancelar_inpc,.posicion_boton_cancelar_obra_proc,.posicion_boton_cancelar_obra_jur1,.posicion_boton_cancelar_obra_term,.posicion_boton_accion_entdcto,.posicion_boton_accion_notiftermobr,.posicion_boton_accion_notifdcto,.posicion_boton_accion_usuario,.posicion_boton_accion_ficha_pago_mes, .posicion_boton_cancelar_rol,.posicion_boton_accion_accion,.posicion_boton_cancelar_tarea, .posicion_boton_cancelar_tipo_asamblea,.posicion_boton_cancelar_estatus_asamblea, posicion_boton_cancelar_asamblea, .posicion_boton_cancelar_tipo_asignacion,.posicion_boton_accion_contratista,.posicion_boton_cancelar_contrato,.posicion_boton_cancelar_comite,.posicion_boton_cancelar_tipo_comite,.posicion_boton_accion_formato_comite,.posicion_boton_accion_acuerdo,.posicion_boton_accion_base_asamblea,.posicion_boton_cancelar_comite_obra,.posicion_boton_cancelar_costo_nuevo_obra,.posicion_boton_cancelar_tipo_recurso,.posicion_boton_cancelar_tanexo_cont {
+  font-weight: bold;      
+  font-size:30px;   
+  color:white;  
+}
+
+.verarchivo,.pasar_total {
+  font-weight: bold;      
+  font-size:18px;   
+  color:white;  
+}
+
+.posicion_boton_accion_sol, .posicion_boton_accion_fact, .posicion_boton_accion_S, .posicion_boton_accion_DU, .posicion_boton_accion_dcto, .posicion_boton_accion_anu,.posicion_boton_accion_lev, .posicion_boton_accion_obraS,.posicion_boton_accion_det,.posicion_boton_accion_pub,.posicion_boton_accion_procobra,.posicion_boton_accion_entregaobra, .posicion_boton_accion_obra, .posicion_boton_accion_fpocdet,.posicion_boton_accion_convenio,.posicion_boton_accion_inpc,.posicion_boton_accion_obra_proc,.posicion_boton_accion_obra_jur1,.posicion_boton_accion_obra_term,.posicion_boton_cancelar_entdcto,.posicion_boton_cancelar_notiftermobr,.posicion_boton_cancelar_notifdcto,.posicion_boton_cancelar_usuario,.posicion_boton_cancelar_ficha_pago_mes, .posicion_boton_accion_rol, .posicion_boton_cancelar_accion_accion, .posicion_boton_accion_tarea, .posicion_boton_accion_tipo_asamblea, .posicion_boton_estatus_asamblea_accion, .posicion_boton_accion_asamblea, .posicion_boton_accion_tipo_asignacion,.posicion_boton_cancelar_contratista,.posicion_boton_accion_contrato,.posicion_boton_accion_comite,.posicion_boton_accion_tipo_comite,.posicion_boton_cancelar_formato_comite,.posicion_boton_cancelar_acuerdo,.posicion_boton_cancelar_base_asamblea,.posicion_boton_accion_comite_obra,.posicion_boton_accion_costo_nuevo_obra,.posicion_boton_accion_tipo_recurso,.posicion_boton_accion_tanexo_cont {
+  font-weight: bold;      
+  font-size:30px;   
+  color:white;  
+}
+ 
+
+/* Customize your modal window here, you can add background image too */
+#boxes .window {  
+  font-size:20px;
+  position:fixed;
+  width:auto;
+  height:auto;
+  display:none;
+  z-index:9999;
+  padding:20px;             
+}
+
+.reporte {   
+  width:auto;
+  height:auto;
+  display:none;           
+}
+
+.underText 
+{ text-decoration: underline;}
+
+.cuerpo_reporte {   
+  font-size:7px;  
+}
+
+
+.ubicacion {  
+  font-size:20px;
+  position:fixed;
+  width:auto;
+  height:auto;
+  display:none;
+  z-index:9999;
+  padding:20px;             
+}
+
+a.skiplink {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+a.skiplink:focus {
+  clip: auto;
+  height: auto;
+  width: auto;
+  background-color: #fff;
+  padding: 0.3em;
+}
+
+#titulo,#titulofact,#tituloDU,#tituloS,#tituloAnu,#titulolev,#titulopresup,#titulodet,#tituloPub,#tituloprocobra,#tituloentregaobra,#tituloDet,#tituloconv,#tituloobraS,#tituloinpc,#tituloobra_proc,#tituloobra_jur1,#titulo_obrterm,#tituloentdcto,#titulotermobr,#titulonotifdcto,#titulousu,#titulofichapagomes,#titulorol,#tituloAccion,#titulotarea,#tituloAsamblea,#titulo_EstatusAsamblea,#titulo_prog_asamblea,#tituloTipoAsignacion,#titulo_contratista,#titulo_comite,#titulo_tcomite,#titulo_fcomite,#titulo_modulo_base,#titulo_trecurso,#titulo_tipo_anexo_contrato{
+            font-size:20px;
+            text-align:right;
+            color:white;            
+        }
+ 
+#boxes,#display_reporte, #dialog, #dialogf, #dialogS, #dialogDU, #dialogoDcto, #dialogoAnu,#dialogoLev, #dialogopresup,#dialogoPub,#dialogodet,#dialogoprocobra, #dialogoentregaobra, #dialogodctodet,#dialogoconv,#dialogoobraS,#dialogoinpc,#dialogoobraproc,#dialogoobrajur1,#dialogo_obrterm,#dialogoentdcto,#dialogotermobr,#dialogonotifdcto,#dialogousuario,#dialogofichapagomes,#dialogorol,#dialogoAccion,#dialogotarea,#dialogo_tasamblea,#dialogo_EstatusAsamblea,#dialogo_prog_asamblea,#dialogo_tasig,#dialogo_contratista,#dialogo_contrato,#dialogo_asamblea,#dialogo_comite,#dialogo_tcomite,#dialogo_act_costo_obra,#dialogo_fcomite,#dialogo_acuerdo,#dialogo_asamblea_base,#dialogo_comite_obra,#dialogo_costo_nuevo,#dialogo_trecurso,#dialogo_tipo_anexo_contrato { 
+  width:auto; 
+  height:auto;
+}
+
+  
+.validateTips { 
+  border: 1px solid transparent; 
+  padding: 0.3em;
+  background-color:lightyellow;
+  font-style:inherit;  
+  top:auto;
+  text-align:center;
+}
+
+.datos {   
+   font-size:15px;   
+   background:silver;  
+   font-style:italic;
+   font-weight:bold;   
+   border: 3px solid #393939;
+   border-radius: 5px 5px 5px 5px;
+   color: #393939;   
+   padding: 5px; 
+}
+
+
+       table.t_modulo td.c{        
+            text-align: center;                      
+            font-size:20px; 
+            font-weight: bold;                      
+            height:40px;
+            background-color:aliceblue;
+            color: black;            
+        }
+
+        table.t_modulo tr.renglon_sistema{        
+            text-align: right;                      
+            font-size:10px; 
+            font-weight: bold;                      
+            height:15px;
+            background-color:coral;
+            color: black;            
+        }
+
+        table.t_modulo td.columna_sistema{        
+            text-align: center;                      
+            color: black;            
+        }
+
+        table.t_modulo td.d{        
+            text-align: right;                      
+            font-size:15px; 
+            font-weight: bold;                      
+            height:40px;
+            background-color:aliceblue;
+            color: black;            
+        }
+
+        table.t_modulo td.e{        
+            text-align: left;                      
+            font-size:15px; 
+            font-weight: bold;                      
+            height:40px;
+            color: white;            
+        }
+
+        table.t_modulo td.ee{        
+            text-align: center;                      
+            font-size:18px; 
+            font-weight: bold;                      
+            height:40px;
+            color: white;            
+        }
+
+         table.t_modulo td.f{        
+           text-align: right;                      
+            font-size:20px; 
+            font-weight: bold;                      
+            height:40px;
+            background-color:aliceblue;
+            color: black;             
+        }
+
+        table.t_modulo td.dato_c{        
+            text-align: center;                      
+            font-size:20px; 
+            font-weight: bold;                      
+            height:40px;        
+        }
+
+        table.t_modulo td.boton_dialog
+        {
+            text-align: center;
+            background-color:#b3daf6;      
+            border: #2628b6 3px solid;       
+            height:30px;
+        }
+
+        table.t_modulo td.boton_dialog a
+        {            
+            font-size:20px; 
+            text-decoration: none; 
+            font-weight:bold;              
+        }
+        
+        
+        table.t_modulo td.boton_dialog a:hover  {
+          color: #1717FF;
+          cursor: pointer;          
+          }        
+
+        table.t_modulo td.signo 
+        {
+            text-align: center;              
+        }
+
+        table.t_modulo td.titulo_modulo
+        {
+            text-align: center;             
+            padding:10px;                          
+            background-color:#000000;      
+            color: #fdf8ef;
+            font: bold 30px arial, arial;
+        }
+
+         table.t_modulo td.titulo_modulo2
+        {
+            text-align: center;             
+            padding:8px;                          
+            background-color:silver;      
+            color: #2628b6;
+            font: bold 20px arial, arial;
+        }
+
+         .dato_captura {
+            font-size:15px; 
+            font-weight:bold;   
+            text-align: center;
+            border: 0;
+            background-color: #eee;
+            border-radius: 5px;
+            border: 1px solid #39c;
+        }
+
+          .dato_captura_float {
+            font-size:15px; 
+            font-weight:bold;   
+            text-align: center;
+            border: 0;
+            background-color: #eee;
+            border-radius: 5px;
+            border: 1px solid #39c;
+        }
+
+          .list_captura {
+            font-size:20px; 
+            font-weight:bold;   
+            text-align: left;
+            border: 0;
+            background-color: #eee;
+            border-radius: 5px;
+            border: 1px solid #39c;
+        }
+
+        .select_captura {
+            font-size:15px; 
+            font-weight:bold;   
+            text-align: center;
+            border: 0;            
+            color: darkblue;
+            background-color:#eee;
+            border-radius: 5px;         
+        }
+        
+        
+
+        
+
+   
+    </style>
+
+
+
+    <link href="Admin/css/estilos.css" rel="stylesheet" type="text/css" />      
+    <link type="text/css" rel="stylesheet" href="admin/css/cupertino/jquery-ui-1.7.2.custom.css" />
+    <link type="text/css" rel="stylesheet" href="admin/css/cupertino/ui.jqgrid.css" />
+    
+    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>  
+    <script type="text/javascript" src="../../js/jquery.jqGrid.min.js"></script>
+    <script type="text/javascript" src="../../js/moment.js"></script>            
+    <script type="text/javascript" src="../../js/FileSaver.js"></script> 
+    <script type="text/javascript" src="../../js/grid.locale-es.js"></script>     
+    <script type="text/javascript" src="../../js/grid.base.js"></script>
+    <script type="text/javascript" src="../../js/excelexportjs.js"></script> 
+    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script type="text/javascript" src="../../js/grid.common.js"></script>
+    <script type="text/javascript" src="../../js/grid.formedit.js"></script>
+    <script type="text/javascript" src="../../js/jquery.fmatter.js"></script>
+    <script type="text/javascript" src="../../js/jquery.tablednd.js"></script>
+    <script type="text/javascript" src="../../js/ui.multiselect.js"></script>
+    <script type="text/javascript" src="../../js/grid.inlinedit.js"></script>
+    <script type="text/javascript" src="../../js/grid.addons.js"> </script>
+    <script type="text/javascript" src="../../js/jquery.searchFilter.js"> </script>
+    <script type="text/javascript" src="../../js/jQDnR.js"></script>
+    <script type="text/javascript" src="../../js/jqModal.js"></script>     
+    <script type="text/javascript" src="../../js/grid.subgrid.js"></script>  
+    <script type="text/javascript" src="../../js/NumerosLetras.js"></script>  
+    
+    <script type="text/javascript">
+       
+       
+
+    </script>
+    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+         
+        
+    </asp:ContentPlaceHolder>        
+</head>   
+<body>   
+  
+  <div>    
+    <form id="form1" runat="server">
+    <table width="100%">        
+        <tr><td class="style2"><asp:Image ID="Image1" runat="server" 
+                    ImageUrl="~/Admin/imagenes/logo_fidoc.png"/></td>
+                <td class="style4">
+                    <div align="right" >
+                        <table><tr>
+                        <td><asp:Label ID="lblUsuario" runat="server" Font-Bold="True"></asp:Label><asp:Label ID="lblOpc" runat="server" Font-Bold="True"></asp:Label></td>
+                        <td>&nbsp;&nbsp;<asp:LinkButton ID="lnkCerrar"   onclientclick="CerrarSesion()" runat="server" 
+                                CausesValidation="False">[ Cerrar Sesión ]</asp:LinkButton></td>
+                        </tr>
+                        </table>
+                        
+                    </div>
+                </td>
+                </tr>
+            <tr>
+                <td class="style3" align="right" colspan="2"> &nbsp;</td>
+            </tr>
+
+                <tr>
+                    <td colspan="2" class="auto-style1">
+                        <asp:Menu ID="Menu2" runat="server" BackColor="#424242"  
+                            DynamicHorizontalOffset="2" Font-Names="Verdana" Font-Size="10" 
+                            ForeColor="#ffffff" Orientation="Horizontal" StaticSubMenuIndent="10px" 
+                            Width="100%" Font-Bold="true" CssClass="menu" StaticEnableDefaultPopOutImage="false">
+                            <StaticSelectedStyle BackColor="#424242"  />
+                            <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                            <DynamicHoverStyle BackColor="#424242" ForeColor="White" />
+                            <DynamicMenuStyle BackColor="#999999" CssClass="MenuIE8" />
+                            <DynamicSelectedStyle BackColor="#999999" />
+                            <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                            <StaticHoverStyle BackColor="#5A6A7A" ForeColor="White"  />
+                            <Items>
+     <asp:MenuItem Text="OIDs" Value="OIDs">
+         <asp:MenuItem Text="Consultar Poligonos de Obra" Value="Consultar Poligonos de Obra"></asp:MenuItem>
+         <asp:MenuItem Text="Calles Desarrollo Urbano" Value="Calles Desarrollo Urbano"></asp:MenuItem>
+     </asp:MenuItem>
+     <asp:MenuItem Text="Obras" Value="Obras" >
+         <asp:MenuItem Text="Consultar Obra" 
+             Value="Consultar Obra"></asp:MenuItem>
+         <asp:MenuItem Text="Act. Costo Obra" Value="Act. Costo Obra"></asp:MenuItem>
+         <asp:MenuItem Text="Contratos" Value="Contratos"></asp:MenuItem>
+         <asp:MenuItem Text="Obra--&gt;Contratos" Value="Obra--&gt;Contratos"></asp:MenuItem>
+     </asp:MenuItem>
+     <asp:MenuItem Text="Cooperadores" Value="Cooperadores">
+         <asp:MenuItem Text="Consultar Cooperador" Value="Consultar Cooperador" NavigateUrl="~/Admin/procesos/consultar_coop.aspx"></asp:MenuItem>
+     </asp:MenuItem>
+     <asp:MenuItem Text="Cartera Vencida" Value="Cartera Vencida">
+         <asp:MenuItem Text="Cartera Vencida Final" Value="Cartera Vencida Final"></asp:MenuItem>
+         <asp:MenuItem Text="DETERMINANTES" Value="DETERMINANTES">
+             <asp:MenuItem Text="Adeudos para generar Carta de Término de Obra" Value="Adeudos para generar Carta de Término de Obra"></asp:MenuItem>
+             <asp:MenuItem Text="Adeudos para notificar Carta de Término de Obra" Value="Adeudos para notificar Carta de Término de Obra"></asp:MenuItem>
+             <asp:MenuItem Text="Adeudos para Determinar" Value="Adeudos para Determinar"></asp:MenuItem>
+             <asp:MenuItem Text="Determinantes generados sin entregar" Value="Determinantes generados sin entregar"></asp:MenuItem>
+             <asp:MenuItem Text="Determinantes sin notificar" Value="Determinantes sin notificar"></asp:MenuItem>
+             <asp:MenuItem Text="Determinantes notificados" Value="Determinantes notificados"></asp:MenuItem>
+         </asp:MenuItem>
+         <asp:MenuItem Text="REQUERIMIENTOS" Value="REQUERIMIENTOS">
+             <asp:MenuItem Text="Requerimientos Generados" Value="Requerimientos Generados"></asp:MenuItem>
+         </asp:MenuItem>
+         <asp:MenuItem Text="Cargar CV" Value="Cargar CV"></asp:MenuItem>
+     </asp:MenuItem>
+     <asp:MenuItem Text="ASAMBLEAS" Value="ASAMBLEAS">
+         <asp:MenuItem Text="Consultar Asambleas" Value="Consultar Asambleas"></asp:MenuItem>
+     </asp:MenuItem>
+                                <asp:MenuItem Text="COMITES" Value="COMITES">
+                                    <asp:MenuItem Text="Gestión Comités" Value="Gestión Comités"></asp:MenuItem>
+                                    <asp:MenuItem Text="Acuerdos por Comité" Value="Acuerdos por Comité"></asp:MenuItem>
+                                </asp:MenuItem>
+                                <asp:MenuItem Text="Contratistas" Value="Contratistas">
+                                    <asp:MenuItem Text="Gestión Contratistas" Value="Gestión Contratistas"></asp:MenuItem>
+                                </asp:MenuItem>
+     <asp:MenuItem Text="UTILERIAS" Value="UTILERIAS">
+         <asp:MenuItem Text="Actualizar Pagos" Value="Actualizar Pagos"></asp:MenuItem>
+         <asp:MenuItem Text="Reportes Generales" Value="Reportes Generales"></asp:MenuItem>
+         <asp:MenuItem Text="Reporte Obras" Value="Reporte Obras"></asp:MenuItem>
+         <asp:MenuItem Text="Transf. Pagos" Value="Transf. Pagos"></asp:MenuItem>
+     </asp:MenuItem>
+     <asp:MenuItem NavigateUrl="~/Admin/procesos/consulta_inpc.aspx" Text="INPC" Value="INPC"></asp:MenuItem>
+     <asp:MenuItem Text="Catalogos" Value="Catalogos">
+         <asp:MenuItem Text="Usuarios" Value="Usuarios"></asp:MenuItem>
+         <asp:MenuItem Text="Roles de Usuario" Value="Roles_Usuario"></asp:MenuItem>
+         <asp:MenuItem Text="Acciones" Value="Acciones"></asp:MenuItem>
+         <asp:MenuItem Text="Tareas" Value="Tareas"></asp:MenuItem>
+         <asp:MenuItem Text="Tipo Asamblea" Value="Tipo Asamblea"></asp:MenuItem>
+         <asp:MenuItem Text="Estatus Asamblea" Value="Estatus Asamblea"></asp:MenuItem>
+         <asp:MenuItem Text="Tipo Asignacion" Value="Tipo Asignacion"></asp:MenuItem>
+         <asp:MenuItem Text="Tipo Comité Técnico" Value="Tipo Comité Técnico"></asp:MenuItem>
+         <asp:MenuItem Text="Formato Comité Técnico" Value="Formato Comité Técnico"></asp:MenuItem>
+         <asp:MenuItem Text="Tipo Recurso Obra" Value="Tipo Recurso Obra"></asp:MenuItem>
+         <asp:MenuItem Text="Tipo Anexo Contrato" Value="Tipo Anexo Contrato"></asp:MenuItem>
+     </asp:MenuItem>
+ </Items>
+                        </asp:Menu>
+                    </td>
+                </tr>
+
+            </table>       
+
+           
+    
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+    </asp:ContentPlaceHolder>
+    </form>
+    </div>      
+    
+        
+</body>
+</html>

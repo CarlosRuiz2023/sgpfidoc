@@ -1,0 +1,285 @@
+﻿<html>
+  <head>
+    <title>Ubicación de Calle de Desarrollo Urbano</title>
+      
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>    
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+
+
+
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->     
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="../../js/ol/v6.3.1/build/ol.js"></script>  
+    <link rel="stylesheet" href="../../js/ol/v6.3.1/css/ol.css" type="text/css"/>
+      
+    
+    
+    
+    <style>
+        a.skiplink {
+        position: absolute;
+        clip: rect(1px, 1px, 1px, 1px);
+        padding: 0;
+        border: 0;
+        height: 1px;
+        width: 1px;
+        overflow: hidden;
+      }
+      a.skiplink:focus {
+        clip: auto;
+        height: auto;
+        width: auto;
+        background-color: #fff;
+        padding: 0.3em;
+      }
+      #map:focus {
+        outline: #4A74A8 solid 0.15em;
+      }
+
+      .ol-popup {
+        position: absolute;
+        background-color: white;
+        -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #cccccc;
+        bottom: 12px;
+        left: -50px;
+        min-width: 280px;
+      }
+      .ol-popup:after, .ol-popup:before {
+        top: 100%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+      .ol-popup:after {
+        border-top-color: white;
+        border-width: 10px;
+        left: 48px;
+        margin-left: -10px;
+      }
+      .ol-popup:before {
+        border-top-color: #cccccc;
+        border-width: 11px;
+        left: 48px;
+        margin-left: -11px;
+      }
+      .ol-popup-closer {
+        text-decoration: none;
+        position: absolute;
+        top: 2px;
+        right: 8px;
+      }
+      .ol-popup-closer:after {
+        content: "✖";
+      }
+    </style>
+  </head>
+  <body>    
+     <a class="skiplink" href="#map">Al mapa</a>
+    
+    <div id="map" class="map" tabindex="0"></div>  
+    <div id="popup" class="ol-popup">
+      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+    <div id="popup-content"></div>
+    </div>
+    <script>
+
+
+        function recuperarParametro(campo) {
+            var RE = new RegExp("[&?]" + campo + "=([^&]*)&");
+            var href = location.href + "&";
+            if (RE.test(href)) {
+                RE.exec(href);
+                return unescape(RegExp.$1);
+            }
+        }
+
+
+        function etiqueta_calle_du(feature, resolution) {
+
+            var maxResolution = 1200;
+            var att = feature.getProperties();
+            var text = att.nomactual;
+            if (resolution > maxResolution) {
+                text = '';
+            }
+            return text;
+        }
+
+
+
+        $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
+            /*Imagen del mapa de google*/
+
+            var centro;
+            var x, y;
+            var mapview;
+            var container = document.getElementById('popup');
+            var content = document.getElementById('popup-content');
+            var closer = document.getElementById('popup-closer');
+            var select = new ol.interaction.Select();
+            var selectedFeature;
+
+            var clavecalle = recuperarParametro("clavecalle");
+
+            var overlay = new ol.Overlay({
+                element: container,
+                autoPan: true,
+                autoPanAnimation: {
+                    duration: 250
+                }
+            });
+
+            var misValores = {
+                polygons: {
+                    text: 'normal',
+                    align: 'center',
+                    baseline: 'middle',
+                    rotation: '0',
+                    font: 'Arial',
+                    weight: 'normal',
+                    placement: 'point',
+                    maxangle: '0.7853981633974483',
+                    overflow: 'false',
+                    size: '13px',
+                    offsetX: '0',
+                    offsetY: '0',
+                    color: 'blue',
+                    outline: '#ffffff',
+                    outlineWidth: '4',
+                    maxreso: '1200'
+                }
+            }
+
+
+
+            closer.onclick = function () {
+                overlay.setPosition(undefined);
+                closer.blur();
+                return false;
+            };
+
+          
+
+            function pcalle_duSeleccionada(feature, resolution, dom) {
+
+                var style_simple = new ol.style.Style({
+                    stroke: new ol.style.Stroke({
+                        color: 'red',
+                        width: 4
+                    }),
+                    text: new ol.style.Text({
+                        font: '30px Calibri',
+                        text: etiqueta_calle_du(feature, resolution),
+                        placement: 'line',
+                        offsetY: 18,                        
+                        fill: new ol.style.Fill({
+                            color: '#0000ff'
+                        })
+                    })
+                });
+
+                return style_simple;
+            }
+
+            
+            var raster = new ol.layer.Tile({
+                source: new ol.source.OSM()
+            });
+            
+
+            var vectorsource = new ol.source.Vector({
+                format: new ol.format.GeoJSON(),
+                url: function (extent) {
+                    return 'http://172.17.11.168:8080/geoserver/sigFidoc/ows?service=WFS&' +
+                    'version=1.0.0&request=GetFeature&typeName=sigFidoc:ccalles_du&' +
+                    'outputFormat=application%2Fjson&CQL_FILTER=clavecalle=' + clavecalle;
+                }
+            });
+
+            /*var vectorsourcecallesdu = new ol.source.Vector({
+                 format: new ol.format.GeoJSON(),
+                 url: function (extent) {
+                     return 'http://172.17.11.168:8080/geoserver/sigFidoc/ows?service=WFS&' +
+                    'version=1.0.0&request=GetFeature&typeName=sigFidoc1:CallesDU&' +
+                    'outputFormat=application%2Fjson'
+                 }
+             })*/
+
+
+            var vector = new ol.layer.Vector({
+                source: vectorsource
+            });
+
+            /*  var vectorcallesdu = new ol.layer.Vector({
+                    source: vectorsourcecallesdu,
+                    style: styleFunction
+                });*/
+
+
+            vectorsource.on('addfeature', function (evt) {
+                if (vectorsource.getState() == 'ready') {
+                    var feature = evt.feature;
+                    var p2 = feature.values_.clavecalle
+                    if (p2 == clavecalle) {
+                        var coords = feature.getGeometry().getCoordinates();
+                        var coord = feature.getGeometry().getExtent();
+
+                        feature.setStyle(pcalle_duSeleccionada(feature, map.getView().getResolution(), misValores));
+
+                        centro = ol.extent.getCenter(coord);
+                        x = centro[0];
+                        y = centro[1];
+
+                        map.getView().setMaxZoom(23);
+                        map.getView().setZoom(19);
+                        map.getView().setCenter(centro);
+
+
+                    }
+                }
+            });
+
+
+
+            var map = new ol.Map({
+                layers: [raster, vector],
+                target: document.getElementById('map'),
+                overlays: [overlay],
+                view: new ol.View({
+                    center: [-11319096.234, 2406669.952],
+                    maxzoom: 23,
+                    zoom: 12
+                })
+            });
+
+
+            map.on('singleclick', function (evt) {
+                /*selectedFeature = select.getFeatures();*/
+                var features = map.getFeaturesAtPixel(evt.pixel);
+                if (features.length > 0) {
+                    var coordinate = evt.coordinate;
+                    content.innerHTML = '<p>ClaveCalle:<code>' + features[0].values_.clavecalle + '</code></p>' +
+                                        '<p>Nombre Actual:<code>' + features[0].values_.nomactual + '</code></p>' + 
+                                        '<p>Nombre Anterior:<code>' + features[0].values_.nomanterio + '</code></p>' +
+                                        '<p>Colonia:<code>' + features[0].values_.colonia + '</code></p>';
+
+                    overlay.setPosition(coordinate);
+                } else {
+                    closer.onclick();
+                }
+            });
+
+
+        });
+
+    </script>
+  </body>
+</html>

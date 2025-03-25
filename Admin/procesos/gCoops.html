@@ -1,0 +1,666 @@
+﻿ <html>
+ <head>
+
+     <title>COOPERADORES</title>
+
+
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+     <link href="https://paulkinzett.github.io/toolbar/css/jquery.toolbar.css" rel="stylesheet" />
+     <link type="text/css" rel="stylesheet" href="../../js/ol/v6.3.1/css/ol.css" />
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+     <script type="text/javascript" src="../../js/ol/v6.3.1/build/ol.js"></script>
+     <script src="https://paulkinzett.github.io/toolbar/js/jquery.toolbar.min.js"></script>
+     <script src="../../proj4js_250/dist/proj4.js"></script>
+     <script src="../../js/jsPDF-1.3.2/dist/jspdf.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.0.28/jspdf.plugin.autotable.js"></script>
+     <script src="../../js/jsPDF-1.3.2/dist/html2canvas.min.js"></script>
+     <script src="../../Global/config.js"></script>
+
+
+     <style>
+
+
+
+         a.skiplink {
+             position: absolute;
+             clip: rect(1px, 1px, 1px, 1px);
+             padding: 0;
+             border: 0;
+             height: 1px;
+             width: 1px;
+             overflow: hidden;
+         }
+
+             a.skiplink:focus {
+                 clip: auto;
+                 height: auto;
+                 width: auto;
+                 background-color: #fff;
+                 padding: 0.3em;
+             }
+
+         #map:focus {
+             outline: #4A74A8 solid 0.15em;
+         }
+
+         .ol-popup {
+             position: absolute;
+             background-color: white;
+             -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+             filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+             padding: 15px;
+             border-radius: 10px;
+             border: 1px solid #cccccc;
+             bottom: 12px;
+             left: -50px;
+             min-width: 50px;
+         }
+
+             .ol-popup:after, .ol-popup:before {
+                 top: 100%;
+                 border: solid transparent;
+                 content: " ";
+                 height: 0;
+                 width: 0;
+                 position: absolute;
+                 pointer-events: none;
+             }
+
+             .ol-popup:after {
+                 border-top-color: white;
+                 border-width: 10px;
+                 left: 48px;
+                 margin-left: -10px;
+             }
+
+             .ol-popup:before {
+                 border-top-color: #cccccc;
+                 border-width: 11px;
+                 left: 48px;
+                 margin-left: -11px;
+             }
+
+         .ol-popup-closer {
+             text-decoration: none;
+             position: absolute;
+             top: 2px;
+             right: 8px;
+         }
+
+             .ol-popup-closer:after {
+                 content: "✖";
+             }
+
+         .letratabla {
+             font-size: 12px;
+         }
+
+         .ui-progressbar {
+             position: relative;
+         }
+
+         .progress-label {
+             position: absolute;
+             left: 50%;
+             top: 4px;
+             font-weight: bold;
+             text-shadow: 1px 1px 0 #fff;
+         }
+         /*Ventana modal*/
+         #boxes .window {
+             font-size: 20px;
+             position: fixed;
+             width: auto;
+             height: auto;
+             display: none;
+             z-index: 9999;
+             padding: 20px;
+         }
+
+         #mask {
+             z-index: 10;
+             background-color: #000;
+             display: none;
+             position: fixed;
+             left: 0;
+             top: 0;
+         }
+
+         #boxes, #formcoop, #eliminar_frente {
+             width: auto;
+             height: auto;
+         }
+
+         .datos {
+             font-size: 15px;
+             background: silver;
+             font-weight: bold;
+             border: 3px solid #393939;
+             border-radius: 5px 5px 5px 5px;
+             color: #393939;
+             padding: 5px;
+         }
+
+         .posicion_boton_cancelar_coop {
+             font-weight: bold;
+             font-size: 30px;
+             color: white;
+         }
+
+         .posicion_boton_accion_coop {
+             font-weight: bold;
+             font-size: 30px;
+             color: white;
+         }
+
+         .consultarpred, .copiapeganomcoop, .getcoop, .clearcoop {
+             font-weight: bold;
+             font-size: 20px;
+             color: black;
+         }
+
+         .datospred {
+             font-weight: bold;
+             font-size: 15px;
+             color: blue;
+         }
+
+         .titulo {
+             font-weight: bold;
+             font-size: 25px;
+             color: white;
+         }
+
+         .titulo_2 {
+             font: bold 18px arial;
+             background-color: skyblue;
+             text-align: center;
+         }
+
+         .titulo_3 {
+             font: bold 20px arial;
+             background-color: skyblue;
+             text-align: center;
+         }
+
+         table.t_elimfte td.prop_coop {
+             text-align: right;
+             font: bold 20px arial;
+             border-collapse: collapse;
+             width: auto;
+             height: auto;
+             color: black;
+         }
+
+         table.t_elimfte td.dato_coop {
+             border-collapse: collapse;
+             text-align: center;
+             width: auto;
+             height: auto;
+             font: bold 25px arial;
+             color: darkblue;
+         }
+
+         table.t_editcoop td.prop_coop {
+             text-align: right;
+             font: bold 12px arial;
+             border-collapse: collapse;
+             width: auto;
+             height: auto;
+             color: black;
+         }
+
+         table.t_editcoop td.dato_coop {
+             border-collapse: collapse;
+             text-align: center;
+             width: auto;
+             height: auto;
+             font: bold 15px arial;
+             color: darkblue;
+         }
+
+         table.t_editcoop td.prop_clave {
+             text-align: right;
+             font: bold 12px arial;
+             border-collapse: collapse;
+             width: auto;
+             height: auto;
+             color: #393939;
+         }
+
+         table.t_editcoop td.dato_clave {
+             border-collapse: collapse;
+             text-align: center;
+             width: auto;
+             height: auto;
+             font: bold 15px arial;
+             color: royalblue;
+         }
+
+
+         table tbody tr:nth-child(odd) {
+             background: #fff5e0;
+         }
+
+         table tbody tr:nth-child(even) {
+             background: #fdf8ef;
+         }
+
+         table.t_editcoop, table.t_elimfte td.prop_coop2 {
+             text-align: right;
+             font-weight: bold;
+         }
+
+         table.t_elimfte td.dato_coop2 {
+             text-align: center;
+             font-weight: normal;
+         }
+
+         table.t_elimfte td.t_botones {
+             text-align: center;
+             background-color: #b3daf6;
+             border: #2628b6 3px solid;
+             height: 30px;
+         }
+
+             table.t_elimfte td.t_botones a {
+                 font-size: 30px;
+                 text-decoration: none;
+                 font-weight: bold;
+             }
+
+         table.t_observadic td.t_botones2 A {
+             font-size: 30px;
+             text-decoration: none;
+             font-weight: bold;
+             text-align: center;
+         }
+
+         table.t_observadic td.t_botones2 {
+             text-align: center;
+             background-color: #b3daf6;
+             border: #2628b6 3px solid;
+             height: 30px;
+         }
+
+         table.t_editfte td.salir a {
+             font-size: 30px;
+             text-decoration: none;
+             font-weight: bold;
+         }
+
+
+         table.t_editcoop td.accion_coop a:hover label {
+             color: #1717FF;
+             text-decoration: none;
+             cursor: pointer;
+             font-size: 20px;
+             text-align: center;
+             font-weight: bold;
+         }
+
+         table.t_editcoop td.accion_coop {
+             color: #1717FF;
+             text-decoration: none;
+             text-align: center;
+             font: bold 18px arial;
+         }
+
+
+
+         table.t_elimfte td.t_botones a:hover label {
+             color: #1717FF;
+             cursor: pointer;
+             text-decoration: none;
+         }
+
+
+
+
+
+         .dato_captura {
+             font-size: 15px;
+             font-weight: bold;
+             text-align: center;
+             border: 0;
+             color: darkblue;
+             background-color: #eee;
+             border-radius: 5px;
+         }
+     </style>
+ </head>
+  <body>
+   <a class="skiplink" href="#map">Go to map</a>    
+   <div id="map" class="map" tabindex="0">
+     <div id="popup" class="ol-popup">
+         <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+         <div id="popup-content"></div>
+     </div>    
+   </div>        
+   <div id="toolbar-options" class="hidden">
+      <a href="#" id="altacoop"><i class="fa fa-check"></i></a>
+      <a href="#" id="editcoop"><i class="fa fa-edit"></i></a>
+      <a href="#" id="elimcoop"><i class="fa fa-trash"></i></a>
+      <a href="#" id="infcoop"><i class="fa fa-exclamation-circle"></i></a>      
+      <a href="#" id="exportar"><i class="fa fa-file-pdf-o"></i></a>  
+   </div>
+   <div data-toolbar="toolbar-options" data-toolbar-animation="flip" class="btn-toolbar " style="position:absolute; top:50%; left:0%"  data-toolbar-style="primary" id="button">
+   <i class="fa fa-cog" style="position:relative"></i>
+   </div>
+   <div id="boxes">
+     <div id="formcoop" class="window"> 
+        <div id="titulocoop" class="titulo" style="text-align:left"> 
+           <p style="text-align:center">GESTION  DE  COOPERADORES</p>
+           oid: <label for="oid" id="lbloid"></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspObra_SIFIDOC: <label for="obr_clv" id="lblobr_clv"></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspObr_clv_int:<label for="obr_clv_int" id="lblobr_clv_int"></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspPrograma: <label for="programa" id="lblprograma"></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspfid: <label for="fid" id="lblfid"></label><br/>           
+           No. Usuario:<label for="idusu" id="lblusuario"></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspAcción:<label for="accion" id="lblaccioncoop"></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNumPagos:<label for="num_pagos" id="lblnumpagos"></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspFecVenPag: <label for="fecvenp" id="lblfecvenp"></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCoop_SIFIDOC:<label for="Coop_SIFIDOC" id="lblcoopsifidoc"></label> <br/>
+        </div>
+        <div class="datos" id="bodycoop">
+          <p style="text-align:center">DATOS DEL COOPERADOR</p>
+          <label for="name">Personas registradas:</label><select name="NombresReg" id="cmbNombresReg"></select>&nbsp&nbsp&nbsp&nbsp<a href="#" class ="clearcoop"><<<</a>&nbsp&nbsp<a href="#" class ="getcoop">>>></a><br/><br/>
+          <label for="name">Apellido Paterno:</label><input type="text" name="apaterno" id="apaterno" size="30" style="text-transform:uppercase"/>&nbsp&nbsp<label for="name">Apellido Materno:</label><input type="text" name="amaterno" id="amaterno" size="30" style="text-transform:uppercase"/>&nbsp&nbsp
+          <label for="name">Nombre(s):</label><input type="text" name="nombrescoop" id="nombrescoop" size="40"  style="text-transform:uppercase"/>&nbsp&nbsp<a href="#" class ="copiapeganomcoop">>>></a><br/>                         
+          <label for="name">*Nombre para ficha de pago:</label><input type="text" name="nomfichacoop" id="nomfichacoop" size="120" style="text-transform:uppercase"/><br/>
+          <label for="name">Teléfono:</label><input type="text" name="telcoop" id="telcoop" size="10"/>&nbsp&nbsp&nbsp&nbsp<label for="name">Correo electrónico:</label><input type="text" name="emailcoop" id="emailcoop" size="80"/><br/>
+          <label for="name">CURP:</label><input type="text" name="curp" id="curp" size="30"/>&nbsp&nbsp&nbsp<label for="name">Relación con el Predio:</label><select name="relpred" id="lstrelpred"></select><br/>          
+          <label for="name">*INE:</label><input type="text" name="ine" id="ine" size="30"/>&nbsp&nbsp&nbsp<label for="name">Dcto. Identific:</label><input type="file" id="file1" name="file"/><a href="#" id="archivo" class="verarchivo"></a>&nbsp&nbsp&nbsp&nbsp&nbsp
+          <p style="text-align:left">Domicilio de Notificación</p>
+          <label for="name">Calle:</label><input name="callenotif" id="txtcallenotif" size="150"/><br/>
+          <label for="name">No. Oficial:</label><input type="text" name="txtnumoficnotif" id="txtnooficnotif" size="20"/><br/>
+          <label for="name">Colonia:</label><input name="txtcolnotif" size="150" id="txtcolnotif"><br/>                              
+          <p style="text-align:center">DATOS DEL PREDIO BENEFICIADO (SISTEMA PREDIAL)</p>
+          <label for="name">Cuenta Predial:</label><input type="text" name="ctapred" id="ctapred" size="15"/><br/><br/>          
+          <label for="name">Nombre del Propietario:</label>&nbsp&nbsp<label for="nompropietariomunic" id="lblnompropmunic" class ="datospred"></label><br/>                                
+          <label for="name">Calle Notific.:</label>&nbsp&nbsp<label for="callempropunic" id="lblcallepropmunic" class ="datospred"></label><br/>
+          <label for="name">Colonia Notific.:</label>&nbsp&nbsp<label for="coloniapropmunic" id="lblcoloniamunic" class ="datospred"></label>          
+          <p style="text-align:left">Ubicación del Predio</p>            
+          <label for="name">Calle y No.:</label>&nbsp&nbsp<label for="municdomprop" id="lblmunicdomprop" class ="datospred"></label><br/>                                
+          <label for="name">Colonia:</label>&nbsp&nbsp<label for="municcolprop" id="lblmuniccolprop" class ="datospred"></label><br/>
+          <label for="name">Tipo uso de suelo::</label>&nbsp&nbsp<label for="tipousosuelo" id="tipousosuelo" class ="datospred"></label>        
+          <p style="text-align:center">DATOS DEL FRENTE</p>
+          <label for="name">*Metros frente:</label><input type="text" name="mtsfte" id="mtsfte" size="10"/>&nbsp&nbsp&nbsp&nbsp&nbsp<label for="name">*No. Oficial:</label><input type="text" name="nooficial" id="nooficial" size="10"/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<label for="name">Manzana:</label><input type="text" name="manzana" id="txtmzna" size="10"/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<label for="name">Lote:</label><input type="text" name="lote" id="txtlote" size="10"/><label for="name">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp*Tipo de predio:</label><select name="tipopredio" id="tipopredio"></select><br/><br/>          
+          <label for="name">Cta.IMUVI:</label><input type="text" name="ctaimuvi" id="ctaimuvi" size="10"/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<label for="name">No.medidor SAPAL:</label><input type="text" name="recsapal" id="recsapal" size="10"/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<label for="name">CUP (Clave unica de predio):</label><input type="text" name="cup" id="cup" size="20"/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<label for="name">R20 de escritura:</label><input type="text" name="r20" id="r20" size="10"/><br/><br/>          
+        </div>                  
+        <div class="botonesA" id="botonesA">
+           <p style="text-align:right"><a href="#" class ="posicion_boton_accion_coop">Aceptar</a>&nbsp&nbsp&nbsp<a href="#" class="posicion_boton_cancelar_coop">Cancelar</a></p>                
+        </div>       
+     </div>
+     <div id="edit_coop" class="window">
+         <div id="titulo_edit_coop" class="titulo" style="text-align:left">
+             <p style="text-align:center">EDITAR DATOS DE COOPERADOR</p>
+         </div>
+         <table class="t_editcoop">
+             <tbody>
+                 <tr>
+                     <td class="titulo_2" colspan="5">COOPERADOR</td>
+                     <td class="titulo_2"><a href="#" class="salir">X</a></td>
+                 </tr>
+                 <tr>
+                     <td class="prop_coop">Nombres del Cooperador:</td>
+                     <td class="dato_coop" colspan="4"><input class="dato_captura" type="text" name="dato_nombre_coop" id="txtnoms_coop" size="50" maxlength="300" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lblnomcoop_accion"></label></a></td>
+                 </tr>
+                 <tr>
+                     <td class="prop_coop">Apellido Paterno:</td>
+                     <td class="dato_coop" colspan="4"><input class="dato_captura" type="text" name="dato_apaterno_coop" id="txtapaterno_coop" size="50" maxlength="300" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lblapaterno_accion"></label></a></td>
+                 </tr>
+                 <tr>
+                     <td class="prop_coop">Apellido Materno:</td>
+                     <td class="dato_coop" colspan="4"><input class="dato_captura" type="text" name="dato_amaterno_coop" id="txtamaterno_coop" size="50" maxlength="300" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lblamaterno_accion"></label></a></td>
+                 </tr>
+                 <tr>
+                     <td class="prop_coop">Calle y No. de Notific:</td>
+                     <td class="dato_coop"><input class="dato_captura" type="text" name="dato_calle_notific_coop" id="txtcalle_notific_coop" size="40" maxlength="120" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lblcalle_notific_accion"></label></a></td>
+
+                     <td class="prop_coop">Colonia Notific:</td>
+                     <td class="dato_coop"><input class="dato_captura" type="text" name="dato_colonia_notific_coop" id="txtcolonia_notific_coop" size="40" maxlength="120" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lblcolonia_notific_accion"></label></a></td>
+                 </tr>
+                 <tr>
+                     <td class="prop_coop">Teléfono:</td>
+                     <td class="dato_coop"><input class="dato_captura" type="text" name="dato_telefono_coop" id="txttelefono_coop" size="20" maxlength="12" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lbltel_accion"></label></a></td>
+
+                     <td class="prop_coop">INE:</td>
+                     <td class="dato_coop"><input class="dato_captura" type="text" name="dato_ine_coop" id="txtine_coop" size="30" maxlength="20" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lbline_accion"></label></a></td>
+                 </tr>
+                 <tr>
+                     <td class="prop_coop">Correo Electrónico:</td>
+                     <td class="dato_coop"><input class="dato_captura" type="text" name="dato_email_coop" id="txtemail_coop" size="40" maxlength="100" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lblemail_accion"></label></a></td>
+
+                     <td class="prop_coop">Relación Predio:</td>
+                     <td class="dato_coop"><select class="dato_captura" type="text" name="dato_rel_pred_coop" id="lstrelpred_coop" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lblrelpred_accion"></label></a></td>
+                 </tr>
+                 <tr>
+                     <td class="prop_coop">CURP:</td>
+                     <td class="dato_coop"><input class="dato_captura" type="text" name="dato_curp_coop" id="txtcurp_coop" size="20" maxlength="20" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lblcurp_accion"></label></a></td>
+
+                     <td class="prop_coop">Documento de Identificación:</td>
+                     <td class="dato_coop"><input class="dato_captura" type="text" name="dato_dcto_ident_coop" id="txtdocident_coop" size="20" maxlength="20" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lbldocident_accion"></label></a></td>
+
+                 </tr>
+                 <tr>
+                     <td class="titulo_2" colspan="6">OBRA</td>
+                 </tr>
+                 <tr>
+                     <td class="prop_coop">Calle:</td>
+                     <td class="dato_coop" colspan="5"><label id="lblcalle_obra"></label></td>
+                 </tr>
+                 <tr>
+                     <td class="prop_coop">Colonia:</td>
+                     <td class="dato_coop" colspan="5"><label id="lblcolonia_obra"></label></td>
+                 </tr>
+                 <tr>
+                     <td class="prop_coop">Tramo:</td>
+                     <td class="dato_coop" colspan="5"><label id="lbltramo_obra"></label></td>
+                 </tr>
+                 <tr>
+                     <td class="prop_coop">Periodo recaudación:</td>
+                     <td class="dato_coop" colspan="2"><label id="lblprec_obra"></label></td>
+
+                     <td class="prop_coop">Estatus Obra:</td>
+                     <td class="dato_coop" colspan="2"><label id="lblestatus_obra"></label></td>
+                 </tr>
+                 <tr>
+                     <td class="prop_coop">Número de pagos:</td>
+                     <td class="dato_coop" colspan="2"><label id="lblnumpag_obra"></label></td>
+
+                     <td class="prop_coop">Programa:</td>
+                     <td class="dato_coop" colspan="2"><label id="lblprograma_obra"></label></td>
+                 </tr>
+                 <tr>
+                     <td class="titulo_2" colspan="6">PREDIO</td>
+                 </tr>
+                 <tr>
+                     <td class="prop_coop">Cta. Predial:</td>
+                     <td class="dato_coop"><input class="dato_captura" type="text" name="dato_ctapred_coop" id="txtctapred_predio" onkeyup="GetDatosPredial(txtctapred_predio.value)" onblur="GetDatosPredial(txtctapred_predio.value)" size="20" maxlength="12" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lblctapred_accion"></label></a></td>
+
+                     <td class="prop_coop">No. Oficial:</td>
+                     <td class="dato_coop"><input class="dato_captura" type="text" name="dato_noofic_coop" id="txtnumofic_predio" size="20" maxlength="10" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lblnoofic_accion"></label></a></td>
+                 </tr>
+                 <tr>
+                     <td class="prop_coop">Nombre del Propietario:</td>
+                     <td class="dato_coop" colspan="2"><label id="lblnomprop_padronpred"></label></td>
+
+
+                     <td class="prop_coop">CUP:</td>
+                     <td class="dato_coop"><input class="dato_captura" type="text" name="dato_cup_coop" id="txtcup_predio" size="25" maxlength="20" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lblcup_accion"></label></a></td>
+                 </tr>
+
+                 <tr>
+                     <td class="prop_coop">Calle Notificación:</td>
+                     <td class="dato_coop" colspan="2"><label id="lblcalle_notific_padronpred"></label></td>
+
+
+
+                     <td class="prop_coop">Cta. IMUVI:</td>
+                     <td class="dato_coop"><input class="dato_captura" type="text" name="dato_noofic_coop" id="txtctaimuvi_predio" size="20" maxlength="10" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lblctaimuvi_accion"></label></a></td>
+                 </tr>
+
+                 <tr>
+                     <td class="prop_coop">Colonia Notificación:</td>
+                     <td class="dato_coop" colspan="2"><label id="lblcolonia_notific_padronpred"></label></td>
+
+
+                     <td class="prop_coop">Cta. SAPAL:</td>
+                     <td class="dato_coop"><input class="dato_captura" type="text" name="dato_sapal_coop" id="txtsapal_predio" size="20" maxlength="10" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lblsapal_accion"></label></a></td>
+                 </tr>
+
+                 <tr>
+                     <td class="prop_coop">Calle y No. ofic.:</td>
+                     <td class="dato_coop" colspan="2"><label id="lblcalle_noofic_padronpred"></label></td>
+
+
+                     <td class="prop_coop">r20:</td>
+                     <td class="dato_coop"><input class="dato_captura" type="text" name="dato_r20_coop" id="txtr20_predio" size="30" maxlength="20" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lblr20_accion"></label></a></td>
+
+                 </tr>
+
+                 <tr>
+                     <td class="prop_coop">Colonia:</td>
+                     <td class="dato_coop" colspan="2"><label id="lblcolonia_padronpred"></label></td>
+
+
+                     <td class="prop_coop">Lote:</td>
+                     <td class="dato_coop"><input class="dato_captura" type="text" name="dato_lote_predio" id="txtlote_predio" size="20" maxlength="5" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lbllote_accion"></label></a></td>
+                 </tr>
+
+                 <tr>
+                     <td class="prop_coop">Uso de Suelo:</td>
+                     <td class="dato_coop" colspan="2"><label id="lblusosuelo_padronpred"></label></td>
+
+
+                     <td class="prop_coop">Manzana:</td>
+                     <td class="dato_coop"><input class="dato_captura" type="text" name="dato_manzana_coop" id="txtmanzana_predio" size="20" maxlength="5" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lblmanzana_accion"></label></a></td>
+                 </tr>
+                 <tr>
+                     <td class="prop_coop">Metros Frente:</td>
+                     <td class="dato_coop"><input class="dato_captura" type="text" name="dato_mtsfte_frente" id="txtmtsfte_frente" size="20" maxlength="10" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lblmtsfte_accion"></label></a></td>
+
+                     <td class="prop_coop">Tipo de Predio:</td>
+                     <td class="dato_coop"><select class="dato_captura" name="dato_tipo_predio_coop" id="lsttipo_predio" /></td>
+                     <td class="accion_coop"><a class="t_accion"><label id="lblaccion_tipo_predio"></label></a></td>
+                 </tr>
+                 <tr>
+                     <td class="titulo_2" colspan="6"></td>
+                 </tr>
+                 <tr>
+                     <td class="prop_clave">fid:pid</td>
+                     <td class="dato_clave"><label id="lblfid_dato"></label></td>
+                     <td class="prop_clave">obr_clv_int:</td>
+                     <td class="dato_clave"><label id="lblobr_clv_int_dato"></label></td>
+                     <td class="prop_clave">idusu:</td>
+                     <td class="dato_clave"><label id="lblidusu_dato"></label></td>
+                 </tr>
+                 <tr>
+                     <td class="prop_clave">coop_s:</td>
+                     <td class="dato_clave"><label id="lblcoop_s_dato"></label></td>
+                     <td class="prop_clave">oid:</td>
+                     <td class="dato_clave"><label id="lbloid_dato"></label></td>
+                     <td class="prop_clave">cid:</td>
+                     <td class="dato_clave"><label id="lblcid_dato"></label></td>
+                 </tr>
+
+             </tbody>
+         </table>
+
+         <div class="botonesA" id="botonesA">
+             <p style="text-align:right"><a href="#" class="posicion_boton_accion_coop">Aceptar</a>&nbsp&nbsp&nbsp<a href="#" class="posicion_boton_cancelar_coop">Cancelar</a></p>
+         </div>
+
+     </div>
+     <div id="eliminar_frente" class="window"> 
+        <div id="titulo_eliminar_frente" class="titulo" style="text-align:left"> 
+           <p style="text-align:center">ELIMINACION DE FRENTE</p>           
+        </div>
+        <table class="t_elimfte">
+              <tbody> 
+                  <tr>
+                      <td class="prop_coop"><a class="t_propiedad"><label id="lbleliminarfte_fid"></label></a></td><td class="dato_coop"><label id="lbleliminarfte_fid_d"></label></td>
+                  </tr>   
+                  <tr>
+                      <td class="prop_coop"><a class="t_propiedad"><label id="lbleliminarfte_obr_clv_int"></label></a></td><td class="dato_coop"><label id="lbleliminarfte_obr_clv_int_d"></label></td>
+                  </tr>
+                  <tr>
+                      <td class="prop_coop"><a class="t_propiedad"><label id="lbleliminarfte_coop_s"></label></a></td><td class="dato_coop"><label id="lbleliminarfte_coop_s_d"></label></td>
+                  </tr>                                                     
+                  <tr>
+                      <td class="prop_coop"><a class="t_propiedad"><label id="lbleliminarfte_nomcoop"></label></a></td><td class="dato_coop" colspan="2"><label id="lbleliminarfte_nomcoop_d"></label></td>
+                  </tr>                                                     
+                  <tr>
+                      <td class="prop_coop"><a class="t_propiedad"><label id="lbleliminarfte_calle"></label></a></td><td class="dato_coop"><label id="lbleliminarfte_calle_d"></label></td>
+                  </tr>                  
+                  <tr>
+                      <td class="prop_coop"><a class="t_propiedad"><label id="lbleliminarfte_no_oficial"></label></a></td><td class="dato_coop"><label id="lbleliminarfte_no_oficial_d"></label></td>
+                  </tr>
+                  <tr>
+                      <td class="prop_coop"><a class="t_propiedad"><label id="lbleliminarfte_colonia"></label></a></td><td class="dato_coop"><label id="lbleliminarfte_colonia_d"></label></td>
+                  </tr>
+                  <tr>
+                      <td class="prop_coop"><a class="t_propiedad"><label id="lbleliminarfte_tramo"></label></a></td><td class="dato_coop"><label id="lbleliminarfte_tramo_d"></label></td>
+                  </tr>
+                  <tr>
+                      <td class="prop_coop"><a class="t_propiedad"><label id="lbleliminarfte_ctapredial"></label></a></td><td class="dato_coop"><label id="lbleliminarfte_ctapredial_d"></label></td>
+                  </tr>
+                  <tr>
+                      <td class="prop_coop"><a class="t_propiedad"><label id="lbleliminarfte_mtsfrente"></label></a></td><td class="dato_coop"><label id="lbleliminarfte_mtsfrente_d"></label></td>
+                  </tr>
+                  <tr>
+                      <td class="prop_coop"><a class="t_propiedad"><label id="lbleliminarfte_programa"></label></a></td><td class="dato_coop"><label id="lbleliminarfte_programa_d"></label></td>
+                  </tr>                  
+                  <tr>
+                      <td class="prop_coop"><a class="t_propiedad"><label id="lbleliminarfte_obr_estatus"></label></a></td><td class="dato_coop"><label id="lbleliminarfte_obr_estatus_d"></label></td>
+                  </tr>   
+                   <tr>
+                      <td class="prop_coop"><a class="t_propiedad"><label id="lbleliminarfte_idusu"></label></a></td><td class="dato_coop"><label id="lbleliminarfte_idusu_d"></label></td>
+                  </tr>   
+                  <tr>
+                      <td class="t_botones"><a href="#" class ="boton_accion_eliminar_fte"><label id="lblelminarfte_aceptar"></label></a></td><td  class="t_botones"><a href="#" class ="boton_cancelar_eliminar_fte"><label id="lbleliminarfte_cancelar"></label></a></td>
+                  </tr>                  
+              </tbody>
+        </table>        
+     </div>
+     <div id="
+         " class="window"> 
+        <div id="t_observ_adic" class="titulo_3"> 
+           <p style="text-align:center">OBSERVACIONES ADICIONALES A LA SOLICITUD</p>           
+        </div>
+        <table class="t_observadic">
+              <tbody> 
+                  <tr>                      
+                      <td colspan="3"><textarea class="dato_coop" id="txtobserv_adic" rows="10" cols="150"></textarea></td>                      
+                  </tr>                                                                    
+                  <tr>
+                      <td class="t_botones2"><a href="#" class ="b_generar_solicitud_sin" >Generar Solicitud SIN FOLIO</a></td>
+                      <td class="t_botones2"><a href="#" class ="b_generar_solicitud" >Generar Solicitud</a></td>
+                      <td class="t_botones2"><a href="#" class ="b_cancelar_solicitud" >CANCELAR</a></td>
+                  </tr>    
+                                
+              </tbody>
+        </table>        
+     </div>
+     <div id="mask"></div>
+     <div id="bodegadatos"></div>     
+   </div>               
+    <script type="text/javascript" src="../../js/ol/v6.3.1/build/gcoop.js"></script>  
+  </body>
+</html>

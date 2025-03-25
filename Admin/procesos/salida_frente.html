@@ -1,0 +1,3093 @@
+﻿<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    
+    <title>REPORTE DE FRENTE</title>
+    
+         
+    <style>
+
+        content {
+            background-color: #2b2727;            
+            padding: 5px;
+            font-size: 5px;            
+        }
+
+        table.gral {
+             border-collapse: collapse;             
+             height:100%;
+             width:100%;   
+        }
+
+
+        table tbody tr:nth-child(odd) {
+        	background: #fff5e0;
+
+            }
+
+        table tbody tr:nth-child(even) {
+	        background: #fdf8ef;
+            }
+
+     
+
+        table.gral td.campo {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        table.gral td.dato {
+            text-align: center;
+            font-weight: normal;
+        }
+      
+        table.gral td.titulo_1ro {
+            text-align: center;
+            font-weight: bold;
+            background-color:#454548;
+            font-size:27px;
+            color:#fff5e0;
+        }
+
+        table.gral td.titulo_2do {
+            text-align: center;
+            font-weight: bold;            
+            background-color:#454548;
+            color:#fff5e0;
+            
+        }
+
+        table.gral td.espacio_aire {            
+             background-color:#8d8383;
+             color:#fff5e0;
+          }
+        
+        table.gral td.titulo_2do_2 {
+            text-align: center;
+            font-weight: bold;
+            min-height:50px;
+            background-color:#8d8383;
+            color:#fff5e0;
+        }
+
+        table.gral td.titulo_3er {
+            text-align: right;
+            font-weight:bold;
+            font-size:26px;
+            background-color:#454548;
+            color:#fff5e0;
+        }
+
+        table.gral td.boton
+        {
+            text-align: center;
+            background-color:#b3daf6;      
+            border: #2628b6 3px solid;       
+            height:30px;
+        }
+      
+        
+        table.gral td.boton a:link {
+             text-decoration: none;             
+             font-size:20px; 
+             font-weight: bold;
+          }
+
+        
+        table.gral td.boton a:hover  {
+          color: #1717FF;
+          cursor: pointer;          
+          }        
+
+        #boxes .window {               
+             position:fixed;
+             width:auto;
+             height:auto;
+             display:none;
+             z-index:9999;
+             padding:20px;             
+         }
+
+        #mask {
+             z-index:10;
+             background-color:#000;
+             display:none;
+             position: fixed;    
+             left: 0;
+             top: 0;  
+        }
+
+        table.t_modulo td.c{        
+            text-align: right;                      
+            font-size:20px; 
+            font-weight: bold;                      
+            height:40px;        
+        }
+
+        table.t_modulo td.dato_c{        
+            text-align: center;                      
+            font-size:20px; 
+            font-weight: bold;                      
+            height:40px;        
+        }
+
+        table.t_modulo td.boton_dialog
+        {
+            text-align: center;
+            background-color:#b3daf6;      
+            border: #2628b6 3px solid;       
+            height:30px;
+        }
+
+        table.t_modulo td.boton_dialog a
+        {            
+            font-size:20px; 
+            text-decoration: none; 
+            font-weight:bold;              
+        }
+        
+        
+         table.t_modulo td.boton_dialog a:hover  {
+          color: #1717FF;
+          cursor: pointer;          
+          }        
+
+        table.t_modulo td.signo 
+        {
+            text-align: center;              
+        }
+
+        table.t_modulo td.titulo_modulo
+        {
+            text-align: center;             
+            padding:10px;                          
+            background-color:#000000;      
+            color: #fdf8ef;
+            font: bold 30px arial, arial;
+        }
+        
+
+        table.t_modulo td.signo a
+        {            
+            font-size:80px; 
+            text-decoration: none; 
+            font-weight:bold;              
+        }
+
+      
+
+    </style>
+    
+    
+    <link type="text/css" rel="stylesheet" href="../css/cupertino/jquery-ui-1.7.2.custom.css" />
+    <link type="text/css" rel="stylesheet" href="../css/cupertino/ui.jqgrid.css" />
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>      
+       
+    <script type="text/javascript" src="../js/jquery.jqGrid.min.js"></script> 
+     <script type="text/javascript" src="../js/grid.locale-es.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>      
+    <script src="../js/moment.js"></script>          
+    <script type="text/javascript" src="../js/NumerosLetras.js"></script> 
+
+    <script>
+
+
+        function NomDia(f) {
+            var dia = f.getDate();
+            var mes = f.getMonth() + 1;
+            var anio = f.getFullYear();
+            var d = new Array()
+            var dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+            var dt = new Date(mes + ' ' + dia + ', ' + anio + ' 12:00:00');
+            return dias[dt.getUTCDay()];
+        }
+
+        function fecha_ini_AS400() {
+            var d = new Date();
+            
+            var nom_dia = NomDia(d);
+            if (nom_dia == 'Lunes') {                
+                d.setDate(d.getDate() - 3);
+                day = d.getDate();
+                month = d.getMonth()+1;
+            }
+            if (nom_dia == 'Sábado' || nom_dia == 'Martes' || nom_dia == 'Miércoles' || nom_dia == 'Jueves' || nom_dia == 'Viernes' || nom_dia == 'Sábado') {
+                
+                d.setDate(d.getDate() - 1);
+                day = d.getDate();
+                month = d.getMonth()+1;
+            }
+            if (nom_dia == 'Domingo') {
+
+                d.setDate(d.getDate() - 2);
+                day = d.getDate();
+                month = d.getMonth()+1;
+            }
+
+            return d.getFullYear() + (month < 10 ? '0' : '') + month + (day < 10 ? '0' : '') + day;
+        }
+
+        function fecha_fin_AS400() {
+            var d = new Date();
+            var month = d.getMonth() + 1;
+            var day = d.getDate();
+            return d.getFullYear() + (month < 10 ? '0' : '') + month + (day < 10 ? '0' : '') + day;
+        }
+
+
+        function recuperarParametro(campo) {
+            var RE = new RegExp("[&?]" + campo + "=([^&]*)&");
+            var href = location.href + "&";
+            if (RE.test(href)) {
+                RE.exec(href);
+                return unescape(RegExp.$1);
+            }
+        }
+
+        function FormatoMoneda(parametro) {
+            if (!isNaN(parametro)) {
+                resultado = ('$' + parseFloat(parametro, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+            } else {
+                resultado = 0;
+            }
+            return resultado
+        }
+
+
+        function FormatoFechaYYYYMMDD(parametro) {
+            var res = '1900-01-01';
+            if (parametro!='') {                
+                var dia = parametro.split('/')[0];
+                var mes = parametro.split('/')[1];
+                var an = parametro.split('/')[2];
+                res = an + '-' + mes + '-' + dia;
+            }
+            return res
+        }
+
+        function fecha_hoy() {
+            var d = new Date();
+            var month = d.getMonth() + 1;
+            var day = d.getDate();
+            return (day < 10 ? '0' : '') + day + '/' + (month < 10 ? '0' : '') + month + '/' + d.getFullYear();
+        }
+
+        function IsNumeric(valor) {
+
+            var log = valor.length;
+            var sw = "S";
+            for (x = 0; x < log; x++) {
+                v1 = valor.substr(x, 1);
+                v2 = parseInt(v1);
+                //Compruebo si es un valor numérico 
+                if (isNaN(v2)) {
+                    if (v1 != ".") {
+                        sw = "N";
+                        x = log;
+                    }
+                }
+            }
+            if (sw == "S") { return true; } else { return false; }
+        }
+
+        function FechaHora() {
+            var hora = new Date()
+            var hrs = hora.getHours();
+            var min = hora.getMinutes();
+            if (min < 10) min = "0" + min;
+            var hoy = new Date();
+            var m = new Array();
+            var d = new Array()
+            var an = hoy.getYear();
+            d[1] = "lunes";
+            d[2] = "martes";
+            d[3] = "miercoles";
+            d[4] = "jueves";
+            d[5] = "viernes";
+            d[6] = "sábado";
+            d[0] = "domingo";
+            m[0] = "enero"; m[1] = "febrero"; m[2] = "marzo";
+            m[3] = "abril"; m[4] = "mayo"; m[5] = "junio";
+            m[6] = "julio"; m[7] = "agosto"; m[8] = "septiembre";
+            m[9] = "octubre"; m[10] = "noviembre"; m[11] = "diciembre";
+            var lugarfechahora = d[hoy.getDay()] + " " + hoy.getDate() + " de " + m[hoy.getMonth()] + "  " + hoy.getFullYear() + "," + hrs + ":" + min + ' hrs';
+
+            return lugarfechahora;
+        }
+
+        function formateacantidad(cantidad) {
+            cantidad = cantidad.replace(/\\d+(.\\d+)?/g, '');
+            return (cantidad);
+        }
+
+
+        var primerslap = false;
+        var segundoslap = false;
+
+        function formateafecha(fecha) {
+            var long = fecha.length;
+            var dia;
+            var mes;
+            var ano;
+            if ((long >= 2) && (primerslap == false)) {
+                dia = fecha.substr(0, 2);
+                if ((IsNumeric(dia) == true) && (dia <= 31) && (dia != "00")) { fecha = fecha.substr(0, 2) + "/" + fecha.substr(3, 7); primerslap = true; }
+                else { fecha = ""; primerslap = false; }
+            }
+            else {
+                dia = fecha.substr(0, 1);
+                if (IsNumeric(dia) == false)
+                { fecha = ""; }
+                if ((long <= 2) && (primerslap = true)) { fecha = fecha.substr(0, 1); primerslap = false; }
+            }
+            if ((long >= 5) && (segundoslap == false)) {
+                mes = fecha.substr(3, 2);
+                if ((IsNumeric(mes) == true) && (mes <= 12) && (mes != "00")) { fecha = fecha.substr(0, 5) + "/" + fecha.substr(6, 4); segundoslap = true; }
+                else { fecha = fecha.substr(0, 3);; segundoslap = false; }
+            }
+            else { if ((long <= 5) && (segundoslap = true)) { fecha = fecha.substr(0, 4); segundoslap = false; } }
+            if (long >= 7) {
+                ano = fecha.substr(6, 4);
+                if (IsNumeric(ano) == false) { fecha = fecha.substr(0, 6); }
+                else { if (long == 10) { if ((ano == 0) || (ano < 1900) || (ano > 2100)) { fecha = fecha.substr(0, 6); } } }
+            }
+            if (long >= 10) {
+                fecha = fecha.substr(0, 10);
+                dia = fecha.substr(0, 2);
+                mes = fecha.substr(3, 2);
+                ano = fecha.substr(6, 4);
+                // Año no viciesto y es febrero y el dia es mayor a 28 
+                if ((ano % 4 != 0) && (mes == 02) && (dia > 28)) { fecha = fecha.substr(0, 2) + "/"; }
+            }
+            return (fecha);
+        }
+
+       
+
+
+        function MostrarFormatoFecha(parametro) {
+           /* var hora = parametro.substr(11, str.length);*/
+            var fecha = parametro.substr(0, 10);
+            var an = fecha.split('-')[0];
+            var mes = fecha.split('-')[1];;
+            var dia = fecha.split('-')[2];;
+            var fecha_res = dia + "/" + mes + "/" + an;
+            return fecha_res;
+        }
+
+
+        function GenerarEdoCta() {
+
+            var id = $("#bodegadatos").data("fid") + ':' + $("#bodegadatos").data("pid") +  ':' +  $("#bodegadatos").data("obr_clv_int") + ':' +  $("#bodegadatos").data("oid");
+            var obra_s = $("#bodegadatos").data("obra_sifidoc");
+            var coop_s = $("#bodegadatos").data("coopid");
+            var nom_coop = $("#bodegadatos").data("nom_ficha");
+            var tipo_obra = $("#bodegadatos").data("tipo_obra");
+            var tramo = $("#bodegadatos").data("tramo");
+            var colonia = $("#bodegadatos").data("colonia");
+            var calle = $("#bodegadatos").data("calle");
+            var obra_status = $("#bodegadatos").data("obr_status");
+            var noofic = $("#bodegadatos").data("nooficial");
+            var mts_fte = $("#bodegadatos").data("mts_fte");
+            var costo_mto=$("#bodegadatos").data("costo_mto");
+            var prog=$("#lblnomprog").text();
+            var uso_predio = $("#bodegadatos").data("uso_suelo");
+            var ctapredial = $("#bodegadatos").data("ctapredial");
+            var periodo= $("#bodegadatos").data("fecinipag") +'  -  ' + $("#bodegadatos").data("fecvencpag");
+            var num_pagos= $("#bodegadatos").data("num_pagos");
+            var capital_sin_inc=$("#bodegadatos").data("capital_sin_inc")
+            var act_costo_obra= $("#bodegadatos").data("inc");
+            var capital= $("#bodegadatos").data("capital");
+            var descto_ppp = $("#bodegadatos").data("descto_aplic");
+            var capital_pagado=$("#bodegadatos").data("monto_capital_pagado");
+            var saldo_total = $("#bodegadatos").data("saldo_total");
+
+            if (saldo_total >= 0.1 && saldo_total <= 0.5) {
+                saldo_total = 0;
+            }
+
+            var hoy = new Date();
+            
+
+            
+            var pdf = new jsPDF('l', 'mm', [280, 214]);
+
+            var img = new Image();
+            img.src = '../imagenes/admon2021_2024.png';
+            pdf.addImage(img, 'PNG', 2, 1.5, 7,3);
+            pdf.setFontSize(5);
+            pdf.text(10, 3, "ESTADO DE CUENTA DE COOPERADOR");
+            pdf.setFontSize(3);            
+            pdf.text(14.5, 4.5, 'León, Guanajuato al día: ' + FechaHora(hoy));
+            pdf.setFontType('bold')
+            pdf.setFontSize(1.5);
+            pdf.text(44 - pdf.getTextWidth(id),5.5,id);
+
+            
+            pdf.setFontSize(2.8);           
+           
+            var tab1 = 15;
+            var inc1 = 1;
+            var reng_inic1 = 6;
+            var brinca_reng=1;
+
+            
+            pdf.text(tab1 - pdf.getTextWidth('Cooperador (SIFIDOC):'), reng_inic1 + inc1*2, 'Cooperador (SIFIDOC):');
+            pdf.text(tab1 - pdf.getTextWidth('Nombre del cooperador:'), reng_inic1 + inc1 * 3, 'Nombre del cooperador:');
+            pdf.text(tab1 - pdf.getTextWidth('Tipo de Obra:'), reng_inic1 + brinca_reng + inc1*4, 'Tipo de Obra:');
+            pdf.text(tab1 - pdf.getTextWidth('TRAMO:'), reng_inic1 + brinca_reng + inc1 * 5, 'TRAMO:');
+            pdf.text(tab1 - pdf.getTextWidth('COLONIA:'), reng_inic1+brinca_reng + inc1 * 6, 'COLONIA:');
+            pdf.text(tab1 - pdf.getTextWidth('CALLE:'), reng_inic1 + brinca_reng + inc1 * 7, 'CALLE:');
+            pdf.text(tab1 - pdf.getTextWidth('No. OFICIAL:'), reng_inic1 + brinca_reng + inc1 * 8, 'No. OFICIAL:');
+            pdf.text(tab1 - pdf.getTextWidth('Mts. de Frente:'), reng_inic1 + brinca_reng + inc1 * 9, 'Mts. de Frente:');
+            pdf.text(tab1 - pdf.getTextWidth('Costo del Metro Lineal:'), reng_inic1 + brinca_reng + inc1 * 10, 'Costo del Metro Lineal:');
+            pdf.text(tab1 - pdf.getTextWidth('Programa:'), reng_inic1 + brinca_reng + inc1 * 11, 'Programa:');
+            pdf.text(tab1 - pdf.getTextWidth('Uso de predio:'), reng_inic1 + brinca_reng + inc1 * 12, 'Uso de predio:');
+            pdf.text(tab1 - pdf.getTextWidth('Periodo de Recaudación:'), reng_inic1 + brinca_reng + inc1 * 13, 'Periodo de Recaudación:');
+            pdf.text(tab1 - pdf.getTextWidth('Número de Pagos:'), reng_inic1 + brinca_reng + inc1 * 14, 'Número de Pagos:');
+            
+            pdf.setFontType('normal')
+            var tab5 = 28;
+
+            pdf.text(tab5 - (pdf.getTextWidth(obra_s + coop_s) / 2), reng_inic1 + inc1 * 2, obra_s + coop_s);
+            
+            var largo_nom_coop = pdf.getTextWidth(nom_coop);
+            if (largo_nom_coop > 25) {
+                pdf.setFontSize(1.5);
+            }
+            else {
+                pdf.setFontSize(2.8);
+            }
+            pdf.text(tab5 - (pdf.getTextWidth(nom_coop) / 2), reng_inic1 + inc1 * 3, nom_coop);
+
+            pdf.setFontSize(2.8);
+            pdf.text(tab5 - (pdf.getTextWidth(tipo_obra) / 2), reng_inic1 + brinca_reng + inc1 * 4, tipo_obra);
+            
+            var largo_tramo = pdf.getTextWidth(tramo);
+            if (largo_tramo > 25) {
+                pdf.setFontSize(1.5);
+            } else {
+                pdf.setFontSize(2.8);
+            }
+
+            pdf.text(tab5 - (pdf.getTextWidth(tramo) / 2), reng_inic1 + brinca_reng + inc1 * 5, tramo);
+            
+            var largo_colonia = pdf.getTextWidth(colonia);
+            if (largo_colonia > 25) {
+                pdf.setFontSize(1.5);
+            }
+            else {
+                pdf.setFontSize(2.8);
+            }
+            pdf.text(tab5 - (pdf.getTextWidth(colonia) / 2), reng_inic1 + brinca_reng + inc1 * 6, colonia);
+
+            
+            var largo_calle = pdf.getTextWidth(calle);
+            if (largo_calle > 25) {
+                pdf.setFontSize(1.5);
+            }
+            else {
+                pdf.setFontSize(2.8);
+            }
+            pdf.text(tab5 - (pdf.getTextWidth(calle) / 2), reng_inic1 + brinca_reng + inc1 * 7, calle);
+
+            pdf.setFontSize(2.8);
+            pdf.text(tab5 - (pdf.getTextWidth(noofic) / 2), reng_inic1 + brinca_reng + inc1 * 8, noofic);
+            pdf.text(tab5 - (pdf.getTextWidth(mts_fte) / 2), reng_inic1 + brinca_reng + inc1 * 9, mts_fte);
+            pdf.text(tab5 - (pdf.getTextWidth(FormatoMoneda(costo_mto)) / 2), reng_inic1 + brinca_reng + inc1 * 10, FormatoMoneda(costo_mto));
+
+            var largo_prog = pdf.getTextWidth(prog);
+            if (largo_prog > 25) {
+                pdf.setFontSize(2);
+            }
+            else {
+                pdf.setFontSize(2.8);
+            }
+            pdf.text(tab5 - (pdf.getTextWidth(prog) / 2), reng_inic1 + brinca_reng + inc1 * 11, prog);
+            
+            pdf.setFontSize(2.8);
+            pdf.text(tab5 - (pdf.getTextWidth(uso_predio) / 2), reng_inic1 + brinca_reng + inc1 * 12, uso_predio);
+            pdf.text(tab5 - (pdf.getTextWidth(periodo) / 2), reng_inic1 + brinca_reng + inc1 * 13, periodo);
+            pdf.text(tab5 - (pdf.getTextWidth(num_pagos) / 2), reng_inic1 + brinca_reng + inc1 * 14, num_pagos);
+
+            pdf.setFontSize(2.8);
+            pdf.setFontType('bold')
+            pdf.line(2, 24, 44, 24);
+            pdf.text(22 - pdf.getTextWidth('DESGLOSE DE MOVIMIENTOS') / 2, 25.4, 'DESGLOSE DE MOVIMIENTOS');            
+            pdf.line(2, 26, 44, 26);
+            
+            var tab2 = 18.5;
+            var tab3 = 27.5;
+            var tab4 = 36.5;
+
+            pdf.line(tab2 + .5, 26, tab2+.5, 60);
+            pdf.line(tab3 +.5,26, tab3 +.5, 60);
+            pdf.line(tab4+.5, 26, tab4+.5, 60);
+            
+            
+
+            pdf.line(2, 60, 44, 60);
+            pdf.text(tab4 - pdf.getTextWidth('TOTAL A PAGAR:'), 61.4, 'TOTAL A PAGAR:');
+            pdf.text(44 - pdf.getTextWidth(FormatoMoneda(saldo_total.toString())), 61.4, FormatoMoneda(saldo_total.toString()));
+            pdf.line(2, 62, 44, 62);
+
+            
+            pdf.setFontSize(3);   
+            pdf.setFontType('normal')
+            
+            
+            pdf.text(tab2-pdf.getTextWidth('Aportación sin incremento:'), 27, 'Aportación sin incremento:');
+            pdf.text(tab2-pdf.getTextWidth('Inc. al Costo de Obra:'), 28, 'Inc. al Costo de Obra:');            
+            pdf.line(2, 28.5, tab3+.5, 28.5);
+            pdf.setFontType('bold')
+            pdf.text(tab2 - pdf.getTextWidth('Total a Aportar:'), 30, 'Total a Aportar:');
+
+
+            
+            pdf.setFontType('normal');
+
+            var act_ley45 = 0;
+            var gastos_req = 0;
+            var gastos_ejec = 0;
+            var recargos=0;          
+            var recargos_pagados=0;
+            var descto_recargos = 0;
+            var descto_est_soc = 0;
+            var descto_autor = 0;
+
+            
+
+
+            if (act_ley45>0) {
+                pdf.text(tab2 - pdf.getTextWidth('Art. 45 LHMEG:'), 33, 'Art. 45 LHMEG:');
+                pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(act_ley45)), 33, FormatoMoneda(act_ley45));
+
+            }
+            if (gastos_req>0) {
+                pdf.text(tab2 - pdf.getTextWidth('Gastos de Requerimiento:'), 34, 'Gastos de Requerimiento:');
+                pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(gastos_req)), 34, FormatoMoneda(gastos_req));
+            }
+            if (gastos_ejec>0) {
+                pdf.text(tab2 - pdf.getTextWidth('Gastos de Ejecución:'), 35, 'Gastos de Ejecución:');
+                pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(gastos_req)), 35, FormatoMoneda(gastos_req));
+            }
+            if (recargos>0) {
+                pdf.text(tab2 - pdf.getTextWidth('Recargos:'), 36, 'Recargos:');
+                pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(gastos_ejec)), 36, FormatoMoneda(gastos_ejec));
+            }           
+            
+            if (recargos_pagados>0) {
+                pdf.text(tab2 - pdf.getTextWidth('Acces. y Recargos pagados:'), 42, 'Acces. y Recargos pagados:');
+                pdf.text(tab4 - pdf.getTextWidth(FormatoMoneda(recargos_pagados)), 42, FormatoMoneda(recargos_pagados));
+            }
+            if (descto_recargos>0) {
+                pdf.text(tab2 - pdf.getTextWidth('Descto. sobre recargos:'), 43, 'Descto. sobre recargos:');
+                pdf.text(tab4 - pdf.getTextWidth(FormatoMoneda(descto_recargos)), 43, FormatoMoneda(descto_recargos));
+            }
+            if (descto_est_soc>0) { 
+                pdf.text(tab2 - pdf.getTextWidth('Ayuda Social (Est. Soc):'), 44, 'Ayuda Social (Est. Soc):');
+                pdf.text(tab4 - pdf.getTextWidth(FormatoMoneda(descto_est_soc)), 44, FormatoMoneda(descto_est_soc));
+            }
+            if (descto_autor > 0) {
+                pdf.text(tab2 - pdf.getTextWidth('Descto. Autorizado:'), 45, 'Descto. Autorizado:');
+                pdf.text(tab4 - pdf.getTextWidth(FormatoMoneda(descto_autor)), 45, FormatoMoneda(descto_autor));
+            }
+            
+            if (descto_ppp > 0) {
+                pdf.text(tab2 - pdf.getTextWidth('Descto. x pago anticipado:'), 57, 'Descto. x pago anticipado:');
+                pdf.text(tab4 - pdf.getTextWidth(FormatoMoneda(descto_ppp.toString())), 57, FormatoMoneda(descto_ppp.toString()));
+            }            
+            
+            pdf.text(tab2 - pdf.getTextWidth('Total de Aportaciones:'), 58, 'Total de Aportaciones:');
+
+            pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(capital_sin_inc)), 27, FormatoMoneda(capital_sin_inc));
+            pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(act_costo_obra)), 28, FormatoMoneda(act_costo_obra));
+            pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(capital)), 30, FormatoMoneda(capital));                        
+            pdf.text(tab4 - pdf.getTextWidth(FormatoMoneda(capital_pagado.toString())), 58, FormatoMoneda(capital_pagado.toString()));
+            
+            
+            
+            //////*******************      PIE DE PAGINA  **********************************//////////////////
+
+            pdf.setFontSize(1.5);
+            pdf.text(2, 70, 'Blvd. Juan José Torres Landa 1701');
+            pdf.text(2, 71, 'Oriente Edificio B de Obras Públicas');
+            pdf.text(2, 72, 'Col. El Tlacuache');
+            pdf.text(2, 73, 'C.P. 37480');
+            pdf.text(2, 74, 'León Gto.');
+
+            pdf.text(22 -  pdf.getTextWidth('Tel. Oficina: 477-470-86-15 al 18')/2, 70, 'Tel. Oficina: 477-470-86-15 al 18');
+            pdf.text(22 -  pdf.getTextWidth('fidoc.leon.gob.mx')/2, 71, 'fidoc.leon.gob.mx');
+
+            var img_facebook = new Image();
+            img_facebook.src = "../imagenes/face.png";
+            pdf.addImage(img_facebook, 'png', 38.5, 69.3, 1.3, 1);
+
+            var img_twitter = new Image();
+            img_twitter.src = "../imagenes/twitter.png";
+            pdf.addImage(img_twitter, 'png', 40.3, 70.3,1, 1);
+
+            var img_whatsapp = new Image();
+            img_whatsapp.src = "../imagenes/whatsapp.jpg";
+            pdf.addImage(img_whatsapp, 'jpg', 39.3, 71.3, 1, 1);
+
+
+            pdf.text(44 - pdf.getTextWidth('facebook/fidocleon'), 70, 'facebook/fidocleon');
+            pdf.text(44 - pdf.getTextWidth('@fidocleon'), 71, '@fidocleon');
+            pdf.text(44 - pdf.getTextWidth('477-325-2586'), 72, '477-325-2586');
+            
+
+            /////****************************************************************////////////////
+
+
+            
+            var hoy = moment().format("DDMMYYYY");
+            
+            var nom_edo_cta = 'edo_cta_' + hoy + '.pdf';
+
+            pdf.save(nom_edo_cta.toString());
+        }
+
+
+        
+
+
+
+        function GeneraPieFijoEdoCta(pdf) {
+        var columna_pie = 10;
+        var row_ini_pie = 255;
+        var reng_adic = 3;
+
+        pdf.setFontSize(6);
+        pdf.setFontType('normal')
+        pdf.line(10, row_ini_pie, 204, row_ini_pie);
+        pdf.text(columna_pie, row_ini_pie + reng_adic * 1, 'Blvd. Juan José Torres Landa 1701');
+        pdf.text(columna_pie, row_ini_pie + reng_adic * 2, 'Oriente Edificio B de Obras Públicas');
+        pdf.text(columna_pie, row_ini_pie + reng_adic * 3, 'Col. El Tlacuache');
+        pdf.text(columna_pie, row_ini_pie + reng_adic * 4, 'C.P. 37480');
+        pdf.text(columna_pie, row_ini_pie + reng_adic * 5, 'León Gto.');
+
+        pdf.text(107 - pdf.getTextWidth('Horarios de atención: Lunes a Viernes, 8:00 hrs - 15:30 hrs') / 2, row_ini_pie + reng_adic * 1, 'Horarios de atención: Lunes a Viernes, 8:00 hrs - 15:30 hrs');
+        pdf.text(107 - pdf.getTextWidth('Tel. Oficina: 477-470-86-15 al 18') / 2, row_ini_pie + reng_adic * 2, 'Tel. Oficina: 477-470-86-15 al 18');
+        pdf.text(107 - pdf.getTextWidth('fidoc.leon.gob.mx') / 2, row_ini_pie + reng_adic * 3, 'fidoc.leon.gob.mx');
+
+        var img_facebook = new Image();
+        img_facebook.src = "../imagenes/face.png";
+        pdf.addImage(img_facebook, 'png', 181, row_ini_pie + reng_adic * 0.4, 3.5, 2.5);
+
+        var img_twitter = new Image();
+        img_twitter.src = "../imagenes/twitter.png";
+        pdf.addImage(img_twitter, 'png', 189, row_ini_pie + reng_adic * 1.4, 2.5, 2.5);
+
+        var img_whatsapp = new Image();
+        img_whatsapp.src = "../imagenes/whatsapp.jpg";
+        pdf.addImage(img_whatsapp, 'jpg', 187, row_ini_pie + reng_adic * 2.4, 2.5, 2.5);
+
+
+        pdf.text(204 - pdf.getTextWidth('facebook/fidocleon'), row_ini_pie + reng_adic, 'facebook/fidocleon');
+        pdf.text(204 - pdf.getTextWidth('@fidocleon'), row_ini_pie + reng_adic * 2, '@fidocleon');
+        pdf.text(204 - pdf.getTextWidth('477-325-2586'), row_ini_pie + reng_adic * 3, '477-325-2586');
+
+        }
+
+
+        function GeneraEncEdoCta(tab1, tab2, tab3, tab4, pdf) {
+            var objencabezado = {
+                "idusu":$("#bodegadatos").data("idusu"),
+                "fid": $("#bodegadatos").data("fid"),
+                "pid": $("#bodegadatos").data("pid"),
+                "obr_clv_int": $("#bodegadatos").data("obr_clv_int"),
+                "oid": $("#bodegadatos").data("oid"),
+                "obra_s": $("#bodegadatos").data("obra_sifidoc"),
+                "coop_s": $("#bodegadatos").data("coopid"),
+                "nom_coop": $("#bodegadatos").data("nom_ficha"),
+                "tipo_obra": $("#bodegadatos").data("tipo_obra"),
+                "tramo": $("#bodegadatos").data("tramo"),
+                "colonia": $("#bodegadatos").data("colonia"),
+                "calle": $("#bodegadatos").data("calle"),
+                "obra_status": $("#bodegadatos").data("obr_status"),
+                "noofic": $("#bodegadatos").data("nooficial"),
+                "mts_fte": $("#bodegadatos").data("mts_fte"),
+                "costo_mto": $("#bodegadatos").data("costo_mto"),
+                "prog": $("#lblnomprog").text(),
+                "uso_predio": $("#bodegadatos").data("uso_suelo"),
+                "ctapredial": $("#bodegadatos").data("ctapredial"),
+                "fecinip": $("#bodegadatos").data("fecinipag"),
+                "fecvencp": $("#bodegadatos").data("fecvencpag"),
+                "num_pagos": $("#bodegadatos").data("num_pagos"),                
+            }
+            /*idusu:fid:pid:obr_clv_int:oid*/
+            var super_clave = objencabezado.idusu + ':' + objencabezado.fid + ':' + objencabezado.pid + ':' + objencabezado.obr_clv_int + ':' + objencabezado.oid;
+
+            var img = new Image();
+            img.src = '../imagenes/admon2021_2024.png';
+            pdf.addImage(img, 'PNG', 10, 10, 60, 22);
+            
+            pdf.setFontSize(14);
+            pdf.setFontType('bold');
+            pdf.text(tab2 + ((tab3 - tab2) / 2), 20, "ESTADO DE CUENTA DE COOPERADOR");
+            
+            pdf.setFontSize(7);
+            pdf.setFontType('normal');
+            pdf.text(tab4 + ((228 - tab4) / 2) - pdf.getTextWidth('León, Guanajuato al día: ' + FechaHora(hoy)), 24, 'León, Guanajuato al día: ' + FechaHora(hoy));
+            pdf.setFontSize(5);
+            pdf.text(tab4 + ((228 - tab4) / 2) - pdf.getTextWidth(super_clave), 28, super_clave);
+
+            var reng_base = 40;
+            var inc = 4.8;
+
+
+            /*Campos lado izquierdo*/
+            pdf.setFontSize(12);
+            pdf.text(tab2 - pdf.getTextWidth('No. Cooperador:'), reng_base + inc /2, 'No. Cooperador:');
+            pdf.text(tab2 - pdf.getTextWidth('Nombre Cooperador:'), reng_base + inc * 2, 'Nombre Cooperador:');
+            pdf.text(tab2 - pdf.getTextWidth('Tipo de Obra:'), reng_base + inc * 3, 'Tipo de Obra:');
+            pdf.text(tab2 - pdf.getTextWidth('Programa:'), reng_base + inc * 4, 'Programa:');
+            pdf.text(tab2 - pdf.getTextWidth('Tramo:'), reng_base + inc * 5, 'Tramo:');
+            pdf.text(tab2 - pdf.getTextWidth('Colonia:'), reng_base + inc * 6, 'Colonia:');
+            pdf.text(tab2 - pdf.getTextWidth('Calle:'), reng_base + inc * 7, 'Calle:');
+            pdf.text(tab2 - pdf.getTextWidth('No. Oficial:'), reng_base + inc * 8, 'No. Oficial:');            
+            pdf.text(tab2 - pdf.getTextWidth('Cta. Predial:'), reng_base + inc * 9, 'Cta. Predial:');
+            pdf.setFontSize(9);
+            pdf.text(tab2 - pdf.getTextWidth('Periodo de recaudación '), reng_base + inc * 10, 'Periodo de recaudación ');
+            pdf.text(tab2 - pdf.getTextWidth('en la PROMOCION de la obra:'), reng_base + inc * 11, 'en la PROMOCION de la obra:');
+
+            pdf.setFontSize(12);
+            
+
+            /*Campos lado derecho*/
+            
+            pdf.text(tab4 - pdf.getTextWidth('Uso predio:'), reng_base + inc * 8, 'Uso predio:');
+            pdf.text(tab4 - pdf.getTextWidth('No. pagos:'), reng_base + inc * 9, 'No. pagos:');
+            pdf.text(tab4 - pdf.getTextWidth('Mts. frente:'), reng_base + inc * 10, 'Mts. frente:');
+            pdf.text(tab4 - pdf.getTextWidth('Costo mto. lineal:'), reng_base + inc * 11, 'Costo mto. lineal:');
+
+
+            /*Valores lado izquierdo*/
+            var margen_resp = 3;
+            pdf.setFontType('bold');            
+            var ancho_nombre = pdf.getTextWidth(objencabezado.nom_coop);
+            var ancho_calle = pdf.getTextWidth(objencabezado.calle);
+            var ancho_colonia = pdf.getTextWidth(objencabezado.colonia);
+            var ancho_tramo = pdf.getTextWidth(objencabezado.tramo);
+
+            if (ancho_nombre > 110) {
+                pdf.setFontSize(10);                
+            }
+            if (ancho_calle > 110) {
+                pdf.setFontSize(10);
+            }
+            if (ancho_colonia > 110) {
+                pdf.setFontSize(10);
+            }
+            if (ancho_tramo > 110) {
+                pdf.setFontSize(10);
+            }
+
+            pdf.text(tab2 + margen_resp, reng_base + inc * 2, objencabezado.nom_coop);
+            pdf.text(tab2 + margen_resp, reng_base + inc * 5, objencabezado.tramo);
+            pdf.text(tab2 + margen_resp, reng_base + inc * 6, objencabezado.colonia);
+            pdf.text(tab2 + margen_resp, reng_base + inc * 7, objencabezado.calle);
+
+            pdf.setFontSize(12);
+            pdf.text(tab2 + margen_resp, reng_base + inc / 2, objencabezado.obra_s + '-' + objencabezado.coop_s);
+            pdf.text(tab2 + margen_resp, reng_base + inc * 4, objencabezado.prog);            
+            pdf.text(tab2 + margen_resp, reng_base + inc * 3, objencabezado.tipo_obra);            
+            pdf.text(tab2 + margen_resp, reng_base + inc * 8, objencabezado.noofic);
+            pdf.text(tab2 + margen_resp, reng_base + inc * 9, objencabezado.ctapredial);
+            pdf.text(tab2 + margen_resp, reng_base + inc * 11, objencabezado.fecinip + ' - ' + objencabezado.fecvencp);        
+          
+
+            
+            /*Valores del lado Derecho*/
+            pdf.text(tab4 + margen_resp, reng_base + inc * 8, objencabezado.uso_predio);
+            pdf.text(tab4 + margen_resp, reng_base + inc * 9, objencabezado.num_pagos);
+            pdf.text(tab4 + margen_resp, reng_base + inc * 10, objencabezado.mts_fte);
+            pdf.text(tab4 + margen_resp, reng_base + inc * 11, FormatoMoneda(objencabezado.costo_mto));
+            
+            
+
+            pdf.line(10, reng_base + inc * 12, 204, reng_base + inc * 12);
+            pdf.line(10, reng_base + inc * 12.2, 204, reng_base + inc * 12.2);
+            pdf.setFontSize(10);
+            pdf.text(tab3 - pdf.getTextWidth('DETALLE DE MOVIMIENTOS') / 2, reng_base + inc * 13, 'DETALLE DE MOVIMIENTOS');
+            pdf.line(10, reng_base + inc * 13.2, 204, reng_base + inc * 13.2);
+
+            pdf.text(10 + ((tab2 - tab1) / 2) - pdf.getTextWidth('CONCEPTO') / 2, reng_base + inc * 14, 'CONCEPTO');
+            pdf.text(tab3 + ((tab4 - tab3) / 2) - pdf.getTextWidth('CANTIDADES') / 2, reng_base + inc * 14, 'CANTIDADES');
+            pdf.line(10, reng_base + inc * 14.2, 204, reng_base + inc * 14.2);
+
+            pdf.line(tab2, reng_base + inc * 13.2, tab2, 232);
+            pdf.line(tab3, reng_base + inc * 14.2, tab3, 232);
+            pdf.line(tab4, reng_base + inc * 14.2, tab4, 232);
+
+            pdf.line(10, 232, 204, 232);
+
+            var hoy = new Date();
+
+        }
+
+        function GeneraCuerpoEdoCta(tab1, tab2, tab3, tab4, pdf) {
+            /*CUERPO*/
+            var reng_base = 40;
+            var inc = 4.8;
+            var pagina = 1;
+            var total_paginas = 1;
+
+
+            var objcuerpo = {
+                "fid": $("#bodegadatos").data("fid"),
+                "capital_sin_inc": $("#bodegadatos").data("capital_sin_inc"),
+                "act_costo_obra": $("#bodegadatos").data("inc")                
+            }
+
+            
+
+            pdf.setFontSize(8);
+            pdf.text(tab2 - pdf.getTextWidth('Costo total beneficio: '), reng_base + inc * 15, 'Costo total beneficio: ');
+            pdf.text(tab2 - pdf.getTextWidth('Incremento al costo de obra: '), reng_base + inc * 16, 'Incremento al costo de obra: ');
+
+            pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(objcuerpo.capital_sin_inc) + ' '), reng_base + inc * 15, FormatoMoneda(objcuerpo.capital_sin_inc) + ' ');
+            pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(objcuerpo.act_costo_obra) + ' '), reng_base + inc * 16, FormatoMoneda(objcuerpo.act_costo_obra) + ' ');
+
+
+            /*pagos*/
+            
+            ConsultarPagos_psql(objcuerpo.fid, 0)
+                           .done(function (r) {
+                               var cadena = r.d;
+                               var objpagos=[];
+                               if (cadena != '<NewDataSet />') {
+                                   $(cadena).find("pagos").each(function () {
+                                       var objpago = {
+                                           "id": 0,
+                                           "folio": '',
+                                           "fecha": '',
+                                           "monto": 0,
+                                           "monto_txt": ''
+                                       };
+
+                                       objpago.id = $(this).find("id_movr").text();
+                                       objpago.folio = $(this).find("folio_cajasr").text();
+                                       objpago.fecha = $(this).find("fec_mov_as400r").text();
+                                       objpago.monto = $(this).find("monto_movr").text();
+                                       objpago.monto_txt = $(this).find("monto_movr").text();
+                                       objpagos.push(objpago);
+                                   });
+                                   
+                                   var pagos_mostrados = 0;                                   
+                                   var limite_pagos_mostrados = 20;                                   
+                                   var num_pagos = objpagos.length;
+                                   var residuo = num_pagos % limite_pagos_mostrados;
+                                   var fraccion = 0;
+                                   if (residuo > 0) {
+                                       fraccion = 1;
+                                   }
+
+                                   total_paginas = Math.floor(num_pagos / limite_pagos_mostrados) + fraccion;
+                                   GeneraNumPaginas(pagina, total_paginas, tab4, pdf);
+                                   
+                                   
+                                   for (var index = 0; index < objpagos.length;) {
+
+                                       if (pagos_mostrados >= limite_pagos_mostrados) {
+                                           pdf.addPage();
+                                           pagina = pagina + 1;
+                                           reng_base = 32;
+                                           pagos_mostrados = 0;
+                                           GeneraEncEdoCta(tab1, tab2, tab3, tab4, pdf);
+                                           GeneraNumPaginas(pagina, total_paginas, tab4, pdf);
+                                           GeneraPieFijoEdoCta(pdf);
+                                       }
+
+                                       pdf.setFontSize(7);
+                                       pdf.setFontType('normal');
+                                       pdf.text(tab2 - pdf.getTextWidth("Pago:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' '), reng_base + inc * (17 + pagos_mostrados), "Pago:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' ');
+                                       pdf.setFontSize(8);
+                                       pdf.text(tab4 - pdf.getTextWidth(FormatoMoneda(objpagos[index].monto_txt) + ' '), reng_base + inc * (17 + pagos_mostrados), FormatoMoneda(objpagos[index].monto_txt) + ' ');                                       
+                                       pagos_mostrados = pagos_mostrados + 1;                                      
+
+                                       index++;
+                                   }
+                                   
+                               }
+                               else {
+                                   console.log("No existen pagos registrados");
+                                   pdf.line(10, 220, 204, 220);                                  
+
+                                   
+                               }
+
+                               
+                               GeneraPieVariableEdoCta(tab1, tab2, tab3, tab4, pdf);
+
+
+                               var fid = $("#bodegadatos").data("fid");
+                               var hoy = moment().format("DDMMYYYY");
+                               var nom_edo_cta = 'edo_cta_' + fid + "_" + hoy + '.pdf';
+                               pdf.save(nom_edo_cta.toString());
+
+                             })
+                                 .fail(function (xhr) {
+                                  console.log(xhr.responseText);
+                                  alert("No fue posible leer los pagos");
+                             })
+
+
+            
+            
+
+        }
+
+
+        function ConsultarPagos_psql(fid, accion) {
+            return $.ajax({
+                url: "../../WebServices/WebServiceMovs.asmx/GetPagos",
+                data: "{'fid':'" + fid + "','accion':'" + accion + "'}",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    if (data.d != null) {
+                        console.log(data.d);
+                    }
+                },
+                error: function (xhr) {
+                    console.log(xhr.responseText);
+                }
+
+            });
+        }
+
+        function GeneraPieVariableEdoCta(tab1, tab2, tab3, tab4, pdf) {
+
+            var reng_base = 40;
+            var inc = 4.8;
+
+            var objcuerpo = {                                
+                "capital": $("#bodegadatos").data("capital"),
+                "descto_ppp": $("#bodegadatos").data("descto_aplic"),
+                "capital_pagado": $("#bodegadatos").data("monto_capital_pagado"),
+                "saldo_total": $("#bodegadatos").data("saldo_total")
+            }
+
+            pdf.setFontType('bold');
+            pdf.setFontSize(8);
+            pdf.text(tab2 - pdf.getTextWidth('Total a aportar: '), reng_base + inc * 38.2, 'Total a aportar: ');
+            pdf.text(tab2 - pdf.getTextWidth('Total de aportaciones: '), reng_base + inc * 39, 'Total de aportaciones: ');
+            pdf.text(tab2 - pdf.getTextWidth('Descuento: '), reng_base + inc * 39.8, 'Descuento: ');
+
+            pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(objcuerpo.capital) + ' '), reng_base + inc * 38.2, FormatoMoneda(objcuerpo.capital) + ' ');
+            pdf.text(tab4 - pdf.getTextWidth(FormatoMoneda(objcuerpo.capital_pagado) + ' '), reng_base + inc * 39, FormatoMoneda(objcuerpo.capital_pagado) + ' ');
+            pdf.text(tab4 - pdf.getTextWidth(FormatoMoneda(objcuerpo.descto_ppp) + ' '), reng_base + inc * 39.8, FormatoMoneda(objcuerpo.descto_ppp) + ' ');
+
+           
+
+            pdf.setFontSize(12);
+            
+            pdf.text(tab4 - pdf.getTextWidth('TOTAL A PAGAR: '), reng_base + inc * 41.2, 'TOTAL A PAGAR: ');
+
+            if (objcuerpo.saldo_total <= 0.9) {
+                objcuerpo.saldo_total = 0;
+            } 
+
+            pdf.text(204 - pdf.getTextWidth(FormatoMoneda(objcuerpo.saldo_total) + ' '), reng_base + inc * 41.2, FormatoMoneda(objcuerpo.saldo_total) + ' ');
+            
+            
+
+            pdf.line(10, 241, 204, 241);
+            pdf.line(10, 242, 204, 242);
+
+            
+
+           
+
+        }
+
+        function GeneraNumPaginas(pagina, total_paginas,tab4, pdf) {
+            pdf.setFontSize(10);
+            pdf.setFontType('bold');
+            pdf.text(tab4 - (102 - (pdf.getTextWidth('Página: ' + pagina.toString() + ' de ' + total_paginas.toString)/2)), 250, 'Página: ' + pagina.toString() + ' de ' + total_paginas.toString());
+        }
+
+
+
+        function GenerarEdoCta2() {           
+            
+            var pdf = new jsPDF('p', 'mm', 'letter');
+
+            var tab1 = 10;
+            var tab2 = 52;
+            var tab3 = tab2 * 2;
+            var tab4 = tab2 * 3;
+
+            GeneraEncEdoCta(tab1, tab2, tab3, tab4, pdf);
+            GeneraPieFijoEdoCta(pdf);
+            GeneraCuerpoEdoCta(tab1, tab2, tab3, tab4, pdf);
+           
+        }
+
+
+        function ValidaDesctoPPP() {
+            var estatus_obra = $("#bodegadatos").data("obr_status");
+            var monto_descto_x_aplic = parseFloat($("#bodegadatos").data("descto_por_aplic"));
+            var monto_descto_aplicado = parseFloat($("#bodegadatos").data("descto_aplic"));
+            var saldo_total = parseFloat($("#bodegadatos").data("saldo_total"));
+            var fecvencpag = moment(FormatoFechaYYYYMMDD($("#bodegadatos").data("fecvencpag")));
+            var hoy = moment();
+            var idusu = $("#bodegadatos").data("idusu");
+            var rolusu = $("#bodegadatos").data("crolnombre");
+           
+            var valid = 0;
+            
+            if (estatus_obra == 2) {
+                if (hoy <= fecvencpag || rolusu == 'Administrador de Sistema') {
+                    if (monto_descto_x_aplic > 0) {
+                        alert('Existe programado un descuento por aplicar, por lo tanto, no es posible registrar el descuento nuevamente.');
+                    }
+                    else {
+                        if (monto_descto_aplicado > 0) {
+                            alert('Ya se encuentra aplicado un descuento por pronto pago, por lo tanto no es posible programar uno nuevo');
+                        }
+                        else {
+                            if (saldo_total > 20) {
+                                valid = 1;
+                            }
+                            else {
+                                alert('No es posible guardar el descuento porque el saldo total esta cubierto.');
+                            }
+                        }
+                    }
+                }
+                else {    
+                    alert('El periodo de recaudación ha terminado, por lo tanto no es posible programar un descuento por pronto pago.');
+                }
+            }
+            else {
+                if (idusu != 46)
+                {
+                    alert('Solo es posible descuentos por pronto pago a adeudos en etapa de RECAUDACIÓN');
+                } else {                    
+                    if (estatus_obra == 4) {
+                        alert('Se programará un descuento en una obra con estatus de PROCESO.');                        
+                        valid = 1;
+                    } else {
+                        if (estatus_obra == 5) {
+                            alert('No es posible porgramar un descuento en una obra con estatus de: TERMINADA VENCIDA.');                        
+                        }
+                    }
+
+                }
+             }
+            
+            return valid;
+        }
+
+        function InsertaPagos(strPagos) { /**/
+
+            var idusu = $("#bodegadatos").data("idusu");
+
+            return $.ajax({
+                type: 'POST',
+                dataType: "json",
+                contentType: "application/json",
+                url: "../../WebServices/WebServicePagos.asmx/InsertarPagosPsql",
+                data: "{'pagos':'" + strPagos + "','idusu':'" + idusu + "'}",
+                sucess: function (data) {
+                    if (data.d != null) {
+                        consolo.log("Pagos actualizados correctamente en PostgresSQL")
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                }
+            });
+        }
+
+        function ActualizarPagosTesoreria() {
+
+            fecini = fecha_ini_AS400();
+            fecfin = fecha_fin_AS400();
+
+            return $.ajax({
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                url: "../../WebServices/WebServicePagos.asmx/GetActPagosAS400",
+                data: "{'fec_inicial':'" + fecini + "','fec_final':'" + fecfin + "'}",
+                success: function (data) {
+                    alert(data.d);
+                },
+                error: function (xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+
+
+       
+        function LeerPagosSIFIDOC(coopid) {
+
+            /*var sentecia_inserccion_pagos_coop = 'insert into pagos_temp (elemento,mov_obra_sifidoc,mov_coop_sifidoc,fec_mov_as400,usu_fidoc,monto_abono_sifidoc,fec_aplic_mov,clave_sifidoc,fid,uscre,folio_pago,coo_clv2,obr_clv_int,mov_activo) values (';*/
+            
+            var sentencia = '';
+            var fid = $("#bodegadatos").data("fid");
+            var obr_clv_int = $("#bodegadatos").data("obr_clv_int");
+            
+
+
+         return   $.ajax({
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                url: "../../WebServices/WebServiceCoop.asmx/GetPagosCoopSIFIDOC",
+                data: "{'coo_clv':'" + coopid + "'}",
+                success: function (data) {
+                    var elementos = 0;
+                    if (data.d != '<NewDataSet />') { /*Existen pagos*/
+                        $(data.d).find("pagos_coops_sifidoc").each(function () {
+                            var cooperador = $(this).find("mov_clv1").text();
+                            var obra = cooperador.substr(0, 10);
+                            var coop = cooperador.substr(10, 3);
+                            var folio_pago = $(this).find("mov_ndep").text();
+                            var aux = $(this).find("mov_fecha_cap").text();
+                            var fec_cap_pag = aux.substr(0, 10);
+                            
+
+                            var monto_pago = $(this).find("mov_cap").text();                           
+
+                            var aux = $(this).find("mov_fecha").text();
+                            var fec_pago =aux.substr(0, 10);
+                            
+
+                            var id_mov_sifidoc = $(this).find("ID").text();
+                            var usu_sifidoc = $(this).find("mov_usu").text();
+                            sentencia = sentencia + fid + ',' + obr_clv_int + ',' + cooperador + ',' + obra + ',' + coop + ',' + folio_pago + ',' + fec_cap_pag + ',' + monto_pago + ',' + fec_pago + ',' + id_mov_sifidoc + ',' + usu_sifidoc + ',;'
+                        });
+                        if (sentencia != '') {
+                            InsertaPagos(sentencia)
+                                 .done(function (result) {
+                                     console.log("Inserción de pagos correctamente en PostgresSQL")
+                                 }).fail(function (result) {
+                                     console.log("No fue posible insertar los pagos en PSQL: " + result.responseText);
+                                 });                            
+                        }
+                        
+                    }
+                    else {
+                        console.log('No existen pagos registrados del cooperador: ' + coopid);
+                    }
+                },
+                error: function (xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+
+            
+        }
+
+
+        function ConsultarFrenteFinanc(fid, accion) {
+            $.ajax(
+               {
+                   url: "../../WebServices/WebServiceFrente.asmx/GetFrenteFinanc", //PageMethod
+                   data: "{'accion':'" + accion 
+                          + "','fid':'" + fid + "'}", //PageMethod Parametros de entrada                       
+                   dataType: "json",
+                   type: "post",
+                   contentType: "application/json; charset=utf-8",
+                   success: function (data) {
+
+                       var cadena = $.trim(data.d);
+                       if (cadena == '<NewDataSet />') {
+                           alert("No información del frente para mostrar");
+                       } else {
+                                // Data.d trae un string con el XML generado dentro del servicio web asmx
+                           $(data.d).find("frentefinanc").each(function () {
+                               $("#bodegadatos").data("fid", $(this).find("fidr").text());
+                               $("#bodegadatos").data("oid", $(this).find("oidr").text());
+                               $("#bodegadatos").data("pid", $(this).find("pidr").text());
+                               $("#bodegadatos").data("obr_clv_int", $(this).find("obr_clv_intr").text());
+                               var id = $("#bodegadatos").data("fid") + ':' + $("#bodegadatos").data("pid") + ':' + $("#bodegadatos").data("oid") + ':' + $("#bodegadatos").data("obr_clv_int");
+                               $("#lblid").text(id);
+                               $("#bodegadatos").data("coopid", $(this).find("coopidr").text());
+                               $("#bodegadatos").data("obra_sifidoc", $(this).find("obra_sifidocr").text());                                                   
+                               $("#lblcooperador").text($(this).find("mnomfichar").text());
+                               $("#bodegadatos").data("nom_ficha", $(this).find("mnomfichar").text());
+                               $("#lblcoopsifidoc").text($(this).find("obra_sifidocr").text() + $(this).find("coopidr").text());
+                               $("#lblcurp").text($(this).find("mcurpr").text());
+                               $("#lbline").text($(this).find("miner").text());
+                               $("#lbltel").text($(this).find("mtelcoopr").text());
+                               $("#lblcorreo").text($(this).find("mcorreor").text());
+                               $("#lblrelacionpredio").text($(this).find("crelacionpredior").text());
+                               $("#bodegadatos").data("relacion_predio", parseInt($(this).find("crelacionpredior").text()));
+                               $("#bodegadatos").data("obr_status", parseInt($(this).find("obr_statusr").text()));
+                               $("#lblnomprog").text($(this).find("nomprogr").text() + ' (' + $(this).find("progdescripr").text() + ')');
+                               $("#bodegadatos").data("nomprog", $(this).find("nomprogr").text());                           
+                               $("#bodegadatos").data("progdescrip", $(this).find("progdescripr").text());
+                               $("#bodegadatos").data("tipo_obra", $(this).find("tipo_obrar").text());
+                               $("#bodegadatos").data("calle", $(this).find("caller").text());
+                               $("#bodegadatos").data("colonia", $(this).find("coloniar").text());
+                               $("#bodegadatos").data("tramo", $(this).find("tramor").text());
+                               $("#bodegadatos").data("nooficial", $(this).find("nooficialr").text());
+                               $("#bodegadatos").data("ctapredial", $(this).find("ctapredialr").text());
+                               $("#bodegadatos").data("uso_suelo", $(this).find("uso_suelor").text());
+                               $("#bodegadatos").data("num_pagos", $(this).find("num_pagosr").text());
+                               $("#bodegadatos").data("mts_fte", $(this).find("mts_frenter").text());
+                               $("#bodegadatos").data("costo_mto", $(this).find("costo_mtor").text());
+                               $("#bodegadatos").data("capital_sin_inc", $(this).find("capital_sin_incr").text());
+                               $("#bodegadatos").data("inc", $(this).find("incr").text());    
+                               $("#lbldomnotif").text($(this).find("dom_notifr").text());
+                               $("#lblfecinipag").text(MostrarFormatoFecha($(this).find("fecinipr").text()));
+                               $("#bodegadatos").data("fecinipag",MostrarFormatoFecha($(this).find("fecinipr").text()));
+                               $("#lblfecvencpag").text(MostrarFormatoFecha($(this).find("fecvenpr").text()));
+                               $("#bodegadatos").data("fecvencpag",MostrarFormatoFecha($(this).find("fecvenpr").text()));
+                               $("#lblfeciniproc").text(MostrarFormatoFecha($(this).find("feciniprocr").text()));
+                               $("#lblfecinicob").text(MostrarFormatoFecha($(this).find("fecinicobr").text()));                                   
+                               $("#lblcapital").text( FormatoMoneda($(this).find("capitalr").text()));
+                               $("#bodegadatos").data("capital", $(this).find("capitalr").text());    
+                               $("#lblIncremento").text(FormatoMoneda($(this).find("incr").text()));
+                               $("#bodegadatos").data("inc", $(this).find("incr").text());
+                               $("#lbldescto_poraplicar_capital").text(FormatoMoneda($(this).find("descto_capital_por_aplicr").text()));
+                               $("#bodegadatos").data("descto_por_aplic", parseFloat($(this).find("descto_capital_por_aplicr").text()));
+                               $("#bodegadatos").data("descto_por_aplic_2", parseFloat($(this).find("descto_capital_por_aplicr").text()));
+                               $("#lbldescto_aplicado_capital").text(FormatoMoneda($(this).find("descto_capital_aplicr").text()));
+                               $("#bodegadatos").data("descto_aplic", parseFloat($(this).find("descto_capital_aplicr").text()));
+                               $("#lblpagcap").text(FormatoMoneda($(this).find("monto_capital_pagador").text()));
+                               $("#bodegadatos").data("monto_capital_pagado", parseFloat($(this).find("monto_capital_pagador").text()));
+                               $("#lblsaldo_total").text(FormatoMoneda($(this).find("saldo_totalr").text()));
+                               $("#bodegadatos").data("saldo_total", parseFloat($(this).find("saldo_totalr").text()));
+                               var coop_sifidoc = $("#bodegadatos").data("obra_sifidoc") + $("#bodegadatos").data("coopid");
+                               })
+                           }
+                           
+                       
+                   },
+                   error: function (response) {
+                       if (response.length != 0)++
+                           alert(response);
+                   }
+               });
+
+        }
+
+            function ConsultarRolUsuario(idusu, accion) {
+                $.ajax(
+                   {
+                       url: "../../WebServices/WebServiceUsuario.asmx/GetRolUsuario", //PageMethod
+                       data: "{'accion':'" + accion
+                              + "','idusu':'" + idusu + "'}", //PageMethod Parametros de entrada                       
+                       dataType: "json",
+                       type: "post",
+                       contentType: "application/json; charset=utf-8",
+                       success: function (data) {
+                           // Data.d trae un string con el XML generado dentro del servicio web asmx
+                           $(data.d).find("rolusuario").each(function () {
+                               $("#bodegadatos").data("musuid", $(this).find("musuidr").text());
+
+                               var aux = $(this).find("musunombrer").text();
+
+                               $("#bodegadatos").data("musunombre", $(this).find("musunombrer").text());
+                               $("#bodegadatos").data("musucorreo", $(this).find("musucorreor").text());
+                               $("#bodegadatos").data("musucuenta", $(this).find("musucuentar").text());
+                               $("#bodegadatos").data("musupass", $(this).find("musupassr").text());
+                               $("#bodegadatos").data("musuidrol", $(this).find("musuidrolr").text());
+                               $("#bodegadatos").data("musurfc", $(this).find("musurfcr").text());
+                               $("#bodegadatos").data("musucurp", $(this).find("musucurpr").text());
+                               $("#bodegadatos").data("mususs", $(this).find("musussr").text());
+                               $("#bodegadatos").data("musuempleado", $(this).find("musuempleador").text());
+                               $("#bodegadatos").data("musrcre_usu", $(this).find("musrcre_usur").text());
+                               $("#bodegadatos").data("musrmod_usu", $(this).find("musrmod_usur").text());
+                               $("#bodegadatos").data("musuestatus", $(this).find("musuestatusr").text());
+                               $("#bodegadatos").data("cactivo", $(this).find("cactivor").text());
+                               $("#bodegadatos").data("musulastlogin",$(this).find("musulastloginr").text());
+                               $("#bodegadatos").data("feccre_usu", $(this).find("feccre_usur").text());
+                               $("#bodegadatos").data("fecmod_usu", $(this).find("fecmod_usur").text());
+                               $("#bodegadatos").data("midarea", $(this).find("midarear").text());
+                               $("#bodegadatos").data("crolid", $(this).find("crolidr").text());
+                               $("#bodegadatos").data("croldescripcion", $(this).find("croldescripcionr").text());
+                               $("#bodegadatos").data("crolestatus", $(this).find("crolestatusr").text());
+                               $("#bodegadatos").data("crolnombre", $(this).find("crolnombrer").text());
+                               $("#bodegadatos").data("usucre_rol", $(this).find("usucre_rolr").text());
+                               $("#bodegadatos").data("feccre_rol", $(this).find("feccre_rolr").text());
+                               $("#bodegadatos").data("usumod_rol", $(this).find("saldo_totalr").text());
+                               $("#bodegadatos").data("fecmod_rol", $(this).find("saldo_totalr").text());
+                           })
+                       },
+                       error: function (response) {
+                           if (response.length != 0)++
+                               alert(response);
+                       }
+                   });
+
+            }
+        
+            function MostrarModalDescuento() {
+                var hoy = new Date();
+
+                $("#lblporcentaje").text('');
+                $("#lblmontodescto").text('');
+                $("#lblsaldoxpagar").text('');
+
+                var idusu = $("#bodegadatos").data("idusu");
+                var rolusu = $("#bodegadatos").data("crolnombre");
+
+                if (rolusu == 'Administrador de Sistema') {
+                    $("#txtfecdesctocap").show();
+                }
+                else {
+                    $("#txtfecdesctocap").hide();
+                }
+
+                $("#lblfecdescto").text(fecha_hoy());
+
+                var maskHeight = $(document).height();
+                var maskWidth = $(window).width();
+
+                //Set height and width to mask to fill up the whole screen
+                $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+
+                //transition effect             
+                $('#mask').fadeIn(1000);
+                $('#mask').fadeTo("slow", 0.8);
+
+                //Get the window height and width
+                var winH = $(window).height();
+                var winW = $(window).width();
+
+                //Set the popup window to center
+                $("#descto").css('top', winH / 2 - $("#descto").height() / 2);
+                $("#descto").css('left', winW / 2 - $("#descto").width() / 2);
+
+                //transition effect
+                $("#descto").fadeIn(2000);
+            }
+
+
+            function MostrarModalAplicarDescto() {
+                var hoy = new Date();
+
+                $("#lblsuma_pagos_antes").text('');
+                $("#lbldescto_a_aplicar").text('');
+                $("#lbldescuento_capital").text('');
+                $("#lblfec_descuento").text('');
+                $("#lbltotal_a_pagar").text('');
+
+                var idusu = $("#bodegadatos").data("idusu");
+                var rolusu = $("#bodegadatos").data("crolnombre");              
+
+                $("#lblfecdescto").text();
+
+                var maskHeight = $(document).height();
+                var maskWidth = $(window).width();
+
+                //Set height and width to mask to fill up the whole screen
+                $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+
+                //transition effect             
+                $('#mask').fadeIn(1000);
+                $('#mask').fadeTo("slow", 0.8);
+
+                //Get the window height and width
+                var winH = $(window).height();
+                var winW = $(window).width();
+
+                //Set the popup window to center
+                $("#aplic_descto").css('top', winH / 2 - $("#aplic_descto").height() / 2);
+                $("#aplic_descto").css('left', winW / 2 - $("#aplic_descto").width() / 2);
+
+                //transition effect
+                $("#aplic_descto").fadeIn(2000);
+            }
+
+            
+
+        
+
+            function MostrarEdicionMetrosFrente() {
+
+                var maskHeight = $(document).height();
+                var maskWidth = $(window).width();
+
+                //Set height and width to mask to fill up the whole screen
+                $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+
+                //transition effect             
+                $('#mask').fadeIn(1000);
+                $('#mask').fadeTo("slow", 0.8);
+
+                //Get the window height and width
+                var winH = $(window).height();
+                var winW = $(window).width();
+
+                //Set the popup window to center
+                $("#editar_metros").css('top', winH / 2 - $("#editar_metros").height() / 2);
+                $("#editar_metros").css('left', winW / 2 - $("#editar_metros").width() / 2);
+
+                //transition effect
+                $("#editar_metros").fadeIn(2000);
+
+            }
+            
+
+            function MostrarCapturaDesctoEspecial() {
+                var maskHeight = $(document).height();
+                var maskWidth = $(window).width();
+
+                //Set height and width to mask to fill up the whole screen
+                $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+
+                //transition effect             
+                $('#mask').fadeIn(1000);
+                $('#mask').fadeTo("slow", 0.8);
+
+                //Get the window height and width
+                var winH = $(window).height();
+                var winW = $(window).width();
+
+                //Set the popup window to center
+                $("#captura_monto_descto_esp").css('top', winH / 2 - $("#captura_monto_descto_esp").height() / 2);
+                $("#captura_monto_descto_esp").css('left', winW / 2 - $("#captura_monto_descto_esp").width() / 2);
+
+                //transition effect
+                $("#captura_monto_descto_esp").fadeIn(2000);
+            }
+
+            function MostrarAplicacionDesctoEspecial() {
+                var maskHeight = $(document).height();
+                var maskWidth = $(window).width();
+
+                //Set height and width to mask to fill up the whole screen
+                $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+
+                //transition effect             
+                $('#mask').fadeIn(1000);
+                $('#mask').fadeTo("slow", 0.8);
+
+                //Get the window height and width
+                var winH = $(window).height();
+                var winW = $(window).width();
+
+                //Set the popup window to center
+                $("#aplicar_descto_especial").css('top', winH / 2 - $("#aplicar_descto_especial").height() / 2);
+                $("#aplicar_descto_especial").css('left', winW / 2 - $("#aplicar_descto_especial").width() / 2);
+
+                //transition effect
+                $("#aplicar_descto_especial").fadeIn(2000);
+            }
+
+            function MostrarBitacoraMovs() {
+
+                var maskHeight = $(document).height();
+                var maskWidth = $(window).width();
+
+                //Set height and width to mask to fill up the whole screen
+                $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+
+                //transition effect             
+                $('#mask').fadeIn(1000);
+                $('#mask').fadeTo("slow", 0.8);
+
+                //Get the window height and width
+                var winH = $(window).height();
+                var winW = $(window).width();
+
+                //Set the popup window to center
+                $("#bit_movs").css('top', winH / 2 - $("#bit_movs").height() / 2);
+                $("#bit_movs").css('left', winW / 2 - $("#bit_movs").width() / 2);
+
+                //transition effect
+                $("#bit_movs").fadeIn(2000);                
+                
+            }
+
+            function EmitirFichaPago() {
+
+                var maskHeight = $(document).height();
+                var maskWidth = $(window).width();
+
+                //Set height and width to mask to fill up the whole screen
+                $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+
+                //transition effect             
+                $('#mask').fadeIn(1000);
+                $('#mask').fadeTo("slow", 0.8);
+
+                //Get the window height and width
+                var winH = $(window).height();
+                var winW = $(window).width();
+
+                //Set the popup window to center
+                $("#emitir_ficpag").css('top', winH / 2 - $("#emitir_ficpag").height() / 2);
+                $("#emitir_ficpag").css('left', winW / 2 - $("#emitir_ficpag").width() / 2);
+
+                //transition effect
+                $("#emitir_ficpag").fadeIn(2000);
+
+            }
+            
+
+            function MostrarDesctoNoProgramado() {
+
+                var maskHeight = $(document).height();
+                var maskWidth = $(window).width();
+
+                //Set height and width to mask to fill up the whole screen
+                $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+
+                //transition effect             
+                $('#mask').fadeIn(1000);
+                $('#mask').fadeTo("slow", 0.8);
+
+                //Get the window height and width
+                var winH = $(window).height();
+                var winW = $(window).width();
+
+                //Set the popup window to center
+                $("#aplicar_descto_no_prog").css('top', winH / 2 - $("#aplicar_descto_no_prog").height() / 2);
+                $("#aplicar_descto_no_prog").css('left', winW / 2 - $("#aplicar_descto_no_prog").width() / 2);
+
+                //transition effect
+                $("#aplicar_descto_no_prog").fadeIn(2000);
+
+            }
+
+            function MostrarDesctoArt24() {
+
+                var maskHeight = $(document).height();
+                var maskWidth = $(window).width();
+
+                //Set height and width to mask to fill up the whole screen
+                $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+
+                //transition effect             
+                $('#mask').fadeIn(1000);
+                $('#mask').fadeTo("slow", 0.8);
+
+                //Get the window height and width
+                var winH = $(window).height();
+                var winW = $(window).width();
+
+                //Set the popup window to center
+                $("#aplicar_descto_art24").css('top', winH / 2 - $("#aplicar_descto_art24").height() / 2);
+                $("#aplicar_descto_art24").css('left', winW / 2 - $("#aplicar_descto_art24").width() / 2);
+
+                //transition effect
+                $("#aplicar_descto_art24").fadeIn(2000);
+
+            }
+
+
+
+            function LlenarGridMovs(fec_inicial,fec_final,fid) {                
+
+                var regs = 0;
+
+                if ($("#grid")[0].grid) {
+                    $.jgrid.gridUnload("#grid");
+                    //$("#grid").jqGrid("clearGridData", true).trigger("reloadGrid");
+                }
+
+                $("#grid").jqGrid(
+                     {
+                         datatype: function () {
+                             $.ajax(
+                               {
+                                   url: "../../WebServices/WebServiceMovs.asmx/GetMovsGrid2_psql", //PageMethod
+                                   data: "{'pPageSize':'" + $('#grid').getGridParam("rowNum") +
+                                   "','pCurrentPage':'" + $('#grid').getGridParam("page") +
+                                   "','pSortColumn':'" + $('#grid').getGridParam("sortname") +
+                                   "','pSortOrder':'" + $('#grid').getGridParam("sortorder") +
+                                   "','fecini':'" + fec_inicial +
+                                   "','fecfin':'" + fec_final +
+                                   "','fid':'" + fid + "'}", //PageMethod Parametros de entrada
+                                   dataType: "json",
+                                   type: "post",
+                                   contentType: "application/json; charset=utf-8",
+                                   complete: function (jsondata, stat) {
+                                       if (stat == "success") {
+                                           jQuery("#grid")[0].addJSONData(JSON.parse(jsondata.responseText).d);
+                                           var objeto = JSON.parse(jsondata.responseText).d;
+                                           regs = objeto.RecordCount;
+                                           if (regs) {
+                                               MostrarBitacoraMovs();
+                                           } else {
+                                               alert('No se encontraron movimientos registrados');
+                                           }
+                                       }
+                                       else {
+                                           alert(JSON.parse(jsondata.responseText).Message);
+                                       }
+                                   }
+                               });
+                         },
+                         jsonReader: //Set the jsonReader to the JQGridJSonResponse squema to bind the data.
+                         {
+                             root: "Items",
+                             page: "CurrentPage",
+                             total: "PageCount",
+                             records: "RecordCount",
+                             repeatitems: true,
+                             cell: "row",
+                             id: "coo_clv2"
+                         },
+                         colModel: [
+                        {
+                            index: 'mov_obra_sifidoc', width: 100, align: 'Center', name: 'ObraS', hidden: true
+                        },
+                        {
+                            index: 'mov_coop_sifidoc', width: 50, align: 'Center', name: 'CoopS', hidden: true
+                        },
+                        {
+                            index: 'fec_mov_as400', width: 100, align: 'Center', name: 'FecMov'
+                        },
+                        {
+                            index: 'usu_sifidoc', width: 100, align: 'Center', name: 'UsuS', hidden: true
+                        },
+                        {
+                            index: 'monto_abono_sifidoc', width: 150, align: 'Center', name: 'AbonoS', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
+                        },
+                        {
+                            index: 'monto_recargo_sifidoc', width: 150, align: 'Center', name: 'CargoS', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
+                        },
+                        {
+                            index: 'tipo_mov_sifidoc', width: 80, align: 'Center', name: 'TipoMovS', hidden: true
+                        },
+                        {
+                            index: 'fec_aplic_mov', width: 200, align: 'Center', name: 'FecAplicMov', hidden: true
+                        },
+                        {
+                            index: 'clave_sifidoc', width: 80, align: 'Center', name: 'ClaveS', hidden: true
+                        },
+                        {
+                            index: 'consecutivo_sifidoc', width: 50, align: 'Center', name: 'ConsecS', hidden: true
+                        },
+                        {
+                            index: 'fid', width: 50, align: 'Center', name: 'fid', hidden: true
+                        },
+                        {
+                            index: 'usucre', width: 50, align: 'Center', name: 'UsuCre'
+                        },
+                        {
+                            index: 'monto_mov', width: 150, align: 'Center', name: 'Monto', hidden: true
+                        },
+                        {
+                            index: 'tipo_mov', width: 50, align: 'Center', name: 'TipoMov', hidden: true
+                        },
+                        {
+                            index: 'id_mov', width: 50, align: 'Center', name: 'IdMov', hidden: true
+                        },
+                        {
+                            index: 'folio_cajas', width: 150, align: 'Center', name: 'FolioCajas'
+                        },
+                        {
+                            index: 'titulo_mov', width: 150, align: 'Center', name: 'ConceptoMov'
+                        },
+                        {
+                            index: 'estatus_mov', width: 100, align: 'Center', name: 'EstatMov'
+                        }],
+                         pager: "#pager", //Pager.                 
+                         loadtext: 'Cargando datos...',
+                         recordtext: "{0} - {1} de {2} elementos",
+                         emptyrecords: 'No hay resultados',
+                         pgtext: 'Pág:{0} de {1}', //Paging input control text format.
+                         rowNum: "19", // PageSize.
+                         rowList: [5, 10, 20], //Variable PageSize DropDownList. 
+                         viewrecords: true, //Show the RecordCount in the pager.
+                         multiselect: false,
+                         sortname: "fec_mov_as400", //login SortColumn
+                         sortorder: "asc", //login SortOrder.
+                         width: "800",
+                         height: "500",
+                         caption: 'Relación de Movimientos Financieros'
+
+                     }).navGrid('#pager', { edit: false, add: false, search: false, del: false })
+
+                .navButtonAdd('#pager',
+                   {
+                       caption: "CancPago",
+                       onClickButton: function () {
+                           var myGrid = $('#grid');
+                           var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                           var objMovFinanc = myGrid.jqGrid('getRowData', selectedRowId);
+                           ConsultaPermisoEjecutarTarea($("#bodegadatos").data("idusu"), 147, 3)
+                           .done(function (result) {
+                               var data = result.d;
+                               var no_tiene_permiso = data.split(":");
+                               var no_tiene = parseInt(no_tiene_permiso[1]);
+                               if (!no_tiene) {
+                                   if (objMovFinanc.FolioCajas) {
+                                       if (objMovFinanc.TipoMov == '1') {
+                                           var estatus_obra = $("#bodegadatos").data("obr_status");
+                                           if (estatus_obra == 2) {
+                                               if (objMovFinanc.EstatMov == 'ACTIVO') {
+                                                   var opcion = confirm('¿Deseas cancelar el pago con número de folio ' + objMovFinanc.FolioCajas + '? ADVERTENCIA: Los descuentos aplicados o por aplicar serán también CANCELADOS.');
+                                                   if (opcion == true) {
+                                                       var objUsuarioTareaAccion = {
+                                                           "id_accion_tarea": 0,
+                                                           "fid": parseInt(objMovFinanc.fid),
+                                                           "pid": 0,
+                                                           "oid": 0,
+                                                           "obr_clv_int": 0,
+                                                           "cid": 0,
+                                                           "idtarea": 147, /*Tarea correspondiente a la cancelación de pagos*/
+                                                           "idusu_solicita": $("#bodegadatos").data("idusu"),
+                                                           "idusu_autoriza": $("#bodegadatos").data("idusu"),
+                                                           "idusu_rubrica": $("#bodegadatos").data("idusu"),
+                                                           "idusu_rubrica2": $("#bodegadatos").data("idusu"),
+                                                           "folio_solic": '',
+                                                           "parametro1": '',
+                                                           "parametro2": '',
+                                                           "parametro3": '',
+                                                           "parametro4": objMovFinanc.FolioCajas,
+                                                           "parametro5": '',
+                                                           "parametro6": '',
+                                                           "parametro7": '',
+                                                           "parametro8": '',
+                                                           "parametro9": '',
+                                                           "parametro10": '',
+                                                           "parametro11": '',
+                                                           "parametro12": '',
+                                                           "parametro13": '',
+                                                           "parametro14": '',
+                                                           "parametro15": '',
+                                                           "parametro16": '',
+                                                           "parametro17": '',
+                                                           "parametro18": '',
+                                                           "parametro19": '',
+                                                           "parametro20": ''
+                                                       };
+
+
+                                                       var objHistAct = {
+                                                           "idactividad": 0,
+                                                           "estatus_actividad": 0,
+                                                           "fecha_actividad": '01/01/1900',
+                                                           "hora_actividad": '00:00:00',
+                                                           "idusu": $("#bodegadatos").data("idusu"),
+                                                           "idaccion": 3
+                                                       };
+
+                                                       CancelarPago(objUsuarioTareaAccion, objHistAct)
+                                                       .done(function (result) {
+                                                           var data = result.d;
+                                                           alert(data);
+                                                           $('#mask, .window').hide();
+                                                       })
+                                                       .fail(function (xhr) {
+                                                           console.log(xhr.responseText);
+                                                           alert("Falló la tarea de cancelar el pago.");
+                                                       })
+                                                   } else {
+                                                       console.log('Acción cancelada por el usuario');
+                                                   }
+                                               } else {
+                                                   alert('PAGO SELECCIONADO se encuentra CANCELADO.');
+                                               }
+                                           }
+                                           else {
+                                               alert('No es posible cancelar pagos de obra en estaus de PROCESO o TERMINADA VENCIDA');
+                                           }
+                                       } else {
+                                           alert('El movimiento seleccionado NO es un PAGO');
+                                       }
+                                   }
+                                   else {
+                                       alert('Selecciona un movimiento registrado de la lista...');
+                                   }
+                               }
+                               else {
+                                   alert('El usuario ' + $("#bodegadatos").data("idusu") + ' NO cuenta con el PERMISO de CANCELAR PAGOS.');
+                               }
+                           })
+                           .fail(function (xhr) {
+                               console.log(xhr.responseText);
+                               alert("Falló consultar permiso de ejecución de tarea.");
+                           })
+                       },
+                       position: "last",
+                       title: "Ver Frente",
+                       cursor: "pointer"
+                   });
+
+
+                /*.navButtonAdd('#pager',
+                   {
+                       caption: "TraspPago",                      
+                       onClickButton: function () {
+                           var myGrid = $('#grid');
+                           var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                           var objMovFinanc = myGrid.jqGrid('getRowData', selectedRowId);
+                           ConsultaPermisoEjecutarTarea($("#bodegadatos").data("idusu"), 151, 3)
+                           .done(function (result) {
+                               var data = result.d;
+                               var no_tiene_permiso = data.split(":");
+                               var no_tiene = parseInt(no_tiene_permiso[1]);
+                               if (!no_tiene) {
+                                   if (objMovFinanc.fid) {
+                                       if (objMovFinanc.TipoMov == '1') {
+                                           var estatus_obra = $("#bodegadatos").data("obr_status");
+                                           if (estatus_obra == 2) {
+                                               if (objMovFinanc.EstatMov == 'ACTIVO') {
+                                                   var opcion = confirm("¿Deseas cancelar el pago con número de folio " + objMovFinanc.FolioCajas + '? IMPORTANTE: Los descuentos aplicados o por aplicar serán también CANCELADOS.');
+                                                   if (opcion == true) {
+                                                       var objUsuarioTareaAccion = {
+                                                           "id_accion_tarea": 0,
+                                                           "fid": parseInt(objMovFinanc.fid),
+                                                           "pid": 0,
+                                                           "oid": 0,
+                                                           "obr_clv_int": 0,
+                                                           "cid": 0,
+                                                           "idtarea": 147, 
+                                                           "idusu_solicita": $("#bodegadatos").data("idusu"),
+                                                           "idusu_autoriza": $("#bodegadatos").data("idusu"),
+                                                           "idusu_rubrica": $("#bodegadatos").data("idusu"),
+                                                           "idusu_rubrica2": $("#bodegadatos").data("idusu"),
+                                                           "folio_solic": '',
+                                                           "parametro1": '',
+                                                           "parametro2": '',
+                                                           "parametro3": '',
+                                                           "parametro4": objMovFinanc.FolioCajas,
+                                                           "parametro5": '',
+                                                           "parametro6": '',
+                                                           "parametro7": '',
+                                                           "parametro8": '',
+                                                           "parametro9": '',
+                                                           "parametro10": '',
+                                                           "parametro11": '',
+                                                           "parametro12": '',
+                                                           "parametro13": '',
+                                                           "parametro14": '',
+                                                           "parametro15": '',
+                                                           "parametro16": '',
+                                                           "parametro17": '',
+                                                           "parametro18": '',
+                                                           "parametro19": '',
+                                                           "parametro20": ''
+                                                       };
+
+
+                                                       var objHistAct = {
+                                                           "idactividad": 0,
+                                                           "estatus_actividad": 0,
+                                                           "fecha_actividad": '01/01/1900',
+                                                           "hora_actividad": '00:00:00',
+                                                           "idusu": $("#bodegadatos").data("idusu"),
+                                                           "idaccion": 3
+                                                       };
+
+                                                       CancelarPago(objUsuarioTareaAccion, objHistAct)
+                                                       .done(function (result) {
+                                                           var data = result.d;
+                                                           alert(data);
+                                                           $('#mask, .window').hide();
+                                                       })
+                                                       .fail(function (xhr) {
+                                                           console.log(xhr.responseText);
+                                                           alert("Falló la tarea de cancelar el pago.");
+                                                       })
+                                                   } else {
+                                                       console.log('Acción cancelada por el usuario');
+                                                   }
+                                               } else {
+                                                   alert('PAGO SELECCIONADO se encuentra CANCELADO.');
+                                               }
+                                           }
+                                           else {
+                                               alert('No es posible cancelar pagos de obra en estaus de PROCESO o TERMINADA VENCIDA');
+                                           }
+                                       } else {
+                                           alert('Movimiento seleccionado no es un pago');
+                                       }
+                                   }
+                                   else {
+                                       alert('Selecciona un movimientos tipo pago de la lista...');
+                                   }
+                               }
+                               else {
+                                   alert('El usuario ' + $("#bodegadatos").data("idusu") + ' NO cuenta con el PERMISO de CANCELAR PAGOS.');
+                               }
+                           })
+                           .fail(function (xhr) {
+                               console.log(xhr.responseText);
+                               alert("Falló consultar permiso de ejecución de tarea.");
+                           })
+                       },
+                       position: "last",
+                       title: "Ver Frente",
+                       cursor: "pointer"
+                   });*/
+
+
+                
+            }
+
+            function CancelarPago(objUsuarioTareaAccion, objHistAct) {
+
+                var stringData = JSON.stringify(objUsuarioTareaAccion);
+                var stringData2 = JSON.stringify(objHistAct);
+
+                return $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; utf-8',
+                    url: "../../WebServices/WebServiceTarea.asmx/RegistraEjecuta_Tarea",
+                    data: "{objUsuarioTareaAccion:" + stringData + ",objHistAct:" + stringData2 +"}"
+                });
+            }
+
+            
+            function ConsultaPermisoEjecutarTarea(idusu, idtarea,idaccion) {                
+                return $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; utf-8',
+                    url: "../../WebServices/WebServiceTarea.asmx/ConsultaPermisoTarea",
+                    data: "{'idusu':'" + idusu + "','idtarea':'" + idtarea + "','idaccion':'" + idaccion + "'}"
+                });
+            }
+
+            function ConsultarProcedeDescto(fid,idusu) {
+                return $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; utf-8',
+                    url: "../../WebServices/WebServiceFrente.asmx/ConsultaParametros_Descto",
+                    data: "{'fid':'" + fid + "','idusu':'" + idusu + "'}"
+                });
+            }
+
+            function AplicarDesctoArt24(fid, idusu) {
+                return $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; utf-8',
+                    url: "../../WebServices/WebServiceFrente.asmx/AplicarDescto_Art24",
+                    data: "{'fid':'" + fid + "','idusu':'" + idusu + "'}"
+                });
+            }
+
+            
+            function AplicarDesctoEspecial(fid, idusu,monto_descto_esp) {
+                return $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; utf-8',
+                    url: "../../WebServices/WebServiceFrente.asmx/AplicarDescto_Especial",
+                    data: "{'fid':'" + fid + "','idusu':'" + idusu + "','monto_descto_esp':'" + monto_descto_esp + "'}"
+                });
+            }
+
+
+            function ConsultaPermisoEjecutarTarea(idusu, idtarea, idaccion) {
+                return $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; utf-8',
+                    url: "../../WebServices/WebServiceTarea.asmx/ConsultaPermisoTarea",
+                    data: "{'idusu':'" + idusu + "','idtarea':'" + idtarea + "','idaccion':'" + idaccion + "'}"
+                });
+            }
+
+            function CalcularDescto(porcentaje_descto) {
+                var saldo_total = parseFloat($("#bodegadatos").data("saldo_total"));
+                var descto_por_aplicar = 0;            
+            
+                descto_por_aplicar = (saldo_total * porcentaje_descto) / 100;
+                $("#bodegadatos").data("descto_por_aplicar", descto_por_aplicar);
+            
+                $("#lblmontodescto").text(FormatoMoneda(descto_por_aplicar));
+                var saldo_pagar = saldo_total - descto_por_aplicar;
+
+                $("#lblsaldoxpagar").text(FormatoMoneda(saldo_pagar));
+
+            }
+
+            function SeleccionDesctoPPP() {
+                /*var hoy = moment('2023-03-20');*/
+                var hoy = moment();
+                var fecinipag_texto = FormatoFechaYYYYMMDD($("#bodegadatos").data("fecinipag"));
+                var fecvenpag_texto = FormatoFechaYYYYMMDD($("#bodegadatos").data("fecvencpag"));
+                   
+                var fecinipag = moment(fecinipag_texto);           
+                var fecvenpag = moment(fecvenpag_texto);
+
+                /*var fecinipag = moment('2022-01-02');
+                var fecvenpag = moment('2023-02-18');*/
+
+                var meses = hoy.diff(fecinipag, 'month'); /*Meses transcurridos del inicio de pagos al día que se solicita programar el descuento*/
+                var descto = 0;
+
+                if (meses == 0) {                
+                    descto = 7.5;
+                }
+                else {
+                    if (meses==1) {                  
+                        descto = 5;
+                    }
+                    else {
+                        if (meses>=2) {                       
+                            descto = 2.5;
+                        } else {
+                            alert('No es posible programar un descuento debido a que el perido de recaudación ha terminado');
+                        }                    
+                    }
+                }
+
+                return descto;            
+            }
+        
+        
+            function ConvertirCadenaToFecha(cadenafec) {
+                if (cadenafec != "") {
+                    var from = cadenafec.split("/");
+                    var from2 = from[2].split(" ");
+                    var fecha = new Date(from2[0], from[1] - 1, from[0]);
+                }
+                else {
+                    /*var fecha = new Date('2200', '01', '01');*/
+                    var fecha = '01/01/1900';
+                }
+
+                return fecha;
+            }
+
+            function ValidaFechaDescto() {
+                var fechadescto = $("#txtfecdesctocap").val();
+                var fecinipag = $("#bodegadatos").data("fecinipag");
+                var valid = 0;
+                if (ConvertirCadenaToFecha(fechadescto) >= ConvertirCadenaToFecha(fecinipag)) {
+                    valid = 1;
+                }
+                else {
+                    alert('La fecha capturada es errónea debe ser mayor que la fecha de inicio de pagos')
+                }
+                return valid;
+            } 
+
+            function GuardarDesctoPorProntoPago(monto_descto, porcentaje_descto) {
+
+                var fec_descto_aplic = ConvertirCadenaToFecha($("#lblfecdescto").text());
+
+
+                var enviarObj = {
+                    "fid": $("#bodegadatos").data("fid"),                
+                    "porcentaje":porcentaje_descto,
+                    "monto_descto":monto_descto,
+                    "fec_ofrece": fec_descto_aplic,
+                    "fec_aplic": fec_descto_aplic,
+                    "usrcre":  $("#bodegadatos").data("idusu"),
+                    "cactivo": 1,
+                    "accion":'insertar'
+                }
+
+                var stringData = JSON.stringify(enviarObj);
+                return $.ajax({
+                    type: 'POST',
+                    url: "../../WebServices/WebServiceFrente.asmx/ActDesctoAplicar",
+                    data: "{objFrenteFinanc:" + stringData + "}",
+                    contentType: 'application/json; utf-8',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.d != null) {
+                            var result = data.d;
+                            var mensaje = result.split(':')[1];
+                            var numerror = result.split(':')[0];
+                            if (numerror == '1') {
+                                alert('Se está tratando de guardar un descuento por aplicar, por lo tanto, no es posible registrarlo nuevamente');
+                            }                        
+                        }
+                    },
+                    error: function (responseText, textStatus, errorThrown) {
+                        alert(textStatus + responseText + errorThrown);
+                    }
+                });
+
+            };
+
+            function GeneraFichaPago(monto_aportacion)
+                {
+                    var pdf = new jsPDF('p', 'mm', 'letter');
+                                   
+                    var col_ref = 70;
+                    var col_ref2 = 72;
+                    var reng_ref = 40;
+                    var reng_inc = 3.7;
+                    var reng_inc2 = 5;
+
+                    var tab1 = 10;
+                    var tab2 = 72;
+                    var tab3 = tab2 * 2;
+                    var tab4 = tab2 * 3;
+                    var tab5 = 208;
+
+                    /*var id = $("#bodegadatos").data("fid") + ':' + $("#bodegadatos").data("pid") + ':' + $("#bodegadatos").data("obr_clv_int") + ':' + $("#bodegadatos").data("oid");
+                    var obra_s = $("#bodegadatos").data("obra_sifidoc");
+                    var coop_s = $("#bodegadatos").data("coopid");
+                    var nom_coop = $("#bodegadatos").data("nom_ficha");
+                    var tipo_obra = $("#bodegadatos").data("tipo_obra");
+                    var tramo = $("#bodegadatos").data("tramo");
+                    var colonia = $("#bodegadatos").data("colonia");
+                    var calle = $("#bodegadatos").data("calle");
+                    var noofic = $("#bodegadatos").data("nooficial");
+                    var mts_fte = $("#bodegadatos").data("mts_fte");
+                    var costo_mto = $("#bodegadatos").data("costo_mto");
+                    var prog = $("#lblnomprog").text();
+                    var uso_predio = $("#bodegadatos").data("uso_suelo");
+                    var periodo = $("#bodegadatos").data("fecinipag") + '  -  ' + $("#bodegadatos").data("fecvencpag");
+                    var num_pagos = $("#bodegadatos").data("num_pagos");
+                    var capital_sin_inc = $("#bodegadatos").data("capital_sin_inc")
+                    var act_costo_obra = $("#bodegadatos").data("inc");
+                    var capital = $("#bodegadatos").data("capital");
+                    var descto_ppp = $("#bodegadatos").data("descto_aplic");
+                    var capital_pagado = $("#bodegadatos").data("monto_capital_pagado");
+                    var saldo_total = $("#bodegadatos").data("saldo_total");*/
+                  
+                    var tamano_col = 14;
+                    var hoy = moment();
+                    var idusu = $("#bodegadatos").data("idusu");
+                    var fid = $("#bodegadatos").data("fid");
+                    var nom_ficha = $("#bodegadatos").data("nom_ficha");
+                    var oid = $("#bodegadatos").data("oid");
+                    var pid = $("#bodegadatos").data("pid");
+                    var obr_clv_int = $("#bodegadatos").data("obr_clv_int");
+                    var obr_clv = $("#bodegadatos").data("obra_sifidoc");
+                    var coopid = $("#bodegadatos").data("coopid");
+                    var nooficial = $("#bodegadatos").data("nooficial");
+                    var numpagos = $("#bodegadatos").data("num_pagos");
+                    var calle = $("#bodegadatos").data("calle");
+                    var colonia =$("#bodegadatos").data("colonia");
+                    var tramo = $("#bodegadatos").data("tramo");
+                    var obr_fecinip = $("#bodegadatos").data("fecinipag");
+                    var obr_fecivenp = $("#bodegadatos").data("fecvencpag");
+                    var descrip_tipo_obr = $("#bodegadatos").data("tipo_obra");
+                    var estatus_obra;
+                    var nomprog = $("#lblnomprog").text();
+                                     
+                    var fecinip = $("#bodegadatos").data("fecinipag");
+                    var fecvenp = $("#bodegadatos").data("fecvencpag");
+                    var costo_obra = $("#bodegadatos").data("capital");
+                    var total_pagar =$("#bodegadatos").data("saldo_total");
+                    var abono = $("#bodegadatos").data("monto_capital_pagado");
+                    var costo_mto = $("#bodegadatos").data("costo_mto");
+                    var mts_fte = $("#bodegadatos").data("mts_fte");
+
+                    var objFormato = {
+                        "fid": fid,
+                        "pid": pid,
+                        "obr_clv_int": obr_clv_int,
+                        "oid": oid,
+                        "idusu": idusu
+                    }
+
+                    GeneraFormatoFichaPago(objFormato,pdf);
+
+                    
+
+                    pdf.setFontSize(12);
+                    pdf.setFontType('bold')
+                    pdf.text(tab2 - pdf.getTextWidth('No. de Cuenta:  '), reng_ref + reng_inc2, 'No. de Cuenta:  ');
+                    pdf.text(tab2, reng_ref + reng_inc2 , obr_clv + ' ' + coopid);
+                    
+
+                    pdf.text(tab2 - pdf.getTextWidth('Nombre de Cooperador:  '), reng_ref + reng_inc2 * 2, 'Nombre de Cooperador:  ');
+                    pdf.text(tab2, reng_ref + reng_inc2 * 2, nom_ficha);
+
+                   
+
+                    pdf.setFontSize(12);
+                    pdf.setFontType('bold')
+                    pdf.text(tab2 - pdf.getTextWidth('CALLE y No.Ofic:  '), reng_ref + reng_inc * 6, 'CALLE y No.Ofic:  ');
+                    pdf.text(tab2 - pdf.getTextWidth('COLONIA: '), reng_ref + reng_inc * 8, 'COLONIA: ');
+                    pdf.text(tab2 - pdf.getTextWidth('TRAMO: '), reng_ref + reng_inc * 10, 'TRAMO: ');
+                    pdf.text(tab2 - pdf.getTextWidth('Programa: '), reng_ref + reng_inc * 12, 'Programa: ');
+                    pdf.text(tab2 - pdf.getTextWidth('Tipo de Obra:  '), reng_ref + reng_inc * 14, 'Tipo de Obra:  ');
+                    pdf.text(tab2 - pdf.getTextWidth('Saldo: '), reng_ref + reng_inc * 16, 'Saldo: ');
+
+                    pdf.setFontType('normal')
+                    pdf.setFontSize(10);
+                    pdf.text(tab2, reng_ref + reng_inc * 6, calle + ' ' + nooficial);
+                    pdf.text(tab2, reng_ref + reng_inc * 8, colonia);
+                    pdf.text(tab2, reng_ref + reng_inc * 10, tramo);
+                    pdf.text(tab2, reng_ref + reng_inc * 12, nomprog);
+                    pdf.text(tab2, reng_ref + reng_inc * 14, descrip_tipo_obr);
+                    //pdf.text(tab2 - pdf.getTextWidth('Periodo de Recaudación:'), reng_ref + reng_inc * 10, 'Periodo de Recaudación:');
+                    
+                    pdf.text(tab2, reng_ref + reng_inc * 16, FormatoMoneda(total_pagar));
+
+                 
+                   // pdf.text(tab2 - pdf.getTextWidth('Costo por metro lineal: '), reng_ref + reng_inc * 11, 'Costo por metro lineal: ');
+                   // pdf.text(tab2 - pdf.getTextWidth('Metros del frente: '), reng_ref + reng_inc * 12, 'Metros del frente: ');
+                   // pdf.text(tab2 - pdf.getTextWidth('Costo Total: '), reng_ref + reng_inc * 14, 'Costo Total: ');
+                   // pdf.text(tab2 - pdf.getTextWidth('Total Aportado: '), reng_ref + reng_inc * 16, 'Total Aportado: ');
+                    //pdf.text(tab2 - pdf.getTextWidth('Meses vencidos sin aportación:'), reng_ref + reng_inc2 * 15, 'Meses vencidos sin aportación:');
+                    
+
+                //    pdf.setFontType('normal');
+                 //   pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(costo_mto)), reng_ref + reng_inc * 11, FormatoMoneda(costo_mto));
+                 //   pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(mts_fte)), reng_ref + reng_inc * 12, mts_fte);
+                 //   pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(costo_obra)), reng_ref + reng_inc * 14, FormatoMoneda(costo_obra));
+                //    pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(abono)), reng_ref + reng_inc * 16, FormatoMoneda(abono));
+
+                    pdf.line(10, reng_ref + reng_inc * 18.5, 204, reng_ref + reng_inc * 18.5);
+
+                    var aport_mes = parseFloat(costo_obra) / parseInt(numpagos);
+                    var monto_aportacion_ficha = 0;
+
+                    var fecinip_f = ConvertirCadenaToFecha(fecinip);
+                    var months = hoy.diff(fecinip_f, 'months');
+                    var num_ficha_act = months;
+                    var cantidad_completa = num_ficha_act * aport_mes;
+                    var cantidad_lleva = parseFloat(abono);
+                    /*var meses_sin_aportacion = (cantidad_completa - cantidad_lleva) / aport_mes;
+                    if (meses_sin_aportacion < 0) {
+                        meses_sin_aportacion = 0;
+                    }
+                    var meses_sin_aportaciones_txt = Math.floor(meses_sin_aportacion).toString();
+                    pdf.text(col_ref2 + 30 - pdf.getTextWidth(meses_sin_aportaciones_txt), reng_ref + reng_inc2 * 12.5, meses_sin_aportaciones_txt);*/
+                    
+                    pdf.line(10, reng_ref + reng_inc * 19, 204, reng_ref + reng_inc * 19);
+                    pdf.setFontSize(12);
+                    pdf.setFontType('bold')
+                    pdf.text(tab2 - pdf.getTextWidth('Monto de Aportación:  '), reng_ref + reng_inc * 21, 'Monto de Aportación:  ');                   
+                
+                    
+                    
+                    
+                    //pdf.text(col_ref2, reng_ref + reng_inc * 6, fecinip + '-' + fecvenp);
+                    var aport_mes_txt = aport_mes.toFixed(2).toString();
+                    var aportacion_txt = monto_aportacion.toFixed(2).toString();
+                    pdf.setFontSize(15);
+                    pdf.text(tab2, reng_ref + reng_inc * 21, FormatoMoneda(aportacion_txt));
+                    var numletras = NumeroALetras(aportacion_txt);
+                    pdf.setFontSize(5);
+                    pdf.text('(' + numletras + ')', tab3 - pdf.getTextWidth('(' + numletras + ')')/2 , reng_ref + reng_inc * 21, { maxWidth: 550, align: "justify" });
+                    pdf.line(10, reng_ref + reng_inc * 22, 204, reng_ref + reng_inc * 22);
+
+
+                    
+                    pdf.setFontSize(10);
+                    pdf.setFontType('bold')
+
+                    pdf.text(tab2 - pdf.getTextWidth('No. de Cuenta:  '), reng_ref + reng_inc2 * 40, 'No. de Cuenta:  ');
+                    pdf.text(tab2 - pdf.getTextWidth('Nombre de Cooperador:  '), reng_ref + reng_inc2 * 41, 'Nombre de Cooperador:  ');
+                    //pdf.text(tab4 - pdf.getTextWidth('Recibo de pago:  '), reng_ref + reng_inc2 * 40, 'Recibo de pago:  ');
+
+                    pdf.text(tab2, reng_ref + reng_inc2 * 40, obr_clv + ' ' + coopid);
+                    pdf.text(tab2, reng_ref + reng_inc2 * 41, nom_ficha);
+                    //pdf.text(tab5 - pdf.getTextWidth('Recibo de pago:  '), reng_ref + reng_inc2 * 40, num_ficha_act + ' de ' + numpagos);
+
+                    pdf.line(10, reng_ref + reng_inc2 * 42.5, 204, reng_ref + reng_inc2 * 42.5);
+
+                    pdf.setFontSize(12);
+                    pdf.setFontType('bold')
+                    pdf.text(tab2 - pdf.getTextWidth('Total de Aportación:   '), reng_ref + reng_inc2 * 43.5, 'Total de Aportación:   ');
+                    pdf.setFontSize(15);
+                    pdf.text(tab2, reng_ref + reng_inc2 * 43.5, FormatoMoneda(aportacion_txt));
+
+                    pdf.setFontSize(5);
+                    pdf.text('(' + numletras + ')', tab3 - pdf.getTextWidth('(' + numletras + ')') / 2, reng_ref + reng_inc2 * 43.5, { maxWidth: 550, align: "justify" });
+
+                    pdf.line(10, reng_ref + reng_inc2 * 44, 204, reng_ref + reng_inc2 * 44);
+
+
+
+
+                    
+
+                var hoy = moment().format("DDMMYYYY");
+                var fichas = fid.toString() + '_' + hoy + '.pdf';
+                pdf.save(fichas.toString());
+                    
+                }
+
+
+            function GeneraFormatoFichaPago(objFormato,pdf) {
+
+                //***** ENCABEZADO ****///
+                var columna_pie = 10;
+                var row_ini_pie = 163;
+                var reng_adic = 3;
+                var img = new Image();
+                img.src = '../imagenes/admon2021_2024.png';
+                pdf.addImage(img, 'PNG', 10, 10, 60, 22);
+                pdf.setFontSize(15);
+                pdf.text(90, 20, "FICHA DE PAGO");
+                pdf.setFontSize(7);
+                pdf.text(110, 26, 'Fecha de Impresión:' + FechaHora());
+                pdf.setFontType('bold')
+                pdf.setFontSize(8);
+
+                pdf.setFontSize(5);
+                pdf.text(155, 29, objFormato.fid + ':' + objFormato.pid + ':' + objFormato.obr_clv_int + ':' + objFormato.oid + ':' + objFormato.idusu);
+
+                pdf.setFontSize(8);
+                pdf.setFontType('bold')
+                pdf.rect(142.3 , 35, 38, 7);
+                pdf.text(144, 40, 'ATENCION AL PÚBLICO');
+
+                pdf.rect(142.3, row_ini_pie + reng_adic * 20, 38, 7);
+                pdf.text(144, row_ini_pie + reng_adic * 21.5, 'ATENCION AL PÚBLICO');
+
+
+                pdf.line(10, 52, 204, 52);
+
+                //**** PIE *****///
+                pdf.setFontSize(6);
+                
+
+
+
+
+                pdf.setFontSize(10);
+                pdf.setFontType('normal')
+                var texto = 'Favor de presentar esta ficha en cualquier Caja de Tesorería Municipal y realizar la aportación que corresponde. '
+
+                pdf.text(texto, 15, row_ini_pie - (reng_adic * 8), { maxWidth: 190, align: "justify" });
+
+                pdf.setFontSize(8);
+                pdf.text(104 - pdf.getTextWidth('A T E N T A M E N T E') / 2, row_ini_pie -(reng_adic * 5), 'A T E N T A M E N T E');
+                pdf.text(104 - pdf.getTextWidth('AREA DE PROMOCION') / 2, row_ini_pie -(reng_adic * 3), 'AREA DE PROMOCION');
+                pdf.text(104 - pdf.getTextWidth('FIDEICOMISO DE OBRAS POR COOPERACION') / 2, row_ini_pie - reng_adic * 2, 'FIDEICOMISO DE OBRAS POR COOPERACION');
+
+
+                pdf.setFontSize(6);
+                pdf.setFontType('normal')
+
+                pdf.line(10, row_ini_pie + reng_adic * 7.5, 204, row_ini_pie + reng_adic * 7.5);
+                pdf.line(10, row_ini_pie + reng_adic * 7.3, 204, row_ini_pie + reng_adic * 7.3);
+
+                pdf.text(columna_pie, row_ini_pie + reng_adic * 8.5, 'Blvd. Juan José Torres Landa 1701');
+                pdf.text(columna_pie, row_ini_pie + reng_adic * 9.5, 'Oriente Edificio B de Obras Públicas');
+                pdf.text(columna_pie, row_ini_pie + reng_adic * 10.5, 'Col. El Tlacuache');
+                pdf.text(columna_pie + 20, row_ini_pie + reng_adic * 10.5, 'C.P. 37480');
+                pdf.text(columna_pie + 36, row_ini_pie + reng_adic * 10.5, 'León Gto.');
+
+                pdf.text(107 - pdf.getTextWidth('Horarios de atención: Lunes a Viernes, 8:00 hrs - 15:30 hrs') / 2, row_ini_pie + reng_adic * 8.5, 'Horarios de atención: Lunes a Viernes, 8:00 hrs - 15:30 hrs');
+                pdf.text(107 - pdf.getTextWidth('Tel. Oficina: 477-470-86-15 al 18') / 2, row_ini_pie + reng_adic * 9.5, 'Tel. Oficina: 477-470-86-15 al 18');
+                pdf.text(107 - pdf.getTextWidth('fidoc.leon.gob.mx') / 2, row_ini_pie + reng_adic * 10.5, 'fidoc.leon.gob.mx');
+
+
+
+                var img_facebook = new Image();
+                img_facebook.src = "../imagenes/face.png";
+                pdf.addImage(img_facebook, 'png', 181, row_ini_pie + reng_adic * 7.8, 3.5, 2.5);
+
+                var img_twitter = new Image();
+                img_twitter.src = "../imagenes/twitter.png";
+                pdf.addImage(img_twitter, 'png', 189, row_ini_pie + reng_adic * 8.8, 2.5, 2.5);
+
+                var img_whatsapp = new Image();
+                img_whatsapp.src = "../imagenes/whatsapp.jpg";
+                pdf.addImage(img_whatsapp, 'jpg', 187, row_ini_pie + reng_adic * 10, 2.5, 2.5);
+
+
+                pdf.text(204 - pdf.getTextWidth('facebook/fidocleon'), row_ini_pie + reng_adic * 8.5, 'facebook/fidocleon');
+                pdf.text(204 - pdf.getTextWidth('@fidocleon'), row_ini_pie + reng_adic * 9.5, '@fidocleon');
+                pdf.text(204 - pdf.getTextWidth('477-325-2586'), row_ini_pie + reng_adic * 10.5, '477-325-2586');
+
+                pdf.line(10, row_ini_pie + reng_adic * 12.2, 204, row_ini_pie + reng_adic * 12.2);
+                pdf.line(10, row_ini_pie + reng_adic * 12.4, 204, row_ini_pie + reng_adic * 12.4);
+                pdf.line(10, row_ini_pie + reng_adic * 12.6, 204, row_ini_pie + reng_adic * 12.6);
+
+
+
+                pdf.addImage(img, 'PNG', 10, row_ini_pie + reng_adic * 13, 60, 22);
+                pdf.setFontSize(15);
+                pdf.setFontType('bold')
+                pdf.text(120 - pdf.getTextWidth('TALON DE FICHA DE PAGO') / 2, row_ini_pie + reng_adic * 15, 'TALON DE FICHA DE PAGO');
+                pdf.setFontSize(7);
+                pdf.setFontType('normal')
+                pdf.text(120 - pdf.getTextWidth('Fecha de Impresión:') / 2, row_ini_pie + reng_adic * 17, 'Fecha de Impresión:' + FechaHora());
+                pdf.setFontSize(5);
+                pdf.text(130, row_ini_pie + reng_adic * 18, objFormato.fid + ':' + objFormato.pid + ':' + objFormato.obr_clv_int + ':' + objFormato.oid + ':' + objFormato.idusu);
+
+            }
+
+            $(document).ready(function () {
+                var fid = recuperarParametro("fid");
+                var aux = fid.slice(-1);
+                if (aux=='#') {
+                    fid = fid.substr(0,fid.length -1);
+                }
+            
+                var idusu = recuperarParametro("idusu");
+                $("#bodegadatos").data("idusu", idusu);
+
+            
+                ConsultarRolUsuario(idusu, 'consulta');          
+                ConsultarFrenteFinanc(fid, 'consulta');
+                
+           
+                        
+
+                $(".genera_descto_1").click(function () {               
+                    $("#lbltipodescto").text('(POR PRONTO PAGO)');                
+                    if (ValidaDesctoPPP()) {
+                        MostrarModalDescuento();
+                        $("#bodegadatos").data("porcentaje_descto", SeleccionDesctoPPP());
+                        var porcentje_descto = $("#bodegadatos").data("porcentaje_descto");
+                        $("#lblporcentaje").text(porcentje_descto.toString() + '%');
+                        CalcularDescto(porcentje_descto);
+                    }                
+                });
+
+
+                $(".pasa_fecha").click(function () {
+               
+                    var idusu = $("#bodegadatos").data("idusu");
+                    var rolusu = $("#bodegadatos").data("crolnombre");
+
+                    if (rolusu == 'Administrador de Sistema') {
+                        if (ValidaFechaDescto()) {
+                            $("#lblfecdescto").text($("#txtfecdesctocap").val());
+                        }
+                        else {
+                            $("#lblfecdescto").text(fecha_hoy());
+                        }
+                    }
+                });
+
+            
+
+                $(".genera_descto_2").click(function () {
+              
+                    $("#lbltipodescto").text('EN ETAPA DE PROCESO');
+                
+                    MostrarModalDescuento();
+                });
+
+                $(".accion_cancelar").click(function (e) {
+                    //Cancel the link behavior
+                    //e.preventlogin();
+                    $('#mask, .window').hide();
+                });
+
+                $(".accion_aceptar").click(function (e) {
+                    var monto_descto = $("#bodegadatos").data("descto_por_aplicar");
+                    var porcentaje_descto = $("#bodegadatos").data("porcentaje_descto");
+                    GuardarDesctoPorProntoPago(monto_descto, porcentaje_descto)
+                    .done(function (result) {
+                        console.log("Descuento por aplicar registrado correctamente.");
+                        $('#mask, .window').hide();
+                        location.reload();
+                    }).fail(function (result) {
+                        alert("No fue posible programar el descuento por aplicar.");
+                    });
+                });
+
+                $(".cambia_descto").click(function (e) {
+                    var nuevo_porcentaje;
+                    var porcentaje_actual = $("#lblporcentaje").text();
+                    var rolusu = $("#bodegadatos").data("crolnombre");
+
+                    if (rolusu == 'Administrador de Sistema') {
+                        if (porcentaje_actual == '2.5%') {
+                            porcentaje_actual = $("#lblporcentaje").text('5%');
+                            nuevo_porcentaje = 5;
+                        } else {
+                            if (porcentaje_actual == '5%') {
+                                porcentaje_actual = $("#lblporcentaje").text('7.5%');
+                                nuevo_porcentaje = 7.5;
+                            } else {
+                                porcentaje_actual = $("#lblporcentaje").text('2.5%');
+                                nuevo_porcentaje = 2.5;
+                            }
+                        }
+                        $("#bodegadatos").data("porcentaje_descto", nuevo_porcentaje);
+                        CalcularDescto(nuevo_porcentaje);
+                    }
+                 
+                });
+
+                $(".act_pagos").click(function (e) {
+                    var coop_sifidoc = $("#bodegadatos").data("obra_sifidoc")  + $("#bodegadatos").data("coopid");                    
+                    ActualizarPagosTesoreria()
+                    .done(function (result) {                        
+                        location.reload();
+                    }).fail(function (result) {
+                        alert("No fue posible actualizar los pagos");
+                    });                                               
+                });
+
+                $(".bitacora").click(function (e) {
+                    var fid = $("#bodegadatos").data("fid");
+                    var hoy = moment().format("DD/MM/YYYY");
+                    LlenarGridMovs('01/01/1900', hoy, fid);                    
+                });
+
+                
+
+                $(".aplicar_descto_art24").click(function (e) {
+                    var fid = $("#bodegadatos").data("fid");
+                    var idusu = $("#bodegadatos").data("idusu");
+                    var hoy = moment().format("DD/MM/YYYY");
+
+                    if ($("#bodegadatos").data("saldo_total") > 20) {
+                        ConsultaPermisoEjecutarTarea(idusu, 158, 3)
+                                  .done(function (result) {
+                                      var data = result.d;
+                                      var no_tiene_permiso = data.split(":");
+                                      var no_tiene = parseInt(no_tiene_permiso[1]);
+                                      if (!no_tiene) {
+                                          AplicarDesctoArt24(fid, idusu)
+                                            .done(function (result) {
+                                                var data = result.d;
+                                                var param_descto = data.split((',')[0]);
+                                                var fid_r = parseInt(param_descto[0]);
+                                                var saldo_actual_r = parseFloat(param_descto[1]);
+                                                var saldo_con_descto_r = parseFloat(param_descto[2]);
+                                                var fec_ult_pag_r = param_descto[3];
+                                                var monto_descto_r = parseFloat(param_descto[4]);
+                                                var descto_aplicado_r = parseInt(param_descto[5]);
+
+                                                if (descto_aplicado_r == 4) {
+                                                    alert('La obra no se encuentra de estatus RECAUDACION o PROCESO');
+                                                }
+
+                                                if (descto_aplicado_r == 1) {
+                                                    $("#lblsaldo_actual_art24").text(FormatoMoneda(param_descto[1]));
+                                                    $("#lblsaldo_con_descto_aplic_art24").text(FormatoMoneda(param_descto[2]));
+                                                    $("#lblfec_ult_pag_art24").text(param_descto[3]);
+                                                    $("#lblmonto_descto_art24").text(FormatoMoneda(param_descto[4]));
+                                                    MostrarDesctoArt24();
+                                                }
+
+                                                if (descto_aplicado_r == 2) {
+                                                    alert('No es posible aplicar un descuento porque el saldo:' + FormatoMoneda(param_descto[2]) + ' es mayor a 2 UMAS.');
+                                                }
+
+                                                if (descto_aplicado_r == 3) {
+                                                    alert('El pago del capital NO fué en una sola exhibición, por lo tanto no es posible aplicar el descuento de 2.5%');
+                                                }
+                                            })
+                                            .fail(function (xhr) {
+                                                console.log(xhr.responseText);
+                                                alert("Falló la consulta de la Fecha del último pago del Frente.");
+                                            })
+                                      } else {
+                                          alert('El usuario ' + $("#bodegadatos").data("idusu").split(":")[1] + ' no cuenta con el permiso para cancelar obra.');
+                                      }
+                                  })
+                                .fail(function (xhr) {
+                                    console.log(xhr.responseText);
+                                    alert("Falló consultar los permisos de ejecución de tarea.");
+                                });
+                    } else {
+                        alert('La cuenta no es factible para aplicar un descuento');
+                    }
+                        
+
+                });
+
+                $(".aplicar_descto_prog").click(function (e) {
+                    var fid = $("#bodegadatos").data("fid");
+                    var idusu = $("#bodegadatos").data("idusu");
+                    var hoy = moment().format("DD/MM/YYYY");
+
+                    if ($("#bodegadatos").data("saldo_total") > 200) {
+                        ConsultarProcedeDescto(fid, idusu)
+                          .done(function (result) {
+                              var data = result.d;
+                              var param_descto = data.split((',')[0]);
+                              var fid_r = parseInt(param_descto[0]);
+                              var saldo_actual_r = parseFloat(param_descto[1]);
+                              var saldo_con_descto_r = parseFloat(param_descto[2]);
+                              var fec_ult_pag_r = param_descto[3];
+                              var monto_descto_r = parseFloat(param_descto[4]);
+                              var porcent_descto_r = parseFloat(param_descto[5]);
+                              var descto_aplicado_r = parseInt(param_descto[6]);
+
+                              if (descto_aplicado_r == 4) {
+
+                                  alert('La fecha del ultimo pago es mayor a la fecha de vencimiento: ');
+
+                              }
+
+                              if (descto_aplicado_r == 1) {
+                                  $("#lblsaldo_actual").text(FormatoMoneda(param_descto[1]));
+                                  $("#lblsaldo_con_descto_aplic").text(FormatoMoneda(param_descto[2]));
+                                  $("#lblfec_ult_pag").text(param_descto[3]);
+                                  $("#lblmonto_descto").text(FormatoMoneda(param_descto[4]));
+                                  $("#lblporcentaje_descto").text(param_descto[5]);                                 
+                                  MostrarDesctoNoProgramado();
+                              }
+
+                              if (descto_aplicado_r == 2) {
+                                  alert('No es posible aplicar un descuento porque el saldo:' + FormatoMoneda(param_descto[2]) + ' es mayor a 2 UMAS.');
+                              }
+
+                              if (descto_aplicado_r == 3) {
+                                  alert('No existen pagos registrados en la cuenta.');
+                              }
+                          })
+                           .fail(function (xhr) {
+                               console.log(xhr.responseText);
+                               alert("Falló la consulta de la Fecha del último pago del Frente.");
+                           })
+                    } else {
+                        alert('La cuenta no es factible para aplicar un descuento');
+                    }
+
+                });
+
+                $(".accion_aceptar_aplicar_descto, .accion_aplicar_descto_art24").click(function (e) {
+                    window.location.reload();
+                });
+
+                $(".accion_aceptar_aplicar_descto_esp").click(function (e) {
+                    var idusu = $("#bodegadatos").data("idusu");
+                    var fid = $("#bodegadatos").data("fid");
+                    var monto_descto_esp_txt = $("#txtmonto_descto_especial").val();
+                    monto_descto_esp_txt = $.trim(monto_descto_esp_txt);
+                    var monto_descto_especial;
+
+                    if (monto_descto_esp_txt.length > 0) {
+                        monto_descto_especial = parseFloat($("#txtmonto_descto_especial").val());
+                    } else {
+                        monto_descto_especial = 0;
+                    }
+                    if (monto_descto_especial > 0) {
+                        AplicarDesctoEspecial(fid, idusu, monto_descto_especial)
+                         .done(function (result) {
+                             var data = result.d;
+                             var param_descto = data.split((',')[0]);
+                             var fid_r = parseInt(param_descto[0]);
+                             var saldo_actual_r = parseFloat(param_descto[1]);
+                             var saldo_con_descto_r = parseFloat(param_descto[2]);
+                             var fec_ult_pag_r = param_descto[3];
+                             var monto_descto_r = parseFloat(param_descto[4]);
+                             var porcent_descto_r = parseFloat(param_descto[5]);
+                             var descto_aplicado_r = parseInt(param_descto[6]);
+
+                             if (descto_aplicado_r == 1) {
+                                 $("#lblsaldo_actual_descto_esp").text(FormatoMoneda(param_descto[1]));
+                                 $("#lblsaldo_con_descto_esp").text(FormatoMoneda(param_descto[2]));
+                                 $("#lblfec_ult_pag_descto_esp").text(param_descto[3]);
+                                 $("#lblmonto_descto_esp").text(FormatoMoneda(param_descto[4]));
+                                 $("#lblporcent_descto_esp").text(param_descto[5]);
+                                 $('#mask, .window').hide();
+                                 MostrarAplicacionDesctoEspecial();
+                             }
+
+                             if (descto_aplicado_r == 2) {
+                                 alert('No es posible aplicar un descuento mayor al 7.5%');
+                             }
+
+                             if (descto_aplicado_r == 3) {
+                                 alert('Se esta descontando más del saldo mismo');
+                             }
+
+                             if (descto_aplicado_r == 4) {
+                                 alert('No se esta descontando completo el saldo');
+                             }
+                         })
+                          .fail(function (xhr) {
+                              console.log(xhr.responseText);
+                              alert("Falló la consulta de la aplicación del descuento.");
+                          })
+                    } else {
+                        alert('El monto capturado de descuento especial no es correcto');
+                        $("#txtmonto_descto_especial").text('0.0');
+                    }
+                });
+
+                $(".aplicar_descto_especial").click(function (e) {
+
+                    if ($("#bodegadatos").data("saldo_total") > 50) {
+                        ConsultaPermisoEjecutarTarea(idusu, 159, 3)
+                             .done(function (result) {
+                                 var data = result.d;
+                                 var no_tiene_permiso = data.split(":");
+                                 var no_tiene = parseInt(no_tiene_permiso[1]);
+                                 if (!no_tiene) {
+                                     MostrarCapturaDesctoEspecial();
+                                 } else {
+                                     alert('No tiene autorizado aplicar descuentos especiales.');
+                                 }
+                             })
+                             .fail(function (xhr) {
+                                 console.log(xhr.responseText);
+                                 alert("Falló consultar los permisos de ejecución de tarea.");
+                             });
+                    } else {
+                        alert('La cuenta no es factible para aplicar un descuento.');
+                    }
+                });
+                
+
+                $(".accion_cancelar_aplicar_descto_esp").click(function (e) {
+                    $('#mask, .window').hide();
+                });
+
+                $(".accion_cerrar_aplicar_descto_esp").click(function (e) {
+                    window.location.reload();
+                });
+                
+
+
+                $(".edo_cta").click(function (e) {
+                    GenerarEdoCta2();
+                });
+
+                $(".emitir_ficpag").click(function (e) {
+                    var fid = $("#bodegadatos").data("fid");
+                    var saldo_total = $("#bodegadatos").data("saldo_total");
+                    var aportacion_mensual = parseFloat($("#bodegadatos").data("capital")) / parseInt($("#bodegadatos").data("num_pagos"));
+                    var idusu = $("#bodegadatos").data("idusu");
+                    
+                    $("#lblaportacion_mensual").text(aportacion_mensual.toFixed(2));
+                    
+
+                    var hoy = moment();
+                    var fecvenp = ConvertirCadenaToFecha($("#bodegadatos").data("fecvencpag"));
+                    if (saldo_total > 20) {                        
+                        if (hoy < fecvenp) {
+                            EmitirFichaPago();
+                        }
+                        else {
+                            if (idusu == '46') {
+                                EmitirFichaPago();
+                            } else {
+                                alert('El plazo de RECAUDACION ha terminado, por lo tanto, no es posible emitir fichas de pago');
+                            }
+                        }
+                    }
+                    else {
+                        alert('El saldo a pagar esta cubierto, por lo que no es posible emitir fichas de pago');
+                    }
+                });
+
+                $(".accion_aceptar_emitir_ficpag").click(function (e) {
+
+                    var monto_aportacion = parseFloat($("#txtemitir_ficpag").val());
+
+                    if (isNaN(monto_aportacion)) {
+                        monto_aportacion = 0;
+                    }
+                    var limite_inferior_aportacion = parseFloat($("#lblaportacion_mensual").html());
+
+                    var descuento_por_aplicar = $("#bodegadatos").data("descto_por_aplic_2");
+                    var idusu = $("#bodegadatos").data("idusu");
+
+                    if (isNaN(descuento_por_aplicar)) {
+                        descuento_por_aplicar = 0;
+                    } 
+
+                    var limite_superior_aportacion = parseFloat($("#bodegadatos").data("saldo_total")) - parseFloat(descuento_por_aplicar);
+                    var hoy = moment();
+                    var fecvenp = ConvertirCadenaToFecha($("#bodegadatos").data("fecvencpag"));
+                    if (idusu != '46') {
+                        if (monto_aportacion >= limite_inferior_aportacion && monto_aportacion <= limite_superior_aportacion) {
+                            if (hoy <= fecvenp) {
+                                GeneraFichaPago(monto_aportacion);
+                            }
+                            else {
+                                alert('El plazo de RECAUDACION ha terminado, por lo tanto, no es posible emitir fichas de pago');
+                            }
+                        }
+                        else {
+                            alert('La cantidad de aportación debe ser mayor a: ' + limite_inferior_aportacion.toFixed(2) + ' y menor o igual a: ' + FormatoMoneda(limite_superior_aportacion));
+                        }
+                    }
+                    else {
+                        GeneraFichaPago(monto_aportacion);
+                    }
+                });
+
+               
+
+              
+
+                
+                                
+
+                $(".accion_cancelar_emitir_ficpag").click(function (e) {
+                    //Cancel the link behavior
+                    //e.preventlogin();
+                    $('#mask, .window').hide();
+                });
+
+                $(".accion_cancelar_aplicar_descto").click(function (e) {
+                    //Cancel the link behavior
+                    //e.preventlogin();
+                    $('#mask, .window').hide();
+                });
+                
+
+                //if mask is clicked
+                $('#mask').click(function () {
+                    $(this).hide();
+                    $('.window').hide();
+                });
+
+            });
+     </script>
+</head>
+<body>
+    <div id="bodegadatos"></div>
+    <div class="content">
+        <table class="gral">
+            <tbody>
+            <tr>
+                <td class="titulo_1ro" colspan="3">REPORTE DE FRENTE</td>  
+                <td class="menu" >Menú</td>                 
+            </tr>
+            <tr>
+                <td class="titulo_2do" colspan="4">DATOS DEL COOPERADOR</td> 
+            </tr>
+            <tr>
+                <td class="campo">Nombre de Cooperador:</td><td class="dato" colspan="3"><label id="lblcooperador"/></td>
+            </tr>
+            <tr>
+                <td class="campo">Coop_SIFIDOC:</td><td class="dato" colspan="3"><label id="lblcoopsifidoc"/></td>
+            </tr>
+            <tr>
+                <td class="campo">CURP:</td><td class="dato" colspan="3"><label id="lblcurp"/></td>                
+            </tr>
+            <tr>
+                <td class="campo">INE:</td><td class="dato" colspan="3"><label id="lbline"/></td>                
+            </tr>
+             <tr>
+                <td class="campo">Teléfono:</td><td class="dato" colspan="3"><label id="lbltel"/></td>                
+            </tr>
+             <tr>
+                <td class="campo">Correo electrónico:</td><td class="dato" colspan="3"><label id="lblcorreo"/></td>                
+            </tr>
+            <tr>
+                <td class="campo">Relación con predio:</td><td class="dato" colspan="3"><label id="lblrelacionpredio"/></td>               
+            </tr>
+            <tr>
+                <td class="campo">Domicilio de Notificación:</td><td class="dato" colspan ="3"><label id="lbldomnotif"/></td>                
+            </tr>
+            <tr>
+                <td class="campo">Programa:</td><td class="dato" colspan ="3"><label id="lblnomprog"/></td>                
+            </tr>                         
+            <tr>
+                <td class="campo">ID:</td><td class="dato" colspan ="3"><label id="lblid"/></td>                
+            </tr>                                   
+            <tr>
+                <td class="titulo_2do" colspan="4">HISTORIAL DE LA CUENTA</td> 
+            </tr>
+            <tr>
+                <td class="campo">Fecha Inicio de Pagos:</td><td class="dato" colspan ="3"><label id="lblfecinipag"/></td>                
+            </tr>                        
+            <tr>
+                <td class="campo">Fecha Venc. de Pagos:</td><td class="dato" colspan ="3"><label id="lblfecvencpag"/></td>                
+            </tr>                        
+            <tr>
+                <td class="campo">Fecha Inicio Proceso Obra:</td><td class="dato" colspan ="3"><label id="lblfeciniproc"/></td>                
+            </tr>                        
+            <tr>
+                <td class="campo">Fecha Inicio Cobranza:</td><td class="dato" colspan ="3"><label id="lblfecinicob"/></td>                
+            </tr>                                   
+            <tr>
+                <td class="titulo_2do" colspan="4">  DETALLE FINANCIERO</td> 
+            </tr>            
+            <tr>
+                <td class="titulo_2do_2">CONCEPTO</td>
+                <td class="titulo_2do_2" colspan="3">MONTOS</td>                 
+            </tr>
+            <tr>
+                <td class="campo">Capital:</td><td class="dato"><label id="lblcapital"></label></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td class="campo">Incremento de Costo de Obra:</td><td class="dato"><label id="lblIncremento"></label></td><td></td><td></td>
+            </tr>                        
+            <tr>
+                <td class="campo">Descuentos a Capital por aplicar:</td><td></td><td class="dato"><label id="lbldescto_poraplicar_capital"></label></td><td></td>
+            </tr>
+            <tr>
+                <td class="campo">Descuentos a Capital aplicados:</td><td></td><td></td><td class="dato"><label id="lbldescto_aplicado_capital"></label></td>                                                                                    
+            </tr>            
+            <tr>
+                <td class="campo">Capital Pagado:</td><td></td><td></td><td class="dato"><label id="lblpagcap" ></label></td>
+            </tr>          
+            <tr>
+                <td class="espacio_aire" colspan="4">&nbsp</td>
+            </tr>
+            <tr>                
+                <td class="titulo_3er" colspan="3">SALDO TOTAL:</td><td class="dato"><label id="lblsaldo_total" ></label></td>
+            </tr>   
+            <tr>
+                <td class="espacio_aire" colspan="4">&nbsp</td>
+            </tr> 
+            <tr>                
+                <td class="boton"><a href="#" class="bitacora">Bitácora_Movimientos</a></td> 
+                <td class="boton"><a href="#" class="genera_descto_1">Descto. por Pronto Pago</a></td>
+                <td class="boton"><a href="#" class="act_pagos">Actualizar Pagos</a></td>
+                <td class="boton"><a href="#" class="edo_cta">Estado de Cuenta</a></td>
+            </tr>    
+            <tr>                
+                <td class="boton"><a href="#" class="aplicar_descto_art24">Aplic. Descto. Art 24 --> 2.5%</a></td>
+                <td class="boton"><a href="#" class="aplicar_descto_prog">Aplicar Descto. No Programado</a></td>
+                <td class="boton"><a href="#" class="aplicar_descto_especial">Aplicar Descuento Especial</a></td>
+                <td class="boton"><a href="#" class="emitir_ficpag">Emitir Ficha Pago</a></td>
+            </tr>                      
+            </tbody>          
+        </table>
+     <div id="boxes">        
+      <div id="descto" class="window">
+          <table class="t_modulo">
+              <tbody> 
+                  <tr>
+                      <td class="titulo_modulo" colspan="3">GENERAR DESCUENTO<label id="lbltipodescto"></label></td>
+                  </tr>   
+                  <tr>
+                      <td class="c">Fecha del Descuento:</td><td><input type="text" name="fec_descto_cap" id="txtfecdesctocap" size="10" maxlength="10" onkeyup = "this.value=formateafecha(this.value);"/><a href="#" class ="pasa_fecha"> >>></a></td><td class="dato_c"><label id="lblfecdescto"></label></td>
+                  </tr>                                   
+                  <tr>
+                      <td class="c" colspan="2">Porcentaje del Descuento: <a href="#" class ="cambia_descto"> >>></a></td><td class="dato_c"><label id="lblporcentaje"></label></td>
+                  </tr>   
+                  <tr>
+                      <td class="c" colspan="2">Monto del Descuento:</td><td class="dato_c"><label id="lblmontodescto"></label></td>
+                  </tr>                  
+                  <tr>
+                      <td class="c" colspan="2">Saldo a pagar:</td><td class="dato_c"><label id="lblsaldoxpagar"></label></td>
+                  </tr>     
+                  <tr>
+                      <td class="boton_dialog" colspan="2"><a href="#" class="accion_aceptar">PROGRAMAR DESCUENTO</a></td><td class="boton_dialog"><a href="#" class="accion_cancelar">CANCELAR</a></td>
+                  </tr>                  
+              </tbody>
+          </table>
+      </div>             
+      <div id="editar_metros" class="window">
+          <table class="t_modulo">
+              <tbody> 
+                  <tr>
+                      <td class="titulo_modulo" colspan="2">EDICION DE METROS DE FRENTE<label id="lbleditmtosfte"></label></td>
+                  </tr>   
+                  <tr>
+                      <td class="c">Metros registrados:</td><td><label id="lblmtos_frente_reg"></label></td>
+                  </tr>                                   
+                  <tr>
+                      <td class="c">Cantidad Nueva de Metros:</td><td class="dato_c"><input type="text" name="metros_frente_new" id="txtmtos_new" size="10" maxlength="6" onkeyup = "this.value=formateametros(this.value);"/></td>
+                  </tr>                     
+                  <tr>
+                      <td class="boton_dialog"><a href="#" class="accion_aceptar_metros_new">ACEPTAR</a></td><td class="boton_dialog"><a href="#" class="accion_cancelar_metros_new">CANCELAR</a></td>
+                  </tr>                  
+              </tbody>
+          </table>
+      </div>        
+       <div id="aplicar_descto_no_prog" class="window">
+          <table class="t_modulo">
+              <tbody> 
+                  <tr>
+                      <td class="titulo_modulo" colspan="2">APLICAR DESCUENTO NO PROGRAMADO</td>
+                  </tr>   
+                  <tr>
+                      <td class="c">Saldo Actual:</td><td><label id="lblsaldo_actual"></label></td>
+                  </tr>
+                   <tr>
+                      <td class="c">Saldo con Descuento Aplicado:</td><td><label id="lblsaldo_con_descto_aplic"></label></td>
+                  </tr>                                                     
+                  <tr>
+                      <td class="c">Fecha Ultimo Pago:</td><td><label id="lblfec_ult_pag"></label></td>
+                  </tr>                                                     
+                  <tr>
+                      <td class="c">Monto del Descuento:</td><td><label id="lblmonto_descto"></label></td>
+                  </tr>                                                     
+                  <tr>
+                      <td class="c">Porcentaje del Descuento:</td><td><label id="lblporcentaje_descto"></label></td>
+                  </tr>                                                     
+                  <tr>
+                      <td class="boton_dialog" colspan="2"><a href="#" class="accion_aceptar_aplicar_descto">CERRAR</a></td>
+                  </tr>                  
+              </tbody>
+          </table>
+      </div>
+      <div id="aplicar_descto_art24" class="window">
+          <table class="t_modulo">
+              <tbody> 
+                  <tr>
+                      <td class="titulo_modulo" colspan="2">APLICAR 2.5% DESCUENTO ART. 24 Reglas de Operación FIDOC</td>
+                  </tr>   
+                  <tr>
+                      <td class="c">Saldo Actual:</td><td><label id="lblsaldo_actual_art24"></label></td>
+                  </tr>
+                   <tr>
+                      <td class="c">Saldo con Descuento Aplicado:</td><td><label id="lblsaldo_con_descto_aplic_art24"></label></td>
+                  </tr>                                                     
+                  <tr>
+                      <td class="c">Fecha Ultimo Pago:</td><td><label id="lblfec_ult_pag_art24"></label></td>
+                  </tr>                                                     
+                  <tr>
+                      <td class="c">Monto del Descuento:</td><td><label id="lblmonto_descto_art24"></label></td>
+                  </tr>                                                                       
+                  <tr>
+                      <td class="boton_dialog" colspan="2"><a href="#" class="accion_aplicar_descto_art24">CERRAR</a></td>
+                  </tr>                  
+              </tbody>
+          </table>
+      </div>
+       <div id="aplicar_descto_especial" class="window">
+          <table class="t_modulo">
+              <tbody> 
+                  <tr>
+                      <td class="titulo_modulo" colspan="2">DESCUENTO ESPECIAL APLICADO</td>
+                  </tr>                 
+                  <tr>
+                      <td class="c">Saldo Actual:</td><td><label id="lblsaldo_actual_descto_esp"></label></td>
+                  </tr>
+                   <tr>
+                      <td class="c">Saldo con Descuento Aplicado:</td><td><label id="lblsaldo_con_descto_esp"></label></td>
+                  </tr>                                                     
+                  <tr>
+                      <td class="c">Fecha Ultimo Pago:</td><td><label id="lblfec_ult_pag_descto_esp"></label></td>
+                  </tr>                                                     
+                  <tr>
+                      <td class="c">Monto del Descuento:</td><td><label id="lblmonto_descto_esp"></label></td>
+                  </tr>                                                     
+                  <tr>
+                      <td class="c">Porcentaje del Descuento:</td><td><label id="lblporcent_descto_esp"></label></td>
+                  </tr>                                                     
+                  <tr>
+                      <td class="boton_dialog" colspan="2"><a href="#" class="accion_cerrar_aplicar_descto_esp">CERRAR</a></td>
+                  </tr>                  
+              </tbody>
+          </table>
+      </div>  
+      <div id="captura_monto_descto_esp" class="window">
+          <table class="t_modulo">
+              <tbody> 
+                  <tr>
+                      <td class="titulo_modulo" colspan="2">CAPTURA MONTO DE DESCUENTO ESPECIAL</td>
+                  </tr>
+                  <tr>
+                      <td class="c">Monto a Descontar:</td><td><input type="text" name="metros_frente_new" id="txtmonto_descto_especial" size="10" maxlength="8" onkeyup = "this.value=formateacantidad(this.value);"/></td>
+                  </tr>                     
+                  <tr>
+                      <td class="boton_dialog"><a href="#" class="accion_aceptar_aplicar_descto_esp">ACEPTAR</a></td>
+                      <td class="boton_dialog"><a href="#" class="accion_cancelar_aplicar_descto_esp">CANCELAR</a></td>
+                  </tr>                  
+              </tbody>
+          </table>
+      </div> 
+      <div id="emitir_ficpag" class="window">
+          <table class="t_modulo">
+              <tbody> 
+                  <tr>
+                      <td class="titulo_modulo" colspan="2">EMISION DE FICHA DE PAGO</td>
+                  </tr>   
+                  <tr>
+                      <td class="c">Monto de la Ficha de Pago: $ </td><td><input type="text" name="emitir_ficpag" id="Text1" size="10" maxlength="7" onkeyup = "this.value=formateacantidad(this.value);"/></td>
+                  </tr>
+                   <tr>
+                      <td class="c">Cantidad mínima de aportación: $ </td><td><label id="Label1"></label></td>
+                  </tr>                                                     
+                  <tr>
+                      <td class="boton_dialog"><a href="#" class="accion_aceptar_emitir_ficpag">EMITIR</a></td><td class="boton_dialog"><a href="#" class="accion_cancelar_emitir_ficpag">CANCELAR</a></td>
+                  </tr>                  
+              </tbody>
+          </table>
+      </div>                           
+      <div id="mask"></div>
+      <div id="bit_movs" class="window">
+           <table id="grid"></table>
+           <div id="pager"></div>         
+      </div>
+    </div>    
+   </div>
+</body>
+</html>

@@ -1,0 +1,2059 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>  
+    <script src="../../js/conv_numero_text.js" type="text/javascript"></script> 
+    <style type="text/css">
+        td {
+           text-align: center;
+        }
+       
+           .auto-style273 {
+            text-align: center;
+            font-weight: bold;
+            font-size : 20px;
+            background-color: #ff6a00;
+            width: 1194px;
+        }
+
+           .auto-style228 {
+            text-align: center;
+            font-weight: bold;
+            font-size : 16px;
+            background-color: #FADCA7;
+            height: 9px;
+            width: 1194px;
+        }
+           .auto-style274 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 20px;
+            background-color: #ff6a00;
+            height: 8px;
+            width: 1086px;
+        }
+         
+            .auto-style275 {
+            text-align: left;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: white;
+            height: 8px;
+            width: 459px;
+        }
+        .auto-style276 {
+            text-align: center;
+            font-weight: bold;
+            font-size : 18px;
+            background-color: white;
+            height: 8px;
+            width: 459px;
+        }
+
+        .auto-style280 {
+            text-align: left;
+            font-weight: bold;
+            color: #00ffff;
+            font-size : 20px;
+            background-color: #000000;
+            height: 42px;
+            width: 459px;
+        }
+         
+        .auto-style277 {
+            text-align: left;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #DE3F08;
+            height: 8px;
+            width: 1395px;
+        }
+     .auto-style278 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 9px;
+            width: 1194px;
+        }
+       
+        .auto-style285 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: white;
+            height: 8px;
+            width: 460px;
+        }
+        .auto-style304 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: white;
+            height: 8px;
+            width: 355px;
+        }     
+        .auto-style310 {
+            text-align: center;
+            font-weight: bold;
+            font-size: 25px;
+            height: 8px;
+            width: 580px;
+            background-color: white;
+        }
+        .auto-style312 {
+            height: 8px;
+            width: 402px;
+        }
+        .auto-style313 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 9px;
+            width: 199px;
+        }
+        .auto-style314 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 9px;
+            width: 1160px;
+        }
+        .auto-style315 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 9px;
+            width: 324px;
+        }
+        .auto-style317 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 9px;
+            width: 799px;
+        }
+        .auto-style318 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 9px;
+            width: 1006px;
+        }
+        .auto-style319 {
+            text-align: center;
+            font-weight: bold;
+            font-size: 25px;
+            height: 9px;
+            width: 458px;
+            background-color: white;
+        }
+        .auto-style321 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: white;
+            height: 9px;
+            width: 460px;
+        }
+        .auto-style331 {
+            text-align: center;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F5DAB2;
+            height: 15px;
+            width: 633px;
+        }
+        .auto-style332 {
+            text-align: center;
+            font-weight: bold;
+            font-size : 22px;
+            background-color: #ff6a00;
+            height: 9px;
+            width: 633px;
+        }
+        .auto-style350 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 9px;
+            width: 438px;
+        }
+        .auto-style352 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 9px;
+            width: 1257px;
+        }
+        .auto-style358 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 30px;
+            width: 1517px;
+        }
+        .auto-style359 {
+            text-align: left;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: white;
+            height: 30px;
+            width: 121px;
+        }
+        .auto-style361 {
+            text-align: left;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: white;
+            height: 8px;
+            width: 739px;
+        }
+        .auto-style382 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 9px;
+            width: 1406px;
+        }
+        .auto-style383 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 9px;
+            width: 427px;
+        }
+        .auto-style398 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 31px;
+            width: 1160px;
+        }
+        .auto-style399 {
+            text-align: left;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: white;
+            height: 31px;
+            width: 459px;
+        }
+        .auto-style400 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 31px;
+            width: 1406px;
+        }
+        .auto-style407 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 30px;
+            width: 324px;
+        }
+        .auto-style408 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 30px;
+            width: 427px;
+        }
+        .auto-style409 {
+            text-align: left;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: white;
+            height: 30px;
+            width: 739px;
+        }
+        .auto-style411 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 18px;
+            width: 324px;
+        }
+        .auto-style412 {
+            text-align: left;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: white;
+            height: 18px;
+            width: 459px;
+        }
+        .auto-style413 {
+            text-align: left;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: white;
+            height: 30px;
+            width: 459px;
+        }
+        .auto-style414 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 30px;
+            width: 1160px;
+        }
+        .auto-style416 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 30px;
+            width: 1406px;
+        }
+        .auto-style417 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 31px;
+            width: 1006px;
+        }
+        .auto-style420 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: white;
+            height: 31px;
+            width: 460px;
+        }
+        .auto-style429 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 18px;
+            width: 1006px;
+        }
+        .auto-style431 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: white;
+            height: 18px;
+            width: 460px;
+        }
+        .auto-style510 {
+            height: 10px;
+            width: 350px;
+        }
+        .auto-style512 {
+            text-align: center;
+            font-weight: bold;
+            font-size: 25px;
+            height: 9px;
+            width: 974px;
+            background-color: white;
+        }
+        .auto-style517 {
+            width: 1176px;
+            height: 3px;
+        }
+        .auto-style524 {
+            width: 386px;
+            height: 3px;
+        }
+        .auto-style526 {
+            text-align: center;
+            font-weight: bold;
+            font-size : 22px;
+            background-color: #ff6a00;
+            height: 9px;
+            width: 652px;
+        }
+        .auto-style527 {
+            text-align: center;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F5DAB2;
+            height: 15px;
+            width: 652px;
+        }
+        .auto-style530 {
+            height: 10px;
+            width: 586px;
+        }
+        .auto-style531 {
+            width: 586px;
+        }
+        #txtdescuento {
+            height: 22px;
+        }
+        .auto-style533 {
+            width: 482px;
+        }
+        .auto-style543 {
+            width: 253px;
+            height: 23px;
+        }
+        .auto-style547 {
+            width: 259px;
+            height: 23px;
+        }
+        .auto-style551 {
+            width: 284px;
+            height: 23px;
+        }
+        .auto-style557 {
+            width: 268px;
+            height: 23px;
+        }
+        .auto-style562 {
+            width: 293px;
+            height: 23px;
+        }
+        .auto-style564 {
+            width: 278px;
+            height: 23px;
+        }
+        .auto-style566 {
+            width: 271px;
+            height: 23px;
+        }
+        .auto-style568 {
+            width: 265px;
+            height: 23px;
+        }
+        #bypassme {
+            width: 1400px;
+        }
+        #datos {
+            width: 1403px;
+        }
+        .auto-style569 {
+            text-align: center;
+            font-weight: bold;
+            font-size : 20px;
+            background-color: #ff6a00;
+            width: 1194px;
+            height: 11px;
+        }
+        .auto-style574 {
+            width: 350px;
+            height: 29px;
+        }
+        .auto-style585 {
+            width: 259px;
+            text-align: center;
+            font-weight: bold;
+            font-size : 20px;
+            background-color: #608cac;
+            height: 57px;
+        }
+        .auto-style587 {
+            width: 718px;
+            height: 3px;
+        }
+        .auto-style588 {
+            width: 718px;
+        }
+        .auto-style594 {
+            width: 526px;
+            height: 3px;
+        }
+        .auto-style596 {
+            width: 526px;
+        }
+        .auto-style598 {
+            width: 350px;
+            height: 3px;
+        }
+        .auto-style599 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 29px;
+            width: 880px;
+        }
+        .auto-style600 {
+            width: 880px;
+            height: 3px;
+        }
+        .auto-style604 {
+            text-align: center;
+            font-weight: bold;
+            font-size : 18px;
+            background-color: white;
+            height: 9px;
+            width: 459px;
+        }
+        .auto-style605 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 5px;
+            width: 1006px;
+        }
+        .auto-style606 {
+            text-align: center;
+            font-weight: bold;
+            font-size : 18px;
+            background-color: white;
+            height: 5px;
+            width: 459px;
+        }
+        .auto-style607 {
+            text-align: center;
+            font-weight: bold;
+            font-size: 25px;
+            height: 5px;
+            width: 458px;
+            background-color: white;
+        }
+        .auto-style608 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: white;
+            height: 5px;
+            width: 460px;
+        }
+        .auto-style609 {
+            text-align: center;
+            font-weight: bold;
+            font-size: 25px;
+            height: 29px;
+            width: 458px;
+            background-color: white;
+        }
+        .auto-style610 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: white;
+            height: 30px;
+            width: 460px;
+        }
+        .auto-style611 {
+            width: 586px;
+            height: 3px;
+        }
+        .auto-style619 {
+            width: 386px;
+            height: 27px;
+        }
+        .auto-style620 {
+            width: 1176px;
+            height: 27px;
+        }
+        .auto-style622 {
+            height: 27px;
+            width: 350px;
+        }
+        .auto-style623 {
+            width: 1017px;
+            height: 3px;
+        }
+        .auto-style624 {
+            width: 1017px;
+            height: 27px;
+        }
+        .auto-style625 {
+            text-align: right;
+            font-weight: bold;
+            font-size : 15px;
+            background-color: #F6EAD8;
+            height: 29px;
+            width: 1017px;
+        }
+        </style>
+    <script>
+
+        function GestionCooperadores(oid, idusu, fid) {
+            //alert(img);
+            var url1 = "../../Procesos/gCoops.html?ResponseType=Edit&oid=" + oid + "&idusu=" + idusu + "&fid=" + fid;
+            newWindow = window.open(url1, "_blank", "top=30,left=200,menubar=no,toolbar=no,location=no, resizable=no,height=1100,width=1300,status=no,scrollbars=yes,minimizable=no,maxmizable=no,resizable=0,titlebar=no,modal=yes");
+            if (newWindow.focus()) {
+                newWindow.focus()
+            }
+        }
+
+
+        function ubicPredio(pid) {
+            //alert(img);
+            var url1 = "../../Procesos/UbicPredio.html?ResponseType=Edit&pid=" + pid;
+            newWindow = window.open(url1, "_blank", "top=150,left=200,menubar=no,toolbar=no,location=no, resizable=no,height=780,width=1105,status=no,scrollbars=yes,minimizable=no,maxmizable=no,resizable=0,titlebar=no,modal=yes");
+            if (newWindow.focus()) {
+                newWindow.focus()
+            }
+        }
+        /*
+        Funcion que convierte cualqueir fecha en formato super largo: Viernes 21 de enero del 2015 
+        
+        */
+
+        function GetLargeFecha(date) {
+            var m = new Array();
+            var d = new Array()
+            var an = date.getYear();
+            d[1] = "Lunes";
+            d[2] = "Martes";
+            d[3] = "Miercoles";
+            d[4] = "Jueves";
+            d[5] = "Viernes";
+            d[6] = "Sábado";
+            d[0] = "Domingo";
+            m[0] = "Enero"; m[1] = "Febrero"; m[2] = "Marzo";
+            m[3] = "Abril"; m[4] = "Mayo"; m[5] = "Junio";
+            m[6] = "Julio"; m[7] = "Agosto"; m[8] = "Septiembre";
+            m[9] = "Octubre"; m[10] = "Noviembre"; m[11] = "Diciembre";
+            var largefecha = d[date.getDay()] + " " + date.getDate() + " de " + m[date.getMonth()] + "  " + date.getFullYear();
+
+            return largefecha;
+        }
+
+        /*
+         Funcion que proporciona en formato super largo la fecha de hoy con la hora         
+         */
+
+        function FechaHora() {
+            var hora = new Date()
+            var hrs = hora.getHours();
+            var min = hora.getMinutes();
+            if (min < 10) min = "0" + min;
+            var hoy = new Date();
+            var m = new Array();
+            var d = new Array()
+            var an = hoy.getYear();
+            d[1] = "Lunes";
+            d[2] = "Martes";
+            d[3] = "Miercoles";
+            d[4] = "Jueves";
+            d[5] = "Viernes";
+            d[6] = "Sábado";
+            d[0] = "Domingo";
+            m[0] = "Enero"; m[1] = "Febrero"; m[2] = "Marzo";
+            m[3] = "Abril"; m[4] = "Mayo"; m[5] = "Junio";
+            m[6] = "Julio"; m[7] = "Agosto"; m[8] = "Septiembre";
+            m[9] = "Octubre"; m[10] = "Noviembre"; m[11] = "Diciembre";
+            var lugarfechahora = d[hoy.getDay()] + " " + hoy.getDate() + " de " + m[hoy.getMonth()] + "  " + hoy.getFullYear() + "," + hrs + ":" + min + ' hrs';
+
+            return lugarfechahora;
+        }
+
+
+        function recuperarParametro(campo) {
+            var RE = new RegExp("[&?]" + campo + "=([^&]*)&");
+            var href = location.href + "&";
+            if (RE.test(href)) {
+                RE.exec(href);
+                return unescape(RegExp.$1);
+            }
+        }
+
+
+        function GetDatosFrente(fid, accion) {
+            return $.ajax({
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                url: "../../WebServices/WebServiceEdoCta.asmx/GetEdoCtaFte",
+                data: "{'fid':'" + fid + "',accion:'" + accion + "'}"
+            });
+        }
+
+        function callWebServicePred(ctapred) {
+
+            var urlctapred = "http://201.116.205.135:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
+            try {
+                $.get(urlctapred, function (xml) {
+                    xmlDoc = $.parseXML(xml),
+                    $xml = $(xmlDoc),
+                    $nomprop = $xml.find("NomProp");
+                    $("#nomprop_p").text($.trim($nomprop.text()));
+
+                    $callenotif = $xml.find("DomProp");
+                    $numoficext = $xml.find("NumExtP");
+                    $letraoficialext = $xml.find("LetraExtP");
+                    $numoficint = $xml.find("NumIntP");
+                    $colnotif = $xml.find("ColProp");
+                    $usosuelo = $xml.find("TipPred");
+                    $("#domnotif_p").text("Calle: " + $.trim($callenotif.text()) + " " + $.trim($numoficext.text()) + " " + $.trim($letraoficialext.text()) + " " + $.trim($numoficint.text()) + ",  Colonia: " + $.trim($colnotif.text()));
+
+
+                    $callenumpred = $xml.find("DomPred");
+                    $numoficextpred = $xml.find("NumExt");
+                    $letraoficextpred = $xml.find("LetraExt");
+                    $numoficintpred = $xml.find("NumInt");
+                    $coloniapred = $xml.find("ColPred");
+                    $lote = $xml.find("Lote");
+                    $mzna = $xml.find("Manzana");
+
+                    $("#dompredio_p").text('Calle: ' + $.trim($callenumpred.text()) + ' ' + $.trim($numoficextpred.text()) + ' ' + $.trim($letraoficextpred.text()) + ' ' + $.trim($numoficintpred.text()) + ',  Colonia: ' + $.trim($coloniapred.text()));
+
+                    $("#lote_p").text($.trim($lote.text()));
+                    $("#mzna_p").text($.trim($mzna.text()));
+
+                    $("#tipopredio_p").text($.trim($usosuelo.text()));
+
+                });
+            }
+            catch (err) {
+                alert("No fue posible consultar la cuenta predial en el padrón de PREDIAL." + err);
+            }
+        }
+
+        function MostrarDatosUsuario(idusu) {
+            $.ajax(
+               {
+                   url: "../../WebServices/WebServiceUsuario.asmx/GetUsuario", //PageMethod
+                   data: "{'idusu':'" + idusu + "'}", //PageMethod Parametros de entrada
+                   dataType: "json",
+                   type: "post",
+                   contentType: "application/json; charset=utf-8",
+                   success: function (data) {
+                       // Data.d trae un string con el XML generado dentro del servicio web asmx
+                       $(data.d).find("usuario").each(function () {
+                           var cuenta = $(this).find("musucuenta").text();
+                           var nombre = $(this).find("musunombre").text();
+                           var rol = $(this).find("musuidrol").text();
+                           $("#lblusuario").text(cuenta);
+                       })
+                   },
+                   error: function (response) {
+                       if (response.length != 0)++
+                           alert(response);
+                   }
+               });
+
+        }
+
+
+
+
+        function ContarFrentexPredio(pid) {
+            return $.ajax(
+                {
+                    url: "../../WebServices/WebServicePredio.asmx/GetFrentesPredio", //PageMethod
+                    data: "{'pid':'" + pid + "'}", //PageMethod Parametros de entrada
+                    dataType: "json",
+                    type: "post",
+                    contentType: "application/json; charset=utf-8",
+
+                });
+
+        }
+
+
+
+        function FormatoFecha(parametro) {
+            var fecha = parametro;
+            if (!isDate(fecha)) {
+                fecha = '01/01/1900';
+            }
+            return fecha;
+        }
+
+        function ConvertirCadenaToFecha(cadenafec) {
+            var fecha = new Date();
+            if (cadenafec != "") {
+                var from = cadenafec.split("/");
+                var fecha = new Date(from[2], from[1] - 1, from[0]);
+                if (!isDate(cadenafec)) {
+                    fecha = '01/01/1900';
+                }
+            }
+            else {
+                /*var fecha = new Date('2200', '01', '01');*/
+                fecha = '01/01/1900';
+            }
+
+            return fecha;
+        }
+
+
+        function FormatoCadena(parametro) {
+
+            if (parametro == null) {
+                parametro = '';
+            }
+            if (parametro == "") {
+                parametro = '';
+            }
+
+            return parametro;
+        }
+
+        function isDate(txtDate) {
+            var currVal = $.trim(txtDate);
+            var resp;
+
+            if (currVal == '')
+                resp = false;
+
+            //Declare Regex            
+            var rxDatePattern = /^(\d{1,2})(\/)(\d{1,2})(\/)(\d{4})$/;
+            var dtArray = currVal.match(rxDatePattern); // is format OK?
+
+            if (dtArray == null) {
+                resp = false;
+            }
+            else {
+                dtDay = parseInt(dtArray[1]);
+                dtMonth = parseInt(dtArray[3]);
+                dtYear = parseInt(dtArray[5]);
+                if (dtMonth < 1 || dtMonth > 12)
+                    resp = false;
+                else if (dtDay < 1 || dtDay > 31)
+                    resp = false;
+                else if ((dtMonth == 4 || dtMonth == 6 || dtMonth == 9 || dtMonth == 11) && dtDay == 31)
+                    resp = false;
+                else if (dtMonth == 2) {
+                    var isleap = (dtYear % 4 == 0 && (dtYear % 100 != 0 || dtYear % 400 == 0));
+                    if (dtDay > 29 || (dtDay == 29 && !isleap))
+                        resp = false;
+                }
+                resp = true;
+            }
+            return resp;
+        }
+
+        function FormatoMoneda(parametro) {
+            if (!isNaN(parametro)) {
+                resultado = ('$' + parseFloat(parametro, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+            } else {
+                resultado = 0;
+            }
+            return resultado
+        }       
+
+
+
+        function ImprimirDocumentoPublico() {
+
+            var doc = new jsPDF("p", "mm", "letter");
+
+            /********************************** ENCABEZADO DE PAGINA ************************/
+            /*columna,renglon,ancho,alto*/
+
+            var img_logofidoc = new Image();
+            img_logofidoc.src = "../../imagenes/logo_fidoc.jpeg";
+            doc.addImage(img_logofidoc, 'jpeg', 15, 15, 50, 40);
+
+
+            var img_logoadmon_21_24 = new Image();
+            img_logoadmon_21_24.src = "../../imagenes/admon2021_2024.png";
+            doc.addImage(img_logoadmon_21_24, 'png', 145, 30, 50, 21);
+
+            doc.setFontSize(20);
+            doc.text(75, 50, 'Estado de Cuenta');
+
+
+
+            //******************** CUERPO DEL DOCUMENTO   ***********//
+
+
+            doc.setFontSize(14);
+            doc.text(18, 80, $("#nomcoop").html());
+            doc.text(18, 85, $("#datos").data("calle") + '    XXX');
+            doc.text(18, 90, $("#datos").data("colonia"));
+
+            var columnacodigos = 155;
+            var rengloncodigos = 80;
+            var inc_reng_codigos = 5;
+
+            doc.setFontSize(12);
+            doc.text(columnacodigos, rengloncodigos, 'fid:');
+            doc.text(columnacodigos + doc.getTextWidth('fid:'), 80 + (inc_reng_codigos * 0), $("#lblfid").html());
+
+            doc.text(columnacodigos, rengloncodigos + 5, 'pid:');
+            doc.text(columnacodigos + doc.getTextWidth('pid:'), rengloncodigos + (inc_reng_codigos * 1), $("#lblpid").html());
+
+            doc.text(columnacodigos, rengloncodigos + 10, 'oid:');
+            doc.text(columnacodigos + doc.getTextWidth('oid:'), rengloncodigos + (inc_reng_codigos * 2), $("#lbloid").html());
+
+            doc.text((columnacodigos - doc.getTextWidth('Cuenta predial:')) + doc.getTextWidth('fid:'), rengloncodigos + (inc_reng_codigos * 3), 'Cuenta predial:' + $("#ctapredial").html());
+            doc.text((columnacodigos - doc.getTextWidth('Coop. SIFIDOC:')) + doc.getTextWidth('fid:'), rengloncodigos + (inc_reng_codigos * 4), 'Coop. SIFIDOC:' + $("#osifidoc").html());
+            doc.text((columnacodigos - doc.getTextWidth('Metros Frente:')) + doc.getTextWidth('fid:'), rengloncodigos + (inc_reng_codigos * 5), 'Metros Frente:' + $("#mtsfte").html());
+            doc.text((columnacodigos - doc.getTextWidth('Costo x Mto.:')) + doc.getTextWidth('fid:'), rengloncodigos + (inc_reng_codigos * 6), 'Costo x Mto.:' + $("#ctomtolineal").html());
+
+
+            doc.setFontSize(8);
+            doc.text(18, rengloncodigos + (inc_reng_codigos * 7), 'Impresión al día:' + FechaHora())
+            doc.setLineWidth(.5);
+            doc.line(18, rengloncodigos + 38, 195, rengloncodigos + 38); // horizontal line
+
+            doc.text(18, rengloncodigos + 42, 'Adeudo convenido el día: ' + GetLargeFecha(ConvertirCadenaToFecha($("#datos").data("fecconv"))) + ' a vencerse el día: ' + GetLargeFecha(ConvertirCadenaToFecha($("#datos").data("fechavencconv"))));
+            doc.text(18, rengloncodigos + 45, 'con el convenio número: ' + $("#datos").data("idconv"));
+
+            doc.line(18, rengloncodigos + 48, 195, rengloncodigos + 48); // horizontal line
+
+            doc.setFontSize(12);
+            doc.text('INFORMACION FINANCIERA', (195 / 2), rengloncodigos + 53, 'center');
+            doc.setLineWidth(.5);
+            doc.line(18, rengloncodigos + 55, 195, rengloncodigos + 55); // horizontal line
+
+          /*  $("#datos").data("recargos", recargos);
+            $("#datos").data("saldo_act2");
+            $("#datos").data("idconv");
+            $("#datos").data("fecconv");
+            $("#datos").data("recargosconv", recargosconv);
+            $("#datos").data("desctorecargosconv", desctorecargosconv);
+            $("#datos").data("recargoporconv", recargoporconv);
+            $("#datos").data("estatusconv", estatusconv);
+            $("#datos").data("fechavencconv", fechavencconv);
+            $("#datos").data("numpagosconv", numpagosconv);
+            $("#datos").data("pagosconv", pagosconv);
+            $("#datos").data("archivoconv", archivoconv);
+            $("#datos").data("pagosconv", pagosconv);
+            $("#datos").data("saldoconv", saldoconv);*/
+            
+
+            doc.setFontSize(10);
+            doc.text('MONTOS', (195 / 8 * 3), rengloncodigos + 59, 'center');
+            doc.text('PERIODO', (195 / 8 * 6), rengloncodigos + 59, 'center');
+            doc.setLineWidth(.2);
+            doc.line(18, rengloncodigos + 63, 195, rengloncodigos + 63); // horizontal line            
+
+
+
+            doc.text('Saldo convenido:', ((195 / 8) * 2), rengloncodigos + 67, 'right');
+            doc.text(FormatoMoneda($("#datos").data("saldo_act2")), ((195 / 8) * 3), rengloncodigos + 67, 'right');
+
+            doc.text('Recargos:', ((195 / 8) * 2), rengloncodigos + 71, 'right');
+            doc.text(FormatoMoneda($("#datos").data("recargosconv")), ((195 / 8) * 3), rengloncodigos + 71, 'right');
+
+            $("#datos").data("porcentajedesctorec", porcentajedesctorec);
+            doc.text('Descto. recargos:', ((195 / 8) * 2), rengloncodigos + 75, 'right');
+            doc.text(FormatoMoneda($("#datos").data("desctorecargosconv")), ((195 / 8) * 4), rengloncodigos + 75, 'right');
+
+            doc.text('Recargo por convenio:', ((195 / 8) * 2), rengloncodigos + 79, 'right');
+            doc.text(FormatoMoneda($("#datos").data("recargoporconv")), ((195 / 8) * 3), rengloncodigos + 79, 'right');
+
+            doc.text('Pagos del convenio:', ((195 / 8) * 2), rengloncodigos + 83, 'right');
+            doc.text(FormatoMoneda($("#datos").data("pagosconv")), ((195 / 8) * 4), rengloncodigos + 83, 'right');
+                       
+            doc.setLineWidth(.3);
+            doc.line(18, rengloncodigos + 86, 195, rengloncodigos + 86); // horizontal line
+
+            doc.setFontSize(12);
+            doc.text('Saldo:', ((195 / 8) * 6), rengloncodigos + 91, 'right');
+            doc.text(FormatoMoneda($("#datos").data("saldoconv")), ((195 / 8) * 7), rengloncodigos + 91, 'right');
+            
+            doc.setLineWidth(.6);
+            doc.line(18, rengloncodigos + 94, 195, rengloncodigos + 94); // horizontal line
+
+            
+
+
+
+
+            //////*******************      PIE DE PAGINA  **********************************//////////////////
+
+            doc.setFontSize(6);
+
+            doc.text('Blvd. Juan José Torres Landa 1701', 18, 250, 'left');
+            doc.text('Oriente Edificio B de Obras Públicas', 18, 253, 'left');
+            doc.text('Col. El Tlacuache', 18, 256, 'left');
+            doc.text('C.P. 37480', 18, 259, 'left');
+            doc.text('León Gto.', 18, 262, 'left');
+
+            doc.text('Tel. Oficina: 477-470-86-15 al 18', 18, 265, 'left');
+            doc.text('fidoc.leon.gob.mx', 18, 268, 'left');
+
+            var img_facebook = new Image();
+            img_facebook.src = "../../imagenes/face.png";
+            doc.addImage(img_facebook, 'png', 158, 240, 12, 8);
+
+            var img_twitter = new Image();
+            img_twitter.src = "../../imagenes/twitter.png";
+            doc.addImage(img_twitter, 'png', 160, 250, 8, 8);
+
+            var img_whatsapp = new Image();
+            img_whatsapp.src = "../../imagenes/whatsapp.jpg";
+            doc.addImage(img_whatsapp, 'jpg', 161, 260, 6, 6);
+
+
+            doc.text('facebook/fidocleon', 190, 245, 'right');
+            doc.text('@fidocleon', 190, 253, 'right');
+            doc.text('477-325-2586', 190, 263, 'right');
+
+            doc.save('edocta.pdf');
+
+        }
+
+        function GeneraFichaLiquidacionPago(objDescto) {
+
+            var doc = new jsPDF("p", "mm", "letter");
+
+            /********************************** ENCABEZADO DE PAGINA ************************/
+            /*columna,renglon,ancho,alto*/
+
+            var img_logofidoc = new Image();
+            img_logofidoc.src = "../../imagenes/logo_fidoc.jpeg";
+            doc.addImage(img_logofidoc, 'jpeg', 15, 15, 50, 40);
+
+
+            var img_logoadmon_21_24 = new Image();
+            img_logoadmon_21_24.src = "../../imagenes/admon2021_2024.png";
+            doc.addImage(img_logoadmon_21_24, 'png', 145, 30, 50, 21);
+
+            doc.setFontSize(15);
+            doc.text('Ficha de liquidación', (195 / 2), 50, 'center');
+            doc.text('de adeudo de pavimento', (195 / 2), 55, 'center');
+
+
+
+            //******************** CUERPO DEL DOCUMENTO   ***********//
+
+            doc.setLineWidth(.3);
+            doc.line(18, 65, 195, 65); // horizontal line
+            doc.setFontSize(8);
+            doc.text(18, 63, 'Impresión al día:' + FechaHora());
+
+
+
+            doc.setFontSize(11);
+
+            doc.text('Por medio de la presente el cooperador: ', 18, 75, 'left');
+            doc.text($("#nomcoop").html(), (195 / 4 * 2), 82, 'center');
+            doc.line((195 / 2) - (doc.getTextWidth($("#nomcoop").html()) / 2), 83, (195 / 2 + (doc.getTextWidth($("#nomcoop").html()) / 2)), 83); // horizontal line
+            doc.text('identificado por la clave de cooperador:', 18, 93, 'left');
+            doc.text('fid:' + $("#lblfid").html(), (192 / 4 * 2), 93, 'center');
+            doc.line((192 / 4 * 2) - (doc.getTextWidth('fid:' + $("#lblfid").html()) / 2), 94, (192 / 4 * 2) + (doc.getTextWidth('fid:' + $("#lblfid").html()) / 2), 94);
+            doc.text('coop_sifidoc:' + $("#osifidoc").html(), (192 / 4 * 3), 93, 'center');
+            doc.line((192 / 4 * 3) - (doc.getTextWidth('coop_sifidoc:' + $("#osifidoc").html()) / 2), 94, (192 / 4 * 3) + (doc.getTextWidth('coop_sifidoc:' + $("#osifidoc").html()) / 2), 94);
+
+            doc.text('acuerda pagar la cantidad de: ' + $("#saldopagar").html(), 18, 100, 'left');
+            var letrasnumero = numeroALetras($("#datos").data("saldo_pagar"), {
+                plural: "PESOS",
+                singular: "PESO",
+                centPlural: "CENTAVOS",
+                centSingular: "CENTAVO"
+            });
+
+            doc.line(18 + doc.getTextWidth('acuerda pagar la cantidad de: '), 101, 192, 101);
+
+            doc.setFontSize(7);
+            doc.text('(' + letrasnumero + ')', 192, 100, 'right');
+
+            doc.setFontSize(11);
+            doc.text('por el beneficio de pavimento al predio con domicilio: ', 18, 106, 'left');
+            doc.text('Calle: ' + $("#datos").data("calle"), 18 + doc.getTextWidth('por el beneficio de pavimento al predio con domicilio: '), 106, 'left');
+            doc.line(18 + doc.getTextWidth('por el beneficio de pavimento al predio con domicilio: '), 107, 192, 107);
+            doc.text('Colonia: ' + $("#datos").data("colonia"), 18, 112, 'left');
+            doc.line(18, 113, 192, 113);
+
+
+
+            var date = new Date();
+            var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+            doc.text('antes de la  fecha: ' + GetLargeFecha(ultimoDia), 18, 118, 'left');
+            doc.line(18 + doc.getTextWidth('antes de la  fecha: '), 119, 18 + doc.getTextWidth('antes de la  fecha: ') + doc.getTextWidth(GetLargeFecha(ultimoDia)), 119);
+
+            doc.text(' de lo contrario el monto a pagar será actualizado.', 18 + doc.getTextWidth('antes de la  fecha: ') + doc.getTextWidth(GetLargeFecha(ultimoDia)), 118, 'left');
+
+
+
+
+
+
+            /*+ $("#nomcoop").html() + ' identificado como:' 
+        
+        var text2 = 'Por medio de la presente el cooperador: ' + $("#nomcoop").html() + ' identificado como:' 
+        clave: fid.' + objDescto.fid + '.sifidoc.' + objDescto.obrasifidoc + ' acuerda pagar la cantidad de: ' + $("#saldopagar").html() + ' por el beneficio de pavimento realizado al predio con un domicilio ubicado en la Calle: ' + $("#datos").data("calle") + ' , Colonia: ' + $("#datos").data("colonia") +' antes del día: ' + objDescto.fec_aplic_descto + ' de lo contrario el descuento no será aplicado y la cantidad a pagar se actualizará.';
+
+        doc.setLineWidth(.5);
+        doc.line(18, 160, 195, 160); // horizontal line
+
+        doc.text(text, 18, 130, { maxWidth: 170, align: "justify" });*/
+
+
+
+
+
+            //////*******************      PIE DE PAGINA  **********************************//////////////////
+
+            doc.setFontSize(6);
+
+            doc.text('Blvd. Juan José Torres Landa 1701', 18, 250, 'left');
+            doc.text('Oriente Edificio B de Obras Públicas', 18, 253, 'left');
+            doc.text('Col. El Tlacuache', 18, 256, 'left');
+            doc.text('C.P. 37480', 18, 259, 'left');
+            doc.text('León Gto.', 18, 262, 'left');
+
+            doc.text('Tel. Oficina: 477-470-86-15 al 18', 18, 265, 'left');
+            doc.text('fidoc.leon.gob.mx', 18, 268, 'left');
+
+            var img_facebook = new Image();
+            img_facebook.src = "../../imagenes/face.png";
+            doc.addImage(img_facebook, 'png', 158, 240, 12, 8);
+
+            var img_twitter = new Image();
+            img_twitter.src = "../../imagenes/twitter.png";
+            doc.addImage(img_twitter, 'png', 160, 250, 8, 8);
+
+            var img_whatsapp = new Image();
+            img_whatsapp.src = "../../imagenes/whatsapp.jpg";
+            doc.addImage(img_whatsapp, 'jpg', 161, 260, 6, 6);
+
+
+            doc.text('facebook/fidocleon', 190, 245, 'right');
+            doc.text('@fidocleon', 190, 253, 'right');
+            doc.text('477-325-2586', 190, 263, 'right');
+
+            doc.save('fichaliquidacion.pdf');
+        }
+
+
+
+        function MostrarValoresFrente(k) {
+
+            var fid = k.Items[0].row[0]; //fid
+            var pid = k.Items[0].row[1]; //pid
+            var oid = k.Items[0].row[2]; //oid
+            var cid = k.Items[0].row[3]; //cid
+            var obrasifidoc = k.Items[0].row[4]; //cooperador
+            var nomficha = k.Items[0].row[5]; //mnomficha
+            var callenotif = k.Items[0].row[6]; //callenotif
+            var colonianotif = k.Items[0].row[7]; //colnotif
+            var nooficnotif = k.Items[0].row[8]; //nooficnotif
+            var mtsfrente = k.Items[0].row[9]; //mts_frente
+            var prid = k.Items[0].row[10]; //prid
+            var costomtolineal = k.Items[0].row[11]; //costo_mto_lineal
+            var costototalobra = k.Items[0].row[12]; //costo_total_obra
+            var nomprog = k.Items[0].row[13]; //nomprog
+            var progmun = k.Items[0].row[14]; //progmun
+            var progcoop = k.Items[0].row[15]; //progcoop
+            var progdescrip = k.Items[0].row[16]; //progdescrip
+            var nooficial = k.Items[0].row[17]; //nooficial            
+            var ctapredial = k.Items[0].row[18]; //ctapredial
+            var lote = k.Items[0].row[19]; //lote
+            var mzna = k.Items[0].row[20]; //mzna
+            var r20 = k.Items[0].row[21]; //r20
+            var cup = k.Items[0].row[22]; //cup
+            var ctaimuvi = k.Items[0].row[23]; //ctaimuvi
+            var ctap = k.Items[0].row[24]; //uso_predio
+            var sapal = k.Items[0].row[25]; //sapal
+            var tipopredio = k.Items[0].row[26]; //tipopredio
+            var usosuelo = k.Items[0].row[27]; //uso_suelo
+            var adeudo = k.Items[0].row[28]; //adeudo
+            var incremento = k.Items[0].row[29]; //incremento
+            var usucre = k.Items[0].row[30]; //usucre
+            var feccre = k.Items[0].row[31]; //feccre
+            var usrmod = k.Items[0].row[32]; //usrmod
+            var fecmod = k.Items[0].row[33]; //fecmod
+            var suma_pagos_antes_antes = k.Items[0].row[34]; //suma_pagos_antes_antes
+            var suma_pagos_antes_desp = k.Items[0].row[35]; //suma_pagos_antes_desp
+            var suma_pagos_desp_antes = k.Items[0].row[36]; //suma_pagos_desp_antes
+            var suma_pagos_desp_desp = k.Items[0].row[37]; //suma_pagos_desp_desp
+            var saldo_parcial = k.Items[0].row[38]; //saldo_parcial
+            var saldo_act = k.Items[0].row[39]; //saldo_act
+            var saldo_act2 = k.Items[0].row[40]; //saldo_act2
+
+            var recargos = k.Items[0].row[41]; //recargos
+            
+            var saldopagar = k.Items[0].row[42]; //saldo_pagar
+            var periodo_recargos = k.Items[0].row[43]; //periodo_recargos
+            var clv_inpc_ant = k.Items[0].row[44]; //clv_inpc_ant
+            var clv_inpc_actual = k.Items[0].row[45]; //clv_inpc_actual
+            var clv_inpc_actual_2 = k.Items[0].row[46]; //clv_inpc_actual_2
+            var fec_ini_per_act = k.Items[0].row[47]; //fec_ini_per_act
+            var fec_fin_per_act = k.Items[0].row[48]; //fec_fin_per_act
+            var fec_fin_per_act_2 = k.Items[0].row[49]; //fec_fin_per_act_2
+            var fecnotifdet = k.Items[0].row[50]; //fec_notif_det
+            var fecnotifreq = k.Items[0].row[51]; //fec_notif_req
+            var fecnotifejec = k.Items[0].row[52]; //fec_notif_ejec
+            var fecpav = k.Items[0].row[53]; //fec_pav
+            var fecrec = k.Items[0].row[54]; //fec_rec
+            var nopagos = k.Items[0].row[55]; //nopagos
+            var fecinipag = k.Items[0].row[56]; //fec_ini_pag
+            var fecvenc = k.Items[0].row[57]; //fec_venc
+            var fecproceso = k.Items[0].row[58]; //fec_proceso
+            var feccob = k.Items[0].row[59]; //fec_cob
+            var fecpub1 = k.Items[0].row[60]; //fec_pub_1
+            var fecpub2 = k.Items[0].row[61]; //fec_pub_2
+            var fecavisocong = k.Items[0].row[62]; //fec_aviso_cong
+            var statusobra = k.Items[0].row[63]; //status_obra
+            var sector = k.Items[0].row[64]; //sector
+            var subsector = k.Items[0].row[65]; //subsector
+            var cvecalle = k.Items[0].row[66]; //cvecalle
+            var calle = k.Items[0].row[67]; //calle
+            var colonia = k.Items[0].row[68]; //colonia
+            var tramo = k.Items[0].row[69]; //tramo            
+            var statusobrac = k.Items[0].row[70]; //cestatus
+            var accesorios6 = k.Items[0].row[71]; //accesorios
+            var accesorios7 = k.Items[0].row[72]; //accesorios
+            var periodoact = k.Items[0].row[73]; //periodo_act
+            var factoract = k.Items[0].row[74]; //factor_act
+            var descuentos = k.Items[0].row[75]; //descuentos
+            var estatusconv = k.Items[0].row[76]; //estatus_convenio
+            var idconv = k.Items[0].row[77]; //idconv
+            var fecconv = k.Items[0].row[78]; //fecconv
+            var factoractconv = k.Items[0].row[79]; //factoractconv
+            var recargosconv = k.Items[0].row[80]; //recargosconv
+            var desctorecargosconv = k.Items[0].row[81]; //desctorecargosconv
+            var recargoporconv = k.Items[0].row[82]; //recargoporconv
+            var fechavencconv = k.Items[0].row[83]; //fechavencconv
+            var numpagosconv = k.Items[0].row[84]; //numpagosconv
+            var saldoconv = k.Items[0].row[85]; //saldoconv
+            var pagosconv = k.Items[0].row[86]; //pagosocnv
+            var archivoconv = k.Items[0].row[87]; //nombre_archivo_convenio
+
+            $("#datos").data("recargos", recargos);           
+            $("#datos").data("saldo_act2", saldo_act2);
+            $("#datos").data("idconv", idconv);
+            $("#datos").data("fecconv", fecconv);
+            $("#datos").data("recargosconv", recargosconv);
+            $("#datos").data("desctorecargosconv", desctorecargosconv);
+            $("#datos").data("recargoporconv", recargoporconv);
+            $("#datos").data("estatusconv", estatusconv);
+            $("#datos").data("fechavencconv", fechavencconv);
+            $("#datos").data("numpagosconv", numpagosconv);
+            $("#datos").data("pagosconv", pagosconv);
+            $("#datos").data("archivoconv", archivoconv);
+            $("#datos").data("pagosconv", pagosconv);
+            $("#datos").data("saldoconv", saldoconv);
+
+            var ctap = ctapredial.length;
+            if (ctap > 0 && ctap < 13) {
+                if (ctapredial != 'SIN_INF_AF') {
+                    callWebServicePred(ctapredial);
+                }
+            }
+
+
+
+            $("#lblfid").text(fid);
+            $("#lblpid").text(pid);
+            $("#lbloid").text(oid);
+            $("#lblcid").text(cid);
+            $("#lblprid").text(prid);
+
+
+
+            ContarFrentexPredio(pid)
+               .done(function (r) {
+                   var cadena = $.trim(r.d);
+                   var idprog, nomarchivo;
+                   if (cadena != "<NewDataSet />") {
+                       $(r.d).find("frentesxp").each(function () {
+                           var numfrentes = $(this).find("numfrentes").text();
+                           if (numfrentes > 1) {
+                               $("#aviso").text("AVISO: Éste predio contiene más frentes beneficiados, lo puedes revisar con la opción de ubicación.");
+                           }
+                       });
+                   }
+               }).fail(function (result) {
+                   console("No es posible los frentes del predio");
+               });
+
+
+
+            $("#domcoop").text('Calle: ' + FormatoCadena(callenotif) + ' ' + FormatoCadena(nooficnotif) + ' ,  Colonia: ', +FormatoCadena(colonianotif));
+
+            $("#nomcoop").text(FormatoCadena(nomficha));
+
+            $("#dompredio").text('Calle: ' + FormatoCadena(calle) + ' ' + FormatoCadena(nooficial) + ' , Colonia: ' + FormatoCadena(colonia));
+
+            $("#datos").data("calle", calle);
+            $("#datos").data("nooficial", nooficial);
+            $("#datos").data("colonia", colonia);
+
+            $("#lote").text(FormatoCadena(lote));
+            $("#mzna").text(FormatoCadena(mzna));
+            $("#tipopredio").text(FormatoCadena(usosuelo));
+            $("#r20").text(FormatoCadena(r20));
+            $("#ctapredial").text(FormatoCadena(ctapredial));
+            $("#ctaimuvi").text(FormatoCadena(ctaimuvi));
+            $("#sapal").text(FormatoCadena(sapal));
+            $("#cup").text(FormatoCadena(cup));
+
+
+            $("#osifidoc").text(FormatoCadena(obrasifidoc));
+            $("#ctototalobra").text(FormatoMoneda(costototalobra));
+            $("#calleobra").text(FormatoCadena(calle));
+            $("#coloniaobra").text(FormatoCadena(colonia));
+            $("#tramoobra").text(FormatoCadena(tramo));
+            $("#fecinipag").text(FormatoFecha(fecinipag));
+            $("#numpagos").text(nopagos);
+            $("#fecvencpag").text(FormatoFecha(fecvenc));
+            $("#fecrec").text(FormatoFecha(fecrec));
+            $("#fecpub1").text(FormatoFecha(fecpub1));
+            $("#fecpub2").text(FormatoFecha(fecpub2));
+            $("#fecproc").text(FormatoFecha(fecproceso));
+            $("#fecpav").text(FormatoFecha(fecpav));
+            $("#fecavicong").text(FormatoFecha(fecavisocong));
+            $("#feccob").text(FormatoFecha(feccob));
+            $("#estatusobra").text(FormatoCadena(statusobrac));
+            $("#accesorios6").text(FormatoMoneda(accesorios6));
+            $("#accesorios7").text(FormatoMoneda(accesorios7));
+            $("#mtsfte").text(mtsfrente);
+            $("#ctomtolineal").text(FormatoMoneda(costomtolineal));
+            $("#fecnotifdet").text(FormatoFecha(fecnotifdet));
+            $("#fecnotifreq").text(FormatoFecha(fecnotifreq));
+            $("#fecnotifejec").text(FormatoFecha(fecnotifejec));
+
+          
+
+
+
+
+            var suerte_principal = parseFloat(adeudo) - parseFloat(incremento);
+            $("#suerteprinc").text(FormatoMoneda(trunc(suerte_principal, 3)));
+            $("#incremento").text(FormatoMoneda(incremento));
+            $("#programa").text(FormatoCadena(nomprog));
+
+
+
+            if (ConvertirCadenaToFecha(fecpav) < ConvertirCadenaToFecha('22/11/2019')) {
+                var pagos_antes = parseFloat(suma_pagos_antes_antes);
+                var pagos_desp = parseFloat(suma_pagos_antes_desp);
+            }
+            else {
+                var pagos_antes = parseFloat(suma_pagos_desp_antes);
+                var pagos_desp = parseFloat(suma_pagos_desp_desp);
+            }
+
+
+
+
+            var difact = parseFloat(saldo_act) - parseFloat(saldo_parcial);
+            var total_pagar = parseFloat(saldo_act2) + parseFloat(recargos);
+            $("#datos").data("total_pagar", total_pagar);
+
+            $("#pagos_antes").text(FormatoMoneda(pagos_antes));
+            $("#saldoparcial").text(FormatoMoneda(saldo_parcial));
+
+            $("#factoract").text(trunc(factoractconv, 3));  /*Se muestra el valor del factor de actualización fijo del convenio*/
+            $("#datos").data("factor_act", factoractconv);
+            $("#periodoact").text(FormatoCadena(periodoact)); 
+
+            $("#saldoact").text(FormatoMoneda(saldo_act));
+            $("#difact").text(FormatoMoneda(difact));
+
+            var pagos_antes_act = pagos_desp - parseFloat(pagosconv); /se hace el arreglo debido a que se suman los pagos realizados y aplicados durante dure el convenio vigente/
+
+            $("#lblpagosdesp").text(FormatoMoneda(pagos_antes_act));
+
+            $("#saldoact2").text(FormatoMoneda(saldo_act2));
+            
+            $("#lblregresar").text('Regresar');
+
+
+
+            /*DATOS DEL COONVENIO*/
+           
+
+            $("#lblsaldoact2").text(FormatoMoneda(trunc(parseFloat(saldo_act2), 2)));
+            $("#lblidconv").text(idconv);
+            $("#lblfecconv").text(fecconv);
+            $("#lblrecargosconv").text(FormatoMoneda(trunc(parseFloat(recargosconv), 2)));
+            $("#lbldesctorecargos").text(FormatoMoneda(trunc(parseFloat(desctorecargosconv), 2)));
+
+            var porcentajedesctorec = (parseFloat(desctorecargosconv) * 100) / parseFloat(desctorecargosconv);
+
+            $("#datos").data("porcentajedesctorec", porcentajedesctorec);
+
+
+            $("#lblrecargoporconv").text(FormatoMoneda(trunc(parseFloat(recargoporconv),2)));            
+
+            $("#lblestatusconv").text(Estatusconvenio(estatusconv));
+
+            $("#lblfecvencconv").text(fechavencconv);
+            $("#lblnumpagosconv").text(numpagosconv);
+            $("#lblpagosconv").text(FormatoMoneda(trunc(parseFloat(pagosconv), 2)));
+            $("#lblarchivoconv").text(archivoconv);
+
+            if (parseFloat(saldoconv) > 0) {
+                $("#lblsaldopositivo").text(FormatoMoneda(trunc(parseFloat(saldoconv))));
+                $("#lblsaldonegativo").text('');
+            }
+            else {
+                $("#lblsaldonegativo").text(FormatoMoneda(trunc(parseFloat(saldoconv))));
+                $("#lblsaldopositivo").text('');
+            }
+            
+        }
+
+
+        function Estatusconvenio(estatusconv) {
+            var descripestatusconv = '';            
+            if (estatusconv == 1) {
+                descripestatusconv='Convenio vigente'
+            }
+            if (estatusconv == 2) {
+                descripestatusconv = 'Convenio cumplido'
+            }
+            return descripestatusconv;
+        }
+
+        
+
+        function trunc(x, posiciones) {
+            var s = x.toString()
+            var l = s.length
+            var decimalLength = s.indexOf('.') + 1
+
+            if (l - decimalLength <= posiciones) {
+                return x
+            }
+            // Parte decimal del número
+            var isNeg = x < 0
+            var decimal = x % 1
+            var entera = isNeg ? Math.ceil(x) : Math.floor(x)
+            // Parte decimal como número entero
+            // Ejemplo: parte decimal = 0.77
+            // decimalFormated = 0.77 * (10^posiciones)
+            // si posiciones es 2 ==> 0.77 * 100
+            // si posiciones es 3 ==> 0.77 * 1000
+            var decimalFormated = Math.floor(
+              Math.abs(decimal) * Math.pow(10, posiciones)
+            )
+            // Sustraemos del número original la parte decimal
+            // y le sumamos la parte decimal que hemos formateado
+            var finalNum = entera +
+              ((decimalFormated / Math.pow(10, posiciones)) * (isNeg ? -1 : 1))
+
+            return finalNum
+        }
+
+        function calculadescuentoporaplicar(descuento) {
+            var recargos = $("#datos").data("recargos");
+            var total_pagar = $("#datos").data("total_pagar");
+            //var recargos = parseFloat();
+            var dctoporaplicar = trunc(descuento * recargos / 100, 2);
+            $("#datos").data("dctoporaplicar", dctoporaplicar);
+            var nuevosaldo = total_pagar - dctoporaplicar;
+            nuevosaldo = trunc(nuevosaldo, 2);
+            $("#datos").data("nuevosaldo", nuevosaldo);
+
+            $("#lbloperacion").text(FormatoMoneda(nuevosaldo.toString()));
+            $("#lbldctoporaplicar").text(FormatoMoneda(dctoporaplicar.toString()));
+
+        }
+
+        function ImprimirFichaPago(objDescto) { /*Inserta los registros de los descuento a aplicar*/
+
+
+            var stringData = JSON.stringify(objDescto);
+            var monto_descto_recargo = objDescto.monto_descto;
+
+
+
+            GeneraFichaLiquidacionPago(objDescto);
+
+            /*
+                GeneraDescuentoPorAplicar(stringData)
+                   .done(function (data) {
+                       if (monto_descto_recargo > 0) {
+                           alert("Se guardó correctamente el descuento por aplicar a recargos");
+                           
+                       }
+                       else {
+                           alert("No se estableció ningún descuento por aplicar..., solo se emitirá la ficha de liquidación correspondiente.");
+                       }
+                   })
+                .fail(function (x) {
+                    alert("No fue posible registrar el descuento sobre recargos...");
+                }); */
+        }
+
+
+
+
+
+
+
+        function GeneraDescuentoPorAplicar(stringData) {
+
+            return $.ajax({
+                type: 'POST',
+                url: "../../WebServices/WebServiceDesctoRecargo.asmx/ActDescto",
+                data: "{objDescto:" + stringData + "}",
+                contentType: 'application/json; utf-8',
+                dataType: 'json'
+            });
+
+        }
+
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return day + '/' + month + '/' + year;
+        }
+
+
+        $(document).ready(function () {
+
+
+
+            $("#lbllugarfechahora").text(FechaHora());
+
+
+            var fid = recuperarParametro("fid");
+            var idusu = recuperarParametro("idusu");
+            var idconv = recuperarParametro("idconv");
+
+            GetDatosFrente(fid, 0)
+            .done(function (data) {
+                var k = data.d;
+                MostrarDatosUsuario(idusu);
+                MostrarValoresFrente(k);
+            })
+            .fail(function (x) {
+                alert("No fue posible consultar los datos del cooperador...");
+            });
+
+
+            $(".ubic_predio").click(function (e) { //Ver documento 
+                var pid = $("#lblpid").text();
+                ubicPredio(pid);
+            });
+
+            $(".imprime_edo_cta").click(function (e) { //Ver documento 
+                ImprimirDocumentoPublico();
+            });
+
+            $(".regresar").click(function (e) { //Ver documento 
+                window.close();
+            });
+
+            $(".archivoconv").click(function (e) { //Ver documento
+                var archivo = $("#datos").data("archivoconv");
+                newWindow = window.open("../../temp/" + archivo)
+            });
+
+           
+
+            $(".imprime_ficha_pago").click(function (e) { //Ver documento
+
+                var fid = parseInt($("#lblfid").text());
+                var pid = parseInt($("#lblpid").text());
+                var oid = parseInt($("#lbloid").text());
+                var obrasifidoc = $("#osifidoc").text();
+                var folio_pago = 0;
+
+                var porcentaje_descto = $("#txtdctomanual").val();
+                if (porcentaje_descto == '0') {
+                    porcentaje_descto = 0;
+                }
+
+                var monto_saldo_pagar = $("#datos").data("nuevosaldo");
+                if (monto_saldo_pagar === undefined) {
+                    monto_saldo_pagar = $("#datos").data("total_pagar");
+                }
+
+                var monto_descto = $("#datos").data("dctoporaplicar");
+                if (monto_descto === undefined) {
+                    monto_descto = 0;
+                }
+
+                var factor_act_pago = $("#datos").data("factor_act");
+
+                var today = new Date();
+                var fec_aplic_descto = FormatoFecha('01/01/1900');
+                var fec_ofrece_descto = ConvertirCadenaToFecha(formatDate(today));
+                var recargos_pagados = 0;
+                var recargos_iniciales = $("#datos").data("recargos");
+                var fec_mov_as400 = FormatoFecha('01/01/1900');
+
+
+                var dias_espera_pago = 8;
+                var fec_dia_final_mes = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+                var fec_lim_pago = new Date();
+                fec_lim_pago.setDate(fec_dia_final_mes.getDate() + dias_espera_pago);
+
+                var fec_lim_pago_cadena = ConvertirCadenaToFecha(formatDate(fec_lim_pago));
+
+
+                var usuario = parseInt(recuperarParametro("idusu"));
+                var estatus_descto = 0;  /*  1 = Aplicado  0= No Aplicado*/
+                var accion = 'altadescto';
+
+
+                var enviarObj = {
+                    "fid": fid,
+                    "pid": pid,
+                    "oid": oid,
+                    "obrasifidoc": obrasifidoc,
+                    "folio_pago": folio_pago,
+                    "porcentaje_descto": porcentaje_descto,
+                    "monto_saldo_pagar": monto_saldo_pagar,
+                    "monto_descto": monto_descto,
+                    "factor_act_pago": factor_act_pago,
+                    "fec_aplic_descto": fec_aplic_descto,
+                    "fec_ofrece_descto": fec_ofrece_descto,
+                    "recargos_pagados": recargos_pagados,
+                    "recargos_iniciales": recargos_iniciales,
+                    "fec_mov_as400": fec_mov_as400,
+                    "fec_lim_pago": fec_lim_pago_cadena,
+                    "usuario": usuario,
+                    "estatus_descto": estatus_descto,
+                    "accion": accion
+                }
+
+                ImprimirFichaPago(enviarObj);
+
+            });
+
+
+
+
+
+            $(".dcto75").click(function (e) { //Se captura 75% de descuento
+                $("#txtdctomanual").val('75');
+                calculadescuentoporaplicar($("#txtdctomanual").val());
+            });
+            $(".dcto50").click(function (e) { //Se captura 50% de descuento
+                $("#txtdctomanual").val('50');
+                calculadescuentoporaplicar($("#txtdctomanual").val());
+            });
+            $(".dcto25").click(function (e) { //Se captura 25% de descuento
+                $("#txtdctomanual").val('25');
+                calculadescuentoporaplicar($("#txtdctomanual").val());
+            });
+            $(".dcto15").click(function (e) { //Se captura 15% de descuento
+                $("#txtdctomanual").val('15');
+                calculadescuentoporaplicar($("#txtdctomanual").val());
+            });
+            $(".dcto10").click(function (e) { //Se captura 10% de descuento
+                $("#txtdctomanual").val('10');
+                calculadescuentoporaplicar($("#txtdctomanual").val());
+            });
+
+            $("#lbledocta").text('Estado de Cuenta');
+        })
+   </script>
+ </head>
+ <body> 
+     
+ </body>
+ 
+</html>
+<div id="datos"></div>
+<div id="bypassme"></div>
+<div id="edoctfte">
+      <table style="width:94%; height: 149px;">
+        <tr>
+            <td class="auto-style304"></td>
+            <td class="auto-style310">FIDEICOMISO DE OBRAS POR COOPERACIÓN<br />
+                <br class=" .auto-style301" />
+                Estado de cuenta de cooperador con convenio</td>
+            <td class="auto-style312"><img src="../../imagenes/logo_fidoc.jpeg" alt="Fideicomiso de Obras por Cooperación" style="width: 239px"/></td>
+        </tr>       
+      </table>
+      <table style="width:94%; height: 65px;">
+        <tr>
+            <td class="auto-style332">oid</td>
+            <td class="auto-style332">pid</td>
+            <td class="auto-style332">fid</td>
+            <td class="auto-style332">cid</td>
+            <td class="auto-style332">prid</td>
+            <td class="auto-style332">Ubicación</td>
+            <td class="auto-style332">Usuario</td>
+            <td class="auto-style526">Fecha de Impresión</td>
+        </tr>        
+        <tr>
+            <td class="auto-style331"><label id="lbloid"></label></td>
+            <td class="auto-style331"><label id="lblpid"></label></td>
+            <td class="auto-style331"><label id="lblfid"></label></td>
+            <td class="auto-style331"><label id="lblcid"></label></td>
+            <td class="auto-style331"><label id="lblprid"></label></td>
+            <td class="auto-style331"><a href="#" class="ubic_predio">>>></a></td>
+            <td class="auto-style331"><label id="lblusuario"></label></td>
+            <td class="auto-style527"><label id="lbllugarfechahora"></label></td>
+        </tr>      
+      </table>
+
+        <table class="auto-style277">  
+        <tr>
+            <td class="auto-style280" colspan="2"><label id="aviso"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style273" colspan="2">DATOS DEL COOPERADOR</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="auto-style228">Sistema de Predial</td>
+        </tr>
+        <tr>
+            <td class="auto-style313">Nombre del Propietario:</td>
+            <td class="auto-style275"><label id="nomprop_p"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style313">Domicilio de Notificación:</td>
+            <td class="auto-style275"><label id="domnotif_p"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style228 " colspan="2">Sistema de FIDOC</td>
+        </tr>
+        <tr>
+            <td class="auto-style313">Nombre del Cooperador:</td>
+            <td class="auto-style275"><label id="nomcoop"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style313">Domicilio de Notificación:</td>
+            <td class="auto-style275"><label id="domcoop"></label></td>
+        </tr>
+        </table>
+        <table style="width: 1396px">
+        <tr>
+            <td class="auto-style273" colspan="7">DATOS DEL PREDIO</td>
+        </tr>
+        <tr>
+            <td class="auto-style228 " colspan="7">Sistema de Predial</td>
+        </tr>
+        <tr>
+            <td class="auto-style350">Domicilio del Predio:</td>
+            <td class="auto-style275"><label id="dompredio_p"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style350">Lote:</td>
+            <td class="auto-style275"><label id="lote_p"></label></td>
+            <td class="auto-style278" colspan="4">Manzana:</td>
+            <td class="auto-style275"><label id="mzna_p"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style350">Tipo de Predio:</td>
+            <td class="auto-style275"><label id="tipopredio_p"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style228 " colspan="7">Sistema de FIDOC</td>
+        </tr>
+        <tr>
+            <td class="auto-style350">Domicilio del Predio:</td>
+            <td class="auto-style275"><label id="dompredio"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style350">Lote:</td>
+            <td class="auto-style275" colspan="3"><label id="lote"></label></td>
+            <td class="auto-style278" colspan="2">Manzana:</td>
+            <td class="auto-style275"><label id="mzna"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style350">Tipo de predio:</td>
+            <td class="auto-style275" colspan="6"><label id="tipopredio"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style350">Cuenta predial:</td>
+            <td class="auto-style275" colspan="6"><label id="ctapredial"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style350">Cta. IMUVI:</td>
+            <td class="auto-style275" colspan="2"><label id="ctaimuvi"></label></td>
+            <td class="auto-style352" colspan="2">R20:</td>
+            <td class="auto-style275" colspan="2"><label id="r20"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style350">CUP (Clave única de predio):</td>
+            <td class="auto-style275" colspan="2"><label id="cup"></label></td>
+            <td class="auto-style352" colspan="2">SAPAL:</td>
+            <td class="auto-style275" colspan="2"><label id="sapal"></label></td>
+        </tr>
+        </table>
+        <table style="width: 1395px; height: 168px;">
+        <tr>
+            <td class="auto-style273" colspan="8">DATOS DE LA OBRA</td>
+        </tr>
+        <tr>
+            <td class="auto-style315">obra_SIFIDOC:</td>
+            <td class="auto-style361" colspan="2"><label id="osifidoc"></label></td>
+            <td class="auto-style383">Costo total de Obra:</td>
+            <td class="auto-style275" colspan="4"><label id="ctototalobra"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style315">Calle:</td>
+            <td class="auto-style275" colspan="7"><label id="calleobra"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style315">Colonia:</td>
+            <td class="auto-style275" colspan="7"><label id="coloniaobra"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style411">Tramo:</td>
+            <td class="auto-style412" colspan="7"><label id="tramoobra"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style407">Fecha Inicio de Pagos:</td>
+            <td class="auto-style409" colspan="2"><label id="fecinipag"></label></td>
+            <td class="auto-style408">Numero de Pagos:</td>
+            <td class="auto-style359"><label id="numpagos"></label></td>
+            <td class="auto-style358" colspan="2">Fecha de vencimiento:</td>
+            <td class="auto-style413"><label id="fecvencpag"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style414" colspan="2">Fecha de recaudación:</td>
+            <td class="auto-style413" colspan="2"><label id="fecrec"></label></td>
+            <td class="auto-style416" colspan="2">Fecha de Publicación 1:</td>
+            <td class="auto-style413" colspan="2"><label id="fecpub1"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style398" colspan="2">Fecha de proceso:</td>
+            <td class="auto-style399" colspan="2"><label id="fecproc"></label></td>
+            <td class="auto-style400" colspan="2">Fecha de Publicación 2:</td>
+            <td class="auto-style399" colspan="2"><label id="fecpub2"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style398" colspan="2">Fecha de entrega de obra:</td>
+            <td class="auto-style399" colspan="2"><label id="fecpav"></label></td>
+            <td class="auto-style400" colspan="2">Fecha de aviso de congreso:</td>
+            <td class="auto-style399" colspan="2"><label id="fecavicong"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style314" colspan="2">Fecha de cobranza:</td>
+            <td class="auto-style275" colspan="2"><label id="feccob"></label></td>
+            <td class="auto-style382" colspan="2">Estatus de Obra:</td>
+            <td class="auto-style275" colspan="2"><label id="estatusobra"></label></td>
+        </tr>
+        </table>
+        <table style="width: 1395px; height: 129px;">
+            <tr>
+            <td class="auto-style569" colspan="4">DATOS DEL FRENTE</td>
+        </tr>
+            <tr>
+            <td class="auto-style318">Metros de Frente:</td>
+            <td class="auto-style275"><label id="mtsfte"></label></td>
+            <td class="auto-style317">Fecha de Notificación Determinante:</td>
+            <td class="auto-style275"><label id="fecnotifdet"></label></td>
+        </tr>
+            <tr>
+            <td class="auto-style318">Costo del metro lineal:</td>
+            <td class="auto-style275"><label id="ctomtolineal"></label></td>
+            <td class="auto-style317">Fecha de Noficación de Requerimiento:</td>
+            <td class="auto-style275"><label id="fecnotifreq"></label></td>
+        </tr>
+            <tr>
+            <td class="auto-style318">Programa</td>
+            <td class="auto-style275"><label id="programa"></label></td>
+            <td class="auto-style317">Fecha de Notificación de Ejecución:</td>
+            <td class="auto-style275"><label id="fecnotifejec"></label></td>
+        </tr>
+            </table>
+        <table style="width: 1395px">
+        <tr>
+            <td class="auto-style273" colspan="4">DETALLE FINANCIERO</td>
+        </tr>
+        <tr>
+            <td class="auto-style254">&nbsp;</td>
+            <td class="auto-style228" colspan="2">MONTOS</td>
+            <td class="auto-style228">PERIODO</td>
+        </tr>
+        <tr>
+            <td class="auto-style318">SUERTE PRINCIPAL:</td>
+            <td class="auto-style319"><label id="suerteprinc"></label></td>
+            <td class="auto-style276">&nbsp;</td>
+            <td class="auto-style321">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style318">Incremento:</td>
+            <td class="auto-style319"><label id="incremento"></label></td>
+            <td class="auto-style276">&nbsp;</td>
+            <td class="auto-style321">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style318">Gastos de Requerimiento:</td>
+            <td class="auto-style319"><label id="accesorios6"></label></td>
+            <td class="auto-style276">&nbsp;</td>
+            <td class="auto-style321">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style318">Gastos de Ejecución:</td>
+            <td class="auto-style319"><label id="accesorios7"></label></td>
+            <td class="auto-style319">&nbsp;</td>
+            <td class="auto-style319">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style318">Pagos antes de la Fecha de Actualización:</td>
+            <td class="auto-style319"></td>
+            <td class="auto-style319"><label id="pagos_antes"></label></td>
+            <td class="auto-style319"></td>
+        </tr>
+        <tr>
+            <td class="auto-style417">SALDO PARCIAL:</td>
+            <td class="auto-style319"><label id="saldoparcial"></label></td>
+            <td class="auto-style319"></td>
+            <td class="auto-style420"></td>
+        </tr>
+        <tr>
+            <td class="auto-style605"></td>
+            <td class="auto-style606"></td>
+            <td class="auto-style607"></td>
+            <td class="auto-style608"></td>
+        </tr>
+        <tr>
+            <td class="auto-style318">Factor de Actualización:</td>
+            <td class="auto-style319"><label id="factoract"></label></td>
+            <td class="auto-style319">&nbsp;</td>
+            <td class="auto-style285">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style318">SALDO ACTUALIZADO:</td>
+            <td class="auto-style319"><label id="saldoact"></label></td>
+            <td class="auto-style319"></td>
+            <td class="auto-style604"><label id="periodoact"></label></td>
+        </tr>
+        <tr>
+            <td class="auto-style318">Diferencia Actualización:</td>
+            <td class="auto-style319"><label id="difact"></label></td>
+            <td class="auto-style319">&nbsp;</td>
+            <td class="auto-style285">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style318">Pagos después de la Fecha de Actualización:</td>
+            <td class="auto-style319"></td>
+            <td class="auto-style319"><label id="lblpagosdesp"></label></td>
+            <td class="auto-style285"></td>
+        </tr>
+        <tr>
+            <td class="auto-style318">SALDO ANTES DE RECARGOS:</td>
+            <td class="auto-style319"><label id="saldoact2"></label></td>
+            <td class="auto-style319">&nbsp;</td>
+            <td class="auto-style285">&nbsp;</td>
+        </tr>       
+        </table>        
+        <table style="width: 1395px; height: 45px">
+        <tr>
+         <td class="auto-style610" colspan="8"></td>
+        </tr>
+        <tr>
+         <td class="auto-style273" colspan="8">DATOS&nbsp; DEL&nbsp; CONVENIO</td>
+        </tr>
+        <tr>
+         <td class="auto-style600">&nbsp;</td>
+         <td class="auto-style587">&nbsp;</td>
+         <td class="auto-style623">&nbsp;</td>
+         <td class="auto-style594">&nbsp;</td>
+         <td class="auto-style611">&nbsp;</td>
+         <td class="auto-style598">&nbsp;</td>
+         <td class="auto-style524">&nbsp;</td>
+         <td class="auto-style517">&nbsp;</td>
+        </tr>
+        <tr>
+         <td class="auto-style599">idConvenio:</td>
+         <td class="auto-style319"><label id="lblidconv"></label></td>
+         <td class="auto-style624"></td>
+         <td class="auto-style228" colspan="2">MONTOS</td>
+         <td class="auto-style622"></td>
+         <td class="auto-style619"></td>
+         <td class="auto-style620"></td>
+        </tr>
+        <tr>
+         <td class="auto-style599">Estatus del convenio:</td>
+         <td class="auto-style319"><label id="lblestatusconv"></label></td>
+         <td class="auto-style625">Saldo antes de recargos:</td>
+         <td class="auto-style319"><label id="lblsaldoact2"></label></td>
+         <td class="auto-style319"></td>
+         <td class="auto-style574"></td>
+         <td class="auto-style609"></td>
+         <td class="auto-style609"> </td>
+        </tr>
+        <tr>
+         <td class="auto-style599">Fecha de celebración del convenio:</td>
+         <td class="auto-style319"><label id="lblfecconv"></label></td>
+         <td class="auto-style625">Recargos:</td>
+         <td class="auto-style319"><label id="lblrecargosconv"></label></td>
+         <td class="auto-style319"></td>
+         <td class="auto-style510"></td>
+         <td class="auto-style319"></td>
+         <td class="auto-style319"> </td>
+        </tr>
+        <tr>
+         <td class="auto-style599">Fecha de vencimiento del convenio:</td>
+         <td class="auto-style319"><label id="lblfecvencconv"></label></td>
+         <td class="auto-style625">Descuento a recargos:</td>
+         <td class="auto-style319"></td>
+         <td class="auto-style319"><label id="lbldesctorecargos"></label></td>
+         <td class="auto-style510">&nbsp;</td>
+         <td class="auto-style319">&nbsp;</td>
+         <td class="auto-style319">&nbsp;</td>
+        </tr>
+        <tr>
+         <td class="auto-style599">Número de pagos convenidos:</td>
+         <td class="auto-style319"><label id="lblnumpagosconv"></label></td>
+         <td class="auto-style625">Recargo por convenio</td>
+         <td class="auto-style319"><label id="lblrecargoporconv"></label></td>
+         <td class="auto-style530"></td>
+         <td class="auto-style510"></td>
+         <td class="auto-style319">&nbsp;</td>
+         <td class="auto-style319">&nbsp;</td>
+        </tr>
+        <tr>
+         <td class="auto-style599"></td>
+         <td class="auto-style319"></td>
+         <td class="auto-style625">Pagos durante el convenio:</td>
+         <td class="auto-style319"></td>
+         <td class="auto-style319"><label id="lblpagosconv"></label></td>
+         <td class="auto-style319">&nbsp;</td>
+         <td class="auto-style319">&nbsp;</td>
+         <td class="auto-style319">&nbsp;</td>
+        </tr>        
+        <tr>
+         <td class="auto-style599">Documento digital del convenio:</td>
+         <td class="auto-style319"><a href="#" class="archivoconv"><label id="lblarchivoconv" class="auto-style319"></label></a></td>
+         <td class="auto-style625">SALDO:</td>
+         <td class="auto-style319"><label id="lblsaldopositivo"></label></td>
+         <td class="auto-style319"><label id="lblsaldonegativo"></label></td>
+         <td class="auto-style319">&nbsp;&nbsp;</td>    
+        </tr>        
+        </table>
+        
+</div>
+
+        <table style="width: 1396px; height: 78px">
+        <tr>
+         <td class="auto-style533">&nbsp;</td>
+         <td class="auto-style533">&nbsp;</td>
+         <td class="auto-style533">&nbsp;</td>
+         <td class="auto-style533">&nbsp;</td>
+         <td class="auto-style533">&nbsp;</td>
+         <td class="auto-style533">&nbsp;</td>
+         <td class="auto-style533">&nbsp;</td>
+         <td class="auto-style533">&nbsp;</td>            
+        </tr>        
+        <tr>
+         <td class="auto-style585"></td>
+         <td class="auto-style585"></td>
+         <td class="auto-style585"></td>
+         <td class="auto-style585"></td>
+         <td class="auto-style585"></td>
+         <td class="auto-style585"><a href="#" class="imprime_edo_cta"><label id="lbledocta"></label></a></td>
+         <td class="auto-style585"><a href="#" class="imprime_ficha_pago"><label id="lblimprimirficha"></label></a></td>
+         <td class="auto-style585"><a href="#" class="regresar"><label id="lblregresar"></label></a></td>            
+        </tr>        
+        <tr>
+         <td class="auto-style562"></td>
+         <td class="auto-style564"></td>
+         <td class="auto-style566"></td>
+         <td class="auto-style551"></td>
+         <td class="auto-style557"></td>
+         <td class="auto-style568"></td>
+         <td class="auto-style547"></td>
+         <td class="auto-style543"></td>            
+        </tr>        
+        </table>
+        
+
+

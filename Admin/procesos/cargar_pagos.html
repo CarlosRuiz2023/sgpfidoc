@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>ACTUALIZAR PAGOS</title>
+    
+    
+    
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    
+
+</head>
+   
+   
+<body>
+
+<script>
+
+
+
+       
+function ValidarArchivo(archivo) {              /*Valida que el archivo sea de tipo PDF y tenga un tamaño menor a 1 MB*/
+
+    var fn = archivo.name;
+    var fs = archivo.size;
+    var ext = fn.split(".").pop();
+    if (fs > 60000000) {
+        alert("El tamaño del archivo: " + fn + " debe ser menor que 3 MB");
+        return false;
+    }
+    else {
+        switch (ext) {
+            case 'txt':            
+                return true;
+            default:
+                alert("El archivo: " + fn + " no tiene extensión .TXT");
+                return false
+        }
+    }
+}
+
+function leerArchivo(e) {
+    var archivo_valido = ValidarArchivo(e.target.files[0]);
+    if (archivo_valido) {        
+        var lector = new FileReader();
+        lector.onload = function (e) {
+            var contenido = e.target.result;                                    
+            actualiza_pagos_bd(contenido,'act_pagos')
+                .done(function (r) {
+                    alert("PAGOS ACTUALIZADOS SATISFACTORIAMENTE")
+                })
+                .fail(function (x) {
+                    alert("No fué posible actualizar los pagos en la BD")
+                });
+            mostrarContenido(contenido);
+        };
+        lector.readAsText(e.target.files[0]);
+    }    
+}
+
+function recuperarParametro(campo) {
+    var RE = new RegExp("[&?]" + campo + "=([^&]*)&");
+    var href = location.href + "&";
+    if (RE.test(href)) {
+        RE.exec(href);
+        return unescape(RegExp.$1);
+    }
+}
+
+
+function actualiza_pagos_bd(arr, accion) {
+
+    var idusu = recuperarParametro("idusu");
+    var text = arr.replace(/\r\n/g, ',');
+    var obj = {
+        "contenido": text,
+        "accion": 'act_pagos',
+    }
+
+  
+
+    var stringData = JSON.stringify(obj);
+
+        return $.ajax({
+            type: "POST",
+            dataType: "json",
+            data: "{'objfiletxt':" + stringData + ",'idusu':'" + idusu + "'}",
+            contentType: "application/json",
+            url: "../../WebServices/WebServicePagos.asmx/GetActPagos"            
+        });
+}
+
+
+
+
+function mostrarContenido(contenido) {
+    var elemento = document.getElementById('contenido_archivo');
+    elemento.innerHTML = contenido;
+}
+
+function FechaHora() {
+    var hora = new Date()
+    var hrs = hora.getHours();
+    var min = hora.getMinutes();
+    if (min < 10) min = "0" + min;
+    var hoy = new Date();
+    var m = new Array();
+    var d = new Array()
+    var an = hoy.getYear();
+    d[1] = "Lunes";
+    d[2] = "Martes";
+    d[3] = "Miercoles";
+    d[4] = "Jueves";
+    d[5] = "Viernes";
+    d[6] = "Sábado";
+    d[0] = "Domingo";
+    m[0] = "Enero"; m[1] = "Febrero"; m[2] = "Marzo";
+    m[3] = "Abril"; m[4] = "Mayo"; m[5] = "Junio";
+    m[6] = "Julio"; m[7] = "Agosto"; m[8] = "Septiembre";
+    m[9] = "Octubre"; m[10] = "Noviembre"; m[11] = "Diciembre";
+    var lugarfechahora = d[hoy.getDay()] + " " + hoy.getDate() + " de " + m[hoy.getMonth()] + "  " + hoy.getFullYear() + "," + hrs + ":" + min + ' hrs';
+
+    return lugarfechahora;
+}
+
+
+$(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/   
+
+
+        $("#lbllugarfechahora").text('  '+ FechaHora());
+        document.getElementById('filepagos').addEventListener('change', leerArchivo, false);
+    });
+</script>
+
+ <br/><br/>
+ <h1>REGISTRAR PAGOS DE COOPERADORES</h1>
+ <br/>
+ 
+ <h2>1.- Da clic sobre el botón que aparece para referenciar el archivo de pagos generado por la aplicación de FIDOC_EXTERNO.</h2>
+ <br/>
+ <h2>2.- Esperar a que se llene la lista de registros de pago.</h2>
+ <br/>
+ <h2>3.- Al finalizar la carga tendrá que aparecer el mensaje de "PAGOS ACTUALIZADOS SATISFACTORIAMENTE".</h2>
+ <br/>
+ <h4>Los pagos se registrarán con fecha de aplicación al:<label id="lbllugarfechahora"></label></h4>
+ <h4>Referenciar archivo de pagos:</h4><input type="file" name="archivo_pagos" id="filepagos"/>
+ <span id="contenido_archivo"></span> 
+</body>
+</html>

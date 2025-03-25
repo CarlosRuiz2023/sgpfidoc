@@ -1,0 +1,47 @@
+﻿<html>   
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>VISOR DE DOCUMENTOS</title>
+<style>
+    html,* { font-family: 'Inter'; }
+    .lead { font-size: 1.5rem; font-weight: 300;background: linear-gradient(to right, #000000 0%, #000000 50%,#999999 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color:transparent; }
+.container { margin: 20px auto; max-width: 960px; }
+</style>
+    <link rel="stylesheet" href="css/pdfviewer.jquery.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
+    <script src="js/pdfviewer.jquery.js"></script>
+</head>
+<body>
+    
+   <div id="pdfviewer"></div>
+
+    <script type="text/javascript">
+        const options = {
+            width: 960,
+            height: 650,
+        };
+
+        function recuperarParametro(campo) {
+            var RE = new RegExp("[&?]" + campo + "=([^&]*)&");
+            var href = location.href + "&";
+            if (RE.test(href)) {
+                RE.exec(href);
+                return unescape(RegExp.$1);
+            }
+        }
+
+        $(document).ready(function () {
+
+            var nom_archivo = recuperarParametro("nombre_docto");
+       
+            $('#pdfviewer').pdfViewer('http://192.1.126.122/fidoc/Admin/temp/'+nom_archivo,options);
+        });
+
+    </script>
+   
+</body>
+</html>
