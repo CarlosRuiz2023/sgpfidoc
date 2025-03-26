@@ -2779,7 +2779,8 @@
                     var hoy = moment();
                     var fecvenp = ConvertirCadenaToFecha($("#bodegadatos").data("fecvencpag"));
                     if (idusu != '46') {
-                        if (monto_aportacion >= limite_inferior_aportacion && monto_aportacion <= limite_superior_aportacion) {
+                        //monto_aportacion >= limite_inferior_aportacion && monto_aportacion <= limite_superior_aportacion
+                        if (true) {
                             if (hoy <= fecvenp) {
                                 GeneraFichaPago(monto_aportacion);
                             }

@@ -11,6 +11,7 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="../../js/ol/v6.3.1/build/ol.js"></script>  
+    <script src="../../Global/config.js"></script>
     <link rel="stylesheet" href="../../js/ol/v6.3.1/css/ol.css" type="text/css"/>
       
     
@@ -198,7 +199,7 @@
             var vectorsource = new ol.source.Vector({
                 format: new ol.format.GeoJSON(),
                 url: function (extent) {
-                    return 'http://172.17.11.168:8080/geoserver/sigFidoc/ows?service=WFS&' +
+                    return geoserverConfig.host +'/geoserver/sigFidoc/ows?service=WFS&' +
                     'version=1.0.0&request=GetFeature&typeName=sigFidoc:ccalles_du&' +
                     'outputFormat=application%2Fjson&CQL_FILTER=clavecalle=' + clavecalle;
                 }

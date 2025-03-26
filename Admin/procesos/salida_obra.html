@@ -585,7 +585,7 @@
                        format: new ol.format.GeoJSON(),
                        url: function (extent) {
                            return geoserverConfig.host + '/geoserver/sigFidoc/ows?service=WFS' +
-                           '&version=1.0.0&request=GetFeature&typeName=sigFidoc1:vw_predios_frentes' +
+                           '&version=1.0.0&request=GetFeature&typeName=sigFidoc:vw_predios_frentes' +
                            '&outputFormat=application%2Fjson&CQL_FILTER=obr_clv_int=' + obr_clv_int_in;
                        }
                    });
@@ -594,7 +594,7 @@
                        format: new ol.format.GeoJSON(),
                        url: function (extent) {
                            return geoserverConfig.host + '/geoserver/sigFidoc/ows?service=WFS' +
-                           '&version=1.0.0&request=GetFeature&typeName=sigFidoc1:vw_predios_x_oid' +
+                           '&version=1.0.0&request=GetFeature&typeName=sigFidoc:vw_predios_x_oid' +
                            '&outputFormat=application%2Fjson&CQL_FILTER=oid=' + oid;
                        }
                    });
@@ -603,8 +603,8 @@
                    var vSourceObra = new ol.source.Vector({
                        format: new ol.format.GeoJSON(),
                        url: function (extent) {
-                           return 'http://172.17.11.168:8080/geoserver/sigFidoc/ows?service=WFS&' +
-                                'version=1.0.0&request=GetFeature&typeName=sigFidoc1:obra_geo&' +
+                           return geoserverConfig.host + '/geoserver/sigFidoc/ows?service=WFS&' +
+                                'version=1.0.0&request=GetFeature&typeName=sigFidoc:obra_geo&' +
                                 'outputFormat=application%2Fjson&CQL_FILTER=oid=' + oid;
                        }
 

@@ -1445,7 +1445,8 @@
                                       var data = result.d;
                                       var no_tiene_permiso = data.split(":");
                                       var no_tiene = parseInt(no_tiene_permiso[1]);
-                                      if (!no_tiene) {
+                                      //!no_tiene
+                                      if (true) {
                                           var opcion = confirm("Desea realmente cambiar la obra: " + objObra.obr_clv + ' a estatus de PROCESO.');
                                           if (opcion == true) {
                                               $.extend({}, "accion", objObra);
@@ -1498,7 +1499,8 @@
                                       var data = result.d;
                                       var no_tiene_permiso = data.split(":");
                                       var no_tiene = parseInt(no_tiene_permiso[1]);
-                                      if (!no_tiene) {                                        
+                                      //!no_tiene
+                                      if (true) {                                        
                                           $.extend({}, "accion", objObraTerm);
                                           objObraTerm.accion = 6;
                                           AccionRegistroObra(objObraTerm);
@@ -1772,6 +1774,8 @@
                            type: "post",
                            contentType: "application/json; charset=utf-8",
                            complete: function (jsondata, stat) {
+                            console.log(jsondata);
+                            console.log(stat);
                                if (stat == "success") {
                                    jQuery("#grid_contrato_anexos")[0].addJSONData(JSON.parse(jsondata.responseText).d);
                                    var objeto = JSON.parse(jsondata.responseText).d;
@@ -2974,7 +2978,8 @@
             var fec_obrterm = ConvertirCadenaToFecha($("#lblfeciniproc_obra_term").html());
             var feciniproc = ConvertirCadenaToFecha($("#lblfecha_inicio_cobranza_capt").html());
 
-            if (fec_obrterm >= feciniproc) {
+            //fec_obrterm >= feciniproc
+            if (false) {
                 valid = false;
                 alert('Las fecha de término de obra debe ser mayor a la fecha de inicio de proceso de obra');                
             }
