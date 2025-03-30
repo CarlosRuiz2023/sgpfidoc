@@ -173,12 +173,12 @@ function isDate(dtStr) {
 
 //---
 function esFechaValida(fecha) {
-    if (fecha != undefined && fecha.value != "" ) {
+    if (fecha != undefined && fecha.value != "") {
         if (!/^\d{2}\/\d{2}\/\d{4}$/.test(fecha.value)) {
             alert("formato de fecha no valida (dd/mm/aaaa)");
             return false;
         }
-        
+
         var dia = parseInt(fecha.value.substring(0, 2), 10);
         var mes = parseInt(fecha.value.substring(3, 5), 10);
         var anio = parseInt(fecha.value.substring(6), 10);
@@ -199,7 +199,7 @@ function esFechaValida(fecha) {
             case 2:
                 if (comprobarSiBisisesto(anio)) { numDias = 29 } else { numDias = 28 };
                 break;
-            login:
+                login:
                 alert("Fecha introducida erronea");
                 return false;
         }
@@ -238,12 +238,10 @@ function formatCurrency(num) {
         cents = "0" + cents;
     for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
         num = num.substring(0, num.length - (4 * i + 3)) + ',' +
-    num.substring(num.length - (4 * i + 3));
+            num.substring(num.length - (4 * i + 3));
     //se quitaron los centavos
-    if (gMuestraCentavos == false)
-    { return (((sign) ? '' : '-') + '$' + num); }
-    else
-    { return (((sign) ? '' : '-') + '$' + num + '.' + cents); }
+    if (gMuestraCentavos == false) { return (((sign) ? '' : '-') + '$' + num); }
+    else { return (((sign) ? '' : '-') + '$' + num + '.' + cents); }
 }
 
 function numeralsOnly(evt) {

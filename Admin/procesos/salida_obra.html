@@ -1,195 +1,203 @@
 ﻿<html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    
-   <title>REPORTE ANALITICO DE OBRA</title>
-    
-    <style>        
-    .wrapper {
-          display: grid;
-          /*grid-template-columns: repeat(2, 1fr);*/
-          grid-template-columns: 1fr 1fr;
-          grid-gap: 10px;
-          background-color:#454548;
-          grid-template-rows: auto;    
-          grid-auto-rows: min-content;    
-          
-          width: 100%;      
-      }
-      
-      .grid-item {
-       background-color: #2b2727;
-       padding: 5px;   
-         
-      }
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-      .one {
+    <title>REPORTE ANALITICO DE OBRA</title>
+
+    <style>
+        .wrapper {
+            display: grid;
+            /*grid-template-columns: repeat(2, 1fr);*/
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 10px;
+            background-color: #454548;
+            grid-template-rows: auto;
+            grid-auto-rows: min-content;
+
+            width: 100%;
+        }
+
+        .grid-item {
+            background-color: #2b2727;
+            padding: 5px;
+
+        }
+
+        .one {
             font: bold 25px arial;
-            color:#fff;
-            background-color: #000000 ;
-            text-align: center;            
+            color: #fff;
+            background-color: #000000;
+            text-align: center;
             grid-column: 1 / span 2;
-            grid-row: 1;             
-                     
-           }
+            grid-row: 1;
 
-      .two {
+        }
+
+        .two {
             grid-column: 1;
-            grid-row: 2;            
-           }
+            grid-row: 2;
+        }
 
-      .three {
-              grid-column: 2;
-              grid-row: 2 ;
-              
-            }
-      .four {
-              grid-column: 1 / span 2;
-              grid-row: 3;
-              padding: 8px;    
-           }
-      
-      .five {
-              grid-column: 1 / span 2;
-              grid-row: 4;
-              padding: 8px;    
-           }
+        .three {
+            grid-column: 2;
+            grid-row: 2;
 
-       .six {
-              grid-column: 1 / span 2;
-              grid-row: 5;
-              padding: 8px;    
-           }
+        }
 
-       .seven {
-              grid-column: 1 / span 2;
-              grid-row: 6;
-              padding: 8px;    
-           }
+        .four {
+            grid-column: 1 / span 2;
+            grid-row: 3;
+            padding: 8px;
+        }
+
+        .five {
+            grid-column: 1 / span 2;
+            grid-row: 4;
+            padding: 8px;
+        }
+
+        .six {
+            grid-column: 1 / span 2;
+            grid-row: 5;
+            padding: 8px;
+        }
+
+        .seven {
+            grid-column: 1 / span 2;
+            grid-row: 6;
+            padding: 8px;
+        }
 
 
-      table tbody tr:nth-child(odd) {
-        	background: #fff5e0;
-            }
+        table tbody tr:nth-child(odd) {
+            background: #fff5e0;
+        }
 
-      table tbody tr:nth-child(even) {
-	        background: #fdf8ef;
-            }
+        table tbody tr:nth-child(even) {
+            background: #fdf8ef;
+        }
 
-      table.gral {
-             border-collapse: collapse;
-             width: 100%;
-             height: 100%;
-             font:  bold 20px arial;
-          }
+        table.gral {
+            border-collapse: collapse;
+            width: 100%;
+            height: 100%;
+            font: bold 20px arial;
+        }
 
-      table.gral td.campo {
+        table.gral td.campo {
             text-align: right;
             font-weight: bold;
         }
 
-      table.gral td.dato {
-            text-align: center;            
-            font:  bold 15px arial;   
-            color:#0a5992
-                 
+        table.gral td.dato {
+            text-align: center;
+            font: bold 15px arial;
+            color: #0a5992
         }
-      
-      table.gral td.titulo_middle {
+
+        table.gral td.titulo_middle {
             text-align: center;
             font-weight: bold;
-            background-color:#454548;
-            color:#fff5e0;
+            background-color: #454548;
+            color: #fff5e0;
         }
 
-     a.skiplink {
-        position: absolute;
-        clip: rect(1px, 1px, 1px, 1px);
-        padding: 0;
-        border: 0;
-        height: 1px;
-        width: 1px;
-        overflow: hidden;
-      }
+        a.skiplink {
+            position: absolute;
+            clip: rect(1px, 1px, 1px, 1px);
+            padding: 0;
+            border: 0;
+            height: 1px;
+            width: 1px;
+            overflow: hidden;
+        }
 
-      a.skiplink:focus {
-        clip: auto;
-        height: auto;
-        width: auto;
-        background-color: #fff;
-        padding: 0.3em;
-      }
-      #map:focus {
-        outline: #4A74A8 solid 0.15em;
-      }
+        a.skiplink:focus {
+            clip: auto;
+            height: auto;
+            width: auto;
+            background-color: #fff;
+            padding: 0.3em;
+        }
 
-      .ol-popup {
-        position: absolute;
-        background-color: white;
-        -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-        filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-        padding: 15px;
-        border-radius: 10px;
-        border: 1px solid #cccccc;
-        bottom: 12px;
-        left: -50px;
-        min-width: 50px;
-      }
-      .ol-popup:after, .ol-popup:before {
-        top: 100%;
-        border: solid transparent;
-        content: " ";
-        height: 0;
-        width: 0;
-        position: absolute;
-        pointer-events: none;
-      }
-      .ol-popup:after {
-        border-top-color: white;
-        border-width: 10px;
-        left: 48px;
-        margin-left: -10px;
-      }
-      .ol-popup:before {
-        border-top-color: #cccccc;
-        border-width: 11px;
-        left: 48px;
-        margin-left: -11px;
-      }
-      .ol-popup-closer {
-        text-decoration: none;
-        position: absolute;
-        top: 2px;
-        right: 8px;
-      }
-      .ol-popup-closer:after {
-        content: "✖";
-      }
+        #map:focus {
+            outline: #4A74A8 solid 0.15em;
+        }
 
-      .tabla_pop_up{
-      font-size:12px;
-      }
-     
+        .ol-popup {
+            position: absolute;
+            background-color: white;
+            -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+            filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #cccccc;
+            bottom: 12px;
+            left: -50px;
+            min-width: 50px;
+        }
+
+        .ol-popup:after,
+        .ol-popup:before {
+            top: 100%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .ol-popup:after {
+            border-top-color: white;
+            border-width: 10px;
+            left: 48px;
+            margin-left: -10px;
+        }
+
+        .ol-popup:before {
+            border-top-color: #cccccc;
+            border-width: 11px;
+            left: 48px;
+            margin-left: -11px;
+        }
+
+        .ol-popup-closer {
+            text-decoration: none;
+            position: absolute;
+            top: 2px;
+            right: 8px;
+        }
+
+        .ol-popup-closer:after {
+            content: "✖";
+        }
+
+        .tabla_pop_up {
+            font-size: 12px;
+        }
     </style>
 
-  
+
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>       
-    <script type="text/javascript" src="../js/jquery.jqGrid.min.js"></script>      
+    <script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.jqGrid.min.js"></script>
     <script type="text/javascript" src="../js/grid.locale-es.js"></script>
-    
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>      
-    <script src="../js/moment.js"></script>          
-    
-    <script src="../../js/ol/v6.3.1/build/ol.js"></script>    
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="../js/moment.js"></script>
+
+    <script src="../../js/ol/v6.3.1/build/ol.js"></script>
     <link type="text/css" rel="stylesheet" href="../css/cupertino/jquery-ui-1.7.2.custom.css" />
     <link type="text/css" rel="stylesheet" href="../css/cupertino/ui.jqgrid.css" />
-    <link rel="stylesheet" href="../../js/ol/v6.3.1/css/ol.css" type="text/css"/>
+    <link rel="stylesheet" href="../../js/ol/v6.3.1/css/ol.css" type="text/css" />
     <script src="../../Global/config.js"></script>
-   
-    
-    
+
+
+
     <script>
         function recuperarParametro(campo) {
             var RE = new RegExp("[&?]" + campo + "=([^&]*)&");
@@ -467,7 +475,7 @@
                         })
                     }),
                     'MultiPoint': new ol.style.Style({
-                        image:image,
+                        image: image,
                         text: new ol.style.Text({
                             textAlign: dom.align == '' ? undefined : dom.align,
                             textBaseline: dom.baseline,
@@ -537,8 +545,8 @@
             function styleFunction(feature, resolution) {
                 return styles(feature, resolution, misValores.polygons);
             }
-            
-            var obr_clv_int_in = recuperarParametro("obr_clv_int");            
+
+            var obr_clv_int_in = recuperarParametro("obr_clv_int");
             var idusu_in = recuperarParametro("idusu");
             $("#bodegadatos").data("idusu_entrada", idusu_in);
 
@@ -560,372 +568,372 @@
             var date = new Date();
             fecha_hoy = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
 
-           
+
 
             ObtenerDatosObra(obr_clv_int_in, fecha_hoy)
-               .done(function (r) {
-              
-                   RelacionarFrentes(obr_clv_int_in + ',' + fecha_hoy + ',');
-                   var oid = $("#bodegadatos").data("oid_entrada");
+                .done(function (r) {
 
-                   RelacionarAsambleas(',,,' + oid + ',');
-                   
-                   RelacionarContratosObra(obr_clv_int_in + ',');
-            
-                   var vSourceFrentes = new ol.source.Vector({
-                       format: new ol.format.GeoJSON(),
-                       url: function (extent) {
-                           return geoserverConfig.host + '/geoserver/sigFidoc/ows?service=WFS' +
-                           '&version=1.0.0&request=GetFeature&typeName=sigFidoc1:vw_frentes_salida2' +
-                           '&outputFormat=application%2Fjson&CQL_FILTER=obr_clv_int=' + obr_clv_int_in;
-                       }
-                   });
+                    RelacionarFrentes(obr_clv_int_in + ',' + fecha_hoy + ',');
+                    var oid = $("#bodegadatos").data("oid_entrada");
 
-                   var vSourcePredios = new ol.source.Vector({
-                       format: new ol.format.GeoJSON(),
-                       url: function (extent) {
-                           return geoserverConfig.host + '/geoserver/sigFidoc/ows?service=WFS' +
-                           '&version=1.0.0&request=GetFeature&typeName=sigFidoc:vw_predios_frentes' +
-                           '&outputFormat=application%2Fjson&CQL_FILTER=obr_clv_int=' + obr_clv_int_in;
-                       }
-                   });
+                    RelacionarAsambleas(',,,' + oid + ',');
 
-                   var vSourcePredios_x_oid = new ol.source.Vector({
-                       format: new ol.format.GeoJSON(),
-                       url: function (extent) {
-                           return geoserverConfig.host + '/geoserver/sigFidoc/ows?service=WFS' +
-                           '&version=1.0.0&request=GetFeature&typeName=sigFidoc:vw_predios_x_oid' +
-                           '&outputFormat=application%2Fjson&CQL_FILTER=oid=' + oid;
-                       }
-                   });
+                    RelacionarContratosObra(obr_clv_int_in + ',');
 
-                 
-                   var vSourceObra = new ol.source.Vector({
-                       format: new ol.format.GeoJSON(),
-                       url: function (extent) {
-                           return geoserverConfig.host + '/geoserver/sigFidoc/ows?service=WFS&' +
+                    var vSourceFrentes = new ol.source.Vector({
+                        format: new ol.format.GeoJSON(),
+                        url: function (extent) {
+                            return geoserverConfig.host + '/geoserver/sigFidoc/ows?service=WFS' +
+                                '&version=1.0.0&request=GetFeature&typeName=sigFidoc1:vw_frentes_salida2' +
+                                '&outputFormat=application%2Fjson&CQL_FILTER=obr_clv_int=' + obr_clv_int_in;
+                        }
+                    });
+
+                    var vSourcePredios = new ol.source.Vector({
+                        format: new ol.format.GeoJSON(),
+                        url: function (extent) {
+                            return geoserverConfig.host + '/geoserver/sigFidoc/ows?service=WFS' +
+                                '&version=1.0.0&request=GetFeature&typeName=sigFidoc:vw_predios_frentes' +
+                                '&outputFormat=application%2Fjson&CQL_FILTER=obr_clv_int=' + obr_clv_int_in;
+                        }
+                    });
+
+                    var vSourcePredios_x_oid = new ol.source.Vector({
+                        format: new ol.format.GeoJSON(),
+                        url: function (extent) {
+                            return geoserverConfig.host + '/geoserver/sigFidoc/ows?service=WFS' +
+                                '&version=1.0.0&request=GetFeature&typeName=sigFidoc:vw_predios_x_oid' +
+                                '&outputFormat=application%2Fjson&CQL_FILTER=oid=' + oid;
+                        }
+                    });
+
+
+                    var vSourceObra = new ol.source.Vector({
+                        format: new ol.format.GeoJSON(),
+                        url: function (extent) {
+                            return geoserverConfig.host + '/geoserver/sigFidoc/ows?service=WFS&' +
                                 'version=1.0.0&request=GetFeature&typeName=sigFidoc:obra_geo&' +
                                 'outputFormat=application%2Fjson&CQL_FILTER=oid=' + oid;
-                       }
+                        }
 
-                   });
+                    });
 
-                                   /*capa vectorial de factibilidades se configuró el propio estilo*/
-                   var vectorObra = new ol.layer.Vector({
-                       source: vSourceObra,
-                       style: new ol.style.Style({
-                           stroke: new ol.style.Stroke({
-                               color: 'red',
-                               width: 2
-                           }),
-                           fill: new ol.style.Fill({
-                               color: '#E6A1AC'
-                           })
-                       })
-                   });
-                           
-                  var vectorPredios = new ol.layer.Vector({
-                       source: vSourcePredios,
-                       style: styleFunction
-                  });
+                    /*capa vectorial de factibilidades se configuró el propio estilo*/
+                    var vectorObra = new ol.layer.Vector({
+                        source: vSourceObra,
+                        style: new ol.style.Style({
+                            stroke: new ol.style.Stroke({
+                                color: 'red',
+                                width: 2
+                            }),
+                            fill: new ol.style.Fill({
+                                color: '#E6A1AC'
+                            })
+                        })
+                    });
 
-                  var vectorPredios_X_oid = new ol.layer.Vector({
-                      source: vSourcePredios_x_oid,
-                      style: new ol.style.Style({
-                          stroke: new ol.style.Stroke({
-                              color: 'blue',
-                              width: 1
-                          }),
-                          fill: new ol.style.Fill({
-                              color: '#C1E3F4'
-                          }),
-                      })
-                  });
+                    var vectorPredios = new ol.layer.Vector({
+                        source: vSourcePredios,
+                        style: styleFunction
+                    });
 
-                  
-
-
-                   var vectorFrentes = new ol.layer.Vector({
-                       source: vSourceFrentes,
-                       style: styleFunction
-                   });
+                    var vectorPredios_X_oid = new ol.layer.Vector({
+                        source: vSourcePredios_x_oid,
+                        style: new ol.style.Style({
+                            stroke: new ol.style.Stroke({
+                                color: 'blue',
+                                width: 1
+                            }),
+                            fill: new ol.style.Fill({
+                                color: '#C1E3F4'
+                            }),
+                        })
+                    });
 
 
 
-                   /*Imagen del mapa de google*/
-                   var raster = new ol.layer.Tile({
-                       source: new ol.source.OSM()
-                   });
 
-
-                   /* Se ejecuta en el lugar 1 */
-                   var map = new ol.Map({
-                       /*layers: [raster, vectorObra, vectorPred, vectorPredPosibles],*/
-                       /*layers: [raster, vectorObra, vectorFrentes],*/
-                       layers: [raster, vectorObra, vectorPredios_X_oid, vectorPredios, vectorFrentes],
-                       target: document.getElementById('map'),
-                       overlays: [overlay],
-                       view: new ol.View({
-                           center: [-11319096.234, 2406669.952],
-                           maxzoom: 23,
-                           zoom: 19.2
-                       })
-                   });
-
-                 
-
-                 /*  vectorPrediosFrentes.getSource().on('change', function (evt) {
-                       var source = evt.target;
-                       if (source.getState() === 'ready') {
-                           numPredIntersect = source.getFeatures().length;
-                           if (numPredIntersect) {
-                               map.addLayer(vectorFrentes);
-                               map.updateSize();
-                           }
-                           else {
-                               alert("No existen predios que se intersecten,favor de dar de alta predios");
-                           }
-                           $('#map').css('cursor', 'default');
-                       }
-                   });*/
-
-
-                  vSourceObra.on('addfeature', function (evt) {
-                      if (vSourceObra.getState() == 'ready') {
-                                var feature = evt.feature;
-                               var coords = feature.getGeometry().getCoordinates();
-                               var coord = feature.getGeometry().getExtent();
-                               centro = ol.extent.getCenter(coord);
-                               x = centro[0];
-                               y = centro[1];
-                               map.getView().setCenter(centro);
-                               map.getView().setZoom(16);
-                       }
-                  });
+                    var vectorFrentes = new ol.layer.Vector({
+                        source: vSourceFrentes,
+                        style: styleFunction
+                    });
 
 
 
-                  closer.onclick = function () {
-                      overlay.setPosition(undefined);
-                      closer.blur();
-                      return false;
-                  };
+                    /*Imagen del mapa de google*/
+                    var raster = new ol.layer.Tile({
+                        source: new ol.source.OSM()
+                    });
 
 
-                   map.on('click', function (evt) {
-                      var geompred; //Geometría del predio
-                      var pid; //Id del predio     
-                      var coopid_edicion;
+                    /* Se ejecuta en el lugar 1 */
+                    var map = new ol.Map({
+                        /*layers: [raster, vectorObra, vectorPred, vectorPredPosibles],*/
+                        /*layers: [raster, vectorObra, vectorFrentes],*/
+                        layers: [raster, vectorObra, vectorPredios_X_oid, vectorPredios, vectorFrentes],
+                        target: document.getElementById('map'),
+                        overlays: [overlay],
+                        view: new ol.View({
+                            center: [-11319096.234, 2406669.952],
+                            maxzoom: 23,
+                            zoom: 19.2
+                        })
+                    });
 
-                      var geomfrente; //Geometria del frente
-                      allFeaturesAtPixel = [];
-                      map.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
-                          geomfrente = evt.coordinate;
-                          allFeaturesAtPixel.push(feature);
-                      });
-                      if (allFeaturesAtPixel.length > 0) { //Si se encuentra features en el pixel clicado                    
-                          var i = 0;
-                          feature = allFeaturesAtPixel[i].id_.split(".");
 
-                          if (feature[0]!='obra_geo') {
-                              pid = allFeaturesAtPixel[i].get('pid');
-                              no_oficial = allFeaturesAtPixel[i].get('nooficial');
-                              mzna = allFeaturesAtPixel[i].get('mzna');
-                              lote = allFeaturesAtPixel[i].get('lote');
-                              ctapredial = allFeaturesAtPixel[i].get('ctapredial');
 
-                              var cuerpo_predio = '<tr><td>' + $.trim(pid) + '</td><td>' + $.trim(no_oficial) + '</td><td>' + $.trim(ctapredial) + '</td><td>' + $.trim(lote) + '</td><td>' + $.trim(mzna) + '</td></tr>'
-                              var encabezado_predio = '<table class="tabla_pop_up"><tr><th>pid</th><th>NoOfic</th><th>CtaPred</th><th>Lote</th><th>Mzna</th></tr>';
-                              var encabezado_frente = '<tr><th>fid</th><th>COOP</th><th colspan="2">NomCoop</th><th>MtsFte</th></tr>'
-                              var cuerpo_frente = '';
-
-                              for (i = 0; i < allFeaturesAtPixel.length; i++) {
-                                  feature = allFeaturesAtPixel[i].id_.split(".");
-                                  if (feature[0] == 'vw_predios_frentes') {
-                                      fid = allFeaturesAtPixel[i].get('fid');
-                                      coopid = allFeaturesAtPixel[i].get('coopid');
-                                      obra_sifidoc = allFeaturesAtPixel[i].get('obra_sifidoc');
-                                      nom_ficha = allFeaturesAtPixel[i].get('mnomficha');
-                                      mts_frente = allFeaturesAtPixel[i].get('mts_frente');
-                                      cuerpo_frente = cuerpo_frente + '<tr><td>' + $.trim(fid) + '</td><td>' + $.trim(obra_sifidoc) + $.trim(coopid) + '</td><td colspan="2">' + $.trim(nom_ficha) + '</td><td>' + $.trim(mts_frente) + '</td></tr>'
-                                      
-                                  }
-                                      
+                    /*  vectorPrediosFrentes.getSource().on('change', function (evt) {
+                          var source = evt.target;
+                          if (source.getState() === 'ready') {
+                              numPredIntersect = source.getFeatures().length;
+                              if (numPredIntersect) {
+                                  map.addLayer(vectorFrentes);
+                                  map.updateSize();
                               }
-                            content.innerHTML = encabezado_predio + cuerpo_predio + encabezado_frente + cuerpo_frente + '</table>';
-                            overlay.setPosition(geomfrente);
-                          } 
-                          
-                      } else {
-                          overlay.setPosition(undefined);
-                          closer.blur();
-                          return false;
-                      }
-                         
-                   });
+                              else {
+                                  alert("No existen predios que se intersecten,favor de dar de alta predios");
+                              }
+                              $('#map').css('cursor', 'default');
+                          }
+                      });*/
+
+
+                    vSourceObra.on('addfeature', function (evt) {
+                        if (vSourceObra.getState() == 'ready') {
+                            var feature = evt.feature;
+                            var coords = feature.getGeometry().getCoordinates();
+                            var coord = feature.getGeometry().getExtent();
+                            centro = ol.extent.getCenter(coord);
+                            x = centro[0];
+                            y = centro[1];
+                            map.getView().setCenter(centro);
+                            map.getView().setZoom(16);
+                        }
+                    });
+
+
+
+                    closer.onclick = function () {
+                        overlay.setPosition(undefined);
+                        closer.blur();
+                        return false;
+                    };
+
+
+                    map.on('click', function (evt) {
+                        var geompred; //Geometría del predio
+                        var pid; //Id del predio     
+                        var coopid_edicion;
+
+                        var geomfrente; //Geometria del frente
+                        allFeaturesAtPixel = [];
+                        map.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
+                            geomfrente = evt.coordinate;
+                            allFeaturesAtPixel.push(feature);
+                        });
+                        if (allFeaturesAtPixel.length > 0) { //Si se encuentra features en el pixel clicado                    
+                            var i = 0;
+                            feature = allFeaturesAtPixel[i].id_.split(".");
+
+                            if (feature[0] != 'obra_geo') {
+                                pid = allFeaturesAtPixel[i].get('pid');
+                                no_oficial = allFeaturesAtPixel[i].get('nooficial');
+                                mzna = allFeaturesAtPixel[i].get('mzna');
+                                lote = allFeaturesAtPixel[i].get('lote');
+                                ctapredial = allFeaturesAtPixel[i].get('ctapredial');
+
+                                var cuerpo_predio = '<tr><td>' + $.trim(pid) + '</td><td>' + $.trim(no_oficial) + '</td><td>' + $.trim(ctapredial) + '</td><td>' + $.trim(lote) + '</td><td>' + $.trim(mzna) + '</td></tr>'
+                                var encabezado_predio = '<table class="tabla_pop_up"><tr><th>pid</th><th>NoOfic</th><th>CtaPred</th><th>Lote</th><th>Mzna</th></tr>';
+                                var encabezado_frente = '<tr><th>fid</th><th>COOP</th><th colspan="2">NomCoop</th><th>MtsFte</th></tr>'
+                                var cuerpo_frente = '';
+
+                                for (i = 0; i < allFeaturesAtPixel.length; i++) {
+                                    feature = allFeaturesAtPixel[i].id_.split(".");
+                                    if (feature[0] == 'vw_predios_frentes') {
+                                        fid = allFeaturesAtPixel[i].get('fid');
+                                        coopid = allFeaturesAtPixel[i].get('coopid');
+                                        obra_sifidoc = allFeaturesAtPixel[i].get('obra_sifidoc');
+                                        nom_ficha = allFeaturesAtPixel[i].get('mnomficha');
+                                        mts_frente = allFeaturesAtPixel[i].get('mts_frente');
+                                        cuerpo_frente = cuerpo_frente + '<tr><td>' + $.trim(fid) + '</td><td>' + $.trim(obra_sifidoc) + $.trim(coopid) + '</td><td colspan="2">' + $.trim(nom_ficha) + '</td><td>' + $.trim(mts_frente) + '</td></tr>'
+
+                                    }
+
+                                }
+                                content.innerHTML = encabezado_predio + cuerpo_predio + encabezado_frente + cuerpo_frente + '</table>';
+                                overlay.setPosition(geomfrente);
+                            }
+
+                        } else {
+                            overlay.setPosition(undefined);
+                            closer.blur();
+                            return false;
+                        }
+
+                    });
 
 
 
                 }).fail(function (response) {
-                        alert("Error, no fue posible guardar cooperador en BD de ACCESS");
-             });
+                    alert("Error, no fue posible guardar cooperador en BD de ACCESS");
+                });
 
 
-            
+
 
         });
-        
+
 
         function ObtenerDatosObra(obr_clv_int_in, fecha_hoy) {
 
-                /*var sentecia_inserccion_pagos_coop = 'insert into pagos_temp (elemento,mov_obra_sifidoc,mov_coop_sifidoc,fec_mov_as400,usu_fidoc,monto_abono_sifidoc,fec_aplic_mov,clave_sifidoc,fid,uscre,folio_pago,coo_clv2,obr_clv_int,mov_activo) values (';*/
-                var sentecia_inserccion_pagos_coop = '';
-                var sentencia = '';
+            /*var sentecia_inserccion_pagos_coop = 'insert into pagos_temp (elemento,mov_obra_sifidoc,mov_coop_sifidoc,fec_mov_as400,usu_fidoc,monto_abono_sifidoc,fec_aplic_mov,clave_sifidoc,fid,uscre,folio_pago,coo_clv2,obr_clv_int,mov_activo) values (';*/
+            var sentecia_inserccion_pagos_coop = '';
+            var sentencia = '';
 
 
-                var date = new Date();
-                var oid_entrada = '';
-                obr_fecha_hoy = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
+            var date = new Date();
+            var oid_entrada = '';
+            obr_fecha_hoy = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
 
-               /* var objObra_q = {
-                    "num_coops":0, 
-                    "total_metros_obra":0,
-				    "obr_costo":0,
-				    "oid":0,
-				    "calle":0,
-				    "colonia":0,
-				    "tramo":0,
-				    "obr_clv_int":0,
-				    "obr_clv":'',
-				    "obr_opergob":'',
-				    "obr_prog2":0,	
-				    "nomprog":'',
-				    "descrip_tipo_obr":'',
-				    "obr_status":0,
-				    "cesatus":'',
-				    "obr_fecinip":'',
-				    "obr_fecinip":'',	  
-				    "obr_fec_ini_proc":'',		  
-				    "obr_fec_ini_cob":'',	  
-				    "plazo_rec":0,
-				    "num_meses_a_fecact":0,
-				    "incremento_frente":0,
-				    "capital_inicial_frente_sin_inc":0,
-				    "capital_inicial_frente_con_inc":0,		  
-				    "capital_pagado_frente":0,
-				    "descto_capital_frente":0,
-				    "ayudas_sociales_frente":0,
-				    "total_recargos_frente":0, 
-				    "cargos_pagados_frente":0,
-				    "descto_recargos_frente":0,
-				    "saldo_capital_frente":0,
-				    "saldo_recargos_frente":0,
-				    "saldo_gral_frente":0,		  
-				    "saldo_sin":0,
-				    "saldo_con":0,
-				    "avance_pago_con_inc":0,
-				    "avance_pago_sin_inc":0
-                  }*/
+            /* var objObra_q = {
+                 "num_coops":0, 
+                 "total_metros_obra":0,
+                 "obr_costo":0,
+                 "oid":0,
+                 "calle":0,
+                 "colonia":0,
+                 "tramo":0,
+                 "obr_clv_int":0,
+                 "obr_clv":'',
+                 "obr_opergob":'',
+                 "obr_prog2":0,	
+                 "nomprog":'',
+                 "descrip_tipo_obr":'',
+                 "obr_status":0,
+                 "cesatus":'',
+                 "obr_fecinip":'',
+                 "obr_fecinip":'',	  
+                 "obr_fec_ini_proc":'',		  
+                 "obr_fec_ini_cob":'',	  
+                 "plazo_rec":0,
+                 "num_meses_a_fecact":0,
+                 "incremento_frente":0,
+                 "capital_inicial_frente_sin_inc":0,
+                 "capital_inicial_frente_con_inc":0,		  
+                 "capital_pagado_frente":0,
+                 "descto_capital_frente":0,
+                 "ayudas_sociales_frente":0,
+                 "total_recargos_frente":0, 
+                 "cargos_pagados_frente":0,
+                 "descto_recargos_frente":0,
+                 "saldo_capital_frente":0,
+                 "saldo_recargos_frente":0,
+                 "saldo_gral_frente":0,		  
+                 "saldo_sin":0,
+                 "saldo_con":0,
+                 "avance_pago_con_inc":0,
+                 "avance_pago_sin_inc":0
+               }*/
 
-          return  $.ajax({
-                    type: "POST",
-                    dataType: "json",
-                    contentType: "application/json",
-                    url: "../../WebServices/WebServiceObras.asmx/GetObra_lim_q",
-                    data: "{'obr_clv_int':'" + obr_clv_int_in + "','fecha_lim':'" + fecha_hoy + "'}",
-                    success: function (data) {
-                        var elementos = 0;
-                        if (data.d != '<NewDataSet />') { /*Existen pagos*/
-                            $(data.d).find("obra_lim_q").each(function () {
-                                
-                                $("#lblobra_s").html($(this).find("obr_clv_out2").text());
-                                $("#lblobr_clv_int").html($(this).find("obr_clv_int_out2").text());
-                                $("#lblcalle").html($(this).find("calle_out2").text());
-                                $("#lblcolonia").html($(this).find("colonia_out2").text());
-                                $("#lbltramo").html($(this).find("tramo_out2").text());
-                                $("#lblTipoObra").html($(this).find("descrip_tipo_obr_out2").text());
-                                $("#lblestatus_obra").html($(this).find("cesatus_out2").text());
-                                $("#lblprograma").html($(this).find("nomprog_out2").text());
-                                $("#lblfecinipag").html($(this).find("obr_fecinip_out2").text());
-                                $("#lblplazo_rec").html($(this).find("plazo_rec_out2").text());
-                                $("#lblfecfinpag").html($(this).find("obr_fecvenp_out2").text());
-                                $("#lblnum_meses_rec").html($(this).find("num_meses_a_fecact_out2").text());
-                                $("#lblfeciniproc").html($(this).find("obr_fec_ini_proc_out2").text());                                
-                                $("#lblfecinicob").html($(this).find("obr_fec_ini_cob_out2").text());
-                                
+            return $.ajax({
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                url: "../../WebServices/WebServiceObras.asmx/GetObra_lim_q",
+                data: "{'obr_clv_int':'" + obr_clv_int_in + "','fecha_lim':'" + fecha_hoy + "'}",
+                success: function (data) {
+                    var elementos = 0;
+                    if (data.d != '<NewDataSet />') { /*Existen pagos*/
+                        $(data.d).find("obra_lim_q").each(function () {
 
-                                var total_capital = 0;
-                                var total_metros = 0;
-                                var totoal_pagos = 0;
-                                var total_incremento = 0;
-                                var total_decremento = 0;
-                                var total_ayudas_soc = 0;
-                                var total_recargos = 0;                               
-                                var total_cargos_pagados = 0;
-                                var total_descto_recargos = 0
-                                var total_saldo = 0;
-                                var costo_total_aportaciones = 0;
-                                var avance_obra_con_inc = 0;
-                                var avance_obra_sin_inc = 0;
-
-                                $("#bodegadatos").data("oid_entrada", $(this).find("oid_out2").text());
-
-                                total_metros = parseFloat($(this).find("total_metros_obra_out2").text());
-                                total_capital = parseFloat($(this).find("capital_inicial_frente_sin_inc_out2").text());
-                                total_pagos = parseFloat($(this).find("capital_pagado_frente_out2").text());
-                                total_incremento = parseFloat($(this).find("incremento_frente_out2").text());
-                                total_decremento = parseFloat($(this).find("descto_capital_frente_out2").text());
-                                total_ayudas_soc = parseFloat($(this).find("ayudas_sociales_frente_out2").text());
-                                total_cargos = parseFloat($(this).find("total_recargos_frente_out2").text());
-                                total_cargos_pagados = parseFloat($(this).find("cargos_pagados_frente_out2").text());
-                                total_descto_recargos = parseFloat($(this).find("descto_recargos_frente_out2").text());
-                                total_saldo = parseFloat($(this).find("saldo_con_out2").text());
-                                costo_total_aportaciones = total_capital + total_incremento - total_decremento;
-
-                                avance_obra_con_inc = parseFloat($(this).find("avance_pago_con_inc_out2").text());
-                                avance_obra_sin_inc = parseFloat($(this).find("avance_pago_sin_inc_out2").text());
-                                
-                                $("#lblcosto_total_aporta").html(FormatoMoneda(costo_total_aportaciones.toFixed(2).toString()));
-                                $("#lblavance_con_inc").html(avance_obra_con_inc.toFixed(2).toString() + '%');
-                                $("#lblavance_sin_inc").html(avance_obra_sin_inc.toFixed(2).toString() + '%');
+                            $("#lblobra_s").html($(this).find("obr_clv_out2").text());
+                            $("#lblobr_clv_int").html($(this).find("obr_clv_int_out2").text());
+                            $("#lblcalle").html($(this).find("calle_out2").text());
+                            $("#lblcolonia").html($(this).find("colonia_out2").text());
+                            $("#lbltramo").html($(this).find("tramo_out2").text());
+                            $("#lblTipoObra").html($(this).find("descrip_tipo_obr_out2").text());
+                            $("#lblestatus_obra").html($(this).find("cesatus_out2").text());
+                            $("#lblprograma").html($(this).find("nomprog_out2").text());
+                            $("#lblfecinipag").html($(this).find("obr_fecinip_out2").text());
+                            $("#lblplazo_rec").html($(this).find("plazo_rec_out2").text());
+                            $("#lblfecfinpag").html($(this).find("obr_fecvenp_out2").text());
+                            $("#lblnum_meses_rec").html($(this).find("num_meses_a_fecact_out2").text());
+                            $("#lblfeciniproc").html($(this).find("obr_fec_ini_proc_out2").text());
+                            $("#lblfecinicob").html($(this).find("obr_fec_ini_cob_out2").text());
 
 
-                                $("#lbltotal_coops").html($(this).find("num_coops_out2").text());
-                                $("#lbltotal_mts").html(total_metros.toFixed(2).toString());
-                                $("#lbltotal_capital").html(FormatoMoneda(total_capital.toFixed(2).toString()));
-                                $("#lbltotal_pagos").html(FormatoMoneda(total_pagos.toFixed(2).toString()));
-                                $("#lbltotal_inc").html(FormatoMoneda(total_incremento.toFixed(2).toString()));
-                                $("#lbltotal_dec").html(FormatoMoneda(total_decremento.toFixed(2).toString()));
-                                $("#lblayuda_soc").html(FormatoMoneda(total_ayudas_soc.toFixed(2).toString()));                                
-                                $("#lbltotal_cargos").html(FormatoMoneda(total_cargos.toFixed(2).toString()));
-                                $("#lbltotal_rec_pag").html(FormatoMoneda(total_cargos_pagados.toFixed(2).toString()));
-                                $("#lbltotal_descto_rec").html(FormatoMoneda(total_descto_recargos.toFixed(2).toString()));                                
-                                $("#lbltotal_saldo").html(FormatoMoneda(total_saldo.toFixed(2).toString()));
+                            var total_capital = 0;
+                            var total_metros = 0;
+                            var totoal_pagos = 0;
+                            var total_incremento = 0;
+                            var total_decremento = 0;
+                            var total_ayudas_soc = 0;
+                            var total_recargos = 0;
+                            var total_cargos_pagados = 0;
+                            var total_descto_recargos = 0
+                            var total_saldo = 0;
+                            var costo_total_aportaciones = 0;
+                            var avance_obra_con_inc = 0;
+                            var avance_obra_sin_inc = 0;
 
-                                
-                            });                           
+                            $("#bodegadatos").data("oid_entrada", $(this).find("oid_out2").text());
 
-                        }
-                        else {
-                            alert('No existe obra registrada');
-                        }
-                    },
-                    error: function (xhr) {
-                        console.log(xhr.responseText);
+                            total_metros = parseFloat($(this).find("total_metros_obra_out2").text());
+                            total_capital = parseFloat($(this).find("capital_inicial_frente_sin_inc_out2").text());
+                            total_pagos = parseFloat($(this).find("capital_pagado_frente_out2").text());
+                            total_incremento = parseFloat($(this).find("incremento_frente_out2").text());
+                            total_decremento = parseFloat($(this).find("descto_capital_frente_out2").text());
+                            total_ayudas_soc = parseFloat($(this).find("ayudas_sociales_frente_out2").text());
+                            total_cargos = parseFloat($(this).find("total_recargos_frente_out2").text());
+                            total_cargos_pagados = parseFloat($(this).find("cargos_pagados_frente_out2").text());
+                            total_descto_recargos = parseFloat($(this).find("descto_recargos_frente_out2").text());
+                            total_saldo = parseFloat($(this).find("saldo_con_out2").text());
+                            costo_total_aportaciones = total_capital + total_incremento - total_decremento;
+
+                            avance_obra_con_inc = parseFloat($(this).find("avance_pago_con_inc_out2").text());
+                            avance_obra_sin_inc = parseFloat($(this).find("avance_pago_sin_inc_out2").text());
+
+                            $("#lblcosto_total_aporta").html(FormatoMoneda(costo_total_aportaciones.toFixed(2).toString()));
+                            $("#lblavance_con_inc").html(avance_obra_con_inc.toFixed(2).toString() + '%');
+                            $("#lblavance_sin_inc").html(avance_obra_sin_inc.toFixed(2).toString() + '%');
+
+
+                            $("#lbltotal_coops").html($(this).find("num_coops_out2").text());
+                            $("#lbltotal_mts").html(total_metros.toFixed(2).toString());
+                            $("#lbltotal_capital").html(FormatoMoneda(total_capital.toFixed(2).toString()));
+                            $("#lbltotal_pagos").html(FormatoMoneda(total_pagos.toFixed(2).toString()));
+                            $("#lbltotal_inc").html(FormatoMoneda(total_incremento.toFixed(2).toString()));
+                            $("#lbltotal_dec").html(FormatoMoneda(total_decremento.toFixed(2).toString()));
+                            $("#lblayuda_soc").html(FormatoMoneda(total_ayudas_soc.toFixed(2).toString()));
+                            $("#lbltotal_cargos").html(FormatoMoneda(total_cargos.toFixed(2).toString()));
+                            $("#lbltotal_rec_pag").html(FormatoMoneda(total_cargos_pagados.toFixed(2).toString()));
+                            $("#lbltotal_descto_rec").html(FormatoMoneda(total_descto_recargos.toFixed(2).toString()));
+                            $("#lbltotal_saldo").html(FormatoMoneda(total_saldo.toFixed(2).toString()));
+
+
+                        });
+
                     }
-                });
-      
+                    else {
+                        alert('No existe obra registrada');
+                    }
+                },
+                error: function (xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+
 
         }
 
         function RelacionarFrentes(filtro) {
-         
+
             var estatus_obra_seleccionado;
 
 
-          /*var bienvusuario = $("#lblUsuario").html();    /*Obtiene el usuario que realiza la transacción*/
-          /*var arrusuario = bienvusuario.split(":");      /*Se recupera el id de factibilidad para que sea parte del nombre del archivo, lo regresa el WebServiceFact como respuesta*/
-          /*  var idusu = arrusuario[2];*/
+            /*var bienvusuario = $("#lblUsuario").html();    /*Obtiene el usuario que realiza la transacción*/
+            /*var arrusuario = bienvusuario.split(":");      /*Se recupera el id de factibilidad para que sea parte del nombre del archivo, lo regresa el WebServiceFact como respuesta*/
+            /*  var idusu = arrusuario[2];*/
 
             if ($("#grid")[0].grid) {
                 $.jgrid.gridUnload("#grid");
@@ -933,232 +941,232 @@
             }
 
             $("#grid").jqGrid(
-             {
-                 datatype: function () {
-                     $.ajax(
-                       {
-                           url: "../../WebServices/WebServiceFrente.asmx/GetObraAnalitico", //PageMethod
-                           data: "{'pPageSize':'" + $('#grid').getGridParam("rowNum") +
-                           "','pCurrentPage':'" + $('#grid').getGridParam("page") +
-                           "','pSortColumn':'" + $('#grid').getGridParam("sortname") +
-                           "','pSortOrder':'" + $('#grid').getGridParam("sortorder") +
-                           "','pFiltro':'" + filtro + "'}", //PageMethod Parametros de entrada
-                           dataType: "json",
-                           type: "post",
-                           contentType: "application/json; charset=utf-8",
-                           complete: function (jsondata, stat) {
-                               if (stat == "success") {
-                                   jQuery("#grid")[0].addJSONData(JSON.parse(jsondata.responseText).d);
-                                   var objeto = JSON.parse(jsondata.responseText).d;
-                                   var regs = objeto.RecordCount;
-                                   if (regs == 0) {
-                                       alert('No se encontraron registros...');
-                                   } 
-                               }
-                               else
-                                   alert(JSON.parse(jsondata.responseText).Message);
-                           }
-                       });
-                 },
-                 jsonReader: //Set the jsonReader to the JQGridJSonResponse squema to bind the data.
-                 {
-                     root: "Items",
-                     page: "CurrentPage",
-                     total: "PageCount",
-                     records: "RecordCount",
-                     repeatitems: true,
-                     cell: "row",
-                     id: "obr_clv_int"
-                 },
-                 colModel: [
-                  {
-                       index: 'fid_out', width: 80, align: 'center',
-                       name: 'fid'
-                  },
-                  {
-                      index: 'coop_s_out', width: 80, align: 'center',
-                      name: 'Coop'
-                  },                  
-                  {
-                      index: 'mts_frente_out', width: 80, align: 'center',
-                      name: 'Mts'
-                  },
-                  {
-                      index: 'obr_cost_out', width: 300, align: 'center',
-                      name: 'CostoMto', hidden: true
-                  },
-                  {
-                      index: 'oid_out', width: 300, align: 'center',
-                      name: 'oid', hidden: true
-                  },
-                  {
-                      index: 'calle_out', width: 500, align: 'Center',
-                      name: 'Calle', hidden: true
-                  },
-                  {
-                      index: 'colonia_out', width: 100, align: 'center',
-                      name: 'Colonia', hidden: true
-                  },
-                  {
-                      index: 'tramo_out', width: 200, align: 'center',
-                      name: 'Tramo', hidden: true
-                  },
-                  {
-                      index: 'obr_clv_int_out', width: 300, align: 'center',
-                      name: 'ObrClvInt', hidden: true
-                  },
-                  {
-                      index: 'obr_clv_out', width: 160, align: 'center',
-                      name: 'Obra_s', hidden: true
-                  },
-                  {
-                      index: 'obr_opergob_out', width: 200, align: 'center',
-                      name: 'ObrOpergob', hidden: true
-                  },
-                  {
-                      index: 'obr_prog2_out', width: 200, align: 'center',
-                      name: 'idProg', hidden: true
-                  },
-                  {
-                      index: 'nomprog_out', width: 160, align: 'center',
-                      name: 'Programa', hidden: true
-                  },
-                  {
-                      index: 'descrip_tipo_obr_out', width: 200, align: 'center',
-                      name: 'TipoObra', hidden: true
-                  },
-                  {
-                      index: 'obr_status_out', width: 200, align: 'center',
-                      name: 'idEstatusObra', hidden: true
-                  },
-                  {
-                      index: 'cestatus_out', width: 200, align: 'center',
-                      name: 'Estatus', hidden: true
-                  },
-                  {
-                      index: 'obr_fecinip_out', width: 160, align: 'center',
-                      name: 'FecIniPag', hidden: true
-                  },
-                  {
-                      index: 'obr_fecvenp_out', width: 160, align: 'center',
-                      name: 'FecVenP', hidden: true
-                  },
-                  {
-                      index: 'obr_fec_ini_proc_out', width: 80, align: 'center',
-                      name: 'FecIniProc', hidden: true
-                  },                  
-                  {
-                      index: 'obr_fec_ini_cob_out', width: 200, align: 'center',
-                      name: 'FecIniCob', hidden: true
-                  },
-                  {
-                      index: 'plazo_rec_out', width: 200, align: 'center',
-                      name: 'Plazo', hidden: true
-                  },
-                  {
-                      index: 'num_meses_a_fecact_out', width: 160, align: 'center',
-                      name: 'NumMeses_a_Hoy', hidden: true
-                  },
-                  {
-                      index: 'capital_inicial_frente_sin_inc_out', width: 150, align: 'center',
-                      name: 'CAPITAL', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
-                  },
-                  {
-                      index: 'incremento_frente_out', width: 150, align: 'center',
-                      name: 'INCREME.', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
-                  },
-                  {
-                      index: 'capital_inicial_frente_con_inc_out', width: 150, align: 'center',
-                      name: 'CapitalConInc', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }, hidden: true
-                  },                  
-                  {
-                      index: 'descto_capital_frente_out', width: 150, align: 'center',
-                      name: 'DECREM.', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
-                  },
-                  {
-                      index: 'ayudas_sociales_frente_out', width: 150, align: 'Center',
-                      name: 'AYUDAS_SOC', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
-                  },
-                  {
-                      index: 'capital_pagado_frente_out', width: 150, align: 'center',
-                      name: 'PAGOS', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
-                  },
-                  {
-                      index: 'total_recargos_frente_out', width: 150, align: 'Center',
-                      name: 'RECARGOS', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
-                  },
-                  {
-                      index: 'descto_recargos_frente_out', width: 150, align: 'Center',
-                      name: 'DESCTO.REC.', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
-                  },
-                  {
-                      index: 'cargos_pagados_frente_out', width: 150, align: 'Center',
-                      name: 'REC.PAGADO', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
-                  },                  
-                  {
-                      index: 'saldo_capital_frente_out', width: 150, align: 'center',
-                      name: 'SaldoCapital', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }, hidden: true
-                  },
-                  {
-                      index: 'saldo_recargos_frente_out', width: 150, align: 'center',
-                      name: 'SaldoRecargos', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }, hidden: true
-                  },
-                  {
-                      index: 'saldo_gral_frente_out', width: 150, align: 'center',
-                      name: 'SaldoGral', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }, hidden: true
-                  },
-                  {
-                      index: 'saldo_sin_out', width: 150, align: 'center',
-                      name: 'SaldoSin', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }, hidden: true
-                  },
-                  {
-                      index: 'saldo_con_out', width: 150, align: 'center',
-                      name: 'SALDO', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
-                  },
-                  {
-                      index: 'avance_pago_con_inc_x_frente_out', width: 150, align: 'center',
-                      name: '%_AVANCE', formatter: "currency", formatoptions: { thousandsSeparator: ',', decimalSeparator: '.', suffix: " %" }
-                  },
-                  {
-                      index: 'avance_pago_sin_inc_x_frente_out', width: 150, align: 'center',
-                      name: 'AvancePagSinInc', formatter: "currency", formatoptions: { thousandsSeparator: ',', decimalSeparator: '.', suffix: " %" }, hidden: true
-                  }],
-                 pager: "#pager", //Pager.                 
-                 loadtext: 'Cargando datos...',
-                 recordtext: "{0} - {1} de {2} elementos",
-                 emptyrecords: 'No hay resultados',
-                 pgtext: 'Pág:{0} de {1}', //Paging input control text format.
-                 rowNum: "10", // PageSize.
-                 rowList: [3, 5, 10], //Variable PageSize DropDownList. 
-                 viewrecords: true, //Show the RecordCount in the pager.
-                 multiselect: false,
-                 sortname: "fid_out", //login SortColumn
-                 sortorder: "asc", //login SortOrder.
-                 /*styleUI: "Bootstrap",*/
-                 width: "1453",
-                 height: "auto",
-                 caption: "FRENTES"
-             }).navGrid('#pager', { edit: false, add: false, search: false, del: false })
-
-               .navButtonAdd('#pager',
+                {
+                    datatype: function () {
+                        $.ajax(
+                            {
+                                url: "../../WebServices/WebServiceFrente.asmx/GetObraAnalitico", //PageMethod
+                                data: "{'pPageSize':'" + $('#grid').getGridParam("rowNum") +
+                                    "','pCurrentPage':'" + $('#grid').getGridParam("page") +
+                                    "','pSortColumn':'" + $('#grid').getGridParam("sortname") +
+                                    "','pSortOrder':'" + $('#grid').getGridParam("sortorder") +
+                                    "','pFiltro':'" + filtro + "'}", //PageMethod Parametros de entrada
+                                dataType: "json",
+                                type: "post",
+                                contentType: "application/json; charset=utf-8",
+                                complete: function (jsondata, stat) {
+                                    if (stat == "success") {
+                                        jQuery("#grid")[0].addJSONData(JSON.parse(jsondata.responseText).d);
+                                        var objeto = JSON.parse(jsondata.responseText).d;
+                                        var regs = objeto.RecordCount;
+                                        if (regs == 0) {
+                                            alert('No se encontraron registros...');
+                                        }
+                                    }
+                                    else
+                                        alert(JSON.parse(jsondata.responseText).Message);
+                                }
+                            });
+                    },
+                    jsonReader: //Set the jsonReader to the JQGridJSonResponse squema to bind the data.
+                    {
+                        root: "Items",
+                        page: "CurrentPage",
+                        total: "PageCount",
+                        records: "RecordCount",
+                        repeatitems: true,
+                        cell: "row",
+                        id: "obr_clv_int"
+                    },
+                    colModel: [
                         {
-                            caption: "AnalitObra",
-                            buttonicon: "ui-icon-document",
-                            onClickButton: function () {
-                                 /*var myGrid = $('#grid');
-                                 var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
-                                 var objObraAnalitico = myGrid.jqGrid('getCell', selectedRowId);*/
-                                 var obr_clv_int = parseInt($("#lblobr_clv_int").html());
-                                 if (obr_clv_int) {
-                                     GenerarReporteObraAnalitico(obr_clv_int);
-                                 }
-                            },
-                            position: "last",
-                            title: "RepObra",
-                            cursor: "pointer"
-                        })
+                            index: 'fid_out', width: 80, align: 'center',
+                            name: 'fid'
+                        },
+                        {
+                            index: 'coop_s_out', width: 80, align: 'center',
+                            name: 'Coop'
+                        },
+                        {
+                            index: 'mts_frente_out', width: 80, align: 'center',
+                            name: 'Mts'
+                        },
+                        {
+                            index: 'obr_cost_out', width: 300, align: 'center',
+                            name: 'CostoMto', hidden: true
+                        },
+                        {
+                            index: 'oid_out', width: 300, align: 'center',
+                            name: 'oid', hidden: true
+                        },
+                        {
+                            index: 'calle_out', width: 500, align: 'Center',
+                            name: 'Calle', hidden: true
+                        },
+                        {
+                            index: 'colonia_out', width: 100, align: 'center',
+                            name: 'Colonia', hidden: true
+                        },
+                        {
+                            index: 'tramo_out', width: 200, align: 'center',
+                            name: 'Tramo', hidden: true
+                        },
+                        {
+                            index: 'obr_clv_int_out', width: 300, align: 'center',
+                            name: 'ObrClvInt', hidden: true
+                        },
+                        {
+                            index: 'obr_clv_out', width: 160, align: 'center',
+                            name: 'Obra_s', hidden: true
+                        },
+                        {
+                            index: 'obr_opergob_out', width: 200, align: 'center',
+                            name: 'ObrOpergob', hidden: true
+                        },
+                        {
+                            index: 'obr_prog2_out', width: 200, align: 'center',
+                            name: 'idProg', hidden: true
+                        },
+                        {
+                            index: 'nomprog_out', width: 160, align: 'center',
+                            name: 'Programa', hidden: true
+                        },
+                        {
+                            index: 'descrip_tipo_obr_out', width: 200, align: 'center',
+                            name: 'TipoObra', hidden: true
+                        },
+                        {
+                            index: 'obr_status_out', width: 200, align: 'center',
+                            name: 'idEstatusObra', hidden: true
+                        },
+                        {
+                            index: 'cestatus_out', width: 200, align: 'center',
+                            name: 'Estatus', hidden: true
+                        },
+                        {
+                            index: 'obr_fecinip_out', width: 160, align: 'center',
+                            name: 'FecIniPag', hidden: true
+                        },
+                        {
+                            index: 'obr_fecvenp_out', width: 160, align: 'center',
+                            name: 'FecVenP', hidden: true
+                        },
+                        {
+                            index: 'obr_fec_ini_proc_out', width: 80, align: 'center',
+                            name: 'FecIniProc', hidden: true
+                        },
+                        {
+                            index: 'obr_fec_ini_cob_out', width: 200, align: 'center',
+                            name: 'FecIniCob', hidden: true
+                        },
+                        {
+                            index: 'plazo_rec_out', width: 200, align: 'center',
+                            name: 'Plazo', hidden: true
+                        },
+                        {
+                            index: 'num_meses_a_fecact_out', width: 160, align: 'center',
+                            name: 'NumMeses_a_Hoy', hidden: true
+                        },
+                        {
+                            index: 'capital_inicial_frente_sin_inc_out', width: 150, align: 'center',
+                            name: 'CAPITAL', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
+                        },
+                        {
+                            index: 'incremento_frente_out', width: 150, align: 'center',
+                            name: 'INCREME.', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
+                        },
+                        {
+                            index: 'capital_inicial_frente_con_inc_out', width: 150, align: 'center',
+                            name: 'CapitalConInc', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }, hidden: true
+                        },
+                        {
+                            index: 'descto_capital_frente_out', width: 150, align: 'center',
+                            name: 'DECREM.', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
+                        },
+                        {
+                            index: 'ayudas_sociales_frente_out', width: 150, align: 'Center',
+                            name: 'AYUDAS_SOC', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
+                        },
+                        {
+                            index: 'capital_pagado_frente_out', width: 150, align: 'center',
+                            name: 'PAGOS', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
+                        },
+                        {
+                            index: 'total_recargos_frente_out', width: 150, align: 'Center',
+                            name: 'RECARGOS', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
+                        },
+                        {
+                            index: 'descto_recargos_frente_out', width: 150, align: 'Center',
+                            name: 'DESCTO.REC.', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
+                        },
+                        {
+                            index: 'cargos_pagados_frente_out', width: 150, align: 'Center',
+                            name: 'REC.PAGADO', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
+                        },
+                        {
+                            index: 'saldo_capital_frente_out', width: 150, align: 'center',
+                            name: 'SaldoCapital', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }, hidden: true
+                        },
+                        {
+                            index: 'saldo_recargos_frente_out', width: 150, align: 'center',
+                            name: 'SaldoRecargos', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }, hidden: true
+                        },
+                        {
+                            index: 'saldo_gral_frente_out', width: 150, align: 'center',
+                            name: 'SaldoGral', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }, hidden: true
+                        },
+                        {
+                            index: 'saldo_sin_out', width: 150, align: 'center',
+                            name: 'SaldoSin', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }, hidden: true
+                        },
+                        {
+                            index: 'saldo_con_out', width: 150, align: 'center',
+                            name: 'SALDO', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
+                        },
+                        {
+                            index: 'avance_pago_con_inc_x_frente_out', width: 150, align: 'center',
+                            name: '%_AVANCE', formatter: "currency", formatoptions: { thousandsSeparator: ',', decimalSeparator: '.', suffix: " %" }
+                        },
+                        {
+                            index: 'avance_pago_sin_inc_x_frente_out', width: 150, align: 'center',
+                            name: 'AvancePagSinInc', formatter: "currency", formatoptions: { thousandsSeparator: ',', decimalSeparator: '.', suffix: " %" }, hidden: true
+                        }],
+                    pager: "#pager", //Pager.                 
+                    loadtext: 'Cargando datos...',
+                    recordtext: "{0} - {1} de {2} elementos",
+                    emptyrecords: 'No hay resultados',
+                    pgtext: 'Pág:{0} de {1}', //Paging input control text format.
+                    rowNum: "10", // PageSize.
+                    rowList: [3, 5, 10], //Variable PageSize DropDownList. 
+                    viewrecords: true, //Show the RecordCount in the pager.
+                    multiselect: false,
+                    sortname: "fid_out", //login SortColumn
+                    sortorder: "asc", //login SortOrder.
+                    /*styleUI: "Bootstrap",*/
+                    width: "1453",
+                    height: "auto",
+                    caption: "FRENTES"
+                }).navGrid('#pager', { edit: false, add: false, search: false, del: false })
 
-            
+                .navButtonAdd('#pager',
+                    {
+                        caption: "AnalitObra",
+                        buttonicon: "ui-icon-document",
+                        onClickButton: function () {
+                            /*var myGrid = $('#grid');
+                            var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                            var objObraAnalitico = myGrid.jqGrid('getCell', selectedRowId);*/
+                            var obr_clv_int = parseInt($("#lblobr_clv_int").html());
+                            if (obr_clv_int) {
+                                GenerarReporteObraAnalitico(obr_clv_int);
+                            }
+                        },
+                        position: "last",
+                        title: "RepObra",
+                        cursor: "pointer"
+                    })
+
+
 
             /* .navButtonAdd('#pager',
                            {
@@ -1214,7 +1222,7 @@
                            });            */
         }
 
-        
+
         function RelacionarAsambleas(filtro) {
 
             if ($("#grid_asambleas")[0].grid) {
@@ -1223,145 +1231,145 @@
             }
 
             $("#grid_asambleas").jqGrid(
-             {
-                 datatype: function () {
-                     $.ajax(
-                       {
-                           url: "../../WebServices/WebServiceAsamblea.asmx/GetAsamblea_Grid", //PageMethod
-                           data: "{'pPageSize':'" + $('#grid_asambleas').getGridParam("rowNum") +
-                           "','pCurrentPage':'" + $('#grid_asambleas').getGridParam("page") +
-                           "','pSortColumn':'" + $('#grid_asambleas').getGridParam("sortname") +
-                           "','pSortOrder':'" + $('#grid_asambleas').getGridParam("sortorder") +
-                           "','filtro':'" + filtro + "'}", //PageMethod Parametros de entrada           
-                           dataType: "json",
-                           type: "post",
-                           contentType: "application/json; charset=utf-8",
-                           complete: function (jsondata, stat) {
-                               if (stat == "success") {
-                                   jQuery("#grid_asambleas")[0].addJSONData(JSON.parse(jsondata.responseText).d);
-                                   var objeto = JSON.parse(jsondata.responseText).d;
-                                   var regs = objeto.RecordCount;
-                                   if (regs == 0) {
-                                       alert('No se encontraron asambleas registradas...');
-                                   }
-                               }
-                               else
-                                   alert(JSON.parse(jsondata.responseText).Message);
-                           }
-                       });
-                 },
-                 jsonReader: //Set the jsonReader to the JQGridJSonResponse squema to bind the data.
-                 {
-                     root: "Items",
-                     page: "CurrentPage",
-                     total: "PageCount",
-                     records: "RecordCount",
-                     repeatitems: true,
-                     cell: "row",
-                     id: "idasamblea"
-                 },
-                 colModel: [
-                                 {
-                                     index: 'idasamblea', width: 50, align: 'Center', name: 'idAsamblea', hidden: true
-                                 },
-                                 {
-                                     index: 'lugar', width: 300, align: 'Center', name: 'Observaciones/Notas Generales'
-                                 },
-                                 {
-                                     index: 'idpromotor', width: 300, align: 'Center', name: 'idPromotor', hidden: true
-                                 },
-                                 {
-                                     index: 'nom_promotor', width: 200, align: 'Center', name: 'NombrePromotor'
-                                 },
-                                 {
-                                     index: 'idtasamblea', width: 50, align: 'Center', name: 'idTipoAsamblea', hidden: true
-                                 },
-                                 {
-                                     index: 'nom_tasamblea', width: 200, align: 'Center', name: 'NombreTipoAsmablea'
-                                 },
-                                 {
-                                     index: 'fecha_asamblea', width: 100, align: 'Center', name: 'FechaAsamblea'
-                                 },
-                                 {
-                                     index: 'num_asistentes', width: 50, align: 'Center', name: 'NumAsistentes'
-                                 },
-                                 {
-                                     index: 'num_asistentes_m', width: 50, align: 'Center', name: 'NumAMujeres'
-                                 },
-                                 {
-                                     index: 'fecha_programa', width: 80, align: 'Center', name: 'FechaPrograma', hidden: true
-                                 },
-                                 {
-                                     index: 'docto_evidencia', width: 80, align: 'Center', name: 'DctoAsamblea', hidden: true
-                                 },
-                                 {
-                                     index: 'oid', width: 50, align: 'Center', name: 'oid', hidden: true
-                                 },
-                                 {
-                                     index: 'estatus_asamblea', width: 50, align: 'Center', name: 'idEstatusAsamblea', hidden: true
-                                 },
-                                 {
-                                     index: 'cestatus', width: 80, align: 'Center', name: 'EstatusAsamblea'
-                                 },
-                                 {
-                                     index: 'usu_cre', width: 50, align: 'Center', name: 'UsuCre', hidden: true
-                                 },
-                                 {
-                                     index: 'usu_mod', width: 50, align: 'Center', name: 'UsuMod', hidden: true
-                                 },
-                                 {
-                                     index: 'fec_cre', width: 50, align: 'Center', name: 'FecCre', hidden: true
-                                 },
-                                 {
-                                     index: 'fec_mod', width: 50, align: 'Center', name: 'FecMod', hidden: true
-                                 },
-                                 {
-                                     index: 'calle', width: 200, align: 'Center', name: 'Calle_Obra', hidden: true
-                                 },
-                                 {
-                                     index: 'colonia', width: 200, align: 'Center', name: 'Colonia_Obra', hidden: true
-                                 },
-                                 {
-                                     index: 'tramo', width: 200, align: 'Center', name: 'Tramo', hidden: true
-                                 }],
-                 pager: "#pager_asambleas", //Pager.                 
-                 loadtext: 'Cargando datos...',
-                 recordtext: "{0} - {1} de {2} elementos",
-                 emptyrecords: 'No hay resultados',
-                 pgtext: 'Pág:{0} de {1}', //Paging input contAccion text format.
-                 rowNum: "20", // PageSize.
-                 rowList: [5, 10, 20], //Variable PageSize DropDownList. 
-                 viewrecords: true, //Show the RecordCount in the pager.
-                 multiselect: false,
-                 sortname: "idasamblea", //login SortColumn
-                 sortorder: "asc", //login SortOrder.
-                 width: "1453",
-                 height: "auto",
-                 caption: "ASAMBLEAS"
-             }).navGrid('#pager_asambleas', { edit: false, add: false, search: false, del: false })
-               
-            .navButtonAdd('#pager_asambleas',
-                   {
-                       caption: "DctoAsamb",
-                       id: "DctoAsamb",
-                       buttonicon: "ui-icon-document",
-                       onClickButton: function () {
+                {
+                    datatype: function () {
+                        $.ajax(
+                            {
+                                url: "../../WebServices/WebServiceAsamblea.asmx/GetAsamblea_Grid", //PageMethod
+                                data: "{'pPageSize':'" + $('#grid_asambleas').getGridParam("rowNum") +
+                                    "','pCurrentPage':'" + $('#grid_asambleas').getGridParam("page") +
+                                    "','pSortColumn':'" + $('#grid_asambleas').getGridParam("sortname") +
+                                    "','pSortOrder':'" + $('#grid_asambleas').getGridParam("sortorder") +
+                                    "','filtro':'" + filtro + "'}", //PageMethod Parametros de entrada           
+                                dataType: "json",
+                                type: "post",
+                                contentType: "application/json; charset=utf-8",
+                                complete: function (jsondata, stat) {
+                                    if (stat == "success") {
+                                        jQuery("#grid_asambleas")[0].addJSONData(JSON.parse(jsondata.responseText).d);
+                                        var objeto = JSON.parse(jsondata.responseText).d;
+                                        var regs = objeto.RecordCount;
+                                        if (regs == 0) {
+                                            alert('No se encontraron asambleas registradas...');
+                                        }
+                                    }
+                                    else
+                                        alert(JSON.parse(jsondata.responseText).Message);
+                                }
+                            });
+                    },
+                    jsonReader: //Set the jsonReader to the JQGridJSonResponse squema to bind the data.
+                    {
+                        root: "Items",
+                        page: "CurrentPage",
+                        total: "PageCount",
+                        records: "RecordCount",
+                        repeatitems: true,
+                        cell: "row",
+                        id: "idasamblea"
+                    },
+                    colModel: [
+                        {
+                            index: 'idasamblea', width: 50, align: 'Center', name: 'idAsamblea', hidden: true
+                        },
+                        {
+                            index: 'lugar', width: 300, align: 'Center', name: 'Observaciones/Notas Generales'
+                        },
+                        {
+                            index: 'idpromotor', width: 300, align: 'Center', name: 'idPromotor', hidden: true
+                        },
+                        {
+                            index: 'nom_promotor', width: 200, align: 'Center', name: 'NombrePromotor'
+                        },
+                        {
+                            index: 'idtasamblea', width: 50, align: 'Center', name: 'idTipoAsamblea', hidden: true
+                        },
+                        {
+                            index: 'nom_tasamblea', width: 200, align: 'Center', name: 'NombreTipoAsmablea'
+                        },
+                        {
+                            index: 'fecha_asamblea', width: 100, align: 'Center', name: 'FechaAsamblea'
+                        },
+                        {
+                            index: 'num_asistentes', width: 50, align: 'Center', name: 'NumAsistentes'
+                        },
+                        {
+                            index: 'num_asistentes_m', width: 50, align: 'Center', name: 'NumAMujeres'
+                        },
+                        {
+                            index: 'fecha_programa', width: 80, align: 'Center', name: 'FechaPrograma', hidden: true
+                        },
+                        {
+                            index: 'docto_evidencia', width: 80, align: 'Center', name: 'DctoAsamblea', hidden: true
+                        },
+                        {
+                            index: 'oid', width: 50, align: 'Center', name: 'oid', hidden: true
+                        },
+                        {
+                            index: 'estatus_asamblea', width: 50, align: 'Center', name: 'idEstatusAsamblea', hidden: true
+                        },
+                        {
+                            index: 'cestatus', width: 80, align: 'Center', name: 'EstatusAsamblea'
+                        },
+                        {
+                            index: 'usu_cre', width: 50, align: 'Center', name: 'UsuCre', hidden: true
+                        },
+                        {
+                            index: 'usu_mod', width: 50, align: 'Center', name: 'UsuMod', hidden: true
+                        },
+                        {
+                            index: 'fec_cre', width: 50, align: 'Center', name: 'FecCre', hidden: true
+                        },
+                        {
+                            index: 'fec_mod', width: 50, align: 'Center', name: 'FecMod', hidden: true
+                        },
+                        {
+                            index: 'calle', width: 200, align: 'Center', name: 'Calle_Obra', hidden: true
+                        },
+                        {
+                            index: 'colonia', width: 200, align: 'Center', name: 'Colonia_Obra', hidden: true
+                        },
+                        {
+                            index: 'tramo', width: 200, align: 'Center', name: 'Tramo', hidden: true
+                        }],
+                    pager: "#pager_asambleas", //Pager.                 
+                    loadtext: 'Cargando datos...',
+                    recordtext: "{0} - {1} de {2} elementos",
+                    emptyrecords: 'No hay resultados',
+                    pgtext: 'Pág:{0} de {1}', //Paging input contAccion text format.
+                    rowNum: "20", // PageSize.
+                    rowList: [5, 10, 20], //Variable PageSize DropDownList. 
+                    viewrecords: true, //Show the RecordCount in the pager.
+                    multiselect: false,
+                    sortname: "idasamblea", //login SortColumn
+                    sortorder: "asc", //login SortOrder.
+                    width: "1453",
+                    height: "auto",
+                    caption: "ASAMBLEAS"
+                }).navGrid('#pager_asambleas', { edit: false, add: false, search: false, del: false })
 
-                           var myGrid = $('#grid_asambleas');
-                           var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
-                           var objAsamblea = myGrid.jqGrid('getRowData', selectedRowId);
+                .navButtonAdd('#pager_asambleas',
+                    {
+                        caption: "DctoAsamb",
+                        id: "DctoAsamb",
+                        buttonicon: "ui-icon-document",
+                        onClickButton: function () {
 
-                           if (objAsamblea.DctoAsamblea) {
-                               AbreVisorDocto(objAsamblea.DctoAsamblea);
-                           }
-                           else {
-                               alert("Selecciona una Asamblea...");
-                           }
-                       },
-                       position: "last",
-                       title: "DctoAsamb",
-                       cursor: "pointer"
-                   });
+                            var myGrid = $('#grid_asambleas');
+                            var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                            var objAsamblea = myGrid.jqGrid('getRowData', selectedRowId);
+
+                            if (objAsamblea.DctoAsamblea) {
+                                AbreVisorDocto(objAsamblea.DctoAsamblea);
+                            }
+                            else {
+                                alert("Selecciona una Asamblea...");
+                            }
+                        },
+                        position: "last",
+                        title: "DctoAsamb",
+                        cursor: "pointer"
+                    });
 
 
 
@@ -1408,159 +1416,159 @@
             }
 
             $("#grid_obra_contratos").jqGrid(
-             {
-                 datatype: function () {
-                     $.ajax(
-                       {
-                           url: "../../WebServices/WebServiceContrato.asmx/GetContrato_x_ObraGrid", //PageMethod
-                           data: "{'pPageSize':'" + $('#grid_obra_contratos').getGridParam("rowNum") +
-                           "','pCurrentPage':'" + $('#grid_obra_contratos').getGridParam("page") +
-                           "','pSortColumn':'" + $('#grid_obra_contratos').getGridParam("sortname") +
-                           "','pSortOrder':'" + $('#grid_obra_contratos').getGridParam("sortorder") +
-                            "','pFiltro':'" + filtro + "'}", //PageMethod Parametros de entrada             
-                           dataType: "json",
-                           type: "post",
-                           contentType: "application/json; charset=utf-8",
-                           complete: function (jsondata, stat) {
-                               if (stat == "success") {
-                                   jQuery("#grid_obra_contratos")[0].addJSONData(JSON.parse(jsondata.responseText).d);
-                                   var objeto = JSON.parse(jsondata.responseText).d;
-                                   var regs = objeto.RecordCount;
-                                   if (regs == 0) {
-                                       alert('No se encontraron contratos registrados...');
-                                   }
-                               }
-                               else
-                                   alert(JSON.parse(jsondata.responseText).Message);
-                           }
-                       });
-                 },
-                 jsonReader: //Set the jsonReader to the JQGridJSonResponse squema to bind the data.
-                               {
-                                   root: "Items",
-                                   page: "CurrentPage",
-                                   total: "PageCount",
-                                   records: "RecordCount",
-                                   repeatitems: true,
-                                   cell: "row",
-                                   id: "obr_clv_int"
-                               },
-                 colModel: [
-                       {
-                           index: 'oid', width: 80, align: 'Center', name: 'oid',hidden: true
-                       },
-                       {
-                           index: 'obr_clv_int', width: 100, align: 'Center', name: 'obr_clv_int', hidden: true
-                       },
-                       {
-                           index: 'obr_clv', width: 50, align: 'Center', name: 'Obra_S', hidden: true
-                       },
-                       {
-                           index: 'idcontrato', width: 50, align: 'Center', name: 'IdContrato', hidden: true
-                       },
-                       {
-                           index: 'num_contrato', width: 100, align: 'Center', name: 'NumContrato'
-                       },
-                       {
-                           index: 'calle', width: 100, align: 'Center', name: 'CALLE', hidden: true
-                       },
-                       {
-                           index: 'colonia', width: 100, align: 'Center', name: 'COLONIA', hidden: true
-                       },
-                       {
-                           index: 'tramo', width: 80, align: 'Center', name: 'TRAMO', hidden: true
-                       },
-                       {
-                           index: 'idprog', width: 100, align: 'Center', name: 'IdProg', hidden: true
-                       },
-                       {
-                           index: 'nom_prog', width: 100, align: 'Center', name: 'NomPrograma', hidden: true
-                       },
-                       {
-                           index: 'docto_contrato', width: 100, align: 'Center', name: 'DoctoContrato', hidden: true
-                       },
-                       {
-                           index: 'idanexo_contrato', width: 100, align: 'Center', name: 'IdAnexoContrato', hidden: true
-                       },
-                       {
-                           index: 'docto_param1', width: 100, align: 'Center', name: 'DoctoAnexo', hidden: true
-                       },
-                       {
-                           index: 'fecha_param2', width: 100, align: 'Center', name: 'FechaParam1'
-                       },
-                       {
-                           index: 'valor_param3', width: 100, align: 'Center', name: 'ValorParam3', hidden: true
-                       },
-                       {
-                           index: 'valor_param4', width: 100, align: 'Center', name: 'ValorParam4', hidden: true
-                       },
-                       {
-                           index: 'idtipo_anexo_contrato', width: 100, align: 'Center', name: 'IdTipoAnexoContrato', hidden: true
-                       },
-                       {
-                           index: 'etiqueta_anexo', width: 100, align: 'Center', name: 'TipoAnexo'
-                       }],
-                 pager: "#pager_obra_contratos", //Pager.                 
-                 loadtext: 'Cargando datos...',
-                 recordtext: "{0} - {1} de {2} elementos",
-                 emptyrecords: 'No hay resultados',
-                 pgtext: 'Pág:{0} de {1}', //Paging input control text format.
-                 rowNum: "8", // PageSize.
-                 rowList: [4, 6, 8], //Variable PageSize DropDownList. 
-                 viewrecords: true, //Show the RecordCount in the pager.                 
-                 multiselect: false,
-                 sortname: "obr_clv_int", //login SortColumn
-                 sortorder: "asc", //login SortOrder.
-                 width: "1453",
-                 height: "auto",
-                 caption: "CONTRATOS DE LA OBRA"
-             }).navGrid('#pager_obra_contratos', { edit: false, add: false, search: false, del: false })
+                {
+                    datatype: function () {
+                        $.ajax(
+                            {
+                                url: "../../WebServices/WebServiceContrato.asmx/GetContrato_x_ObraGrid", //PageMethod
+                                data: "{'pPageSize':'" + $('#grid_obra_contratos').getGridParam("rowNum") +
+                                    "','pCurrentPage':'" + $('#grid_obra_contratos').getGridParam("page") +
+                                    "','pSortColumn':'" + $('#grid_obra_contratos').getGridParam("sortname") +
+                                    "','pSortOrder':'" + $('#grid_obra_contratos').getGridParam("sortorder") +
+                                    "','pFiltro':'" + filtro + "'}", //PageMethod Parametros de entrada             
+                                dataType: "json",
+                                type: "post",
+                                contentType: "application/json; charset=utf-8",
+                                complete: function (jsondata, stat) {
+                                    if (stat == "success") {
+                                        jQuery("#grid_obra_contratos")[0].addJSONData(JSON.parse(jsondata.responseText).d);
+                                        var objeto = JSON.parse(jsondata.responseText).d;
+                                        var regs = objeto.RecordCount;
+                                        if (regs == 0) {
+                                            alert('No se encontraron contratos registrados...');
+                                        }
+                                    }
+                                    else
+                                        alert(JSON.parse(jsondata.responseText).Message);
+                                }
+                            });
+                    },
+                    jsonReader: //Set the jsonReader to the JQGridJSonResponse squema to bind the data.
+                    {
+                        root: "Items",
+                        page: "CurrentPage",
+                        total: "PageCount",
+                        records: "RecordCount",
+                        repeatitems: true,
+                        cell: "row",
+                        id: "obr_clv_int"
+                    },
+                    colModel: [
+                        {
+                            index: 'oid', width: 80, align: 'Center', name: 'oid', hidden: true
+                        },
+                        {
+                            index: 'obr_clv_int', width: 100, align: 'Center', name: 'obr_clv_int', hidden: true
+                        },
+                        {
+                            index: 'obr_clv', width: 50, align: 'Center', name: 'Obra_S', hidden: true
+                        },
+                        {
+                            index: 'idcontrato', width: 50, align: 'Center', name: 'IdContrato', hidden: true
+                        },
+                        {
+                            index: 'num_contrato', width: 100, align: 'Center', name: 'NumContrato'
+                        },
+                        {
+                            index: 'calle', width: 100, align: 'Center', name: 'CALLE', hidden: true
+                        },
+                        {
+                            index: 'colonia', width: 100, align: 'Center', name: 'COLONIA', hidden: true
+                        },
+                        {
+                            index: 'tramo', width: 80, align: 'Center', name: 'TRAMO', hidden: true
+                        },
+                        {
+                            index: 'idprog', width: 100, align: 'Center', name: 'IdProg', hidden: true
+                        },
+                        {
+                            index: 'nom_prog', width: 100, align: 'Center', name: 'NomPrograma', hidden: true
+                        },
+                        {
+                            index: 'docto_contrato', width: 100, align: 'Center', name: 'DoctoContrato', hidden: true
+                        },
+                        {
+                            index: 'idanexo_contrato', width: 100, align: 'Center', name: 'IdAnexoContrato', hidden: true
+                        },
+                        {
+                            index: 'docto_param1', width: 100, align: 'Center', name: 'DoctoAnexo', hidden: true
+                        },
+                        {
+                            index: 'fecha_param2', width: 100, align: 'Center', name: 'FechaParam1'
+                        },
+                        {
+                            index: 'valor_param3', width: 100, align: 'Center', name: 'ValorParam3', hidden: true
+                        },
+                        {
+                            index: 'valor_param4', width: 100, align: 'Center', name: 'ValorParam4', hidden: true
+                        },
+                        {
+                            index: 'idtipo_anexo_contrato', width: 100, align: 'Center', name: 'IdTipoAnexoContrato', hidden: true
+                        },
+                        {
+                            index: 'etiqueta_anexo', width: 100, align: 'Center', name: 'TipoAnexo'
+                        }],
+                    pager: "#pager_obra_contratos", //Pager.                 
+                    loadtext: 'Cargando datos...',
+                    recordtext: "{0} - {1} de {2} elementos",
+                    emptyrecords: 'No hay resultados',
+                    pgtext: 'Pág:{0} de {1}', //Paging input control text format.
+                    rowNum: "8", // PageSize.
+                    rowList: [4, 6, 8], //Variable PageSize DropDownList. 
+                    viewrecords: true, //Show the RecordCount in the pager.                 
+                    multiselect: false,
+                    sortname: "obr_clv_int", //login SortColumn
+                    sortorder: "asc", //login SortOrder.
+                    width: "1453",
+                    height: "auto",
+                    caption: "CONTRATOS DE LA OBRA"
+                }).navGrid('#pager_obra_contratos', { edit: false, add: false, search: false, del: false })
 
-           .navButtonAdd('#pager_obra_contratos',
-                   {
-                       caption: "VerContrato",
-                       id: "VerContrato",
-                       buttonicon: "ui-icon-document",
-                       onClickButton: function () {
+                .navButtonAdd('#pager_obra_contratos',
+                    {
+                        caption: "VerContrato",
+                        id: "VerContrato",
+                        buttonicon: "ui-icon-document",
+                        onClickButton: function () {
 
-                           var myGrid = $('#grid_obra_contratos');
-                           var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
-                           var objContrato = myGrid.jqGrid('getRowData', selectedRowId);
+                            var myGrid = $('#grid_obra_contratos');
+                            var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                            var objContrato = myGrid.jqGrid('getRowData', selectedRowId);
 
-                           if (objContrato.IdContrato) {
-                               AbreVisorDocto(objContrato.DoctoContrato);
-                           }
-                           else {
-                               alert("Selecciona un Contrato...");
-                           }
-                       },
-                       position: "last",
-                       title: "DctoDet",
-                       cursor: "pointer"
-                   })
+                            if (objContrato.IdContrato) {
+                                AbreVisorDocto(objContrato.DoctoContrato);
+                            }
+                            else {
+                                alert("Selecciona un Contrato...");
+                            }
+                        },
+                        position: "last",
+                        title: "DctoDet",
+                        cursor: "pointer"
+                    })
 
-            .navButtonAdd('#pager_obra_contratos',
-                   {
-                       caption: "VerDctoAnexo",
-                       id: "VerDoctoAnexo",
-                       buttonicon: "ui-icon-document",
-                       onClickButton: function () {
+                .navButtonAdd('#pager_obra_contratos',
+                    {
+                        caption: "VerDctoAnexo",
+                        id: "VerDoctoAnexo",
+                        buttonicon: "ui-icon-document",
+                        onClickButton: function () {
 
-                           var myGrid = $('#grid_obra_contratos');
-                           var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
-                           var objContrato = myGrid.jqGrid('getRowData', selectedRowId);
+                            var myGrid = $('#grid_obra_contratos');
+                            var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                            var objContrato = myGrid.jqGrid('getRowData', selectedRowId);
 
-                           if (objContrato.IdContrato) {
-                               AbreVisorDocto(objContrato.DoctoAnexo);
-                           }
-                           else {
-                               alert("Selecciona un Contrato...");
-                           }
-                       },
-                       position: "last",
-                       title: "DctoDet",
-                       cursor: "pointer"
-                   })
+                            if (objContrato.IdContrato) {
+                                AbreVisorDocto(objContrato.DoctoAnexo);
+                            }
+                            else {
+                                alert("Selecciona un Contrato...");
+                            }
+                        },
+                        position: "last",
+                        title: "DctoDet",
+                        cursor: "pointer"
+                    })
         }
 
 
@@ -1576,10 +1584,10 @@
             $.ajax({
                 url: "../../WebServices/WebServiceFrente.asmx/GetObraAnalitico", //PageMethod
                 data: "{'pPageSize':'10000" +
-                      "','pCurrentPage':'1" +
-                      "','pSortColumn':'fid_out" +
-                      "','pSortOrder':'asc" +
-                      "','pFiltro':'" + filtro + "'}", //PageMethod Parametros de entrada                                   
+                    "','pCurrentPage':'1" +
+                    "','pSortColumn':'fid_out" +
+                    "','pSortOrder':'asc" +
+                    "','pFiltro':'" + filtro + "'}", //PageMethod Parametros de entrada                                   
                 dataType: "json",
                 type: "post",
                 contentType: "application/json; charset=utf-8",
@@ -1590,7 +1598,7 @@
                     var reg;
                     var reg2;
                     var num_regs = objeto.RecordCount;
-                    
+
 
 
                     if (num_regs > 0) {
@@ -1602,7 +1610,7 @@
                         var inc_reng = 3;
                         var tamano_col = 14;
 
-                       
+
 
                         var regxpag = 40;
                         var residuo = num_regs % regxpag;
@@ -1642,7 +1650,7 @@
                             "ultimo_reg_coop": 0
                         }
 
-                        for (i = 0; i < num_regs ; i++) {
+                        for (i = 0; i < num_regs; i++) {
                             reg2 = objeto.Items[i].row;
 
                             if (registros_impresos >= regxpag) {
@@ -1657,9 +1665,9 @@
 
                             pdf.setFontSize(6);
                             pdf.setFontType('normal')
-                            /*fid:coopid*/ pdf.text(col_ref1 + tamano_col * .2 - pdf.getTextWidth(reg2[0] + ':' + reg2[1]) / 2, reng_ref1 + (registros_impresos * inc_reng), reg2[0] + ':' +reg2[1]);
-                            /*MTS*/ pdf.text(col_ref1 + tamano_col * 1 - pdf.getTextWidth(reg2[2]) / 2, reng_ref1 + (registros_impresos * inc_reng), reg2[2]);                            
-                            /*CAPITAL*/pdf.text(col_ref1 + tamano_col * 2 - pdf.getTextWidth(FormatoMoneda(reg2[22])) / 2, reng_ref1 + (registros_impresos * inc_reng), FormatoMoneda(reg2[22]));                            
+                            /*fid:coopid*/ pdf.text(col_ref1 + tamano_col * .2 - pdf.getTextWidth(reg2[0] + ':' + reg2[1]) / 2, reng_ref1 + (registros_impresos * inc_reng), reg2[0] + ':' + reg2[1]);
+                            /*MTS*/ pdf.text(col_ref1 + tamano_col * 1 - pdf.getTextWidth(reg2[2]) / 2, reng_ref1 + (registros_impresos * inc_reng), reg2[2]);
+                            /*CAPITAL*/pdf.text(col_ref1 + tamano_col * 2 - pdf.getTextWidth(FormatoMoneda(reg2[22])) / 2, reng_ref1 + (registros_impresos * inc_reng), FormatoMoneda(reg2[22]));
                             /*INCREM.*/pdf.text(col_ref1 + tamano_col * 3.2 - pdf.getTextWidth(FormatoMoneda(reg2[23])) / 2, reng_ref1 + (registros_impresos * inc_reng), FormatoMoneda(reg2[23]));
                             /*DECREM.*/ pdf.text(col_ref1 + tamano_col * 4.5 - pdf.getTextWidth(FormatoMoneda(reg2[25])), reng_ref1 + (registros_impresos * inc_reng), FormatoMoneda(reg2[25]));
                             /*AYUDS_SOC*/ pdf.text(col_ref1 + tamano_col * 5.7 - pdf.getTextWidth(FormatoMoneda(reg2[26])), reng_ref1 + (registros_impresos * inc_reng), FormatoMoneda(reg2[26]));
@@ -1671,7 +1679,7 @@
 
 
 
-                          
+
                             objTotalesObra.total_total_metros = objTotalesObra.total_total_metros + parseFloat(reg2[2]);
                             objTotalesObra.total_total_capital = objTotalesObra.total_total_capital + parseFloat(reg2[22]);
                             objTotalesObra.total_total_incremento = objTotalesObra.total_total_incremento + parseFloat(reg2[23]);
@@ -1691,7 +1699,7 @@
                             registros_impresos++;
                         }
 
-                       GeneraPie(objTotalesObra, pdf);
+                        GeneraPie(objTotalesObra, pdf);
 
                         var hoy = moment().format("DDMMYYYY");
                         var reporte_obra = 'Rep_Obr_' + obr_clv_int.toString() + '_' + hoy + '.pdf';
@@ -1714,10 +1722,10 @@
             var avance_obrax_coop = 0;
 
             /*Este valor se debe calcular porque se requiere a nivel obra*/
-           /* var avance_obra_dos_decimas = parseFloat(total_total_abonos) * 100 / parseFloat(total_total_costo);
-            avance_obra_dos_decimas = avance_obra_dos_decimas.toFixed(2);*/
+            /* var avance_obra_dos_decimas = parseFloat(total_total_abonos) * 100 / parseFloat(total_total_costo);
+             avance_obra_dos_decimas = avance_obra_dos_decimas.toFixed(2);*/
 
-            pdf.line(10, objTotalesObra.ultimo_reg_coop + 7, 204, objTotalesObra.ultimo_reg_coop + 7);            
+            pdf.line(10, objTotalesObra.ultimo_reg_coop + 7, 204, objTotalesObra.ultimo_reg_coop + 7);
             pdf.text(10 + tamano_col * 1.2 - pdf.getTextWidth(objTotalesObra.total_total_metros.toFixed(2).toString()), objTotalesObra.ultimo_reg_coop + 11, objTotalesObra.total_total_metros.toFixed(2).toString());
             pdf.text(10 + tamano_col * 2.4 - pdf.getTextWidth(FormatoMoneda(objTotalesObra.total_total_capital.toString())), objTotalesObra.ultimo_reg_coop + 11, FormatoMoneda(objTotalesObra.total_total_capital.toString()));
             pdf.text(10 + tamano_col * 3.4 - pdf.getTextWidth(FormatoMoneda(objTotalesObra.total_total_incremento.toString())), objTotalesObra.ultimo_reg_coop + 11, FormatoMoneda(objTotalesObra.total_total_incremento.toString()));
@@ -1733,7 +1741,7 @@
 
 
 
-            var avance_con_inc = objTotalesObra.total_avance_con_inc  /  objTotalesObra.num_regs;
+            var avance_con_inc = objTotalesObra.total_avance_con_inc / objTotalesObra.num_regs;
             var avance_sin_inc = objTotalesObra.total_avance_sin_inc / objTotalesObra.num_regs;
             var costo_total_aporta = objTotalesObra.total_total_capital + objTotalesObra.total_total_incremento - objTotalesObra.total_total_decrementos;
 
@@ -1769,7 +1777,7 @@
             var descrip_tipo_obr = reg[13];
             var estatus_obra = reg[15];
             var nomprog = reg[12];
-            var plazo_rec = (parseInt(reg[20])+1).toString();
+            var plazo_rec = (parseInt(reg[20]) + 1).toString();
             var num_meses = reg[21];
             var obr_opergob = reg[10];
             /*var progdescrip = reg[15];
@@ -1808,13 +1816,13 @@
             pdf.text(columna_ref - pdf.getTextWidth('Plazo en Recaudación (meses):'), reng_ref + reng_inc * 12, 'Plazo en Recaudación (meses):');
             pdf.text(columna_ref - pdf.getTextWidth('Meses de pago a la fecha:'), reng_ref + reng_inc * 13, 'Meses de pago a la fecha:');
             if (obr_feciniproc != '01/01/1900') {
-                pdf.text(columna_ref - pdf.getTextWidth('Fecha Inicio Proceso Obra:'), reng_ref + reng_inc * 14, 'Fecha Inicio Proceso Obra:');                
+                pdf.text(columna_ref - pdf.getTextWidth('Fecha Inicio Proceso Obra:'), reng_ref + reng_inc * 14, 'Fecha Inicio Proceso Obra:');
             }
 
             if (obr_fecinicob != '01/01/1900') {
                 pdf.text(columna_ref - pdf.getTextWidth('Fecha Inicio Cobranza:'), reng_ref + reng_inc * 15, 'Fecha Inicio Cobranza:');
             }
-            
+
 
             pdf.setFontType('normal')
             columna_ref = 130;
@@ -1824,7 +1832,7 @@
             pdf.text(columna_ref - pdf.getTextWidth(colonia) / 2, reng_ref + reng_inc * 6, colonia);
 
             var x = pdf.getTextWidth(tramo);
-            if (x>= 100) {
+            if (x >= 100) {
                 pdf.setFontSize(6);
             }
             pdf.text(columna_ref - pdf.getTextWidth(tramo) / 2, reng_ref + reng_inc * 7, tramo);
@@ -1837,11 +1845,11 @@
             pdf.text(columna_ref - pdf.getTextWidth(plazo_rec) / 2, reng_ref + reng_inc * 12, plazo_rec);
             pdf.text(columna_ref - pdf.getTextWidth(num_meses) / 2, reng_ref + reng_inc * 13, num_meses);
 
-            if (obr_feciniproc != '01/01/1900') {                
+            if (obr_feciniproc != '01/01/1900') {
                 pdf.text(columna_ref - pdf.getTextWidth(obr_feciniproc) / 2, reng_ref + reng_inc * 14, obr_feciniproc);
             }
 
-            if (obr_fecinicob != '01/01/1900') {                
+            if (obr_fecinicob != '01/01/1900') {
                 pdf.text(columna_ref - pdf.getTextWidth(obr_fecinicob) / 2, reng_ref + reng_inc * 15, obr_fecinicob);
             }
 
@@ -1982,8 +1990,8 @@
                 try {
                     $.get(urlctapred, function (xml) {
                         xmlDoc = $.parseXML(xml),
-                        $xml = $(xmlDoc),
-                        $nomprop = $xml.find("NomProp");
+                            $xml = $(xmlDoc),
+                            $nomprop = $xml.find("NomProp");
                         $("#lblnompropmunic").text($.trim($nomprop.text()));
                         $callenotif = $xml.find("DomProp");
                         $numoficext = $xml.find("NumExtP");
@@ -2019,116 +2027,134 @@
             }
         }
     </script>
-  
+
 </head>
-<body> 
- <div id="bodegadatos"></div>
- <div class="wrapper">
-    <div class="grid-item one">REPORTE DE OBRA</div>               
-    <div id="map" class="grid-item two map">
-      <div id="popup" class="ol-popup">
-         <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-         <div id="popup-content"></div>
-     </div>    
-    </div>
-    <div class="grid-item three">
-        <table class="gral">
-            <tbody>
-            <tr>
-                <td class="campo">Obra_s:</td> <td class="dato"><label id="lblobra_s"/></td>
-                <td class="campo">Obr_Clv_Int:</td> <td class="dato"><label id="lblobr_clv_int"/></td>
-            </tr>            
-            <tr>
-                <td class="campo">Calle:</td> <td class="dato" colspan="3"><label id="lblcalle"/></td>
-            </tr>
-            <tr>
-                <td class="campo">Colonia:</td> <td class="dato" colspan="3"><label id="lblcolonia"/></td>
-            </tr>
-            <tr>
-                <td class="campo">Tramo:</td> <td class="dato" colspan="3"><label id="lbltramo"/></td>
-            </tr>
-            <tr>
-                <td class="campo">Tipo de Obra:</td> <td class="dato" colspan="3"><label id="lblTipoObra"/></td>
-            </tr>                            
-            <tr>
-                <td class="campo">Estatus Actual:</td> <td class="dato" colspan="3"><label id="lblestatus_obra"/></td>
-            </tr>
-            <tr>
-                <td class="campo">Programa:</td> <td class="dato" colspan="3"><label id="lblprograma"/></td>
-            </tr>
-            <tr>
-                <td class="campo">Fecha Inicio Pagos:</td> <td class="dato"><label id="lblfecinipag"/></td>
-                <td class="campo">Plazo Recaudación:</td> <td class="dato"><label id="lblplazo_rec"/></td>
-            </tr>
-            <tr>
-                <td class="campo">Fecha Fin Pagos:</td><td class="dato"><label id="lblfecfinpag"/></td>
-                <td class="campo">Meses de pago a la fecha:</td> <td class="dato"><label id="lblnum_meses_rec"/></td>
-            </tr>
-            <tr>
-                <td class="campo">Fecha Inicio Proceso:</td><td class="dato"><label id="lblfeciniproc"/></td>
-                <td class="campo">Fecha Inicio Cobranza:</td><td class="dato"><label id="lblfecinicob"/></td>                
-            </tr>                        
-             <tr>
-                <td class="campo">Costo Total Aport. (Capital + Inc.- Dec.):</td> <td class="dato" colspan="3"><label id="lblcosto_total_aporta"/></td>
-            </tr>
-            <tr>
-                <td class="campo">Avance Obra con Incremento:</td> <td class="dato" colspan="3"><label id="lblavance_con_inc"/></td>
-            </tr>
-            <tr>
-                <td class="campo">Avance Obra sin Incremento:</td> <td class="dato" colspan="3"><label id="lblavance_sin_inc"/></td>
-            </tr>            
-            </tbody>          
-        </table>
-    </div>    
-    <div class="grid-item four">      
-        <div>  
-            <table id="grid"></table>
-            <div id="pager"></div>        
+
+<body>
+    <div id="bodegadatos"></div>
+    <div class="wrapper">
+        <div class="grid-item one">REPORTE DE OBRA</div>
+        <div id="map" class="grid-item two map">
+            <div id="popup" class="ol-popup">
+                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                <div id="popup-content"></div>
             </div>
-    </div>
-    <div class="grid-item five">
-          <table class="gral">
-            <tbody>
-            <tr>
-                <td class="campo">Total Coops</td> 
-                <td class="campo">Total Metros</td>
-                <td class="campo">Total Capital</td>
-                <td class="campo">Total Inc.</td>
-                <td class="campo">Total Dec.</td>
-                <td class="campo">Total Ayuda Soc.</td> 
-                <td class="campo">Total Pagos.</td>
-                <td class="campo">Total Cargos</td>
-                <td class="campo">Total Descto.Rec</td>
-                <td class="campo">Total Cargos Pag.</td>
-                <td class="campo">Saldo Total </td>               
-            </tr>            
-             <tr>
-                <td class="dato"><label id="lbltotal_coops"></label></td> 
-                <td class="dato"><label id="lbltotal_mts"></label></td>
-                <td class="dato"><label id="lbltotal_capital"></label></td>
-                <td class="dato"><label id="lbltotal_inc"></label></td>
-                <td class="dato"><label id="lbltotal_dec"></label></td>
-                <td class="dato"><label id="lblayuda_soc"></label></td> 
-                <td class="dato"><label id="lbltotal_pagos"></label></td>
-                <td class="dato"><label id="lbltotal_cargos"></label></td>
-                <td class="dato"><label id="lbltotal_descto_rec"></label></td>
-                <td class="dato"><label id="lbltotal_rec_pag"></label></td>
-                <td class="dato"><label id="lbltotal_saldo"></label></td>               
-            </tr>                      
-            </tbody>          
-        </table>
-    </div>
-    <div class="grid-item six">      
-        <div>  
-            <table id="grid_asambleas"></table>
-            <div id="pager_asambleas"></div>        
+        </div>
+        <div class="grid-item three">
+            <table class="gral">
+                <tbody>
+                    <tr>
+                        <td class="campo">Obra_s:</td>
+                        <td class="dato"><label id="lblobra_s" /></td>
+                        <td class="campo">Obr_Clv_Int:</td>
+                        <td class="dato"><label id="lblobr_clv_int" /></td>
+                    </tr>
+                    <tr>
+                        <td class="campo">Calle:</td>
+                        <td class="dato" colspan="3"><label id="lblcalle" /></td>
+                    </tr>
+                    <tr>
+                        <td class="campo">Colonia:</td>
+                        <td class="dato" colspan="3"><label id="lblcolonia" /></td>
+                    </tr>
+                    <tr>
+                        <td class="campo">Tramo:</td>
+                        <td class="dato" colspan="3"><label id="lbltramo" /></td>
+                    </tr>
+                    <tr>
+                        <td class="campo">Tipo de Obra:</td>
+                        <td class="dato" colspan="3"><label id="lblTipoObra" /></td>
+                    </tr>
+                    <tr>
+                        <td class="campo">Estatus Actual:</td>
+                        <td class="dato" colspan="3"><label id="lblestatus_obra" /></td>
+                    </tr>
+                    <tr>
+                        <td class="campo">Programa:</td>
+                        <td class="dato" colspan="3"><label id="lblprograma" /></td>
+                    </tr>
+                    <tr>
+                        <td class="campo">Fecha Inicio Pagos:</td>
+                        <td class="dato"><label id="lblfecinipag" /></td>
+                        <td class="campo">Plazo Recaudación:</td>
+                        <td class="dato"><label id="lblplazo_rec" /></td>
+                    </tr>
+                    <tr>
+                        <td class="campo">Fecha Fin Pagos:</td>
+                        <td class="dato"><label id="lblfecfinpag" /></td>
+                        <td class="campo">Meses de pago a la fecha:</td>
+                        <td class="dato"><label id="lblnum_meses_rec" /></td>
+                    </tr>
+                    <tr>
+                        <td class="campo">Fecha Inicio Proceso:</td>
+                        <td class="dato"><label id="lblfeciniproc" /></td>
+                        <td class="campo">Fecha Inicio Cobranza:</td>
+                        <td class="dato"><label id="lblfecinicob" /></td>
+                    </tr>
+                    <tr>
+                        <td class="campo">Costo Total Aport. (Capital + Inc.- Dec.):</td>
+                        <td class="dato" colspan="3"><label id="lblcosto_total_aporta" /></td>
+                    </tr>
+                    <tr>
+                        <td class="campo">Avance Obra con Incremento:</td>
+                        <td class="dato" colspan="3"><label id="lblavance_con_inc" /></td>
+                    </tr>
+                    <tr>
+                        <td class="campo">Avance Obra sin Incremento:</td>
+                        <td class="dato" colspan="3"><label id="lblavance_sin_inc" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="grid-item four">
+            <div>
+                <table id="grid"></table>
+                <div id="pager"></div>
+            </div>
+        </div>
+        <div class="grid-item five">
+            <table class="gral">
+                <tbody>
+                    <tr>
+                        <td class="campo">Total Coops</td>
+                        <td class="campo">Total Metros</td>
+                        <td class="campo">Total Capital</td>
+                        <td class="campo">Total Inc.</td>
+                        <td class="campo">Total Dec.</td>
+                        <td class="campo">Total Ayuda Soc.</td>
+                        <td class="campo">Total Pagos.</td>
+                        <td class="campo">Total Cargos</td>
+                        <td class="campo">Total Descto.Rec</td>
+                        <td class="campo">Total Cargos Pag.</td>
+                        <td class="campo">Saldo Total </td>
+                    </tr>
+                    <tr>
+                        <td class="dato"><label id="lbltotal_coops"></label></td>
+                        <td class="dato"><label id="lbltotal_mts"></label></td>
+                        <td class="dato"><label id="lbltotal_capital"></label></td>
+                        <td class="dato"><label id="lbltotal_inc"></label></td>
+                        <td class="dato"><label id="lbltotal_dec"></label></td>
+                        <td class="dato"><label id="lblayuda_soc"></label></td>
+                        <td class="dato"><label id="lbltotal_pagos"></label></td>
+                        <td class="dato"><label id="lbltotal_cargos"></label></td>
+                        <td class="dato"><label id="lbltotal_descto_rec"></label></td>
+                        <td class="dato"><label id="lbltotal_rec_pag"></label></td>
+                        <td class="dato"><label id="lbltotal_saldo"></label></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="grid-item six">
+            <div>
+                <table id="grid_asambleas"></table>
+                <div id="pager_asambleas"></div>
+            </div>
+        </div>
+        <div class="grid-item seven">
+            <table id="grid_obra_contratos"></table>
+            <div id="pager_obra_contratos"></div>
         </div>
     </div>
-    <div class="grid-item seven">    
-             <table id="grid_obra_contratos"></table>
-            <div id="pager_obra_contratos"></div>                        
-    </div>
-</div>    
-</body>    
-</html>
+</body>
 
+</html>

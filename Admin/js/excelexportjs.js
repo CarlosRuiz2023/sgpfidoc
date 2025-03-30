@@ -16,7 +16,7 @@
         , dataset: null
         , columns: null
         , returnUri: false
-	, locale: 'en-US'   
+        , locale: 'en-US'
         , worksheetName: "My Worksheet"
         , encoding: "utf-8"
     };
@@ -31,8 +31,8 @@
         var excelData;
 
         return Initialize();
-		
-		function Initialize() {
+
+        function Initialize() {
             var type = $settings.datatype.toLowerCase();
 
             BuildDataStructure(type);
@@ -53,18 +53,17 @@
                     break;
             }
 
-       
+
             if ($settings.returnUri) {
                 return excelData;
             }
             else {
 
-                if (!isBrowserIE())
-                {
+                if (!isBrowserIE()) {
                     window.open(excelData);
                 }
 
-               
+
             }
         }
 
@@ -105,7 +104,7 @@
         }
 
         function ConvertFromTable() {
-            var result = $('<div>').append($('#' + $settings.containerid).clone()).html();            
+            var result = $('<div>').append($('#' + $settings.containerid).clone()).html();
             return result;
         }
 
@@ -154,7 +153,7 @@
         function Export(htmltable) {
 
             if (isBrowserIE()) {
-        
+
                 exportToExcelIE(htmltable);
             }
             else {
@@ -217,18 +216,18 @@
             var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
             var textRange; var j = 0;
             var tab;
-                  
 
-            if ($settings.datatype.toLowerCase() == 'table') {            
+
+            if ($settings.datatype.toLowerCase() == 'table') {
                 tab = document.getElementById($settings.containerid);  // get table              
             }
-            else{
+            else {
                 tab = el.children[0]; // get table
             }
 
-          
-        
-            for (j = 0 ; j < tab.rows.length ; j++) {
+
+
+            for (j = 0; j < tab.rows.length; j++) {
                 tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
                 //tab_text=tab_text+"</tr>";
             }
@@ -249,30 +248,30 @@
                 txtArea1.focus();
                 sa = txtArea1.document.execCommand("SaveAs", true, "download");
             }
-            else                
+            else
                 sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
 
             return (sa);
 
 
         }
-        
+
     };
 })(jQuery);
 
 
 //get columns
-function getColumns(paramData){
+function getColumns(paramData) {
 
-	var header = [];
-	$.each(paramData[0], function (key, value) {
-		//console.log(key + '==' + value);
-		var obj = {}
-		obj["headertext"] = key;
-		obj["datatype"] = "string";
-		obj["datafield"] = key;
-		header.push(obj);
-	}); 
-	return header;
+    var header = [];
+    $.each(paramData[0], function (key, value) {
+        //console.log(key + '==' + value);
+        var obj = {}
+        obj["headertext"] = key;
+        obj["datatype"] = "string";
+        obj["datafield"] = key;
+        header.push(obj);
+    });
+    return header;
 
 }

@@ -1,89 +1,92 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <title>ESTADO DE CUENTA DE COOPERADOR</title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>  
-    <script src="../../js/conv_numero_text.js" type="text/javascript"></script> 
+    <script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="../../js/conv_numero_text.js" type="text/javascript"></script>
     <style type="text/css">
-        
         td {
-           text-align: center;
+            text-align: center;
         }
 
-           .auto-style332 {
+        .auto-style332 {
             text-align: center;
             font-weight: bold;
-            font-size : 22px;
+            font-size: 22px;
             background-color: #F6EAD8;
             width: 1194px;
         }
 
-             .auto-style746 {
+        .auto-style746 {
             text-align: center;
             font-weight: bold;
-            font-size : 22px;
+            font-size: 22px;
             background-color: silver;
             width: 1194px;
         }
 
 
 
-                      .auto-style273 {
+        .auto-style273 {
             text-align: center;
             font-weight: bold;
-            font-size : 20px;
+            font-size: 20px;
             background-color: #ff6a00;
             width: 1194px;
         }
 
-           .auto-style228 {
+        .auto-style228 {
             text-align: center;
             font-weight: bold;
-            font-size : 16px;
+            font-size: 16px;
             background-color: #FADCA7;
             height: 9px;
             width: 1194px;
         }
-                    
-            .auto-style280 {
+
+        .auto-style280 {
             text-align: left;
             font-weight: bold;
             color: #00ffff;
-            font-size : 20px;
+            font-size: 20px;
             background-color: #000000;
             height: 42px;
             width: 459px;
         }
-         
+
         .auto-style277 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #DE3F08;
             height: 8px;
             width: 1729px;
         }
-            
+
         .auto-style285 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 8px;
             width: 460px;
         }
+
         .auto-style304 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 8px;
             width: 355px;
-        }     
+        }
+
         .auto-style310 {
             text-align: center;
             font-weight: bold;
@@ -92,18 +95,21 @@
             width: 580px;
             background-color: white;
         }
+
         .auto-style312 {
             height: 8px;
             width: 402px;
         }
+
         .auto-style318 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 1006px;
         }
+
         .auto-style319 {
             text-align: center;
             font-weight: bold;
@@ -112,161 +118,185 @@
             width: 841px;
             background-color: white;
         }
-       
+
         .auto-style361 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 33px;
             width: 952px;
         }
+
         .auto-style526 {
             text-align: center;
             font-weight: bold;
-            font-size : 22px;
+            font-size: 22px;
             background-color: #ff6a00;
             height: 9px;
             width: 652px;
         }
+
         .auto-style527 {
             text-align: center;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F5DAB2;
             height: 15px;
             width: 652px;
         }
+
         #txtdescuento {
             height: 22px;
         }
+
         .auto-style533 {
             width: 482px;
         }
+
         .auto-style543 {
             width: 253px;
             height: 23px;
         }
+
         .auto-style547 {
             width: 259px;
             height: 23px;
         }
+
         .auto-style551 {
             width: 284px;
             height: 23px;
         }
+
         .auto-style557 {
             width: 268px;
             height: 23px;
         }
+
         .auto-style562 {
             width: 293px;
             height: 23px;
         }
+
         .auto-style564 {
             width: 278px;
             height: 23px;
         }
+
         .auto-style566 {
             width: 271px;
             height: 23px;
         }
+
         .auto-style568 {
             width: 265px;
             height: 23px;
         }
+
         #bypassme {
             width: 1371px;
         }
-        
+
         .auto-style585 {
             width: 259px;
             text-align: center;
             font-weight: bold;
-            font-size : 20px;
+            font-size: 20px;
             background-color: #608cac;
             height: 52px;
         }
+
         .auto-style604 {
             text-align: center;
             font-weight: bold;
-            font-size : 18px;
+            font-size: 18px;
             background-color: white;
             height: 9px;
             width: 459px;
         }
+
         .auto-style628 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 33px;
             width: 1067px;
         }
+
         .auto-style666 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 34px;
             width: 1067px;
         }
+
         .auto-style667 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 34px;
             width: 952px;
         }
+
         .auto-style668 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 8px;
             width: 952px;
         }
+
         .auto-style669 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 33px;
             width: 1095px;
         }
+
         .auto-style670 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 33px;
             width: 1179px;
         }
+
         .auto-style672 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 32px;
             width: 952px;
         }
+
         .auto-style678 {
             text-align: center;
             font-weight: bold;
-            font-size : 18px;
+            font-size: 18px;
             background-color: white;
             height: 14px;
             width: 459px;
         }
+
         .auto-style679 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 14px;
             width: 1006px;
         }
+
         .auto-style680 {
             text-align: center;
             font-weight: bold;
@@ -275,6 +305,7 @@
             width: 841px;
             background-color: white;
         }
+
         .auto-style692 {
             text-align: center;
             font-weight: bold;
@@ -283,57 +314,65 @@
             width: 599px;
             background-color: white;
         }
+
         .auto-style694 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 33px;
             width: 599px;
         }
+
         .auto-style695 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 32px;
             width: 599px;
         }
+
         .auto-style696 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 8px;
             width: 599px;
         }
+
         .auto-style706 {
             height: 7px;
         }
+
         .auto-style707 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 7px;
             width: 952px;
         }
+
         .auto-style708 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 33px;
             width: 841px;
         }
+
         .auto-style710 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 8px;
             width: 841px;
         }
+
         .auto-style718 {
             text-align: center;
             font-weight: bold;
@@ -341,6 +380,7 @@
             width: 841px;
             background-color: white;
         }
+
         .auto-style719 {
             text-align: center;
             font-weight: bold;
@@ -348,93 +388,106 @@
             width: 599px;
             background-color: white;
         }
+
         .auto-style723 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             width: 460px;
         }
+
         .auto-style724 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             width: 952px;
         }
+
         .auto-style726 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 43px;
             width: 952px;
         }
+
         .auto-style728 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 45px;
             width: 952px;
         }
+
         .auto-style730 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 41px;
             width: 952px;
         }
-        
-       /*Ventana modal*/
-       #boxes .window {  
-            font-size:20px;
-            position:fixed;
-            width:auto;
-            height:auto;
-            display:none;
-            z-index:9999;
-            padding:20px;             
+
+        /*Ventana modal*/
+        #boxes .window {
+            font-size: 20px;
+            position: fixed;
+            width: auto;
+            height: auto;
+            display: none;
+            z-index: 9999;
+            padding: 20px;
         }
-       
+
         #mask {
-            z-index:10;
-            background-color:#000;
-            display:none;
-            position: fixed;    
+            z-index: 10;
+            background-color: #000;
+            display: none;
+            position: fixed;
             left: 0;
-            top: 0;  
+            top: 0;
         }
 
-        #boxes, #form_recactsaldo,#dialogo_descto { 
-             width:auto; 
-             height:auto;
+        #boxes,
+        #form_recactsaldo,
+        #dialogo_descto {
+            width: auto;
+            height: auto;
         }
 
-        #titulo, #titulorecactsaldo, #titulocapdescto {
-            font-size:20px;
-            text-align:right;
-            color:white;            
+        #titulo,
+        #titulorecactsaldo,
+        #titulocapdescto {
+            font-size: 20px;
+            text-align: right;
+            color: white;
         }
 
-        .posicion_boton_cancelar_recactcsaldo, .posicion_boton_accion_recactsaldo, .posicion_boton_accion_descto,.posicion_boton_cancelar_descto {
+        .posicion_boton_cancelar_recactcsaldo,
+        .posicion_boton_accion_recactsaldo,
+        .posicion_boton_accion_descto,
+        .posicion_boton_cancelar_descto {
             font-weight: bold;
             font-size: 30px;
             color: white;
         }
-                
-        
-        .datos {   
-            font-size:15px;   
-            background:silver;  
-            font-style:italic;
-            font-weight:bold;   
+
+
+        .datos {
+            font-size: 15px;
+            background: silver;
+            font-style: italic;
+            font-weight: bold;
             border: 3px solid #393939;
             border-radius: 5px 5px 5px 5px;
-            color: #393939;   
-            padding: 5px; 
-         }
+            color: #393939;
+            padding: 5px;
+        }
+
         .auto-style732 {
             text-align: center;
             font-weight: bold;
@@ -443,22 +496,25 @@
             width: 841px;
             background-color: white;
         }
+
         .auto-style736 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             width: 460px;
             height: 11px;
         }
+
         .auto-style737 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 11px;
             width: 1006px;
         }
+
         .auto-style738 {
             text-align: center;
             font-weight: bold;
@@ -467,6 +523,7 @@
             width: 841px;
             background-color: white;
         }
+
         .auto-style739 {
             text-align: center;
             font-weight: bold;
@@ -475,22 +532,25 @@
             width: 599px;
             background-color: white;
         }
+
         .auto-style742 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             width: 460px;
             height: 10px;
         }
+
         .auto-style743 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 10px;
             width: 1006px;
         }
+
         .auto-style744 {
             text-align: center;
             font-weight: bold;
@@ -499,6 +559,7 @@
             width: 841px;
             background-color: white;
         }
+
         .auto-style745 {
             text-align: center;
             font-weight: bold;
@@ -507,6 +568,7 @@
             width: 599px;
             background-color: white;
         }
+
         .auto-style747 {
             text-align: center;
             font-weight: bold;
@@ -515,10 +577,10 @@
             width: 599px;
             background-color: white;
         }
-        </style>
+    </style>
     <script>
 
-        function MostrarMovs(idusu,fec_inicial, fec_final, tipo_mov,fec_notif_det,saldo_act5,idcoop) {
+        function MostrarMovs(idusu, fec_inicial, fec_final, tipo_mov, fec_notif_det, saldo_act5, idcoop) {
             //alert(img);
             var url1 = "../../Procesos/RelacionMovs.html?ResponseType=Edit&idusu=" + idusu + "&fecini=" + fec_inicial + "&fecfin=" + fec_final + "&tipomov=" + tipo_mov + "&fecnotifdet=" + fec_notif_det + "&saldoact5=" + saldo_act5 + "&idcoop=" + idcoop;
             newWindow = window.open(url1, "_blank", "top=30,left=200,menubar=no,toolbar=no,location=no, resizable=no,height=750,width=1020,status=no,scrollbars=yes,minimizable=no,maxmizable=no,resizable=0,titlebar=no,modal=yes");
@@ -527,7 +589,7 @@
             }
         }
 
-        
+
 
 
         function ubicPredio(pid) {
@@ -610,10 +672,10 @@
                 contentType: "application/json",
                 url: "../../WebServices/WebServiceCoop.asmx/GetCoop_S2_psql",
                 data: "{'pPageSize':'" + 10 +
-                           "','pCurrentPage':'" + 10 +
-                           "','pSortColumn':'" + 'coo_clv2' +
-                           "','pSortOrder':'" + 'asc' +
-                           "','pFiltro':'" + 'NULL,NULL,NULL,NULL,NULL,NULL,0,' + coo_clv2 + ",'}", //PageMethod Parametros de entrada
+                    "','pCurrentPage':'" + 10 +
+                    "','pSortColumn':'" + 'coo_clv2' +
+                    "','pSortOrder':'" + 'asc' +
+                    "','pFiltro':'" + 'NULL,NULL,NULL,NULL,NULL,NULL,0,' + coo_clv2 + ",'}", //PageMethod Parametros de entrada
             });
         }
 
@@ -623,8 +685,8 @@
             try {
                 $.get(urlctapred, function (xml) {
                     xmlDoc = $.parseXML(xml),
-                    $xml = $(xmlDoc),
-                    $nomprop = $xml.find("NomProp");
+                        $xml = $(xmlDoc),
+                        $nomprop = $xml.find("NomProp");
                     $("#nomprop_p").text($.trim($nomprop.text()));
 
                     $callenotif = $xml.find("DomProp");
@@ -660,26 +722,26 @@
 
         function MostrarDatosUsuario(idusu) {
             $.ajax(
-               {
-                   url: "../../WebServices/WebServiceUsuario.asmx/GetUsuario", //PageMethod
-                   data: "{'idusu':'" + idusu + "'}", //PageMethod Parametros de entrada
-                   dataType: "json",
-                   type: "post",
-                   contentType: "application/json; charset=utf-8",
-                   success: function (data) {
-                       // Data.d trae un string con el XML generado dentro del servicio web asmx
-                       $(data.d).find("usuario").each(function () {
-                           var cuenta = $(this).find("musucuenta").text();
-                           var nombre = $(this).find("musunombre").text();
-                           var rol = $(this).find("musuidrol").text();
-                           $("#lblusuario").text(cuenta);
-                       })
-                   },
-                   error: function (response) {
-                       if (response.length != 0)++
-                           alert(response);
-                   }
-               });
+                {
+                    url: "../../WebServices/WebServiceUsuario.asmx/GetUsuario", //PageMethod
+                    data: "{'idusu':'" + idusu + "'}", //PageMethod Parametros de entrada
+                    dataType: "json",
+                    type: "post",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        // Data.d trae un string con el XML generado dentro del servicio web asmx
+                        $(data.d).find("usuario").each(function () {
+                            var cuenta = $(this).find("musucuenta").text();
+                            var nombre = $(this).find("musunombre").text();
+                            var rol = $(this).find("musuidrol").text();
+                            $("#lblusuario").text(cuenta);
+                        })
+                    },
+                    error: function (response) {
+                        if (response.length != 0) ++
+                            alert(response);
+                    }
+                });
 
         }
 
@@ -695,8 +757,7 @@
             }
             else {
                 dia = fecha.substr(0, 1);
-                if (IsNumeric(dia) == false)
-                { fecha = ""; }
+                if (IsNumeric(dia) == false) { fecha = ""; }
                 if ((long <= 2) && (primerslap = true)) { fecha = fecha.substr(0, 1); primerslap = false; }
             }
             if ((long >= 5) && (segundoslap == false)) {
@@ -1281,7 +1342,7 @@
         }
 
 
-      
+
 
         function MostrarValoresFrente(k) {
 
@@ -1353,19 +1414,19 @@
             var sum_pagos = k.Items[0].row[65];//sum_pagos
             var sum_bonific = k.Items[0].row[66];//sum_pagos
             var sum_bonific_xap = k.Items[0].row[67];//sum_pagos_xap
-            var saldo_act4= k.Items[0].row[68];//saldo_act4
-            var saldo_depurar= k.Items[0].row[69];//saldo_depurar
-            var saldo_act5= k.Items[0].row[70];//saldo_act5
+            var saldo_act4 = k.Items[0].row[68];//saldo_act4
+            var saldo_depurar = k.Items[0].row[69];//saldo_depurar
+            var saldo_act5 = k.Items[0].row[70];//saldo_act5
             var sum_rec_act_saldo = k.Items[0].row[71];//sum_rec_act_saldo
             var fec_ult_rec_act_saldo = k.Items[0].row[72];//sum_rec_act_saldo
             var fact_act_ant = k.Items[0].row[73];//sum_rec_act_saldo
-            var fec_notif_det= k.Items[0].row[74];//fec_notif_det
-            var fec_notif_req =k.Items[0].row[75];//fec_notif_req
+            var fec_notif_det = k.Items[0].row[74];//fec_notif_det
+            var fec_notif_req = k.Items[0].row[75];//fec_notif_req
             var fec_notif_ejec = k.Items[0].row[76];//fec_notif_ejec
 
 
 
-            
+
             $("#bodegadatos").data("coo_clv1", coo_clv1);
             $("#bodegadatos").data("obr_clv2", obr_clv2);
             $("#bodegadatos").data("obr_clv_int", obr_clv_int);
@@ -1375,7 +1436,7 @@
             $("#bodegadatos").data("saldoact5", saldo_act5);
             $("#bodegadatos").data("sum_recargos_t5", sum_recargos);
             $("#bodegadatos").data("sum_desctos_xap", sum_desctos_xap);
-            
+
 
             var date = new Date();
             var diahoy = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
@@ -1385,19 +1446,19 @@
 
 
             $("#lblusuario").text($("#bodegadatos").data("idusu"));
-            
-            
 
-            $("#lblcoo_clv2").text(coo_clv2);                
-            $("#lblobr_clv_int").text(obr_clv_int);    
+
+
+            $("#lblcoo_clv2").text(coo_clv2);
+            $("#lblobr_clv_int").text(obr_clv_int);
             $("#lblcoop_s").text(obr_clv2 + coo_clv1);
 
             $("#lblapaterno").text(FormatoCadena(coo_pat));
             $("#lblamaterno").text(FormatoCadena(coo_mat));
             $("#lblnombres").text(FormatoCadena(coo_nom));
             $("#lblnomfichacoop").text(FormatoCadena(coo_nombre));
-            $("#lbldomcoop").text(FormatoCadena(obr_call + ' ' + ' No. ' + coo_nof + '  Col. ' + col_nom ));
-            $("#lblmtsfte").text(trunc(coo_mts,2));
+            $("#lbldomcoop").text(FormatoCadena(obr_call + ' ' + ' No. ' + coo_nof + '  Col. ' + col_nom));
+            $("#lblmtsfte").text(trunc(coo_mts, 2));
             $("#lblcostoxmetro").text(FormatoCadena(obr_cost));
             $("#lblidobra_s").text(FormatoCadena(obr_clv2));
 
@@ -1433,8 +1494,8 @@
             $("#lbldesctosxap").text(FormatoMoneda(sum_desctos_xap));
             $("#lblbonific").text(FormatoMoneda(sum_bonific));
             $("#lblbonificxap").text(FormatoMoneda(sum_bonific_xap));
-            
-            
+
+
 
             $("#lbl_periodopagos").text(FormatoMoneda(saldo_depurar));
 
@@ -1450,7 +1511,51 @@
             }
 
 
-                if (parseFloat(saldo_depurar) >= -20 && parseFloat(saldo_depurar) <= 20) {
+            if (parseFloat(saldo_depurar) >= -20 && parseFloat(saldo_depurar) <= 20) {
+                $("#lbllinkpagdespfecact").text('');
+                $("#lbllinkpagosantes").text('');
+                $("#lbletiqpag2").text('');
+                $("#lbletiqpag1").text('');
+                $("#lblpagosantesfecact").text('');
+                $("#lblpagosdespfecact").text('');
+                $("#lblsaldoact1").text('$0.00');
+                $("#lblfactoract").text('$0.00');
+                $("#lblmontoact2").text('$0.00');
+                $("#lblsaldoact2").text('$0.00');
+                //$("#lblsaldoact3").text(FormatoMoneda(saldo_act3));
+                $("#lblsaldoact4").text('$0.00');
+                $("#lblrecargos").text(FormatoMoneda(sum_recargos));
+                $("#lblrecargosdev").text(FormatoMoneda(sum_recargos_t10));
+                $("#lblrecargosconv").text(FormatoMoneda(sum_recargos_t8));
+                $("#lblsumpagos").text(FormatoMoneda(sum_pagos));
+                $("#lblrecactsaldo").text('');
+                $("#lblsaldoact5").text(FormatoMoneda(saldo_depurar));
+            }
+            else {
+                if (ConvertirCadenaToFecha(fec_notif_det) > ConvertirCadenaToFecha('01/01/1900')) {
+                    if (fec_act == '22/11/2019') {
+                        $("#lblpagosantesfecact").text(FormatoMoneda(sum_pag_antes_221119));
+                        $("#lblpagosdespfecact").text(FormatoMoneda(sum_pag_desp_221119));
+                    }
+                    else {
+                        $("#lblpagosantesfecact").text(FormatoFecha(sum_pag_antes_fec_ent));
+                        $("#lblpagosdespfecact").text(FormatoMoneda(sum_pag_desp_fec_ent));
+                    }
+                    $("#lblsaldoact1").text(FormatoMoneda(trunc(saldo_act1, 3)));
+                    $("#lblfactoract").text(trunc(factor_act, 3));
+                    $("#lblmontoact2").text(FormatoMoneda(monto_act));
+                    $("#lblsaldoact2").text(FormatoMoneda(saldo_act2));
+                    $("#lblsaldoact4").text(FormatoMoneda(saldo_act4));
+                    $("#lblrecargos").text(FormatoMoneda(sum_recargos));
+                    $("#lblrecargosdev").text(FormatoMoneda(sum_recargos_t10));
+                    $("#lblrecargosconv").text(FormatoMoneda(sum_recargos_t8));
+
+                    $("#lbletiqsumpagos").text('');
+                    $("#lblsumpagos").text('');
+                    $("#lblsaldoact5").text(FormatoMoneda(saldo_act5));
+
+                }
+                else {
                     $("#lbllinkpagdespfecact").text('');
                     $("#lbllinkpagosantes").text('');
                     $("#lbletiqpag2").text('');
@@ -1470,58 +1575,14 @@
                     $("#lblrecactsaldo").text('');
                     $("#lblsaldoact5").text(FormatoMoneda(saldo_depurar));
                 }
-                else {
-                    if (ConvertirCadenaToFecha(fec_notif_det) > ConvertirCadenaToFecha('01/01/1900')) {
-                        if (fec_act == '22/11/2019') {
-                            $("#lblpagosantesfecact").text(FormatoMoneda(sum_pag_antes_221119));
-                            $("#lblpagosdespfecact").text(FormatoMoneda(sum_pag_desp_221119));
-                        }
-                        else {
-                            $("#lblpagosantesfecact").text(FormatoFecha(sum_pag_antes_fec_ent));
-                            $("#lblpagosdespfecact").text(FormatoMoneda(sum_pag_desp_fec_ent));
-                        }
-                        $("#lblsaldoact1").text(FormatoMoneda(trunc(saldo_act1, 3)));
-                        $("#lblfactoract").text(trunc(factor_act, 3));
-                        $("#lblmontoact2").text(FormatoMoneda(monto_act));
-                        $("#lblsaldoact2").text(FormatoMoneda(saldo_act2));
-                        $("#lblsaldoact4").text(FormatoMoneda(saldo_act4));
-                        $("#lblrecargos").text(FormatoMoneda(sum_recargos));
-                        $("#lblrecargosdev").text(FormatoMoneda(sum_recargos_t10));
-                        $("#lblrecargosconv").text(FormatoMoneda(sum_recargos_t8));
-                        
-                        $("#lbletiqsumpagos").text('');
-                        $("#lblsumpagos").text('');
-                        $("#lblsaldoact5").text(FormatoMoneda(saldo_act5));
-                        
-                    }
-                    else {
-                        $("#lbllinkpagdespfecact").text('');
-                        $("#lbllinkpagosantes").text('');
-                        $("#lbletiqpag2").text('');
-                        $("#lbletiqpag1").text('');
-                        $("#lblpagosantesfecact").text('');
-                        $("#lblpagosdespfecact").text('');
-                        $("#lblsaldoact1").text('$0.00');
-                        $("#lblfactoract").text('$0.00');
-                        $("#lblmontoact2").text('$0.00');
-                        $("#lblsaldoact2").text('$0.00');
-                        //$("#lblsaldoact3").text(FormatoMoneda(saldo_act3));
-                        $("#lblsaldoact4").text('$0.00');
-                        $("#lblrecargos").text(FormatoMoneda(sum_recargos));
-                        $("#lblrecargosdev").text(FormatoMoneda(sum_recargos_t10));
-                        $("#lblrecargosconv").text(FormatoMoneda(sum_recargos_t8));
-                        $("#lblsumpagos").text(FormatoMoneda(sum_pagos));
-                        $("#lblrecactsaldo").text('');
-                        $("#lblsaldoact5").text(FormatoMoneda(saldo_depurar));
-                    }
-                }
-
-                $("#lblfecnotdet").text(fec_notif_det);
-                $("#lblfecnotreq").text(fec_notif_req);
-                $("#lblfecnotejec").text(fec_notif_ejec);
-                $("#lblregresar").text('Regresar');
             }
-        
+
+            $("#lblfecnotdet").text(fec_notif_det);
+            $("#lblfecnotreq").text(fec_notif_req);
+            $("#lblfecnotejec").text(fec_notif_ejec);
+            $("#lblregresar").text('Regresar');
+        }
+
 
 
         function Estatusconvenio(estatusconv) {
@@ -1535,27 +1596,27 @@
             return descripestatusconv;
         }
 
-        function RelacionaPagosAntesFecAct(fec_act,idcoop) {            
+        function RelacionaPagosAntesFecAct(fec_act, idcoop) {
 
             var fec_inicial;
             var fec_final;
-            var tipo_mov=1;            
+            var tipo_mov = 1;
             var idcoop;
             var idusu = $("#bodegadatos").data("idusu");
-            
-           
-            
+
+
+
             fec_inicial = '01/01/1900';
 
-            if (fec_act == '22/11/2019') {            
+            if (fec_act == '22/11/2019') {
                 fec_final = '22/11/2019';
             }
             else {
-                
-                fec_final = fec_act;                
+
+                fec_final = fec_act;
             }
 
-            MostrarMovs(idusu,fec_inicial, fec_final, tipo_mov,'01/01/1900','0',idcoop);
+            MostrarMovs(idusu, fec_inicial, fec_final, tipo_mov, '01/01/1900', '0', idcoop);
         }
 
         function RelacionaPagosDespFecAct(fec_act, idcoop) {
@@ -1571,14 +1632,14 @@
                 fec_inicial = '23/11/2019';
             }
             else {
-                fec_inicial = fec_act;                
+                fec_inicial = fec_act;
             }
 
             fec_final = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
 
             MostrarMovs(idusu, fec_inicial, fec_final, tipo_mov, '01/01/1900', '0', idcoop);
         }
-        
+
 
         function RelacionaRecargosTipo5(idcoop) {
 
@@ -1590,13 +1651,13 @@
             var idusu = $("#bodegadatos").data("idusu");
             var fec_notif_det = $("#lblfecnotdet").html();
             var saldoact5 = $("#bodegadatos").data("saldoact5");
-            
-            fec_inicial = '01/01/1900';           
+
+            fec_inicial = '01/01/1900';
             fec_final = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
-            MostrarMovs(idusu, fec_inicial, fec_final, tipo_mov,fec_notif_det,saldoact5, idcoop);
+            MostrarMovs(idusu, fec_inicial, fec_final, tipo_mov, fec_notif_det, saldoact5, idcoop);
         }
 
-       
+
         function RelacionaBonificaciones(idcoop) {
 
             var fec_inicial = '01/01/1900';
@@ -1641,17 +1702,17 @@
             // si posiciones es 2 ==> 0.77 * 100
             // si posiciones es 3 ==> 0.77 * 1000
             var decimalFormated = Math.floor(
-              Math.abs(decimal) * Math.pow(10, posiciones)
+                Math.abs(decimal) * Math.pow(10, posiciones)
             )
             // Sustraemos del número original la parte decimal
             // y le sumamos la parte decimal que hemos formateado
             var finalNum = entera +
-              ((decimalFormated / Math.pow(10, posiciones)) * (isNeg ? -1 : 1))
+                ((decimalFormated / Math.pow(10, posiciones)) * (isNeg ? -1 : 1))
 
             return finalNum
         }
 
-       
+
 
         function ImprimirFichaPago(objDescto) { /*Inserta los registros de los descuento a aplicar*/
 
@@ -1732,9 +1793,9 @@
             if (isDate(fec_cap) && ConvertirCadenaToFecha(fec_cap) > ConvertirCadenaToFecha('01/01/1900') && ConvertirCadenaToFecha(fec_cap) <= date) {
 
                 var hoy = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
-                
 
-                
+
+
                 var mov_obr = $("#lblobra_sifidoc_w").html();
                 var mov_coop = $("#lblcoop_sifidoc_w").html();
                 var mov_fecha = ConvertirCadenaToFecha(fec_cap); //Fecha vieja
@@ -1750,17 +1811,17 @@
                 var mov_tipo_int = 16;
                 var mov_descrip = '';
                 var accion = 0;
-                
-                InsertaMovFinanc(mov_obr, mov_coop, mov_fecha, mov_usu, mov_monto, mov_fecha_cap, mov_ndep, mov_devolver,mov_capital, idmov, obr_clv_int, coo_clv2, mov_tipo_int, mov_descrip, accion)
-                                               .done(function (r) { /*Si se tiene éxito al guardar la factibilidad*/
-                                                   alert("Movimiento financiero guardado correctamente");
-                                                   $('#mask, .window').hide();
-                                                   window.location.reload();
-                                               })
-                                               .fail(function (xhr) {
-                                                   console.log(xhr.responseText);                                                   
-                                                   alert("No es posible guardar el registro financiero...");
-                                               });
+
+                InsertaMovFinanc(mov_obr, mov_coop, mov_fecha, mov_usu, mov_monto, mov_fecha_cap, mov_ndep, mov_devolver, mov_capital, idmov, obr_clv_int, coo_clv2, mov_tipo_int, mov_descrip, accion)
+                    .done(function (r) { /*Si se tiene éxito al guardar la factibilidad*/
+                        alert("Movimiento financiero guardado correctamente");
+                        $('#mask, .window').hide();
+                        window.location.reload();
+                    })
+                    .fail(function (xhr) {
+                        console.log(xhr.responseText);
+                        alert("No es posible guardar el registro financiero...");
+                    });
 
             }
             else {
@@ -1770,44 +1831,44 @@
         }
 
 
-        function InsertaMovFinanc(mov_obr, mov_coop, mov_fecha, mov_usu, mov_monto, mov_fecha_cap, mov_ndep, mov_devolver,mov_capital, idmov,obr_clv_int ,coo_clv2, mov_tipo_int, mov_descrip, accion) { /*Inserta los registros de los documentos en la tabla de mDocumento*/
+        function InsertaMovFinanc(mov_obr, mov_coop, mov_fecha, mov_usu, mov_monto, mov_fecha_cap, mov_ndep, mov_devolver, mov_capital, idmov, obr_clv_int, coo_clv2, mov_tipo_int, mov_descrip, accion) { /*Inserta los registros de los documentos en la tabla de mDocumento*/
 
 
-                var enviarObj = {
-                    "mov_obr":mov_obr,
-                    "mov_coop":mov_coop,
-                    "mov_fecha":mov_fecha,
-                    "mov_usu":mov_usu,
-                    "mov_monto":mov_monto,
-                    "mov_fecha_cap":mov_fecha_cap,
-                    "mov_ndep":mov_ndep,
-                    "mov_devolver": mov_devolver,
-                    "mov_capital": mov_capital,
-                    "id":idmov,
-                    "obr_clv_int":obr_clv_int,
-                    "coo_clv2":coo_clv2,
-                    "mov_tipo_int": mov_tipo_int,
-                    "mov_descrip": mov_descrip,
-                    "accion":accion,
-                }
+            var enviarObj = {
+                "mov_obr": mov_obr,
+                "mov_coop": mov_coop,
+                "mov_fecha": mov_fecha,
+                "mov_usu": mov_usu,
+                "mov_monto": mov_monto,
+                "mov_fecha_cap": mov_fecha_cap,
+                "mov_ndep": mov_ndep,
+                "mov_devolver": mov_devolver,
+                "mov_capital": mov_capital,
+                "id": idmov,
+                "obr_clv_int": obr_clv_int,
+                "coo_clv2": coo_clv2,
+                "mov_tipo_int": mov_tipo_int,
+                "mov_descrip": mov_descrip,
+                "accion": accion,
+            }
 
-                var stringData = JSON.stringify(enviarObj);
+            var stringData = JSON.stringify(enviarObj);
 
-                return $.ajax({
-                    type: 'POST',
-                    url: "../../WebServices/WebServiceMovs.asmx/RegMov",
-                    data: "{objMovFinanc:" + stringData + "}",
-                    contentType: 'application/json; utf-8',
-                    dataType: 'json',                   
-                    success: function (data) {
-                        if (data.d != null) {
-                            console.log(data.d);
-                        }
-                    },
-                    error: function (responseText, textStatus, errorThrown) {
-                        alert(textStatus + responseText + errorThrown);
+            return $.ajax({
+                type: 'POST',
+                url: "../../WebServices/WebServiceMovs.asmx/RegMov",
+                data: "{objMovFinanc:" + stringData + "}",
+                contentType: 'application/json; utf-8',
+                dataType: 'json',
+                success: function (data) {
+                    if (data.d != null) {
+                        console.log(data.d);
                     }
-                });
+                },
+                error: function (responseText, textStatus, errorThrown) {
+                    alert(textStatus + responseText + errorThrown);
+                }
+            });
         }
 
 
@@ -1858,32 +1919,32 @@
             //transition effect
             $("#dialogo_descto").fadeIn(2000);
         }
-        
+
 
         function MostrarRegistroRecActSaldo(accion) {
 
             if (accion == 0) {
 
-                var coop_sifidoc = $("#lblcoop_s").html().substr(10,3);
-                var obra_sifidoc = $("#lblcoop_s").html().substr(0,10);
-                var usuario = $("#bodegadatos").data("idusu");                
+                var coop_sifidoc = $("#lblcoop_s").html().substr(10, 3);
+                var obra_sifidoc = $("#lblcoop_s").html().substr(0, 10);
+                var usuario = $("#bodegadatos").data("idusu");
                 var idusu = usuario.split(":")[1];
                 var date = new Date();
                 var hoy = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
-                
-                var saldoact1 = $("#lblsaldoact1").html();             
+
+                var saldoact1 = $("#lblsaldoact1").html();
 
                 $("#lblobra_sifidoc_w").text(obra_sifidoc);
-                $("#lblidusu_w").text(idusu);                
+                $("#lblidusu_w").text(idusu);
                 $("#lblcoop_sifidoc_w").text(coop_sifidoc);
                 $("#lblobrclvint_w").text($("#lblobr_clv_int").html());
                 $("#lblcoopclv2_w").text($("#lblcoo_clv2").html());
-                $("#lblhoy_w").text(hoy);               
+                $("#lblhoy_w").text(hoy);
                 $("#lblfec_act_w").text($("#lblfecact").html());
                 $("#lblsaldoact1_w").text(saldoact1);
                 $("#lblaccion_rec_act_saldo_w").text(accion);
-            }        
-            
+            }
+
             MostrarModalRecActSaldo();
         }
 
@@ -1904,17 +1965,17 @@
 
 
         }
-        
+
 
         function calculafechavigencia(dias) {
 
             var date = new Date();
             date.setDate(date.getDate() + parseInt(dias));
-                        
+
             var fec_vig_texto = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
 
             $("#lblfecvigdescto").text(fec_vig_texto);
-            
+
         }
 
         function CapturarDesctos(idusu, sum_recargos_t5, idcoop) {
@@ -1925,13 +1986,13 @@
             MostrarModalCapturaDescto();
             $("#lblfecvigdescto").text(diahoy);
             $("#txtdctomanual").val('');
-            $("#txtnumdias").val('');            
+            $("#txtnumdias").val('');
 
             var idusu = $("#bodegadatos").data("idusu");
             $("#lblidusu_descto").text(idusu);
             var sum_recargos_t5 = $("#bodegadatos").data("sum_recargos_t5");;
             var idcoop = $("#bodegadatos").data("idcoop");
-            
+
 
             $("#lbltotalrecargos").text(FormatoMoneda(sum_recargos_t5));
         }
@@ -1940,45 +2001,45 @@
         function AplicarDesctoRecargo(accion) {
 
             var date = new Date();
-            var fecvigdescto = ConvertirCadenaToFecha($("#lblfecvigdescto").html());            
+            var fecvigdescto = ConvertirCadenaToFecha($("#lblfecvigdescto").html());
             var montodescto = parseFloat($("#bodegadatos").data("dctoporaplicar"));
-             if (montodescto > 0) {
-                    var hoy = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();                    
-                    var mov_obr = parseInt($("#bodegadatos").data("obr_clv2"));
-                    var mov_coop = parseInt($("#bodegadatos").data("coo_clv1"));
-                    var mov_fecha = new Date();
-                                        
-                    var usuario_nom_id = $("#bodegadatos").data("idusu");                
-                    var idusu = usuario_nom_id.split(":")[1];
-                 
-                    var mov_usu = parseInt(idusu);
-                    var mov_monto = montodescto;
-                    var mov_fecha_cap = fecvigdescto;
-                    var mov_ndep = hoy + ':' + $("#bodegadatos").data("coo_clv1");
-                    var mov_devolver = 0;
-                    var mov_capital = 0; /*Recargo por aplicar*/
-                    var idmov = 0;
-                    var obr_clv_int = $("#bodegadatos").data("obr_clv_int");
-                    var coo_clv2 = $("#bodegadatos").data("coo_clv2");
-                    var mov_tipo_int = 3
-                    var mov_descrip = '';
+            if (montodescto > 0) {
+                var hoy = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
+                var mov_obr = parseInt($("#bodegadatos").data("obr_clv2"));
+                var mov_coop = parseInt($("#bodegadatos").data("coo_clv1"));
+                var mov_fecha = new Date();
 
-                    InsertaMovFinanc(mov_obr, mov_coop, mov_fecha, mov_usu, mov_monto, mov_fecha_cap, mov_ndep, mov_devolver,mov_capital, idmov, obr_clv_int, coo_clv2, mov_tipo_int, mov_descrip, accion)
-                                                   .done(function (r) { /*Si se tiene éxito al guardar la factibilidad*/
+                var usuario_nom_id = $("#bodegadatos").data("idusu");
+                var idusu = usuario_nom_id.split(":")[1];
 
-                                                       alert("Movimiento financiero guardado correctamente");
-                                                       $('#mask, .window').hide();
-                                                       RedibujarGrid();
+                var mov_usu = parseInt(idusu);
+                var mov_monto = montodescto;
+                var mov_fecha_cap = fecvigdescto;
+                var mov_ndep = hoy + ':' + $("#bodegadatos").data("coo_clv1");
+                var mov_devolver = 0;
+                var mov_capital = 0; /*Recargo por aplicar*/
+                var idmov = 0;
+                var obr_clv_int = $("#bodegadatos").data("obr_clv_int");
+                var coo_clv2 = $("#bodegadatos").data("coo_clv2");
+                var mov_tipo_int = 3
+                var mov_descrip = '';
 
-                                                   })
-                                                   .fail(function (xhr) {
-                                                       console.log(xhr.responseText);
-                                                       alert("No es posible guardar el registro financiero...");
-                                                   });
-                }
-                else {
-                    alert("El descuento no es válido, debe ser mayor o igual a cero");
-                }           
+                InsertaMovFinanc(mov_obr, mov_coop, mov_fecha, mov_usu, mov_monto, mov_fecha_cap, mov_ndep, mov_devolver, mov_capital, idmov, obr_clv_int, coo_clv2, mov_tipo_int, mov_descrip, accion)
+                    .done(function (r) { /*Si se tiene éxito al guardar la factibilidad*/
+
+                        alert("Movimiento financiero guardado correctamente");
+                        $('#mask, .window').hide();
+                        RedibujarGrid();
+
+                    })
+                    .fail(function (xhr) {
+                        console.log(xhr.responseText);
+                        alert("No es posible guardar el registro financiero...");
+                    });
+            }
+            else {
+                alert("El descuento no es válido, debe ser mayor o igual a cero");
+            }
         }
 
 
@@ -1994,32 +2055,32 @@
             var coo_clv2 = recuperarParametro("coo_clv2");
 
             if (coo_clv2.indexOf("#") > -1) {
-                coo_clv2 = coo_clv2.substr(0,coo_clv2.length-1);
+                coo_clv2 = coo_clv2.substr(0, coo_clv2.length - 1);
             }
             $("#bodegadatos").data("coo_clv2", coo_clv2);
 
-           
-
-            
 
 
-            
-            var idusu = recuperarParametro("idusu");               
+
+
+
+
+            var idusu = recuperarParametro("idusu");
             $("#bodegadatos").data("idusu", idusu);
 
             var idconv = recuperarParametro("idconv");
 
             GetDatosFrente(coo_clv2, 0)
-            .done(function (data) {
-                var k = data.d;
-                //MostrarDatosUsuario(idusu);
-                MostrarValoresFrente(k);
-            })
-            .fail(function (x) {
-                alert("No fue posible consultar los datos del cooperador...");
-            });
+                .done(function (data) {
+                    var k = data.d;
+                    //MostrarDatosUsuario(idusu);
+                    MostrarValoresFrente(k);
+                })
+                .fail(function (x) {
+                    alert("No fue posible consultar los datos del cooperador...");
+                });
 
-            
+
             //if mask is clicked
             $('#mask').click(function () {
                 $(this).hide();
@@ -2032,7 +2093,7 @@
                 $('#mask, .window').hide();
             });
 
-                   
+
 
             $(".ubic_predio").click(function (e) { //Ver documento 
                 var pid = $("#lblpid").text();
@@ -2054,18 +2115,18 @@
             $(".relaciona_rec_tipo_5").click(function (e) { //Ver documento 
                 RelacionaRecargosTipo5($("#lblcoo_clv2").html());
             });
-            
+
 
             $(".relaciona_pagos_desp_fec_act").click(function (e) { //Ver documento                 
                 RelacionaPagosDespFecAct($("#lblfecact").html(), $("#lblcoo_clv2").html())
             });
-            
+
             $(".relaciona_desctos_tipo_3").click(function (e) { //Ver documento                 
                 var recargos_t5 = $("#bodegadatos").data("sum_recargos_t5");
                 var saldoact5 = $("#bodegadatos").data("saldoact5");
                 var descto_xap = $("#bodegadatos").data("sum_desctos_xap");
 
-                if (parseFloat(descto_xap)>0) {
+                if (parseFloat(descto_xap) > 0) {
                     alert("Ya existe un descuento aplicado, se procederá a editarlo");
                     var idusu = $("#bodegadatos").data("idusu");
                     var idcoop = $("#lblcoo_clv2").html();
@@ -2077,17 +2138,17 @@
                             var idusu = $("#bodegadatos").data("idusu");
                             var idcoop = $("#lblcoo_clv2").html();
                             $("#lblaccion_descto").html('3');
-                            CapturarDesctos(idusu, recargos_t5, idcoop);                           
+                            CapturarDesctos(idusu, recargos_t5, idcoop);
                         } else {
                             alert("No existe monto de recargos al cual descontar");
                         }
                     }
                     else {
-                          alert("El crédito se encuentra pagado, por lo tanto no es posible realizar descuentos.");
-                    }                          
+                        alert("El crédito se encuentra pagado, por lo tanto no es posible realizar descuentos.");
+                    }
                 }
             });
-            
+
 
             $(".relaciona_todos_pag_tipo_1").click(function (e) { //Ver documento                 
                 RelacionaTodosPagos($("#lblcoo_clv2").html())
@@ -2103,14 +2164,14 @@
             });
 
             $(".aplicar_rec_act_saldo").click(function (e) { //Ver documento              
-                MostrarRegistroRecActSaldo(0);                
+                MostrarRegistroRecActSaldo(0);
             });
 
             $(".posicion_boton_accion_recactsaldo").click(function (e) { //Ver documento
                 AplicarRegistroRecActSaldo($("#txtfecrecactsaldo").val());
             });
-            
-            
+
+
 
             $(".posicion_boton_accion_descto").click(function (e) { //Ver documento 
                 var accion = $("#lblaccion_descto").html();
@@ -2122,8 +2183,8 @@
             $(".posicion_boton_cancelar_descto").click(function (e) {
                 $('#mask, .window').hide();
             });
-            
-            
+
+
 
 
             $(".imprime_ficha_pago").click(function (e) { //Ver documento
@@ -2224,405 +2285,429 @@
 
             $("#lbledocta").text('Estado de Cuenta');
         })
-   </script>
+    </script>
 </head>
-        
- <body>      
-<div id="bypassme"></div>
-     <div id="edocta">
-      <table style="width:100%; height: 149px;">
-        <tr>
-            <td class="auto-style304"></td>
-            <td class="auto-style310">FIDEICOMISO DE OBRAS POR COOPERACIÓN<br />
-                <br class=" .auto-style301" />
-                Estado de cuenta de cooperador </td>
-            <td class="auto-style312"><img src="../../imagenes/logo_fidoc.jpeg" alt="Fideicomiso de Obras por Cooperación" style="width: 239px"/></td>
-        </tr>       
-      </table>
-      <table style="width:100%; height: 65px;">
-        <tr>
-            <td class="auto-style526">&nbsp;</td>
-            <td class="auto-style526">&nbsp;</td>
-            <td class="auto-style526">Coop (SIFIDOC)</td>
-            <td class="auto-style526">obr_clv_int</td>
-            <td class="auto-style526">coo_clv2</td>
-            <td class="auto-style526">Ubicación</td>
-            <td class="auto-style526">Usuario</td>
-            <td class="auto-style526">Fecha de Impresión</td>
-        </tr>        
-        <tr>
-            <td class="auto-style527"></td>
-            <td class="auto-style527"></td>
-            <td class="auto-style527"><label id="lblcoop_s"></label></td>
-            <td class="auto-style527"><label id="lblobr_clv_int"></label></td>
-            <td class="auto-style527"><label id="lblcoo_clv2"></label></td>
-            <td class="auto-style527"><a href="#" class="ubic_predio">>>></a></td>
-            <td class="auto-style527"><label id="lblusuario"></label></td>
-            <td class="auto-style527"><label id="lbllugarfechahora"></label></td>
-        </tr>      
-      </table>
 
-        <table class="auto-style277">  
-        <tr>
-            <td class="auto-style280" colspan="2"><label id="aviso"></label></td>
-        </tr>
-        <tr>
-            <td class="auto-style273" colspan="2">DATOS DEL COOPERADOR</td>
-        </tr>
-        <tr>
-            <td class="auto-style228 " colspan="2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style628">Apellido Paterno:</td>
-            <td class="auto-style669"><label id="lblapaterno">lblapaterno</label></td>
-        </tr>
-        <tr>
-            <td class="auto-style628">Apellido Materno:</td>
-            <td class="auto-style669"><label id="lblamaterno">lblamaterno</label></td>
-        </tr>
-        <tr>
-            <td class="auto-style628">Nombres:</td>
-            <td class="auto-style669"><label id="lblnombres">lblnombres</label></td>
-        </tr>
-        <tr>
-            <td class="auto-style628">Nombre de cooperador para fichas:</td>
-            <td class="auto-style669"><label id="lblnomfichacoop">lblNombreFichaCooperador</label></td>
-        </tr>
-        <tr>
-            <td class="auto-style628">Domicilio del predio beneficiado:</td>
-            <td class="auto-style669"><label id="lbldomcoop">lblDomBenef</label></td>
-        </tr>
-        <tr>
-            <td class="auto-style628">Mts. de Frente</td>
-            <td class="auto-style669"><label id="lblmtsfte">lblMetrosFrente</label></td>
-        </tr>
-        <tr>
-            <td class="auto-style628">Costo por Metro:</td>
-            <td class="auto-style669"><label id="lblcostoxmetro">lblCostoXMetro</label></td>
-        </tr>
+<body>
+    <div id="bypassme"></div>
+    <div id="edocta">
+        <table style="width:100%; height: 149px;">
+            <tr>
+                <td class="auto-style304"></td>
+                <td class="auto-style310">FIDEICOMISO DE OBRAS POR COOPERACIÓN<br />
+                    <br class=" .auto-style301" />
+                    Estado de cuenta de cooperador
+                </td>
+                <td class="auto-style312"><img src="../../imagenes/logo_fidoc.jpeg"
+                        alt="Fideicomiso de Obras por Cooperación" style="width: 239px" /></td>
+            </tr>
+        </table>
+        <table style="width:100%; height: 65px;">
+            <tr>
+                <td class="auto-style526">&nbsp;</td>
+                <td class="auto-style526">&nbsp;</td>
+                <td class="auto-style526">Coop (SIFIDOC)</td>
+                <td class="auto-style526">obr_clv_int</td>
+                <td class="auto-style526">coo_clv2</td>
+                <td class="auto-style526">Ubicación</td>
+                <td class="auto-style526">Usuario</td>
+                <td class="auto-style526">Fecha de Impresión</td>
+            </tr>
+            <tr>
+                <td class="auto-style527"></td>
+                <td class="auto-style527"></td>
+                <td class="auto-style527"><label id="lblcoop_s"></label></td>
+                <td class="auto-style527"><label id="lblobr_clv_int"></label></td>
+                <td class="auto-style527"><label id="lblcoo_clv2"></label></td>
+                <td class="auto-style527"><a href="#" class="ubic_predio">>>></a></td>
+                <td class="auto-style527"><label id="lblusuario"></label></td>
+                <td class="auto-style527"><label id="lbllugarfechahora"></label></td>
+            </tr>
+        </table>
+
+        <table class="auto-style277">
+            <tr>
+                <td class="auto-style280" colspan="2"><label id="aviso"></label></td>
+            </tr>
+            <tr>
+                <td class="auto-style273" colspan="2">DATOS DEL COOPERADOR</td>
+            </tr>
+            <tr>
+                <td class="auto-style228 " colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Apellido Paterno:</td>
+                <td class="auto-style669"><label id="lblapaterno">lblapaterno</label></td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Apellido Materno:</td>
+                <td class="auto-style669"><label id="lblamaterno">lblamaterno</label></td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Nombres:</td>
+                <td class="auto-style669"><label id="lblnombres">lblnombres</label></td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Nombre de cooperador para fichas:</td>
+                <td class="auto-style669"><label id="lblnomfichacoop">lblNombreFichaCooperador</label></td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Domicilio del predio beneficiado:</td>
+                <td class="auto-style669"><label id="lbldomcoop">lblDomBenef</label></td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Mts. de Frente</td>
+                <td class="auto-style669"><label id="lblmtsfte">lblMetrosFrente</label></td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Costo por Metro:</td>
+                <td class="auto-style669"><label id="lblcostoxmetro">lblCostoXMetro</label></td>
+            </tr>
         </table>
         <table style="width: 1727px; height: 407px;">
-        <tr>
-            <td class="auto-style628">Clave_obra (SIFIDOC):</td>
-            <td class="auto-style361" colspan="2"><label id="lblidobra_s">lblidobra</label></td>
-            <td class="auto-style628">Costo total de Obra:</td>
-            <td class="auto-style361"><label id="lblctototalobra">lblctototalobra</label></td>
-        </tr>
-        <tr>
-            <td class="auto-style628">Calle:</td>
-            <td class="auto-style361" colspan="4"><label id="lblcalleobra">lblcalleobra</label></td>
-        </tr>
-        <tr>
-            <td class="auto-style666">Colonia:</td>
-            <td class="auto-style667" colspan="4"><label id="lblcoloniaobra">lblcoloniaobra</label></td>
-        </tr>
-        <tr>
-            <td class="auto-style628">Tramo:</td>
-            <td class="auto-style361" colspan="4"><label id="lbltramoobra">lbltramoobra</label></td>
-        </tr>
-        <tr>
-            <td class="auto-style628">Fecha Inicio de Pagos:</td>
-            <td class="auto-style670"><label id="lblfecinipag">lblfecinipag</label></td>
-            <td class="auto-style628">Número de Pagos:</td>
-            <td class="auto-style361"><label id="lblnumpagos">lblnumpagos</label></td>            
-        </tr>
-        <tr>
-            <td class="auto-style628">Fecha de recaudación:</td>
-            <td class="auto-style670"><label id="lblfecrec">lblfecrec</label></td>
-            <td class="auto-style628">Fecha de vencimiento:</td>
-            <td class="auto-style361"><label id="lblfecvenc">lblfecvenc</label></td>
-        </tr>
-        <tr>
-            <td class="auto-style628">Fecha de proceso:</td>            
-            <td class="auto-style670"><label id="lblfecproc">lblfecproc</label></td>                
-            <td class="auto-style628">Fecha de Publicación 1:</td>                        
-            <td class="auto-style361"><label id="lblfecpub1">lblfecpub1</label></td>
-        </tr>
-        <tr>
-            <td class="auto-style628">Fecha de entrega de obra:</td>
-            <td class="auto-style670"><label id="lblentregaobra">lblentregaobra</label></td>
-            <td class="auto-style628">Fecha de Publicación 2:</td>
-            <td class="auto-style361"><label id="lblpub2">lblpub2</label></td>
-            
-        </tr>
-        <tr>
-            <td class="auto-style628">Fecha de cobranza:</td>
-            <td class="auto-style670"><label id="lblfeccob">lblfeccob</label></td>
-            <td class="auto-style628">Estatus de Obra:</td>
-            <td class="auto-style361"><label id="lblestatusobra">lblestatusobra</label></td>            
-        </tr>
-        <tr>
-            <td class="auto-style628">Programa:</td>
-            <td class="auto-style670"><label id="lblprograma">lblprograma</label></td>
-            <td class="auto-style628">Número de cooperadores:</td>
-            <td class="auto-style361"><label id="lblnumcoops">lblnumcoops</label></td>            
-        </tr>
+            <tr>
+                <td class="auto-style628">Clave_obra (SIFIDOC):</td>
+                <td class="auto-style361" colspan="2"><label id="lblidobra_s">lblidobra</label></td>
+                <td class="auto-style628">Costo total de Obra:</td>
+                <td class="auto-style361"><label id="lblctototalobra">lblctototalobra</label></td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Calle:</td>
+                <td class="auto-style361" colspan="4"><label id="lblcalleobra">lblcalleobra</label></td>
+            </tr>
+            <tr>
+                <td class="auto-style666">Colonia:</td>
+                <td class="auto-style667" colspan="4"><label id="lblcoloniaobra">lblcoloniaobra</label></td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Tramo:</td>
+                <td class="auto-style361" colspan="4"><label id="lbltramoobra">lbltramoobra</label></td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Fecha Inicio de Pagos:</td>
+                <td class="auto-style670"><label id="lblfecinipag">lblfecinipag</label></td>
+                <td class="auto-style628">Número de Pagos:</td>
+                <td class="auto-style361"><label id="lblnumpagos">lblnumpagos</label></td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Fecha de recaudación:</td>
+                <td class="auto-style670"><label id="lblfecrec">lblfecrec</label></td>
+                <td class="auto-style628">Fecha de vencimiento:</td>
+                <td class="auto-style361"><label id="lblfecvenc">lblfecvenc</label></td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Fecha de proceso:</td>
+                <td class="auto-style670"><label id="lblfecproc">lblfecproc</label></td>
+                <td class="auto-style628">Fecha de Publicación 1:</td>
+                <td class="auto-style361"><label id="lblfecpub1">lblfecpub1</label></td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Fecha de entrega de obra:</td>
+                <td class="auto-style670"><label id="lblentregaobra">lblentregaobra</label></td>
+                <td class="auto-style628">Fecha de Publicación 2:</td>
+                <td class="auto-style361"><label id="lblpub2">lblpub2</label></td>
+
+            </tr>
+            <tr>
+                <td class="auto-style628">Fecha de cobranza:</td>
+                <td class="auto-style670"><label id="lblfeccob">lblfeccob</label></td>
+                <td class="auto-style628">Estatus de Obra:</td>
+                <td class="auto-style361"><label id="lblestatusobra">lblestatusobra</label></td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Programa:</td>
+                <td class="auto-style670"><label id="lblprograma">lblprograma</label></td>
+                <td class="auto-style628">Número de cooperadores:</td>
+                <td class="auto-style361"><label id="lblnumcoops">lblnumcoops</label></td>
+            </tr>
         </table>
         <table style="width: 1727px">
-        <tr>
-            <td class="auto-style273" colspan="4">DETALLE FINANCIERO</td>
-        </tr>
-        <tr>
-            <td class="auto-style628">Fecha Notificación Determinación:</td>
-            <td class="auto-style670" colspan="2"><label id="lblfecnotdet"></label></td>
-            <td class="auto-style728"></td>
-        </tr>
-        <tr>
-            <td class="auto-style628">Fecha Notificación Requerimiento:</td>
-            <td class="auto-style670" colspan="2"><label id="lblfecnotreq"></label></td>
-            <td class="auto-style726"></td>
-        </tr>
-        <tr>
-            <td class="auto-style628">Fecha Notificación Ejecución:</td>
-            <td class="auto-style670" colspan="2"><label id="lblfecnotejec"></label></td>
-            <td class="auto-style730"></td>
-        </tr>
-        <tr>
-            <td class="auto-style628">Fecha Act. Saldo (Ley Hda. Art. 45):</td>
-            <td class="auto-style670" colspan="2"><label id="lblfecact"></label></td>
-            <td class="auto-style732"></td>
-        </tr>
-        <tr>
-            <td class="auto-style706"></td>
-            <td class="auto-style707" colspan="2"></td>
-            <td class="auto-style707"></td>
-        </tr>
-        <tr>
-            <td class="auto-style254">&nbsp;</td>
-            <td class="auto-style228" colspan="2">MONTOS</td>
-            <td class="auto-style228">PERIODO</td>
-        </tr>
-        <tr>
-            <td class="auto-style628">SUERTE PRINCIPAL:</td>
-            <td class="auto-style319"><label id="lblsuerteprinc">lblsuerteprinc</label></td>
-            <td class="auto-style694">&nbsp;</td>
-            <td class="auto-style361"><label id="lbl_periodopagos"></label></td>
-        </tr>
-        <tr>
-            <td class="auto-style628">Incremento:</td>
-            <td class="auto-style319"><label id="lblinc">lblinc</label></td>
-            <td class="auto-style695"></td>
-            <td class="auto-style672"></td>
-        </tr>
-        <tr>
-            <td class="auto-style628">Gastos de Requerimiento:</td>
-            <td class="auto-style319"><label id="lblaccesorios6">lblaccesorios6</label></td>
-            <td class="auto-style694"></td>
-            <td class="auto-style361">&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style628">Gastos de Ejecución:</td>
-            <td class="auto-style319"><label id="lblaccesorios7">lblaccesorios7</label></td>
-            <td class="auto-style694"></td>
-            <td class="auto-style361">&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style628"><a href="#" class="relaciona_pagos_antes_fec_act"><label id="lbllinkpagosantes">>>>&nbsp;&nbsp;  </label></a><label id="lbletiqpag1">Pagos antes de Fec. Act. :</label></td>
-            <td class="auto-style708"></td>
-            <td class="auto-style747"><label id="lblpagosantesfecact">lbl_pagos_antes_fec</label></td>
-            <td class="auto-style319"><label id="lblperiodopagos"></label></td>
-        </tr>
-        <tr>
-            <td class="auto-style628">Saldo a Actualizar (S1):</td>
-            <td class="auto-style319"><label id="lblsaldoact1">lblsaldoact1</label></td>
-            <td class="auto-style694">&nbsp;</td>
-            <td class="auto-style361">&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style668"></td>
-            <td class="auto-style710"></td>
-            <td class="auto-style696"></td>
-            <td class="auto-style668"></td>
-        </tr>
-        <tr>
-            <td class="auto-style318">Factor de Actualización:</td>
-            <td class="auto-style319"><label id="lblfactoract">lblfactoract</label></td>
-            <td class="auto-style747">&nbsp;</td>
-            <td class="auto-style285">&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style318">Monto de actualización al día <label id="lbldiahoy2"></label>:</td>
-            <td class="auto-style319"><label id="lblmontoact2">lblmontoact2</label></td>
-            <td class="auto-style747">&nbsp;</td>
-            <td class="auto-style604">&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style318">Actualización de saldo Art. 45&nbsp; Ley Hda. al día <label id="lbldiahoy1"></label> (S2):</td>
-            <td class="auto-style319"><label id="lblsaldoact2">lblsaldoact2</label></td>
-            <td class="auto-style747"></td>
-            <td class="auto-style604"></td>
-        </tr>
-        <tr>
-            <td class="auto-style679"><a href="#" class="relaciona_pagos_desp_fec_act"><label id="lbllinkpagdespfecact">>>>  </label></a><label id="lbletiqpag2">Pagos después de Fec. Act.:</label></td>
-            <td class="auto-style680"></td>
-            <td class="auto-style692"><label id="lblpagosdespfecact">lblpagosdespfecact</label></td>
-            <td class="auto-style678"></td>
-        </tr>
-        <tr>
-            <td class="auto-style724"></td>
-            <td class="auto-style718"></td>
-            <td class="auto-style719"></td>
-            <td class="auto-style723"></td>
-        </tr>
-        <tr>
-            <td class="auto-style318">Saldo antes de recargos (S4):</td>
-            <td class="auto-style319"><label id="lblsaldoact4">lblsaldoact4</label></td>
-            <td class="auto-style747">&nbsp;</td>
-            <td class="auto-style285">&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style318"><a href="#" class="relaciona_rec_tipo_5"><label id="lbllinkrecargosreg">>>></label></a>&nbsp; Recargos registrados (Art. 39 Ley Ingresos):</td>
-            <td class="auto-style319"><label id="lblrecargos">lblrecargos</label></td>
-            <td class="auto-style747">&nbsp;</td>
-            <td class="auto-style285">&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style318">Recargos por Devolución:</td>
-            <td class="auto-style319"><label id="lblrecargosdev">lblrecargosdev</label></td>
-            <td class="auto-style747">&nbsp;</td>
-            <td class="auto-style285">&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style318">Recargos por Convenio:</td>
-            <td class="auto-style319"><label id="lblrecargosconv">lblrecargosconv</label></td>
-            <td class="auto-style747">&nbsp;</td>
-            <td class="auto-style285">&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style318"><a href="#" class="relaciona_todos_pag_tipo_1"><label id="lbletiqsumpagos">>>> Pagos registrados:</label></a></td>
-            <td class="auto-style319"></td>
-            <td class="auto-style747"><label id="lblsumpagos">lblsumpagos</label></td>
-            <td class="auto-style285">&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style743"></td>
-            <td class="auto-style744"></td>
-            <td class="auto-style745"></td>
-            <td class="auto-style742"></td>
-        </tr>
-        <tr>
-            <td class="auto-style318"><a href="#" class="relaciona_desctos_tipo_3"><label id="lbllinkdesctos">>>></label></a> Descuentos de recargos por aplicar:</td>
-            <td class="auto-style319"></td>
-            <td class="auto-style747"><label id="lbldesctosxap">lbldesctosrecargosxap</label></td>
-            <td class="auto-style285"></td>
-        </tr>
-        <tr>
-            <td class="auto-style318">Descuentos de recargos aplicados:</td>
-            <td class="auto-style319"></td>
-            <td class="auto-style747"><label id="lbldesctosrecargos">lbldesctosrecargos</label></td>
-            <td class="auto-style285"></td>
-        </tr>
-        <tr>
-            <td class="auto-style737"></td>
-            <td class="auto-style738"></td>
-            <td class="auto-style739"></td>
-            <td class="auto-style736"></td>
-        </tr>
-        <tr>
-            <td class="auto-style318"><a href="#" class="relaciona_bonific_tipo_2"><label id="lblbonificacion">>>></label></a>Bonificaciones por aplicar:</td>
-            <td class="auto-style319"></td>
-            <td class="auto-style747"><label id="lblbonificxap">lblbonificxap</label></td>
-            <td class="auto-style285">&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style318">Bonificaciones aplicadas:</td>
-            <td class="auto-style319">&nbsp;</td>
-            <td class="auto-style747"><label id="lblbonific">lblbonific</label></td>
-            <td class="auto-style285">&nbsp;</td>
-        </tr>       
-        <tr>
-            <td class="auto-style318">TOTAL A PAGAR (S5):</td>
-            <td class="auto-style319"><label id="lblsaldoact5">lblsaldoact5</label></td>
-            <td class="auto-style747">&nbsp;</td>
-            <td class="auto-style285">&nbsp;</td>
-        </tr>       
-        </table>              
+            <tr>
+                <td class="auto-style273" colspan="4">DETALLE FINANCIERO</td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Fecha Notificación Determinación:</td>
+                <td class="auto-style670" colspan="2"><label id="lblfecnotdet"></label></td>
+                <td class="auto-style728"></td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Fecha Notificación Requerimiento:</td>
+                <td class="auto-style670" colspan="2"><label id="lblfecnotreq"></label></td>
+                <td class="auto-style726"></td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Fecha Notificación Ejecución:</td>
+                <td class="auto-style670" colspan="2"><label id="lblfecnotejec"></label></td>
+                <td class="auto-style730"></td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Fecha Act. Saldo (Ley Hda. Art. 45):</td>
+                <td class="auto-style670" colspan="2"><label id="lblfecact"></label></td>
+                <td class="auto-style732"></td>
+            </tr>
+            <tr>
+                <td class="auto-style706"></td>
+                <td class="auto-style707" colspan="2"></td>
+                <td class="auto-style707"></td>
+            </tr>
+            <tr>
+                <td class="auto-style254">&nbsp;</td>
+                <td class="auto-style228" colspan="2">MONTOS</td>
+                <td class="auto-style228">PERIODO</td>
+            </tr>
+            <tr>
+                <td class="auto-style628">SUERTE PRINCIPAL:</td>
+                <td class="auto-style319"><label id="lblsuerteprinc">lblsuerteprinc</label></td>
+                <td class="auto-style694">&nbsp;</td>
+                <td class="auto-style361"><label id="lbl_periodopagos"></label></td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Incremento:</td>
+                <td class="auto-style319"><label id="lblinc">lblinc</label></td>
+                <td class="auto-style695"></td>
+                <td class="auto-style672"></td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Gastos de Requerimiento:</td>
+                <td class="auto-style319"><label id="lblaccesorios6">lblaccesorios6</label></td>
+                <td class="auto-style694"></td>
+                <td class="auto-style361">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Gastos de Ejecución:</td>
+                <td class="auto-style319"><label id="lblaccesorios7">lblaccesorios7</label></td>
+                <td class="auto-style694"></td>
+                <td class="auto-style361">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style628"><a href="#" class="relaciona_pagos_antes_fec_act"><label
+                            id="lbllinkpagosantes">>>>&nbsp;&nbsp; </label></a><label id="lbletiqpag1">Pagos antes de
+                        Fec. Act. :</label></td>
+                <td class="auto-style708"></td>
+                <td class="auto-style747"><label id="lblpagosantesfecact">lbl_pagos_antes_fec</label></td>
+                <td class="auto-style319"><label id="lblperiodopagos"></label></td>
+            </tr>
+            <tr>
+                <td class="auto-style628">Saldo a Actualizar (S1):</td>
+                <td class="auto-style319"><label id="lblsaldoact1">lblsaldoact1</label></td>
+                <td class="auto-style694">&nbsp;</td>
+                <td class="auto-style361">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style668"></td>
+                <td class="auto-style710"></td>
+                <td class="auto-style696"></td>
+                <td class="auto-style668"></td>
+            </tr>
+            <tr>
+                <td class="auto-style318">Factor de Actualización:</td>
+                <td class="auto-style319"><label id="lblfactoract">lblfactoract</label></td>
+                <td class="auto-style747">&nbsp;</td>
+                <td class="auto-style285">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style318">Monto de actualización al día <label id="lbldiahoy2"></label>:</td>
+                <td class="auto-style319"><label id="lblmontoact2">lblmontoact2</label></td>
+                <td class="auto-style747">&nbsp;</td>
+                <td class="auto-style604">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style318">Actualización de saldo Art. 45&nbsp; Ley Hda. al día <label
+                        id="lbldiahoy1"></label> (S2):</td>
+                <td class="auto-style319"><label id="lblsaldoact2">lblsaldoact2</label></td>
+                <td class="auto-style747"></td>
+                <td class="auto-style604"></td>
+            </tr>
+            <tr>
+                <td class="auto-style679"><a href="#" class="relaciona_pagos_desp_fec_act"><label
+                            id="lbllinkpagdespfecact">>>> </label></a><label id="lbletiqpag2">Pagos después de Fec.
+                        Act.:</label></td>
+                <td class="auto-style680"></td>
+                <td class="auto-style692"><label id="lblpagosdespfecact">lblpagosdespfecact</label></td>
+                <td class="auto-style678"></td>
+            </tr>
+            <tr>
+                <td class="auto-style724"></td>
+                <td class="auto-style718"></td>
+                <td class="auto-style719"></td>
+                <td class="auto-style723"></td>
+            </tr>
+            <tr>
+                <td class="auto-style318">Saldo antes de recargos (S4):</td>
+                <td class="auto-style319"><label id="lblsaldoact4">lblsaldoact4</label></td>
+                <td class="auto-style747">&nbsp;</td>
+                <td class="auto-style285">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style318"><a href="#" class="relaciona_rec_tipo_5"><label
+                            id="lbllinkrecargosreg">>>></label></a>&nbsp; Recargos registrados (Art. 39 Ley Ingresos):
+                </td>
+                <td class="auto-style319"><label id="lblrecargos">lblrecargos</label></td>
+                <td class="auto-style747">&nbsp;</td>
+                <td class="auto-style285">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style318">Recargos por Devolución:</td>
+                <td class="auto-style319"><label id="lblrecargosdev">lblrecargosdev</label></td>
+                <td class="auto-style747">&nbsp;</td>
+                <td class="auto-style285">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style318">Recargos por Convenio:</td>
+                <td class="auto-style319"><label id="lblrecargosconv">lblrecargosconv</label></td>
+                <td class="auto-style747">&nbsp;</td>
+                <td class="auto-style285">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style318"><a href="#" class="relaciona_todos_pag_tipo_1"><label id="lbletiqsumpagos">>>>
+                            Pagos registrados:</label></a></td>
+                <td class="auto-style319"></td>
+                <td class="auto-style747"><label id="lblsumpagos">lblsumpagos</label></td>
+                <td class="auto-style285">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style743"></td>
+                <td class="auto-style744"></td>
+                <td class="auto-style745"></td>
+                <td class="auto-style742"></td>
+            </tr>
+            <tr>
+                <td class="auto-style318"><a href="#" class="relaciona_desctos_tipo_3"><label
+                            id="lbllinkdesctos">>>></label></a> Descuentos de recargos por aplicar:</td>
+                <td class="auto-style319"></td>
+                <td class="auto-style747"><label id="lbldesctosxap">lbldesctosrecargosxap</label></td>
+                <td class="auto-style285"></td>
+            </tr>
+            <tr>
+                <td class="auto-style318">Descuentos de recargos aplicados:</td>
+                <td class="auto-style319"></td>
+                <td class="auto-style747"><label id="lbldesctosrecargos">lbldesctosrecargos</label></td>
+                <td class="auto-style285"></td>
+            </tr>
+            <tr>
+                <td class="auto-style737"></td>
+                <td class="auto-style738"></td>
+                <td class="auto-style739"></td>
+                <td class="auto-style736"></td>
+            </tr>
+            <tr>
+                <td class="auto-style318"><a href="#" class="relaciona_bonific_tipo_2"><label
+                            id="lblbonificacion">>>></label></a>Bonificaciones por aplicar:</td>
+                <td class="auto-style319"></td>
+                <td class="auto-style747"><label id="lblbonificxap">lblbonificxap</label></td>
+                <td class="auto-style285">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style318">Bonificaciones aplicadas:</td>
+                <td class="auto-style319">&nbsp;</td>
+                <td class="auto-style747"><label id="lblbonific">lblbonific</label></td>
+                <td class="auto-style285">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style318">TOTAL A PAGAR (S5):</td>
+                <td class="auto-style319"><label id="lblsaldoact5">lblsaldoact5</label></td>
+                <td class="auto-style747">&nbsp;</td>
+                <td class="auto-style285">&nbsp;</td>
+            </tr>
+        </table>
 
         <table style="width: 1728px; height: 78px">
-        <tr>
-         <td class="auto-style533">&nbsp;</td>
-         <td class="auto-style533">&nbsp;</td>
-         <td class="auto-style533">&nbsp;</td>
-         <td class="auto-style533">&nbsp;</td>
-         <td class="auto-style533">&nbsp;</td>
-         <td class="auto-style533">&nbsp;</td>
-         <td class="auto-style533">&nbsp;</td>
-         <td class="auto-style533">&nbsp;</td>            
-        </tr>        
-        <tr>
-         <td class="auto-style585"><!--<a href="#" class="aplicar_rec_act_saldo"><label id="lblrecactsaldo">ACT_SDO_CTAS_LIQ</label></a>--></td>
-         <td class="auto-style585"></td>
-         <td class="auto-style585"></td>
-         <td class="auto-style585"></td>
-         <td class="auto-style585"></td>
-         <td class="auto-style585"><a href="#" class="imprime_edo_cta"><label id="lbledocta"></label></a></td>
-         <td class="auto-style585"><a href="#" class="imprime_ficha_pago"><label id="lblimprimirficha"></label></a></td>
-         <td class="auto-style585"><a href="#" class="regresar"><label id="lblregresar"></label></a></td>            
-        </tr>        
-        <tr>
-         <td class="auto-style562"></td>
-         <td class="auto-style564"></td>
-         <td class="auto-style566"></td>
-         <td class="auto-style551"></td>
-         <td class="auto-style557"></td>
-         <td class="auto-style568"></td>
-         <td class="auto-style547"></td>
-         <td class="auto-style543"></td>            
-        </tr>        
+            <tr>
+                <td class="auto-style533">&nbsp;</td>
+                <td class="auto-style533">&nbsp;</td>
+                <td class="auto-style533">&nbsp;</td>
+                <td class="auto-style533">&nbsp;</td>
+                <td class="auto-style533">&nbsp;</td>
+                <td class="auto-style533">&nbsp;</td>
+                <td class="auto-style533">&nbsp;</td>
+                <td class="auto-style533">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style585">
+                    <!--<a href="#" class="aplicar_rec_act_saldo"><label id="lblrecactsaldo">ACT_SDO_CTAS_LIQ</label></a>-->
+                </td>
+                <td class="auto-style585"></td>
+                <td class="auto-style585"></td>
+                <td class="auto-style585"></td>
+                <td class="auto-style585"></td>
+                <td class="auto-style585"><a href="#" class="imprime_edo_cta"><label id="lbledocta"></label></a></td>
+                <td class="auto-style585"><a href="#" class="imprime_ficha_pago"><label
+                            id="lblimprimirficha"></label></a></td>
+                <td class="auto-style585"><a href="#" class="regresar"><label id="lblregresar"></label></a></td>
+            </tr>
+            <tr>
+                <td class="auto-style562"></td>
+                <td class="auto-style564"></td>
+                <td class="auto-style566"></td>
+                <td class="auto-style551"></td>
+                <td class="auto-style557"></td>
+                <td class="auto-style568"></td>
+                <td class="auto-style547"></td>
+                <td class="auto-style543"></td>
+            </tr>
         </table>
-     </div>
-     <div id="boxes">   
-         <div id="form_recactsaldo" class="window"> 
-           <div id="titulorecactsaldo"  class="titulo" > 
-             <p style="text-align:center">ACTUALIZACION DE SALDO POR USUARIO</p>
-              Usuario:<label for="usuario" id="lblidusu_w"></label><br/>
-              Obra_SIFIDOC:<label for="obra_s" id="lblobra_sifidoc_w"></label><br/>
-              Coop_SIFIDOC:<label for="coop_s" id="lblcoop_sifidoc_w"></label><br/>
-              No. de Obra: <label for="coopclv2" id="lblobrclvint_w"></label><br/>
-              No. de Coop: <label for="coopclv2" id="lblcoopclv2_w"></label><br/>                                    
-              SaldoAct1:   <label for="saldoact1" id="lblsaldoact1_w"></label><br/>
-              Fecha Actualización: <label for="fecactualizacion" id="lblfec_act_w"></label><br/>                     
-              Fecha del día de hoy: <label for="fecactual" id="lblhoy_w"></label><br/>                                                   
-              Acción:<label for="accion" id="lblaccion_rec_act_saldo_w"></label><br/> 
-           </div>
-           <div class="datos" id="bodyrecactsaldo">                                  
-               <label for="name" id="lblfecrecsaldo">*FECHA DEL LA LIQUIDACION DE LA CUENTA:</label><input type="text" name="fecrecsaldo" id="txtfecrecactsaldo" size="10" maxlength="10" onkeyup = "this.value=formateafecha(this.value);"/><br/>
-           </div>                  
-           <div class="botonesA" id="botonesC">
-                <p style="text-align:right"><a href="#" class ="posicion_boton_accion_recactsaldo">Aceptar</a>&nbsp&nbsp&nbsp<a href="#" class="posicion_boton_cancelar_recactcsaldo">Cancelar</a></p>                
+    </div>
+    <div id="boxes">
+        <div id="form_recactsaldo" class="window">
+            <div id="titulorecactsaldo" class="titulo">
+                <p style="text-align:center">ACTUALIZACION DE SALDO POR USUARIO</p>
+                Usuario:<label for="usuario" id="lblidusu_w"></label><br />
+                Obra_SIFIDOC:<label for="obra_s" id="lblobra_sifidoc_w"></label><br />
+                Coop_SIFIDOC:<label for="coop_s" id="lblcoop_sifidoc_w"></label><br />
+                No. de Obra: <label for="coopclv2" id="lblobrclvint_w"></label><br />
+                No. de Coop: <label for="coopclv2" id="lblcoopclv2_w"></label><br />
+                SaldoAct1: <label for="saldoact1" id="lblsaldoact1_w"></label><br />
+                Fecha Actualización: <label for="fecactualizacion" id="lblfec_act_w"></label><br />
+                Fecha del día de hoy: <label for="fecactual" id="lblhoy_w"></label><br />
+                Acción:<label for="accion" id="lblaccion_rec_act_saldo_w"></label><br />
             </div>
-        </div>  
+            <div class="datos" id="bodyrecactsaldo">
+                <label for="name" id="lblfecrecsaldo">*FECHA DEL LA LIQUIDACION DE LA CUENTA:</label><input type="text"
+                    name="fecrecsaldo" id="txtfecrecactsaldo" size="10" maxlength="10"
+                    onkeyup="this.value=formateafecha(this.value);" /><br />
+            </div>
+            <div class="botonesA" id="botonesC">
+                <p style="text-align:right"><a href="#"
+                        class="posicion_boton_accion_recactsaldo">Aceptar</a>&nbsp&nbsp&nbsp<a href="#"
+                        class="posicion_boton_cancelar_recactcsaldo">Cancelar</a></p>
+            </div>
+        </div>
 
-        <div id="dialogo_descto" class="window"> 
-           <div id="titulocapdescto"  class="titulo" > 
-                Usuario:<label for="usuario" id="lblidusu_descto"></label><br/>
-                Accion:<label for="accion" id="lblaccion_descto"></label><br/>
-           </div> 
-         <table style="width:100%; height: 65px;">
-           <tr>
-              <td class="auto-style332" colspan="4">CAPTURA DE DESCUENTOS SOBRE RECARGOS TIPO 5</td>            
-           </tr>    
-           <tr>
-              <td class="auto-style332">Total Recargos Registrados</td>
-              <td class="auto-style332">Descuento X Aplicar (%)</td>
-              <td class="auto-style332">Monto del Descuento</td>           
-              <td class="auto-style332">Vigencia del Descuento <label id="lblfecvigdescto"></label></td>
-           </tr>        
-           <tr>
-              <td class="auto-style746"><label id="lbltotalrecargos"></label></td>
-              <td class="auto-style746"><input type="number" id="txtdctomanual" min="1" max="75"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); if (this.value > 75) this.value = 75; calculadescuentoporaplicar(this.value) " maxLength="3"/></td>
-              <td class="auto-style746"><label id="lblmontodescontar"></label></td>           
-              <td class="auto-style746"><input type="number" id="txtnumdias" min="1" max="120"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); if (this.value > 120) this.value = 120; calculafechavigencia(this.value) " maxLength="3"/> DIAS</td>           
-           </tr>             
-         </table>  
-         <div class="botonesA" id="bot_capdescto">
-             <p style="text-align:right"><a href="#" class ="posicion_boton_accion_descto">Aceptar</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="#" class="posicion_boton_cancelar_descto">Cancelar</a></p>                
-         </div>
-        </div>  
-       <div id="mask"></div>   
-     </div>               
-     <div id="bodegadatos"></div>
- </body>  
+        <div id="dialogo_descto" class="window">
+            <div id="titulocapdescto" class="titulo">
+                Usuario:<label for="usuario" id="lblidusu_descto"></label><br />
+                Accion:<label for="accion" id="lblaccion_descto"></label><br />
+            </div>
+            <table style="width:100%; height: 65px;">
+                <tr>
+                    <td class="auto-style332" colspan="4">CAPTURA DE DESCUENTOS SOBRE RECARGOS TIPO 5</td>
+                </tr>
+                <tr>
+                    <td class="auto-style332">Total Recargos Registrados</td>
+                    <td class="auto-style332">Descuento X Aplicar (%)</td>
+                    <td class="auto-style332">Monto del Descuento</td>
+                    <td class="auto-style332">Vigencia del Descuento <label id="lblfecvigdescto"></label></td>
+                </tr>
+                <tr>
+                    <td class="auto-style746"><label id="lbltotalrecargos"></label></td>
+                    <td class="auto-style746"><input type="number" id="txtdctomanual" min="1" max="75"
+                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); if (this.value > 75) this.value = 75; calculadescuentoporaplicar(this.value) "
+                            maxLength="3" /></td>
+                    <td class="auto-style746"><label id="lblmontodescontar"></label></td>
+                    <td class="auto-style746"><input type="number" id="txtnumdias" min="1" max="120"
+                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); if (this.value > 120) this.value = 120; calculafechavigencia(this.value) "
+                            maxLength="3" /> DIAS</td>
+                </tr>
+            </table>
+            <div class="botonesA" id="bot_capdescto">
+                <p style="text-align:right"><a href="#"
+                        class="posicion_boton_accion_descto">Aceptar</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="#"
+                        class="posicion_boton_cancelar_descto">Cancelar</a></p>
+            </div>
+        </div>
+        <div id="mask"></div>
+    </div>
+    <div id="bodegadatos"></div>
+</body>
+
 </html>
-
-

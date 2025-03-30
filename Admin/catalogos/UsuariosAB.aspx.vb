@@ -105,73 +105,73 @@ Partial Class Admin_catalogos_UsuariosAB
         dt = clsUsuarios.Consulta_Usuarios(objUsuarioEN)
 
         Try
-            objUsuarioEN.Empleado = Me.txtEmpleado.Text
-            objUsuarioEN.Nombre = Me.txtNombre.Text.Trim
-            objUsuarioEN.Area = Me.txtArea.Text.Trim
-            objUsuarioEN.Correo = Me.txtCorreo.Text.Trim
-            objUsuarioEN.Curp = Me.txtCurp.Text.Trim
-            objUsuarioEN.Rfc = Me.txtRFC.Text.Trim
-            objUsuarioEN.Ss = Me.txtSS.Text.Trim
-            objUsuarioEN.Usuario = Me.txtUsuario.Text.Trim
+        objUsuarioEN.Empleado = Me.txtEmpleado.Text
+        objUsuarioEN.Nombre = Me.txtNombre.Text.Trim
+        objUsuarioEN.Area = Me.txtArea.Text.Trim
+        objUsuarioEN.Correo = Me.txtCorreo.Text.Trim
+        objUsuarioEN.Curp = Me.txtCurp.Text.Trim
+        objUsuarioEN.Rfc = Me.txtRFC.Text.Trim
+        objUsuarioEN.Ss = Me.txtSS.Text.Trim
+        objUsuarioEN.Usuario = Me.txtUsuario.Text.Trim
 
-            objUsuarioEN.IdRol = Me.cmbRol.SelectedValue
-            objUsuarioEN.Activo = Me.cmbEstatus.SelectedValue
+        objUsuarioEN.IdRol = Me.cmbRol.SelectedValue
+        objUsuarioEN.Activo = Me.cmbEstatus.SelectedValue
 
-            Dim dtu As DataTable
-            objUsuarioEN.Accion = "Consulta"
-            Dim u As Integer = Session("USUARIO")
-            objUsuarioEN.IdUsuario = u
-            dtu = clsUsuarios.Consulta_Usuarios(objUsuarioEN)
+        Dim dtu As DataTable
+        objUsuarioEN.Accion = "Consulta"
+        Dim u As Integer = Session("USUARIO")
+        objUsuarioEN.IdUsuario = u
+        dtu = clsUsuarios.Consulta_Usuarios(objUsuarioEN)
 
-            If vId <> 0 Then
-                objUsuarioEN.UsuMod = dtu.Rows(0).Item(2)
-                objUsuarioEN.IdUsuario = vId
+        If vId <> 0 Then
+            objUsuarioEN.UsuMod = dtu.Rows(0).Item(2)
+            objUsuarioEN.IdUsuario = vId
 
-                If txtPass.Text = "" Then
-                    objUsuarioEN.Pass = dt.Rows(0).Item("mUsuPass")
-                Else
-                    objUsuarioEN.Pass = funcion.Encriptar(txtPass.Text.Trim)
-                End If
-
-                objUsuarioEN.Accion = "Actualizar"
+            If txtPass.Text = "" Then
+                objUsuarioEN.Pass = dt.Rows(0).Item("mUsuPass")
             Else
-                objUsuarioEN.IdUsuario = 0
-                objUsuarioEN.UsuCre = dtu.Rows(0).Item(2)
                 objUsuarioEN.Pass = funcion.Encriptar(txtPass.Text.Trim)
-                objUsuarioEN.Accion = "Insertar"
             End If
 
-            ban = clsUsuarios.Insertar(objUsuarioEN)
-            If ban >= 0 Then
-                'Limpiar()
-                'lblComentario.Text = "Registro Ingresado"
-                'objAlumnoEN.Nombre = ""
-                'dgvClientes.DataSource = AlumnoENTIDAD.Buscar(objAlumnoEN)
-                'Response.Redirect("~/catalogos/Usuarios.aspx")
-                Dim script As String = "<script type='text/javascript'>" & _
-                                    " window.opener.location.reload(true); window.close();" & _
-                                "</script>"
+            objUsuarioEN.Accion = "Actualizar"
+        Else
+            objUsuarioEN.IdUsuario = 0
+            objUsuarioEN.UsuCre = dtu.Rows(0).Item(2)
+            objUsuarioEN.Pass = funcion.Encriptar(txtPass.Text.Trim)
+            objUsuarioEN.Accion = "Insertar"
+        End If
 
-                'ScriptManager.RegisterStartupScript(Me, GetType(Page), "alerta", script, False)
-                Page.ClientScript.RegisterStartupScript(GetType(Page), "script", script, False)
+        ban = clsUsuarios.Insertar(objUsuarioEN)
+        If ban >= 0 Then
+            'Limpiar()
+            'lblComentario.Text = "Registro Ingresado"
+            'objAlumnoEN.Nombre = ""
+            'dgvClientes.DataSource = AlumnoENTIDAD.Buscar(objAlumnoEN)
+            'Response.Redirect("~/catalogos/Usuarios.aspx")
+            Dim script As String = "<script type='text/javascript'>" & _
+                " window.opener.location.reload(true); window.close();" & _
+                "</script>"
 
-            Else
-                MsgBox(strMensajeError)
-                strMensajeError = ""
-            End If
+            'ScriptManager.RegisterStartupScript(Me, GetType(Page), "alerta", script, False)
+            Page.ClientScript.RegisterStartupScript(GetType(Page), "script", script, False)
+
+        Else
+            MsgBox(strMensajeError)
+            strMensajeError = ""
+        End If
 
         Catch ex1 As SqlException
-            lblerror.Text = "Ha ocurrido un error.  Datos no guardados  " & ex1.Message
+        lblerror.Text = "Ha ocurrido un error.  Datos no guardados  " & ex1.Message
         Catch ex2 As Exception
-            lblerror.Text = "Ha ocurrido un error.  Datos no guardados  " & ex2.Message
+        lblerror.Text = "Ha ocurrido un error.  Datos no guardados  " & ex2.Message
         End Try
 
     End Sub
 
     Protected Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
         Dim script As String = "<script type='text/javascript'>" & _
-                                    "window.opener.location.reload(true); window.close();" & _
-                                "</script>"
+            "window.opener.location.reload(true); window.close();" & _
+            "</script>"
 
         'ScriptManager.RegisterStartupScript(Me, GetType(Page), "alerta", script, False)
         Page.ClientScript.RegisterStartupScript(GetType(Page), "script", script, False)

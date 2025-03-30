@@ -1,35 +1,35 @@
 ﻿<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    
-    <title>ACTUALIZACIÓN DE COSTO DE OBRA</title>
-    
-         
-    <style>
 
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>ACTUALIZACIÓN DE COSTO DE OBRA</title>
+
+
+    <style>
         content {
-            background-color: #2b2727;            
+            background-color: #2b2727;
             padding: 5px;
-            font-size: 5px;            
+            font-size: 5px;
         }
 
         table.gral {
-             border-collapse: collapse;             
-             height:100%;
-             width:100%;   
+            border-collapse: collapse;
+            height: 100%;
+            width: 100%;
         }
 
 
         table tbody tr:nth-child(odd) {
-        	background: #fff5e0;
+            background: #fff5e0;
 
-            }
+        }
 
         table tbody tr:nth-child(even) {
-	        background: #fdf8ef;
-            }
+            background: #fdf8ef;
+        }
 
-     
+
 
         table.gral td.campo {
             text-align: right;
@@ -40,156 +40,148 @@
             text-align: center;
             font-weight: normal;
         }
-      
+
         table.gral td.titulo_1ro {
             text-align: center;
             font-weight: bold;
-            background-color:#454548;
-            font-size:27px;
-            color:#fff5e0;
+            background-color: #454548;
+            font-size: 27px;
+            color: #fff5e0;
         }
 
         table.gral td.titulo_2do {
             text-align: center;
-            font-weight: bold;            
-            background-color:#454548;
-            color:#fff5e0;
-            
+            font-weight: bold;
+            background-color: #454548;
+            color: #fff5e0;
+
         }
 
-        table.gral td.espacio_aire {            
-             background-color:#8d8383;
-             color:#fff5e0;
-          }
-        
+        table.gral td.espacio_aire {
+            background-color: #8d8383;
+            color: #fff5e0;
+        }
+
         table.gral td.titulo_2do_2 {
             text-align: center;
             font-weight: bold;
-            min-height:50px;
-            background-color:#8d8383;
-            color:#fff5e0;
+            min-height: 50px;
+            background-color: #8d8383;
+            color: #fff5e0;
         }
 
         table.gral td.titulo_3er {
             text-align: right;
-            font-weight:bold;
-            font-size:26px;
-            background-color:#454548;
-            color:#fff5e0;
+            font-weight: bold;
+            font-size: 26px;
+            background-color: #454548;
+            color: #fff5e0;
         }
 
-        table.gral td.boton
-        {
+        table.gral td.boton {
             text-align: center;
-            background-color:#b3daf6;      
-            border: #2628b6 3px solid;       
-            height:30px;
+            background-color: #b3daf6;
+            border: #2628b6 3px solid;
+            height: 30px;
         }
-      
-        
+
+
         table.gral td.boton a:link {
-             text-decoration: none;             
-             font-size:20px; 
-             font-weight: bold;
-          }
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-        
-        table.gral td.boton a:hover  {
-          color: #1717FF;
-          cursor: pointer;          
-          }        
 
-        #boxes .window {               
-             position:fixed;
-             width:auto;
-             height:auto;
-             display:none;
-             z-index:9999;
-             padding:20px;             
-         }
+        table.gral td.boton a:hover {
+            color: #1717FF;
+            cursor: pointer;
+        }
+
+        #boxes .window {
+            position: fixed;
+            width: auto;
+            height: auto;
+            display: none;
+            z-index: 9999;
+            padding: 20px;
+        }
 
         #mask {
-             z-index:10;
-             background-color:#000;
-             display:none;
-             position: fixed;    
-             left: 0;
-             top: 0;  
+            z-index: 10;
+            background-color: #000;
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
         }
 
-        table.t_modulo td.c{        
-            text-align: right;                      
-            font-size:20px; 
-            font-weight: bold;                      
-            height:40px;        
+        table.t_modulo td.c {
+            text-align: right;
+            font-size: 20px;
+            font-weight: bold;
+            height: 40px;
         }
 
-        table.t_modulo td.dato_c{        
-            text-align: center;                      
-            font-size:20px; 
-            font-weight: bold;                      
-            height:40px;        
-        }
-
-        table.t_modulo td.boton_dialog
-        {
+        table.t_modulo td.dato_c {
             text-align: center;
-            background-color:#b3daf6;      
-            border: #2628b6 3px solid;       
-            height:30px;
+            font-size: 20px;
+            font-weight: bold;
+            height: 40px;
         }
 
-        table.t_modulo td.boton_dialog a
-        {            
-            font-size:20px; 
-            text-decoration: none; 
-            font-weight:bold;              
-        }
-        
-        
-         table.t_modulo td.boton_dialog a:hover  {
-          color: #1717FF;
-          cursor: pointer;          
-          }        
-
-        table.t_modulo td.signo 
-        {
-            text-align: center;              
+        table.t_modulo td.boton_dialog {
+            text-align: center;
+            background-color: #b3daf6;
+            border: #2628b6 3px solid;
+            height: 30px;
         }
 
-        table.t_modulo td.titulo_modulo
-        {
-            text-align: center;             
-            padding:10px;                          
-            background-color:#000000;      
+        table.t_modulo td.boton_dialog a {
+            font-size: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+
+        table.t_modulo td.boton_dialog a:hover {
+            color: #1717FF;
+            cursor: pointer;
+        }
+
+        table.t_modulo td.signo {
+            text-align: center;
+        }
+
+        table.t_modulo td.titulo_modulo {
+            text-align: center;
+            padding: 10px;
+            background-color: #000000;
             color: #fdf8ef;
             font: bold 30px arial, arial;
         }
-        
 
-        table.t_modulo td.signo a
-        {            
-            font-size:80px; 
-            text-decoration: none; 
-            font-weight:bold;              
+
+        table.t_modulo td.signo a {
+            font-size: 80px;
+            text-decoration: none;
+            font-weight: bold;
         }
-
-      
-
     </style>
-    
-    
+
+
     <link type="text/css" rel="stylesheet" href="../css/cupertino/jquery-ui-1.7.2.custom.css" />
     <link type="text/css" rel="stylesheet" href="../css/cupertino/ui.jqgrid.css" />
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>      
-       
-    <script type="text/javascript" src="../js/jquery.jqGrid.min.js"></script> 
-     <script type="text/javascript" src="../js/grid.locale-es.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>      
-    <script src="../js/moment.js"></script>          
-    <script type="text/javascript" src="../js/NumerosLetras.js"></script> 
+    <script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script type="text/javascript" src="../js/jquery.jqGrid.min.js"></script>
+    <script type="text/javascript" src="../js/grid.locale-es.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="../js/moment.js"></script>
+    <script type="text/javascript" src="../js/NumerosLetras.js"></script>
 
     <script>
 
@@ -332,8 +324,7 @@
             }
             else {
                 dia = fecha.substr(0, 1);
-                if (IsNumeric(dia) == false)
-                { fecha = ""; }
+                if (IsNumeric(dia) == false) { fecha = ""; }
                 if ((long <= 2) && (primerslap = true)) { fecha = fecha.substr(0, 1); primerslap = false; }
             }
             if ((long >= 5) && (segundoslap == false)) {
@@ -850,84 +841,84 @@
             /*pagos*/
 
             ConsultarPagos_psql(objcuerpo.fid, 0)
-                           .done(function (r) {
-                               var cadena = r.d;
-                               var objpagos = [];
-                               if (cadena != '<NewDataSet />') {
-                                   $(cadena).find("pagos").each(function () {
-                                       var objpago = {
-                                           "id": 0,
-                                           "folio": '',
-                                           "fecha": '',
-                                           "monto": 0,
-                                           "monto_txt": ''
-                                       };
+                .done(function (r) {
+                    var cadena = r.d;
+                    var objpagos = [];
+                    if (cadena != '<NewDataSet />') {
+                        $(cadena).find("pagos").each(function () {
+                            var objpago = {
+                                "id": 0,
+                                "folio": '',
+                                "fecha": '',
+                                "monto": 0,
+                                "monto_txt": ''
+                            };
 
-                                       objpago.id = $(this).find("id_movr").text();
-                                       objpago.folio = $(this).find("folio_cajasr").text();
-                                       objpago.fecha = $(this).find("fec_mov_as400r").text();
-                                       objpago.monto = $(this).find("monto_movr").text();
-                                       objpago.monto_txt = $(this).find("monto_movr").text();
-                                       objpagos.push(objpago);
-                                   });
+                            objpago.id = $(this).find("id_movr").text();
+                            objpago.folio = $(this).find("folio_cajasr").text();
+                            objpago.fecha = $(this).find("fec_mov_as400r").text();
+                            objpago.monto = $(this).find("monto_movr").text();
+                            objpago.monto_txt = $(this).find("monto_movr").text();
+                            objpagos.push(objpago);
+                        });
 
-                                   var pagos_mostrados = 0;
-                                   var limite_pagos_mostrados = 20;
-                                   var num_pagos = objpagos.length;
-                                   var residuo = num_pagos % limite_pagos_mostrados;
-                                   var fraccion = 0;
-                                   if (residuo > 0) {
-                                       fraccion = 1;
-                                   }
+                        var pagos_mostrados = 0;
+                        var limite_pagos_mostrados = 20;
+                        var num_pagos = objpagos.length;
+                        var residuo = num_pagos % limite_pagos_mostrados;
+                        var fraccion = 0;
+                        if (residuo > 0) {
+                            fraccion = 1;
+                        }
 
-                                   total_paginas = Math.floor(num_pagos / limite_pagos_mostrados) + fraccion;
-                                   GeneraNumPaginas(pagina, total_paginas, tab4, pdf);
-
-
-                                   for (var index = 0; index < objpagos.length;) {
-
-                                       if (pagos_mostrados >= limite_pagos_mostrados) {
-                                           pdf.addPage();
-                                           pagina = pagina + 1;
-                                           reng_base = 32;
-                                           pagos_mostrados = 0;
-                                           GeneraEncEdoCta(tab1, tab2, tab3, tab4, pdf);
-                                           GeneraNumPaginas(pagina, total_paginas, tab4, pdf);
-                                           GeneraPieFijoEdoCta(pdf);
-                                       }
-
-                                       pdf.setFontSize(7);
-                                       pdf.setFontType('normal');
-                                       pdf.text(tab2 - pdf.getTextWidth("Pago:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' '), reng_base + inc * (17 + pagos_mostrados), "Pago:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' ');
-                                       pdf.setFontSize(8);
-                                       pdf.text(tab4 - pdf.getTextWidth(FormatoMoneda(objpagos[index].monto_txt) + ' '), reng_base + inc * (17 + pagos_mostrados), FormatoMoneda(objpagos[index].monto_txt) + ' ');
-                                       pagos_mostrados = pagos_mostrados + 1;
-
-                                       index++;
-                                   }
-
-                               }
-                               else {
-                                   console.log("No existen pagos registrados");
-                                   pdf.line(10, 220, 204, 220);
+                        total_paginas = Math.floor(num_pagos / limite_pagos_mostrados) + fraccion;
+                        GeneraNumPaginas(pagina, total_paginas, tab4, pdf);
 
 
-                               }
+                        for (var index = 0; index < objpagos.length;) {
+
+                            if (pagos_mostrados >= limite_pagos_mostrados) {
+                                pdf.addPage();
+                                pagina = pagina + 1;
+                                reng_base = 32;
+                                pagos_mostrados = 0;
+                                GeneraEncEdoCta(tab1, tab2, tab3, tab4, pdf);
+                                GeneraNumPaginas(pagina, total_paginas, tab4, pdf);
+                                GeneraPieFijoEdoCta(pdf);
+                            }
+
+                            pdf.setFontSize(7);
+                            pdf.setFontType('normal');
+                            pdf.text(tab2 - pdf.getTextWidth("Pago:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' '), reng_base + inc * (17 + pagos_mostrados), "Pago:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' ');
+                            pdf.setFontSize(8);
+                            pdf.text(tab4 - pdf.getTextWidth(FormatoMoneda(objpagos[index].monto_txt) + ' '), reng_base + inc * (17 + pagos_mostrados), FormatoMoneda(objpagos[index].monto_txt) + ' ');
+                            pagos_mostrados = pagos_mostrados + 1;
+
+                            index++;
+                        }
+
+                    }
+                    else {
+                        console.log("No existen pagos registrados");
+                        pdf.line(10, 220, 204, 220);
 
 
-                               GeneraPieVariableEdoCta(tab1, tab2, tab3, tab4, pdf);
+                    }
 
 
-                               var fid = $("#bodegadatos").data("fid");
-                               var hoy = moment().format("DDMMYYYY");
-                               var nom_edo_cta = 'edo_cta_' + fid + "_" + hoy + '.pdf';
-                               pdf.save(nom_edo_cta.toString());
+                    GeneraPieVariableEdoCta(tab1, tab2, tab3, tab4, pdf);
 
-                           })
-                                 .fail(function (xhr) {
-                                     console.log(xhr.responseText);
-                                     alert("No fue posible leer los pagos");
-                                 })
+
+                    var fid = $("#bodegadatos").data("fid");
+                    var hoy = moment().format("DDMMYYYY");
+                    var nom_edo_cta = 'edo_cta_' + fid + "_" + hoy + '.pdf';
+                    pdf.save(nom_edo_cta.toString());
+
+                })
+                .fail(function (xhr) {
+                    console.log(xhr.responseText);
+                    alert("No fue posible leer los pagos");
+                })
 
 
 
@@ -1160,11 +1151,11 @@
                         });
                         if (sentencia != '') {
                             InsertaPagos(sentencia)
-                                 .done(function (result) {
-                                     console.log("Inserción de pagos correctamente en PostgresSQL")
-                                 }).fail(function (result) {
-                                     console.log("No fue posible insertar los pagos en PSQL: " + result.responseText);
-                                 });
+                                .done(function (result) {
+                                    console.log("Inserción de pagos correctamente en PostgresSQL")
+                                }).fail(function (result) {
+                                    console.log("No fue posible insertar los pagos en PSQL: " + result.responseText);
+                                });
                         }
 
                     }
@@ -1183,136 +1174,136 @@
 
         function ConsultarFrenteFinanc(fid, accion) {
             $.ajax(
-               {
-                   url: "http://192.1.126.122/fidoc/WebServices/WebServiceFrente.asmx/GetFrenteFinanc", //PageMethod
-                   data: "{'accion':'" + accion
-                          + "','fid':'" + fid + "'}", //PageMethod Parametros de entrada                       
-                   dataType: "json",
-                   type: "post",
-                   contentType: "application/json; charset=utf-8",
-                   success: function (data) {
+                {
+                    url: "http://192.1.126.122/fidoc/WebServices/WebServiceFrente.asmx/GetFrenteFinanc", //PageMethod
+                    data: "{'accion':'" + accion
+                        + "','fid':'" + fid + "'}", //PageMethod Parametros de entrada                       
+                    dataType: "json",
+                    type: "post",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
 
-                       var cadena = $.trim(data.d);
-                       if (cadena == '<NewDataSet />') {
-                           alert("No información del frente para mostrar");
-                       } else {
-                           // Data.d trae un string con el XML generado dentro del servicio web asmx
-                           $(data.d).find("frentefinanc").each(function () {
-                               $("#bodegadatos").data("fid", $(this).find("fidr").text());
-                               $("#bodegadatos").data("oid", $(this).find("oidr").text());
-                               $("#bodegadatos").data("pid", $(this).find("pidr").text());
-                               $("#bodegadatos").data("obr_clv_int", $(this).find("obr_clv_intr").text());
-                               var id = $("#bodegadatos").data("fid") + ':' + $("#bodegadatos").data("pid") + ':' + $("#bodegadatos").data("oid") + ':' + $("#bodegadatos").data("obr_clv_int");
-                               $("#lblid").text(id);
-                               $("#bodegadatos").data("coopid", $(this).find("coopidr").text());
-                               $("#bodegadatos").data("obra_sifidoc", $(this).find("obra_sifidocr").text());
-                               $("#lblcooperador").text($(this).find("mnomfichar").text());
-                               $("#bodegadatos").data("nom_ficha", $(this).find("mnomfichar").text());
-                               $("#lblcoopsifidoc").text($(this).find("obra_sifidocr").text() + $(this).find("coopidr").text());
-                               $("#lblcurp").text($(this).find("mcurpr").text());
-                               $("#lbline").text($(this).find("miner").text());
-                               $("#lbltel").text($(this).find("mtelcoopr").text());
-                               $("#lblcorreo").text($(this).find("mcorreor").text());
-                               $("#lblrelacionpredio").text($(this).find("crelacionpredior").text());
-                               $("#bodegadatos").data("relacion_predio", parseInt($(this).find("crelacionpredior").text()));
-                               $("#bodegadatos").data("obr_status", parseInt($(this).find("obr_statusr").text()));
-                               $("#lblnomprog").text($(this).find("nomprogr").text() + ' (' + $(this).find("progdescripr").text() + ')');
-                               $("#bodegadatos").data("nomprog", $(this).find("nomprogr").text());
-                               $("#bodegadatos").data("progdescrip", $(this).find("progdescripr").text());
-                               $("#bodegadatos").data("tipo_obra", $(this).find("tipo_obrar").text());
-                               $("#bodegadatos").data("calle", $(this).find("caller").text());
-                               $("#bodegadatos").data("colonia", $(this).find("coloniar").text());
-                               $("#bodegadatos").data("tramo", $(this).find("tramor").text());
-                               $("#bodegadatos").data("nooficial", $(this).find("nooficialr").text());
-                               $("#bodegadatos").data("ctapredial", $(this).find("ctapredialr").text());
-                               $("#bodegadatos").data("uso_suelo", $(this).find("uso_suelor").text());
-                               $("#bodegadatos").data("num_pagos", $(this).find("num_pagosr").text());
-                               $("#bodegadatos").data("mts_fte", $(this).find("mts_frenter").text());
-                               $("#bodegadatos").data("costo_mto", $(this).find("costo_mtor").text());
-                               $("#bodegadatos").data("capital_sin_inc", $(this).find("capital_sin_incr").text());
-                               $("#bodegadatos").data("inc", $(this).find("incr").text());
-                               $("#lbldomnotif").text($(this).find("dom_notifr").text());
-                               $("#lblfecinipag").text(MostrarFormatoFecha($(this).find("fecinipr").text()));
-                               $("#bodegadatos").data("fecinipag", MostrarFormatoFecha($(this).find("fecinipr").text()));
-                               $("#lblfecvencpag").text(MostrarFormatoFecha($(this).find("fecvenpr").text()));
-                               $("#bodegadatos").data("fecvencpag", MostrarFormatoFecha($(this).find("fecvenpr").text()));
-                               $("#lblfeciniproc").text(MostrarFormatoFecha($(this).find("feciniprocr").text()));
-                               $("#lblfecinicob").text(MostrarFormatoFecha($(this).find("fecinicobr").text()));
-                               $("#lblcapital").text(FormatoMoneda($(this).find("capitalr").text()));
-                               $("#bodegadatos").data("capital", $(this).find("capitalr").text());
-                               $("#lblIncremento").text(FormatoMoneda($(this).find("incr").text()));
-                               $("#bodegadatos").data("inc", $(this).find("incr").text());
-                               $("#lbldescto_poraplicar_capital").text(FormatoMoneda($(this).find("descto_capital_por_aplicr").text()));
-                               $("#bodegadatos").data("descto_por_aplic", parseFloat($(this).find("descto_capital_por_aplicr").text()));
-                               $("#bodegadatos").data("descto_por_aplic_2", parseFloat($(this).find("descto_capital_por_aplicr").text()));
-                               $("#lbldescto_aplicado_capital").text(FormatoMoneda($(this).find("descto_capital_aplicr").text()));
-                               $("#bodegadatos").data("descto_aplic", parseFloat($(this).find("descto_capital_aplicr").text()));
-                               $("#lblpagcap").text(FormatoMoneda($(this).find("monto_capital_pagador").text()));
-                               $("#bodegadatos").data("monto_capital_pagado", parseFloat($(this).find("monto_capital_pagador").text()));
-                               $("#lblsaldo_total").text(FormatoMoneda($(this).find("saldo_totalr").text()));
-                               $("#bodegadatos").data("saldo_total", parseFloat($(this).find("saldo_totalr").text()));
-                               var coop_sifidoc = $("#bodegadatos").data("obra_sifidoc") + $("#bodegadatos").data("coopid");
-                           })
-                       }
+                        var cadena = $.trim(data.d);
+                        if (cadena == '<NewDataSet />') {
+                            alert("No información del frente para mostrar");
+                        } else {
+                            // Data.d trae un string con el XML generado dentro del servicio web asmx
+                            $(data.d).find("frentefinanc").each(function () {
+                                $("#bodegadatos").data("fid", $(this).find("fidr").text());
+                                $("#bodegadatos").data("oid", $(this).find("oidr").text());
+                                $("#bodegadatos").data("pid", $(this).find("pidr").text());
+                                $("#bodegadatos").data("obr_clv_int", $(this).find("obr_clv_intr").text());
+                                var id = $("#bodegadatos").data("fid") + ':' + $("#bodegadatos").data("pid") + ':' + $("#bodegadatos").data("oid") + ':' + $("#bodegadatos").data("obr_clv_int");
+                                $("#lblid").text(id);
+                                $("#bodegadatos").data("coopid", $(this).find("coopidr").text());
+                                $("#bodegadatos").data("obra_sifidoc", $(this).find("obra_sifidocr").text());
+                                $("#lblcooperador").text($(this).find("mnomfichar").text());
+                                $("#bodegadatos").data("nom_ficha", $(this).find("mnomfichar").text());
+                                $("#lblcoopsifidoc").text($(this).find("obra_sifidocr").text() + $(this).find("coopidr").text());
+                                $("#lblcurp").text($(this).find("mcurpr").text());
+                                $("#lbline").text($(this).find("miner").text());
+                                $("#lbltel").text($(this).find("mtelcoopr").text());
+                                $("#lblcorreo").text($(this).find("mcorreor").text());
+                                $("#lblrelacionpredio").text($(this).find("crelacionpredior").text());
+                                $("#bodegadatos").data("relacion_predio", parseInt($(this).find("crelacionpredior").text()));
+                                $("#bodegadatos").data("obr_status", parseInt($(this).find("obr_statusr").text()));
+                                $("#lblnomprog").text($(this).find("nomprogr").text() + ' (' + $(this).find("progdescripr").text() + ')');
+                                $("#bodegadatos").data("nomprog", $(this).find("nomprogr").text());
+                                $("#bodegadatos").data("progdescrip", $(this).find("progdescripr").text());
+                                $("#bodegadatos").data("tipo_obra", $(this).find("tipo_obrar").text());
+                                $("#bodegadatos").data("calle", $(this).find("caller").text());
+                                $("#bodegadatos").data("colonia", $(this).find("coloniar").text());
+                                $("#bodegadatos").data("tramo", $(this).find("tramor").text());
+                                $("#bodegadatos").data("nooficial", $(this).find("nooficialr").text());
+                                $("#bodegadatos").data("ctapredial", $(this).find("ctapredialr").text());
+                                $("#bodegadatos").data("uso_suelo", $(this).find("uso_suelor").text());
+                                $("#bodegadatos").data("num_pagos", $(this).find("num_pagosr").text());
+                                $("#bodegadatos").data("mts_fte", $(this).find("mts_frenter").text());
+                                $("#bodegadatos").data("costo_mto", $(this).find("costo_mtor").text());
+                                $("#bodegadatos").data("capital_sin_inc", $(this).find("capital_sin_incr").text());
+                                $("#bodegadatos").data("inc", $(this).find("incr").text());
+                                $("#lbldomnotif").text($(this).find("dom_notifr").text());
+                                $("#lblfecinipag").text(MostrarFormatoFecha($(this).find("fecinipr").text()));
+                                $("#bodegadatos").data("fecinipag", MostrarFormatoFecha($(this).find("fecinipr").text()));
+                                $("#lblfecvencpag").text(MostrarFormatoFecha($(this).find("fecvenpr").text()));
+                                $("#bodegadatos").data("fecvencpag", MostrarFormatoFecha($(this).find("fecvenpr").text()));
+                                $("#lblfeciniproc").text(MostrarFormatoFecha($(this).find("feciniprocr").text()));
+                                $("#lblfecinicob").text(MostrarFormatoFecha($(this).find("fecinicobr").text()));
+                                $("#lblcapital").text(FormatoMoneda($(this).find("capitalr").text()));
+                                $("#bodegadatos").data("capital", $(this).find("capitalr").text());
+                                $("#lblIncremento").text(FormatoMoneda($(this).find("incr").text()));
+                                $("#bodegadatos").data("inc", $(this).find("incr").text());
+                                $("#lbldescto_poraplicar_capital").text(FormatoMoneda($(this).find("descto_capital_por_aplicr").text()));
+                                $("#bodegadatos").data("descto_por_aplic", parseFloat($(this).find("descto_capital_por_aplicr").text()));
+                                $("#bodegadatos").data("descto_por_aplic_2", parseFloat($(this).find("descto_capital_por_aplicr").text()));
+                                $("#lbldescto_aplicado_capital").text(FormatoMoneda($(this).find("descto_capital_aplicr").text()));
+                                $("#bodegadatos").data("descto_aplic", parseFloat($(this).find("descto_capital_aplicr").text()));
+                                $("#lblpagcap").text(FormatoMoneda($(this).find("monto_capital_pagador").text()));
+                                $("#bodegadatos").data("monto_capital_pagado", parseFloat($(this).find("monto_capital_pagador").text()));
+                                $("#lblsaldo_total").text(FormatoMoneda($(this).find("saldo_totalr").text()));
+                                $("#bodegadatos").data("saldo_total", parseFloat($(this).find("saldo_totalr").text()));
+                                var coop_sifidoc = $("#bodegadatos").data("obra_sifidoc") + $("#bodegadatos").data("coopid");
+                            })
+                        }
 
 
-                   },
-                   error: function (response) {
-                       if (response.length != 0)++
-                           alert(response);
-                   }
-               });
+                    },
+                    error: function (response) {
+                        if (response.length != 0) ++
+                            alert(response);
+                    }
+                });
 
         }
 
         function ConsultarRolUsuario(idusu, accion) {
             $.ajax(
-               {
-                   url: "http://192.1.126.122/fidoc/WebServices/WebServiceUsuario.asmx/GetRolUsuario", //PageMethod
-                   data: "{'accion':'" + accion
-                          + "','idusu':'" + idusu + "'}", //PageMethod Parametros de entrada                       
-                   dataType: "json",
-                   type: "post",
-                   contentType: "application/json; charset=utf-8",
-                   success: function (data) {
-                       // Data.d trae un string con el XML generado dentro del servicio web asmx
-                       $(data.d).find("rolusuario").each(function () {
-                           $("#bodegadatos").data("musuid", $(this).find("musuidr").text());
+                {
+                    url: "http://192.1.126.122/fidoc/WebServices/WebServiceUsuario.asmx/GetRolUsuario", //PageMethod
+                    data: "{'accion':'" + accion
+                        + "','idusu':'" + idusu + "'}", //PageMethod Parametros de entrada                       
+                    dataType: "json",
+                    type: "post",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        // Data.d trae un string con el XML generado dentro del servicio web asmx
+                        $(data.d).find("rolusuario").each(function () {
+                            $("#bodegadatos").data("musuid", $(this).find("musuidr").text());
 
-                           var aux = $(this).find("musunombrer").text();
+                            var aux = $(this).find("musunombrer").text();
 
-                           $("#bodegadatos").data("musunombre", $(this).find("musunombrer").text());
-                           $("#bodegadatos").data("musucorreo", $(this).find("musucorreor").text());
-                           $("#bodegadatos").data("musucuenta", $(this).find("musucuentar").text());
-                           $("#bodegadatos").data("musupass", $(this).find("musupassr").text());
-                           $("#bodegadatos").data("musuidrol", $(this).find("musuidrolr").text());
-                           $("#bodegadatos").data("musurfc", $(this).find("musurfcr").text());
-                           $("#bodegadatos").data("musucurp", $(this).find("musucurpr").text());
-                           $("#bodegadatos").data("mususs", $(this).find("musussr").text());
-                           $("#bodegadatos").data("musuempleado", $(this).find("musuempleador").text());
-                           $("#bodegadatos").data("musrcre_usu", $(this).find("musrcre_usur").text());
-                           $("#bodegadatos").data("musrmod_usu", $(this).find("musrmod_usur").text());
-                           $("#bodegadatos").data("musuestatus", $(this).find("musuestatusr").text());
-                           $("#bodegadatos").data("cactivo", $(this).find("cactivor").text());
-                           $("#bodegadatos").data("musulastlogin", $(this).find("musulastloginr").text());
-                           $("#bodegadatos").data("feccre_usu", $(this).find("feccre_usur").text());
-                           $("#bodegadatos").data("fecmod_usu", $(this).find("fecmod_usur").text());
-                           $("#bodegadatos").data("midarea", $(this).find("midarear").text());
-                           $("#bodegadatos").data("crolid", $(this).find("crolidr").text());
-                           $("#bodegadatos").data("croldescripcion", $(this).find("croldescripcionr").text());
-                           $("#bodegadatos").data("crolestatus", $(this).find("crolestatusr").text());
-                           $("#bodegadatos").data("crolnombre", $(this).find("crolnombrer").text());
-                           $("#bodegadatos").data("usucre_rol", $(this).find("usucre_rolr").text());
-                           $("#bodegadatos").data("feccre_rol", $(this).find("feccre_rolr").text());
-                           $("#bodegadatos").data("usumod_rol", $(this).find("saldo_totalr").text());
-                           $("#bodegadatos").data("fecmod_rol", $(this).find("saldo_totalr").text());
-                       })
-                   },
-                   error: function (response) {
-                       if (response.length != 0)++
-                           alert(response);
-                   }
-               });
+                            $("#bodegadatos").data("musunombre", $(this).find("musunombrer").text());
+                            $("#bodegadatos").data("musucorreo", $(this).find("musucorreor").text());
+                            $("#bodegadatos").data("musucuenta", $(this).find("musucuentar").text());
+                            $("#bodegadatos").data("musupass", $(this).find("musupassr").text());
+                            $("#bodegadatos").data("musuidrol", $(this).find("musuidrolr").text());
+                            $("#bodegadatos").data("musurfc", $(this).find("musurfcr").text());
+                            $("#bodegadatos").data("musucurp", $(this).find("musucurpr").text());
+                            $("#bodegadatos").data("mususs", $(this).find("musussr").text());
+                            $("#bodegadatos").data("musuempleado", $(this).find("musuempleador").text());
+                            $("#bodegadatos").data("musrcre_usu", $(this).find("musrcre_usur").text());
+                            $("#bodegadatos").data("musrmod_usu", $(this).find("musrmod_usur").text());
+                            $("#bodegadatos").data("musuestatus", $(this).find("musuestatusr").text());
+                            $("#bodegadatos").data("cactivo", $(this).find("cactivor").text());
+                            $("#bodegadatos").data("musulastlogin", $(this).find("musulastloginr").text());
+                            $("#bodegadatos").data("feccre_usu", $(this).find("feccre_usur").text());
+                            $("#bodegadatos").data("fecmod_usu", $(this).find("fecmod_usur").text());
+                            $("#bodegadatos").data("midarea", $(this).find("midarear").text());
+                            $("#bodegadatos").data("crolid", $(this).find("crolidr").text());
+                            $("#bodegadatos").data("croldescripcion", $(this).find("croldescripcionr").text());
+                            $("#bodegadatos").data("crolestatus", $(this).find("crolestatusr").text());
+                            $("#bodegadatos").data("crolnombre", $(this).find("crolnombrer").text());
+                            $("#bodegadatos").data("usucre_rol", $(this).find("usucre_rolr").text());
+                            $("#bodegadatos").data("feccre_rol", $(this).find("feccre_rolr").text());
+                            $("#bodegadatos").data("usumod_rol", $(this).find("saldo_totalr").text());
+                            $("#bodegadatos").data("fecmod_rol", $(this).find("saldo_totalr").text());
+                        })
+                    },
+                    error: function (response) {
+                        if (response.length != 0) ++
+                            alert(response);
+                    }
+                });
 
         }
 
@@ -1442,334 +1433,334 @@
             }
 
             $("#grid").jqGrid(
-                 {
-                     datatype: function () {
-                         $.ajax(
-                           {
-                               url: "http://192.1.126.122/fidoc/WebServices/WebServiceMovs.asmx/GetMovsGrid2_psql", //PageMethod
-                               data: "{'pPageSize':'" + $('#grid').getGridParam("rowNum") +
-                               "','pCurrentPage':'" + $('#grid').getGridParam("page") +
-                               "','pSortColumn':'" + $('#grid').getGridParam("sortname") +
-                               "','pSortOrder':'" + $('#grid').getGridParam("sortorder") +
-                               "','fecini':'" + fec_inicial +
-                               "','fecfin':'" + fec_final +
-                               "','fid':'" + fid + "'}", //PageMethod Parametros de entrada
-                               dataType: "json",
-                               type: "post",
-                               contentType: "application/json; charset=utf-8",
-                               complete: function (jsondata, stat) {
-                                   if (stat == "success") {
-                                       jQuery("#grid")[0].addJSONData(JSON.parse(jsondata.responseText).d);
-                                       var objeto = JSON.parse(jsondata.responseText).d;
-                                       regs = objeto.RecordCount;
-                                       if (regs) {
-                                           MostrarBitacoraMovs();
-                                       } else {
-                                           alert('No se encontraron movimientos registrados');
-                                       }
-                                   }
-                                   else {
-                                       alert(JSON.parse(jsondata.responseText).Message);
-                                   }
-                               }
-                           });
-                     },
-                     jsonReader: //Set the jsonReader to the JQGridJSonResponse squema to bind the data.
-                     {
-                         root: "Items",
-                         page: "CurrentPage",
-                         total: "PageCount",
-                         records: "RecordCount",
-                         repeatitems: true,
-                         cell: "row",
-                         id: "coo_clv2"
-                     },
-                     colModel: [
-                    {
-                        index: 'mov_obra_sifidoc', width: 100, align: 'Center', name: 'ObraS', hidden: true
+                {
+                    datatype: function () {
+                        $.ajax(
+                            {
+                                url: "http://192.1.126.122/fidoc/WebServices/WebServiceMovs.asmx/GetMovsGrid2_psql", //PageMethod
+                                data: "{'pPageSize':'" + $('#grid').getGridParam("rowNum") +
+                                    "','pCurrentPage':'" + $('#grid').getGridParam("page") +
+                                    "','pSortColumn':'" + $('#grid').getGridParam("sortname") +
+                                    "','pSortOrder':'" + $('#grid').getGridParam("sortorder") +
+                                    "','fecini':'" + fec_inicial +
+                                    "','fecfin':'" + fec_final +
+                                    "','fid':'" + fid + "'}", //PageMethod Parametros de entrada
+                                dataType: "json",
+                                type: "post",
+                                contentType: "application/json; charset=utf-8",
+                                complete: function (jsondata, stat) {
+                                    if (stat == "success") {
+                                        jQuery("#grid")[0].addJSONData(JSON.parse(jsondata.responseText).d);
+                                        var objeto = JSON.parse(jsondata.responseText).d;
+                                        regs = objeto.RecordCount;
+                                        if (regs) {
+                                            MostrarBitacoraMovs();
+                                        } else {
+                                            alert('No se encontraron movimientos registrados');
+                                        }
+                                    }
+                                    else {
+                                        alert(JSON.parse(jsondata.responseText).Message);
+                                    }
+                                }
+                            });
                     },
+                    jsonReader: //Set the jsonReader to the JQGridJSonResponse squema to bind the data.
                     {
-                        index: 'mov_coop_sifidoc', width: 50, align: 'Center', name: 'CoopS', hidden: true
+                        root: "Items",
+                        page: "CurrentPage",
+                        total: "PageCount",
+                        records: "RecordCount",
+                        repeatitems: true,
+                        cell: "row",
+                        id: "coo_clv2"
                     },
-                    {
-                        index: 'fec_mov_as400', width: 100, align: 'Center', name: 'FecMov'
-                    },
-                    {
-                        index: 'usu_sifidoc', width: 100, align: 'Center', name: 'UsuS', hidden: true
-                    },
-                    {
-                        index: 'monto_abono_sifidoc', width: 150, align: 'Center', name: 'AbonoS', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
-                    },
-                    {
-                        index: 'monto_recargo_sifidoc', width: 150, align: 'Center', name: 'CargoS', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
-                    },
-                    {
-                        index: 'tipo_mov_sifidoc', width: 80, align: 'Center', name: 'TipoMovS', hidden: true
-                    },
-                    {
-                        index: 'fec_aplic_mov', width: 200, align: 'Center', name: 'FecAplicMov', hidden: true
-                    },
-                    {
-                        index: 'clave_sifidoc', width: 80, align: 'Center', name: 'ClaveS', hidden: true
-                    },
-                    {
-                        index: 'consecutivo_sifidoc', width: 50, align: 'Center', name: 'ConsecS', hidden: true
-                    },
-                    {
-                        index: 'fid', width: 50, align: 'Center', name: 'fid', hidden: true
-                    },
-                    {
-                        index: 'usucre', width: 50, align: 'Center', name: 'UsuCre'
-                    },
-                    {
-                        index: 'monto_mov', width: 150, align: 'Center', name: 'Monto', hidden: true
-                    },
-                    {
-                        index: 'tipo_mov', width: 50, align: 'Center', name: 'TipoMov', hidden: true
-                    },
-                    {
-                        index: 'id_mov', width: 50, align: 'Center', name: 'IdMov', hidden: true
-                    },
-                    {
-                        index: 'folio_cajas', width: 150, align: 'Center', name: 'FolioCajas'
-                    },
-                    {
-                        index: 'titulo_mov', width: 150, align: 'Center', name: 'ConceptoMov'
-                    },
-                    {
-                        index: 'estatus_mov', width: 100, align: 'Center', name: 'EstatMov'
-                    }],
-                     pager: "#pager", //Pager.                 
-                     loadtext: 'Cargando datos...',
-                     recordtext: "{0} - {1} de {2} elementos",
-                     emptyrecords: 'No hay resultados',
-                     pgtext: 'Pág:{0} de {1}', //Paging input control text format.
-                     rowNum: "19", // PageSize.
-                     rowList: [5, 10, 20], //Variable PageSize DropDownList. 
-                     viewrecords: true, //Show the RecordCount in the pager.
-                     multiselect: false,
-                     sortname: "fec_mov_as400", //login SortColumn
-                     sortorder: "asc", //login SortOrder.
-                     width: "800",
-                     height: "500",
-                     caption: 'Relación de Movimientos Financieros'
+                    colModel: [
+                        {
+                            index: 'mov_obra_sifidoc', width: 100, align: 'Center', name: 'ObraS', hidden: true
+                        },
+                        {
+                            index: 'mov_coop_sifidoc', width: 50, align: 'Center', name: 'CoopS', hidden: true
+                        },
+                        {
+                            index: 'fec_mov_as400', width: 100, align: 'Center', name: 'FecMov'
+                        },
+                        {
+                            index: 'usu_sifidoc', width: 100, align: 'Center', name: 'UsuS', hidden: true
+                        },
+                        {
+                            index: 'monto_abono_sifidoc', width: 150, align: 'Center', name: 'AbonoS', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
+                        },
+                        {
+                            index: 'monto_recargo_sifidoc', width: 150, align: 'Center', name: 'CargoS', formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }
+                        },
+                        {
+                            index: 'tipo_mov_sifidoc', width: 80, align: 'Center', name: 'TipoMovS', hidden: true
+                        },
+                        {
+                            index: 'fec_aplic_mov', width: 200, align: 'Center', name: 'FecAplicMov', hidden: true
+                        },
+                        {
+                            index: 'clave_sifidoc', width: 80, align: 'Center', name: 'ClaveS', hidden: true
+                        },
+                        {
+                            index: 'consecutivo_sifidoc', width: 50, align: 'Center', name: 'ConsecS', hidden: true
+                        },
+                        {
+                            index: 'fid', width: 50, align: 'Center', name: 'fid', hidden: true
+                        },
+                        {
+                            index: 'usucre', width: 50, align: 'Center', name: 'UsuCre'
+                        },
+                        {
+                            index: 'monto_mov', width: 150, align: 'Center', name: 'Monto', hidden: true
+                        },
+                        {
+                            index: 'tipo_mov', width: 50, align: 'Center', name: 'TipoMov', hidden: true
+                        },
+                        {
+                            index: 'id_mov', width: 50, align: 'Center', name: 'IdMov', hidden: true
+                        },
+                        {
+                            index: 'folio_cajas', width: 150, align: 'Center', name: 'FolioCajas'
+                        },
+                        {
+                            index: 'titulo_mov', width: 150, align: 'Center', name: 'ConceptoMov'
+                        },
+                        {
+                            index: 'estatus_mov', width: 100, align: 'Center', name: 'EstatMov'
+                        }],
+                    pager: "#pager", //Pager.                 
+                    loadtext: 'Cargando datos...',
+                    recordtext: "{0} - {1} de {2} elementos",
+                    emptyrecords: 'No hay resultados',
+                    pgtext: 'Pág:{0} de {1}', //Paging input control text format.
+                    rowNum: "19", // PageSize.
+                    rowList: [5, 10, 20], //Variable PageSize DropDownList. 
+                    viewrecords: true, //Show the RecordCount in the pager.
+                    multiselect: false,
+                    sortname: "fec_mov_as400", //login SortColumn
+                    sortorder: "asc", //login SortOrder.
+                    width: "800",
+                    height: "500",
+                    caption: 'Relación de Movimientos Financieros'
 
-                 }).navGrid('#pager', { edit: false, add: false, search: false, del: false })
+                }).navGrid('#pager', { edit: false, add: false, search: false, del: false })
 
-            .navButtonAdd('#pager',
-               {
-                   caption: "CancPago",
-                   onClickButton: function () {
-                       var myGrid = $('#grid');
-                       var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
-                       var objMovFinanc = myGrid.jqGrid('getRowData', selectedRowId);
-                       ConsultaPermisoEjecutarTarea($("#bodegadatos").data("idusu"), 147, 3)
-                       .done(function (result) {
-                           var data = result.d;
-                           var no_tiene_permiso = data.split(":");
-                           var no_tiene = parseInt(no_tiene_permiso[1]);
-                           if (!no_tiene) {
-                               if (objMovFinanc.FolioCajas) {
-                                   if (objMovFinanc.TipoMov == '1') {
-                                       var estatus_obra = $("#bodegadatos").data("obr_status");
-                                       if (estatus_obra == 2) {
-                                           if (objMovFinanc.EstatMov == 'ACTIVO') {
-                                               var opcion = confirm('¿Deseas cancelar el pago con número de folio ' + objMovFinanc.FolioCajas + '? ADVERTENCIA: Los descuentos aplicados o por aplicar serán también CANCELADOS.');
-                                               if (opcion == true) {
-                                                   var objUsuarioTareaAccion = {
-                                                       "id_accion_tarea": 0,
-                                                       "fid": parseInt(objMovFinanc.fid),
-                                                       "pid": 0,
-                                                       "oid": 0,
-                                                       "obr_clv_int": 0,
-                                                       "cid": 0,
-                                                       "idtarea": 147, /*Tarea correspondiente a la cancelación de pagos*/
-                                                       "idusu_solicita": $("#bodegadatos").data("idusu"),
-                                                       "idusu_autoriza": $("#bodegadatos").data("idusu"),
-                                                       "idusu_rubrica": $("#bodegadatos").data("idusu"),
-                                                       "idusu_rubrica2": $("#bodegadatos").data("idusu"),
-                                                       "folio_solic": '',
-                                                       "parametro1": '',
-                                                       "parametro2": '',
-                                                       "parametro3": '',
-                                                       "parametro4": objMovFinanc.FolioCajas,
-                                                       "parametro5": '',
-                                                       "parametro6": '',
-                                                       "parametro7": '',
-                                                       "parametro8": '',
-                                                       "parametro9": '',
-                                                       "parametro10": '',
-                                                       "parametro11": '',
-                                                       "parametro12": '',
-                                                       "parametro13": '',
-                                                       "parametro14": '',
-                                                       "parametro15": '',
-                                                       "parametro16": '',
-                                                       "parametro17": '',
-                                                       "parametro18": '',
-                                                       "parametro19": '',
-                                                       "parametro20": ''
-                                                   };
-
-
-                                                   var objHistAct = {
-                                                       "idactividad": 0,
-                                                       "estatus_actividad": 0,
-                                                       "fecha_actividad": '01/01/1900',
-                                                       "hora_actividad": '00:00:00',
-                                                       "idusu": $("#bodegadatos").data("idusu"),
-                                                       "idaccion": 3
-                                                   };
-
-                                                   CancelarPago(objUsuarioTareaAccion, objHistAct)
-                                                   .done(function (result) {
-                                                       var data = result.d;
-                                                       alert(data);
-                                                       $('#mask, .window').hide();
-                                                   })
-                                                   .fail(function (xhr) {
-                                                       console.log(xhr.responseText);
-                                                       alert("Falló la tarea de cancelar el pago.");
-                                                   })
-                                               } else {
-                                                   console.log('Acción cancelada por el usuario');
-                                               }
-                                           } else {
-                                               alert('PAGO SELECCIONADO se encuentra CANCELADO.');
-                                           }
-                                       }
-                                       else {
-                                           alert('No es posible cancelar pagos de obra en estaus de PROCESO o TERMINADA VENCIDA');
-                                       }
-                                   } else {
-                                       alert('El movimiento seleccionado NO es un PAGO');
-                                   }
-                               }
-                               else {
-                                   alert('Selecciona un movimiento registrado de la lista...');
-                               }
-                           }
-                           else {
-                               alert('El usuario ' + $("#bodegadatos").data("idusu") + ' NO cuenta con el PERMISO de CANCELAR PAGOS.');
-                           }
-                       })
-                       .fail(function (xhr) {
-                           console.log(xhr.responseText);
-                           alert("Falló consultar permiso de ejecución de tarea.");
-                       })
-                   },
-                   position: "last",
-                   title: "Ver Frente",
-                   cursor: "pointer"
-               })
+                .navButtonAdd('#pager',
+                    {
+                        caption: "CancPago",
+                        onClickButton: function () {
+                            var myGrid = $('#grid');
+                            var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                            var objMovFinanc = myGrid.jqGrid('getRowData', selectedRowId);
+                            ConsultaPermisoEjecutarTarea($("#bodegadatos").data("idusu"), 147, 3)
+                                .done(function (result) {
+                                    var data = result.d;
+                                    var no_tiene_permiso = data.split(":");
+                                    var no_tiene = parseInt(no_tiene_permiso[1]);
+                                    if (!no_tiene) {
+                                        if (objMovFinanc.FolioCajas) {
+                                            if (objMovFinanc.TipoMov == '1') {
+                                                var estatus_obra = $("#bodegadatos").data("obr_status");
+                                                if (estatus_obra == 2) {
+                                                    if (objMovFinanc.EstatMov == 'ACTIVO') {
+                                                        var opcion = confirm('¿Deseas cancelar el pago con número de folio ' + objMovFinanc.FolioCajas + '? ADVERTENCIA: Los descuentos aplicados o por aplicar serán también CANCELADOS.');
+                                                        if (opcion == true) {
+                                                            var objUsuarioTareaAccion = {
+                                                                "id_accion_tarea": 0,
+                                                                "fid": parseInt(objMovFinanc.fid),
+                                                                "pid": 0,
+                                                                "oid": 0,
+                                                                "obr_clv_int": 0,
+                                                                "cid": 0,
+                                                                "idtarea": 147, /*Tarea correspondiente a la cancelación de pagos*/
+                                                                "idusu_solicita": $("#bodegadatos").data("idusu"),
+                                                                "idusu_autoriza": $("#bodegadatos").data("idusu"),
+                                                                "idusu_rubrica": $("#bodegadatos").data("idusu"),
+                                                                "idusu_rubrica2": $("#bodegadatos").data("idusu"),
+                                                                "folio_solic": '',
+                                                                "parametro1": '',
+                                                                "parametro2": '',
+                                                                "parametro3": '',
+                                                                "parametro4": objMovFinanc.FolioCajas,
+                                                                "parametro5": '',
+                                                                "parametro6": '',
+                                                                "parametro7": '',
+                                                                "parametro8": '',
+                                                                "parametro9": '',
+                                                                "parametro10": '',
+                                                                "parametro11": '',
+                                                                "parametro12": '',
+                                                                "parametro13": '',
+                                                                "parametro14": '',
+                                                                "parametro15": '',
+                                                                "parametro16": '',
+                                                                "parametro17": '',
+                                                                "parametro18": '',
+                                                                "parametro19": '',
+                                                                "parametro20": ''
+                                                            };
 
 
-            .navButtonAdd('#pager',
-               {
-                   caption: "TraspPago",
-                   onClickButton: function () {
-                       var myGrid = $('#grid');
-                       var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
-                       var objMovFinanc = myGrid.jqGrid('getRowData', selectedRowId);
-                       ConsultaPermisoEjecutarTarea($("#bodegadatos").data("idusu"), 151, 3)
-                       .done(function (result) {
-                           var data = result.d;
-                           var no_tiene_permiso = data.split(":");
-                           var no_tiene = parseInt(no_tiene_permiso[1]);
-                           if (!no_tiene) {
-                               if (objMovFinanc.fid) {
-                                   if (objMovFinanc.TipoMov == '1') {
-                                       var estatus_obra = $("#bodegadatos").data("obr_status");
-                                       if (estatus_obra == 2) {
-                                           if (objMovFinanc.EstatMov == 'ACTIVO') {
-                                               var opcion = confirm("¿Deseas cancelar el pago con número de folio " + objMovFinanc.FolioCajas + '? IMPORTANTE: Los descuentos aplicados o por aplicar serán también CANCELADOS.');
-                                               if (opcion == true) {
-                                                   var objUsuarioTareaAccion = {
-                                                       "id_accion_tarea": 0,
-                                                       "fid": parseInt(objMovFinanc.fid),
-                                                       "pid": 0,
-                                                       "oid": 0,
-                                                       "obr_clv_int": 0,
-                                                       "cid": 0,
-                                                       "idtarea": 147, /*Tarea correspondiente a la cancelación de pagos*/
-                                                       "idusu_solicita": $("#bodegadatos").data("idusu"),
-                                                       "idusu_autoriza": $("#bodegadatos").data("idusu"),
-                                                       "idusu_rubrica": $("#bodegadatos").data("idusu"),
-                                                       "idusu_rubrica2": $("#bodegadatos").data("idusu"),
-                                                       "folio_solic": '',
-                                                       "parametro1": '',
-                                                       "parametro2": '',
-                                                       "parametro3": '',
-                                                       "parametro4": objMovFinanc.FolioCajas,
-                                                       "parametro5": '',
-                                                       "parametro6": '',
-                                                       "parametro7": '',
-                                                       "parametro8": '',
-                                                       "parametro9": '',
-                                                       "parametro10": '',
-                                                       "parametro11": '',
-                                                       "parametro12": '',
-                                                       "parametro13": '',
-                                                       "parametro14": '',
-                                                       "parametro15": '',
-                                                       "parametro16": '',
-                                                       "parametro17": '',
-                                                       "parametro18": '',
-                                                       "parametro19": '',
-                                                       "parametro20": ''
-                                                   };
+                                                            var objHistAct = {
+                                                                "idactividad": 0,
+                                                                "estatus_actividad": 0,
+                                                                "fecha_actividad": '01/01/1900',
+                                                                "hora_actividad": '00:00:00',
+                                                                "idusu": $("#bodegadatos").data("idusu"),
+                                                                "idaccion": 3
+                                                            };
+
+                                                            CancelarPago(objUsuarioTareaAccion, objHistAct)
+                                                                .done(function (result) {
+                                                                    var data = result.d;
+                                                                    alert(data);
+                                                                    $('#mask, .window').hide();
+                                                                })
+                                                                .fail(function (xhr) {
+                                                                    console.log(xhr.responseText);
+                                                                    alert("Falló la tarea de cancelar el pago.");
+                                                                })
+                                                        } else {
+                                                            console.log('Acción cancelada por el usuario');
+                                                        }
+                                                    } else {
+                                                        alert('PAGO SELECCIONADO se encuentra CANCELADO.');
+                                                    }
+                                                }
+                                                else {
+                                                    alert('No es posible cancelar pagos de obra en estaus de PROCESO o TERMINADA VENCIDA');
+                                                }
+                                            } else {
+                                                alert('El movimiento seleccionado NO es un PAGO');
+                                            }
+                                        }
+                                        else {
+                                            alert('Selecciona un movimiento registrado de la lista...');
+                                        }
+                                    }
+                                    else {
+                                        alert('El usuario ' + $("#bodegadatos").data("idusu") + ' NO cuenta con el PERMISO de CANCELAR PAGOS.');
+                                    }
+                                })
+                                .fail(function (xhr) {
+                                    console.log(xhr.responseText);
+                                    alert("Falló consultar permiso de ejecución de tarea.");
+                                })
+                        },
+                        position: "last",
+                        title: "Ver Frente",
+                        cursor: "pointer"
+                    })
 
 
-                                                   var objHistAct = {
-                                                       "idactividad": 0,
-                                                       "estatus_actividad": 0,
-                                                       "fecha_actividad": '01/01/1900',
-                                                       "hora_actividad": '00:00:00',
-                                                       "idusu": $("#bodegadatos").data("idusu"),
-                                                       "idaccion": 3
-                                                   };
+                .navButtonAdd('#pager',
+                    {
+                        caption: "TraspPago",
+                        onClickButton: function () {
+                            var myGrid = $('#grid');
+                            var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                            var objMovFinanc = myGrid.jqGrid('getRowData', selectedRowId);
+                            ConsultaPermisoEjecutarTarea($("#bodegadatos").data("idusu"), 151, 3)
+                                .done(function (result) {
+                                    var data = result.d;
+                                    var no_tiene_permiso = data.split(":");
+                                    var no_tiene = parseInt(no_tiene_permiso[1]);
+                                    if (!no_tiene) {
+                                        if (objMovFinanc.fid) {
+                                            if (objMovFinanc.TipoMov == '1') {
+                                                var estatus_obra = $("#bodegadatos").data("obr_status");
+                                                if (estatus_obra == 2) {
+                                                    if (objMovFinanc.EstatMov == 'ACTIVO') {
+                                                        var opcion = confirm("¿Deseas cancelar el pago con número de folio " + objMovFinanc.FolioCajas + '? IMPORTANTE: Los descuentos aplicados o por aplicar serán también CANCELADOS.');
+                                                        if (opcion == true) {
+                                                            var objUsuarioTareaAccion = {
+                                                                "id_accion_tarea": 0,
+                                                                "fid": parseInt(objMovFinanc.fid),
+                                                                "pid": 0,
+                                                                "oid": 0,
+                                                                "obr_clv_int": 0,
+                                                                "cid": 0,
+                                                                "idtarea": 147, /*Tarea correspondiente a la cancelación de pagos*/
+                                                                "idusu_solicita": $("#bodegadatos").data("idusu"),
+                                                                "idusu_autoriza": $("#bodegadatos").data("idusu"),
+                                                                "idusu_rubrica": $("#bodegadatos").data("idusu"),
+                                                                "idusu_rubrica2": $("#bodegadatos").data("idusu"),
+                                                                "folio_solic": '',
+                                                                "parametro1": '',
+                                                                "parametro2": '',
+                                                                "parametro3": '',
+                                                                "parametro4": objMovFinanc.FolioCajas,
+                                                                "parametro5": '',
+                                                                "parametro6": '',
+                                                                "parametro7": '',
+                                                                "parametro8": '',
+                                                                "parametro9": '',
+                                                                "parametro10": '',
+                                                                "parametro11": '',
+                                                                "parametro12": '',
+                                                                "parametro13": '',
+                                                                "parametro14": '',
+                                                                "parametro15": '',
+                                                                "parametro16": '',
+                                                                "parametro17": '',
+                                                                "parametro18": '',
+                                                                "parametro19": '',
+                                                                "parametro20": ''
+                                                            };
 
-                                                   CancelarPago(objUsuarioTareaAccion, objHistAct)
-                                                   .done(function (result) {
-                                                       var data = result.d;
-                                                       alert(data);
-                                                       $('#mask, .window').hide();
-                                                   })
-                                                   .fail(function (xhr) {
-                                                       console.log(xhr.responseText);
-                                                       alert("Falló la tarea de cancelar el pago.");
-                                                   })
-                                               } else {
-                                                   console.log('Acción cancelada por el usuario');
-                                               }
-                                           } else {
-                                               alert('PAGO SELECCIONADO se encuentra CANCELADO.');
-                                           }
-                                       }
-                                       else {
-                                           alert('No es posible cancelar pagos de obra en estaus de PROCESO o TERMINADA VENCIDA');
-                                       }
-                                   } else {
-                                       alert('Movimiento seleccionado no es un pago');
-                                   }
-                               }
-                               else {
-                                   alert('Selecciona un movimientos tipo pago de la lista...');
-                               }
-                           }
-                           else {
-                               alert('El usuario ' + $("#bodegadatos").data("idusu") + ' NO cuenta con el PERMISO de CANCELAR PAGOS.');
-                           }
-                       })
-                       .fail(function (xhr) {
-                           console.log(xhr.responseText);
-                           alert("Falló consultar permiso de ejecución de tarea.");
-                       })
-                   },
-                   position: "last",
-                   title: "Ver Frente",
-                   cursor: "pointer"
-               });
+
+                                                            var objHistAct = {
+                                                                "idactividad": 0,
+                                                                "estatus_actividad": 0,
+                                                                "fecha_actividad": '01/01/1900',
+                                                                "hora_actividad": '00:00:00',
+                                                                "idusu": $("#bodegadatos").data("idusu"),
+                                                                "idaccion": 3
+                                                            };
+
+                                                            CancelarPago(objUsuarioTareaAccion, objHistAct)
+                                                                .done(function (result) {
+                                                                    var data = result.d;
+                                                                    alert(data);
+                                                                    $('#mask, .window').hide();
+                                                                })
+                                                                .fail(function (xhr) {
+                                                                    console.log(xhr.responseText);
+                                                                    alert("Falló la tarea de cancelar el pago.");
+                                                                })
+                                                        } else {
+                                                            console.log('Acción cancelada por el usuario');
+                                                        }
+                                                    } else {
+                                                        alert('PAGO SELECCIONADO se encuentra CANCELADO.');
+                                                    }
+                                                }
+                                                else {
+                                                    alert('No es posible cancelar pagos de obra en estaus de PROCESO o TERMINADA VENCIDA');
+                                                }
+                                            } else {
+                                                alert('Movimiento seleccionado no es un pago');
+                                            }
+                                        }
+                                        else {
+                                            alert('Selecciona un movimientos tipo pago de la lista...');
+                                        }
+                                    }
+                                    else {
+                                        alert('El usuario ' + $("#bodegadatos").data("idusu") + ' NO cuenta con el PERMISO de CANCELAR PAGOS.');
+                                    }
+                                })
+                                .fail(function (xhr) {
+                                    console.log(xhr.responseText);
+                                    alert("Falló consultar permiso de ejecución de tarea.");
+                                })
+                        },
+                        position: "last",
+                        title: "Ver Frente",
+                        cursor: "pointer"
+                    });
 
 
 
@@ -2277,13 +2268,13 @@
                 var monto_descto = $("#bodegadatos").data("descto_por_aplicar");
                 var porcentaje_descto = $("#bodegadatos").data("porcentaje_descto");
                 GuardarDesctoPorProntoPago(monto_descto, porcentaje_descto)
-                .done(function (result) {
-                    console.log("Descuento por aplicar registrado correctamente.");
-                    $('#mask, .window').hide();
-                    location.reload();
-                }).fail(function (result) {
-                    alert("No fue posible programar el descuento por aplicar.");
-                });
+                    .done(function (result) {
+                        console.log("Descuento por aplicar registrado correctamente.");
+                        $('#mask, .window').hide();
+                        location.reload();
+                    }).fail(function (result) {
+                        alert("No fue posible programar el descuento por aplicar.");
+                    });
             });
 
             $(".cambia_descto").click(function (e) {
@@ -2313,11 +2304,11 @@
             $(".act_pagos").click(function (e) {
                 var coop_sifidoc = $("#bodegadatos").data("obra_sifidoc") + $("#bodegadatos").data("coopid");
                 ActualizarPagosTesoreria()
-                .done(function (result) {
-                    location.reload();
-                }).fail(function (result) {
-                    alert("No fue posible actualizar los pagos");
-                });
+                    .done(function (result) {
+                        location.reload();
+                    }).fail(function (result) {
+                        alert("No fue posible actualizar los pagos");
+                    });
             });
 
             $(".bitacora").click(function (e) {
@@ -2409,181 +2400,234 @@
             });
 
         });
-     </script>
+    </script>
 </head>
+
 <body>
     <div id="bodegadatos"></div>
     <div class="content">
         <table class="gral">
             <tbody>
-            <tr>
-                <td class="titulo_1ro" colspan="4">ACTUALIZACION DE COSTO DE OBRA</td>                  
-            </tr>
-            <tr>
-                <td class="titulo_2do" colspan="4">DATOS DE LA OBRA</td> 
-            </tr>
-            <tr>
-                <td class="campo">Calle:</td><td class="dato" colspan="3"><label id="lblcooperador"/></td>
-            </tr>
-            <tr>
-                <td class="campo">Colonia:</td><td class="dato" colspan="3"><label id="lblcoopsifidoc"/></td>
-            </tr>
-            <tr>
-                <td class="campo">Tramo:</td><td class="dato" colspan="3"><label id="lblcurp"/></td>                
-            </tr>
-            <tr>
-                <td class="campo">No. Obra:</td><td class="dato"><label id="lblnoobra"/></td>                
-                <td class="campo">Clave de Obra:</td><td class="dato"><label id="lblobr_clv_int"/></td>                
-            </tr>
-            <tr>
-                <td class="campo">INE:</td><td class="dato" colspan="3"><label id="lbline"/></td>                
-            </tr>
-             <tr>
-                <td class="campo">Teléfono:</td><td class="dato" colspan="3"><label id="lbltel"/></td>                
-            </tr>
-             <tr>
-                <td class="campo">Correo electrónico:</td><td class="dato" colspan="3"><label id="lblcorreo"/></td>                
-            </tr>
-            <tr>
-                <td class="campo">Relación con predio:</td><td class="dato" colspan="3"><label id="lblrelacionpredio"/></td>               
-            </tr>
-            <tr>
-                <td class="campo">Domicilio de Notificación:</td><td class="dato" colspan ="3"><label id="lbldomnotif"/></td>                
-            </tr>
-            <tr>
-                <td class="campo">Programa:</td><td class="dato" colspan ="3"><label id="lblnomprog"/></td>                
-            </tr>                         
-            <tr>
-                <td class="campo">ID:</td><td class="dato" colspan ="3"><label id="lblid"/></td>                
-            </tr>                                   
-            <tr>
-                <td class="titulo_2do" colspan="4">HISTORIAL DE LA CUENTA</td> 
-            </tr>
-            <tr>
-                <td class="campo">Fecha Inicio de Pagos:</td><td class="dato" colspan ="3"><label id="lblfecinipag"/></td>                
-            </tr>                        
-            <tr>
-                <td class="campo">Fecha Venc. de Pagos:</td><td class="dato" colspan ="3"><label id="lblfecvencpag"/></td>                
-            </tr>                        
-            <tr>
-                <td class="campo">Fecha Inicio Proceso Obra:</td><td class="dato" colspan ="3"><label id="lblfeciniproc"/></td>                
-            </tr>                        
-            <tr>
-                <td class="campo">Fecha Inicio Cobranza:</td><td class="dato" colspan ="3"><label id="lblfecinicob"/></td>                
-            </tr>                                   
-            <tr>
-                <td class="titulo_2do" colspan="4">  DETALLE FINANCIERO</td> 
-            </tr>            
-            <tr>
-                <td class="titulo_2do_2">CONCEPTO</td>
-                <td class="titulo_2do_2" colspan="3">MONTOS</td>                 
-            </tr>
-            <tr>
-                <td class="campo">Capital:</td><td class="dato"><label id="lblcapital"></label></td><td></td><td></td>
-            </tr>
-            <tr>
-                <td class="campo">Incremento de Costo de Obra:</td><td class="dato"><label id="lblIncremento"></label></td><td></td><td></td>
-            </tr>                        
-            <tr>
-                <td class="campo">Descuentos a Capital por aplicar:</td><td></td><td class="dato"><label id="lbldescto_poraplicar_capital"></label></td><td></td>
-            </tr>
-            <tr>
-                <td class="campo">Descuentos a Capital aplicados:</td><td></td><td></td><td class="dato"><label id="lbldescto_aplicado_capital"></label></td>                                                                                    
-            </tr>            
-            <tr>
-                <td class="campo">Capital Pagado:</td><td></td><td></td><td class="dato"><label id="lblpagcap" ></label></td>
-            </tr>          
-            <tr>
-                <td class="espacio_aire" colspan="4">&nbsp</td>
-            </tr>
-            <tr>                
-                <td class="titulo_3er" colspan="3">SALDO TOTAL:</td><td class="dato"><label id="lblsaldo_total" ></label></td>
-            </tr>   
-            <tr>
-                <td class="espacio_aire" colspan="4">&nbsp</td>
-            </tr> 
-            <tr>                
-                <td class="boton"><a href="#" class="bitacora">Bitácora_Movimientos</a></td> 
-                <td class="boton"><a href="#" class="genera_descto_1">Descto. por Pronto Pago</a></td>
-                <td class="boton"><a href="#" class="act_pagos">Actualizar Pagos</a></td>
-                <td class="boton"><a href="#" class="edo_cta">Estado de Cuenta</a></td>
-            </tr>    
-            <tr>                
-                <td class="boton"><a href="#" class="edit_mtos">Editar metros del frente</a></td>
-                <td class="boton"><a href="#" class="solic_descto">Solicitar Descuento</a></td>
-                <td class="boton"><a href="#" class="act_costo">Actualizar Costo de Obra</a></td>
-                <td class="boton"><a href="#" class="emitir_ficpag">Emitir Ficha Pago</a></td>
-            </tr>                      
-            </tbody>          
+                <tr>
+                    <td class="titulo_1ro" colspan="4">ACTUALIZACION DE COSTO DE OBRA</td>
+                </tr>
+                <tr>
+                    <td class="titulo_2do" colspan="4">DATOS DE LA OBRA</td>
+                </tr>
+                <tr>
+                    <td class="campo">Calle:</td>
+                    <td class="dato" colspan="3"><label id="lblcooperador" /></td>
+                </tr>
+                <tr>
+                    <td class="campo">Colonia:</td>
+                    <td class="dato" colspan="3"><label id="lblcoopsifidoc" /></td>
+                </tr>
+                <tr>
+                    <td class="campo">Tramo:</td>
+                    <td class="dato" colspan="3"><label id="lblcurp" /></td>
+                </tr>
+                <tr>
+                    <td class="campo">No. Obra:</td>
+                    <td class="dato"><label id="lblnoobra" /></td>
+                    <td class="campo">Clave de Obra:</td>
+                    <td class="dato"><label id="lblobr_clv_int" /></td>
+                </tr>
+                <tr>
+                    <td class="campo">INE:</td>
+                    <td class="dato" colspan="3"><label id="lbline" /></td>
+                </tr>
+                <tr>
+                    <td class="campo">Teléfono:</td>
+                    <td class="dato" colspan="3"><label id="lbltel" /></td>
+                </tr>
+                <tr>
+                    <td class="campo">Correo electrónico:</td>
+                    <td class="dato" colspan="3"><label id="lblcorreo" /></td>
+                </tr>
+                <tr>
+                    <td class="campo">Relación con predio:</td>
+                    <td class="dato" colspan="3"><label id="lblrelacionpredio" /></td>
+                </tr>
+                <tr>
+                    <td class="campo">Domicilio de Notificación:</td>
+                    <td class="dato" colspan="3"><label id="lbldomnotif" /></td>
+                </tr>
+                <tr>
+                    <td class="campo">Programa:</td>
+                    <td class="dato" colspan="3"><label id="lblnomprog" /></td>
+                </tr>
+                <tr>
+                    <td class="campo">ID:</td>
+                    <td class="dato" colspan="3"><label id="lblid" /></td>
+                </tr>
+                <tr>
+                    <td class="titulo_2do" colspan="4">HISTORIAL DE LA CUENTA</td>
+                </tr>
+                <tr>
+                    <td class="campo">Fecha Inicio de Pagos:</td>
+                    <td class="dato" colspan="3"><label id="lblfecinipag" /></td>
+                </tr>
+                <tr>
+                    <td class="campo">Fecha Venc. de Pagos:</td>
+                    <td class="dato" colspan="3"><label id="lblfecvencpag" /></td>
+                </tr>
+                <tr>
+                    <td class="campo">Fecha Inicio Proceso Obra:</td>
+                    <td class="dato" colspan="3"><label id="lblfeciniproc" /></td>
+                </tr>
+                <tr>
+                    <td class="campo">Fecha Inicio Cobranza:</td>
+                    <td class="dato" colspan="3"><label id="lblfecinicob" /></td>
+                </tr>
+                <tr>
+                    <td class="titulo_2do" colspan="4"> DETALLE FINANCIERO</td>
+                </tr>
+                <tr>
+                    <td class="titulo_2do_2">CONCEPTO</td>
+                    <td class="titulo_2do_2" colspan="3">MONTOS</td>
+                </tr>
+                <tr>
+                    <td class="campo">Capital:</td>
+                    <td class="dato"><label id="lblcapital"></label></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="campo">Incremento de Costo de Obra:</td>
+                    <td class="dato"><label id="lblIncremento"></label></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="campo">Descuentos a Capital por aplicar:</td>
+                    <td></td>
+                    <td class="dato"><label id="lbldescto_poraplicar_capital"></label></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="campo">Descuentos a Capital aplicados:</td>
+                    <td></td>
+                    <td></td>
+                    <td class="dato"><label id="lbldescto_aplicado_capital"></label></td>
+                </tr>
+                <tr>
+                    <td class="campo">Capital Pagado:</td>
+                    <td></td>
+                    <td></td>
+                    <td class="dato"><label id="lblpagcap"></label></td>
+                </tr>
+                <tr>
+                    <td class="espacio_aire" colspan="4">&nbsp</td>
+                </tr>
+                <tr>
+                    <td class="titulo_3er" colspan="3">SALDO TOTAL:</td>
+                    <td class="dato"><label id="lblsaldo_total"></label></td>
+                </tr>
+                <tr>
+                    <td class="espacio_aire" colspan="4">&nbsp</td>
+                </tr>
+                <tr>
+                    <td class="boton"><a href="#" class="bitacora">Bitácora_Movimientos</a></td>
+                    <td class="boton"><a href="#" class="genera_descto_1">Descto. por Pronto Pago</a></td>
+                    <td class="boton"><a href="#" class="act_pagos">Actualizar Pagos</a></td>
+                    <td class="boton"><a href="#" class="edo_cta">Estado de Cuenta</a></td>
+                </tr>
+                <tr>
+                    <td class="boton"><a href="#" class="edit_mtos">Editar metros del frente</a></td>
+                    <td class="boton"><a href="#" class="solic_descto">Solicitar Descuento</a></td>
+                    <td class="boton"><a href="#" class="act_costo">Actualizar Costo de Obra</a></td>
+                    <td class="boton"><a href="#" class="emitir_ficpag">Emitir Ficha Pago</a></td>
+                </tr>
+            </tbody>
         </table>
-     <div id="boxes">        
-      <div id="descto" class="window">
-          <table class="t_modulo">
-              <tbody> 
-                  <tr>
-                      <td class="titulo_modulo" colspan="3">GENERAR DESCUENTO <label id="lbltipodescto"></label></td>
-                  </tr>   
-                  <tr>
-                      <td class="c">Fecha del Descuento:</td><td><input type="text" name="fec_descto_cap" id="txtfecdesctocap" size="10" maxlength="10" onkeyup = "this.value=formateafecha(this.value);"/><a href="#" class ="pasa_fecha"> >>></a></td><td class="dato_c"><label id="lblfecdescto"></label></td>
-                  </tr>                                   
-                  <tr>
-                      <td class="c" colspan="2">Porcentaje del Descuento: <a href="#" class ="cambia_descto"> >>></a></td><td class="dato_c"><label id="lblporcentaje"></label></td>
-                  </tr>   
-                  <tr>
-                      <td class="c" colspan="2">Monto del Descuento:</td><td class="dato_c"><label id="lblmontodescto"></label></td>
-                  </tr>                  
-                  <tr>
-                      <td class="c" colspan="2">Saldo a pagar:</td><td class="dato_c"><label id="lblsaldoxpagar"></label></td>
-                  </tr>     
-                  <tr>
-                      <td class="boton_dialog" colspan="2"><a href="#" class="accion_aceptar">PROGRAMAR DESCUENTO</a></td><td class="boton_dialog"><a href="#" class="accion_cancelar">CANCELAR</a></td>
-                  </tr>                  
-              </tbody>
-          </table>
-      </div>        
-      <div id="editar_metros" class="window">
-          <table class="t_modulo">
-              <tbody> 
-                  <tr>
-                      <td class="titulo_modulo" colspan="2">EDICION DE METROS DE FRENTE<label id="lbleditmtosfte"></label></td>
-                  </tr>   
-                  <tr>
-                      <td class="c">Metros registrados:</td><td><label id="lblmtos_frente_reg"></label></td>
-                  </tr>                                   
-                  <tr>
-                      <td class="c">Cantidad Nueva de Metros:</td><td class="dato_c"><input type="text" name="metros_frente_new" id="txtmtos_new" size="10" maxlength="6" onkeyup = "this.value=formateametros(this.value);"/></td>
-                  </tr>                     
-                  <tr>
-                      <td class="boton_dialog"><a href="#" class="accion_aceptar_metros_new">ACEPTAR</a></td><td class="boton_dialog"><a href="#" class="accion_cancelar_metros_new">CANCELAR</a></td>
-                  </tr>                  
-              </tbody>
-          </table>
-      </div>        
-       <div id="emitir_ficpag" class="window">
-          <table class="t_modulo">
-              <tbody> 
-                  <tr>
-                      <td class="titulo_modulo" colspan="2">EMISION DE FICHA DE PAGO</td>
-                  </tr>   
-                  <tr>
-                      <td class="c">Monto de la Ficha de Pago: $ </td><td><input type="text" name="emitir_ficpag" id="txtemitir_ficpag" size="10" maxlength="7" onkeyup = "this.value=formateacantidad(this.value);"/></td>
-                  </tr>
-                   <tr>
-                      <td class="c">Cantidad mínima de aportación: $ </td><td><label id="lblaportacion_mensual"></label></td>
-                  </tr>                                                     
-                  <tr>
-                      <td class="boton_dialog"><a href="#" class="accion_aceptar_emitir_ficpag">EMITIR</a></td><td class="boton_dialog"><a href="#" class="accion_cancelar_emitir_ficpag">CANCELAR</a></td>
-                  </tr>                  
-              </tbody>
-          </table>
-      </div>              
-      <div id="mask"></div>
-      <div id="bit_movs" class="window">
-           <table id="grid"></table>
-           <div id="pager"></div>         
-      </div>
-    </div>    
-   </div>
+        <div id="boxes">
+            <div id="descto" class="window">
+                <table class="t_modulo">
+                    <tbody>
+                        <tr>
+                            <td class="titulo_modulo" colspan="3">GENERAR DESCUENTO <label id="lbltipodescto"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="c">Fecha del Descuento:</td>
+                            <td><input type="text" name="fec_descto_cap" id="txtfecdesctocap" size="10" maxlength="10"
+                                    onkeyup="this.value=formateafecha(this.value);" /><a href="#" class="pasa_fecha">
+                                    >>></a></td>
+                            <td class="dato_c"><label id="lblfecdescto"></label></td>
+                        </tr>
+                        <tr>
+                            <td class="c" colspan="2">Porcentaje del Descuento: <a href="#" class="cambia_descto">
+                                    >>></a></td>
+                            <td class="dato_c"><label id="lblporcentaje"></label></td>
+                        </tr>
+                        <tr>
+                            <td class="c" colspan="2">Monto del Descuento:</td>
+                            <td class="dato_c"><label id="lblmontodescto"></label></td>
+                        </tr>
+                        <tr>
+                            <td class="c" colspan="2">Saldo a pagar:</td>
+                            <td class="dato_c"><label id="lblsaldoxpagar"></label></td>
+                        </tr>
+                        <tr>
+                            <td class="boton_dialog" colspan="2"><a href="#" class="accion_aceptar">PROGRAMAR
+                                    DESCUENTO</a></td>
+                            <td class="boton_dialog"><a href="#" class="accion_cancelar">CANCELAR</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="editar_metros" class="window">
+                <table class="t_modulo">
+                    <tbody>
+                        <tr>
+                            <td class="titulo_modulo" colspan="2">EDICION DE METROS DE FRENTE<label
+                                    id="lbleditmtosfte"></label></td>
+                        </tr>
+                        <tr>
+                            <td class="c">Metros registrados:</td>
+                            <td><label id="lblmtos_frente_reg"></label></td>
+                        </tr>
+                        <tr>
+                            <td class="c">Cantidad Nueva de Metros:</td>
+                            <td class="dato_c"><input type="text" name="metros_frente_new" id="txtmtos_new" size="10"
+                                    maxlength="6" onkeyup="this.value=formateametros(this.value);" /></td>
+                        </tr>
+                        <tr>
+                            <td class="boton_dialog"><a href="#" class="accion_aceptar_metros_new">ACEPTAR</a></td>
+                            <td class="boton_dialog"><a href="#" class="accion_cancelar_metros_new">CANCELAR</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="emitir_ficpag" class="window">
+                <table class="t_modulo">
+                    <tbody>
+                        <tr>
+                            <td class="titulo_modulo" colspan="2">EMISION DE FICHA DE PAGO</td>
+                        </tr>
+                        <tr>
+                            <td class="c">Monto de la Ficha de Pago: $ </td>
+                            <td><input type="text" name="emitir_ficpag" id="txtemitir_ficpag" size="10" maxlength="7"
+                                    onkeyup="this.value=formateacantidad(this.value);" /></td>
+                        </tr>
+                        <tr>
+                            <td class="c">Cantidad mínima de aportación: $ </td>
+                            <td><label id="lblaportacion_mensual"></label></td>
+                        </tr>
+                        <tr>
+                            <td class="boton_dialog"><a href="#" class="accion_aceptar_emitir_ficpag">EMITIR</a></td>
+                            <td class="boton_dialog"><a href="#" class="accion_cancelar_emitir_ficpag">CANCELAR</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="mask"></div>
+            <div id="bit_movs" class="window">
+                <table id="grid"></table>
+                <div id="pager"></div>
+            </div>
+        </div>
+    </div>
 </body>
-</html>
 
+</html>

@@ -1,82 +1,93 @@
 ﻿<html>
-  <head>
+
+<head>
     <title>Ubicación de Factibilidad</title>
     <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
     <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script
+        src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
     <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
     <style>
-      a.skiplink {
-        position: absolute;
-        clip: rect(1px, 1px, 1px, 1px);
-        padding: 0;
-        border: 0;
-        height: 1px;
-        width: 1px;
-        overflow: hidden;
-      }
-      a.skiplink:focus {
-        clip: auto;
-        height: auto;
-        width: auto;
-        background-color: #fff;
-        padding: 0.3em;
-      }
-      #map:focus {
-        outline: #4A74A8 solid 0.15em;
-      }
+        a.skiplink {
+            position: absolute;
+            clip: rect(1px, 1px, 1px, 1px);
+            padding: 0;
+            border: 0;
+            height: 1px;
+            width: 1px;
+            overflow: hidden;
+        }
 
-      .ol-popup {
-        position: absolute;
-        background-color: white;
-        -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-        filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-        padding: 15px;
-        border-radius: 10px;
-        border: 1px solid #cccccc;
-        bottom: 12px;
-        left: -50px;
-        min-width: 280px;
-      }
-      .ol-popup:after, .ol-popup:before {
-        top: 100%;
-        border: solid transparent;
-        content: " ";
-        height: 0;
-        width: 0;
-        position: absolute;
-        pointer-events: none;
-      }
-      .ol-popup:after {
-        border-top-color: white;
-        border-width: 10px;
-        left: 48px;
-        margin-left: -10px;
-      }
-      .ol-popup:before {
-        border-top-color: #cccccc;
-        border-width: 11px;
-        left: 48px;
-        margin-left: -11px;
-      }
-      .ol-popup-closer {
-        text-decoration: none;
-        position: absolute;
-        top: 2px;
-        right: 8px;
-      }
-      .ol-popup-closer:after {
-        content: "✖";
-      }
+        a.skiplink:focus {
+            clip: auto;
+            height: auto;
+            width: auto;
+            background-color: #fff;
+            padding: 0.3em;
+        }
+
+        #map:focus {
+            outline: #4A74A8 solid 0.15em;
+        }
+
+        .ol-popup {
+            position: absolute;
+            background-color: white;
+            -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+            filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #cccccc;
+            bottom: 12px;
+            left: -50px;
+            min-width: 280px;
+        }
+
+        .ol-popup:after,
+        .ol-popup:before {
+            top: 100%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .ol-popup:after {
+            border-top-color: white;
+            border-width: 10px;
+            left: 48px;
+            margin-left: -10px;
+        }
+
+        .ol-popup:before {
+            border-top-color: #cccccc;
+            border-width: 11px;
+            left: 48px;
+            margin-left: -11px;
+        }
+
+        .ol-popup-closer {
+            text-decoration: none;
+            position: absolute;
+            top: 2px;
+            right: 8px;
+        }
+
+        .ol-popup-closer:after {
+            content: "✖";
+        }
     </style>
-  </head>
-  <body>
+</head>
+
+<body>
     <a class="skiplink" href="#map">Go to map</a>
-    
-    <div id="map" class="map" tabindex="0"></div>  
+
+    <div id="map" class="map" tabindex="0"></div>
     <div id="popup" class="ol-popup">
-      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-    <div id="popup-content"></div>
+        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+        <div id="popup-content"></div>
     </div>
     <script>
 
@@ -174,13 +185,13 @@
             return styles[feature.getGeometry().getType()];
         };
 
-        
+
         var vectorSource = new ol.source.Vector({
             format: new ol.format.GeoJSON(),
-            url: function (extent) {                
+            url: function (extent) {
                 return 'http://192.168.1.5:8090/geoserver/sigFidoc1/ows?service=WFS&' +
-                'version=1.0.0&request=GetFeature&typeName=sigFidoc1:factibilidad&' +
-                'outputFormat=application%2Fjson&'
+                    'version=1.0.0&request=GetFeature&typeName=sigFidoc1:factibilidad&' +
+                    'outputFormat=application%2Fjson&'
             },
             strategy: ol.loadingstrategy.bbox
         });
@@ -190,20 +201,20 @@
             source: vectorSource,
             style: styleFunction
         });
-        
+
 
         var raster = new ol.layer.Tile({
             source: new ol.source.OSM()
         });
 
-        
+
         var map = new ol.Map({
             layers: [raster, vector],
-            overlays:[overlay],
+            overlays: [overlay],
             target: document.getElementById('map'),
             view: new ol.View({
                 center: [-11319096.234, 2406669.952],
-                maxzoom:17,
+                maxzoom: 17,
                 zoom: 12
             })
         });
@@ -212,12 +223,12 @@
         map.addInteraction(select);
 
         var selectedFeature = select.getFeatures();
-        
+
         map.on('singleclick', function (evt) {
             var coordinate = evt.coordinate;
             closer.onclick();
             selectedFeature.on(['add', 'remove'], function () {
-                var hdms = selectedFeature.getArray().map(function (feature) {                    
+                var hdms = selectedFeature.getArray().map(function (feature) {
                     var id = feature.getId('id');
                     var idx = id.substr(13, id.length - 12);
                     return idx;
@@ -225,12 +236,13 @@
                 if (hdms.length > 0) {
                     content.innerHTML = 'Id_Factibilidad:<code>' + hdms + '</code>';
                     overlay.setPosition(coordinate);
-                }                
+                }
 
             })
         });
-                
+
         map.addControl(new ol.control.ZoomSlider());
     </script>
-  </body>
+</body>
+
 </html>

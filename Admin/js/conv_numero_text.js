@@ -1,4 +1,4 @@
-﻿var numeroALetras = (function() {
+﻿var numeroALetras = (function () {
     // Código basado en el comentario de @sapienman
     // Código basado en https://gist.github.com/alfchee/e563340276f89b22042a
     function Unidades(num) {
@@ -173,7 +173,7 @@
         };
 
         if (data.centavos > 0) {
-            data.letrasCentavos = 'CON ' + (function() {
+            data.letrasCentavos = 'CON ' + (function () {
                 if (data.centavos == 1)
                     return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoSingular;
                 else

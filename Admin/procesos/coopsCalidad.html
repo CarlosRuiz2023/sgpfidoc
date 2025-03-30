@@ -1,30 +1,32 @@
 ﻿<html>
-  <head>
-    
-      <title>COOPERADORES_CALIDAD</title>
-    
-    
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
-    <link rel="stylesheet" href="https://openlayers.org/en/v5.2.0/css/ol.css" type="text/css"/>    
-    <link href="https://paulkinzett.github.io/toolbar/css/jquery.toolbar.css" rel="stylesheet"/> 
+
+<head>
+
+    <title>COOPERADORES_CALIDAD</title>
 
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>    
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="https://openlayers.org/en/v5.2.0/css/ol.css" type="text/css" />
+    <link href="https://paulkinzett.github.io/toolbar/css/jquery.toolbar.css" rel="stylesheet" />
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script
+        src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
     <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
-    
+
 
     <script src="https://paulkinzett.github.io/toolbar/js/jquery.toolbar.min.js"></script>
     <script src="../../proj4js_250/dist/proj4.js"></script>
     <script src="../../Global/config.js"></script>
-     
+
 
     <style>
-
-     /*      table {                
+        /*      table {                
 
                 width: 100%;
                 border-collapse: collapse;
@@ -41,227 +43,277 @@
                 background: #dedede;
             }*/
 
-    table {        
-     width: 100%;
-     border: 1px solid #999;
-     text-align: left;
-     border-collapse: collapse;
-     margin: 0 0 1em 0;
-     caption-side: top;
-     font-weight: 100;
-     font-style: normal;
-    }
-    caption, td, th {
-     padding: 0.3em;     
-    }
-    th {
-      text-align: center;
-      background: #dedede;
-    }
-    td {
-      border-bottom: 1px solid #999;
-      text-align: center;
-      width: 25%;
-    }
-
-      a.skiplink {
-        position: absolute;
-        clip: rect(1px, 1px, 1px, 1px);
-        padding: 0;
-        border: 0;
-        height: 1px;
-        width: 1px;
-        overflow: hidden;
-      }
-      a.skiplink:focus {
-        clip: auto;
-        height: auto;
-        width: auto;
-        background-color: #fff;
-        padding: 0.3em;
-      }
-      #map:focus {
-        outline: #4A74A8 solid 0.15em;
-      }
-
-      .ol-popup {
-        position: absolute;
-        background-color: white;
-        -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-        filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-        padding: 15px;
-        border-radius: 10px;
-        border: 1px solid #cccccc;
-        bottom: 12px;
-        left: -50px;
-        min-width: 50px;
-      }
-      .ol-popup:after, .ol-popup:before {
-        top: 100%;
-        border: solid transparent;
-        content: " ";
-        height: 0;
-        width: 0;
-        position: absolute;
-        pointer-events: none;
-      }
-      .ol-popup:after {
-        border-top-color: white;
-        border-width: 10px;
-        left: 48px;
-        margin-left: -10px;
-      }
-      .ol-popup:before {
-        border-top-color: #cccccc;
-        border-width: 11px;
-        left: 48px;
-        margin-left: -11px;
-      }
-      .ol-popup-closer {
-        text-decoration: none;
-        position: absolute;
-        top: 2px;
-        right: 8px;
-      }
-      .ol-popup-closer:after {
-        content: "✖";
-      }
-  .letratabla{
-      font-size:12px;
-  }
-      
-  .ui-progressbar {
-    position: relative;
-  }
-  .progress-label {
-    position: absolute;
-    left: 50%;
-    top: 4px;
-    font-weight: bold;
-    text-shadow: 1px 1px 0 #fff;
-  }
-/*Ventana modal*/
- #boxes .window {  
-  font-size:20px;
-  position:fixed;
-  width:auto;
-  height:auto;
-  display:none;
-  z-index:9999;
-  padding:20px;             
-}
-  
-#mask {
-  z-index:10;
-  background-color:#000;
-  display:none;
-  position: fixed;    
-  left: 0;
-  top: 0;  
-}
-
-#boxes, #formcoop { 
-  width:auto; 
-  height:auto;
-}
-
-.datos {
-   font-size:15px;   
-   background:silver;     
-   font-weight:bold;   
-   border: 3px solid #393939;
-   border-radius: 5px 5px 5px 5px;
-   color: #393939;   
-   padding: 5px; 
-}
-
-.posicion_boton_cancelar_coop {
-  font-weight: bold;      
-  font-size:30px;   
-  color:white;  
-}
-
-.posicion_boton_accion_coop{
-  font-weight: bold;      
-  font-size:30px;   
-  color:white;  
-}
-
-.consultarpred, .copiapeganomcoop .getcoop{
-  font-weight: bold;      
-  font-size:20px;   
-  color:black;  
-   }
-
-.datospred {
-  font-weight: bold;      
-  font-size:15px;   
-  color:blue;  
-   }
-
-.titulo {
-  font-weight: bold;      
-  font-size:25px;   
-  color:white;         
+        table {
+            width: 100%;
+            border: 1px solid #999;
+            text-align: left;
+            border-collapse: collapse;
+            margin: 0 0 1em 0;
+            caption-side: top;
+            font-weight: 100;
+            font-style: normal;
         }
-  </style>
+
+        caption,
+        td,
+        th {
+            padding: 0.3em;
+        }
+
+        th {
+            text-align: center;
+            background: #dedede;
+        }
+
+        td {
+            border-bottom: 1px solid #999;
+            text-align: center;
+            width: 25%;
+        }
+
+        a.skiplink {
+            position: absolute;
+            clip: rect(1px, 1px, 1px, 1px);
+            padding: 0;
+            border: 0;
+            height: 1px;
+            width: 1px;
+            overflow: hidden;
+        }
+
+        a.skiplink:focus {
+            clip: auto;
+            height: auto;
+            width: auto;
+            background-color: #fff;
+            padding: 0.3em;
+        }
+
+        #map:focus {
+            outline: #4A74A8 solid 0.15em;
+        }
+
+        .ol-popup {
+            position: absolute;
+            background-color: white;
+            -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+            filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #cccccc;
+            bottom: 12px;
+            left: -50px;
+            min-width: 50px;
+        }
+
+        .ol-popup:after,
+        .ol-popup:before {
+            top: 100%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .ol-popup:after {
+            border-top-color: white;
+            border-width: 10px;
+            left: 48px;
+            margin-left: -10px;
+        }
+
+        .ol-popup:before {
+            border-top-color: #cccccc;
+            border-width: 11px;
+            left: 48px;
+            margin-left: -11px;
+        }
+
+        .ol-popup-closer {
+            text-decoration: none;
+            position: absolute;
+            top: 2px;
+            right: 8px;
+        }
+
+        .ol-popup-closer:after {
+            content: "✖";
+        }
+
+        .letratabla {
+            font-size: 12px;
+        }
+
+        .ui-progressbar {
+            position: relative;
+        }
+
+        .progress-label {
+            position: absolute;
+            left: 50%;
+            top: 4px;
+            font-weight: bold;
+            text-shadow: 1px 1px 0 #fff;
+        }
+
+        /*Ventana modal*/
+        #boxes .window {
+            font-size: 20px;
+            position: fixed;
+            width: auto;
+            height: auto;
+            display: none;
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        #mask {
+            z-index: 10;
+            background-color: #000;
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        #boxes,
+        #formcoop {
+            width: auto;
+            height: auto;
+        }
+
+        .datos {
+            font-size: 15px;
+            background: silver;
+            font-weight: bold;
+            border: 3px solid #393939;
+            border-radius: 5px 5px 5px 5px;
+            color: #393939;
+            padding: 5px;
+        }
+
+        .posicion_boton_cancelar_coop {
+            font-weight: bold;
+            font-size: 30px;
+            color: white;
+        }
+
+        .posicion_boton_accion_coop {
+            font-weight: bold;
+            font-size: 30px;
+            color: white;
+        }
+
+        .consultarpred,
+        .copiapeganomcoop .getcoop {
+            font-weight: bold;
+            font-size: 20px;
+            color: black;
+        }
+
+        .datospred {
+            font-weight: bold;
+            font-size: 15px;
+            color: blue;
+        }
+
+        .titulo {
+            font-weight: bold;
+            font-size: 25px;
+            color: white;
+        }
+    </style>
 </head>
-  <body>
-     <a class="skiplink" href="#map">Ir al mapa...</a>
-    
-   <div id="map" class="map" tabindex="0">
-     <div id="popup" class="ol-popup">
-         <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-         <div id="popup-content"></div>
-     </div>    
-   </div> 
-   <div id="toolbar-options" class="hidden">
-      <a href="#" id="altacoop"><i class="fa fa-check"></i></a>
-      <a href="#" id="editcoop"><i class="fa fa-edit"></i></a>
-      <a href="#" id="elimcoop"><i class="fa fa-trash"></i></a>
-      <a href="#" id="infcoop"><i class="fa fa-exclamation-circle"></i></a>
-      <a href="#" id="promocion"><i class="fa fa-bolt"></i></a>
-   </div>
-   <div data-toolbar="toolbar-options" data-toolbar-animation="flip" class="btn-toolbar " style="position:absolute; top:50%; left:0%"  data-toolbar-style="primary" id="button">
-   <i class="fa fa-cog" style="position:relative"></i>
-   </div>
-   <div id="boxes">
-     <div id="formcoop" class="window"> 
-        <div id="titulocoop" class="titulo" style="text-align:left"> 
-           <p style="text-align:center">GESTION  DE  COOPERADORES</p>
-           No. de solicitud: <label for="idsol" id="lblsolicitud"></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp No. Usuario:<label for="idusu" id="lblusuario"></label><br/>
-           No. Factibilidad: <label for="idfact" id="lblfact"></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Acción:<label for="accion" id="lblaccioncoop"></label>
+
+<body>
+    <a class="skiplink" href="#map">Ir al mapa...</a>
+
+    <div id="map" class="map" tabindex="0">
+        <div id="popup" class="ol-popup">
+            <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+            <div id="popup-content"></div>
         </div>
-        <div class="datos" id="bodycoop">
-          <p style="text-align:center">DATOS DEL COOPERADOR</p>
-          <label for="name">Personas registradas:</label><select name="NombresReg" id="cmbNombresReg"></select>&nbsp&nbsp&nbsp&nbsp<a href="#" class ="getcoop">>>></a><br/><br/>
-          <label for="name">Apellido Paterno:</label><input type="text" name="apaterno" id="apaterno" size="30" style="text-transform:uppercase"/>&nbsp&nbsp<label for="name">Apellido Materno:</label><input type="text" name="amaterno" id="amaterno" size="30" style="text-transform:uppercase"/>&nbsp&nbsp
-          <label for="name">Nombre(s):</label><input type="text" name="nombrescoop" id="nombrescoop" size="40"  style="text-transform:uppercase"/>&nbsp&nbsp<a href="#" class ="copiapeganomcoop">>>></a><br/>                         
-          <label for="name">*Nombre para ficha de pago:</label><input type="text" name="nomfichacoop" id="nomfichacoop" size="120" style="text-transform:uppercase"/><br/>
-          <label for="name">Teléfono:</label><input type="text" name="telcoop" id="telcoop" size="10"/>&nbsp&nbsp&nbsp&nbsp<label for="name">Correo electrónico:</label><input type="text" name="emailcoop" id="emailcoop" size="80"/><br/>
-          <label for="name">CURP:</label><input type="text" name="curp" id="curp" size="30"/>&nbsp&nbsp&nbsp<label for="name">Relación con el Predio:</label><select name="relpred" id="lstrelpred"></select><br/>          
-          <p style="text-align:left"><label for="name">Domicilio para notificación.</label></p>         
-          <label for="name">*Calle:</label><select name="callenotif" id="calle"></select>&nbsp&nbsp&nbsp<label for="name">*Colonia:</label><select name="colnotif" id="colonia"></select>&nbsp&nbsp<label for="name">*No. Oficial:</label><input type="text" name="nooficnotif" id="nooficnotif" size="10"/><br/>                    
-          <p style="text-align:center">DATOS DEL PREDIO BENEFICIADO (SISTEMA PREDIAL)</p>
-          <label for="name">Cuenta Predial:</label><input type="text" name="ctapred" id="ctapred" size="15"/>  <a href="#" class ="consultarpred">>>></a><br/><br/>          
-          <label for="name">Nombre del Propietario:</label>&nbsp&nbsp<label for="nompropietariomunic" id="lblnompropmunic" class ="datospred"></label><br/>                                
-          <label for="name">Calle Notific.:</label>&nbsp&nbsp<label for="callempropunic" id="lblcallepropmunic" class ="datospred"></label><br/>
-          <label for="name">Colonia Notific.:</label>&nbsp&nbsp<label for="coloniapropmunic" id="lblcoloniamunic" class ="datospred"></label>          
-          <p style="text-align:left">Ubicación del Predio</p>            
-          <label for="name">Calle y No.:</label>&nbsp&nbsp<label for="municdomprop" id="lblmunicdomprop" class ="datospred"></label><br/>                                
-          <label for="name">Colonia:</label>&nbsp&nbsp<label for="municcolprop" id="lblmuniccolprop" class ="datospred"></label><br/>
-          <label for="name">Tipo uso de suelo::</label>&nbsp&nbsp<label for="tipousosuelo" id="tipousosuelo" class ="datospred"></label>        
-          <p style="text-align:center">REFERENCIAS ADICIONALES AL PREDIO</p>
-          <label for="name">*Metros frente:</label><input type="text" name="mtsfte" id="mtsfte" size="6"/>&nbsp&nbsp&nbsp&nbsp<label for="name">*No. Oficial:</label><input type="text" name="nooficial" id="nooficial" size="10"/>&nbsp&nbsp&nbsp&nbsp<label for="name">*Tipo de predio:</label><select name="tipopredio" id="tipopredio"></select><br/>
-          <label for="name">Cta. IMUVI:</label><input type="text" name="ctaimuvi" id="ctaimuvi" size="15"/>&nbsp&nbsp&nbsp&nbsp<label for="name">No. medidor SAPAL:</label><input type="text" name="recsapal" id="recsapal" size="10"/>&nbsp&nbsp&nbsp&nbsp<label for="name">CUP (Clave unica de predio):</label><input type="text" name="cup" id="cup" size="20"/>&nbsp&nbsp&nbsp&nbsp<label for="name">R20 de escritura:</label><input type="text" name="r20" id="r20" size="15"/><br/><br/>
-        </div>                  
-        <div class="botonesA" id="botonesA">
-           <p style="text-align:right"><a href="#" class ="posicion_boton_accion_coop">Aceptar</a>&nbsp&nbsp&nbsp<a href="#" class="posicion_boton_cancelar_coop">Cancelar</a></p>                
-        </div>     
-     </div>
-     <div id="mask"></div>
-     <div id="bodegadatos"></div>
-   </div>           
+    </div>
+    <div id="toolbar-options" class="hidden">
+        <a href="#" id="altacoop"><i class="fa fa-check"></i></a>
+        <a href="#" id="editcoop"><i class="fa fa-edit"></i></a>
+        <a href="#" id="elimcoop"><i class="fa fa-trash"></i></a>
+        <a href="#" id="infcoop"><i class="fa fa-exclamation-circle"></i></a>
+        <a href="#" id="promocion"><i class="fa fa-bolt"></i></a>
+    </div>
+    <div data-toolbar="toolbar-options" data-toolbar-animation="flip" class="btn-toolbar "
+        style="position:absolute; top:50%; left:0%" data-toolbar-style="primary" id="button">
+        <i class="fa fa-cog" style="position:relative"></i>
+    </div>
+    <div id="boxes">
+        <div id="formcoop" class="window">
+            <div id="titulocoop" class="titulo" style="text-align:left">
+                <p style="text-align:center">GESTION DE COOPERADORES</p>
+                No. de solicitud: <label for="idsol"
+                    id="lblsolicitud"></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp No. Usuario:<label
+                    for="idusu" id="lblusuario"></label><br />
+                No. Factibilidad: <label for="idfact" id="lblfact"></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                Acción:<label for="accion" id="lblaccioncoop"></label>
+            </div>
+            <div class="datos" id="bodycoop">
+                <p style="text-align:center">DATOS DEL COOPERADOR</p>
+                <label for="name">Personas registradas:</label><select name="NombresReg"
+                    id="cmbNombresReg"></select>&nbsp&nbsp&nbsp&nbsp<a href="#" class="getcoop">>>></a><br /><br />
+                <label for="name">Apellido Paterno:</label><input type="text" name="apaterno" id="apaterno" size="30"
+                    style="text-transform:uppercase" />&nbsp&nbsp<label for="name">Apellido Materno:</label><input
+                    type="text" name="amaterno" id="amaterno" size="30" style="text-transform:uppercase" />&nbsp&nbsp
+                <label for="name">Nombre(s):</label><input type="text" name="nombrescoop" id="nombrescoop" size="40"
+                    style="text-transform:uppercase" />&nbsp&nbsp<a href="#" class="copiapeganomcoop">>>></a><br />
+                <label for="name">*Nombre para ficha de pago:</label><input type="text" name="nomfichacoop"
+                    id="nomfichacoop" size="120" style="text-transform:uppercase" /><br />
+                <label for="name">Teléfono:</label><input type="text" name="telcoop" id="telcoop"
+                    size="10" />&nbsp&nbsp&nbsp&nbsp<label for="name">Correo electrónico:</label><input type="text"
+                    name="emailcoop" id="emailcoop" size="80" /><br />
+                <label for="name">CURP:</label><input type="text" name="curp" id="curp"
+                    size="30" />&nbsp&nbsp&nbsp<label for="name">Relación con el Predio:</label><select name="relpred"
+                    id="lstrelpred"></select><br />
+                <p style="text-align:left"><label for="name">Domicilio para notificación.</label></p>
+                <label for="name">*Calle:</label><select name="callenotif" id="calle"></select>&nbsp&nbsp&nbsp<label
+                    for="name">*Colonia:</label><select name="colnotif" id="colonia"></select>&nbsp&nbsp<label
+                    for="name">*No. Oficial:</label><input type="text" name="nooficnotif" id="nooficnotif"
+                    size="10" /><br />
+                <p style="text-align:center">DATOS DEL PREDIO BENEFICIADO (SISTEMA PREDIAL)</p>
+                <label for="name">Cuenta Predial:</label><input type="text" name="ctapred" id="ctapred" size="15" /> <a
+                    href="#" class="consultarpred">>>></a><br /><br />
+                <label for="name">Nombre del Propietario:</label>&nbsp&nbsp<label for="nompropietariomunic"
+                    id="lblnompropmunic" class="datospred"></label><br />
+                <label for="name">Calle Notific.:</label>&nbsp&nbsp<label for="callempropunic" id="lblcallepropmunic"
+                    class="datospred"></label><br />
+                <label for="name">Colonia Notific.:</label>&nbsp&nbsp<label for="coloniapropmunic" id="lblcoloniamunic"
+                    class="datospred"></label>
+                <p style="text-align:left">Ubicación del Predio</p>
+                <label for="name">Calle y No.:</label>&nbsp&nbsp<label for="municdomprop" id="lblmunicdomprop"
+                    class="datospred"></label><br />
+                <label for="name">Colonia:</label>&nbsp&nbsp<label for="municcolprop" id="lblmuniccolprop"
+                    class="datospred"></label><br />
+                <label for="name">Tipo uso de suelo::</label>&nbsp&nbsp<label for="tipousosuelo" id="tipousosuelo"
+                    class="datospred"></label>
+                <p style="text-align:center">REFERENCIAS ADICIONALES AL PREDIO</p>
+                <label for="name">*Metros frente:</label><input type="text" name="mtsfte" id="mtsfte"
+                    size="6" />&nbsp&nbsp&nbsp&nbsp<label for="name">*No. Oficial:</label><input type="text"
+                    name="nooficial" id="nooficial" size="10" />&nbsp&nbsp&nbsp&nbsp<label for="name">*Tipo de
+                    predio:</label><select name="tipopredio" id="tipopredio"></select><br />
+                <label for="name">Cta. IMUVI:</label><input type="text" name="ctaimuvi" id="ctaimuvi"
+                    size="15" />&nbsp&nbsp&nbsp&nbsp<label for="name">No. medidor SAPAL:</label><input type="text"
+                    name="recsapal" id="recsapal" size="10" />&nbsp&nbsp&nbsp&nbsp<label for="name">CUP (Clave unica de
+                    predio):</label><input type="text" name="cup" id="cup" size="20" />&nbsp&nbsp&nbsp&nbsp<label
+                    for="name">R20 de escritura:</label><input type="text" name="r20" id="r20" size="15" /><br /><br />
+            </div>
+            <div class="botonesA" id="botonesA">
+                <p style="text-align:right"><a href="#" class="posicion_boton_accion_coop">Aceptar</a>&nbsp&nbsp&nbsp<a
+                        href="#" class="posicion_boton_cancelar_coop">Cancelar</a></p>
+            </div>
+        </div>
+        <div id="mask"></div>
+        <div id="bodegadatos"></div>
+    </div>
 
 
     <script type="text/javascript">
@@ -523,8 +575,8 @@
                 try {
                     $.get(urlctapred, function (xml) {
                         xmlDoc = $.parseXML(xml),
-                        $xml = $(xmlDoc),
-                        $nomprop = $xml.find("NomProp");
+                            $xml = $(xmlDoc),
+                            $nomprop = $xml.find("NomProp");
                         $("#lblnompropmunic").text($.trim($nomprop.text()));
                         $callenotif = $xml.find("DomProp");
                         $numoficext = $xml.find("NumExtP");
@@ -659,8 +711,8 @@
                 format: new ol.format.GeoJSON(),
                 url: function (extent) {
                     return 'http://192.168.1.5:8090/geoserver/sigFidoc1/ows?service=WFS' +
-                    '&version=1.0.0&request=GetFeature&typeName=sigFidoc1:vw_predios_fidoc' +
-                    '&outputFormat=application%2Fjson&CQL_FILTER=gid=' + parametro.toString();
+                        '&version=1.0.0&request=GetFeature&typeName=sigFidoc1:vw_predios_fidoc' +
+                        '&outputFormat=application%2Fjson&CQL_FILTER=gid=' + parametro.toString();
                 }
             });
 
@@ -668,8 +720,8 @@
                 format: new ol.format.GeoJSON(),
                 url: function (extent) {
                     return 'http://192.168.1.5:8090/geoserver/sigFidoc1/ows?service=WFS' +
-                    '&version=1.0.0&request=GetFeature&typeName=sigFidoc1:vw_predios_fuente' +
-                    '&outputFormat=application%2Fjson&CQL_FILTER=gid=' + parametro.toString();
+                        '&version=1.0.0&request=GetFeature&typeName=sigFidoc1:vw_predios_fuente' +
+                        '&outputFormat=application%2Fjson&CQL_FILTER=gid=' + parametro.toString();
                 }
             });
 
@@ -677,8 +729,8 @@
                 format: new ol.format.GeoJSON(),
                 url: function (extent) {
                     return 'http://192.168.1.5:8090/geoserver/sigFidoc1/ows?service=WFS&' +
-                         'version=1.0.0&request=GetFeature&typeName=sigFidoc1:factibilidad&' +
-                         'outputFormat=application%2Fjson&CQL_FILTER=gid=' + parametro.toString();
+                        'version=1.0.0&request=GetFeature&typeName=sigFidoc1:factibilidad&' +
+                        'outputFormat=application%2Fjson&CQL_FILTER=gid=' + parametro.toString();
                 }
 
             });
@@ -687,8 +739,8 @@
                 format: new ol.format.GeoJSON(),
                 url: function (extent) {
                     return 'http://192.168.1.5:8090/geoserver/sigFidoc1/ows?service=WFS&' +
-                         'version=1.0.0&request=GetFeature&typeName=sigFidoc1:frentes&' +
-                         'outputFormat=application%2Fjson&CQL_FILTER=gid=' + parametro.toString();
+                        'version=1.0.0&request=GetFeature&typeName=sigFidoc1:frentes&' +
+                        'outputFormat=application%2Fjson&CQL_FILTER=gid=' + parametro.toString();
                 }
             });
 
@@ -864,81 +916,81 @@
                             map.addInteraction(select);
 
                             ConsultaFrente(fid)
-                           .done(function (r) {
-                               var cadena = $.trim(r.d);
-                               if (cadena != "<NewDataSet />") {  // Si no se encontró frente con el frente seleccionado.
-                                   $(r.d).find("Frente").each(function () {
-                                       $("#bodegadatos").data("fid", fid);
-                                       var coorfter = $(this).find("coorfter").text();
-                                       var mtsfter = parseFloat($(this).find("mtsfter").text());
-                                       var cidr = parseInt($(this).find("cidr").text());
-                                       var pidr = parseInt($(this).find("pidr").text());
-                                       var gidr = parseInt($(this).find("gidr").text());
-                                       $("#bodegadatos").data("idcoop", cidr);
-                                       $("#bodegadatos").data("pid", pidr);
-                                       var ctapredialr = $(this).find("ctapredial").text();
-                                       var fusrcrer = parseInt($(this).find("fusrcrer").text());
-                                       var ffecha_crr = ArreglaFecha($(this).find("ffecha_crr").text());
-                                       var fusrmodr = parseInt($(this).find("fusrmodr").text());
-                                       var ffecha_mor = ArreglaFecha($(this).find("ffecha_mor").text());
-                                       $("#mtsfte").val(mtsfter);
-                                       llenarNombresCoops(cidr);
-                                       MostrarDatosPredio(pidr);
+                                .done(function (r) {
+                                    var cadena = $.trim(r.d);
+                                    if (cadena != "<NewDataSet />") {  // Si no se encontró frente con el frente seleccionado.
+                                        $(r.d).find("Frente").each(function () {
+                                            $("#bodegadatos").data("fid", fid);
+                                            var coorfter = $(this).find("coorfter").text();
+                                            var mtsfter = parseFloat($(this).find("mtsfter").text());
+                                            var cidr = parseInt($(this).find("cidr").text());
+                                            var pidr = parseInt($(this).find("pidr").text());
+                                            var gidr = parseInt($(this).find("gidr").text());
+                                            $("#bodegadatos").data("idcoop", cidr);
+                                            $("#bodegadatos").data("pid", pidr);
+                                            var ctapredialr = $(this).find("ctapredial").text();
+                                            var fusrcrer = parseInt($(this).find("fusrcrer").text());
+                                            var ffecha_crr = ArreglaFecha($(this).find("ffecha_crr").text());
+                                            var fusrmodr = parseInt($(this).find("fusrmodr").text());
+                                            var ffecha_mor = ArreglaFecha($(this).find("ffecha_mor").text());
+                                            $("#mtsfte").val(mtsfter);
+                                            llenarNombresCoops(cidr);
+                                            MostrarDatosPredio(pidr);
 
-                                       ConsultaCoop(cidr, 'infcoop')
-                                       .done(function (r) {
-                                           var cadena2 = $.trim(r.d);
-                                           if (cadena2 != "<NewDataSet />") {
-                                               $(r.d).find("Coop").each(function () {
-                                                   var apaterno = $(this).find("mApellidoP").text();
-                                                   var amaterno = $(this).find("mApellidoM").text();
-                                                   var nombres = $(this).find("mNombres").text();
-                                                   var nomficha = $(this).find("mNomFicha").text();
-                                                   var secfno = $(this).find("secfno").text();
-                                                   var ssfcno = $(this).find("ssfcno").text();
-                                                   var clacno = $(this).find("clacno").text();
-                                                   var callecoop = parseFloat($(this).find("mCalleCoop").text());
-                                                   var colcoop = parseInt($(this).find("mColCoop").text());
-                                                   var nooficial = parseInt($(this).find("mNoOficial_Ext").text());
-                                                   var telcoop = parseInt($(this).find("mTelCoop").text());
-                                                   var curp = $(this).find("mCurp").text();
-                                                   var relpredio = $(this).find("mRelacionPredio").text();
-                                                   var usrcre = parseInt($(this).find("usrcre").text());
-                                                   var feccre = ArreglaFecha($(this).find("feccre").text());
-                                                   var usrmod = parseInt($(this).find("usrmod").text());
-                                                   var fecmod = ArreglaFecha($(this).find("fecmod").text());
+                                            ConsultaCoop(cidr, 'infcoop')
+                                                .done(function (r) {
+                                                    var cadena2 = $.trim(r.d);
+                                                    if (cadena2 != "<NewDataSet />") {
+                                                        $(r.d).find("Coop").each(function () {
+                                                            var apaterno = $(this).find("mApellidoP").text();
+                                                            var amaterno = $(this).find("mApellidoM").text();
+                                                            var nombres = $(this).find("mNombres").text();
+                                                            var nomficha = $(this).find("mNomFicha").text();
+                                                            var secfno = $(this).find("secfno").text();
+                                                            var ssfcno = $(this).find("ssfcno").text();
+                                                            var clacno = $(this).find("clacno").text();
+                                                            var callecoop = parseFloat($(this).find("mCalleCoop").text());
+                                                            var colcoop = parseInt($(this).find("mColCoop").text());
+                                                            var nooficial = parseInt($(this).find("mNoOficial_Ext").text());
+                                                            var telcoop = parseInt($(this).find("mTelCoop").text());
+                                                            var curp = $(this).find("mCurp").text();
+                                                            var relpredio = $(this).find("mRelacionPredio").text();
+                                                            var usrcre = parseInt($(this).find("usrcre").text());
+                                                            var feccre = ArreglaFecha($(this).find("feccre").text());
+                                                            var usrmod = parseInt($(this).find("usrmod").text());
+                                                            var fecmod = ArreglaFecha($(this).find("fecmod").text());
 
-                                                   $("#apaterno").val(apaterno);
-                                                   $("#amaterno").val(amaterno);
-                                                   $("#nombrescoop").val(nombres);
-                                                   $("#nomfichacoop").val(nomficha);
-                                                   $("#nooficnotif").val(nooficial);
-                                                   $("#telcoop").val(telcoop);
-                                                   $("#emailcoop").val($(this).find("mCorreo").text());
-                                                   $("#curp").val(curp);
-                                                   llenarRelPred(relpredio);
-                                                   llenarColonias(secfno, ssfcno, clacno);
-                                               })
-                                               MostrarModalCoop();
-                                               if (accion == 'elimcoop') {
-                                                   HabilitarCajasTexto(true);
-                                                   alert('Se eliminará el frente seleccionado');
-                                               }
-                                           }
-                                           else {
-                                               alert("No se encuentra asignado algún cooperador.");
-                                           }
-                                       }).fail(function (r) {
-                                           alert("No fué posible consultar los datos del cooperador.");
-                                       })
-                                   })
-                               }
-                               else {
-                                   alert("El número de frente se encuentra vacío.");
-                               }
-                           }).fail(function (r) {
-                               alert("No fué posible consultar el frente solicitado.");
-                           });
+                                                            $("#apaterno").val(apaterno);
+                                                            $("#amaterno").val(amaterno);
+                                                            $("#nombrescoop").val(nombres);
+                                                            $("#nomfichacoop").val(nomficha);
+                                                            $("#nooficnotif").val(nooficial);
+                                                            $("#telcoop").val(telcoop);
+                                                            $("#emailcoop").val($(this).find("mCorreo").text());
+                                                            $("#curp").val(curp);
+                                                            llenarRelPred(relpredio);
+                                                            llenarColonias(secfno, ssfcno, clacno);
+                                                        })
+                                                        MostrarModalCoop();
+                                                        if (accion == 'elimcoop') {
+                                                            HabilitarCajasTexto(true);
+                                                            alert('Se eliminará el frente seleccionado');
+                                                        }
+                                                    }
+                                                    else {
+                                                        alert("No se encuentra asignado algún cooperador.");
+                                                    }
+                                                }).fail(function (r) {
+                                                    alert("No fué posible consultar los datos del cooperador.");
+                                                })
+                                        })
+                                    }
+                                    else {
+                                        alert("El número de frente se encuentra vacío.");
+                                    }
+                                }).fail(function (r) {
+                                    alert("No fué posible consultar el frente solicitado.");
+                                });
 
                         }
                     }
@@ -975,35 +1027,35 @@
             });
 
             $('#button').on('toolbarItemClick',
-                   function (event, buttonClicked) {
-                       map.removeInteraction(draw);
-                       $('#map').css('cursor', 'login');
-                       accion = buttonClicked.id;
-                       if (accion == 'altacoop') {
-                           HabilitarCajasTexto(false);
-                           draw = new ol.interaction.Draw({
-                               source: vSourceFrentes,
-                               type: 'Point'
-                           });
-                           map.addInteraction(draw);
-                       }
-                       if (accion == 'editcoop') {
-                           HabilitarCajasTexto(false);
-                           $('#map').css('cursor', 'alias');
+                function (event, buttonClicked) {
+                    map.removeInteraction(draw);
+                    $('#map').css('cursor', 'login');
+                    accion = buttonClicked.id;
+                    if (accion == 'altacoop') {
+                        HabilitarCajasTexto(false);
+                        draw = new ol.interaction.Draw({
+                            source: vSourceFrentes,
+                            type: 'Point'
+                        });
+                        map.addInteraction(draw);
+                    }
+                    if (accion == 'editcoop') {
+                        HabilitarCajasTexto(false);
+                        $('#map').css('cursor', 'alias');
 
-                       }
-                       if (accion == 'elimcoop') {
-                           $('#map').css('cursor', 'pointer');
-                       }
-                       if (accion == 'infcoop') {
-                           $('#map').css('cursor', 'help');
-                       }
-                       if (accion == 'promocion') {
-                           EnviarPromocion();
-                           
-                       }
+                    }
+                    if (accion == 'elimcoop') {
+                        $('#map').css('cursor', 'pointer');
+                    }
+                    if (accion == 'infcoop') {
+                        $('#map').css('cursor', 'help');
+                    }
+                    if (accion == 'promocion') {
+                        EnviarPromocion();
 
-                   });
+                    }
+
+                });
 
             /*Prepara la barra de herramientas*/
             $('#button').toolbar({
@@ -1043,50 +1095,50 @@
                     var idcoop = $("#cmbNombresReg").val();
                     $("#bodegadatos").data("idcoop", idcoop);
                     ConsultaCoop(idcoop, 'infcoop')
-                                       .done(function (r) {
-                                           var cadena2 = $.trim(r.d);
-                                           if (cadena2 != "<NewDataSet />") {
-                                               $(r.d).find("Coop").each(function () {
-                                                   var apaterno = $(this).find("mApellidoP").text();
-                                                   var amaterno = $(this).find("mApellidoM").text();
-                                                   var nombres = $(this).find("mNombres").text();
-                                                   var nomficha = $(this).find("mNomFicha").text();
-                                                   var correo = $(this).find("mCorreo").text();
-                                                   var secfno = $(this).find("secfno").text();
-                                                   var ssfcno = $(this).find("ssfcno").text();
-                                                   var clacno = $(this).find("clacno").text();
-                                                   var callecoop = parseFloat($(this).find("mCalleCoop").text());
-                                                   var colcoop = parseInt($(this).find("mColCoop").text());
-                                                   var nooficial = parseInt($(this).find("mNoOficial_Ext").text());
-                                                   var telcoop = parseInt($(this).find("mTelCoop").text());
-                                                   var curp = $(this).find("mCurp").text();
-                                                   var idrelpredio = $(this).find("mRelPredio").text();
-                                                   var usrcre = parseInt($(this).find("usrcre").text());
-                                                   var feccre = ArreglaFecha($(this).find("feccre").text());
-                                                   var usrmod = parseInt($(this).find("usrmod").text());
-                                                   var fecmod = ArreglaFecha($(this).find("fecmod").text());
-                                                   if (secfno != '') {
-                                                       $("#calle").val(clacno);
-                                                   }
-                                                   $("#apaterno").val(apaterno);
-                                                   $("#amaterno").val(amaterno);
-                                                   $("#nombrescoop").val(nombres);
-                                                   $("#nomfichacoop").val(nomficha);
-                                                   $("#nooficnotif").val(nooficial);
-                                                   $("#telcoop").val(telcoop);
-                                                   $("#emailcoop").val(correo);
-                                                   $("#curp").val(curp);
+                        .done(function (r) {
+                            var cadena2 = $.trim(r.d);
+                            if (cadena2 != "<NewDataSet />") {
+                                $(r.d).find("Coop").each(function () {
+                                    var apaterno = $(this).find("mApellidoP").text();
+                                    var amaterno = $(this).find("mApellidoM").text();
+                                    var nombres = $(this).find("mNombres").text();
+                                    var nomficha = $(this).find("mNomFicha").text();
+                                    var correo = $(this).find("mCorreo").text();
+                                    var secfno = $(this).find("secfno").text();
+                                    var ssfcno = $(this).find("ssfcno").text();
+                                    var clacno = $(this).find("clacno").text();
+                                    var callecoop = parseFloat($(this).find("mCalleCoop").text());
+                                    var colcoop = parseInt($(this).find("mColCoop").text());
+                                    var nooficial = parseInt($(this).find("mNoOficial_Ext").text());
+                                    var telcoop = parseInt($(this).find("mTelCoop").text());
+                                    var curp = $(this).find("mCurp").text();
+                                    var idrelpredio = $(this).find("mRelPredio").text();
+                                    var usrcre = parseInt($(this).find("usrcre").text());
+                                    var feccre = ArreglaFecha($(this).find("feccre").text());
+                                    var usrmod = parseInt($(this).find("usrmod").text());
+                                    var fecmod = ArreglaFecha($(this).find("fecmod").text());
+                                    if (secfno != '') {
+                                        $("#calle").val(clacno);
+                                    }
+                                    $("#apaterno").val(apaterno);
+                                    $("#amaterno").val(amaterno);
+                                    $("#nombrescoop").val(nombres);
+                                    $("#nomfichacoop").val(nomficha);
+                                    $("#nooficnotif").val(nooficial);
+                                    $("#telcoop").val(telcoop);
+                                    $("#emailcoop").val(correo);
+                                    $("#curp").val(curp);
 
-                                                   llenarRelPred(idrelpredio);
-                                                   llenarColonias(secfno, ssfcno, clacno)
-                                               })
-                                           }
-                                           else {
-                                               alert("El cooperador no contiene datos");
-                                           }
-                                       }).fail(function (r) {
-                                           alert("No fue posible consultar los datos del cooperador");
-                                       });
+                                    llenarRelPred(idrelpredio);
+                                    llenarColonias(secfno, ssfcno, clacno)
+                                })
+                            }
+                            else {
+                                alert("El cooperador no contiene datos");
+                            }
+                        }).fail(function (r) {
+                            alert("No fue posible consultar los datos del cooperador");
+                        });
                 }
             });
             /*       function barra() {
@@ -1134,12 +1186,12 @@
             function EnviarPromocion() {
                 alert("Se regresará la solicitud a Promoción para su re-evaluación");
                 SolicitaFirmas(idsol, idanu)
-                        .done(function (r) {
-                            alert("Reevaluar solicitud");
-                            close();
-                        }).fail(function (r) {
-                            alert("No fué posible solicitar la re-evluación de la solicitud");
-                        });
+                    .done(function (r) {
+                        alert("Reevaluar solicitud");
+                        close();
+                    }).fail(function (r) {
+                        alert("No fué posible solicitar la re-evluación de la solicitud");
+                    });
             }
 
             function SolicitaFirmas(idsol, idanu) {
@@ -1236,30 +1288,30 @@
                 if (accion != 'elimcoop') {
                     if ($.trim($("#ctapred").val()) != "") {
                         RevisaCuentaPredial(pid, cup, fecha_cr, fecha_mo, usrcre, usrmod, tipo, tipopredio, ctapredial, ctaimuvi, observacio, usopredio, r20, nooficial, sapal, geom, 'consultapredio')
-                        .done(function (r) {
-                            var cadena = $.trim(r.d);
-                            if (cadena != "<NewDataSet />") {  // Si no se encontró predio con la cuenta predial capturada.
-                                $(r.d).find("Predio").each(function () {
-                                    var ctapredial = $(this).find("ctapredialr").text();
-                                    var pidr = parseInt($(this).find("pidr").text());
-                                    if (pid != pidr) {  // Si el predio encontrado con la cuenta predial es el mismo donde se dió clic
-                                        alert("La cuenta predial: " + ctapredial + ' se encuentra registrada con el predio: ' + pidr + ' por lo tanto no es posible registrar el cooperador')
-                                    }
-                                    else {
-                                        if (validarcoop()) {  /*Valida que los datos del cooperador sean correctos*/
-                                            AsignaCoop();
+                            .done(function (r) {
+                                var cadena = $.trim(r.d);
+                                if (cadena != "<NewDataSet />") {  // Si no se encontró predio con la cuenta predial capturada.
+                                    $(r.d).find("Predio").each(function () {
+                                        var ctapredial = $(this).find("ctapredialr").text();
+                                        var pidr = parseInt($(this).find("pidr").text());
+                                        if (pid != pidr) {  // Si el predio encontrado con la cuenta predial es el mismo donde se dió clic
+                                            alert("La cuenta predial: " + ctapredial + ' se encuentra registrada con el predio: ' + pidr + ' por lo tanto no es posible registrar el cooperador')
                                         }
-                                    }
-                                })
-                            }
-                            else {
-                                if (validarcoop()) {  /*Valida que los datos del cooperador sean correctos*/
-                                    AsignaCoop();
+                                        else {
+                                            if (validarcoop()) {  /*Valida que los datos del cooperador sean correctos*/
+                                                AsignaCoop();
+                                            }
+                                        }
+                                    })
                                 }
-                            }
-                        }).fail(function (r) {
-                            alert("No fue posible consultar la cuenta predial");
-                        });
+                                else {
+                                    if (validarcoop()) {  /*Valida que los datos del cooperador sean correctos*/
+                                        AsignaCoop();
+                                    }
+                                }
+                            }).fail(function (r) {
+                                alert("No fue posible consultar la cuenta predial");
+                            });
                     }
                     else {
                         var c = validarcoop();
@@ -1375,18 +1427,18 @@
             function EliminarFrente(fid, usrcre) {
                 $('#mask, .window').hide();
                 AccionFrente(fid, 0, 0, 0, 0, '', 0, 0, '', 0, '', usrcre, '', usrcre, accion) //*Tener cuidado ya que elimina fisicamente el registro.
-                .done(function (r) {
-                    var features = vSourceFrentes.getFeatures();
-                    for (var i = 0; i < (features.length - 1) ; i++) {
-                        if (features[i].get('fid') == fid) {
-                            break;
+                    .done(function (r) {
+                        var features = vSourceFrentes.getFeatures();
+                        for (var i = 0; i < (features.length - 1); i++) {
+                            if (features[i].get('fid') == fid) {
+                                break;
+                            }
                         }
-                    }
-                    vSourceFrentes.removeFeature(features[i])
-                    alert("Frente eliminado correctamente")
-                }).fail(function (response) {
-                    alert("El frente no se ha podido eliminar");
-                });
+                        vSourceFrentes.removeFeature(features[i])
+                        alert("Frente eliminado correctamente")
+                    }).fail(function (response) {
+                        alert("El frente no se ha podido eliminar");
+                    });
             }
 
 
@@ -1458,87 +1510,87 @@
                             pfecha_mor = ArreglaFecha($(this).find("ffecha_mor").text());
 
                             ConsultaCoop(cidr, 'infcoop')
-                           .done(function (r) {
-                               $(r.d).find("Coop").each(function () {
-                                   nomficha = $(this).find("mNomFicha").text();
-                                   callecoop = $(this).find("mCalleCoop").text();
-                                   colcoop = $(this).find("mColCoop").text();
-                                   nooficial = $(this).find("mNoOficial_Ext").text();
-                                   telcoop = $(this).find("mTelCoop").text();
-                                   relpredio = $(this).find("mRelPred").text();
-                                   usrcre = parseInt($(this).find("usrcre").text());
-                                   feccre = ArreglaFecha($(this).find("feccre").text());
-                                   usrmod = parseInt($(this).find("usrmod").text());
-                                   fecmod = ArreglaFecha($(this).find("fecmod").text());
-                                   domanuencia = callecoop + ' ' + nooficial + ' ' + colcoop;
+                                .done(function (r) {
+                                    $(r.d).find("Coop").each(function () {
+                                        nomficha = $(this).find("mNomFicha").text();
+                                        callecoop = $(this).find("mCalleCoop").text();
+                                        colcoop = $(this).find("mColCoop").text();
+                                        nooficial = $(this).find("mNoOficial_Ext").text();
+                                        telcoop = $(this).find("mTelCoop").text();
+                                        relpredio = $(this).find("mRelPred").text();
+                                        usrcre = parseInt($(this).find("usrcre").text());
+                                        feccre = ArreglaFecha($(this).find("feccre").text());
+                                        usrmod = parseInt($(this).find("usrmod").text());
+                                        fecmod = ArreglaFecha($(this).find("fecmod").text());
+                                        domanuencia = callecoop + ' ' + nooficial + ' ' + colcoop;
 
-                                   if (ctapredialr) {
-                                       var ctapredial, nomprop, dompred, domprop, manzana, lote, tipopred;
-                                       ConsultaPredial(ctapredialr)
-                                       .done(function (xml) {
-                                           ctapredial = $.trim($("CtaPred", xml).text());
-                                           if (ctapredial) {
-                                               nomprop = $.trim($("NomProp", xml).text());
-                                               dompred = 'Calle: ' + $.trim($("DomPred", xml).text()) + ' ' + $.trim($("NumExt", xml).text()) + ' ' + $.trim($("LetraExt", xml).text()) + ' ' + $.trim($("NumInt", xml).text()) + ' Colonia: ' + $.trim($("ColPred", xml).text());
-                                               domprop = 'Calle: ' + $.trim($("DomProp", xml).text()) + ' ' + $.trim($("NumExtP", xml).text()) + ' ' + $.trim($("LetraExtP", xml).text()) + ' ' + $.trim($("NumIntP", xml).text()) + ' Colonia: ' + $.trim($("ColProp", xml).text());
-                                               manzana = $.trim($("Manzana", xml).text());
-                                               lote = $.trim($("Lote", xml).text());
-                                               tipopred = $.trim($("TipPred", xml).text());
-                                               content.innerHTML = '<table class="letratabla"><tr><th>Metros</th><th>CoopID</th><th>pID</th><th>fID</th></tr>'
-                                                                 + '<tr><td>' + mtsfter + '</td><td>' + cidr + '</td><td>' + pidr + '</td><td>' + fid + '<td></tr>'
-                                                                 + '<tr><th colspan=4>DATOS DEL COOPERADOR</th></tr>'
-                                                                 + '<tr><td colspan=2>Cooperador:</td><td colspan=2>' + nomficha + '</td><td>'
-                                                                 + '<tr><td colspan=2>Domic. Coop (FIDOC):</td><td colspan=2>' + domanuencia + '</td><td>'
-                                                                 + '<tr><td colspan=2>Tel:</td><td colspan=2>' + telcoop + '</td><td>'
-                                                                 + '<tr><td colspan=2>Relación cooperador:</td><td colspan=2>' + relpredio + '</td><td>'
-                                                                 + '<tr><th colspan=4>DATOS DEL PREDIO</th></tr>'
-                                                                 + '<tr><td colspan=2>Uso_Predio (FIDOC):</td><td colspan=2>' + usopredior + '</td><td>'
-                                                                 + '<tr><td colspan=2>Propietario:</td><td colspan=2>' + nomprop + '</td><td>'
-                                                                 + '<tr><td colspan=2>Cta_Predial:</td><td colspan=2>' + ctapredial + '</td><td>'
-                                                                 + '<tr><td colspan=2>Domic. Predio</td><td colspan=2>' + dompred + '</td><td>'
-                                                                 + '<tr><td colspan=2>Domic. Prop.</td><td colspan=2>' + domprop + '</td><td>'
-                                                                 + '<tr><td colspan=2>Manzana:</td><td colspan=2>' + manzana + '</td><td>'
-                                                                 + '<tr><td colspan=2>Lote:</td><td colspan=2>' + lote + '</td><td>'
-                                                                 + '<tr><td colspan=2>Uso predio (PREDIAL):</td><td colspan=2>' + tipopred + '</td><td>'
-                                                                 + '<tr><td colspan=2>No. Oficial:</td><td colspan=2>' + nooficialr + '</td><td>'
-                                                                 + '<tr><td colspan=2>CUP:</td><td colspan=2>' + cupr + '</td><td>'
-                                                                 + '<tr><td colspan=2>CTA_IMUVI:</td><td colspan=2>' + ctaimuvir + '</td><td>'
-                                                                 + '<tr><td colspan=2>R20:</td><td colspan=2>' + r20r + '</td><td>'
-                                                                 + '<tr><td colspan=2>Cta. SAPAL:</td><td colspan=2>' + sapalr + '</td><td>'
-                                                                 + '</table>'
-                                           }
-                                           else {
-                                               alert("No se encontró la cuenta predial solicitada");
-                                           }
-                                       })
-                                       .fail(function (r) {
-                                           alert("No pudieron consultarse los datos de predial");
-                                       });
-                                   }
-                                   else {
+                                        if (ctapredialr) {
+                                            var ctapredial, nomprop, dompred, domprop, manzana, lote, tipopred;
+                                            ConsultaPredial(ctapredialr)
+                                                .done(function (xml) {
+                                                    ctapredial = $.trim($("CtaPred", xml).text());
+                                                    if (ctapredial) {
+                                                        nomprop = $.trim($("NomProp", xml).text());
+                                                        dompred = 'Calle: ' + $.trim($("DomPred", xml).text()) + ' ' + $.trim($("NumExt", xml).text()) + ' ' + $.trim($("LetraExt", xml).text()) + ' ' + $.trim($("NumInt", xml).text()) + ' Colonia: ' + $.trim($("ColPred", xml).text());
+                                                        domprop = 'Calle: ' + $.trim($("DomProp", xml).text()) + ' ' + $.trim($("NumExtP", xml).text()) + ' ' + $.trim($("LetraExtP", xml).text()) + ' ' + $.trim($("NumIntP", xml).text()) + ' Colonia: ' + $.trim($("ColProp", xml).text());
+                                                        manzana = $.trim($("Manzana", xml).text());
+                                                        lote = $.trim($("Lote", xml).text());
+                                                        tipopred = $.trim($("TipPred", xml).text());
+                                                        content.innerHTML = '<table class="letratabla"><tr><th>Metros</th><th>CoopID</th><th>pID</th><th>fID</th></tr>'
+                                                            + '<tr><td>' + mtsfter + '</td><td>' + cidr + '</td><td>' + pidr + '</td><td>' + fid + '<td></tr>'
+                                                            + '<tr><th colspan=4>DATOS DEL COOPERADOR</th></tr>'
+                                                            + '<tr><td colspan=2>Cooperador:</td><td colspan=2>' + nomficha + '</td><td>'
+                                                            + '<tr><td colspan=2>Domic. Coop (FIDOC):</td><td colspan=2>' + domanuencia + '</td><td>'
+                                                            + '<tr><td colspan=2>Tel:</td><td colspan=2>' + telcoop + '</td><td>'
+                                                            + '<tr><td colspan=2>Relación cooperador:</td><td colspan=2>' + relpredio + '</td><td>'
+                                                            + '<tr><th colspan=4>DATOS DEL PREDIO</th></tr>'
+                                                            + '<tr><td colspan=2>Uso_Predio (FIDOC):</td><td colspan=2>' + usopredior + '</td><td>'
+                                                            + '<tr><td colspan=2>Propietario:</td><td colspan=2>' + nomprop + '</td><td>'
+                                                            + '<tr><td colspan=2>Cta_Predial:</td><td colspan=2>' + ctapredial + '</td><td>'
+                                                            + '<tr><td colspan=2>Domic. Predio</td><td colspan=2>' + dompred + '</td><td>'
+                                                            + '<tr><td colspan=2>Domic. Prop.</td><td colspan=2>' + domprop + '</td><td>'
+                                                            + '<tr><td colspan=2>Manzana:</td><td colspan=2>' + manzana + '</td><td>'
+                                                            + '<tr><td colspan=2>Lote:</td><td colspan=2>' + lote + '</td><td>'
+                                                            + '<tr><td colspan=2>Uso predio (PREDIAL):</td><td colspan=2>' + tipopred + '</td><td>'
+                                                            + '<tr><td colspan=2>No. Oficial:</td><td colspan=2>' + nooficialr + '</td><td>'
+                                                            + '<tr><td colspan=2>CUP:</td><td colspan=2>' + cupr + '</td><td>'
+                                                            + '<tr><td colspan=2>CTA_IMUVI:</td><td colspan=2>' + ctaimuvir + '</td><td>'
+                                                            + '<tr><td colspan=2>R20:</td><td colspan=2>' + r20r + '</td><td>'
+                                                            + '<tr><td colspan=2>Cta. SAPAL:</td><td colspan=2>' + sapalr + '</td><td>'
+                                                            + '</table>'
+                                                    }
+                                                    else {
+                                                        alert("No se encontró la cuenta predial solicitada");
+                                                    }
+                                                })
+                                                .fail(function (r) {
+                                                    alert("No pudieron consultarse los datos de predial");
+                                                });
+                                        }
+                                        else {
 
-                                       content.innerHTML = '<table class="letratabla"><tr><th>Metros</th><th>CoopID</th><th>pID</th><th>fID</th></tr>'
-                                                                 + '<tr><td>' + mtsfter + '</td><td>' + cidr + '</td><td>' + pidr + '</td><td>' + fid + '<td></tr>'
-                                                                 + '<tr><th colspan=4>DATOS DEL COOPERADOR</th></tr>'
-                                                                 + '<tr><td colspan=2>Cooperador:</td><td colspan=2>' + nomficha + '</td><td>'
-                                                                 + '<tr><td colspan=2>Domic. Coop (FIDOC):</td><td colspan=2>' + domanuencia + '</td><td>'
-                                                                 + '<tr><td colspan=2>Tel:</td><td colspan=2>' + telcoop + '</td><td>'
-                                                                 + '<tr><td colspan=2>Relación cooperador:</td><td colspan=2>' + relpredio + '</td><td>'
-                                                                 + '<tr><th colspan=4>DATOS DEL PREDIO</th></tr>'
-                                                                 + '<tr><td colspan=2>Uso_Predio (FIDOC):</td><td colspan=2>' + usopredior + '</td><td>'
-                                                                 + '<tr><td colspan=2>No. Oficial:</td><td colspan=2>' + nooficialr + '</td><td>'
-                                                                 + '<tr><td colspan=2>CUP:</td><td colspan=2>' + cupr + '</td><td>'
-                                                                 + '<tr><td colspan=2>CTA_IMUVI:</td><td colspan=2>' + ctaimuvir + '</td><td>'
-                                                                 + '<tr><td colspan=2>R20:</td><td colspan=2>' + r20r + '</td><td>'
-                                                                 + '<tr><td colspan=2>Cta. SAPAL:</td><td colspan=2>' + sapalr + '</td><td>'
-                                                                 + '</table>'
+                                            content.innerHTML = '<table class="letratabla"><tr><th>Metros</th><th>CoopID</th><th>pID</th><th>fID</th></tr>'
+                                                + '<tr><td>' + mtsfter + '</td><td>' + cidr + '</td><td>' + pidr + '</td><td>' + fid + '<td></tr>'
+                                                + '<tr><th colspan=4>DATOS DEL COOPERADOR</th></tr>'
+                                                + '<tr><td colspan=2>Cooperador:</td><td colspan=2>' + nomficha + '</td><td>'
+                                                + '<tr><td colspan=2>Domic. Coop (FIDOC):</td><td colspan=2>' + domanuencia + '</td><td>'
+                                                + '<tr><td colspan=2>Tel:</td><td colspan=2>' + telcoop + '</td><td>'
+                                                + '<tr><td colspan=2>Relación cooperador:</td><td colspan=2>' + relpredio + '</td><td>'
+                                                + '<tr><th colspan=4>DATOS DEL PREDIO</th></tr>'
+                                                + '<tr><td colspan=2>Uso_Predio (FIDOC):</td><td colspan=2>' + usopredior + '</td><td>'
+                                                + '<tr><td colspan=2>No. Oficial:</td><td colspan=2>' + nooficialr + '</td><td>'
+                                                + '<tr><td colspan=2>CUP:</td><td colspan=2>' + cupr + '</td><td>'
+                                                + '<tr><td colspan=2>CTA_IMUVI:</td><td colspan=2>' + ctaimuvir + '</td><td>'
+                                                + '<tr><td colspan=2>R20:</td><td colspan=2>' + r20r + '</td><td>'
+                                                + '<tr><td colspan=2>Cta. SAPAL:</td><td colspan=2>' + sapalr + '</td><td>'
+                                                + '</table>'
 
 
-                                   }
-                               })
-                           }).fail(function (r) {
-                               alert("No fue posible consultar los datos del cooperador");
-                           })
+                                        }
+                                    })
+                                }).fail(function (r) {
+                                    alert("No fue posible consultar los datos del cooperador");
+                                })
                         })
                     }).fail(function (r) {
                         alert("No fue posible consultar los datos del frente");
@@ -1677,33 +1729,33 @@
                             txtidcoopr = msgresultCoop[1];
                             idcoopr = parseInt(msgresultCoop[1]);
                             ActualizaPredio(pid, cup, hoy, hoy, usuario, usuario, tipo, tipopredio, ctapredial, ctaimuvi, observacio, usopredio, r20, nooficial, sapal, geompredio, accion)
-                              .done(function (r) {
-                                  AccionFrente(0, latitud, longitud, mtsfte, idcoopr, txtidcoopr, pid, 0, '', gid, hoy, usuario, hoy, usuario, accion)
-                                  .done(function (r) {
-                                      console.log("Se guardó el frente");
-                                      RecargaCapaFrentes()
-                                      .done(function (result) {
-                                          var format = vSourceFrentes.getFormat();
-                                          vSourceFrentes.forEachFeature(function (feature) {
-                                              vSourceFrentes.removeFeature(feature);
-                                          });
-                                          var features = format.readFeatures(result);
-                                          vSourceFrentes.addFeatures(features);
-                                      }).fail(function (response) {
-                                          alert("Error")
-                                      })
-                                  })
-                                  .fail(function (x) {
-                                      alert("No fué posible guardar los datos del frente");
-                                  })
-                              })
-                              .fail(function (x) {
-                                  alert("ISAUL");
-                              })
+                                .done(function (r) {
+                                    AccionFrente(0, latitud, longitud, mtsfte, idcoopr, txtidcoopr, pid, 0, '', gid, hoy, usuario, hoy, usuario, accion)
+                                        .done(function (r) {
+                                            console.log("Se guardó el frente");
+                                            RecargaCapaFrentes()
+                                                .done(function (result) {
+                                                    var format = vSourceFrentes.getFormat();
+                                                    vSourceFrentes.forEachFeature(function (feature) {
+                                                        vSourceFrentes.removeFeature(feature);
+                                                    });
+                                                    var features = format.readFeatures(result);
+                                                    vSourceFrentes.addFeatures(features);
+                                                }).fail(function (response) {
+                                                    alert("Error")
+                                                })
+                                        })
+                                        .fail(function (x) {
+                                            alert("No fué posible guardar los datos del frente");
+                                        })
+                                })
+                                .fail(function (x) {
+                                    alert("ISAUL");
+                                })
                         })
-                      .fail(function (x) {
-                          alert("No fué posible guardar los datos del cooperador...");
-                      });
+                        .fail(function (x) {
+                            alert("No fué posible guardar los datos del cooperador...");
+                        });
                     $('#mask, .window').hide();
                 }
 
@@ -1715,22 +1767,22 @@
                             txtidcoopr = msgresultCoop[1];
                             idcoopr = parseInt(msgresultCoop[1]);
                             ActualizaPredio(pid, cup, hoy, hoy, usuario, usuario, tipo, tipopredio, ctapredial, ctaimuvi, observacio, usopredio, r20, nooficial, sapal, geompredio, accion)
-                              .done(function (r) {
-                                  AccionFrente(fid, latitud, longitud, mtsfte, idcoopr, txtidcoopr, pid, 0, '', gid, hoy, usuario, hoy, usuario, accion)
-                                  .done(function (r) {
-                                      console.log("Se guardó el frente")
-                                  })
-                                  .fail(function (x) {
-                                      alert("No fué posible guardar los datos del frente")
-                                  })
-                              })
-                              .fail(function (x) {
+                                .done(function (r) {
+                                    AccionFrente(fid, latitud, longitud, mtsfte, idcoopr, txtidcoopr, pid, 0, '', gid, hoy, usuario, hoy, usuario, accion)
+                                        .done(function (r) {
+                                            console.log("Se guardó el frente")
+                                        })
+                                        .fail(function (x) {
+                                            alert("No fué posible guardar los datos del frente")
+                                        })
+                                })
+                                .fail(function (x) {
 
-                              })
+                                })
                         })
-                      .fail(function (x) {
-                          alert("No fué posible guardar los datos del cooperador...");
-                      });
+                        .fail(function (x) {
+                            alert("No fué posible guardar los datos del cooperador...");
+                        });
                     $('#mask, .window').hide();
                 }
 
@@ -1750,7 +1802,7 @@
             function borrapuntosinregistrarseBD() {
                 var features = vSourceFrentes.getFeatures();
                 var fid;
-                for (var i = 0; i < (features.length - 1) ; i++) {
+                for (var i = 0; i < (features.length - 1); i++) {
                     fid = features[i].get('fid');
                     if (!fid) {
                         break;
@@ -1837,24 +1889,24 @@
             function MostrarDatosPredio(pid) {
                 /*RevisaCuentaPredial(pid, cup, fecha_cr, fecha_mo, usrcre, usrmod, tipo, tipopredio, ctapredial, ctaimuvi, observacio, usopredio, r20, nooficial, sapal, geom, accion)*/
                 RevisaCuentaPredial(pid, '', '', '', 1, 1, 'A', 0, '', '', '', 1, '', '', '', '', 'consultaprediopid')
-                .done(function (r) {
-                    $(r.d).find("Predio").each(function () {
-                        var tipo_predio = parseInt($(this).find("usopredior").text());
-                        $("#ctapred").val($(this).find("ctapredialr").text());
-                        $("#ctaimuvi").val($(this).find("ctaimuvir").text());
-                        $("#cup").val($(this).find("cupr").text());
-                        $("#recsapal").val($(this).find("sapalr").text());
-                        $("#nooficial").val($(this).find("nooficialr").text());
-                        $("#r20").val($(this).find("r20r").text());
-                        llenarUsoPred(tipo_predio);
-                        if ($("#ctapred").val() != '') {
-                            callWebServicePred();
-                        }
-                    })
+                    .done(function (r) {
+                        $(r.d).find("Predio").each(function () {
+                            var tipo_predio = parseInt($(this).find("usopredior").text());
+                            $("#ctapred").val($(this).find("ctapredialr").text());
+                            $("#ctaimuvi").val($(this).find("ctaimuvir").text());
+                            $("#cup").val($(this).find("cupr").text());
+                            $("#recsapal").val($(this).find("sapalr").text());
+                            $("#nooficial").val($(this).find("nooficialr").text());
+                            $("#r20").val($(this).find("r20r").text());
+                            llenarUsoPred(tipo_predio);
+                            if ($("#ctapred").val() != '') {
+                                callWebServicePred();
+                            }
+                        })
 
-                }).fail(function (r) {
-                    alert("No fue posible consultar los datos del predio");
-                });
+                    }).fail(function (r) {
+                        alert("No fue posible consultar los datos del predio");
+                    });
 
             }
 
@@ -1944,5 +1996,6 @@
         });
 
     </script>
-  </body>
+</body>
+
 </html>

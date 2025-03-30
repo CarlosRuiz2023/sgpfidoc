@@ -1,91 +1,103 @@
 ﻿<html>
-  <head>
+
+<head>
     <title>Ubicación de Predio</title>
-      
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>    
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
     <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
 
 
 
-    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->     
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
-    
-    
+    <script
+        src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+
+
     <style>
         a.skiplink {
-        position: absolute;
-        clip: rect(1px, 1px, 1px, 1px);
-        padding: 0;
-        border: 0;
-        height: 1px;
-        width: 1px;
-        overflow: hidden;
-      }
-      a.skiplink:focus {
-        clip: auto;
-        height: auto;
-        width: auto;
-        background-color: #fff;
-        padding: 0.3em;
-      }
-      #map:focus {
-        outline: #4A74A8 solid 0.15em;
-      }
+            position: absolute;
+            clip: rect(1px, 1px, 1px, 1px);
+            padding: 0;
+            border: 0;
+            height: 1px;
+            width: 1px;
+            overflow: hidden;
+        }
 
-      .ol-popup {
-        position: absolute;
-        background-color: white;
-        -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-        filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-        padding: 15px;
-        border-radius: 10px;
-        border: 1px solid #cccccc;
-        bottom: 12px;
-        left: -50px;
-        min-width: 280px;
-      }
-      .ol-popup:after, .ol-popup:before {
-        top: 100%;
-        border: solid transparent;
-        content: " ";
-        height: 0;
-        width: 0;
-        position: absolute;
-        pointer-events: none;
-      }
-      .ol-popup:after {
-        border-top-color: white;
-        border-width: 10px;
-        left: 48px;
-        margin-left: -10px;
-      }
-      .ol-popup:before {
-        border-top-color: #cccccc;
-        border-width: 11px;
-        left: 48px;
-        margin-left: -11px;
-      }
-      .ol-popup-closer {
-        text-decoration: none;
-        position: absolute;
-        top: 2px;
-        right: 8px;
-      }
-      .ol-popup-closer:after {
-        content: "✖";
-      }
+        a.skiplink:focus {
+            clip: auto;
+            height: auto;
+            width: auto;
+            background-color: #fff;
+            padding: 0.3em;
+        }
+
+        #map:focus {
+            outline: #4A74A8 solid 0.15em;
+        }
+
+        .ol-popup {
+            position: absolute;
+            background-color: white;
+            -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+            filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #cccccc;
+            bottom: 12px;
+            left: -50px;
+            min-width: 280px;
+        }
+
+        .ol-popup:after,
+        .ol-popup:before {
+            top: 100%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .ol-popup:after {
+            border-top-color: white;
+            border-width: 10px;
+            left: 48px;
+            margin-left: -10px;
+        }
+
+        .ol-popup:before {
+            border-top-color: #cccccc;
+            border-width: 11px;
+            left: 48px;
+            margin-left: -11px;
+        }
+
+        .ol-popup-closer {
+            text-decoration: none;
+            position: absolute;
+            top: 2px;
+            right: 8px;
+        }
+
+        .ol-popup-closer:after {
+            content: "✖";
+        }
     </style>
-  </head>
-  <body>    
-     <a class="skiplink" href="#map">Al mapa</a>
-    
-    <div id="map" class="map" tabindex="0"></div>  
+</head>
+
+<body>
+    <a class="skiplink" href="#map">Al mapa</a>
+
+    <div id="map" class="map" tabindex="0"></div>
     <div id="popup" class="ol-popup">
-      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-    <div id="popup-content"></div>
+        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+        <div id="popup-content"></div>
     </div>
     <script>
 
@@ -104,7 +116,7 @@
                 color: 'black',
                 outline: '#ffffff',
                 outlineWidth: '4',
-                placement: 'point',  
+                placement: 'point',
                 maxangle: '0.7853981633974483',
                 overflow: 'true',
                 maxreso: '1200'
@@ -164,7 +176,7 @@
             }
         }
 
-      
+
         function ExtraeFrentesObraPredio(pid) {
             return $.ajax({
                 type: "POST",
@@ -184,7 +196,7 @@
                         color: 'red',
                     }),
                     stroke: new ol.style.Stroke({ color: 'black', width: 1 })
-                }),               
+                }),
                 text: createTextStyle(feature, resolution, misValores.frentes)
             });
         }
@@ -198,7 +210,7 @@
                 }),
                 fill: new ol.style.Fill({
                     color: 'rgba(0, 0, 300, 0.1)'
-                }),                         
+                }),
                 text: createTextStyle(feature, resolution, misValores.obras),
             });
         }
@@ -217,11 +229,11 @@
         }
 
         function createTextStyle(feature, resolution, dom) {
-            return textstyle = new ol.style.Text ({
+            return textstyle = new ol.style.Text({
                 textAlign: dom.align == '' ? undefined : dom.align,
                 textBaseline: dom.baseline,
                 font: dom.weight + ' ' + dom.size + ' ' + dom.font,
-                text: getText(feature,resolution,dom),              
+                text: getText(feature, resolution, dom),
                 fill: new ol.style.Fill({ color: dom.color }),
                 offsetX: dom.offsetX,
                 offsetY: dom.offsetY,
@@ -236,7 +248,7 @@
             });
         }
 
-       
+
 
         function getText(feature, resolution, dom) {
             type = dom.text;
@@ -248,10 +260,10 @@
             var att = feature.getProperties();
             var text = '';
             if (uno == 'obras_fidoc') {
-                text ='obra:' + att.oid.toString();
+                text = 'obra:' + att.oid.toString();
             }
             if (uno == 'predios_fidoc_sol') {
-                text = 'predio:'  + att.pid.toString();
+                text = 'predio:' + att.pid.toString();
             }
             if (uno == 'frentes') {
                 text = 'frente:' + att.fid.toString();
@@ -273,8 +285,8 @@
             return text;
         };
 
-       
-    
+
+
 
 
         $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
@@ -289,17 +301,6 @@
             var select = new ol.interaction.Select();
             var selectedFeature;
 
-           
-
-            var overlay = new ol.Overlay({
-                element: container,
-                autoPan: true,
-                autoPanAnimation: {
-                    duration: 250
-                }
-            });
-
-            
 
 
             var overlay = new ol.Overlay({
@@ -310,149 +311,161 @@
                 }
             });
 
-           
+
+
+
+            var overlay = new ol.Overlay({
+                element: container,
+                autoPan: true,
+                autoPanAnimation: {
+                    duration: 250
+                }
+            });
+
+
             var pid = recuperarParametro("pid");
             var oids = [];
             var fids = [];
 
 
-           
+
 
             ExtraeFrentesObraPredio(pid)
-               .done(function (r) {
-                   var cadena = $.trim(r.d);                   
-                   if (cadena != "<NewDataSet />") {
-                       $(r.d).find("frentesxp").each(function () {
-                           fids.push($(this).find("fid").text());
-                           oids.push($(this).find("oid").text());
-                       });
-                   }
+                .done(function (r) {
+                    var cadena = $.trim(r.d);
+                    if (cadena != "<NewDataSet />") {
+                        $(r.d).find("frentesxp").each(function () {
+                            fids.push($(this).find("fid").text());
+                            oids.push($(this).find("oid").text());
+                        });
+                    }
 
 
-                   var frentes=fids[0];
-                   var obras=oids[0];
+                    var frentes = fids[0];
+                    var obras = oids[0];
 
-                   if (fids.length > 1) {
-                       for (i = 1; i < fids.length; i++) {
-                           frentes = frentes + ',' + fids[i];
-                       }
+                    if (fids.length > 1) {
+                        for (i = 1; i < fids.length; i++) {
+                            frentes = frentes + ',' + fids[i];
+                        }
 
-                       for (i = 1; i < oids.length; i++) {
-                           obras = obras + ',' + oids[i];
-                       }
-                   }
+                        for (i = 1; i < oids.length; i++) {
+                            obras = obras + ',' + oids[i];
+                        }
+                    }
 
-                   var image = new ol.style.Circle({
-                       radius: 5,
-                       fill: new ol.style.Fill({ color: 'blue' }),
-                       stroke: new ol.style.Stroke({ color: 'black', width: 1 })
-                   });
+                    var image = new ol.style.Circle({
+                        radius: 5,
+                        fill: new ol.style.Fill({ color: 'blue' }),
+                        stroke: new ol.style.Stroke({ color: 'black', width: 1 })
+                    });
 
-                   var imageselected = new ol.style.Circle({
-                       radius: 4,
-                       fill: new ol.style.Fill({ color: 'orange' }),
-                       stroke: new ol.style.Stroke({ color: 'yellow', width: 1 })
-                   });
-
-                   
-                   var raster = new ol.layer.Tile({
-                       source: new ol.source.OSM()
-                   });
+                    var imageselected = new ol.style.Circle({
+                        radius: 4,
+                        fill: new ol.style.Fill({ color: 'orange' }),
+                        stroke: new ol.style.Stroke({ color: 'yellow', width: 1 })
+                    });
 
 
-                   var vectorsourceObras = new ol.source.Vector({
-                       format: new ol.format.GeoJSON(),
-                       url: function (extent) {
-                           return 'http://192.168.1.5:8090/geoserver/sigFidoc1/ows?service=WFS&' +
-                           'version=1.0.0&request=GetFeature&typeName=sigFidoc1:obras_fidoc&' +
-                           'outputFormat=application%2Fjson&CQL_FILTER=oid%20in(' + obras + ')'
-                           }
-                   });
-
-                   var vectorsourceFrentes = new ol.source.Vector({
-                       format: new ol.format.GeoJSON(),
-                       url: function (extent) {
-                           return 'http://192.168.1.5:8090/geoserver/sigFidoc1/ows?service=WFS&' +
-                           'version=1.0.0&request=GetFeature&typeName=sigFidoc1:frentes&' +
-                           'outputFormat=application%2Fjson&CQL_FILTER=fid%20in(' + frentes + ')'
-                       }
-                   });
-
-                   var vectorsourcePredios = new ol.source.Vector({
-                       format: new ol.format.GeoJSON(),
-                       url: function (extent) {
-                           return 'http://192.168.1.5:8090/geoserver/sigFidoc1/ows?service=WFS&' +
-                           'version=1.0.0&request=GetFeature&typeName=sigFidoc1:predios_fidoc_sol&' +
-                           'outputFormat=application%2Fjson&CQL_FILTER=pid=' + pid
-                       }
-                   });
-
-                   var vectorFrente = new ol.layer.Vector({
-                       source: vectorsourceFrentes,
-                       style: pointStyleFunction
-                   });
-
-                   var vectorPredio = new ol.layer.Vector({
-                       source: vectorsourcePredios,
-                       style: polygonPredioStyleFunction
-                   });
-                   
-
-                   var vectorObra = new ol.layer.Vector({
-                       source: vectorsourceObras,
-                       style: polygonObraStyleFunction
-                   });
-
-                   
-
-                   var map = new ol.Map({
-                       layers: [raster, vectorObra, vectorPredio, vectorFrente],
-                       target: document.getElementById('map'),
-                       view: new ol.View({
-                           center: [-11319096.234, 2406669.952],
-                           maxzoom: 23,
-                           zoom: 12
-                       })
-                   });
+                    var raster = new ol.layer.Tile({
+                        source: new ol.source.OSM()
+                    });
 
 
-                   vectorsourcePredios.on('addfeature', function (evt) {
-                       if (vectorsourcePredios.getState() == 'ready') {
-                           var feature = evt.feature;
-                           var p = evt.feature.N.pid
-                           if (p) {
-                               var coords = feature.getGeometry().getCoordinates();
-                               var coord = feature.getGeometry().getExtent();
+                    var vectorsourceObras = new ol.source.Vector({
+                        format: new ol.format.GeoJSON(),
+                        url: function (extent) {
+                            return 'http://192.168.1.5:8090/geoserver/sigFidoc1/ows?service=WFS&' +
+                                'version=1.0.0&request=GetFeature&typeName=sigFidoc1:obras_fidoc&' +
+                                'outputFormat=application%2Fjson&CQL_FILTER=oid%20in(' + obras + ')'
+                        }
+                    });
 
-                               centro = ol.extent.getCenter(coord);
-                               x = centro[0];
-                               y = centro[1];
+                    var vectorsourceFrentes = new ol.source.Vector({
+                        format: new ol.format.GeoJSON(),
+                        url: function (extent) {
+                            return 'http://192.168.1.5:8090/geoserver/sigFidoc1/ows?service=WFS&' +
+                                'version=1.0.0&request=GetFeature&typeName=sigFidoc1:frentes&' +
+                                'outputFormat=application%2Fjson&CQL_FILTER=fid%20in(' + frentes + ')'
+                        }
+                    });
 
-                               map.getView().setMaxZoom(23);
-                               map.getView().setZoom(19);
-                               map.getView().setCenter(centro);
-                           }
-                           else {
-                               alert("NO SE ENCUENTRA PREDIO");
-                           }
-                       }
-                   });
+                    var vectorsourcePredios = new ol.source.Vector({
+                        format: new ol.format.GeoJSON(),
+                        url: function (extent) {
+                            return 'http://192.168.1.5:8090/geoserver/sigFidoc1/ows?service=WFS&' +
+                                'version=1.0.0&request=GetFeature&typeName=sigFidoc1:predios_fidoc_sol&' +
+                                'outputFormat=application%2Fjson&CQL_FILTER=pid=' + pid
+                        }
+                    });
 
-               }).fail(function (result) {
-                   console("No es posible leer los datos relacionados con el predio");
-               });
-            
+                    var vectorFrente = new ol.layer.Vector({
+                        source: vectorsourceFrentes,
+                        style: pointStyleFunction
+                    });
+
+                    var vectorPredio = new ol.layer.Vector({
+                        source: vectorsourcePredios,
+                        style: polygonPredioStyleFunction
+                    });
+
+
+                    var vectorObra = new ol.layer.Vector({
+                        source: vectorsourceObras,
+                        style: polygonObraStyleFunction
+                    });
+
+
+
+                    var map = new ol.Map({
+                        layers: [raster, vectorObra, vectorPredio, vectorFrente],
+                        target: document.getElementById('map'),
+                        view: new ol.View({
+                            center: [-11319096.234, 2406669.952],
+                            maxzoom: 23,
+                            zoom: 12
+                        })
+                    });
+
+
+                    vectorsourcePredios.on('addfeature', function (evt) {
+                        if (vectorsourcePredios.getState() == 'ready') {
+                            var feature = evt.feature;
+                            var p = evt.feature.N.pid
+                            if (p) {
+                                var coords = feature.getGeometry().getCoordinates();
+                                var coord = feature.getGeometry().getExtent();
+
+                                centro = ol.extent.getCenter(coord);
+                                x = centro[0];
+                                y = centro[1];
+
+                                map.getView().setMaxZoom(23);
+                                map.getView().setZoom(19);
+                                map.getView().setCenter(centro);
+                            }
+                            else {
+                                alert("NO SE ENCUENTRA PREDIO");
+                            }
+                        }
+                    });
+
+                }).fail(function (result) {
+                    console("No es posible leer los datos relacionados con el predio");
+                });
+
 
             closer.onclick = function () {
                 overlay.setPosition(undefined);
                 closer.blur();
                 return false;
-            };           
+            };
 
-            
+
 
         });
 
     </script>
-  </body>
+</body>
+
 </html>

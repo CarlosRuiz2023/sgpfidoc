@@ -1,70 +1,74 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"  lang="es" xml:lang="es">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    
+
     <style type="text/css">
-
         #mask {
-             z-index:10;
-             background-color:#000;
-             display:none;
-             position: fixed;    
-             left: 0;
-             top: 0;  
-         }
-
-        #boxes .window {  
-            font-size:20px;
-            position:fixed;
-            width:auto;   
-            height:auto;
-            display:none;
-            z-index:9999;
-            padding:20px;             
+            z-index: 10;
+            background-color: #000;
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
         }
-          
+
+        #boxes .window {
+            font-size: 20px;
+            position: fixed;
+            width: auto;
+            height: auto;
+            display: none;
+            z-index: 9999;
+            padding: 20px;
+        }
+
         #titulorecnat {
-            font-size:20px;
-            text-align:right;
-            color:white;            
-        }
- 
-        #boxes, #dialogorecnat{ 
-           width:auto; 
-           height:auto;
+            font-size: 20px;
+            text-align: right;
+            color: white;
         }
 
-       .posicion_boton_accion_recnat,.posicion_boton_cancelar_recnat {
-           font-weight: bold;      
-           font-size:30px;   
-           color:white;  
+        #boxes,
+        #dialogorecnat {
+            width: auto;
+            height: auto;
         }
-               
-       .datos {   
-           font-size:15px;   
-           background:silver;  
-           font-style:italic;
-           font-weight:bold;   
-           border: 3px solid #393939;
-           border-radius: 5px 5px 5px 5px;
-           color: #393939;   
-           padding: 5px; 
-       }
+
+        .posicion_boton_accion_recnat,
+        .posicion_boton_cancelar_recnat {
+            font-weight: bold;
+            font-size: 30px;
+            color: white;
+        }
+
+        .datos {
+            font-size: 15px;
+            background: silver;
+            font-style: italic;
+            font-weight: bold;
+            border: 3px solid #393939;
+            border-radius: 5px 5px 5px 5px;
+            color: #393939;
+            padding: 5px;
+        }
     </style>
 
-    
+
     <link type="text/css" rel="stylesheet" href="../../css/cupertino/jquery-ui-1.7.2.custom.css" />
     <link type="text/css" rel="stylesheet" href="../../css/ui.jqgrid.css" />
-    
-    
-    <script type="text/javascript" src="../../js/JScript_General.js" ></script>    
+
+
+    <script type="text/javascript" src="../../js/JScript_General.js"></script>
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>    
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>    
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>     
+    <script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
     <script type="text/javascript" src="../../js/excelexportjs.js"></script>
     <script type="text/javascript" src="../../js/grid.locale-es.js"></script>
     <script type="text/javascript" src="../../js/jquery.jqGrid.min.js"></script>
@@ -79,866 +83,865 @@
     <!--<script type="text/javascript" src="../../js/grid.addons.js"> </script>-->
     <script type="text/javascript" src="../../js/jquery.searchFilter.js"> </script>
     <script type="text/javascript" src="../../js/jQDnR.js"></script>
-    <script type="text/javascript" src="../../js/jqModal.js"></script>     
-    <script type="text/javascript" src="../../js/grid.subgrid.js"></script>      
-     
+    <script type="text/javascript" src="../../js/jqModal.js"></script>
+    <script type="text/javascript" src="../../js/grid.subgrid.js"></script>
 
-   <script type="text/javascript">
 
+    <script type="text/javascript">
 
 
-       $(document).ready(function () {
 
-           var idusu = recuperarParametro("idusu");
-           var obr_clv_int = recuperarParametro("obr_clv_int");
-           var accion = recuperarParametro("accion");
-          
+        $(document).ready(function () {
 
+            var idusu = recuperarParametro("idusu");
+            var obr_clv_int = recuperarParametro("obr_clv_int");
+            var accion = recuperarParametro("accion");
 
 
-           if (accion.indexOf("#") > -1) {
-               accion = accion.substr(0, accion.length - 1);
-           }
 
 
-           $("#bodegadatos").data("idusu", idusu);
-           $("#bodegadatos").data("obr_clv_int", obr_clv_int);
-           
-
-           Relaciona_coops(idusu,obr_clv_int,accion);
-
-
-
-
-/*
-           $(".posicion_boton_accion_recnat").click(function (e) { //Ver documento 
-               //alert("Agregar registro de recargo");
-               var montorecnat = $("#txtmontorecargo_x").val();
-               var fec_cap = $("#txtfecrec_x").val();
-               AplicarRegistroRecNat(fec_cap, montorecnat, 1)
-           });
-
-
-
-           $(".posicion_boton_cancelar_recnat").click(function (e) { //Ver documento 
-               $('#mask, .window').hide();
-           });
-
-           $('#mask').click(function () {
-               $(this).hide();
-               $('.window').hide();
-           });
-
-           */
-
-
-       });
-
-
-       function isDate(txtDate) {
-           var currVal = $.trim(txtDate);
-           var resp;
-
-           if (currVal == '')
-               resp = false;
-
-           //Declare Regex            
-           var rxDatePattern = /^(\d{1,2})(\/)(\d{1,2})(\/)(\d{4})$/;
-           var dtArray = currVal.match(rxDatePattern); // is format OK?
-
-           if (dtArray == null) {
-               resp = false;
-           }
-           else {
-               dtDay = parseInt(dtArray[1]);
-               dtMonth = parseInt(dtArray[3]);
-               dtYear = parseInt(dtArray[5]);
-               if (dtMonth < 1 || dtMonth > 12)
-                   resp = false;
-               else if (dtDay < 1 || dtDay > 31)
-                   resp = false;
-               else if ((dtMonth == 4 || dtMonth == 6 || dtMonth == 9 || dtMonth == 11) && dtDay == 31)
-                   resp = false;
-               else if (dtMonth == 2) {
-                   var isleap = (dtYear % 4 == 0 && (dtYear % 100 != 0 || dtYear % 400 == 0));
-                   if (dtDay > 29 || (dtDay == 29 && !isleap))
-                       resp = false;
-               }
-               resp = true;
-           }
-
-           //Checks for dd/mm/yyyy format.
-
-           if (!resp) {
-               alert("La fecha capturada como fecha de envío es incorrecta");
-           }
-           return resp;
-       }
-
-
-       function filterFloat(evt, input) {
-           // Backspace = 8, Enter = 13, ‘0′ = 48, ‘9′ = 57, ‘.’ = 46, ‘-’ = 43
-           var key = window.Event ? evt.which : evt.keyCode;
-           var chark = String.fromCharCode(key);
-           var tempValue = input.value + chark;
-           if (key >= 48 && key <= 57) {
-               if (filter(tempValue) === false) {
-                   return false;
-               } else {
-                   return true;
-               }
-           } else {
-               if (key == 8 || key == 13 || key == 0) {
-                   return true;
-               } else if (key == 46) {
-                   if (filter(tempValue) === false) {
-                       return false;
-                   } else {
-                       return true;
-                   }
-               } else {
-                   return false;
-               }
-           }
-       }
-
-       function filter(__val__) {
-           var preg = /^([0-9]+\.?[0-9]{0,2})$/;
-           if (preg.test(__val__) === true) {
-               return true;
-           } else {
-               return false;
-           }
-
-       }
-
-
-
-       function IsNumeric(valor) {
-
-           var log = valor.length;
-           var sw = "S";
-           for (x = 0; x < log; x++) {
-               v1 = valor.substr(x, 1);
-               v2 = parseInt(v1);
-               //Compruebo si es un valor numérico 
-               if (isNaN(v2)) {
-                   if (v1 != ".") {
-                       sw = "N";
-                       x = log;
-                   }
-               }
-           }
-           if (sw == "S") { return true; } else { return false; }
-       }
-
-       var primerslap = false;
-       var segundoslap = false;
-
-       function formateafecha(fecha) {
-           var long = fecha.length;
-           var dia;
-           var mes;
-           var ano;
-           if ((long >= 2) && (primerslap == false)) {
-               dia = fecha.substr(0, 2);
-               if ((IsNumeric(dia) == true) && (dia <= 31) && (dia != "00")) { fecha = fecha.substr(0, 2) + "/" + fecha.substr(3, 7); primerslap = true; }
-               else { fecha = ""; primerslap = false; }
-           }
-           else {
-               dia = fecha.substr(0, 1);
-               if (IsNumeric(dia) == false)
-               { fecha = ""; }
-               if ((long <= 2) && (primerslap = true)) { fecha = fecha.substr(0, 1); primerslap = false; }
-           }
-           if ((long >= 5) && (segundoslap == false)) {
-               mes = fecha.substr(3, 2);
-               if ((IsNumeric(mes) == true) && (mes <= 12) && (mes != "00")) { fecha = fecha.substr(0, 5) + "/" + fecha.substr(6, 4); segundoslap = true; }
-               else { fecha = fecha.substr(0, 3);; segundoslap = false; }
-           }
-           else { if ((long <= 5) && (segundoslap = true)) { fecha = fecha.substr(0, 4); segundoslap = false; } }
-           if (long >= 7) {
-               ano = fecha.substr(6, 4);
-               if (IsNumeric(ano) == false) { fecha = fecha.substr(0, 6); }
-               else { if (long == 10) { if ((ano == 0) || (ano < 1900) || (ano > 2100)) { fecha = fecha.substr(0, 6); } } }
-           }
-           if (long >= 10) {
-               fecha = fecha.substr(0, 10);
-               dia = fecha.substr(0, 2);
-               mes = fecha.substr(3, 2);
-               ano = fecha.substr(6, 4);
-               // Año no viciesto y es febrero y el dia es mayor a 28 
-               if ((ano % 4 != 0) && (mes == 02) && (dia > 28)) { fecha = fecha.substr(0, 2) + "/"; }
-           }
-           return (fecha);
-       }
-
-
-       function ConvertirCadenaToFecha(cadenafec) {
-           if (cadenafec != "") {
-               var from = cadenafec.split("/");
-               var fecha = new Date(from[2], from[1] - 1, from[0]);
-           }
-           else {
-               /*var fecha = new Date('2200', '01', '01');*/
-               var fecha = '01/01/1900';
-           }
-
-           return fecha;
-       }
-
-
-
-       function recuperarParametro(campo) {
-           var RE = new RegExp("[&?]" + campo + "=([^&]*)&");
-           var href = location.href + "&";
-           if (RE.test(href)) {
-               RE.exec(href);
-               return unescape(RegExp.$1);
-           }
-       }
-
-
-
-       function RedibujarGrid() {
-           //    jQuery("#grid").jqGrid('setGridParam',
-           //        {
-           //          datatype: function () { ObtenerDatos(ObtenerFiltro()) }                
-           //        })
-           //.trigger("reloadGrid");
-           $("#grid").trigger("reloadGrid");
-       }
-
-
-
-  /*     function AplicarRegistroRecNat(fec_cap, montomov, accion) {
-
-           var date = new Date();
-
-           if (isDate(fec_cap) && ConvertirCadenaToFecha(fec_cap) > ConvertirCadenaToFecha('01/01/1900') && ConvertirCadenaToFecha(fec_cap) <= date) {
-               if (parseFloat(montomov) > 0) {
-                   var hoy = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
-
-                   var mov_obr = $("#bodegadatos").data("mov_obr");
-                   var mov_coop = $("#bodegadatos").data("mov_coop");
-                   var mov_fecha = ConvertirCadenaToFecha(fec_cap); //Fecha vieja
-                   var mov_usu = $("#lblusu_x").html();
-                   var mov_monto = parseFloat(montomov);
-                   var mov_fecha_cap = date;   // Fecha nueva
-                   var mov_ndep = fec_cap + ':' + $("#lblcoop_x").html();
-                   var mov_devolver = 0;
-                   var idmov = 0;
-                   var obr_clv_int = parseInt($("#bodegadatos").data("obr_clv_int"));
-                   var coo_clv2 = parseInt($("#lblcoop_x").html());
-                   var mov_tipo_int = parseInt($("#lsttipomov").val());
-                   var mov_descrip = '';
-
-
-
-
-                   InsertaMovFinanc(mov_obr, mov_coop, mov_fecha, mov_usu, mov_monto, mov_fecha_cap, mov_ndep, mov_devolver, idmov, obr_clv_int, coo_clv2, mov_tipo_int, mov_descrip, accion)
-                                                  .done(function (r) { /*Si se tiene éxito al guardar la factibilidad*/
-
-      /*                                                alert("Movimiento financiero guardado correctamente");
-                                                      $('#mask, .window').hide();
-                                                      RedibujarGrid();
-
-                                                  })
-                                                  .fail(function (xhr) {
-                                                      console.log(xhr.responseText);
-                                                      alert("No es posible guardar el registro financiero...");
-                                                  });
-               }
-               else {
-                   alert("La cantidad del recargo capturado es inválido.");
-               }
-
-           }
-           else {
-
-               alert("La fecha capturada no es válida.")
-           }
-       }
-
-       */
-
-/*       function InsertaMovFinanc(mov_obr, mov_coop, mov_fecha, mov_usu, mov_monto, mov_fecha_cap, mov_ndep, mov_devolver, idmov, obr_clv_int, coo_clv2, mov_tipo_int, mov_descrip, accion) { /*Inserta los registros de los documentos en la tabla de mDocumento*/
-
-
- /*          var enviarObj = {
-               "mov_obr": mov_obr,
-               "mov_coop": mov_coop,
-               "mov_fecha": mov_fecha,
-               "mov_usu": mov_usu,
-               "mov_monto": mov_monto,
-               "mov_fecha_cap": mov_fecha_cap,
-               "mov_ndep": mov_ndep,
-               "mov_devolver": mov_devolver,
-               "id": idmov,
-               "obr_clv_int": obr_clv_int,
-               "coo_clv2": coo_clv2,
-               "mov_tipo_int": mov_tipo_int,
-               "mov_descrip": mov_descrip,
-               "accion": accion,
-           }
-
-           var stringData = JSON.stringify(enviarObj);
-
-           return $.ajax({
-               type: 'POST',
-               url: "../../WebServices/WebServiceMovs.asmx/RegMov",
-               data: "{objMovFinanc:" + stringData + "}",
-               contentType: 'application/json; utf-8',
-               dataType: 'json',
-               success: function (data) {
-                   if (data.d != null) {
-                       console.log(data.d);
-                   }
-               },
-               error: function (responseText, textStatus, errorThrown) {
-                   alert(textStatus + responseText + errorThrown);
-               }
-           });
-       }
-
-
-
-       function MostrarModalRecNat() {
-           var maskHeight = $(document).height();
-           var maskWidth = $(window).width();
-
-
-           //Set height and width to mask to fill up the whole screen
-           $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
-
-           //transition effect             
-           $('#mask').fadeIn(1000);
-           $('#mask').fadeTo("slow", 0.8);
-
-           //Get the window height and width
-           var winH = $(window).height();
-           var winW = $(window).width();
-
-           //Set the popup window to center
-           $("#dialogorecnat").css('top', winH / 2 - $("#dialogorecnat").height() / 2);
-           $("#dialogorecnat").css('left', winW / 2 - $("#dialogorecnat").width() / 2);
-
-           //transition effect
-           $("#dialogorecnat").fadeIn(2000);
-       }
-
-
-       function OperacionMovFinanc(idusu, idcoop, tipo_mov, accion) {
-
-           var date = new Date();
-           var hoy = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
-
-           if (accion == 1) {
-
-
-               $("#lblusu_x").text(idusu);
-               $("#lblcoop_x").text(idcoop);
-               $("#lblfechoy_x").text(hoy);
-               $("#lblaccion_x").text(accion);
-               llenarTipoMov(parseInt(tipo_mov));
-               MostrarModalRecNat();
-           }
-
-           if (accion == 2) { //Eliminar recargo, (se introduce un registro de cancelación de recargo)
-
-               var mov_obr = $("#bodegadatos").data("mov_obr");
-               var mov_coop = $("#bodegadatos").data("mov_coop");
-               var mov_fecha = date;
-               var mov_usu = idusu;
-               var mov_monto = $("#bodegadatos").data("mov_monto");
-               var mov_fecha_cap = date;
-               var mov_ndep = hoy + ':' + tipo_mov.toString();
-               var mov_devolver = 0
-               var idmov = $("#bodegadatos").data("idmov");
-               var obr_clv_int = $("#bodegadatos").data("obr_clv_int")
-               var coo_clv2 = idcoop;
-               var mov_tipo_int = tipo_mov; //Tipo de recargo a cancelar
-               var mov_descrip = '';
-
-               if (tipo_mov == 5 || tipo_mov == 8 || tipo_mov == 10) {
-                   InsertaMovFinanc(mov_obr, mov_coop, mov_fecha, mov_usu, mov_monto, mov_fecha_cap, mov_ndep, mov_devolver, idmov, obr_clv_int, coo_clv2, mov_tipo_int, mov_descrip, accion);
-                   alert("Movimiento cancelado");
-                   location.reload();
-               }
-               else {
-                   alert("No es posible eliminar el movimiento financiero");
-               }
-           }
-
-
-       }*/
-
-
-
-
-
-
-       function Relaciona_coops(idusu,obr_clv_int,accion) {
-
-           var tituloventana = '';           
-
-           $("#grid").jqGrid(
-            {
-                datatype: function () {
-                    $.ajax(
-                      {
-                          url: "../../WebServices/WebServiceCoop.asmx/Get_vwcoops_4", //PageMethod
-                          data: "{'pPageSize':'" + $('#grid').getGridParam("rowNum") +
-                          "','pCurrentPage':'" + $('#grid').getGridParam("page") +
-                          "','pSortColumn':'" + $('#grid').getGridParam("sortname") +
-                          "','pSortOrder':'" + $('#grid').getGridParam("sortorder") +
-                          "','idusu':'" + idusu +
-                          "','obr_clv_int':'" + obr_clv_int +
-                          "','accion':'" + accion +"'}", //PageMethod Parametros de entrada
-                          dataType: "json",
-                          type: "post",
-                          contentType: "application/json; charset=utf-8",
-                          complete: function (jsondata, stat) {
-                              if (stat == "success") {
-                                  jQuery("#grid")[0].addJSONData(JSON.parse(jsondata.responseText).d);
-
-                                  var objeto = JSON.parse(jsondata.responseText).d;
-                                  var regs = objeto.RecordCount;
-                                  if (regs == 0) {
-                                      alert('No se encontraron registros...');
-                                  }                                 
-                              }
-                              else {
-                                  alert(JSON.parse(jsondata.responseText).Message);
-                              }
+            if (accion.indexOf("#") > -1) {
+                accion = accion.substr(0, accion.length - 1);
+            }
+
+
+            $("#bodegadatos").data("idusu", idusu);
+            $("#bodegadatos").data("obr_clv_int", obr_clv_int);
+
+
+            Relaciona_coops(idusu, obr_clv_int, accion);
+
+
+
+
+            /*
+                       $(".posicion_boton_accion_recnat").click(function (e) { //Ver documento 
+                           //alert("Agregar registro de recargo");
+                           var montorecnat = $("#txtmontorecargo_x").val();
+                           var fec_cap = $("#txtfecrec_x").val();
+                           AplicarRegistroRecNat(fec_cap, montorecnat, 1)
+                       });
+            
+            
+            
+                       $(".posicion_boton_cancelar_recnat").click(function (e) { //Ver documento 
+                           $('#mask, .window').hide();
+                       });
+            
+                       $('#mask').click(function () {
+                           $(this).hide();
+                           $('.window').hide();
+                       });
+            
+                       */
+
+
+        });
+
+
+        function isDate(txtDate) {
+            var currVal = $.trim(txtDate);
+            var resp;
+
+            if (currVal == '')
+                resp = false;
+
+            //Declare Regex            
+            var rxDatePattern = /^(\d{1,2})(\/)(\d{1,2})(\/)(\d{4})$/;
+            var dtArray = currVal.match(rxDatePattern); // is format OK?
+
+            if (dtArray == null) {
+                resp = false;
+            }
+            else {
+                dtDay = parseInt(dtArray[1]);
+                dtMonth = parseInt(dtArray[3]);
+                dtYear = parseInt(dtArray[5]);
+                if (dtMonth < 1 || dtMonth > 12)
+                    resp = false;
+                else if (dtDay < 1 || dtDay > 31)
+                    resp = false;
+                else if ((dtMonth == 4 || dtMonth == 6 || dtMonth == 9 || dtMonth == 11) && dtDay == 31)
+                    resp = false;
+                else if (dtMonth == 2) {
+                    var isleap = (dtYear % 4 == 0 && (dtYear % 100 != 0 || dtYear % 400 == 0));
+                    if (dtDay > 29 || (dtDay == 29 && !isleap))
+                        resp = false;
+                }
+                resp = true;
+            }
+
+            //Checks for dd/mm/yyyy format.
+
+            if (!resp) {
+                alert("La fecha capturada como fecha de envío es incorrecta");
+            }
+            return resp;
+        }
+
+
+        function filterFloat(evt, input) {
+            // Backspace = 8, Enter = 13, ‘0′ = 48, ‘9′ = 57, ‘.’ = 46, ‘-’ = 43
+            var key = window.Event ? evt.which : evt.keyCode;
+            var chark = String.fromCharCode(key);
+            var tempValue = input.value + chark;
+            if (key >= 48 && key <= 57) {
+                if (filter(tempValue) === false) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                if (key == 8 || key == 13 || key == 0) {
+                    return true;
+                } else if (key == 46) {
+                    if (filter(tempValue) === false) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        function filter(__val__) {
+            var preg = /^([0-9]+\.?[0-9]{0,2})$/;
+            if (preg.test(__val__) === true) {
+                return true;
+            } else {
+                return false;
+            }
+
+        }
+
+
+
+        function IsNumeric(valor) {
+
+            var log = valor.length;
+            var sw = "S";
+            for (x = 0; x < log; x++) {
+                v1 = valor.substr(x, 1);
+                v2 = parseInt(v1);
+                //Compruebo si es un valor numérico 
+                if (isNaN(v2)) {
+                    if (v1 != ".") {
+                        sw = "N";
+                        x = log;
+                    }
+                }
+            }
+            if (sw == "S") { return true; } else { return false; }
+        }
+
+        var primerslap = false;
+        var segundoslap = false;
+
+        function formateafecha(fecha) {
+            var long = fecha.length;
+            var dia;
+            var mes;
+            var ano;
+            if ((long >= 2) && (primerslap == false)) {
+                dia = fecha.substr(0, 2);
+                if ((IsNumeric(dia) == true) && (dia <= 31) && (dia != "00")) { fecha = fecha.substr(0, 2) + "/" + fecha.substr(3, 7); primerslap = true; }
+                else { fecha = ""; primerslap = false; }
+            }
+            else {
+                dia = fecha.substr(0, 1);
+                if (IsNumeric(dia) == false) { fecha = ""; }
+                if ((long <= 2) && (primerslap = true)) { fecha = fecha.substr(0, 1); primerslap = false; }
+            }
+            if ((long >= 5) && (segundoslap == false)) {
+                mes = fecha.substr(3, 2);
+                if ((IsNumeric(mes) == true) && (mes <= 12) && (mes != "00")) { fecha = fecha.substr(0, 5) + "/" + fecha.substr(6, 4); segundoslap = true; }
+                else { fecha = fecha.substr(0, 3);; segundoslap = false; }
+            }
+            else { if ((long <= 5) && (segundoslap = true)) { fecha = fecha.substr(0, 4); segundoslap = false; } }
+            if (long >= 7) {
+                ano = fecha.substr(6, 4);
+                if (IsNumeric(ano) == false) { fecha = fecha.substr(0, 6); }
+                else { if (long == 10) { if ((ano == 0) || (ano < 1900) || (ano > 2100)) { fecha = fecha.substr(0, 6); } } }
+            }
+            if (long >= 10) {
+                fecha = fecha.substr(0, 10);
+                dia = fecha.substr(0, 2);
+                mes = fecha.substr(3, 2);
+                ano = fecha.substr(6, 4);
+                // Año no viciesto y es febrero y el dia es mayor a 28 
+                if ((ano % 4 != 0) && (mes == 02) && (dia > 28)) { fecha = fecha.substr(0, 2) + "/"; }
+            }
+            return (fecha);
+        }
+
+
+        function ConvertirCadenaToFecha(cadenafec) {
+            if (cadenafec != "") {
+                var from = cadenafec.split("/");
+                var fecha = new Date(from[2], from[1] - 1, from[0]);
+            }
+            else {
+                /*var fecha = new Date('2200', '01', '01');*/
+                var fecha = '01/01/1900';
+            }
+
+            return fecha;
+        }
+
+
+
+        function recuperarParametro(campo) {
+            var RE = new RegExp("[&?]" + campo + "=([^&]*)&");
+            var href = location.href + "&";
+            if (RE.test(href)) {
+                RE.exec(href);
+                return unescape(RegExp.$1);
+            }
+        }
+
+
+
+        function RedibujarGrid() {
+            //    jQuery("#grid").jqGrid('setGridParam',
+            //        {
+            //          datatype: function () { ObtenerDatos(ObtenerFiltro()) }                
+            //        })
+            //.trigger("reloadGrid");
+            $("#grid").trigger("reloadGrid");
+        }
+
+
+
+        /*     function AplicarRegistroRecNat(fec_cap, montomov, accion) {
+      
+                 var date = new Date();
+      
+                 if (isDate(fec_cap) && ConvertirCadenaToFecha(fec_cap) > ConvertirCadenaToFecha('01/01/1900') && ConvertirCadenaToFecha(fec_cap) <= date) {
+                     if (parseFloat(montomov) > 0) {
+                         var hoy = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
+      
+                         var mov_obr = $("#bodegadatos").data("mov_obr");
+                         var mov_coop = $("#bodegadatos").data("mov_coop");
+                         var mov_fecha = ConvertirCadenaToFecha(fec_cap); //Fecha vieja
+                         var mov_usu = $("#lblusu_x").html();
+                         var mov_monto = parseFloat(montomov);
+                         var mov_fecha_cap = date;   // Fecha nueva
+                         var mov_ndep = fec_cap + ':' + $("#lblcoop_x").html();
+                         var mov_devolver = 0;
+                         var idmov = 0;
+                         var obr_clv_int = parseInt($("#bodegadatos").data("obr_clv_int"));
+                         var coo_clv2 = parseInt($("#lblcoop_x").html());
+                         var mov_tipo_int = parseInt($("#lsttipomov").val());
+                         var mov_descrip = '';
+      
+      
+      
+      
+                         InsertaMovFinanc(mov_obr, mov_coop, mov_fecha, mov_usu, mov_monto, mov_fecha_cap, mov_ndep, mov_devolver, idmov, obr_clv_int, coo_clv2, mov_tipo_int, mov_descrip, accion)
+                                                        .done(function (r) { /*Si se tiene éxito al guardar la factibilidad*/
+
+        /*                                                alert("Movimiento financiero guardado correctamente");
+                                                        $('#mask, .window').hide();
+                                                        RedibujarGrid();
+  
+                                                    })
+                                                    .fail(function (xhr) {
+                                                        console.log(xhr.responseText);
+                                                        alert("No es posible guardar el registro financiero...");
+                                                    });
+                 }
+                 else {
+                     alert("La cantidad del recargo capturado es inválido.");
+                 }
+  
+             }
+             else {
+  
+                 alert("La fecha capturada no es válida.")
+             }
+         }
+  
+         */
+
+        /*       function InsertaMovFinanc(mov_obr, mov_coop, mov_fecha, mov_usu, mov_monto, mov_fecha_cap, mov_ndep, mov_devolver, idmov, obr_clv_int, coo_clv2, mov_tipo_int, mov_descrip, accion) { /*Inserta los registros de los documentos en la tabla de mDocumento*/
+
+
+        /*          var enviarObj = {
+                      "mov_obr": mov_obr,
+                      "mov_coop": mov_coop,
+                      "mov_fecha": mov_fecha,
+                      "mov_usu": mov_usu,
+                      "mov_monto": mov_monto,
+                      "mov_fecha_cap": mov_fecha_cap,
+                      "mov_ndep": mov_ndep,
+                      "mov_devolver": mov_devolver,
+                      "id": idmov,
+                      "obr_clv_int": obr_clv_int,
+                      "coo_clv2": coo_clv2,
+                      "mov_tipo_int": mov_tipo_int,
+                      "mov_descrip": mov_descrip,
+                      "accion": accion,
+                  }
+       
+                  var stringData = JSON.stringify(enviarObj);
+       
+                  return $.ajax({
+                      type: 'POST',
+                      url: "../../WebServices/WebServiceMovs.asmx/RegMov",
+                      data: "{objMovFinanc:" + stringData + "}",
+                      contentType: 'application/json; utf-8',
+                      dataType: 'json',
+                      success: function (data) {
+                          if (data.d != null) {
+                              console.log(data.d);
                           }
-                      });
-                },
-                jsonReader: //Set the jsonReader to the JQGridJSonResponse squema to bind the data.
+                      },
+                      error: function (responseText, textStatus, errorThrown) {
+                          alert(textStatus + responseText + errorThrown);
+                      }
+                  });
+              }
+       
+       
+       
+              function MostrarModalRecNat() {
+                  var maskHeight = $(document).height();
+                  var maskWidth = $(window).width();
+       
+       
+                  //Set height and width to mask to fill up the whole screen
+                  $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+       
+                  //transition effect             
+                  $('#mask').fadeIn(1000);
+                  $('#mask').fadeTo("slow", 0.8);
+       
+                  //Get the window height and width
+                  var winH = $(window).height();
+                  var winW = $(window).width();
+       
+                  //Set the popup window to center
+                  $("#dialogorecnat").css('top', winH / 2 - $("#dialogorecnat").height() / 2);
+                  $("#dialogorecnat").css('left', winW / 2 - $("#dialogorecnat").width() / 2);
+       
+                  //transition effect
+                  $("#dialogorecnat").fadeIn(2000);
+              }
+       
+       
+              function OperacionMovFinanc(idusu, idcoop, tipo_mov, accion) {
+       
+                  var date = new Date();
+                  var hoy = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
+       
+                  if (accion == 1) {
+       
+       
+                      $("#lblusu_x").text(idusu);
+                      $("#lblcoop_x").text(idcoop);
+                      $("#lblfechoy_x").text(hoy);
+                      $("#lblaccion_x").text(accion);
+                      llenarTipoMov(parseInt(tipo_mov));
+                      MostrarModalRecNat();
+                  }
+       
+                  if (accion == 2) { //Eliminar recargo, (se introduce un registro de cancelación de recargo)
+       
+                      var mov_obr = $("#bodegadatos").data("mov_obr");
+                      var mov_coop = $("#bodegadatos").data("mov_coop");
+                      var mov_fecha = date;
+                      var mov_usu = idusu;
+                      var mov_monto = $("#bodegadatos").data("mov_monto");
+                      var mov_fecha_cap = date;
+                      var mov_ndep = hoy + ':' + tipo_mov.toString();
+                      var mov_devolver = 0
+                      var idmov = $("#bodegadatos").data("idmov");
+                      var obr_clv_int = $("#bodegadatos").data("obr_clv_int")
+                      var coo_clv2 = idcoop;
+                      var mov_tipo_int = tipo_mov; //Tipo de recargo a cancelar
+                      var mov_descrip = '';
+       
+                      if (tipo_mov == 5 || tipo_mov == 8 || tipo_mov == 10) {
+                          InsertaMovFinanc(mov_obr, mov_coop, mov_fecha, mov_usu, mov_monto, mov_fecha_cap, mov_ndep, mov_devolver, idmov, obr_clv_int, coo_clv2, mov_tipo_int, mov_descrip, accion);
+                          alert("Movimiento cancelado");
+                          location.reload();
+                      }
+                      else {
+                          alert("No es posible eliminar el movimiento financiero");
+                      }
+                  }
+       
+       
+              }*/
+
+
+
+
+
+
+        function Relaciona_coops(idusu, obr_clv_int, accion) {
+
+            var tituloventana = '';
+
+            $("#grid").jqGrid(
                 {
-                    root: "Items",
-                    page: "CurrentPage",
-                    total: "PageCount",
-                    records: "RecordCount",
-                    repeatitems: true,
-                    cell: "row",
-                    id: "fid"
-                },
-                colModel: [
-               {
-                   index: 'fid', width: 200, align: 'Center', name: 'fid'
-               },
-               {
-                   index: 'geom_frente', width: 200, align: 'Center', name: 'geom_frente'
-               },
-               {
-                   index: 'mts_frente', width: 200, align: 'Center', name: 'MtsFrente'
-               },
-               {
-                   index: 'cid', width: 200, align: 'Center', name: 'cid'
-               },
-               {
-                   index: 'coopid', width: 200, align: 'Center', name: 'coopid'//, datefmt: 'd/m/Y'
-               },
-               {
-                   index: 'pid', width: 200, align: 'Center', name: 'pid'//, formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }, sorttype: 'number', summaryType: 'sum'
-               },
-               {
-                   index: 'oid', width: 200, align: 'Center', name: 'oid'
-               },
-               {
-                   index: 'obs_grales', width: 200, align: 'Center', name: 'ObsGrales'
-               },
-               {
-                   index: 'obra_sifidoc', width: 200, align: 'Center', name: 'ObraSIFIDOC'//, hidden: true
-               },
-               {
-                   index: 'gid', width: 200, align: 'Center', name: 'gid'
-               },
-               {
-                   index: 'feccre_frente', width: 200, align: 'Center', name: 'feccre_fte'
-               },
-               {
-                   index: 'fecmod_frente', width: 200, align: 'Center', name: 'fecmod_fte'
-               },
-               {
-                   index: 'usucre_frente', width: 200, align: 'Center', name: 'uscre_fte'
-               },
-               {
-                   index: 'usumod_frente', width: 200, align: 'Center', name: 'usumod_fte'
-               },
-               {
-                   index: 'prid', width: 200, align: 'Center', name: 'prid'
-               },
-               {
-                   index: 'inc', width: 200, align: 'Center', name: 'inc'
-               },
-               {
-                   index: 'did', width: 200, align: 'Center', name: 'did'
-               },
-               {
-                   index: 'factor_act_pago', width: 200, align: 'Center', name: 'fact_act_pag'
-               },
-               {
-                   index: 'obr_clv_int', width: 200, align: 'Center', name: 'obr_clv_int'
-               },
-               {
-                   index: 'coo_clv2', width: 200, align: 'Center', name: 'coo_clv2'
-               },
-               {
-                   index: 'activo', width: 200, align: 'Center', name: 'activo'
-               },               
-               {
-                   index: 'capital', width: 200, align: 'Center', name: 'capital'
-               },
-               {
-                   index: 'midcoop', width: 200, align: 'Center', name: 'midcoop'
-               },
-               {
-                   index: 'mapellidop', width: 200, align: 'Center', name: 'mapellidop'
-               },
-               {
-                   index: 'mapellidom', width: 200, align: 'Center', name: 'mapellidom'
-               },
-               {
-                   index: 'mnombres', width: 200, align: 'Center', name: 'mnombres'
-               },
-               {
-                   index: 'mcallecoop', width: 200, align: 'Center', name: 'mcallecoop'
-               },
-               {
-                   index: 'mcolcoop', width: 200, align: 'Center', name: 'mcolcoop'
-               },
-               {
-                   index: 'mnooficial_ext', width: 200, align: 'Center', name: 'mnooficial_ext'
-               },
-               {
-                   index: 'mnooficial_int', width: 200, align: 'Center', name: 'mnooficial_int'
-               },
-               {
-                   index: 'mtelcoop', width: 200, align: 'Center', name: 'mtelcoop'
-               },
-               {
-                   index: 'mnomficha', width: 200, align: 'Center', name: 'mnomficha'
-               },
-               {
-                   index: 'mestado', width: 200, align: 'Center', name: 'mestado'
-               },
-               {
-                   index: 'mpais', width: 200, align: 'Center', name: 'mpais'
-               },
-               {
-                   index: 'mcorreo', width: 200, align: 'Center', name: 'mcorreo'
-               },
-               {
-                   index: 'usrcre_coop', width: 200, align: 'Center', name: 'usrcre_coop'
-               },
-               {
-                   index: 'feccre_coop', width: 200, align: 'Center', name: 'feccre_coop'
-               },
-               {
-                   index: 'usrmod_coop', width: 200, align: 'Center', name: 'usrmod_coop'
-               },
-               {
-                   index: 'fecmod_coop', width: 200, align: 'Center', name: 'fecmod_coop'
-               },
-               {
-                   index: 'mcurp', width: 200, align: 'Center', name: 'mcurp'
-               },
-               {
-                   index: 'mrelacionpredio', width: 200, align: 'Center', name: 'mrelacionpredio'
-               },
-               {
-                   index: 'ine', width: 200, align: 'Center', name: 'ine'
-               },
-               {
-                   index: 'doc_identific', width: 200, align: 'Center', name: 'doc_identific'
-               },
-               {
-                   index: 'obr_clv', width: 200, align: 'Center', name: 'obr_clv'
-               },
-               {
-                   index: 'obr_mts', width: 200, align: 'Center', name: 'obr_mts'
-               },
-               {
-                   index: 'obr_cost', width: 200, align: 'Center', name: 'obr_cost'
-               },
-               {
-                   index: 'obr_int', width: 200, align: 'Center', name: 'obr_int'
-               },
-               {
-                   index: 'obr_fecha', width: 200, align: 'Center', name: 'obr_fecha'
-               },
-               {
-                   index: 'obr_cost_total', width: 200, align: 'Center', name: 'obr_costo_total'
-               },
-               {
-                   index: 'obr_inc', width: 200, align: 'Center', name: 'obr_inc'
-               },
-               {
-                   index: 'obr_fecinip', width: 200, align: 'Center', name: 'obr_fecinip'
-               },
-               {
-                   index: 'obr_fecvenp', width: 200, align: 'Center', name: 'obr_fecvenp'
-               },
-               {
-                   index: 'obr_npago', width: 200, align: 'Center', name: 'obr_npago'
-               },
-               {
-                   index: 'obr_num_periodo', width: 200, align: 'Center', name: 'obr_num_periodo'
-               },
-               {
-                   index: 'obr_opergob', width: 200, align: 'Center', name: 'obr_opergob'
-               },
-               {
-                   index: 'obr_fec_ini_proc', width: 200, align: 'Center', name: 'obr_fec_ini_proc'
-               },
-               {
-                   index: 'obr_fec_ini_cob', width: 200, align: 'Center', name: 'obr_fec_ini_cob'
-               },
-               {
-                   index: 'obr_clv_int_obra', width: 200, align: 'Center', name: 'obr_clv_int_obra'
-               },
-               {
-                   index: 'obr_prog2', width: 200, align: 'Center', name: 'obr_prog2'
-               },
-               {
-                   index: 'nomprog', width: 200, align: 'Center', name: 'obr_nomprog'
-               },
-               {
-                   index: 'progdescrip', width: 200, align: 'Center', name: 'obr_progdescrip'
-               },
-               {
-                   index: 'obr_clv2', width: 200, align: 'Center', name: 'obr_clv2'
-               },
-               {
-                   index: 'obr_status', width: 200, align: 'Center', name: 'obr_status'
-               },
-               {
-                   index: 'cestatus', width: 200, align: 'Center', name: 'cestatus'
-               },
-               {
-                   index: 'oid_obra', width: 200, align: 'Center', name: 'oid_obra'
-               },
-               {
-                   index: 'obr_fec_canc', width: 200, align: 'Center', name: 'obr_fec_canc'
-               },
-               {
-                   index: 'obr_sis', width: 200, align: 'Center', name: 'obr_sis'
-               },
-               {
-                   index: 'col_clv2', width: 200, align: 'Center', name: 'col_clv2'
-               },
-               {
-                   index: 'no_contrato', width: 200, align: 'Center', name: 'no_contrato'
-               },
-               {
-                   index: 'gastos_admvos', width: 200, align: 'Center', name: 'gastos_admvos'
-               },               
-               {
-                   index: 'obr_fec_pub1', width: 200, align: 'Center', name: 'fec_pub1'
-               },
-               {
-                   index: 'obr_fec_pub2', width: 200, align: 'Center', name: 'fec_pub2'
-               },
-               {
-                   index: 'evid_pub1', width: 200, align: 'Center', name: 'evid_pub1'
-               },
-               {
-                   index: 'evid_pub2', width: 200, align: 'Center', name: 'evid_pub2'
-               },
-               {
-                   index: 'evid_obra_proc', width: 200, align: 'Center', name: 'evid_obra_proc'
-               },
-               {
-                   index: 'evid_termino_obra', width: 200, align: 'Center', name: 'evid_termino_obra'
-               },
-               {
-                   index: 'obr_nat', width: 200, align: 'Center', name: 'obr_nat'
-               },
-               {
-                   index: 'pid_predio', width: 200, align: 'Center', name: 'pid_predio'
-               },
-               {
-                   index: 'objectid', width: 200, align: 'Center', name: 'objectid'
-               },
-               {
-                   index: 'gid_server', width: 200, align: 'Center', name: 'gid_server'
-               },
-               {
-                   index: 'cup', width: 200, align: 'Center', name: 'cup'
-               },
-               {
-                   index: 'feccre_pred', width: 200, align: 'Center', name: 'feccre_pred'
-               },
-               {
-                   index: 'fecmod_pred', width: 200, align: 'Center', name: 'fecmod_pred'
-               },
-               {
-                   index: 'tipo', width: 200, align: 'Center', name: 'tipo'
-               },
-               {
-                   index: 'tipopredio', width: 200, align: 'Center', name: 'tipo_predio'
-               },
-               {
-                   index: 'ctapredial', width: 200, align: 'Center', name: 'ctapredial'
-               },
-               {
-                   index: 'ctaimuvi', width: 200, align: 'Center', name: 'ctaimuvi'
-               },
-               {
-                   index: 'observacio', width: 200, align: 'Center', name: 'observacio'
-               },
-               {
-                   index: 'shape_area', width: 200, align: 'Center', name: 'shape_area'
-               },
-               {
-                   index: 'shape_len', width: 200, align: 'Center', name: 'shape_len'
-               },
-               {
-                   index: 'geom_predio', width: 200, align: 'Center', name: 'geom_predio'
-               },
-               {
-                   index: 'uso_predio', width: 200, align: 'Center', name: 'uso_predio'
-               },
-               {
-                   index: 'uso_suelo', width: 200, align: 'Center', name: 'uso_suelo'
-               },
-               {
-                   index: 'r20', width: 200, align: 'Center', name: 'r20'
-               },
-               {
-                   index: 'nooficial', width: 200, align: 'Center', name: 'nooficial'
-               },
-               {
-                   index: 'sapal', width: 200, align: 'Center', name: 'sapal'
-               },
-               {
-                   index: 'usrcre_pred', width: 200, align: 'Center', name: 'usrcre_pred'
-               },
-               {
-                   index: 'usrmod_pred', width: 200, align: 'Center', name: 'usrmod_pred'
-               },
-               {
-                   index: 'num_escritura', width: 200, align: 'Center', name: 'num_escritura'
-               },
-               {
-                   index: 'reg_escritura', width: 200, align: 'Center', name: 'reg_escritura'
-               },
-               {
-                   index: 'folio_escritura', width: 200, align: 'Center', name: 'folio_escritura'
-               },
-               {
-                   index: 'tomo_escritura', width: 200, align: 'Center', name: 'tomo_escritura'
-               },
-               {
-                   index: 'doc_escritura', width: 200, align: 'Center', name: 'doc_escritura'
-               },
-               {
-                   index: 'lote', width: 200, align: 'Center', name: 'lote'
-               },
-               {
-                   index: 'mzna', width: 200, align: 'Center', name: 'mzna'
-               },
-               {
-                   index: 'saldo_sin', width: 200, align: 'Center', name: 'saldo_sin'
-               },
-               {
-                   index: 'saldo_sin_act', width: 200, align: 'Center', name: 'saldo_sin_act'
-               },
-               {
-                   index: 'pagos', width: 200, align: 'Center', name: 'pagos'
-               },
-               {
-                   index: 'recargos', width: 200, align: 'Center', name: 'recargos'
-               },
-               {
-                   index: 'clv_inpc_ant', width: 200, align: 'Center', name: 'clv_inpc_ant'
-               },
-               {
-                   index: 'clv_inpc_actual', width: 200, align: 'Center', name: 'clv_inpc_actual'
-               },
-               {
-                   index: 'clv_inpc_actual_2', width: 200, align: 'Center', name: 'clv_inpc_actual2'
-               },
-               {
-                   index: 'factor_act', width: 200, align: 'Center', name: 'factor_act'
-               },
-               {
-                   index: 'monto_act', width: 200, align: 'Center', name: 'monto_act'
-               },
-               {
-                   index: 'saldo', width: 200, align: 'Center', name: 'saldo'
-               },
-               {
-                   index: 'calle', width: 200, align: 'Center', name: 'Calle'
-               },
-               {
-                   index: 'colonia', width: 200, align: 'Center', name: 'Colonia'
-               },
-               {
-                   index: 'limite1', width: 200, align: 'Center', name: 'Límite_1'
-               },
-               {
-                   index: 'limite2', width: 200, align: 'Center', name: 'Límite_2'
-               },
-               {
-                   index: 'tramo', width: 200, align: 'Center', name: 'Tramo'
-               },
-               {
-                   index: 'pae', width: 200, align: 'Center', name: 'PAE'
-               },
-               {
-                   index: 'iddet', width: 200, align: 'Center', name: 'iddet'
-               },
-               {
-                   index: 'det_estatus', width: 200, align: 'Center', name: 'det_estatus'
-               },
-               {
-                   index: 'fec_imp_det', width: 200, align: 'Center', name: 'fec_imp_det'
-               },
-               {
-                   index: 'fec_ent_det', width: 200, align: 'Center', name: 'fec_ent_det'
-               },
-               {
-                   index: 'fec_notif_det', width: 200, align: 'Center', name: 'fec_notif_det'
-               },
-               {
-                   index: 'hora_notif_det', width: 200, align: 'Center', name: 'hora_notif_det'
-               },
-               {
-                   index: 'idministro', width: 200, align: 'Center', name: 'idministro'
-               },
-               {
-                   index: 'musunombre', width: 200, align: 'Center', name: 'usunombre'
-               },
-               {
-                   index: 'tipo_doc', width: 200, align: 'Center', name: 'tipo_doc'
-               },
-               {
-                   index: 'nom_doc', width: 200, align: 'Center', name: 'nom_doc'
-               }],
-                pager: "#pager", //Pager.                 
-                loadtext: 'Cargando datos...',
-                recordtext: "{0} - {1} de {2} elementos",
-                emptyrecords: 'No hay resultados',
-                pgtext: 'Pág:{0} de {1}', //Paging input control text format.
-                rowNum: "30", // PageSize.
-                rowList: [5, 10, 20], //Variable PageSize DropDownList. 
-                viewrecords: true, //Show the RecordCount in the pager.
-                multiselect: false,
-                sortname: "fid", //login SortColumn
-                sortorder: "asc", //login SortOrder.
-                width: "1600",
-                height: "900",               
-                caption: tituloventana
+                    datatype: function () {
+                        $.ajax(
+                            {
+                                url: "../../WebServices/WebServiceCoop.asmx/Get_vwcoops_4", //PageMethod
+                                data: "{'pPageSize':'" + $('#grid').getGridParam("rowNum") +
+                                    "','pCurrentPage':'" + $('#grid').getGridParam("page") +
+                                    "','pSortColumn':'" + $('#grid').getGridParam("sortname") +
+                                    "','pSortOrder':'" + $('#grid').getGridParam("sortorder") +
+                                    "','idusu':'" + idusu +
+                                    "','obr_clv_int':'" + obr_clv_int +
+                                    "','accion':'" + accion + "'}", //PageMethod Parametros de entrada
+                                dataType: "json",
+                                type: "post",
+                                contentType: "application/json; charset=utf-8",
+                                complete: function (jsondata, stat) {
+                                    if (stat == "success") {
+                                        jQuery("#grid")[0].addJSONData(JSON.parse(jsondata.responseText).d);
 
-            }).navGrid('#pager', { edit: false, add: false, search: false, del: false })
+                                        var objeto = JSON.parse(jsondata.responseText).d;
+                                        var regs = objeto.RecordCount;
+                                        if (regs == 0) {
+                                            alert('No se encontraron registros...');
+                                        }
+                                    }
+                                    else {
+                                        alert(JSON.parse(jsondata.responseText).Message);
+                                    }
+                                }
+                            });
+                    },
+                    jsonReader: //Set the jsonReader to the JQGridJSonResponse squema to bind the data.
+                    {
+                        root: "Items",
+                        page: "CurrentPage",
+                        total: "PageCount",
+                        records: "RecordCount",
+                        repeatitems: true,
+                        cell: "row",
+                        id: "fid"
+                    },
+                    colModel: [
+                        {
+                            index: 'fid', width: 200, align: 'Center', name: 'fid'
+                        },
+                        {
+                            index: 'geom_frente', width: 200, align: 'Center', name: 'geom_frente'
+                        },
+                        {
+                            index: 'mts_frente', width: 200, align: 'Center', name: 'MtsFrente'
+                        },
+                        {
+                            index: 'cid', width: 200, align: 'Center', name: 'cid'
+                        },
+                        {
+                            index: 'coopid', width: 200, align: 'Center', name: 'coopid'//, datefmt: 'd/m/Y'
+                        },
+                        {
+                            index: 'pid', width: 200, align: 'Center', name: 'pid'//, formatter: 'currency', formatoptions: { prefix: '$', thousandsSeparator: ',', decimalSeparator: '.' }, sorttype: 'number', summaryType: 'sum'
+                        },
+                        {
+                            index: 'oid', width: 200, align: 'Center', name: 'oid'
+                        },
+                        {
+                            index: 'obs_grales', width: 200, align: 'Center', name: 'ObsGrales'
+                        },
+                        {
+                            index: 'obra_sifidoc', width: 200, align: 'Center', name: 'ObraSIFIDOC'//, hidden: true
+                        },
+                        {
+                            index: 'gid', width: 200, align: 'Center', name: 'gid'
+                        },
+                        {
+                            index: 'feccre_frente', width: 200, align: 'Center', name: 'feccre_fte'
+                        },
+                        {
+                            index: 'fecmod_frente', width: 200, align: 'Center', name: 'fecmod_fte'
+                        },
+                        {
+                            index: 'usucre_frente', width: 200, align: 'Center', name: 'uscre_fte'
+                        },
+                        {
+                            index: 'usumod_frente', width: 200, align: 'Center', name: 'usumod_fte'
+                        },
+                        {
+                            index: 'prid', width: 200, align: 'Center', name: 'prid'
+                        },
+                        {
+                            index: 'inc', width: 200, align: 'Center', name: 'inc'
+                        },
+                        {
+                            index: 'did', width: 200, align: 'Center', name: 'did'
+                        },
+                        {
+                            index: 'factor_act_pago', width: 200, align: 'Center', name: 'fact_act_pag'
+                        },
+                        {
+                            index: 'obr_clv_int', width: 200, align: 'Center', name: 'obr_clv_int'
+                        },
+                        {
+                            index: 'coo_clv2', width: 200, align: 'Center', name: 'coo_clv2'
+                        },
+                        {
+                            index: 'activo', width: 200, align: 'Center', name: 'activo'
+                        },
+                        {
+                            index: 'capital', width: 200, align: 'Center', name: 'capital'
+                        },
+                        {
+                            index: 'midcoop', width: 200, align: 'Center', name: 'midcoop'
+                        },
+                        {
+                            index: 'mapellidop', width: 200, align: 'Center', name: 'mapellidop'
+                        },
+                        {
+                            index: 'mapellidom', width: 200, align: 'Center', name: 'mapellidom'
+                        },
+                        {
+                            index: 'mnombres', width: 200, align: 'Center', name: 'mnombres'
+                        },
+                        {
+                            index: 'mcallecoop', width: 200, align: 'Center', name: 'mcallecoop'
+                        },
+                        {
+                            index: 'mcolcoop', width: 200, align: 'Center', name: 'mcolcoop'
+                        },
+                        {
+                            index: 'mnooficial_ext', width: 200, align: 'Center', name: 'mnooficial_ext'
+                        },
+                        {
+                            index: 'mnooficial_int', width: 200, align: 'Center', name: 'mnooficial_int'
+                        },
+                        {
+                            index: 'mtelcoop', width: 200, align: 'Center', name: 'mtelcoop'
+                        },
+                        {
+                            index: 'mnomficha', width: 200, align: 'Center', name: 'mnomficha'
+                        },
+                        {
+                            index: 'mestado', width: 200, align: 'Center', name: 'mestado'
+                        },
+                        {
+                            index: 'mpais', width: 200, align: 'Center', name: 'mpais'
+                        },
+                        {
+                            index: 'mcorreo', width: 200, align: 'Center', name: 'mcorreo'
+                        },
+                        {
+                            index: 'usrcre_coop', width: 200, align: 'Center', name: 'usrcre_coop'
+                        },
+                        {
+                            index: 'feccre_coop', width: 200, align: 'Center', name: 'feccre_coop'
+                        },
+                        {
+                            index: 'usrmod_coop', width: 200, align: 'Center', name: 'usrmod_coop'
+                        },
+                        {
+                            index: 'fecmod_coop', width: 200, align: 'Center', name: 'fecmod_coop'
+                        },
+                        {
+                            index: 'mcurp', width: 200, align: 'Center', name: 'mcurp'
+                        },
+                        {
+                            index: 'mrelacionpredio', width: 200, align: 'Center', name: 'mrelacionpredio'
+                        },
+                        {
+                            index: 'ine', width: 200, align: 'Center', name: 'ine'
+                        },
+                        {
+                            index: 'doc_identific', width: 200, align: 'Center', name: 'doc_identific'
+                        },
+                        {
+                            index: 'obr_clv', width: 200, align: 'Center', name: 'obr_clv'
+                        },
+                        {
+                            index: 'obr_mts', width: 200, align: 'Center', name: 'obr_mts'
+                        },
+                        {
+                            index: 'obr_cost', width: 200, align: 'Center', name: 'obr_cost'
+                        },
+                        {
+                            index: 'obr_int', width: 200, align: 'Center', name: 'obr_int'
+                        },
+                        {
+                            index: 'obr_fecha', width: 200, align: 'Center', name: 'obr_fecha'
+                        },
+                        {
+                            index: 'obr_cost_total', width: 200, align: 'Center', name: 'obr_costo_total'
+                        },
+                        {
+                            index: 'obr_inc', width: 200, align: 'Center', name: 'obr_inc'
+                        },
+                        {
+                            index: 'obr_fecinip', width: 200, align: 'Center', name: 'obr_fecinip'
+                        },
+                        {
+                            index: 'obr_fecvenp', width: 200, align: 'Center', name: 'obr_fecvenp'
+                        },
+                        {
+                            index: 'obr_npago', width: 200, align: 'Center', name: 'obr_npago'
+                        },
+                        {
+                            index: 'obr_num_periodo', width: 200, align: 'Center', name: 'obr_num_periodo'
+                        },
+                        {
+                            index: 'obr_opergob', width: 200, align: 'Center', name: 'obr_opergob'
+                        },
+                        {
+                            index: 'obr_fec_ini_proc', width: 200, align: 'Center', name: 'obr_fec_ini_proc'
+                        },
+                        {
+                            index: 'obr_fec_ini_cob', width: 200, align: 'Center', name: 'obr_fec_ini_cob'
+                        },
+                        {
+                            index: 'obr_clv_int_obra', width: 200, align: 'Center', name: 'obr_clv_int_obra'
+                        },
+                        {
+                            index: 'obr_prog2', width: 200, align: 'Center', name: 'obr_prog2'
+                        },
+                        {
+                            index: 'nomprog', width: 200, align: 'Center', name: 'obr_nomprog'
+                        },
+                        {
+                            index: 'progdescrip', width: 200, align: 'Center', name: 'obr_progdescrip'
+                        },
+                        {
+                            index: 'obr_clv2', width: 200, align: 'Center', name: 'obr_clv2'
+                        },
+                        {
+                            index: 'obr_status', width: 200, align: 'Center', name: 'obr_status'
+                        },
+                        {
+                            index: 'cestatus', width: 200, align: 'Center', name: 'cestatus'
+                        },
+                        {
+                            index: 'oid_obra', width: 200, align: 'Center', name: 'oid_obra'
+                        },
+                        {
+                            index: 'obr_fec_canc', width: 200, align: 'Center', name: 'obr_fec_canc'
+                        },
+                        {
+                            index: 'obr_sis', width: 200, align: 'Center', name: 'obr_sis'
+                        },
+                        {
+                            index: 'col_clv2', width: 200, align: 'Center', name: 'col_clv2'
+                        },
+                        {
+                            index: 'no_contrato', width: 200, align: 'Center', name: 'no_contrato'
+                        },
+                        {
+                            index: 'gastos_admvos', width: 200, align: 'Center', name: 'gastos_admvos'
+                        },
+                        {
+                            index: 'obr_fec_pub1', width: 200, align: 'Center', name: 'fec_pub1'
+                        },
+                        {
+                            index: 'obr_fec_pub2', width: 200, align: 'Center', name: 'fec_pub2'
+                        },
+                        {
+                            index: 'evid_pub1', width: 200, align: 'Center', name: 'evid_pub1'
+                        },
+                        {
+                            index: 'evid_pub2', width: 200, align: 'Center', name: 'evid_pub2'
+                        },
+                        {
+                            index: 'evid_obra_proc', width: 200, align: 'Center', name: 'evid_obra_proc'
+                        },
+                        {
+                            index: 'evid_termino_obra', width: 200, align: 'Center', name: 'evid_termino_obra'
+                        },
+                        {
+                            index: 'obr_nat', width: 200, align: 'Center', name: 'obr_nat'
+                        },
+                        {
+                            index: 'pid_predio', width: 200, align: 'Center', name: 'pid_predio'
+                        },
+                        {
+                            index: 'objectid', width: 200, align: 'Center', name: 'objectid'
+                        },
+                        {
+                            index: 'gid_server', width: 200, align: 'Center', name: 'gid_server'
+                        },
+                        {
+                            index: 'cup', width: 200, align: 'Center', name: 'cup'
+                        },
+                        {
+                            index: 'feccre_pred', width: 200, align: 'Center', name: 'feccre_pred'
+                        },
+                        {
+                            index: 'fecmod_pred', width: 200, align: 'Center', name: 'fecmod_pred'
+                        },
+                        {
+                            index: 'tipo', width: 200, align: 'Center', name: 'tipo'
+                        },
+                        {
+                            index: 'tipopredio', width: 200, align: 'Center', name: 'tipo_predio'
+                        },
+                        {
+                            index: 'ctapredial', width: 200, align: 'Center', name: 'ctapredial'
+                        },
+                        {
+                            index: 'ctaimuvi', width: 200, align: 'Center', name: 'ctaimuvi'
+                        },
+                        {
+                            index: 'observacio', width: 200, align: 'Center', name: 'observacio'
+                        },
+                        {
+                            index: 'shape_area', width: 200, align: 'Center', name: 'shape_area'
+                        },
+                        {
+                            index: 'shape_len', width: 200, align: 'Center', name: 'shape_len'
+                        },
+                        {
+                            index: 'geom_predio', width: 200, align: 'Center', name: 'geom_predio'
+                        },
+                        {
+                            index: 'uso_predio', width: 200, align: 'Center', name: 'uso_predio'
+                        },
+                        {
+                            index: 'uso_suelo', width: 200, align: 'Center', name: 'uso_suelo'
+                        },
+                        {
+                            index: 'r20', width: 200, align: 'Center', name: 'r20'
+                        },
+                        {
+                            index: 'nooficial', width: 200, align: 'Center', name: 'nooficial'
+                        },
+                        {
+                            index: 'sapal', width: 200, align: 'Center', name: 'sapal'
+                        },
+                        {
+                            index: 'usrcre_pred', width: 200, align: 'Center', name: 'usrcre_pred'
+                        },
+                        {
+                            index: 'usrmod_pred', width: 200, align: 'Center', name: 'usrmod_pred'
+                        },
+                        {
+                            index: 'num_escritura', width: 200, align: 'Center', name: 'num_escritura'
+                        },
+                        {
+                            index: 'reg_escritura', width: 200, align: 'Center', name: 'reg_escritura'
+                        },
+                        {
+                            index: 'folio_escritura', width: 200, align: 'Center', name: 'folio_escritura'
+                        },
+                        {
+                            index: 'tomo_escritura', width: 200, align: 'Center', name: 'tomo_escritura'
+                        },
+                        {
+                            index: 'doc_escritura', width: 200, align: 'Center', name: 'doc_escritura'
+                        },
+                        {
+                            index: 'lote', width: 200, align: 'Center', name: 'lote'
+                        },
+                        {
+                            index: 'mzna', width: 200, align: 'Center', name: 'mzna'
+                        },
+                        {
+                            index: 'saldo_sin', width: 200, align: 'Center', name: 'saldo_sin'
+                        },
+                        {
+                            index: 'saldo_sin_act', width: 200, align: 'Center', name: 'saldo_sin_act'
+                        },
+                        {
+                            index: 'pagos', width: 200, align: 'Center', name: 'pagos'
+                        },
+                        {
+                            index: 'recargos', width: 200, align: 'Center', name: 'recargos'
+                        },
+                        {
+                            index: 'clv_inpc_ant', width: 200, align: 'Center', name: 'clv_inpc_ant'
+                        },
+                        {
+                            index: 'clv_inpc_actual', width: 200, align: 'Center', name: 'clv_inpc_actual'
+                        },
+                        {
+                            index: 'clv_inpc_actual_2', width: 200, align: 'Center', name: 'clv_inpc_actual2'
+                        },
+                        {
+                            index: 'factor_act', width: 200, align: 'Center', name: 'factor_act'
+                        },
+                        {
+                            index: 'monto_act', width: 200, align: 'Center', name: 'monto_act'
+                        },
+                        {
+                            index: 'saldo', width: 200, align: 'Center', name: 'saldo'
+                        },
+                        {
+                            index: 'calle', width: 200, align: 'Center', name: 'Calle'
+                        },
+                        {
+                            index: 'colonia', width: 200, align: 'Center', name: 'Colonia'
+                        },
+                        {
+                            index: 'limite1', width: 200, align: 'Center', name: 'Límite_1'
+                        },
+                        {
+                            index: 'limite2', width: 200, align: 'Center', name: 'Límite_2'
+                        },
+                        {
+                            index: 'tramo', width: 200, align: 'Center', name: 'Tramo'
+                        },
+                        {
+                            index: 'pae', width: 200, align: 'Center', name: 'PAE'
+                        },
+                        {
+                            index: 'iddet', width: 200, align: 'Center', name: 'iddet'
+                        },
+                        {
+                            index: 'det_estatus', width: 200, align: 'Center', name: 'det_estatus'
+                        },
+                        {
+                            index: 'fec_imp_det', width: 200, align: 'Center', name: 'fec_imp_det'
+                        },
+                        {
+                            index: 'fec_ent_det', width: 200, align: 'Center', name: 'fec_ent_det'
+                        },
+                        {
+                            index: 'fec_notif_det', width: 200, align: 'Center', name: 'fec_notif_det'
+                        },
+                        {
+                            index: 'hora_notif_det', width: 200, align: 'Center', name: 'hora_notif_det'
+                        },
+                        {
+                            index: 'idministro', width: 200, align: 'Center', name: 'idministro'
+                        },
+                        {
+                            index: 'musunombre', width: 200, align: 'Center', name: 'usunombre'
+                        },
+                        {
+                            index: 'tipo_doc', width: 200, align: 'Center', name: 'tipo_doc'
+                        },
+                        {
+                            index: 'nom_doc', width: 200, align: 'Center', name: 'nom_doc'
+                        }],
+                    pager: "#pager", //Pager.                 
+                    loadtext: 'Cargando datos...',
+                    recordtext: "{0} - {1} de {2} elementos",
+                    emptyrecords: 'No hay resultados',
+                    pgtext: 'Pág:{0} de {1}', //Paging input control text format.
+                    rowNum: "30", // PageSize.
+                    rowList: [5, 10, 20], //Variable PageSize DropDownList. 
+                    viewrecords: true, //Show the RecordCount in the pager.
+                    multiselect: false,
+                    sortname: "fid", //login SortColumn
+                    sortorder: "asc", //login SortOrder.
+                    width: "1600",
+                    height: "900",
+                    caption: tituloventana
 
-             .navButtonAdd('#pager',
-                       {
-                           caption: "GenerarTodosRecibos",
-                           buttonicon: "ui-icon-document",
+                }).navGrid('#pager', { edit: false, add: false, search: false, del: false })
+
+                .navButtonAdd('#pager',
+                    {
+                        caption: "GenerarTodosRecibos",
+                        buttonicon: "ui-icon-document",
                         /*   onClickButton: function () {
                                var idcoop = parseInt($("#bodegadatos").data("idcoop"));
                                var tipo_mov = parseInt($("#bodegadatos").data("tipo_mov"));
@@ -977,113 +980,122 @@
                                    }
                                }
                            },*/
-                           position: "last",
-                           title: "AltaRecNat",
-                           cursor: "pointer"
-                       })
+                        position: "last",
+                        title: "AltaRecNat",
+                        cursor: "pointer"
+                    })
 
-           .navButtonAdd('#pager',
-                       {
-                           caption: "EliminarMovFinanc",
-                           buttonicon: "ui-icon-document",
-                           onClickButton: function () {
-                               var myGrid = $('#grid');
-                               var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
-                               var idcoop = myGrid.jqGrid('getCell', selectedRowId, 'ClvCoopInt');
-                               var tipo_mov = myGrid.jqGrid('getCell', selectedRowId, 'TipoMovInt');
-                               var mov_monto = myGrid.jqGrid('getCell', selectedRowId, 'MontoMov');
-                               var idmov = myGrid.jqGrid('getCell', selectedRowId, 'IdMov');
-                               $("#bodegadatos").data("idmov", idmov);
-                               $("#bodegadatos").data("mov_monto", mov_monto);
-                               var accion = 2;  //Accion de eliminar un movimiento financiero                                       
-                               var usuario = $("#bodegadatos").data("idusu");
-                               var idusu = parseInt(usuario.split(":")[1]);
-                               var saldoact5 = parseFloat($("#bodegadatos").data("saldoact5"));
+                .navButtonAdd('#pager',
+                    {
+                        caption: "EliminarMovFinanc",
+                        buttonicon: "ui-icon-document",
+                        onClickButton: function () {
+                            var myGrid = $('#grid');
+                            var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                            var idcoop = myGrid.jqGrid('getCell', selectedRowId, 'ClvCoopInt');
+                            var tipo_mov = myGrid.jqGrid('getCell', selectedRowId, 'TipoMovInt');
+                            var mov_monto = myGrid.jqGrid('getCell', selectedRowId, 'MontoMov');
+                            var idmov = myGrid.jqGrid('getCell', selectedRowId, 'IdMov');
+                            $("#bodegadatos").data("idmov", idmov);
+                            $("#bodegadatos").data("mov_monto", mov_monto);
+                            var accion = 2;  //Accion de eliminar un movimiento financiero                                       
+                            var usuario = $("#bodegadatos").data("idusu");
+                            var idusu = parseInt(usuario.split(":")[1]);
+                            var saldoact5 = parseFloat($("#bodegadatos").data("saldoact5"));
 
-                               if (idcoop) {
-                                   if (tipo_mov == 5 || tipo_mov == 8 || tipo_mov == 10) { //Tipos de movimientos
-                                       if (idusu == 46) { // Permisos de usuario                                                                                                
-                                           if (saldoact5 > 20) {
-                                               OperacionMovFinanc(idusu, idcoop, tipo_mov, accion);
-                                           }
-                                           else {
-                                               alert("La cuenta se encuentra saldada, no es permitido elminar recargos");
-                                           }
-                                       } else {
-                                           alert("Usuario sin privilegios para registrar recargos naturales");
-                                       }
-                                   } else {
-                                       alert("No es posible eliminar movmientos de éste tipo...");
-                                   }
-                               }
-                               else {
-                                   alert("Selecciona un recargo para cancelar...");
-                               }
-                           },
-                           position: "last",
-                           title: "AltaRecNat",
-                           cursor: "pointer"
-                       });
+                            if (idcoop) {
+                                if (tipo_mov == 5 || tipo_mov == 8 || tipo_mov == 10) { //Tipos de movimientos
+                                    if (idusu == 46) { // Permisos de usuario                                                                                                
+                                        if (saldoact5 > 20) {
+                                            OperacionMovFinanc(idusu, idcoop, tipo_mov, accion);
+                                        }
+                                        else {
+                                            alert("La cuenta se encuentra saldada, no es permitido elminar recargos");
+                                        }
+                                    } else {
+                                        alert("Usuario sin privilegios para registrar recargos naturales");
+                                    }
+                                } else {
+                                    alert("No es posible eliminar movmientos de éste tipo...");
+                                }
+                            }
+                            else {
+                                alert("Selecciona un recargo para cancelar...");
+                            }
+                        },
+                        position: "last",
+                        title: "AltaRecNat",
+                        cursor: "pointer"
+                    });
 
-       }
+        }
 
 
 
-       function llenarTipoMov(tipo_mov) {
-           $.ajax({
-               type: "POST",
-               dataType: "json",
-               contentType: "application/json",
-               url: "../../WebServices/WebServiceMovs.asmx/GetTipoMov",
-               data: "{'tipo_mov':'" + tipo_mov + "'}",
-               success: function (data) {
-                   var elementos = 0;
-                   $("#lsttipomov").html('');
-                   $(data.d).find("tipomov").each(function () {
-                       var option = $(document.createElement('option'));
-                       var clvtipomov = $(this).find("idtipomovr").text();
-                       var descrip_tipomov = $(this).find("titulomovr").text();
-                       option.html(descrip_tipomov);
-                       option.val(clvtipomov);
-                       $("#lsttipomov").append(option);
-                   });
+        function llenarTipoMov(tipo_mov) {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                url: "../../WebServices/WebServiceMovs.asmx/GetTipoMov",
+                data: "{'tipo_mov':'" + tipo_mov + "'}",
+                success: function (data) {
+                    var elementos = 0;
+                    $("#lsttipomov").html('');
+                    $(data.d).find("tipomov").each(function () {
+                        var option = $(document.createElement('option'));
+                        var clvtipomov = $(this).find("idtipomovr").text();
+                        var descrip_tipomov = $(this).find("titulomovr").text();
+                        option.html(descrip_tipomov);
+                        option.val(clvtipomov);
+                        $("#lsttipomov").append(option);
+                    });
 
-               },
-               error: function (xhr) {
-                   console.log(xhr.responseText);
-               }
-           });
-       }
+                },
+                error: function (xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+        }
 
 
 
     </script>
 </head>
-<body>    
+
+<body>
 
     <table id="grid"></table>
-    <div id="pager"></div>&nbsp    
+    <div id="pager"></div>&nbsp
 
-        <div id="bodegadatos"></div>
-            <div id="boxes">                        
-                  <div id="dialogorecnat" class="window"> 
-                     <div id="titulorecnat" class="titulo"> 
-                        <p style="text-align:center"></p>
-                        Usuario:<label for="usuario" id="lblusu_x"></label><br/>                       
-                        No. de Coop:<label for="coopclv2" id="lblcoop_x"></label><br/>
-                        Fecha del día de hoy: <label for="fecactual" id="lblfechoy_x"></label><br/>                                                   
-                        Acción:<label for="accion" id="lblaccion_x"></label><br/> 
-                     </div>
-                     <div class="datos" id="bodyrecargonatural">                                           
-                          <label for="name" id="lblmonto_rec_x">*MONTO RECARGO:</label><input type="text" name="montorecargo" id="txtmontorecargo_x" size="10" value="10" onkeypress="return filterFloat(event,this)";/><br/><br/><br/>  
-                          <label for="name" id="lblfec_rec_x">*FECHA RECARGO:</label><input type="text" name="fecharecargo" id="txtfecrec_x" size="10" maxlength="10" onkeyup = "this.value=formateafecha(this.value);"/><br/><br/>          
-                          <label for="name" id="lbltipomov_x">*TIPO DE MOVIMIENTO:</label><select name="tipoobra" id="lsttipomov"></select><br/><br/>
-                     </div>                  
-                     <div class="botonesA" id="botonesX">
-                        <p style="text-align:right"><a href="#" class ="posicion_boton_accion_recnat">Aceptar</a>&nbsp&nbsp&nbsp<a href="#" class="posicion_boton_cancelar_recnat">Cancelar</a></p>                
-                     </div>
-                  </div>     
-                <div id="mask"></div>    
+    <div id="bodegadatos"></div>
+    <div id="boxes">
+        <div id="dialogorecnat" class="window">
+            <div id="titulorecnat" class="titulo">
+                <p style="text-align:center"></p>
+                Usuario:<label for="usuario" id="lblusu_x"></label><br />
+                No. de Coop:<label for="coopclv2" id="lblcoop_x"></label><br />
+                Fecha del día de hoy: <label for="fecactual" id="lblfechoy_x"></label><br />
+                Acción:<label for="accion" id="lblaccion_x"></label><br />
             </div>
- </body>    
+            <div class="datos" id="bodyrecargonatural">
+                <label for="name" id="lblmonto_rec_x">*MONTO RECARGO:</label><input type="text" name="montorecargo"
+                    id="txtmontorecargo_x" size="10" value="10" onkeypress="return filterFloat(event,this)"
+                    ; /><br /><br /><br />
+                <label for="name" id="lblfec_rec_x">*FECHA RECARGO:</label><input type="text" name="fecharecargo"
+                    id="txtfecrec_x" size="10" maxlength="10"
+                    onkeyup="this.value=formateafecha(this.value);" /><br /><br />
+                <label for="name" id="lbltipomov_x">*TIPO DE MOVIMIENTO:</label><select name="tipoobra"
+                    id="lsttipomov"></select><br /><br />
+            </div>
+            <div class="botonesA" id="botonesX">
+                <p style="text-align:right"><a href="#"
+                        class="posicion_boton_accion_recnat">Aceptar</a>&nbsp&nbsp&nbsp<a href="#"
+                        class="posicion_boton_cancelar_recnat">Cancelar</a></p>
+            </div>
+        </div>
+        <div id="mask"></div>
+    </div>
+</body>
+
 </html>

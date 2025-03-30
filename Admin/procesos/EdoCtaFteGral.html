@@ -1,46 +1,49 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>  
-    <script src="../../js/conv_numero_text.js" type="text/javascript"></script> 
+    <script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="../../js/conv_numero_text.js" type="text/javascript"></script>
     <style type="text/css">
         td {
-           text-align: center;
+            text-align: center;
         }
-       
-           .auto-style273 {
+
+        .auto-style273 {
             text-align: center;
             font-weight: bold;
-            font-size : 20px;
+            font-size: 20px;
             background-color: #ff6a00;
             width: 1194px;
         }
 
-           .auto-style228 {
+        .auto-style228 {
             text-align: center;
             font-weight: bold;
-            font-size : 16px;
+            font-size: 16px;
             background-color: #FADCA7;
             height: 9px;
             width: 1194px;
         }
-                    
-            .auto-style275 {
+
+        .auto-style275 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 8px;
             width: 459px;
         }
+
         .auto-style276 {
             text-align: center;
             font-weight: bold;
-            font-size : 18px;
+            font-size: 18px;
             background-color: white;
             height: 8px;
             width: 459px;
@@ -50,45 +53,48 @@
             text-align: left;
             font-weight: bold;
             color: #00ffff;
-            font-size : 20px;
+            font-size: 20px;
             background-color: #000000;
             height: 42px;
             width: 459px;
         }
-         
+
         .auto-style277 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #DE3F08;
             height: 8px;
             width: 1395px;
         }
-     .auto-style278 {
+
+        .auto-style278 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 1194px;
         }
-       
+
         .auto-style285 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 8px;
             width: 460px;
         }
+
         .auto-style304 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 8px;
             width: 355px;
-        }     
+        }
+
         .auto-style310 {
             text-align: center;
             font-weight: bold;
@@ -97,50 +103,57 @@
             width: 580px;
             background-color: white;
         }
+
         .auto-style312 {
             height: 8px;
             width: 402px;
         }
+
         .auto-style313 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 199px;
         }
+
         .auto-style314 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 1160px;
         }
+
         .auto-style315 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 324px;
         }
+
         .auto-style317 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 799px;
         }
+
         .auto-style318 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 1006px;
         }
+
         .auto-style319 {
             text-align: center;
             font-weight: bold;
@@ -149,290 +162,333 @@
             width: 458px;
             background-color: white;
         }
+
         .auto-style321 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 9px;
             width: 460px;
         }
+
         .auto-style331 {
             text-align: center;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F5DAB2;
             height: 15px;
             width: 633px;
         }
+
         .auto-style332 {
             text-align: center;
             font-weight: bold;
-            font-size : 22px;
+            font-size: 22px;
             background-color: #ff6a00;
             height: 9px;
             width: 633px;
         }
+
         .auto-style350 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 438px;
         }
+
         .auto-style352 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 1293px;
         }
+
         .auto-style358 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 30px;
             width: 1517px;
         }
+
         .auto-style359 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 30px;
             width: 121px;
         }
+
         .auto-style361 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 8px;
             width: 739px;
         }
+
         .auto-style382 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 1406px;
         }
+
         .auto-style383 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 427px;
         }
+
         .auto-style398 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 31px;
             width: 1160px;
         }
+
         .auto-style399 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 31px;
             width: 459px;
         }
+
         .auto-style400 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 31px;
             width: 1406px;
         }
+
         .auto-style407 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 30px;
             width: 324px;
         }
+
         .auto-style408 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 30px;
             width: 427px;
         }
+
         .auto-style409 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 30px;
             width: 739px;
         }
+
         .auto-style411 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 18px;
             width: 324px;
         }
+
         .auto-style412 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 18px;
             width: 459px;
         }
+
         .auto-style413 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 30px;
             width: 459px;
         }
+
         .auto-style414 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 30px;
             width: 1160px;
         }
+
         .auto-style416 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 30px;
             width: 1406px;
         }
+
         .auto-style417 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 31px;
             width: 1006px;
         }
+
         .auto-style420 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 31px;
             width: 460px;
         }
+
         .auto-style526 {
             text-align: center;
             font-weight: bold;
-            font-size : 22px;
+            font-size: 22px;
             background-color: #ff6a00;
             height: 9px;
             width: 652px;
         }
+
         .auto-style527 {
             text-align: center;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F5DAB2;
             height: 15px;
             width: 652px;
         }
+
         #txtdescuento {
             height: 22px;
         }
+
         .auto-style533 {
             width: 482px;
         }
+
         .auto-style543 {
             width: 253px;
             height: 23px;
         }
+
         .auto-style547 {
             width: 259px;
             height: 23px;
         }
+
         .auto-style551 {
             width: 284px;
             height: 23px;
         }
+
         .auto-style557 {
             width: 268px;
             height: 23px;
         }
+
         .auto-style562 {
             width: 293px;
             height: 23px;
         }
+
         .auto-style564 {
             width: 278px;
             height: 23px;
         }
+
         .auto-style566 {
             width: 271px;
             height: 23px;
         }
+
         .auto-style568 {
             width: 265px;
             height: 23px;
         }
+
         #bypassme {
             width: 1400px;
         }
+
         #datos {
             width: 1403px;
         }
+
         .auto-style569 {
             text-align: center;
             font-weight: bold;
-            font-size : 20px;
+            font-size: 20px;
             background-color: #ff6a00;
             width: 1194px;
             height: 11px;
         }
+
         .auto-style585 {
             width: 259px;
             text-align: center;
             font-weight: bold;
-            font-size : 20px;
+            font-size: 20px;
             background-color: #608cac;
             height: 57px;
         }
+
         .auto-style604 {
             text-align: center;
             font-weight: bold;
-            font-size : 18px;
+            font-size: 18px;
             background-color: white;
             height: 9px;
             width: 459px;
         }
+
         .auto-style605 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 5px;
             width: 1006px;
         }
+
         .auto-style606 {
             text-align: center;
             font-weight: bold;
-            font-size : 18px;
+            font-size: 18px;
             background-color: white;
             height: 5px;
             width: 459px;
         }
+
         .auto-style607 {
             text-align: center;
             font-weight: bold;
@@ -441,15 +497,16 @@
             width: 458px;
             background-color: white;
         }
+
         .auto-style608 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 5px;
             width: 460px;
         }
-        </style>
+    </style>
     <script>
 
         function GestionCooperadores(oid, idusu, fid) {
@@ -551,8 +608,8 @@
             try {
                 $.get(urlctapred, function (xml) {
                     xmlDoc = $.parseXML(xml),
-                    $xml = $(xmlDoc),
-                    $nomprop = $xml.find("NomProp");
+                        $xml = $(xmlDoc),
+                        $nomprop = $xml.find("NomProp");
                     $("#nomprop_p").text($.trim($nomprop.text()));
 
                     $callenotif = $xml.find("DomProp");
@@ -588,26 +645,26 @@
 
         function MostrarDatosUsuario(idusu) {
             $.ajax(
-               {
-                   url: "../../WebServices/WebServiceUsuario.asmx/GetUsuario", //PageMethod
-                   data: "{'idusu':'" + idusu + "'}", //PageMethod Parametros de entrada
-                   dataType: "json",
-                   type: "post",
-                   contentType: "application/json; charset=utf-8",
-                   success: function (data) {
-                       // Data.d trae un string con el XML generado dentro del servicio web asmx
-                       $(data.d).find("usuario").each(function () {
-                           var cuenta = $(this).find("musucuenta").text();
-                           var nombre = $(this).find("musunombre").text();
-                           var rol = $(this).find("musuidrol").text();
-                           $("#lblusuario").text(cuenta);
-                       })
-                   },
-                   error: function (response) {
-                       if (response.length != 0)++
-                           alert(response);
-                   }
-               });
+                {
+                    url: "../../WebServices/WebServiceUsuario.asmx/GetUsuario", //PageMethod
+                    data: "{'idusu':'" + idusu + "'}", //PageMethod Parametros de entrada
+                    dataType: "json",
+                    type: "post",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        // Data.d trae un string con el XML generado dentro del servicio web asmx
+                        $(data.d).find("usuario").each(function () {
+                            var cuenta = $(this).find("musucuenta").text();
+                            var nombre = $(this).find("musunombre").text();
+                            var rol = $(this).find("musuidrol").text();
+                            $("#lblusuario").text(cuenta);
+                        })
+                    },
+                    error: function (response) {
+                        if (response.length != 0) ++
+                            alert(response);
+                    }
+                });
 
         }
 
@@ -1289,20 +1346,20 @@
 
 
             ContarFrentexPredio(pid)
-               .done(function (r) {
-                   var cadena = $.trim(r.d);
-                   var idprog, nomarchivo;
-                   if (cadena != "<NewDataSet />") {
-                       $(r.d).find("frentesxp").each(function () {
-                           var numfrentes = $(this).find("numfrentes").text();
-                           if (numfrentes > 1) {
-                               $("#aviso").text("AVISO: Éste predio contiene más frentes beneficiados, lo puedes revisar con la opción de ubicación.");
-                           }
-                       });
-                   }
-               }).fail(function (result) {
-                   console("No es posible los frentes del predio");
-               });
+                .done(function (r) {
+                    var cadena = $.trim(r.d);
+                    var idprog, nomarchivo;
+                    if (cadena != "<NewDataSet />") {
+                        $(r.d).find("frentesxp").each(function () {
+                            var numfrentes = $(this).find("numfrentes").text();
+                            if (numfrentes > 1) {
+                                $("#aviso").text("AVISO: Éste predio contiene más frentes beneficiados, lo puedes revisar con la opción de ubicación.");
+                            }
+                        });
+                    }
+                }).fail(function (result) {
+                    console("No es posible los frentes del predio");
+                });
 
 
 
@@ -1461,12 +1518,12 @@
             // si posiciones es 2 ==> 0.77 * 100
             // si posiciones es 3 ==> 0.77 * 1000
             var decimalFormated = Math.floor(
-              Math.abs(decimal) * Math.pow(10, posiciones)
+                Math.abs(decimal) * Math.pow(10, posiciones)
             )
             // Sustraemos del número original la parte decimal
             // y le sumamos la parte decimal que hemos formateado
             var finalNum = entera +
-              ((decimalFormated / Math.pow(10, posiciones)) * (isNeg ? -1 : 1))
+                ((decimalFormated / Math.pow(10, posiciones)) * (isNeg ? -1 : 1))
 
             return finalNum
         }
@@ -1555,14 +1612,14 @@
             var idconv = recuperarParametro("idconv");
 
             GetDatosFrente(fid, 0)
-            .done(function (data) {
-                var k = data.d;
-                MostrarDatosUsuario(idusu);
-                MostrarValoresFrente(k);
-            })
-            .fail(function (x) {
-                alert("No fue posible consultar los datos del cooperador...");
-            });
+                .done(function (data) {
+                    var k = data.d;
+                    MostrarDatosUsuario(idusu);
+                    MostrarValoresFrente(k);
+                })
+                .fail(function (x) {
+                    alert("No fue posible consultar los datos del cooperador...");
+                });
 
 
             $(".ubic_predio").click(function (e) { //Ver documento 
@@ -1683,26 +1740,29 @@
 
             $("#lbledocta").text('Estado de Cuenta');
         })
-   </script>
- </head>
- <body> 
-     
- </body>
- 
+    </script>
+</head>
+
+<body>
+
+</body>
+
 </html>
 <div id="datos"></div>
 <div id="bypassme"></div>
 <div id="edoctfte">
-      <table style="width:99%; height: 149px;">
+    <table style="width:99%; height: 149px;">
         <tr>
             <td class="auto-style304"></td>
             <td class="auto-style310">FIDEICOMISO DE OBRAS POR COOPERACIÓN<br />
                 <br class=" .auto-style301" />
-                Estado de cuenta de cooperador con convenio</td>
-            <td class="auto-style312"><img src="../../imagenes/logo_fidoc.jpeg" alt="Fideicomiso de Obras por Cooperación" style="width: 239px"/></td>
-        </tr>       
-      </table>
-      <table style="width:99%; height: 65px;">
+                Estado de cuenta de cooperador con convenio
+            </td>
+            <td class="auto-style312"><img src="../../imagenes/logo_fidoc.jpeg"
+                    alt="Fideicomiso de Obras por Cooperación" style="width: 239px" /></td>
+        </tr>
+    </table>
+    <table style="width:99%; height: 65px;">
         <tr>
             <td class="auto-style332">oid</td>
             <td class="auto-style332">pid</td>
@@ -1712,7 +1772,7 @@
             <td class="auto-style332">Ubicación</td>
             <td class="auto-style332">Usuario</td>
             <td class="auto-style526">Fecha de Impresión</td>
-        </tr>        
+        </tr>
         <tr>
             <td class="auto-style331"><label id="lbloid"></label></td>
             <td class="auto-style331"><label id="lblpid"></label></td>
@@ -1722,10 +1782,10 @@
             <td class="auto-style331"><a href="#" class="ubic_predio">>>></a></td>
             <td class="auto-style331"><label id="lblusuario"></label></td>
             <td class="auto-style527"><label id="lbllugarfechahora"></label></td>
-        </tr>      
-      </table>
+        </tr>
+    </table>
 
-        <table class="auto-style277">  
+    <table class="auto-style277">
         <tr>
             <td class="auto-style280" colspan="2"><label id="aviso"></label></td>
         </tr>
@@ -1754,8 +1814,8 @@
             <td class="auto-style313">Domicilio de Notificación:</td>
             <td class="auto-style275"><label id="domcoop"></label></td>
         </tr>
-        </table>
-        <table style="width: 1396px">
+    </table>
+    <table style="width: 1396px">
         <tr>
             <td class="auto-style273" colspan="7">DATOS DEL PREDIO</td>
         </tr>
@@ -1809,8 +1869,8 @@
             <td class="auto-style352" colspan="2">SAPAL:</td>
             <td class="auto-style275" colspan="2"><label id="sapal"></label></td>
         </tr>
-        </table>
-        <table style="width: 1395px; height: 168px;">
+    </table>
+    <table style="width: 1395px; height: 168px;">
         <tr>
             <td class="auto-style273" colspan="8">DATOS DE LA OBRA</td>
         </tr>
@@ -1864,31 +1924,31 @@
             <td class="auto-style382" colspan="2">Estatus de Obra:</td>
             <td class="auto-style275" colspan="2"><label id="estatusobra"></label></td>
         </tr>
-        </table>
-        <table style="width: 1395px; height: 129px;">
-            <tr>
+    </table>
+    <table style="width: 1395px; height: 129px;">
+        <tr>
             <td class="auto-style569" colspan="4">DATOS DEL FRENTE</td>
         </tr>
-            <tr>
+        <tr>
             <td class="auto-style318">Metros de Frente:</td>
             <td class="auto-style275"><label id="mtsfte"></label></td>
             <td class="auto-style317">Fecha de Notificación Determinante:</td>
             <td class="auto-style275"><label id="fecnotifdet"></label></td>
         </tr>
-            <tr>
+        <tr>
             <td class="auto-style318">Costo del metro lineal:</td>
             <td class="auto-style275"><label id="ctomtolineal"></label></td>
             <td class="auto-style317">Fecha de Noficación de Requerimiento:</td>
             <td class="auto-style275"><label id="fecnotifreq"></label></td>
         </tr>
-            <tr>
+        <tr>
             <td class="auto-style318">Programa</td>
             <td class="auto-style275"><label id="programa"></label></td>
             <td class="auto-style317">Fecha de Notificación de Ejecución:</td>
             <td class="auto-style275"><label id="fecnotifejec"></label></td>
         </tr>
-            </table>
-        <table style="width: 1395px">
+    </table>
+    <table style="width: 1395px">
         <tr>
             <td class="auto-style273" colspan="4">DETALLE FINANCIERO</td>
         </tr>
@@ -1968,45 +2028,42 @@
             <td class="auto-style319"><label id="saldoact2"></label></td>
             <td class="auto-style319">&nbsp;</td>
             <td class="auto-style285">&nbsp;</td>
-        </tr>       
-        </table>              
-       
-        
-        
+        </tr>
+    </table>
+
+
+
 </div>
 
-        <table style="width: 1396px; height: 78px">
-        <tr>
-         <td class="auto-style533">&nbsp;</td>
-         <td class="auto-style533">&nbsp;</td>
-         <td class="auto-style533">&nbsp;</td>
-         <td class="auto-style533">&nbsp;</td>
-         <td class="auto-style533">&nbsp;</td>
-         <td class="auto-style533">&nbsp;</td>
-         <td class="auto-style533">&nbsp;</td>
-         <td class="auto-style533">&nbsp;</td>            
-        </tr>        
-        <tr>
-         <td class="auto-style585"></td>
-         <td class="auto-style585"></td>
-         <td class="auto-style585"></td>
-         <td class="auto-style585"></td>
-         <td class="auto-style585"></td>
-         <td class="auto-style585"><a href="#" class="imprime_edo_cta"><label id="lbledocta"></label></a></td>
-         <td class="auto-style585"><a href="#" class="imprime_ficha_pago"><label id="lblimprimirficha"></label></a></td>
-         <td class="auto-style585"><a href="#" class="regresar"><label id="lblregresar"></label></a></td>            
-        </tr>        
-        <tr>
-         <td class="auto-style562"></td>
-         <td class="auto-style564"></td>
-         <td class="auto-style566"></td>
-         <td class="auto-style551"></td>
-         <td class="auto-style557"></td>
-         <td class="auto-style568"></td>
-         <td class="auto-style547"></td>
-         <td class="auto-style543"></td>            
-        </tr>        
-        </table>
-        
-
-
+<table style="width: 1396px; height: 78px">
+    <tr>
+        <td class="auto-style533">&nbsp;</td>
+        <td class="auto-style533">&nbsp;</td>
+        <td class="auto-style533">&nbsp;</td>
+        <td class="auto-style533">&nbsp;</td>
+        <td class="auto-style533">&nbsp;</td>
+        <td class="auto-style533">&nbsp;</td>
+        <td class="auto-style533">&nbsp;</td>
+        <td class="auto-style533">&nbsp;</td>
+    </tr>
+    <tr>
+        <td class="auto-style585"></td>
+        <td class="auto-style585"></td>
+        <td class="auto-style585"></td>
+        <td class="auto-style585"></td>
+        <td class="auto-style585"></td>
+        <td class="auto-style585"><a href="#" class="imprime_edo_cta"><label id="lbledocta"></label></a></td>
+        <td class="auto-style585"><a href="#" class="imprime_ficha_pago"><label id="lblimprimirficha"></label></a></td>
+        <td class="auto-style585"><a href="#" class="regresar"><label id="lblregresar"></label></a></td>
+    </tr>
+    <tr>
+        <td class="auto-style562"></td>
+        <td class="auto-style564"></td>
+        <td class="auto-style566"></td>
+        <td class="auto-style551"></td>
+        <td class="auto-style557"></td>
+        <td class="auto-style568"></td>
+        <td class="auto-style547"></td>
+        <td class="auto-style543"></td>
+    </tr>
+</table>

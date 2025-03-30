@@ -1,306 +1,309 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <style type="text/css">
-        
         td {
-           text-align: center;
+            text-align: center;
         }
 
-         .auto-style331 {
+        .auto-style331 {
             text-align: center;
             font-weight: bold;
-            font-size : 30px;
+            font-size: 30px;
             background-color: #ffd800;
             width: 1194px;
         }
-       
-           .auto-style332 {
+
+        .auto-style332 {
             text-align: center;
             font-weight: bold;
-            font-size : 22px;
+            font-size: 22px;
             background-color: #ff6a00;
             width: 1194px;
         }
 
 
-           .auto-style333 {
+        .auto-style333 {
             text-align: center;
             font-weight: bold;
-            font-size : 20px;
+            font-size: 20px;
             background-color: #ffffff;
             width: 1194px;
         }
 
 
-              .auto-style334 {
+        .auto-style334 {
             text-align: center;
             font-weight: bold;
-            font-size : 20px;
+            font-size: 20px;
             background-color: #e9e5e5;
             width: 1194px;
         }
+    </style>
 
-        
-        </style>
 
-    
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>        
-    
-         
-
-   <script type="text/javascript">
-
-       function calculadescuentoporaplicar(descuento) {
-           var recargos = $("#bodegadatos").data("sum_recargos_t5");
-           
-           var dctoporaplicar = trunc(descuento * recargos / 100, 2);
-           $("#datos").data("dctoporaplicar", dctoporaplicar);
-
-           /*var nuevosaldo = total_pagar - dctoporaplicar;
-           nuevosaldo = trunc(nuevosaldo, 2);
-           $("#datos").data("nuevosaldo", nuevosaldo);
-
-           $("#lbloperacion").text(FormatoMoneda(nuevosaldo.toString()));
-           $("#lbldctoporaplicar").text(FormatoMoneda(dctoporaplicar.toString()));*/
-
-           $("#lblmontodescontar").text(FormatoMoneda(dctoporaplicar));
-
-       }
-
-
-       function recuperarParametro(campo) {
-           var RE = new RegExp("[&?]" + campo + "=([^&]*)&");
-           var href = location.href + "&";
-           if (RE.test(href)) {
-               RE.exec(href);
-               return unescape(RegExp.$1);
-           }
-       }
-
-       function FormatoFecha(parametro) {
-           var fecha = parametro;
-           if (!isDate(fecha)) {
-               fecha = '01/01/1900';
-           }
-           return fecha;
-       }
-
-       function ConvertirCadenaToFecha(cadenafec) {
-           var fecha = new Date();
-           if (cadenafec != "") {
-               var from = cadenafec.split("/");
-               var fecha = new Date(from[2], from[1] - 1, from[0]);
-               if (!isDate(cadenafec)) {
-                   fecha = '01/01/1900';
-               }
-           }
-           else {
-               /*var fecha = new Date('2200', '01', '01');*/
-               fecha = '01/01/1900';
-           }
-
-           return fecha;
-       }
-
-
-       function trunc(x, posiciones) {
-           var s = x.toString()
-           var l = s.length
-           var decimalLength = s.indexOf('.') + 1
-
-           if (l - decimalLength <= posiciones) {
-               return x
-           }
-           // Parte decimal del número
-           var isNeg = x < 0
-           var decimal = x % 1
-           var entera = isNeg ? Math.ceil(x) : Math.floor(x)
-           // Parte decimal como número entero
-           // Ejemplo: parte decimal = 0.77
-           // decimalFormated = 0.77 * (10^posiciones)
-           // si posiciones es 2 ==> 0.77 * 100
-           // si posiciones es 3 ==> 0.77 * 1000
-           var decimalFormated = Math.floor(
-             Math.abs(decimal) * Math.pow(10, posiciones)
-           )
-           // Sustraemos del número original la parte decimal
-           // y le sumamos la parte decimal que hemos formateado
-           var finalNum = entera +
-             ((decimalFormated / Math.pow(10, posiciones)) * (isNeg ? -1 : 1))
-
-           return finalNum
-       }
-
-       function FormatoCadena(parametro) {
-
-           if (parametro == null) {
-               parametro = '';
-           }
-           if (parametro == "") {
-               parametro = '';
-           }
-
-           return parametro;
-       }
-
-       function isDate(txtDate) {
-           var currVal = $.trim(txtDate);
-           var resp;
-
-           if (currVal == '')
-               resp = false;
-
-           //Declare Regex            
-           var rxDatePattern = /^(\d{1,2})(\/)(\d{1,2})(\/)(\d{4})$/;
-           var dtArray = currVal.match(rxDatePattern); // is format OK?
-
-           if (dtArray == null) {
-               resp = false;
-           }
-           else {
-               dtDay = parseInt(dtArray[1]);
-               dtMonth = parseInt(dtArray[3]);
-               dtYear = parseInt(dtArray[5]);
-               if (dtMonth < 1 || dtMonth > 12)
-                   resp = false;
-               else if (dtDay < 1 || dtDay > 31)
-                   resp = false;
-               else if ((dtMonth == 4 || dtMonth == 6 || dtMonth == 9 || dtMonth == 11) && dtDay == 31)
-                   resp = false;
-               else if (dtMonth == 2) {
-                   var isleap = (dtYear % 4 == 0 && (dtYear % 100 != 0 || dtYear % 400 == 0));
-                   if (dtDay > 29 || (dtDay == 29 && !isleap))
-                       resp = false;
-               }
-               resp = true;
-           }
-           return resp;
-       }
-
-       function FormatoMoneda(parametro) {
-           if (!isNaN(parametro)) {
-               resultado = ('$' + parseFloat(parametro, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
-           } else {
-               resultado = 0;
-           }
-           return resultado
-       }
-
-
-       function formateafecha(fecha) {
-           var long = fecha.length;
-           var dia;
-           var mes;
-           var ano;
-           if ((long >= 2) && (primerslap == false)) {
-               dia = fecha.substr(0, 2);
-               if ((IsNumeric(dia) == true) && (dia <= 31) && (dia != "00")) { fecha = fecha.substr(0, 2) + "/" + fecha.substr(3, 7); primerslap = true; }
-               else { fecha = ""; primerslap = false; }
-           }
-           else {
-               dia = fecha.substr(0, 1);
-               if (IsNumeric(dia) == false)
-               { fecha = ""; }
-               if ((long <= 2) && (primerslap = true)) { fecha = fecha.substr(0, 1); primerslap = false; }
-           }
-           if ((long >= 5) && (segundoslap == false)) {
-               mes = fecha.substr(3, 2);
-               if ((IsNumeric(mes) == true) && (mes <= 12) && (mes != "00")) { fecha = fecha.substr(0, 5) + "/" + fecha.substr(6, 4); segundoslap = true; }
-               else { fecha = fecha.substr(0, 3);; segundoslap = false; }
-           }
-           else { if ((long <= 5) && (segundoslap = true)) { fecha = fecha.substr(0, 4); segundoslap = false; } }
-           if (long >= 7) {
-               ano = fecha.substr(6, 4);
-               if (IsNumeric(ano) == false) { fecha = fecha.substr(0, 6); }
-               else { if (long == 10) { if ((ano == 0) || (ano < 1900) || (ano > 2100)) { fecha = fecha.substr(0, 6); } } }
-           }
-           if (long >= 10) {
-               fecha = fecha.substr(0, 10);
-               dia = fecha.substr(0, 2);
-               mes = fecha.substr(3, 2);
-               ano = fecha.substr(6, 4);
-               // Año no viciesto y es febrero y el dia es mayor a 28 
-               if ((ano % 4 != 0) && (mes == 02) && (dia > 28)) { fecha = fecha.substr(0, 2) + "/"; }
-           }
-           return (fecha);
-       }
-
-       $(document).ready(function () {
-
-           var idusu = recuperarParametro("idusu");
-           var sum_recargos_t5 = recuperarParametro("sum_recargos_t5");
-           var idcoop = recuperarParametro("idcoop");
-           var fec_vig_rec_t5;
-
-           if (idcoop.indexOf("#") > -1) {
-               idcoop = idcoop.substr(0, idcoop.length - 1);
-           }
-
-           $("#bodegadatos").data("idcoop", idcoop);
-           $("#bodegadatos").data("idusu", idusu);
-           $("#bodegadatos").data("sum_recargos_t5", sum_recargos_t5);
-
-           $("#lbltotalrecargos").text(FormatoMoneda(sum_recargos_t5));
-
-
-           $(".posicion_boton_accion_descto").click(function (e) { //Ver documento 
-
-               
-           });
+    <script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 
 
-           $(".posicion_boton_cancelar_descto").click(function (e) { 
-               window.close();
-           });
+    <script type="text/javascript">
 
-       });
-</script>
+        function calculadescuentoporaplicar(descuento) {
+            var recargos = $("#bodegadatos").data("sum_recargos_t5");
+
+            var dctoporaplicar = trunc(descuento * recargos / 100, 2);
+            $("#datos").data("dctoporaplicar", dctoporaplicar);
+
+            /*var nuevosaldo = total_pagar - dctoporaplicar;
+            nuevosaldo = trunc(nuevosaldo, 2);
+            $("#datos").data("nuevosaldo", nuevosaldo);
+ 
+            $("#lbloperacion").text(FormatoMoneda(nuevosaldo.toString()));
+            $("#lbldctoporaplicar").text(FormatoMoneda(dctoporaplicar.toString()));*/
+
+            $("#lblmontodescontar").text(FormatoMoneda(dctoporaplicar));
+
+        }
+
+
+        function recuperarParametro(campo) {
+            var RE = new RegExp("[&?]" + campo + "=([^&]*)&");
+            var href = location.href + "&";
+            if (RE.test(href)) {
+                RE.exec(href);
+                return unescape(RegExp.$1);
+            }
+        }
+
+        function FormatoFecha(parametro) {
+            var fecha = parametro;
+            if (!isDate(fecha)) {
+                fecha = '01/01/1900';
+            }
+            return fecha;
+        }
+
+        function ConvertirCadenaToFecha(cadenafec) {
+            var fecha = new Date();
+            if (cadenafec != "") {
+                var from = cadenafec.split("/");
+                var fecha = new Date(from[2], from[1] - 1, from[0]);
+                if (!isDate(cadenafec)) {
+                    fecha = '01/01/1900';
+                }
+            }
+            else {
+                /*var fecha = new Date('2200', '01', '01');*/
+                fecha = '01/01/1900';
+            }
+
+            return fecha;
+        }
+
+
+        function trunc(x, posiciones) {
+            var s = x.toString()
+            var l = s.length
+            var decimalLength = s.indexOf('.') + 1
+
+            if (l - decimalLength <= posiciones) {
+                return x
+            }
+            // Parte decimal del número
+            var isNeg = x < 0
+            var decimal = x % 1
+            var entera = isNeg ? Math.ceil(x) : Math.floor(x)
+            // Parte decimal como número entero
+            // Ejemplo: parte decimal = 0.77
+            // decimalFormated = 0.77 * (10^posiciones)
+            // si posiciones es 2 ==> 0.77 * 100
+            // si posiciones es 3 ==> 0.77 * 1000
+            var decimalFormated = Math.floor(
+                Math.abs(decimal) * Math.pow(10, posiciones)
+            )
+            // Sustraemos del número original la parte decimal
+            // y le sumamos la parte decimal que hemos formateado
+            var finalNum = entera +
+                ((decimalFormated / Math.pow(10, posiciones)) * (isNeg ? -1 : 1))
+
+            return finalNum
+        }
+
+        function FormatoCadena(parametro) {
+
+            if (parametro == null) {
+                parametro = '';
+            }
+            if (parametro == "") {
+                parametro = '';
+            }
+
+            return parametro;
+        }
+
+        function isDate(txtDate) {
+            var currVal = $.trim(txtDate);
+            var resp;
+
+            if (currVal == '')
+                resp = false;
+
+            //Declare Regex            
+            var rxDatePattern = /^(\d{1,2})(\/)(\d{1,2})(\/)(\d{4})$/;
+            var dtArray = currVal.match(rxDatePattern); // is format OK?
+
+            if (dtArray == null) {
+                resp = false;
+            }
+            else {
+                dtDay = parseInt(dtArray[1]);
+                dtMonth = parseInt(dtArray[3]);
+                dtYear = parseInt(dtArray[5]);
+                if (dtMonth < 1 || dtMonth > 12)
+                    resp = false;
+                else if (dtDay < 1 || dtDay > 31)
+                    resp = false;
+                else if ((dtMonth == 4 || dtMonth == 6 || dtMonth == 9 || dtMonth == 11) && dtDay == 31)
+                    resp = false;
+                else if (dtMonth == 2) {
+                    var isleap = (dtYear % 4 == 0 && (dtYear % 100 != 0 || dtYear % 400 == 0));
+                    if (dtDay > 29 || (dtDay == 29 && !isleap))
+                        resp = false;
+                }
+                resp = true;
+            }
+            return resp;
+        }
+
+        function FormatoMoneda(parametro) {
+            if (!isNaN(parametro)) {
+                resultado = ('$' + parseFloat(parametro, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+            } else {
+                resultado = 0;
+            }
+            return resultado
+        }
+
+
+        function formateafecha(fecha) {
+            var long = fecha.length;
+            var dia;
+            var mes;
+            var ano;
+            if ((long >= 2) && (primerslap == false)) {
+                dia = fecha.substr(0, 2);
+                if ((IsNumeric(dia) == true) && (dia <= 31) && (dia != "00")) { fecha = fecha.substr(0, 2) + "/" + fecha.substr(3, 7); primerslap = true; }
+                else { fecha = ""; primerslap = false; }
+            }
+            else {
+                dia = fecha.substr(0, 1);
+                if (IsNumeric(dia) == false) { fecha = ""; }
+                if ((long <= 2) && (primerslap = true)) { fecha = fecha.substr(0, 1); primerslap = false; }
+            }
+            if ((long >= 5) && (segundoslap == false)) {
+                mes = fecha.substr(3, 2);
+                if ((IsNumeric(mes) == true) && (mes <= 12) && (mes != "00")) { fecha = fecha.substr(0, 5) + "/" + fecha.substr(6, 4); segundoslap = true; }
+                else { fecha = fecha.substr(0, 3);; segundoslap = false; }
+            }
+            else { if ((long <= 5) && (segundoslap = true)) { fecha = fecha.substr(0, 4); segundoslap = false; } }
+            if (long >= 7) {
+                ano = fecha.substr(6, 4);
+                if (IsNumeric(ano) == false) { fecha = fecha.substr(0, 6); }
+                else { if (long == 10) { if ((ano == 0) || (ano < 1900) || (ano > 2100)) { fecha = fecha.substr(0, 6); } } }
+            }
+            if (long >= 10) {
+                fecha = fecha.substr(0, 10);
+                dia = fecha.substr(0, 2);
+                mes = fecha.substr(3, 2);
+                ano = fecha.substr(6, 4);
+                // Año no viciesto y es febrero y el dia es mayor a 28 
+                if ((ano % 4 != 0) && (mes == 02) && (dia > 28)) { fecha = fecha.substr(0, 2) + "/"; }
+            }
+            return (fecha);
+        }
+
+        $(document).ready(function () {
+
+            var idusu = recuperarParametro("idusu");
+            var sum_recargos_t5 = recuperarParametro("sum_recargos_t5");
+            var idcoop = recuperarParametro("idcoop");
+            var fec_vig_rec_t5;
+
+            if (idcoop.indexOf("#") > -1) {
+                idcoop = idcoop.substr(0, idcoop.length - 1);
+            }
+
+            $("#bodegadatos").data("idcoop", idcoop);
+            $("#bodegadatos").data("idusu", idusu);
+            $("#bodegadatos").data("sum_recargos_t5", sum_recargos_t5);
+
+            $("#lbltotalrecargos").text(FormatoMoneda(sum_recargos_t5));
+
+
+            $(".posicion_boton_accion_descto").click(function (e) { //Ver documento 
+
+
+            });
+
+
+
+            $(".posicion_boton_cancelar_descto").click(function (e) {
+                window.close();
+            });
+
+        });
+    </script>
 </head>
-<body>
-<div id="capturadescto">
-      
-      <table style="width:100%; height: 65px;">
-        <tr>
-            <td class="auto-style331" colspan="4">Captura de Descuento sobre recargos</td>            
 
-        </tr>    
-        <tr>
-            <td class="auto-style332">Total Recargos Registrados</td>
-            <td class="auto-style332">Descuentos X Aplicar</td>
-            <td class="auto-style332">Monto del Descuento</td>           
-            <td class="auto-style332">Vigencia del Descuento</td>
-        </tr>        
-        <tr>
-            <td class="auto-style333"><label id="lbltotalrecargos"></label></td>
-            <td class="auto-style333"><input type="number" id="txtdctomanual" min="1" max="75"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); if (this.value > 75) this.value = 75; calculadescuentoporaplicar(this.value) " maxLength="3"/></td>
-            <td class="auto-style333"><label id="lblmontodescontar"></label></td>           
-            <td class="auto-style333"><input type="text" name="fecharecargo" id="txtfecrec_x" size="10" maxlength="10" onkeyup = "this.value=formateafecha(this.value);"/></td>           
-        </tr>      
-        <tr>      
-            <td class="auto-style333"></td>
-            <td class="auto-style333"></td>
-            <td class="auto-style333"></td>           
-            <td class="auto-style333"></td>
-        </tr>     
-        <tr>      
-            <td class="auto-style333"></td>
-            <td class="auto-style333"></td>
-            <td class="auto-style333"></td>           
-            <td class="auto-style333"></td>
-        </tr>     
-        <tr>
-            <td class="auto-style333"></td>
-            <td class="auto-style333"></td>            
-            <td class="auto-style334"><a href="#" class="posicion_boton_cancelar_descto">Cancelar</a></td>            
-            <td class="auto-style334"><a href="#" class ="posicion_boton_accion_descto">Aceptar</a></td>
-        </tr>
-      </table>
-</div>
-<div id="bodegadatos"></div>
+<body>
+    <div id="capturadescto">
+
+        <table style="width:100%; height: 65px;">
+            <tr>
+                <td class="auto-style331" colspan="4">Captura de Descuento sobre recargos</td>
+
+            </tr>
+            <tr>
+                <td class="auto-style332">Total Recargos Registrados</td>
+                <td class="auto-style332">Descuentos X Aplicar</td>
+                <td class="auto-style332">Monto del Descuento</td>
+                <td class="auto-style332">Vigencia del Descuento</td>
+            </tr>
+            <tr>
+                <td class="auto-style333"><label id="lbltotalrecargos"></label></td>
+                <td class="auto-style333"><input type="number" id="txtdctomanual" min="1" max="75"
+                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); if (this.value > 75) this.value = 75; calculadescuentoporaplicar(this.value) "
+                        maxLength="3" /></td>
+                <td class="auto-style333"><label id="lblmontodescontar"></label></td>
+                <td class="auto-style333"><input type="text" name="fecharecargo" id="txtfecrec_x" size="10"
+                        maxlength="10" onkeyup="this.value=formateafecha(this.value);" /></td>
+            </tr>
+            <tr>
+                <td class="auto-style333"></td>
+                <td class="auto-style333"></td>
+                <td class="auto-style333"></td>
+                <td class="auto-style333"></td>
+            </tr>
+            <tr>
+                <td class="auto-style333"></td>
+                <td class="auto-style333"></td>
+                <td class="auto-style333"></td>
+                <td class="auto-style333"></td>
+            </tr>
+            <tr>
+                <td class="auto-style333"></td>
+                <td class="auto-style333"></td>
+                <td class="auto-style334"><a href="#" class="posicion_boton_cancelar_descto">Cancelar</a></td>
+                <td class="auto-style334"><a href="#" class="posicion_boton_accion_descto">Aceptar</a></td>
+            </tr>
+        </table>
+    </div>
+    <div id="bodegadatos"></div>
 </body>
+
 </html>

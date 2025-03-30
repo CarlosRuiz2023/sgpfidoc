@@ -1,54 +1,58 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>  
-    <script src="../../js/conv_numero_text.js" type="text/javascript"></script> 
+    <script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="../../js/conv_numero_text.js" type="text/javascript"></script>
     <style type="text/css">
         td {
-           text-align: center;
+            text-align: center;
         }
-       
-           .auto-style273 {
+
+        .auto-style273 {
             text-align: center;
             font-weight: bold;
-            font-size : 20px;
+            font-size: 20px;
             background-color: #ff6a00;
             width: 1194px;
         }
 
-           .auto-style228 {
+        .auto-style228 {
             text-align: center;
             font-weight: bold;
-            font-size : 16px;
+            font-size: 16px;
             background-color: #FADCA7;
             height: 9px;
             width: 1194px;
         }
-           .auto-style274 {
+
+        .auto-style274 {
             text-align: right;
             font-weight: bold;
-            font-size : 20px;
+            font-size: 20px;
             background-color: #ff6a00;
             height: 8px;
             width: 1086px;
         }
-         
-            .auto-style275 {
+
+        .auto-style275 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 8px;
             width: 459px;
         }
+
         .auto-style276 {
             text-align: center;
             font-weight: bold;
-            font-size : 18px;
+            font-size: 18px;
             background-color: white;
             height: 8px;
             width: 459px;
@@ -58,45 +62,48 @@
             text-align: left;
             font-weight: bold;
             color: #00ffff;
-            font-size : 20px;
+            font-size: 20px;
             background-color: #000000;
             height: 42px;
             width: 459px;
         }
-         
+
         .auto-style277 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #DE3F08;
             height: 8px;
             width: 1395px;
         }
-     .auto-style278 {
+
+        .auto-style278 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 1194px;
         }
-       
+
         .auto-style285 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 8px;
             width: 460px;
         }
+
         .auto-style304 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 8px;
             width: 355px;
-        }     
+        }
+
         .auto-style310 {
             text-align: center;
             font-weight: bold;
@@ -105,50 +112,57 @@
             width: 580px;
             background-color: white;
         }
+
         .auto-style312 {
             height: 8px;
             width: 402px;
         }
+
         .auto-style313 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 199px;
         }
+
         .auto-style314 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 1160px;
         }
+
         .auto-style315 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 324px;
         }
+
         .auto-style317 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 799px;
         }
+
         .auto-style318 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 1006px;
         }
+
         .auto-style319 {
             text-align: center;
             font-weight: bold;
@@ -157,235 +171,265 @@
             width: 458px;
             background-color: white;
         }
+
         .auto-style321 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 9px;
             width: 460px;
         }
+
         .auto-style331 {
             text-align: center;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F5DAB2;
             height: 15px;
             width: 633px;
         }
+
         .auto-style332 {
             text-align: center;
             font-weight: bold;
-            font-size : 22px;
+            font-size: 22px;
             background-color: #ff6a00;
             height: 9px;
             width: 633px;
         }
+
         .auto-style350 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 438px;
         }
+
         .auto-style352 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 1257px;
         }
+
         .auto-style358 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 30px;
             width: 1517px;
         }
+
         .auto-style359 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 30px;
             width: 121px;
         }
+
         .auto-style361 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 8px;
             width: 1280px;
         }
+
         .auto-style382 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 1441px;
         }
+
         .auto-style398 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 31px;
             width: 1160px;
         }
+
         .auto-style399 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 31px;
             width: 459px;
         }
+
         .auto-style400 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 31px;
             width: 1441px;
         }
+
         .auto-style407 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 30px;
             width: 324px;
         }
+
         .auto-style408 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 30px;
             width: 363px;
         }
+
         .auto-style409 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 30px;
             width: 1280px;
         }
+
         .auto-style411 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 18px;
             width: 324px;
         }
+
         .auto-style412 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 18px;
             width: 459px;
         }
+
         .auto-style413 {
             text-align: left;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 30px;
             width: 459px;
         }
+
         .auto-style414 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 30px;
             width: 1160px;
         }
+
         .auto-style416 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 30px;
             width: 1441px;
         }
+
         .auto-style417 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 31px;
             width: 1006px;
         }
+
         .auto-style420 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 31px;
             width: 460px;
         }
+
         .auto-style423 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             width: 1006px;
         }
+
         .auto-style424 {
             text-align: center;
             font-weight: bold;
-            font-size : 18px;
+            font-size: 18px;
             background-color: white;
             width: 459px;
         }
+
         .auto-style425 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             width: 460px;
         }
+
         .auto-style429 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 18px;
             width: 1006px;
         }
+
         .auto-style431 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 18px;
             width: 460px;
         }
+
         .auto-style437 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 29px;
             width: 474px;
         }
+
         .auto-style438 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 29px;
             width: 590px;
         }
+
         .auto-style439 {
             text-align: center;
             font-weight: bold;
@@ -394,14 +438,16 @@
             width: 458px;
             background-color: white;
         }
+
         .auto-style440 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: white;
             height: 29px;
             width: 460px;
         }
+
         .auto-style472 {
             text-align: center;
             font-weight: bold;
@@ -409,18 +455,21 @@
             width: 458px;
             background-color: white;
         }
+
         .auto-style504 {
             text-align: center;
             font-weight: bold;
-            font-size : 16px;
+            font-size: 16px;
             background-color: #E9CC79;
             height: 9px;
             width: 298px;
         }
+
         .auto-style510 {
             height: 10px;
             width: 298px;
         }
+
         .auto-style512 {
             text-align: center;
             font-weight: bold;
@@ -429,140 +478,169 @@
             width: 974px;
             background-color: white;
         }
+
         .auto-style516 {
             text-align: center;
             font-weight: bold;
-            font-size : 16px;
+            font-size: 16px;
             background-color: #FADCA7;
             height: 9px;
             width: 1176px;
         }
+
         .auto-style517 {
             width: 1176px;
         }
+
         .auto-style524 {
             width: 386px;
         }
+
         .auto-style525 {
             text-align: center;
             font-weight: bold;
-            font-size : 16px;
+            font-size: 16px;
             background-color: #FADCA7;
             height: 9px;
             width: 386px;
         }
+
         .auto-style526 {
             text-align: center;
             font-weight: bold;
-            font-size : 22px;
+            font-size: 22px;
             background-color: #ff6a00;
             height: 9px;
             width: 652px;
         }
+
         .auto-style527 {
             text-align: center;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F5DAB2;
             height: 15px;
             width: 652px;
         }
+
         .auto-style528 {
             height: 10px;
             width: 314px;
         }
+
         .auto-style529 {
             width: 314px;
         }
+
         .auto-style530 {
             height: 10px;
             width: 333px;
         }
+
         .auto-style531 {
             width: 333px;
         }
+
         #txtdescuento {
             height: 22px;
         }
+
         .auto-style532 {
             height: 10px;
             width: 316px;
         }
+
         .auto-style533 {
             width: 316px;
         }
+
         .auto-style534 {
             height: 10px;
             width: 328px;
         }
+
         .auto-style535 {
             width: 328px;
         }
+
         .auto-style543 {
             width: 253px;
             height: 23px;
         }
+
         .auto-style546 {
             width: 259px;
             text-align: center;
             font-weight: bold;
-            font-size : 20px;
+            font-size: 20px;
             background-color: #608cac;
         }
+
         .auto-style547 {
             width: 259px;
             height: 23px;
         }
+
         .auto-style551 {
             width: 284px;
             height: 23px;
         }
+
         .auto-style557 {
             width: 268px;
             height: 23px;
         }
+
         .auto-style562 {
             width: 293px;
             height: 23px;
         }
+
         .auto-style564 {
             width: 278px;
             height: 23px;
         }
+
         .auto-style566 {
             width: 271px;
             height: 23px;
         }
+
         .auto-style568 {
             width: 265px;
             height: 23px;
         }
+
         #bypassme {
             width: 1400px;
         }
+
         #datos {
             width: 1403px;
         }
+
         .auto-style569 {
             text-align: center;
             font-weight: bold;
-            font-size : 20px;
+            font-size: 20px;
             background-color: #ff6a00;
             width: 1194px;
             height: 11px;
         }
+
         .auto-style574 {
             width: 298px;
         }
+
         .auto-style575 {
             text-align: right;
             font-weight: bold;
-            font-size : 15px;
+            font-size: 15px;
             background-color: #F6EAD8;
             height: 9px;
             width: 363px;
         }
-        </style>
+    </style>
     <script>
 
         function GestionCooperadores(oid, idusu, fid) {
@@ -588,7 +666,7 @@
         
         */
 
-        function GetLargeFecha(date) {                        
+        function GetLargeFecha(date) {
             var m = new Array();
             var d = new Array()
             var an = date.getYear();
@@ -648,95 +726,95 @@
         }
 
 
-        function GetDatosFrente(fid,accion) {
-             return $.ajax({
+        function GetDatosFrente(fid, accion) {
+            return $.ajax({
                 type: "POST",
                 dataType: "json",
                 contentType: "application/json",
                 url: "../../WebServices/WebServiceEdoCta.asmx/GetEdoCtaFte",
-                data: "{'fid':'" + fid + "',accion:'" + accion + "'}"                                
+                data: "{'fid':'" + fid + "',accion:'" + accion + "'}"
             });
         }
 
         function callWebServicePred(ctapred) {
-                       
-                var urlctapred = "http://201.116.205.135:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
-                try {
-                    $.get(urlctapred, function (xml) {
-                        xmlDoc = $.parseXML(xml),
+
+            var urlctapred = "http://201.116.205.135:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
+            try {
+                $.get(urlctapred, function (xml) {
+                    xmlDoc = $.parseXML(xml),
                         $xml = $(xmlDoc),
                         $nomprop = $xml.find("NomProp");
-                        $("#nomprop_p").text($.trim($nomprop.text()));
+                    $("#nomprop_p").text($.trim($nomprop.text()));
 
-                        $callenotif = $xml.find("DomProp");
-                        $numoficext = $xml.find("NumExtP");
-                        $letraoficialext = $xml.find("LetraExtP");
-                        $numoficint = $xml.find("NumIntP");
-                        $colnotif = $xml.find("ColProp");
-                        $usosuelo = $xml.find("TipPred");
-                        $("#domnotif_p").text("Calle: " + $.trim($callenotif.text()) + " " + $.trim($numoficext.text()) + " " + $.trim($letraoficialext.text()) + " " + $.trim($numoficint.text()) + ",  Colonia: " + $.trim($colnotif.text()));
-                        
+                    $callenotif = $xml.find("DomProp");
+                    $numoficext = $xml.find("NumExtP");
+                    $letraoficialext = $xml.find("LetraExtP");
+                    $numoficint = $xml.find("NumIntP");
+                    $colnotif = $xml.find("ColProp");
+                    $usosuelo = $xml.find("TipPred");
+                    $("#domnotif_p").text("Calle: " + $.trim($callenotif.text()) + " " + $.trim($numoficext.text()) + " " + $.trim($letraoficialext.text()) + " " + $.trim($numoficint.text()) + ",  Colonia: " + $.trim($colnotif.text()));
 
-                        $callenumpred = $xml.find("DomPred");
-                        $numoficextpred = $xml.find("NumExt");
-                        $letraoficextpred = $xml.find("LetraExt");
-                        $numoficintpred = $xml.find("NumInt");
-                        $coloniapred = $xml.find("ColPred");
-                        $lote = $xml.find("Lote");
-                        $mzna = $xml.find("Manzana");
 
-                        $("#dompredio_p").text('Calle: ' + $.trim($callenumpred.text()) + ' ' + $.trim($numoficextpred.text()) + ' ' + $.trim($letraoficextpred.text()) + ' ' + $.trim($numoficintpred.text()) + ',  Colonia: ' + $.trim($coloniapred.text()));
-                                            
-                        $("#lote_p").text($.trim($lote.text()));
-                        $("#mzna_p").text($.trim($mzna.text()));
-                        
-                        $("#tipopredio_p").text($.trim($usosuelo.text()));
+                    $callenumpred = $xml.find("DomPred");
+                    $numoficextpred = $xml.find("NumExt");
+                    $letraoficextpred = $xml.find("LetraExt");
+                    $numoficintpred = $xml.find("NumInt");
+                    $coloniapred = $xml.find("ColPred");
+                    $lote = $xml.find("Lote");
+                    $mzna = $xml.find("Manzana");
 
-                    });
-                }
-                catch (err) {
-                    alert("No fue posible consultar la cuenta predial en el padrón de PREDIAL." + err);
-                }
+                    $("#dompredio_p").text('Calle: ' + $.trim($callenumpred.text()) + ' ' + $.trim($numoficextpred.text()) + ' ' + $.trim($letraoficextpred.text()) + ' ' + $.trim($numoficintpred.text()) + ',  Colonia: ' + $.trim($coloniapred.text()));
+
+                    $("#lote_p").text($.trim($lote.text()));
+                    $("#mzna_p").text($.trim($mzna.text()));
+
+                    $("#tipopredio_p").text($.trim($usosuelo.text()));
+
+                });
+            }
+            catch (err) {
+                alert("No fue posible consultar la cuenta predial en el padrón de PREDIAL." + err);
+            }
         }
 
         function MostrarDatosUsuario(idusu) {
             $.ajax(
-               {
-                   url: "../../WebServices/WebServiceUsuario.asmx/GetUsuario", //PageMethod
-                   data: "{'idusu':'" + idusu + "'}", //PageMethod Parametros de entrada
-                   dataType: "json",
-                   type: "post",
-                   contentType: "application/json; charset=utf-8",
-                   success: function (data) {                       
-                       // Data.d trae un string con el XML generado dentro del servicio web asmx
-                       $(data.d).find("usuario").each(function () {
-                           var cuenta = $(this).find("musucuenta").text();
-                           var nombre = $(this).find("musunombre").text();
-                           var rol = $(this).find("musuidrol").text();                                                      
-                           $("#lblusuario").text(cuenta);
-                           })
-                   },
-                   error: function (response) {
-                       if (response.length != 0)++
-                           alert(response);
-                   }
-               });
+                {
+                    url: "../../WebServices/WebServiceUsuario.asmx/GetUsuario", //PageMethod
+                    data: "{'idusu':'" + idusu + "'}", //PageMethod Parametros de entrada
+                    dataType: "json",
+                    type: "post",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        // Data.d trae un string con el XML generado dentro del servicio web asmx
+                        $(data.d).find("usuario").each(function () {
+                            var cuenta = $(this).find("musucuenta").text();
+                            var nombre = $(this).find("musunombre").text();
+                            var rol = $(this).find("musuidrol").text();
+                            $("#lblusuario").text(cuenta);
+                        })
+                    },
+                    error: function (response) {
+                        if (response.length != 0) ++
+                            alert(response);
+                    }
+                });
 
         }
 
-                                  
+
 
 
         function ContarFrentexPredio(pid) {
-           return $.ajax(
-               {
-                   url: "../../WebServices/WebServicePredio.asmx/GetFrentesPredio", //PageMethod
-                   data: "{'pid':'" + pid + "'}", //PageMethod Parametros de entrada
-                   dataType: "json",
-                   type: "post",
-                   contentType: "application/json; charset=utf-8",
-                   
-               });
+            return $.ajax(
+                {
+                    url: "../../WebServices/WebServicePredio.asmx/GetFrentesPredio", //PageMethod
+                    data: "{'pid':'" + pid + "'}", //PageMethod Parametros de entrada
+                    dataType: "json",
+                    type: "post",
+                    contentType: "application/json; charset=utf-8",
+
+                });
 
         }
 
@@ -747,7 +825,7 @@
             if (!isDate(fecha)) {
                 fecha = '01/01/1900';
             }
-            return fecha;            
+            return fecha;
         }
 
         function ConvertirCadenaToFecha(cadenafec) {
@@ -769,14 +847,14 @@
 
 
         function FormatoCadena(parametro) {
-            
+
             if (parametro == null) {
                 parametro = '';
             }
             if (parametro == "") {
                 parametro = '';
             }
-            
+
             return parametro;
         }
 
@@ -824,13 +902,13 @@
         }
 
         function ImprimirDocumento() {  /*Documento interno pero no fue permitido generarse 07/12/2021*/
-           
+
             var img = new Image();
             img.src = "../../imagenes/logo_fidoc.jpeg";
 
-            var doc = new jsPDF("p","mm","letter");        
+            var doc = new jsPDF("p", "mm", "letter");
 
-            
+
             doc.addImage(img, 'jpeg', 160, 1, 50, 40);
             doc.setFontSize(20);
             doc.text(15, 15, 'Fideicomiso de Obras por Cooperación');
@@ -842,12 +920,12 @@
             doc.text(160, 42, FechaHora());
             doc.setFontSize(12);
             doc.text(10, 45, 'oid: ' + $("#lbloid").html() + '        pid: ' + $("#lblpid").html() + '        fid: ' + $("#lblfid").html() + '       cid: ' + $("#lblcid").html());
-            
+
             doc.line(18, 46, 18 + doc.getTextWidth($("#lbloid").html()), 46);
             doc.line(41, 46, 41 + doc.getTextWidth($("#lblpid").html()), 46);
             doc.line(68, 46, 68 + doc.getTextWidth($("#lblfid").html()), 46);
             doc.line(94, 46, 94 + doc.getTextWidth($("#lblcid").html()), 46);
-                        
+
             doc.text(20, 55, 'DATOS DEL COOPERADOR');
 
             doc.setFontSize(10);
@@ -855,7 +933,7 @@
             doc.line(49, 61, 49 + doc.getTextWidth($("#nomcoop").html()), 61);
             doc.text(10, 64, 'Domicilio de Notificación: ' + $("#domcoop").html());
             doc.line(50, 65, 50 + doc.getTextWidth($("#domcoop").html()), 65);
-            
+
             doc.setFontSize(12);
             doc.text(20, 72, 'DATOS DEL PREDIO');
 
@@ -873,7 +951,7 @@
 
             doc.text(10, 90, 'Cuenta Predial: ' + $("#ctapredial").html());
             doc.line(36, 91, 36 + doc.getTextWidth($("#ctapredial").html()), 91);
-            
+
 
 
             doc.setFontSize(12);
@@ -882,7 +960,7 @@
             doc.setFontSize(10);
             doc.text(10, 104, 'Obra_coop (SIFIDOC): ' + $("#osifidoc").html());
             doc.line(47, 105, 47 + doc.getTextWidth($("#osifidoc").html()), 105);
-            
+
 
             doc.text(10, 108, 'Calle:   ' + $("#calleobra").html());
             doc.line(22, 109, 22 + doc.getTextWidth($("#calleobra").html()), 109);
@@ -892,24 +970,24 @@
 
             doc.text(10, 116, 'Tramo: ' + $("#tramoobra").html());
             doc.line(20, 117, 20 + doc.getTextWidth($("#tramoobra").html()), 117);
-             
+
             doc.text(10, 121, 'Fecha Inicio Pagos: ' + $("#fecinipag").html() + '       Num. pagos: ' + $("#numpagos").html() + '                Fecha Fin Pagos: ' + $("#fecvencpag").html());
             doc.line(42, 122, 42 + doc.getTextWidth($("#fecinipag").html()), 122);
             doc.line(88, 122, 88 + doc.getTextWidth($("#numpagos").html()), 122);
             doc.line(136, 122, 136 + doc.getTextWidth($("#fecvencpag").html()), 122);
-            
-            
+
+
             doc.text(10, 126, 'Fecha recaudación: ' + $("#fecrec").html() + '        Fecha 1ra. Publicación: ' + $("#fecpub1").html() + '        Fecha 2da. Publicación: ' + $("#fecpub2").html());
             doc.line(42, 127, 42 + doc.getTextWidth($("#fecrec").html()), 127);
             doc.line(106, 127, 106 + doc.getTextWidth($("#fecpub1").html()), 127);
             doc.line(170, 127, 170 + doc.getTextWidth($("#fecpub2").html()), 127);
 
-            doc.text(10, 131, 'Fecha proceso: ' + $("#fecproc").html() +    '             Fecha aviso congreso: ' + $("#fecavicong").html()+ '           Fecha entrega obra: ' + $("#fecpav").html());
+            doc.text(10, 131, 'Fecha proceso: ' + $("#fecproc").html() + '             Fecha aviso congreso: ' + $("#fecavicong").html() + '           Fecha entrega obra: ' + $("#fecpav").html());
             doc.line(35, 132, 35 + doc.getTextWidth($("#fecproc").html()), 132);
             doc.line(102, 132, 102 + doc.getTextWidth($("#fecavicong").html()), 132);
             doc.line(163, 132, 163 + doc.getTextWidth($("#fecpav").html()), 132);
 
-            doc.text(10, 136, 'Fecha cobranza: ' + $("#feccob").html() +    '           Estatus de obra: ' + $("#estatusobra").html());
+            doc.text(10, 136, 'Fecha cobranza: ' + $("#feccob").html() + '           Estatus de obra: ' + $("#estatusobra").html());
             doc.line(37, 137, 37 + doc.getTextWidth($("#feccob").html()), 137);
             doc.line(92, 137, 92 + doc.getTextWidth($("#estatusobra").html()), 137);
 
@@ -933,12 +1011,12 @@
             doc.text(101, 155, 'Fecha de notificación de ejecución: ' + $("#fecnotifejec").html());
             doc.line(158, 156, 158 + doc.getTextWidth($("#fecnotifejec").html()), 156);
 
-            
+
             doc.setFontSize(12);
             doc.text(46, 164, 'DETALLE DE MOVIMIENTOS FINANCIEROS');
 
             doc.setFontSize(10);
-            doc.text(63,169, 'MONTOS'  + '                                         PERIODO ');
+            doc.text(63, 169, 'MONTOS' + '                                         PERIODO ');
 
             doc.setFontSize(9);
             /*columna,renglon*/
@@ -946,34 +1024,34 @@
             var reng_inicio = 175;
             var inc_reng = 4;
 
-            doc.text(10, reng_inicio,'SUERTE PRINCIPAL:');
+            doc.text(10, reng_inicio, 'SUERTE PRINCIPAL:');
             doc.text(55, reng_inicio, $("#suerteprinc").html());
 
-            
+
 
             doc.text(10 + (doc.getTextWidth('SUERTE PRINCIPAL:') - doc.getTextWidth('Incremento:')), reng_inicio + inc_reng, 'Incremento:');
             doc.text(55 + (doc.getTextWidth($("#suerteprinc").html()) - doc.getTextWidth($("#incremento").html())), reng_inicio + inc_reng, $("#incremento").html());
-            
-            doc.text(10 + (doc.getTextWidth('SUERTE PRINCIPAL:') - doc.getTextWidth('accesorios')), reng_inicio + inc_reng*2, 'Accesorios:');
-            doc.text(55 + (doc.getTextWidth($("#suerteprinc").html()) - doc.getTextWidth($("#accesorios").html())), reng_inicio + inc_reng*2, $("#accesorios").html());
-            
+
+            doc.text(10 + (doc.getTextWidth('SUERTE PRINCIPAL:') - doc.getTextWidth('accesorios')), reng_inicio + inc_reng * 2, 'Accesorios:');
+            doc.text(55 + (doc.getTextWidth($("#suerteprinc").html()) - doc.getTextWidth($("#accesorios").html())), reng_inicio + inc_reng * 2, $("#accesorios").html());
+
             doc.text(10 + (doc.getTextWidth('SUERTE PRINCIPAL:') - doc.getTextWidth('Pagos antes de Act:')), reng_inicio + inc_reng * 3, 'Pagos antes de Act:');
             doc.text(55 + (doc.getTextWidth($("#suerteprinc").html()) * 2 - doc.getTextWidth($("#pagos_antes").html())), reng_inicio + inc_reng * 3, $("#pagos_antes").html());
 
             doc.text(10 + (doc.getTextWidth('SUERTE PRINCIPAL:') - doc.getTextWidth('SALDO_PARCIAL:')), reng_inicio + inc_reng * 4, 'SALDO_PARCIAL:');
             doc.text(55 + (doc.getTextWidth($("#suerteprinc").html()) - doc.getTextWidth($("#saldoparcial").html())), reng_inicio + inc_reng * 4, $("#saldoparcial").html());
-            
+
             doc.text(10 + (doc.getTextWidth('SUERTE PRINCIPAL:') - doc.getTextWidth('Factor Act.:')), reng_inicio + inc_reng * 5, 'Factor Act.:');
             doc.text(55 + (doc.getTextWidth($("#suerteprinc").html()) - doc.getTextWidth($("#factoract").html())), reng_inicio + inc_reng * 5, $("#factoract").html());
             doc.text(110, 198, $("#periodoact").html());
 
-            
+
             doc.text(10 + (doc.getTextWidth('SUERTE PRINCIPAL:') - doc.getTextWidth('SALDO_ACT:')), reng_inicio + inc_reng * 6, 'SALDO_ACT:');
-            doc.text(55 + (doc.getTextWidth($("#suerteprinc").html()) - doc.getTextWidth($("#saldoact").html())), reng_inicio + inc_reng *6, $("#saldoact").html());
+            doc.text(55 + (doc.getTextWidth($("#suerteprinc").html()) - doc.getTextWidth($("#saldoact").html())), reng_inicio + inc_reng * 6, $("#saldoact").html());
 
-            
 
-            
+
+
             doc.text(10 + (doc.getTextWidth('SUERTE PRINCIPAL:') - doc.getTextWidth('Pagos después de Act:')), reng_inicio + inc_reng * 7, 'Pagos despues de Act:');
             doc.text(55 + (doc.getTextWidth($("#suerteprinc").html()) * 2 - doc.getTextWidth($("#pagos_despues").html())), reng_inicio + inc_reng * 7, $("#pagos_despues").html());
 
@@ -995,14 +1073,14 @@
             doc.setFontSize(15);
             doc.text(20 + (doc.getTextWidth('SUERTE PRINCIPAL:') - doc.getTextWidth('Saldo total pagar:')), reng_inicio + inc_reng * 13, 'Saldo total pagar:');
             doc.text(90 + (doc.getTextWidth($("#suerteprinc").html()) - doc.getTextWidth($("#saldopagar").html())), reng_inicio + inc_reng * 13, $("#saldopagar").html());
-            
+
             doc.save('edocta.pdf');
 
         }
 
 
-      
-        function ImprimirDocumentoPublico() {           
+
+        function ImprimirDocumentoPublico() {
 
             var doc = new jsPDF("p", "mm", "letter");
 
@@ -1010,22 +1088,22 @@
             /*columna,renglon,ancho,alto*/
 
             var img_logofidoc = new Image();
-            img_logofidoc.src = "../../imagenes/logo_fidoc.jpeg";            
+            img_logofidoc.src = "../../imagenes/logo_fidoc.jpeg";
             doc.addImage(img_logofidoc, 'jpeg', 15, 15, 50, 40);
 
 
             var img_logoadmon_21_24 = new Image();
-            img_logoadmon_21_24.src = "../../imagenes/admon2021_2024.png";            
+            img_logoadmon_21_24.src = "../../imagenes/admon2021_2024.png";
             doc.addImage(img_logoadmon_21_24, 'png', 145, 30, 50, 21);
 
             doc.setFontSize(20);
             doc.text(75, 50, 'Estado de Cuenta');
-            
+
 
 
             //******************** CUERPO DEL DOCUMENTO   ***********//
 
-            
+
             doc.setFontSize(14);
             doc.text(18, 80, $("#nomcoop").html());
             doc.text(18, 85, $("#datos").data("calle") + '    XXX');
@@ -1037,22 +1115,22 @@
 
             doc.setFontSize(12);
             doc.text(columnacodigos, rengloncodigos, 'fid:');
-            doc.text(columnacodigos + doc.getTextWidth('fid:'), 80 + (inc_reng_codigos*0), $("#lblfid").html());
+            doc.text(columnacodigos + doc.getTextWidth('fid:'), 80 + (inc_reng_codigos * 0), $("#lblfid").html());
 
-            doc.text(columnacodigos, rengloncodigos+5, 'pid:');
-            doc.text(columnacodigos + doc.getTextWidth('pid:'), rengloncodigos + (inc_reng_codigos*1), $("#lblpid").html());
+            doc.text(columnacodigos, rengloncodigos + 5, 'pid:');
+            doc.text(columnacodigos + doc.getTextWidth('pid:'), rengloncodigos + (inc_reng_codigos * 1), $("#lblpid").html());
 
-            doc.text(columnacodigos, rengloncodigos+10, 'oid:');
-            doc.text(columnacodigos + doc.getTextWidth('oid:'), rengloncodigos + (inc_reng_codigos*2), $("#lbloid").html());
+            doc.text(columnacodigos, rengloncodigos + 10, 'oid:');
+            doc.text(columnacodigos + doc.getTextWidth('oid:'), rengloncodigos + (inc_reng_codigos * 2), $("#lbloid").html());
 
-            doc.text((columnacodigos - doc.getTextWidth('Cuenta predial:')) + doc.getTextWidth('fid:'), rengloncodigos+(inc_reng_codigos*3), 'Cuenta predial:' + $("#ctapredial").html());
-            doc.text((columnacodigos - doc.getTextWidth('Coop. SIFIDOC:')) + doc.getTextWidth('fid:'), rengloncodigos + (inc_reng_codigos*4), 'Coop. SIFIDOC:' + $("#osifidoc").html());
-            doc.text((columnacodigos - doc.getTextWidth('Metros Frente:')) + doc.getTextWidth('fid:'), rengloncodigos + (inc_reng_codigos*5), 'Metros Frente:' + $("#mtsfte").html());
-            doc.text((columnacodigos - doc.getTextWidth('Costo x Mto.:')) + doc.getTextWidth('fid:'), rengloncodigos + (inc_reng_codigos*6), 'Costo x Mto.:' + $("#ctomtolineal").html());
+            doc.text((columnacodigos - doc.getTextWidth('Cuenta predial:')) + doc.getTextWidth('fid:'), rengloncodigos + (inc_reng_codigos * 3), 'Cuenta predial:' + $("#ctapredial").html());
+            doc.text((columnacodigos - doc.getTextWidth('Coop. SIFIDOC:')) + doc.getTextWidth('fid:'), rengloncodigos + (inc_reng_codigos * 4), 'Coop. SIFIDOC:' + $("#osifidoc").html());
+            doc.text((columnacodigos - doc.getTextWidth('Metros Frente:')) + doc.getTextWidth('fid:'), rengloncodigos + (inc_reng_codigos * 5), 'Metros Frente:' + $("#mtsfte").html());
+            doc.text((columnacodigos - doc.getTextWidth('Costo x Mto.:')) + doc.getTextWidth('fid:'), rengloncodigos + (inc_reng_codigos * 6), 'Costo x Mto.:' + $("#ctomtolineal").html());
 
-                       
+
             doc.setFontSize(8);
-            doc.text(18, rengloncodigos + (inc_reng_codigos*7), 'Impresión al día:'+ FechaHora())
+            doc.text(18, rengloncodigos + (inc_reng_codigos * 7), 'Impresión al día:' + FechaHora())
             doc.setLineWidth(.5);
             doc.line(18, rengloncodigos + 38, 195, rengloncodigos + 38); // horizontal line
             doc.setFontSize(12);
@@ -1067,9 +1145,9 @@
 
             doc.text('SUERTE PRINCIPAL:', ((195 / 8) * 2), rengloncodigos + 58, 'right');
             doc.text($("#suerteprinc").html(), ((195 / 8) * 3), rengloncodigos + 58, 'right');
-            
+
             doc.text('Incremento:', ((195 / 8) * 2), rengloncodigos + 62, 'right');
-            doc.text($("#incremento").html(), ((195 / 8) * 3), rengloncodigos + 62, 'right');           
+            doc.text($("#incremento").html(), ((195 / 8) * 3), rengloncodigos + 62, 'right');
 
 
             doc.text('Gastos Requerimiento:', ((195 / 8) * 2), rengloncodigos + 66, 'right');
@@ -1083,14 +1161,14 @@
 
             doc.text('Saldo parcial:', ((195 / 8) * 2), rengloncodigos + 78, 'right');
             doc.text($("#saldoparcial").html(), ((195 / 8) * 3), rengloncodigos + 78, 'right');
-            
+
             doc.text('Factor Act:', ((195 / 8) * 2), rengloncodigos + 82, 'right');
             doc.text($("#factoract").html(), ((195 / 8) * 3), rengloncodigos + 82, 'right');
             doc.text($("#periodoact").html(), ((195 / 8) * 6), rengloncodigos + 82, 'center');
 
             doc.text('Saldo Actualizado:', ((195 / 8) * 2), rengloncodigos + 86, 'right');
             doc.text($("#saldoact").html(), ((195 / 8) * 3), rengloncodigos + 86, 'right');
-            
+
             doc.text('Pagos desp. Act:', ((195 / 8) * 2), rengloncodigos + 90, 'right');
             doc.text($("#pagos_despues").html(), ((195 / 8) * 4), rengloncodigos + 90, 'right');
 
@@ -1099,10 +1177,10 @@
 
             doc.text('Recargos:', ((195 / 8) * 2), rengloncodigos + 98, 'right');
             doc.text($("#recargos").html(), ((195 / 8) * 3), rengloncodigos + 98, 'right');
-            
+
             doc.text('Total pagar:', ((195 / 8) * 2), rengloncodigos + 102, 'right');
             doc.text($("#totalpagar").html(), ((195 / 8) * 3), rengloncodigos + 102, 'right');
-            
+
             doc.text('Dctos. sobre recargos:', ((195 / 8) * 2), rengloncodigos + 106, 'right');
             doc.text($("#descuentos").html(), ((195 / 8) * 3), rengloncodigos + 106, 'right');
 
@@ -1116,14 +1194,14 @@
 
             doc.setLineWidth(.6);
             doc.line(18, rengloncodigos + 118, 195, rengloncodigos + 118); // horizontal line
-            
-            if ($("#datos").data("saldo_pagar")>1) { 
+
+            if ($("#datos").data("saldo_pagar") > 1) {
                 var img_publicidad = new Image();
                 img_publicidad.src = "../../imagenes/campana_161221.jpg";
                 doc.addImage(img_publicidad, 'png', 18, rengloncodigos + 120, 175, 35);
             }
 
-                       
+
 
 
 
@@ -1134,15 +1212,15 @@
             doc.text('Blvd. Juan José Torres Landa 1701', 18, 250, 'left');
             doc.text('Oriente Edificio B de Obras Públicas', 18, 253, 'left');
             doc.text('Col. El Tlacuache', 18, 256, 'left');
-            doc.text('C.P. 37480', 18,259, 'left');
-            doc.text('León Gto.', 18,262, 'left');
-            
+            doc.text('C.P. 37480', 18, 259, 'left');
+            doc.text('León Gto.', 18, 262, 'left');
+
             doc.text('Tel. Oficina: 477-470-86-15 al 18', 18, 265, 'left');
             doc.text('fidoc.leon.gob.mx', 18, 268, 'left');
 
             var img_facebook = new Image();
-            img_facebook.src = "../../imagenes/face.png";            
-            doc.addImage(img_facebook, 'png', 158, 240, 12, 8);  
+            img_facebook.src = "../../imagenes/face.png";
+            doc.addImage(img_facebook, 'png', 158, 240, 12, 8);
 
             var img_twitter = new Image();
             img_twitter.src = "../../imagenes/twitter.png";
@@ -1152,7 +1230,7 @@
             img_whatsapp.src = "../../imagenes/whatsapp.jpg";
             doc.addImage(img_whatsapp, 'jpg', 161, 260, 6, 6);
 
-            
+
             doc.text('facebook/fidocleon', 190, 245, 'right');
             doc.text('@fidocleon', 190, 253, 'right');
             doc.text('477-325-2586', 190, 263, 'right');
@@ -1177,7 +1255,7 @@
             img_logoadmon_21_24.src = "../../imagenes/admon2021_2024.png";
             doc.addImage(img_logoadmon_21_24, 'png', 145, 30, 50, 21);
 
-            doc.setFontSize(15);            
+            doc.setFontSize(15);
             doc.text('Ficha de liquidación', (195 / 2), 50, 'center');
             doc.text('de adeudo de pavimento', (195 / 2), 55, 'center');
 
@@ -1189,17 +1267,17 @@
             doc.line(18, 65, 195, 65); // horizontal line
             doc.setFontSize(8);
             doc.text(18, 63, 'Impresión al día:' + FechaHora());
-            
-            
+
+
 
             doc.setFontSize(11);
-            
+
             doc.text('Por medio de la presente el cooperador: ', 18, 75, 'left');
             doc.text($("#nomcoop").html(), (195 / 4 * 2), 82, 'center');
             doc.line((195 / 2) - (doc.getTextWidth($("#nomcoop").html()) / 2), 83, (195 / 2 + (doc.getTextWidth($("#nomcoop").html()) / 2)), 83); // horizontal line
             doc.text('identificado por la clave de cooperador:', 18, 93, 'left');
             doc.text('fid:' + $("#lblfid").html(), (192 / 4 * 2), 93, 'center');
-            doc.line((192 / 4 * 2) - (doc.getTextWidth('fid:' + $("#lblfid").html())/2), 94, (192 / 4 * 2) + (doc.getTextWidth('fid:' + $("#lblfid").html())/2), 94);
+            doc.line((192 / 4 * 2) - (doc.getTextWidth('fid:' + $("#lblfid").html()) / 2), 94, (192 / 4 * 2) + (doc.getTextWidth('fid:' + $("#lblfid").html()) / 2), 94);
             doc.text('coop_sifidoc:' + $("#osifidoc").html(), (192 / 4 * 3), 93, 'center');
             doc.line((192 / 4 * 3) - (doc.getTextWidth('coop_sifidoc:' + $("#osifidoc").html()) / 2), 94, (192 / 4 * 3) + (doc.getTextWidth('coop_sifidoc:' + $("#osifidoc").html()) / 2), 94);
 
@@ -1208,10 +1286,10 @@
                 plural: "PESOS",
                 singular: "PESO",
                 centPlural: "CENTAVOS",
-                centSingular: "CENTAVO" 
+                centSingular: "CENTAVO"
             });
-            
-            doc.line(18+doc.getTextWidth('acuerda pagar la cantidad de: '), 101,192, 101);
+
+            doc.line(18 + doc.getTextWidth('acuerda pagar la cantidad de: '), 101, 192, 101);
 
             doc.setFontSize(7);
             doc.text('(' + letrasnumero + ')', 192, 100, 'right');
@@ -1223,33 +1301,33 @@
             doc.text('Colonia: ' + $("#datos").data("colonia"), 18, 112, 'left');
             doc.line(18, 113, 192, 113);
 
-          
+
 
             var date = new Date();
-            var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);          
+            var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
             doc.text('antes de la  fecha: ' + GetLargeFecha(ultimoDia), 18, 118, 'left');
             doc.line(18 + doc.getTextWidth('antes de la  fecha: '), 119, 18 + doc.getTextWidth('antes de la  fecha: ') + doc.getTextWidth(GetLargeFecha(ultimoDia)), 119);
 
             doc.text(' de lo contrario el monto a pagar será actualizado.', 18 + doc.getTextWidth('antes de la  fecha: ') + doc.getTextWidth(GetLargeFecha(ultimoDia)), 118, 'left');
-            
-            
 
 
 
 
-                /*+ $("#nomcoop").html() + ' identificado como:' 
-            
-            var text2 = 'Por medio de la presente el cooperador: ' + $("#nomcoop").html() + ' identificado como:' 
-            clave: fid.' + objDescto.fid + '.sifidoc.' + objDescto.obrasifidoc + ' acuerda pagar la cantidad de: ' + $("#saldopagar").html() + ' por el beneficio de pavimento realizado al predio con un domicilio ubicado en la Calle: ' + $("#datos").data("calle") + ' , Colonia: ' + $("#datos").data("colonia") +' antes del día: ' + objDescto.fec_aplic_descto + ' de lo contrario el descuento no será aplicado y la cantidad a pagar se actualizará.';
-
-            doc.setLineWidth(.5);
-            doc.line(18, 160, 195, 160); // horizontal line
-
-            doc.text(text, 18, 130, { maxWidth: 170, align: "justify" });*/
 
 
-            
+            /*+ $("#nomcoop").html() + ' identificado como:' 
+        
+        var text2 = 'Por medio de la presente el cooperador: ' + $("#nomcoop").html() + ' identificado como:' 
+        clave: fid.' + objDescto.fid + '.sifidoc.' + objDescto.obrasifidoc + ' acuerda pagar la cantidad de: ' + $("#saldopagar").html() + ' por el beneficio de pavimento realizado al predio con un domicilio ubicado en la Calle: ' + $("#datos").data("calle") + ' , Colonia: ' + $("#datos").data("colonia") +' antes del día: ' + objDescto.fec_aplic_descto + ' de lo contrario el descuento no será aplicado y la cantidad a pagar se actualizará.';
+
+        doc.setLineWidth(.5);
+        doc.line(18, 160, 195, 160); // horizontal line
+
+        doc.text(text, 18, 130, { maxWidth: 170, align: "justify" });*/
+
+
+
 
 
             //////*******************      PIE DE PAGINA  **********************************//////////////////
@@ -1368,9 +1446,9 @@
             var factoract = k.Items[0].row[74]; //factor_act
             var descuentos = k.Items[0].row[75]; //descuentos
             var estatusconv = k.Items[0].row[76]; //estatus_convenio
-           
 
-            if (estatusconv==0) {  //****Revisa si el adeudo del frente esta convenido
+
+            if (estatusconv == 0) {  //****Revisa si el adeudo del frente esta convenido
 
                 var ctap = ctapredial.length;
                 if (ctap > 0 && ctap < 13) {
@@ -1518,31 +1596,31 @@
             }
         }
 
-        function trunc (x, posiciones) {
+        function trunc(x, posiciones) {
             var s = x.toString()
             var l = s.length
             var decimalLength = s.indexOf('.') + 1
 
-            if (l - decimalLength <= posiciones){
+            if (l - decimalLength <= posiciones) {
                 return x
             }
             // Parte decimal del número
-            var isNeg  = x < 0
-            var decimal =  x % 1
-            var entera  = isNeg ? Math.ceil(x) : Math.floor(x)
+            var isNeg = x < 0
+            var decimal = x % 1
+            var entera = isNeg ? Math.ceil(x) : Math.floor(x)
             // Parte decimal como número entero
             // Ejemplo: parte decimal = 0.77
             // decimalFormated = 0.77 * (10^posiciones)
             // si posiciones es 2 ==> 0.77 * 100
             // si posiciones es 3 ==> 0.77 * 1000
             var decimalFormated = Math.floor(
-              Math.abs(decimal) * Math.pow(10, posiciones)
+                Math.abs(decimal) * Math.pow(10, posiciones)
             )
             // Sustraemos del número original la parte decimal
             // y le sumamos la parte decimal que hemos formateado
-            var finalNum = entera + 
-              ((decimalFormated / Math.pow(10, posiciones))*(isNeg ? -1 : 1))
-  
+            var finalNum = entera +
+                ((decimalFormated / Math.pow(10, posiciones)) * (isNeg ? -1 : 1))
+
             return finalNum
         }
 
@@ -1552,7 +1630,7 @@
             //var recargos = parseFloat();
             var dctoporaplicar = trunc(descuento * recargos / 100, 2);
             $("#datos").data("dctoporaplicar", dctoporaplicar);
-            var nuevosaldo = total_pagar - dctoporaplicar;            
+            var nuevosaldo = total_pagar - dctoporaplicar;
             nuevosaldo = trunc(nuevosaldo, 2);
             $("#datos").data("nuevosaldo", nuevosaldo);
 
@@ -1562,11 +1640,11 @@
         }
 
         function ImprimirFichaPago(objDescto) { /*Inserta los registros de los descuento a aplicar*/
-            
+
 
             var stringData = JSON.stringify(objDescto);
             var monto_descto_recargo = objDescto.monto_descto;
-            
+
 
 
             GeneraFichaLiquidacionPago(objDescto);
@@ -1585,13 +1663,13 @@
                 .fail(function (x) {
                     alert("No fue posible registrar el descuento sobre recargos...");
                 }); */
-            }
-            
+        }
 
 
-               
-            
-        
+
+
+
+
 
         function GeneraDescuentoPorAplicar(stringData) {
 
@@ -1618,23 +1696,23 @@
         }
 
 
-        $(document).ready(function () {       
+        $(document).ready(function () {
 
-            $("#lbllugarfechahora").text(FechaHora());            
+            $("#lbllugarfechahora").text(FechaHora());
 
             var fid = recuperarParametro("fid");
             var idusu = recuperarParametro("idusu");
 
-            GetDatosFrente(fid,0)
-            .done(function (data) {                
-                var k = data.d;
-                MostrarDatosUsuario(idusu);
-                MostrarValoresFrente(k);
-            })
-            .fail(function (x) {
-                alert("No fue posible consultar los datos del cooperador...");
-            });
-                        
+            GetDatosFrente(fid, 0)
+                .done(function (data) {
+                    var k = data.d;
+                    MostrarDatosUsuario(idusu);
+                    MostrarValoresFrente(k);
+                })
+                .fail(function (x) {
+                    alert("No fue posible consultar los datos del cooperador...");
+                });
+
 
             $(".ubic_predio").click(function (e) { //Ver documento 
                 var pid = $("#lblpid").text();
@@ -1649,20 +1727,20 @@
                 window.close();
             });
 
-          
+
             $(".imprime_ficha_pago").click(function (e) { //Ver documento
-               
+
                 var fid = parseInt($("#lblfid").text());
-                var pid=parseInt($("#lblpid").text());
+                var pid = parseInt($("#lblpid").text());
                 var oid = parseInt($("#lbloid").text());
                 var obrasifidoc = $("#osifidoc").text();
                 var folio_pago = 0;
 
                 var porcentaje_descto = $("#txtdctomanual").val();
-                if (porcentaje_descto=='0') {
+                if (porcentaje_descto == '0') {
                     porcentaje_descto = 0;
-                }                                          
-                
+                }
+
                 var monto_saldo_pagar = $("#datos").data("nuevosaldo");
                 if (monto_saldo_pagar === undefined) {
                     monto_saldo_pagar = $("#datos").data("total_pagar");
@@ -1676,24 +1754,24 @@
                 var factor_act_pago = $("#datos").data("factor_act");
 
                 var today = new Date();
-                var fec_aplic_descto= FormatoFecha('01/01/1900');
+                var fec_aplic_descto = FormatoFecha('01/01/1900');
                 var fec_ofrece_descto = ConvertirCadenaToFecha(formatDate(today));
                 var recargos_pagados = 0;
                 var recargos_iniciales = $("#datos").data("recargos");
                 var fec_mov_as400 = FormatoFecha('01/01/1900');
 
-                               
+
                 var dias_espera_pago = 8;
                 var fec_dia_final_mes = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-                var fec_lim_pago = new Date();                
+                var fec_lim_pago = new Date();
                 fec_lim_pago.setDate(fec_dia_final_mes.getDate() + dias_espera_pago);
-                
+
                 var fec_lim_pago_cadena = ConvertirCadenaToFecha(formatDate(fec_lim_pago));
 
 
                 var usuario = parseInt(recuperarParametro("idusu"));
                 var estatus_descto = 0;  /*  1 = Aplicado  0= No Aplicado*/
-                 var accion = 'altadescto';
+                var accion = 'altadescto';
 
 
                 var enviarObj = {
@@ -1713,17 +1791,17 @@
                     "fec_mov_as400": fec_mov_as400,
                     "fec_lim_pago": fec_lim_pago_cadena,
                     "usuario": usuario,
-                    "estatus_descto":estatus_descto,
+                    "estatus_descto": estatus_descto,
                     "accion": accion
-                }             
+                }
 
                 ImprimirFichaPago(enviarObj);
-                
-            });
-            
 
-            
-            
+            });
+
+
+
+
 
             $(".dcto75").click(function (e) { //Se captura 75% de descuento
                 $("#txtdctomanual").val('75');
@@ -1748,26 +1826,29 @@
 
             $("#lbledocta").text('Estado de Cuenta');
         })
-   </script>
- </head>
- <body> 
-     
- </body>
- 
+    </script>
+</head>
+
+<body>
+
+</body>
+
 </html>
 <div id="datos"></div>
 <div id="bypassme"></div>
 <div id="edoctfte">
-      <table style="width:98%; height: 149px;">
+    <table style="width:98%; height: 149px;">
         <tr>
             <td class="auto-style304"></td>
             <td class="auto-style310">FIDEICOMISO DE OBRAS POR COOPERACIÓN<br />
                 <br class=" .auto-style301" />
-                Estado de cuenta de cooperador </td>
-            <td class="auto-style312"><img src="../../imagenes/logo_fidoc.jpeg" alt="Fideicomiso de Obras por Cooperación" style="width: 239px"/></td>
-        </tr>       
-      </table>
-      <table style="width:98%; height: 65px;">
+                Estado de cuenta de cooperador
+            </td>
+            <td class="auto-style312"><img src="../../imagenes/logo_fidoc.jpeg"
+                    alt="Fideicomiso de Obras por Cooperación" style="width: 239px" /></td>
+        </tr>
+    </table>
+    <table style="width:98%; height: 65px;">
         <tr>
             <td class="auto-style332">oid</td>
             <td class="auto-style332">pid</td>
@@ -1777,7 +1858,7 @@
             <td class="auto-style332">Ubicación</td>
             <td class="auto-style332">Usuario</td>
             <td class="auto-style526">Fecha de Impresión</td>
-        </tr>        
+        </tr>
         <tr>
             <td class="auto-style331"><label id="lbloid"></label></td>
             <td class="auto-style331"><label id="lblpid"></label></td>
@@ -1787,10 +1868,10 @@
             <td class="auto-style331"><a href="#" class="ubic_predio">>>></a></td>
             <td class="auto-style331"><label id="lblusuario"></label></td>
             <td class="auto-style527"><label id="lbllugarfechahora"></label></td>
-        </tr>      
-      </table>
+        </tr>
+    </table>
 
-        <table class="auto-style277">  
+    <table class="auto-style277">
         <tr>
             <td class="auto-style280" colspan="2"><label id="aviso"></label></td>
         </tr>
@@ -1819,8 +1900,8 @@
             <td class="auto-style313">Domicilio de Notificación:</td>
             <td class="auto-style275"><label id="domcoop"></label></td>
         </tr>
-        </table>
-        <table style="width: 1396px">
+    </table>
+    <table style="width: 1396px">
         <tr>
             <td class="auto-style273" colspan="7">DATOS DEL PREDIO</td>
         </tr>
@@ -1874,8 +1955,8 @@
             <td class="auto-style352" colspan="2">SAPAL:</td>
             <td class="auto-style275" colspan="2"><label id="sapal"></label></td>
         </tr>
-        </table>
-        <table style="width: 1395px; height: 168px;">
+    </table>
+    <table style="width: 1395px; height: 168px;">
         <tr>
             <td class="auto-style273" colspan="8">DATOS DE LA OBRA</td>
         </tr>
@@ -1929,31 +2010,31 @@
             <td class="auto-style382" colspan="2">Estatus de Obra:</td>
             <td class="auto-style275" colspan="2"><label id="estatusobra"></label></td>
         </tr>
-        </table>
-        <table style="width: 1395px; height: 129px;">
-            <tr>
+    </table>
+    <table style="width: 1395px; height: 129px;">
+        <tr>
             <td class="auto-style569" colspan="4">DATOS DEL FRENTE</td>
         </tr>
-            <tr>
+        <tr>
             <td class="auto-style318">Metros de Frente:</td>
             <td class="auto-style275"><label id="mtsfte"></label></td>
             <td class="auto-style317">Fecha de Notificación Determinante:</td>
             <td class="auto-style275"><label id="fecnotifdet"></label></td>
         </tr>
-            <tr>
+        <tr>
             <td class="auto-style318">Costo del metro lineal:</td>
             <td class="auto-style275"><label id="ctomtolineal"></label></td>
             <td class="auto-style317">Fecha de Noficación de Requerimiento:</td>
             <td class="auto-style275"><label id="fecnotifreq"></label></td>
         </tr>
-            <tr>
+        <tr>
             <td class="auto-style318">Programa</td>
             <td class="auto-style275"><label id="programa"></label></td>
             <td class="auto-style317">Fecha de Notificación de Ejecución:</td>
             <td class="auto-style275"><label id="fecnotifejec"></label></td>
         </tr>
-            </table>
-        <table style="width: 1395px">
+    </table>
+    <table style="width: 1395px">
         <tr>
             <td class="auto-style273" colspan="5">DETALLE FINANCIERO</td>
         </tr>
@@ -2053,70 +2134,69 @@
             <td class="auto-style439"></td>
             <td class="auto-style440"></td>
         </tr>
-        </table>
-        <table style="width: 1395px; height: 31px;">
-          <tr>
-             <td class="auto-style274">SALDO TOTAL A PAGAR: </td>
-             <td class="auto-style512"><label id="saldopagar"></label></td>
-        </tr>
-        </table>
-        <table style="width: 1395px; height: 45px">
+    </table>
+    <table style="width: 1395px; height: 31px;">
         <tr>
-         <td class="auto-style529"></td>
-         <td class="auto-style533"></td>
-         <td class="auto-style535"></td>
-         <td class="auto-style531"></td>
-         <td class="auto-style531"></td>
-         <td class="auto-style574"></td>
-         <td class="auto-style524"></td>
-         <td class="auto-style517"></td>
+            <td class="auto-style274">SALDO TOTAL A PAGAR: </td>
+            <td class="auto-style512"><label id="saldopagar"></label></td>
         </tr>
+    </table>
+    <table style="width: 1395px; height: 45px">
         <tr>
-         <td class="auto-style528"></td>
-         <td class="auto-style532"></td>
-         <td class="auto-style534"></td>
-         <td class="auto-style530"></td>
-         <td class="auto-style530"></td>
-         <td class="auto-style510"></td>
-         <td class="auto-style525">Descuento por aplicar</td>
-         <td class="auto-style516">Saldo Total a Pagar =&nbsp; Total a Pagar - Descuento por aplicar </td>
+            <td class="auto-style529"></td>
+            <td class="auto-style533"></td>
+            <td class="auto-style535"></td>
+            <td class="auto-style531"></td>
+            <td class="auto-style531"></td>
+            <td class="auto-style574"></td>
+            <td class="auto-style524"></td>
+            <td class="auto-style517"></td>
         </tr>
         <tr>
-         <td class="auto-style529"><a href="#" class="dcto75"><label id="lbldcto75"></label></a></td>
-         <td class="auto-style533"><a href="#" class="dcto50"><label id="lbldcto50"></label></a></td>
-         <td class="auto-style535"><a href="#" class="dcto25"><label id="lbldcto25"></label></a></td>
-         <td class="auto-style531"><a href="#" class="dcto15"><label id="lbldcto15"></label></a></td>
-         <td class="auto-style531"><a href="#" class="dcto10"><label id="lbldcto10"></label></a></td>
-         <td class="auto-style504"><input type="number" id="txtdctomanual" min="1" max="75"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); if (this.value > 75) this.value = 75; calculadescuentoporaplicar(this.value) " maxLength="3"/> % &nbsp;&nbsp;&nbsp;</td>
-         <td class="auto-style319"><label id="lbldctoporaplicar"></label> </td>
-         <td class="auto-style319"><label id="lbloperacion"></label></td>
-        </tr>        
-        </table>
-        
+            <td class="auto-style528"></td>
+            <td class="auto-style532"></td>
+            <td class="auto-style534"></td>
+            <td class="auto-style530"></td>
+            <td class="auto-style530"></td>
+            <td class="auto-style510"></td>
+            <td class="auto-style525">Descuento por aplicar</td>
+            <td class="auto-style516">Saldo Total a Pagar =&nbsp; Total a Pagar - Descuento por aplicar </td>
+        </tr>
+        <tr>
+            <td class="auto-style529"><a href="#" class="dcto75"><label id="lbldcto75"></label></a></td>
+            <td class="auto-style533"><a href="#" class="dcto50"><label id="lbldcto50"></label></a></td>
+            <td class="auto-style535"><a href="#" class="dcto25"><label id="lbldcto25"></label></a></td>
+            <td class="auto-style531"><a href="#" class="dcto15"><label id="lbldcto15"></label></a></td>
+            <td class="auto-style531"><a href="#" class="dcto10"><label id="lbldcto10"></label></a></td>
+            <td class="auto-style504"><input type="number" id="txtdctomanual" min="1" max="75"
+                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); if (this.value > 75) this.value = 75; calculadescuentoporaplicar(this.value) "
+                    maxLength="3" /> % &nbsp;&nbsp;&nbsp;</td>
+            <td class="auto-style319"><label id="lbldctoporaplicar"></label> </td>
+            <td class="auto-style319"><label id="lbloperacion"></label></td>
+        </tr>
+    </table>
+
 </div>
 
-        <table style="width: 1396px; height: 78px">
-        <tr>
-         <td class="auto-style546"></td>
-         <td class="auto-style546"></td>
-         <td class="auto-style546"></td>
-         <td class="auto-style546"></td>
-         <td class="auto-style546"></td>
-         <td class="auto-style546"><a href="#" class="imprime_edo_cta"><label id="lbledocta"></label></a></td>
-         <td class="auto-style546"><a href="#" class="imprime_ficha_pago"><label id="lblimprimirficha"></label></a></td>
-         <td class="auto-style546"><a href="#" class="regresar"><label id="lblregresar"></label></a></td>            
-        </tr>        
-        <tr>
-         <td class="auto-style562"></td>
-         <td class="auto-style564"></td>
-         <td class="auto-style566"></td>
-         <td class="auto-style551"></td>
-         <td class="auto-style557"></td>
-         <td class="auto-style568"></td>
-         <td class="auto-style547"></td>
-         <td class="auto-style543"></td>            
-        </tr>        
-        </table>
-        
-
-
+<table style="width: 1396px; height: 78px">
+    <tr>
+        <td class="auto-style546"></td>
+        <td class="auto-style546"></td>
+        <td class="auto-style546"></td>
+        <td class="auto-style546"></td>
+        <td class="auto-style546"></td>
+        <td class="auto-style546"><a href="#" class="imprime_edo_cta"><label id="lbledocta"></label></a></td>
+        <td class="auto-style546"><a href="#" class="imprime_ficha_pago"><label id="lblimprimirficha"></label></a></td>
+        <td class="auto-style546"><a href="#" class="regresar"><label id="lblregresar"></label></a></td>
+    </tr>
+    <tr>
+        <td class="auto-style562"></td>
+        <td class="auto-style564"></td>
+        <td class="auto-style566"></td>
+        <td class="auto-style551"></td>
+        <td class="auto-style557"></td>
+        <td class="auto-style568"></td>
+        <td class="auto-style547"></td>
+        <td class="auto-style543"></td>
+    </tr>
+</table>
