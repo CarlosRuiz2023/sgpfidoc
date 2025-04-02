@@ -5202,7 +5202,9 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     if (parseInt(idcoop) == 0) {
                         var msgresultCoop = r.d;
                         var msgresultCoop = msgresultCoop.split(":");
+                        // Aqui se obtiene el midcoop de la insercion correspondiente
                         idcoop = parseInt(msgresultCoop[1]);
+                        console.log("midcoop: "+idcoop);
                         objFrente.cid = idcoop;
                     }
 
@@ -5215,6 +5217,42 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                             AccionFrente(objFrente)
                                 .done(function (r) {
                                     mensaje = r.d;
+                                    console.log(r.d);
+                                    arr_mensaje = mensaje.split(":");
+                                    fid = arr_mensaje[1];
+                                    coopid = arr_mensaje[2];
+                                    console.log("Fid: "+fid);
+                                    console.log("Coopid: "+coopid);
+                                    console.log("Pid: "+objFrente.pid);
+                                    console.log("obr_clv_int: "+objFrente.obr_clv_int);
+                                    console.log("obrafidoc: "+objFrente.obrafidoc);
+                                    // Construir el objeto de datos correctamente
+                                    let data_WS_obra = {
+                                        pPageSize: 20,
+                                        pCurrentPage: 1,
+                                        pSortColumn: "b.obr_clv_int", // Asumo que es una cadena
+                                        pSortOrder: "asc", // Asumo que es una cadena
+                                        pFiltro: ",,," + objFrente.obr_clv_int + "," // Construir la cadena de filtro
+                                    };
+
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: "../../WebServices/WebServiceObras.asmx/GetObra_psql",
+                                        data: JSON.stringify(data_WS_obra), // Convertir el objeto a JSON
+                                        contentType: 'application/json; utf-8',
+                                        dataType: 'json',
+                                        success: function (data) {
+                                            if (data.d != null) {
+                                                //console.log(data.d.Items[0].id);
+                                                console.log(data.d.Items[0].row);
+                                                console.log(data.d.Items[0].row[46]);
+                                            }
+                                        },
+                                        error: function (responseText, textStatus, errorThrown) {
+                                            alert(textStatus + responseText + errorThrown);
+                                        }
+                                    });
+
                                     /*arr_mensaje = mensaje.split(":");
                                     objCoopAccess.coo_clv1 = arr_mensaje[2];
                                     objCoopAccess.coo_clv = objCoopAccess.coo_obr + objCoopAccess.coo_clv1;
@@ -5490,7 +5528,7 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
             dataType: 'json',
             sucess: function (data) {
                 if (data.d != null) {
-                    console.log("Se guardo el cooperador correctamente")
+                    console.log(data.d);
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {

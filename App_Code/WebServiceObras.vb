@@ -29,11 +29,6 @@ Public Class WebServiceObras
         Dim recordcount As Integer
         Dim currentpage As Integer
 
-        Console.WriteLine("Prueba")
-
-
-
-
         Using con As New NpgsqlConnection(constr)
             Using cmd As New NpgsqlCommand("public2.sp_obra_grid3", con)
                 cmd.CommandType = CommandType.StoredProcedure
@@ -650,7 +645,6 @@ Public Class WebServiceObras
                 Dim par_obr_clv_txt As NpgsqlParameter = New NpgsqlParameter("@obr_clv_out", NpgsqlTypes.NpgsqlDbType.Integer, 36) ' .Value = Space(1000)
                 par_obr_clv_txt.Direction = ParameterDirection.Output
 
-
                 cmd.Parameters.Add(parIdError)
                 cmd.Parameters.Add(parDesError)
                 cmd.Parameters.Add(par_obr_clv_int)
@@ -660,7 +654,9 @@ Public Class WebServiceObras
                 con.Open()
                 cmd.ExecuteNonQuery()
                 obr_clv_int = cmd.Parameters("@obr_clv_int_out").Value()
+                System.Diagnostics.Debug.WriteLine("obr_clv_int :" + obr_clv_int.ToString())
                 obr_clv_txt = cmd.Parameters("@obr_clv_out").Value()
+                System.Diagnostics.Debug.WriteLine("obr_clv_txt :" + obr_clv_txt.ToString())
                 numerror = cmd.Parameters("@noerror").Value()
                 messerror = cmd.Parameters("@descerror").Value()
                 con.Close()
@@ -672,7 +668,7 @@ Public Class WebServiceObras
             If numerror > 0 Then
                 Return messerror & ":0"
             Else
-                Return "Accion ejecutada correctamente:" & obr_clv_int.ToString & ":" & obr_clv_txt
+                Return "Accion ejecutada correctamente:" & obr_clv_int.ToString() & ":" & obr_clv_txt.ToString()
             End If
         Catch ex As SqlException
             Return ex.Message & "No.Error:" & numerror.ToString() & "Mensaje error:" & messerror

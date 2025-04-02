@@ -62,7 +62,7 @@ Public Class WebServicePagos
     End Function
 
 
-    <WebMethod(Description:="ACTUALIZAR PAGOS")> _
+    <WebMethod(Description:="ACTUALIZAR PAGOS")>
     <ScriptMethod(ResponseFormat:=ResponseFormat.Json, XmlSerializeString:=True)>
     Public Function GetActPagosAS400(fec_inicial As String, fec_final As String) As String
 
@@ -98,6 +98,9 @@ Public Class WebServicePagos
                 pagos_json = pagos_json.Replace("Ã\u001", "Ñ")
                 pagos_json = pagos_json.Replace("Ã\u0081", "")
                 pagos_json = pagos_json.Trim()
+
+                ' Agrega esto para ver el JSON en la ventana de salida
+                System.Diagnostics.Debug.WriteLine("JSON Retornado: " & pagos_json)
             Else
                 pagos_json = ""
             End If
@@ -139,6 +142,26 @@ Public Class WebServicePagos
 
                             'Dim a = "insert into public2.pagos_tesoreria (cooperador,nombre,fecha,importe,letrarecibo) values ('" + coop_s + "','" + nombre + "','" + fec_as400 + "'," + importe + ",'" + recibo + "');"
                             'cmd.CommandText = "insert into public2.pagos_tesoreria (cooperador,nombre,fecha,importe,letrarecibo) values ('" + coop_s + "','" + nombre + "','" + fec_as400 + "'," + importe + ",'" + recibo + "');"
+
+                            System.Diagnostics.Debug.WriteLine("coop_s: " & coop_s)
+                            System.Diagnostics.Debug.WriteLine("obra_s: " & obra_s)
+                            System.Diagnostics.Debug.WriteLine("year_fec_as400_txt: " & year_fec_as400_txt)
+                            System.Diagnostics.Debug.WriteLine("mes_fec_as400_txt: " & mes_fec_as400_txt)
+                            System.Diagnostics.Debug.WriteLine("dia_fec_as400_txt: " & dia_fec_as400_txt)
+                            System.Diagnostics.Debug.WriteLine("fec_as400: " & fec_as400)
+                            System.Diagnostics.Debug.WriteLine("usu_fidoc: " & usu_fidoc)
+                            System.Diagnostics.Debug.WriteLine("importe: " & importe)
+                            System.Diagnostics.Debug.WriteLine("tipo_mov: " & tipo_mov)
+                            System.Diagnostics.Debug.WriteLine("obra_coop_s: " & obra_coop_s)
+                            System.Diagnostics.Debug.WriteLine("fid: " & fid)
+                            System.Diagnostics.Debug.WriteLine("usucre: " & usucre)
+                            System.Diagnostics.Debug.WriteLine("p2_recibo: " & p2_recibo)
+                            System.Diagnostics.Debug.WriteLine("recibo: " & recibo)
+                            System.Diagnostics.Debug.WriteLine("obr_clv_int: " & obr_clv_int)
+                            System.Diagnostics.Debug.WriteLine("mov_activo: " & mov_activo)
+                            System.Diagnostics.Debug.WriteLine("nombre: " & nombre)
+                            System.Diagnostics.Debug.WriteLine("elemento: " & elemento)
+
                             cmd.CommandText = "insert into public2.pagos_temp (elemento,mov_obra_sifidoc,mov_coop_sifidoc,fec_mov_as400,usu_fidoc,monto_abono_sifidoc,tipo_mov_sifidoc,fec_aplic_mov,clave_sifidoc,fid,usucre,folio_pago,coo_clv2,obr_clv_int,mov_activo) values ('" + elemento + "','" + obra_s + "','" + coop_s + "','" + fec_as400 + "','" + usu_fidoc + "'," + importe + "," + tipo_mov + ",'" + fec_as400 + "','" + obra_coop_s + "'," + fid + ",'" + usucre + "','" + recibo + "'," + coop_s + "," + obr_clv_int + "," + mov_activo + ");"
                             cmd.ExecuteNonQuery()
                         Next
@@ -178,6 +201,40 @@ Public Class WebServicePagos
 
         End Try
 
+    End Function
+
+    <WebMethod(Description:="OBTENER PAGOS")>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json, XmlSerializeString:=True)>
+    Public Function GetPagosAS400(fec_inicial As String, fec_final As String) As String
+        Dim pagos_json As String = ""
+        Dim conn As New OdbcConnection("DSN=QDSN_LEON;UID=CFUENTES;PWD=Fidoc_7;LONGDATACOMPAT=1;")
+        Try
+            conn.Open()
+            Dim command As New OdbcCommand("SELECT CLOB(LCSFIDOC.FNC_PAGOS_FIDOC(" & fec_inicial & "," & fec_final & ")) AS PAGOS FROM sysibm.sysdummy1", conn)
+            command.Prepare()
+            command.CommandTimeout = 0
+            Dim odbc_dbLector As OdbcDataReader = command.ExecuteReader()
+
+            If odbc_dbLector.Read() Then
+                pagos_json = odbc_dbLector.GetValue(0).ToString()
+                pagos_json = pagos_json.Replace("\u0000", "").Replace("Ã\u001", "Ñ").Replace("Ã\u0081", "").Trim()
+            End If
+
+            odbc_dbLector.Close()
+            command.Dispose()
+            conn.Close()
+        Catch ex As Exception
+            Return JsonConvert.SerializeObject(New With {.Error = New With {.Id = 1, .Descripcion = ex.Message}})
+        End Try
+
+        If String.IsNullOrEmpty(pagos_json) Then
+            Return JsonConvert.SerializeObject(New With {.Error = New With {.Id = 0, .Descripcion = "No se encontraron pagos"}})
+        End If
+
+        'Dim objeto As JQGridJsonResponsePagos = New JQGridJsonResponsePagos
+        'objeto.JQGridJsonResponsePagos(pagos_json)
+        'Return objeto
+        Return pagos_json
     End Function
 
 

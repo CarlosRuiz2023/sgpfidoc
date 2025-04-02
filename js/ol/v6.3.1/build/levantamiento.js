@@ -1891,6 +1891,7 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
 
 
     function InsertarCoop(idcoop, apaterno, amaterno, nombres, callecoop, colcoop, nooficialext, nooficialint, telcoop, nomficha, estado, pais, domcoop, email, sifidoc, usuario, hoy, usuario, hoy, curp, relpred, secfno, sscfno, cvecalle, ine, nomarchivo,accion) { /*Inserta los registros de los documentos en la tabla de mDocumento*/
+        //TODO:
         var enviarObj = {
             "idcoop": idcoop,
             "apellidoP": apaterno,

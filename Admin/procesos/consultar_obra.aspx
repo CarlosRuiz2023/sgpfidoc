@@ -2316,6 +2316,7 @@
     function CancelarObra_psql(objObra) {
 
         var stringData = JSON.stringify(objObra);
+        //TODO:
         return $.ajax({
             type: 'POST',
             url: "../../WebServices/WebServiceObras.asmx/RegObra_PostgresSql",
@@ -3220,6 +3221,7 @@
         function RegistrarObrTerm_psql(objObraTerm) {
 
             var stringData = JSON.stringify(objObraTerm);
+            //TODO:
             return $.ajax({
                 type: 'POST',
                 url: "../../WebServices/WebServiceObras.asmx/RegObra_PostgresSql",
@@ -3388,6 +3390,8 @@
 
 
             var stringData = JSON.stringify(enviarObj);
+            //TODO: 
+            //alert(enviarObj);
             return $.ajax({
                 type: 'POST',
                 url: "../../WebServices/WebServiceObras.asmx/RegObra_PostgresSql",
@@ -3397,6 +3401,33 @@
                 success: function (data) {
                     if (data.d != null) {
                         console.log(data.d);
+                        let partes = data.d.split(':');
+                        let obr_clv = partes[2]; // El "736" está en el segundo elemento (índice 1)
+                        // Construir el objeto de datos correctamente
+                        let segundaPeticionData = {
+                            pPageSize: 20,
+                            pCurrentPage: 1,
+                            pSortColumn: "b.obr_clv_int", // Asumo que es una cadena
+                            pSortOrder: "asc", // Asumo que es una cadena
+                            pFiltro: ",,," + obr_clv + "," // Construir la cadena de filtro
+                        };
+
+                        $.ajax({
+                            type: 'POST',
+                            url: "../../WebServices/WebServiceObras.asmx/GetObra_psql",
+                            data: JSON.stringify(segundaPeticionData), // Convertir el objeto a JSON
+                            contentType: 'application/json; utf-8',
+                            dataType: 'json',
+                            success: function (data) {
+                                if (data.d != null) {
+                                    console.log(data.d.Items[0].id);
+                                    console.log(data.d.Items[0].row);
+                                }
+                            },
+                            error: function (responseText, textStatus, errorThrown) {
+                                alert(textStatus + responseText + errorThrown);
+                            }
+                        });
                     }
                 },
                 error: function (responseText, textStatus, errorThrown) {

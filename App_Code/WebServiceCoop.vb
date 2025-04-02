@@ -182,7 +182,7 @@ Public Class WebServiceCoop
             End Using
         End Using
         Try
-            Return "Accion ejecutada correctamente:" & idcoopx.ToString
+            Return "Accion ejecutada correctamente:" & idcoopx.ToString()
         Catch ex As SqlException
             Return ex.Message & "No.Error:" & numerror.ToString() & "Mensaje error:" & messerror
         End Try

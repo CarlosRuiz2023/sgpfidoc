@@ -20,6 +20,7 @@ Public Class WebServiceFrente
     Public Function ActFrente(objFrente As clsFrente) As String
         Dim constr As String = ConfigurationManager.ConnectionStrings("cf5").ConnectionString
         Dim fidx As Integer = 0
+        Dim pidx As Integer = 0
         Dim coopidx As String = Nothing
         Dim numerror As Integer = 0
         Dim messerror As String = Nothing
@@ -77,7 +78,7 @@ Public Class WebServiceFrente
             End Using
         End Using
         Try
-            Return "Registro de frente guardado:" + fidx.ToString + ":" + coopidx
+            Return "Registro de frente guardado:" + fidx.ToString() + ":" + coopidx.ToString()+ ":"+pidx.ToString()
         Catch ex As Exception
             Return "Error " & ex.Message
         End Try
