@@ -13,7 +13,7 @@
     End Property
 #End Region
 
-    Public Sub JQGridJsonResponseTipoAsamblea( pagos_list As List(Of clsPago))
+    Public Sub JQGridJsonResponseTipoAsamblea(pagos_list As List(Of clsPago))
         _items = New List(Of JQGridItem)
         Dim pago As clsPago = New clsPago()
 
@@ -34,7 +34,7 @@
                                                         pago.Obr_clv_int,
                                                         pago.Mov_activo,
                                                         pago.Nombre,
-                                                        pago.Elemento                                                         })
+                                                        pago.Elemento})
             _items.Add(objeto)
         Next
     End Sub

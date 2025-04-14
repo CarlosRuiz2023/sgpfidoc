@@ -78,7 +78,7 @@ Public Class WebServiceFrente
             End Using
         End Using
         Try
-            Return "Registro de frente guardado:" + fidx.ToString() + ":" + coopidx.ToString()+ ":"+pidx.ToString()
+            Return "Registro de frente guardado:" + fidx.ToString() + ":" + coopidx.ToString() + ":" + pidx.ToString()
         Catch ex As Exception
             Return "Error " & ex.Message
         End Try

@@ -1,4 +1,7 @@
 ﻿// Global/config.js
-var geoserverConfig = {
-    host: 'http://localhost:8080'
+const geoserverConfig = {
+    host: 'http://localhost:8080',
+    fidoc_ws: 'http://localhost:3000'
 };
+
+export default geoserverConfig;

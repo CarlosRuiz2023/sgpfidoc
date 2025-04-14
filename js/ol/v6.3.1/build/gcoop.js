@@ -1,5 +1,4 @@
-﻿
-/*Variables globales*/
+﻿import geoserverConfig from "../../../../Global/config";
 var accion = 'infcoop';
 var draw, select = null;
 
