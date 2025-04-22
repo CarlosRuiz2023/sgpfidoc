@@ -88,7 +88,7 @@
    <link type="text/css" rel="stylesheet" href="../css/cupertino/jquery-ui-1.7.2.custom.css" />
    <link type="text/css" rel="stylesheet" href="../css/cupertino/ui.jqgrid.css" />
    <link rel="stylesheet" href="../js/ol/v6.3.1/css/ol.css" type="text/css"/>
-   <script src="../../Global/config.js"></script>   
+   <!--script src="../../Global/config.js"></!--script-->   
     
     <script type="text/javascript">
         function recuperarParametro(campo) {
@@ -370,28 +370,28 @@
             var vectorsourceFrente = new ol.source.Vector({
                 format: new ol.format.GeoJSON(),
                 url: function (extent) {
-                    return geoserverConfig.host +'/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_frentes_salida1&outputFormat=application%2Fjson&CQL_FILTER=pid=' + pid_entrada
+                    return 'http://localhost:8080/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_frentes_salida1&outputFormat=application%2Fjson&CQL_FILTER=pid=' + pid_entrada
                 }
             });
 
             var vectorsourcePredioComp = new ol.source.Vector({
                 format: new ol.format.GeoJSON(),
                 url: function (extent) {
-                    return geoserverConfig.host +'/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_frentes_salida2&outputFormat=application%2Fjson&CQL_FILTER=oid=' + oid_entrada
+                    return 'http://localhost:8080/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_frentes_salida2&outputFormat=application%2Fjson&CQL_FILTER=oid=' + oid_entrada
                 }
             });
 
             var vectorsourceObra = new ol.source.Vector({
                 format: new ol.format.GeoJSON(),
                 url: function (extent) {
-                    return geoserverConfig.host +'/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_frentes_salida1&outputFormat=application%2Fjson&CQL_FILTER=pid=' + pid_entrada
+                    return 'http://localhost:8080/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_frentes_salida1&outputFormat=application%2Fjson&CQL_FILTER=pid=' + pid_entrada
                 }
             });
             
             var vectorsourcePredio = new ol.source.Vector({
                 format: new ol.format.GeoJSON(),
                 url: function (extent) {
-                    return geoserverConfig.host +'/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_frentes_salida1&outputFormat=application%2Fjson&CQL_FILTER=pid=' + pid_entrada
+                    return 'http://localhost:8080/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_frentes_salida1&outputFormat=application%2Fjson&CQL_FILTER=pid=' + pid_entrada
                 }
             });
 

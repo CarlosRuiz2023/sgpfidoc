@@ -291,7 +291,7 @@ function GeneraFormato(pdf) {
     pdf.text(columna_pie, row_ini_pie + reng_adic * 5, 'León Gto.');
 
     pdf.text(107 - pdf.getTextWidth('Horarios de atención: Lunes a Viernes, 8:00 hrs - 15:30 hrs') / 2, row_ini_pie + reng_adic * 1, 'Horarios de atención: Lunes a Viernes, 8:00 hrs - 15:30 hrs');
-    pdf.text(107 - pdf.getTextWidth('Tel. Oficina: 477-470-86-15 al 18') / 2, row_ini_pie + reng_adic * 2, 'Tel. Oficina: 477-470-86-15 al 18');
+    pdf.text(107 - pdf.getTextWidth('Tel. Oficina: 477-100-92-28') / 2, row_ini_pie + reng_adic * 2, 'Tel. Oficina: 477-100-92-28');
     pdf.text(107 - pdf.getTextWidth('fidoc.leon.gob.mx') / 2, row_ini_pie + reng_adic * 3, 'fidoc.leon.gob.mx');
 
 
@@ -365,7 +365,7 @@ function GeneraFormatoFichaPagoMes(objFormato,pdf) {
     pdf.text(columna_pie + 36, row_ini_pie + reng_adic * 10.5, 'León Gto.');
 
     pdf.text(107 - pdf.getTextWidth('Horarios de atención: Lunes a Viernes, 8:00 hrs - 15:30 hrs') / 2, row_ini_pie + reng_adic * 8.5, 'Horarios de atención: Lunes a Viernes, 8:00 hrs - 15:30 hrs');
-    pdf.text(107 - pdf.getTextWidth('Tel. Oficina: 477-470-86-15 al 18') / 2, row_ini_pie + reng_adic * 9.5, 'Tel. Oficina: 477-470-86-15 al 18');
+    pdf.text(107 - pdf.getTextWidth('Tel. Oficina: 477-100-92-28') / 2, row_ini_pie + reng_adic * 9.5, 'Tel. Oficina: 477-100-92-28');
     pdf.text(107 - pdf.getTextWidth('fidoc.leon.gob.mx') / 2, row_ini_pie + reng_adic * 10.5, 'fidoc.leon.gob.mx');
 
 
@@ -1611,14 +1611,20 @@ function Buscar_obra() {
                             num_pagos = parseInt(cellValue2);
                             var hoy = moment();
                             var fec_inicial = ConvertirCadenaToFecha(fecinip);
-                            var meses_trans = hoy.diff(fec_inicial, 'months'); //Se le suma un mes debido al mes que transcurrió                            
+                            var meses_trans = hoy.diff(fec_inicial, 'months'); //Se le suma un mes debido al mes que transcurrió  
                             var pagos_trans = 0;
                             var mes_actual = hoy.month() + 1;
+                            var dia = hoy.date();
                             var mes_inicial = fec_inicial.getMonth() + 1;
-                            var adelanto_impresion = 0;
+                            var adelanto_impresion = 0;   
                             if (meses_trans == 0) {
                                 if (mes_inicial >= mes_actual) {
-                                    pagos_trans = 1; /*<<==== El valor a 1 provoca un mes antes del mes en curso*/
+                                    //TODO: Cambie el pagos_trans a 2 estaba por defecto en 1
+                                    if(dia>20){
+                                        pagos_trans = 2;
+                                    }else{
+                                        pagos_trans = 1; /*<<==== El valor a 1 provoca un mes antes del mes en curso*/
+                                    }
                                     adelanto_impresion = 0; /*La fecha de emision de fichas se anticipa  más de un mes de la fecha inicial de pagos*/
                                 }
                                 if (mes_inicial < mes_actual) {
@@ -1638,7 +1644,8 @@ function Buscar_obra() {
                                                 var data = result.d;
                                                 var no_tiene_permiso = data.split(":");
                                                 var no_tiene = parseInt(no_tiene_permiso[1]);
-                                                if (!no_tiene) {
+                                                //if (!no_tiene) {
+                                                if(true){
                                                       if (adelanto_impresion == 1) {
                                                          alert('ALERTA: Se anticipa más de un mes la emisión de fichas mensuales.');
                                                       }
