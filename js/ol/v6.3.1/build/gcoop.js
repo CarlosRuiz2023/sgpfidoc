@@ -1,13 +1,14 @@
-﻿import geoserverConfig from "../../../../Global/config";
+﻿
+/*Variables globales*/
 var accion = 'infcoop';
 var draw, select = null;
 
 
 /*Funcion para llamar una pagina*/
 
-function GenerarSolicitud(idusu, idasunto, fid, pid, obr_clv_int, oid, cid) {
+function GenerarSolicitud(idusu,idasunto,fid,pid,obr_clv_int,oid,cid) {
     //alert(img);
-    var url1 = "../../Procesos/salida_solicitud_asunto.html?ResponseType=Edit&idusu=" + idusu + "&idasunto=" + idasunto + "&fid=" + fid + "&pid=" + pid + "&obr_clv_int" + obr_clv_int + "&oid=" + oid + "&cid=" + cid;
+    var url1 = "../Procesos/salida_solicitud_asunto.html?ResponseType=Edit&idusu=" + idusu + "&idasunto=" + idasunto + "&fid=" + fid + "&pid=" + pid + "&obr_clv_int" + obr_clv_int + "&oid=" + oid + "&cid=" + cid;
     newWindow = window.open(url1, "_blank", "top=150,left=200,menubar=no,toolbar=no,location=no, resizable=no,height=780,width=1600,status=no,scrollbars=yes,minimizable=no,maxmizable=no,resizable=0,titlebar=no,modal=yes");
     if (newWindow.focus()) {
         newWindow.focus()
@@ -216,11 +217,11 @@ function validarcoop() {
 
 function ValidacionGuardadoArchivo(archivo, nomarchivo) {
     GuardarArchivo(archivo, nomarchivo)
-        .done(function (result) {
-            console.log("Archivo " + nomarchivo + " guardado correctamente");
-        }).fail(function (result) {
-            alert("No fue posible guardar archivo de documento de identificación");
-        });
+    .done(function (result) {
+        console.log("Archivo " + nomarchivo + " guardado correctamente");
+    }).fail(function (result) {
+        alert("No fue posible guardar archivo de documento de identificación");
+    });
 }
 
 
@@ -235,7 +236,7 @@ function GuardarArchivo(archivo, nomarchivo) {
 
     return $.ajax({
         type: "POST",
-        url: "../../WebServices/WebServiceFileUpload.asmx/GuardarArchivo",
+        url: "http://192.1.126.122/fidoc/WebServices/WebServiceFileUpload.asmx/GuardarArchivo",
         contentType: false,
         processData: false,
         data: formdata
@@ -252,7 +253,7 @@ function ConsultarPredio(ctapredial) {
         type: "POST",
         dataType: "json",
         contentType: "application/json",
-        url: "../../WebServices/WebServicePredio.asmx/GetNumPredio",
+        url: "http://192.1.126.122/fidoc/WebServices/WebServicePredio.asmx/GetNumPredio",
         data: "{'ctapredial':'" + ctapredial + "'}"
     });
 }
@@ -260,7 +261,7 @@ function ConsultarPredio(ctapredial) {
 
 
 function leerArchivo(nom_archivo) {
-    var url = "../../temp/" + nom_archivo;
+    var url = "../temp/" + nom_archivo;
     window.open(url, '_blank', 'toolbar=0');
 }
 
@@ -301,7 +302,7 @@ function llenarNombresCoops(cidcoop, accionx) {
         type: 'POST',
         dataType: 'json',
         contentType: 'application/json; utf-8',
-        url: "../../WebServices/WebServiceCoop.asmx/Getcoop",
+        url: "http://192.1.126.122/fidoc/WebServices/WebServiceCoop.asmx/Getcoop",
         data: "{objCoop:" + stringData + "}",
         success: function (data) {
             var elementos = 0;
@@ -334,7 +335,7 @@ function ConsultaObrasS(oid, accion) {
         type: "POST",
         dataType: "json",
         contentType: "application/json",
-        url: "../../WebServices/WebServiceObras.asmx/GetObrasifidoc",
+        url: "http://192.1.126.122/fidoc/WebServices/WebServiceObras.asmx/GetObrasifidoc",
         data: "{'accion':'" + accion + "','oid':'" + oid + "'}",
         success: function (data) {
             var cadena = $.trim(data.d);
@@ -363,7 +364,7 @@ function ConsultaPresupprog(xid) {
         type: "POST",
         dataType: "json",
         contentType: "application/json",
-        url: "../../WebServices/WebServicePresup.asmx/GetPresupprog",
+        url: "http://192.1.126.122/fidoc/WebServices/WebServicePresup.asmx/GetPresupprog",
         data: "{'oid':'" + xid + "'}"
     });
 }
@@ -373,7 +374,7 @@ function ConsultaNumeroPredio(ctapredial) {
         type: "POST",
         dataType: "json",
         contentType: "application/json",
-        url: "../../WebServices/WebServicePredio.asmx/GetNumPredio",
+        url: "http://192.1.126.122/fidoc/WebServices/WebServicePredio.asmx/GetNumPredio",
         data: "{'ctapredial':'" + ctapredial + "'}"
     });
 }
@@ -384,7 +385,7 @@ function llenarRelPred_formEdit(idrelpredio, accion) {
         type: "POST",
         dataType: "json",
         contentType: "application/json",
-        url: "../../WebServices/WebServiceRelCoopPred.asmx/ConsultaRelCoopPredioP",
+        url: "http://192.1.126.122/fidoc/WebServices/WebServiceRelCoopPred.asmx/ConsultaRelCoopPredioP",
         data: "{'accion':'" + accion + "'}",
         success: function (data) {
             var elementos = 0;
@@ -413,7 +414,7 @@ function llenarRelPred(idrelpredio, accion) {
         type: "POST",
         dataType: "json",
         contentType: "application/json",
-        url: "../../WebServices/WebServiceRelCoopPred.asmx/ConsultaRelCoopPredioP",
+        url: "http://192.1.126.122/fidoc/WebServices/WebServiceRelCoopPred.asmx/ConsultaRelCoopPredioP",
         data: "{'accion':'" + accion + "'}",
         success: function (data) {
             var elementos = 0;
@@ -441,7 +442,7 @@ function llenarUsoPred(idusopredio, accion) {
         type: "POST",
         dataType: "json",
         contentType: "application/json",
-        url: "../../WebServices/WebServiceUsoPredio.asmx/ConsultaUsoPredio",
+        url: "http://192.1.126.122/fidoc/WebServices/WebServiceUsoPredio.asmx/ConsultaUsoPredio",
         data: "{'accion':'" + accion + "'}",
         success: function (data) {
             var elementos = 0;
@@ -469,7 +470,7 @@ function llenarUsoPred_formEdit(idusopredio, accion) {
         type: "POST",
         dataType: "json",
         contentType: "application/json",
-        url: "../../WebServices/WebServiceUsoPredio.asmx/ConsultaUsoPredio",
+        url: "http://192.1.126.122/fidoc/WebServices/WebServiceUsoPredio.asmx/ConsultaUsoPredio",
         data: "{'accion':'" + accion + "'}",
         success: function (data) {
             var elementos = 0;
@@ -492,7 +493,7 @@ function llenarUsoPred_formEdit(idusopredio, accion) {
     });
 }
 
-function RegistrarSolicitud(objUsuarioTareaAccion, objHistAct) {
+function RegistrarSolicitud(objUsuarioTareaAccion,objHistAct) {   
 
     var stringData = JSON.stringify(objUsuarioTareaAccion);
     var stringData2 = JSON.stringify(objHistAct);
@@ -501,8 +502,8 @@ function RegistrarSolicitud(objUsuarioTareaAccion, objHistAct) {
         type: 'POST',
         dataType: 'json',
         contentType: 'application/json; utf-8',
-        url: "../../WebServices/WebServiceTarea.asmx/RegistraEjecuta_Tarea",
-        data: "{objUsuarioTareaAccion:" + stringData + ",objHistAct:" + stringData2 + "}"
+        url: "http://192.1.126.122/fidoc/WebServices/WebServiceTarea.asmx/RegistraEjecuta_Tarea",
+        data: "{objUsuarioTareaAccion:" + stringData + ",objHistAct:" + stringData2 +"}"
     });
 }
 
@@ -513,7 +514,7 @@ function RegistrarSolicitud(objUsuarioTareaAccion, objHistAct) {
          type: "POST",
          dataType: "json",
          contentType: "application/json",
-         url: "../../WebServices/WebServiceCoop.asmx/GetCoop",
+         url: "http://192.1.126.122/fidoc/WebServices/WebServiceCoop.asmx/GetCoop",
          data:"{'idcoop':'" + idcoop + "'}",
          success: function (data) {
              $(data.d).find("NombreCoops").each(function () {
@@ -598,12 +599,12 @@ function limpiarDatosPredio() {
 function callWebServicePred() {
     var ctapred = $("#ctapred").val();
     if (ctapred) {
-        var urlctapred = "http://201.116.205.135:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
+        var urlctapred = "http://192.168.1.175:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
         try {
             $.get(urlctapred, function (xml) {
                 xmlDoc = $.parseXML(xml),
-                    $xml = $(xmlDoc),
-                    $nomprop = $xml.find("NomProp");
+                $xml = $(xmlDoc),
+                $nomprop = $xml.find("NomProp");
                 $("#lblnompropmunic").text($.trim($nomprop.text()));
                 $callenotif = $xml.find("DomProp");
                 $numoficext = $xml.find("NumExtP");
@@ -645,12 +646,12 @@ function callWebServicePred() {
 
 function checaCtaPred(ctapred) {
     var hayprop = '';
-    var urlctapred = "http://201.116.205.135:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
+    var urlctapred = "http://192.168.1.175:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
     try {
         $.get(urlctapred, function (xml) {
             xmlDoc = $.parseXML(xml),
-                $xml = $(xmlDoc),
-                $nomprop = $xml.find("NomProp");
+            $xml = $(xmlDoc),
+            $nomprop = $xml.find("NomProp");
             hayprop = $.trim($nomprop.text());
         });
     }
@@ -694,13 +695,13 @@ function etiqueta_frente(feature, resolution, dom) {
 }
 
 function GetPredio(ctapredial) {
-    if (ctapred.length == 12) {
-        var urlctapred = "../../WebServices/WebServicePredio.asmx/GetNumPredio?ctapredial=" + GetNumPredio;
+    if (ctapred.length==12) {
+        var urlctapred = "http://192.1.126.122/fidoc/WebServices/WebServicePredio.asmx/GetNumPredio?ctapredial=" + GetNumPredio;
         try {
             $.get(urlctapred, function (xml) {
                 xmlDoc = $.parseXML(xml),
-                    $xml = $(xmlDoc),
-                    $nomprop = $xml.find("NomProp");
+                $xml = $(xmlDoc),
+                $nomprop = $xml.find("NomProp");
                 $("#lblnomprop_padronpred").text($.trim($nomprop.text()));
                 $callenotif = $xml.find("DomProp");
                 $numoficext = $xml.find("NumExtP");
@@ -720,48 +721,48 @@ function GetPredio(ctapredial) {
                 $("#lblcalle_noofic_padronpred").text($.trim($callenumpred.text()) + ' ' + $.trim($numoficextpred.text()) + ' ' + $.trim($letraoficextpred.text()) + ' ' + $.trim($numoficintpred.text()));
                 $("#lblcolonia_padronpred").text($.trim($coloniapred.text()));
                 $("#lblusosuelo_padronpred").text($.trim($usosuelo.text()));
-
+                    
             });
         }
         catch (err) {
             alert(err);
         }
-    }
+    }   
 }
 
 
 function GetDatosPredial(ctapred) {
-    if (ctapred.length == 12) {
-        var urlctapred = "http://201.116.205.135:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
+    if (ctapred.length==12) {
+        var urlctapred = "http://192.168.1.175:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
         try {
             $.get(urlctapred, function (xml) {
                 xmlDoc = $.parseXML(xml),
-                    $xml = $(xmlDoc),
-                    $nomprop = $xml.find("NomProp");
+                $xml = $(xmlDoc),
+                $nomprop = $xml.find("NomProp");
                 var nom_prop = $.trim($nomprop.text());
                 if (nom_prop) {
                     ConsultarPredio(ctapred)
                         .done(function (result) {
                             var data = result.d;
-                            var ctapredial_valida = 0;
+                            var ctapredial_valida = 0; 
                             var dato_predial = ($("#lblfid_dato").text()).split(':');
 
-                            var pid_actual = parseInt(dato_predial[1]);
+                            var pid_actual =  parseInt(dato_predial[1]);
 
                             if (data != '<NewDataSet />') {
                                 $(data).find("predio").each(function () {
-                                    var pid_encontrado = $(this).find("pidr").text();
+                                    var pid_encontrado= $(this).find("pidr").text();
                                     if (parseInt(pid_encontrado) == pid_actual) {
-                                        ctapredial_valida = 1;
+                                        ctapredial_valida=1;
                                     }
                                     else {
                                         alert('Dato inválido, la cuenta predial se encuentra asignada al predio:  ' + pid_encontrado);
                                         $("#txtctapred_predio").val('');
                                     }
                                 });
-
+                                
                             } else {
-                                ctapredial_valida = 1;
+                                ctapredial_valida=1;
                             }
 
                             if (ctapredial_valida) {
@@ -784,11 +785,11 @@ function GetDatosPredial(ctapred) {
                                 $("#lblcolonia_padronpred").text($.trim($coloniapred.text()));
                                 $("#lblusosuelo_padronpred").text($.trim($usosuelo.text()));
                             }
-
+                            
                         })
-                        .fail(function (r) {
-                            alert("No pudieron consultarse los datos de predial");
-                        });
+                         .fail(function (r) {
+                             alert("No pudieron consultarse los datos de predial");
+                         });            
                 }
                 else {
 
@@ -802,17 +803,17 @@ function GetDatosPredial(ctapred) {
         }
     }
     else {
-
-        $("#lblnomprop_padronpred").text('');
-
+            
+        $("#lblnomprop_padronpred").text('');          
+            
         $("#lblcalle_notific_padronpred").text('');
         $("#lblcolonia_notific_padronpred").text('');
-
+            
         $("#lblcalle_noofic_padronpred").text('');
-        $("#lblcolonia_padronpred").text('');
-
+        $("#lblcolonia_padronpred").text('');           
+            
         $("#lblusosuelo_padronpred").text('');
-
+        
     }
 }
 
@@ -852,7 +853,7 @@ function HabilitarCajasTexto(estatus) {
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
+    results = regex.exec(location.search);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
@@ -918,36 +919,43 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
     $("#bodegadatos").data("numpagos", numpagos);
     $("#bodegadatos").data("fecvenp", fecvenp);
 
-    var vectorPrediosPosibles = new ol.source.Vector({
-        format: new ol.format.GeoJSON(),
-        url: function (extent) {
-            return geoserverConfig.host+'/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_predios_posibles&outputFormat=application%2Fjson&CQL_FILTER=oid=' + oid.toString();
-        }
-        //http://localhost:8080/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_predios_unicos&maxFeatures=50&outputFormat=application%2Fjson&CQL_FILTER=oid=9999
-    });
-
     var vectorPredios = new ol.source.Vector({
         format: new ol.format.GeoJSON(),
         url: function (extent) {
-            return geoserverConfig.host +'/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_predios_unicos&outputFormat=application%2Fjson&CQL_FILTER=oid=' + oid.toString();
+            return 'http://172.17.11.169:8080/geoserver/sigFidoc/ows?service=WFS' +
+            '&version=1.0.0&request=GetFeature&typeName=sigFidoc1:vw_predios_unicos' +
+            '&outputFormat=application%2Fjson&CQL_FILTER=oid=' + oid.toString();
         }
-        //http://localhost:8080/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_predios_posibles&maxFeatures=50&outputFormat=application%2Fjson&CQL_FILTER=oid=9999
     });
+
+    var vectorPrediosPosibles = new ol.source.Vector({
+        format: new ol.format.GeoJSON(),
+        url: function (extent) {
+            return 'http://172.17.11.169:8080/geoserver/sigFidoc/ows?service=WFS' +
+            '&version=1.0.0&request=GetFeature&typeName=sigFidoc1:vw_predios_posibles' +
+            '&outputFormat=application%2Fjson&CQL_FILTER=oid=' + oid.toString();
+        }
+    });
+
+
 
 
     var vSourceObra = new ol.source.Vector({
         format: new ol.format.GeoJSON(),
         url: function (extent) {
-            return geoserverConfig.host +'/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc:obra_geo&outputFormat=application/json&featureid=obra_geo.' + oid.toString();
+            return 'http://172.17.11.169:8080/geoserver/sigFidoc/ows?service=WFS&' +
+                 'version=1.0.0&request=GetFeature&typeName=sigFidoc1:obra_geo&' +
+                 'outputFormat=application%2Fjson&CQL_FILTER=oid=' + oid.toString();
         }
-        //http://localhost:8080/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc:obra_geo&maxFeatures=50&outputFormat=application/json&featureid=obra_geo.9999
-        //http://localhost:8080/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Aobra_geo&maxFeatures=50&outputFormat=application%2Fjson&CQL_FILTER=sector=12
+
     });
 
     var vSourceFrentes = new ol.source.Vector({
         format: new ol.format.GeoJSON(),
         url: function (extent) {
-            return geoserverConfig.host +'/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_coops_4&outputFormat=application%2Fjson&CQL_FILTER=obr_clv_int=' + obr_clv_int.toString();
+            return 'http://172.17.11.169:8080/geoserver/sigFidoc/ows?service=WFS&' +
+                 'version=1.0.0&request=GetFeature&typeName=sigFidoc1:vw_coops_4&' +
+                 'outputFormat=application%2Fjson&CQL_FILTER=obr_clv_int=' + obr_clv_int.toString();
         }
     });
 
@@ -1008,21 +1016,20 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
     vSourceObra.on('addfeature', function (evt) {
         if (vSourceObra.getState() == 'ready') {
             var numFacti = evt.feature.values_.oid; /*Existen poligonos de factibilidad*/
-            /* if (numFacti) {
-                
+            if (numFacti) {
+                var feature = evt.feature;
+                var coords = feature.getGeometry().getCoordinates();
+                var coord = feature.getGeometry().getExtent();
+                centro = ol.extent.getCenter(coord);
+                x = centro[0];
+                y = centro[1];
+                map.getView().setCenter(centro);
                 /*$('#map').css('cursor', 'wait');*/
-        }
-        else {
-            alert("NO SE ENCUENTRA POLIGONO DE OBRA.");
-            /*window.close();
-        } */
-            var feature = evt.feature;
-            var coords = feature.getGeometry().getCoordinates();
-            var coord = feature.getGeometry().getExtent();
-            centro = ol.extent.getCenter(coord);
-            x = centro[0];
-            y = centro[1];
-            map.getView().setCenter(centro);
+            }
+            else {
+                alert("NO SE ENCUENTRA POLIGONO DE OBRA.");
+                /*window.close();*/
+            }
         }
     });
 
@@ -1109,7 +1116,7 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
             $("#lblnumpagos").text(numpagos);
             $("#lblfecvenp").text(fecvenp);
             $("#lblcoopsifidoc").text('000');
-
+      
 
             /*Plantilla de edicion de datos 10/05/2023*/
 
@@ -1134,231 +1141,230 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
             $("#lblpid_prop").text('pid:');
             $("#lblpid_dato").text(pid);
             /*-----------------------------------------*/
-
+            
             $("#lblidusu_prop").text('idusu:');
             $("#lblidusu_dato").text(idusu);
-
+            
             $("#lblaccion_prop").text('accion:');
             $("#lblaccion_dato").text(accion);
 
             /*******************************************/
-            if (fid) {
-
-                if (accion == 'editcoop' || accion == 'elimcoop') {
+            if (fid) {                
+                
+                if (accion == 'editcoop' || accion == 'elimcoop') {     
 
                     var permiso_eliminar = $("#bodegadatos").data("eliminar_coop_obra_rec") || $("#bodegadatos").data("eliminar_coop_obra_proc") || $("#bodegadatos").data("eliminar_coop_obra_cob");
-                    var permiso_editar = $("#bodegadatos").data("checarEditarObraRec") ||
-                        $("#bodegadatos").data("checarEditarObraProc") ||
-                        $("#bodegadatos").data("checarEditarObraCob") ||
-                        $("#bodegadatos").data("checarSolicitarEditarObraRec") ||
-                        $("#bodegadatos").data("checarSolicitarEditarObraProc") ||
-                        $("#bodegadatos").data("checarSolicitarEditarObraCob");
+                    var permiso_editar = $("#bodegadatos").data("checarEditarObraRec")  ||
+                                         $("#bodegadatos").data("checarEditarObraProc") ||
+                                         $("#bodegadatos").data("checarEditarObraCob")  ||
+                                         $("#bodegadatos").data("checarSolicitarEditarObraRec") ||
+                                         $("#bodegadatos").data("checarSolicitarEditarObraProc") ||
+                                          $("#bodegadatos").data("checarSolicitarEditarObraCob");
 
 
                     if (permiso_eliminar || permiso_editar) {
                         /*HabilitarCajasTexto_EditElim();*/
                         LeerFrente('consulta', fid)
-                            .done(function (r) {
-                                var frente = [];
-                                var data = r.d;
+                             .done(function (r) {
+                                 var frente = [];
+                                 var data = r.d;
+                                
+                                 if (data != '<NewDataSet />') {
+                                     $(data).find("frentefinanc").each(function () {
+                                         var objFrente = {"fid": 0,
+                                             "geom_frente": '',
+                                             "pid": 0,
+                                             "oid": 0,
+                                             "obr_clv_int": 0,
+                                             "obra_sifidoc": '',
+                                             "coopid": '',
+                                             "coop_s": '',
+                                             "midcoop": 0,
+                                             "mapellidop": '',
+                                             "mapellidom": '',
+                                             "mnombres": '',
+                                             "mnomficha": '',
+                                             "mcorreo": '',
+                                             "mcurp": '',
+                                             "ine": '',
+                                             "doc_identific":'',
+                                             "telcoop":'',
+                                             "mcallecoop": '',
+                                             "mcolcoop": '',
+                                             "mnooficial_ext": '',
+                                             "mnooficial_int": '',
+                                             "dom_notif": '',
+                                             "cidrelpred":0,
+                                             "relacionpredio":'',
+                                             "obr_status": 0,
+                                             "cestatus":'',
+                                             "nomprog": '',
+                                             "progdescrip": '',
+                                             "obr_npago": 0,
+                                             "tipo_obra": 0,
+                                             "calle": '',
+                                             "colonia": '',
+                                             "tramo": '',
+                                             "nooficial": '',
+                                             "ctapredial": '',
+                                             "cup":'',
+                                             "cta_imuvi":'',
+                                             "sapal":'',
+                                             "r20":'',
+                                             "lote":'',
+                                             "mzna":'',
+                                             "cve_uso_suelo":'',
+                                             "uso_suelo": '',
+                                             "mts_frente": 0,
+                                             "inc": '',
+                                             "costo_mto": 0,
+                                             "capital_sin_inc": 0,
+                                             "capital": 0,
+                                             "monto_capital_pagado": 0,
+                                             "saldo_capital": 0,
+                                             "feciniproc": '',
+                                             "fecinicob": '',
+                                             "fecinip": '',
+                                             "fecvenp": '',
+                                             "descto_capital_por_aplic": 0,
+                                             "descto_capital_aplic": 0,
+                                             "saldo_total": 0
+                                         }
+                                         objFrente.fid = $(this).find("fidr").text();
+                                         objFrente.geom_frente = $(this).find("geom_frenter").text();
+                                         objFrente.pid = $(this).find("pidr").text();
+                                         objFrente.oid = $(this).find("oidr").text();
+                                         objFrente.obr_clv_int = $(this).find("obr_clv_intr").text();
+                                         objFrente.obra_sifidoc =  $(this).find("obra_sifidocr").text();
+                                         objFrente.coopid = $(this).find("coopidr").text();
+                                         objFrente.coop_s = $(this).find("obra_sifidocr").text() + '-' + $(this).find("coopidr").text();
+                                         objFrente.midcoop = $(this).find("midcoopr").text();                                       
+                                         objFrente.mapellidop = $(this).find("mapellidopr").text();
+                                         objFrente.mapellidom = $(this).find("mapellidomr").text();
+                                         objFrente.mnombres = $(this).find("mnombresr").text();
+                                         objFrente.mnomficha =  $(this).find("mnomfichar").text();
+                                         objFrente.mcorreo = $(this).find("mcorreor").text();
+                                         objFrente.mcurp = $(this).find("mcurpr").text();
+                                         objFrente.ine = $(this).find("iner").text();
+                                         objFrente.doc_identific=$(this).find("doc_identificr").text();
+                                         objFrente.telcoop = $(this).find("mtelcoopr").text();
+                                         objFrente.mcallecoop = $(this).find("mcallecoopr").text();
+                                         objFrente.mcolcoop = $(this).find("mcolcoopr").text();
+                                         objFrente.mnooficial_ext =  $(this).find("mnooficial_extr").text();
+                                         objFrente.mnooficial_int = $(this).find("mnooficial_intr").text();
+                                         objFrente.dom_notif = $(this).find("dom_notif").text();
+                                         objFrente.cidrelpred = $(this).find("cidrelpredr").text();
+                                         objFrente.relacionpredio = $(this).find("crelacionpredior").text();                                       
+                                         objFrente.obr_status = $(this).find("obr_statusr").text();
+                                         objFrente.cestatus = $(this).find("cestatusr").text();
+                                         objFrente.nomprog = $(this).find("nomprogr").text();
+                                         objFrente.progdescrip = $(this).find("progdescripr").text();
+                                         objFrente.obr_npago = parseFloat($(this).find("num_pagosr").text());
+                                         objFrente.tipo_obra = $(this).find("tipo_obrar").text();
+                                         objFrente.calle = $(this).find("caller").text();
+                                         objFrente.colonia = $(this).find("coloniar").text();
+                                         objFrente.tramo = $(this).find("tramor").text();
+                                         objFrente.nooficial = $(this).find("nooficialr").text();
+                                         objFrente.ctapredial =  $(this).find("ctapredialr").text();
+                                         objFrente.cup =  $(this).find("cupr").text();           
+                                         objFrente.cta_imuvi =  $(this).find("ctaimuvir").text();           
+                                         objFrente.sapal =  $(this).find("sapalr").text();           
+                                         objFrente.r20 =  $(this).find("r20r").text();           
+                                         objFrente.lote =  $(this).find("loter").text();           
+                                         objFrente.mzna =  $(this).find("mznar").text();           
+                                         objFrente.cve_uso_suelo =  $(this).find("idtipopredior").text();           
+                                         objFrente.uso_suelo = $(this).find("uso_suelor").text();
+                                         objFrente.mts_frente = $(this).find("mts_frenter").text();
+                                         objFrente.inc = $(this).find("incr").text();
+                                         objFrente.costo_mto = parseFloat($(this).find("costo_mtor").text());
+                                         objFrente.capital_sin_inc = $(this).find("capital_sin_incr").text();
+                                         objFrente.capital = $(this).find("capitalr").text();
+                                         objFrente.monto_capital_pagado = parseFloat($(this).find("monto_capital_pagador").text());
+                                         objFrente.saldo_capital = $(this).find("saldo_capitalr").text();
+                                         objFrente.feciniproc = MostrarFormatoFecha($(this).find("feciniprocr").text());
+                                         objFrente.fecinicob =  MostrarFormatoFecha($(this).find("fecinicobr").text());
+                                         objFrente.fecinip = MostrarFormatoFecha($(this).find("fecinipr").text());
+                                         objFrente.fecvenp = MostrarFormatoFecha($(this).find("fecvenpr").text());
+                                         objFrente.descto_capital_por_aplic = $(this).find("descto_capital_por_aplicr").text();                                       
+                                         objFrente.descto_capital_aplic = $(this).find("descto_capital_aplicr").text();
+                                         objFrente.saldo_total = $(this).find("saldo_totalr").text();
+                                         frente.push(objFrente);
 
-                                if (data != '<NewDataSet />') {
-                                    $(data).find("frentefinanc").each(function () {
-                                        var objFrente = {
-                                            "fid": 0,
-                                            "geom_frente": '',
-                                            "pid": 0,
-                                            "oid": 0,
-                                            "obr_clv_int": 0,
-                                            "obra_sifidoc": '',
-                                            "coopid": '',
-                                            "coop_s": '',
-                                            "midcoop": 0,
-                                            "mapellidop": '',
-                                            "mapellidom": '',
-                                            "mnombres": '',
-                                            "mnomficha": '',
-                                            "mcorreo": '',
-                                            "mcurp": '',
-                                            "ine": '',
-                                            "doc_identific": '',
-                                            "telcoop": '',
-                                            "mcallecoop": '',
-                                            "mcolcoop": '',
-                                            "mnooficial_ext": '',
-                                            "mnooficial_int": '',
-                                            "dom_notif": '',
-                                            "cidrelpred": 0,
-                                            "relacionpredio": '',
-                                            "obr_status": 0,
-                                            "cestatus": '',
-                                            "nomprog": '',
-                                            "progdescrip": '',
-                                            "obr_npago": 0,
-                                            "tipo_obra": 0,
-                                            "calle": '',
-                                            "colonia": '',
-                                            "tramo": '',
-                                            "nooficial": '',
-                                            "ctapredial": '',
-                                            "cup": '',
-                                            "cta_imuvi": '',
-                                            "sapal": '',
-                                            "r20": '',
-                                            "lote": '',
-                                            "mzna": '',
-                                            "cve_uso_suelo": '',
-                                            "uso_suelo": '',
-                                            "mts_frente": 0,
-                                            "inc": '',
-                                            "costo_mto": 0,
-                                            "capital_sin_inc": 0,
-                                            "capital": 0,
-                                            "monto_capital_pagado": 0,
-                                            "saldo_capital": 0,
-                                            "feciniproc": '',
-                                            "fecinicob": '',
-                                            "fecinip": '',
-                                            "fecvenp": '',
-                                            "descto_capital_por_aplic": 0,
-                                            "descto_capital_aplic": 0,
-                                            "saldo_total": 0
-                                        }
-                                        objFrente.fid = $(this).find("fidr").text();
-                                        objFrente.geom_frente = $(this).find("geom_frenter").text();
-                                        objFrente.pid = $(this).find("pidr").text();
-                                        objFrente.oid = $(this).find("oidr").text();
-                                        objFrente.obr_clv_int = $(this).find("obr_clv_intr").text();
-                                        objFrente.obra_sifidoc = $(this).find("obra_sifidocr").text();
-                                        objFrente.coopid = $(this).find("coopidr").text();
-                                        objFrente.coop_s = $(this).find("obra_sifidocr").text() + '-' + $(this).find("coopidr").text();
-                                        objFrente.midcoop = $(this).find("midcoopr").text();
-                                        objFrente.mapellidop = $(this).find("mapellidopr").text();
-                                        objFrente.mapellidom = $(this).find("mapellidomr").text();
-                                        objFrente.mnombres = $(this).find("mnombresr").text();
-                                        objFrente.mnomficha = $(this).find("mnomfichar").text();
-                                        objFrente.mcorreo = $(this).find("mcorreor").text();
-                                        objFrente.mcurp = $(this).find("mcurpr").text();
-                                        objFrente.ine = $(this).find("iner").text();
-                                        objFrente.doc_identific = $(this).find("doc_identificr").text();
-                                        objFrente.telcoop = $(this).find("mtelcoopr").text();
-                                        objFrente.mcallecoop = $(this).find("mcallecoopr").text();
-                                        objFrente.mcolcoop = $(this).find("mcolcoopr").text();
-                                        objFrente.mnooficial_ext = $(this).find("mnooficial_extr").text();
-                                        objFrente.mnooficial_int = $(this).find("mnooficial_intr").text();
-                                        objFrente.dom_notif = $(this).find("dom_notif").text();
-                                        objFrente.cidrelpred = $(this).find("cidrelpredr").text();
-                                        objFrente.relacionpredio = $(this).find("crelacionpredior").text();
-                                        objFrente.obr_status = $(this).find("obr_statusr").text();
-                                        objFrente.cestatus = $(this).find("cestatusr").text();
-                                        objFrente.nomprog = $(this).find("nomprogr").text();
-                                        objFrente.progdescrip = $(this).find("progdescripr").text();
-                                        objFrente.obr_npago = parseFloat($(this).find("num_pagosr").text());
-                                        objFrente.tipo_obra = $(this).find("tipo_obrar").text();
-                                        objFrente.calle = $(this).find("caller").text();
-                                        objFrente.colonia = $(this).find("coloniar").text();
-                                        objFrente.tramo = $(this).find("tramor").text();
-                                        objFrente.nooficial = $(this).find("nooficialr").text();
-                                        objFrente.ctapredial = $(this).find("ctapredialr").text();
-                                        objFrente.cup = $(this).find("cupr").text();
-                                        objFrente.cta_imuvi = $(this).find("ctaimuvir").text();
-                                        objFrente.sapal = $(this).find("sapalr").text();
-                                        objFrente.r20 = $(this).find("r20r").text();
-                                        objFrente.lote = $(this).find("loter").text();
-                                        objFrente.mzna = $(this).find("mznar").text();
-                                        objFrente.cve_uso_suelo = $(this).find("idtipopredior").text();
-                                        objFrente.uso_suelo = $(this).find("uso_suelor").text();
-                                        objFrente.mts_frente = $(this).find("mts_frenter").text();
-                                        objFrente.inc = $(this).find("incr").text();
-                                        objFrente.costo_mto = parseFloat($(this).find("costo_mtor").text());
-                                        objFrente.capital_sin_inc = $(this).find("capital_sin_incr").text();
-                                        objFrente.capital = $(this).find("capitalr").text();
-                                        objFrente.monto_capital_pagado = parseFloat($(this).find("monto_capital_pagador").text());
-                                        objFrente.saldo_capital = $(this).find("saldo_capitalr").text();
-                                        objFrente.feciniproc = MostrarFormatoFecha($(this).find("feciniprocr").text());
-                                        objFrente.fecinicob = MostrarFormatoFecha($(this).find("fecinicobr").text());
-                                        objFrente.fecinip = MostrarFormatoFecha($(this).find("fecinipr").text());
-                                        objFrente.fecvenp = MostrarFormatoFecha($(this).find("fecvenpr").text());
-                                        objFrente.descto_capital_por_aplic = $(this).find("descto_capital_por_aplicr").text();
-                                        objFrente.descto_capital_aplic = $(this).find("descto_capital_aplicr").text();
-                                        objFrente.saldo_total = $(this).find("saldo_totalr").text();
-                                        frente.push(objFrente);
+                                         if (accion == 'editcoop') {
+                                             var objFrente_Inicial = objFrente;
+                                             $("#bodegadatos").data("objFrente_Inicial",objFrente_Inicial);
+                                             PreparaInterfazEdicionFrente(objFrente,idusu) 
+                                         }
+                                         else {
+                                             PreparaInterfazEliminacionFrente(objFrente,idusu)
+                                         }
 
-                                        if (accion == 'editcoop') {
-                                            var objFrente_Inicial = objFrente;
-                                            $("#bodegadatos").data("objFrente_Inicial", objFrente_Inicial);
-                                            PreparaInterfazEdicionFrente(objFrente, idusu)
-                                        }
-                                        else {
-                                            PreparaInterfazEliminacionFrente(objFrente, idusu)
-                                        }
+                                         
+                                     });
 
+                                        
+                                     var monto_pagado = $("#bodegadatos").data("monto_pagado");
+                                     var monto_pagado_txt = monto_pagado.toString();
 
-                                    });
+                                     if (accion=='editcoop') {
+                                         PrepararTareasAccionesCampos_Editar(obr_estatus,monto_pagado);
 
+                                     } else {
+                                         if (monto_pagado==0) {
+                                             if (obr_estatus =='2') { /*Si la obra esta en Recaudación*/                        
+                                                 if ($("#bodegadatos").data("eliminar_coop_obra_rec"))  {                           
+                                                     MostrarModalEliminarFrente();
+                                                 }
+                                                 else {
+                                                     alert('No tiene permiso para eliminar un frente de una obra en Recaudación');
+                                                 }                                  
+                                             } else {
+                                                 if (obr_estatus=='4') {
+                                                     if ($("#bodegadatos").data("eliminar_coop_obra_proc"))  {                           
+                                                         MostrarModalEliminarFrente();
+                                                     }
+                                                     else {
+                                                         alert('No tiene permiso para eliminar un frente de una obra en Proceso');
+                                                     }                                  
+                                                 } else {
+                                                     if (obr_estatus=='5') {
+                                                         if ($("#bodegadatos").data("eliminar_coop_obra_cob"))  {                           
+                                                             MostrarModalEliminarFrente();
+                                                         }
+                                                         else {
+                                                             alert('No tiene permiso para eliminar un frente de una obra en Cobranza');
+                                                         }                                  
 
-                                    var monto_pagado = $("#bodegadatos").data("monto_pagado");
-                                    var monto_pagado_txt = monto_pagado.toString();
+                                                     } else {
+                                                         alert('Considerar otros estatus de obras');
+                                                     }   
 
-                                    if (accion == 'editcoop') {
-                                        PrepararTareasAccionesCampos_Editar(obr_estatus, monto_pagado);
-
-                                    } else {
-                                        if (monto_pagado == 0) {
-                                            if (obr_estatus == '2') { /*Si la obra esta en Recaudación*/
-                                                if ($("#bodegadatos").data("eliminar_coop_obra_rec")) {
-                                                    MostrarModalEliminarFrente();
-                                                }
-                                                else {
-                                                    alert('No tiene permiso para eliminar un frente de una obra en Recaudación');
-                                                }
-                                            } else {
-                                                if (obr_estatus == '4') {
-                                                    if ($("#bodegadatos").data("eliminar_coop_obra_proc")) {
-                                                        MostrarModalEliminarFrente();
-                                                    }
-                                                    else {
-                                                        alert('No tiene permiso para eliminar un frente de una obra en Proceso');
-                                                    }
-                                                } else {
-                                                    if (obr_estatus == '5') {
-                                                        if ($("#bodegadatos").data("eliminar_coop_obra_cob")) {
-                                                            MostrarModalEliminarFrente();
-                                                        }
-                                                        else {
-                                                            alert('No tiene permiso para eliminar un frente de una obra en Cobranza');
-                                                        }
-
-                                                    } else {
-                                                        alert('Considerar otros estatus de obras');
-                                                    }
-
-                                                }
-                                            }
-                                        } else {
-                                            alert('No es posible eliminar el frente seleccionado porque tiene un monto pagado de: ' + FormatoMoneda(monto_pagado_txt) + ', si desea eliminar el frente debe proceder como una Cancelación de Cooperador');
-                                        }
-                                    }
-                                }
-                                else {
-                                    alert('No se encontraron datos del frente solicitado.')
-                                }
-                            })
-                            .fail(function (xhr) {
-                                console.log(xhr.responseText);
-                                alert("Falla al recuperar el dato del frente a consultar.");
-                            })
+                                                 }
+                                             }
+                                         } else {
+                                             alert('No es posible eliminar el frente seleccionado porque tiene un monto pagado de: '+  FormatoMoneda(monto_pagado_txt) + ', si desea eliminar el frente debe proceder como una Cancelación de Cooperador');
+                                         }
+                                     } 
+                                 }
+                                 else {
+                                     alert('No se encontraron datos del frente solicitado.')
+                                 }
+                             })
+                             .fail(function (xhr) {
+                                 console.log(xhr.responseText);
+                                 alert("Falla al recuperar el dato del frente a consultar.");
+                             })                                   
                     }
                     else {
                         alert('No tiene permiso para eliminar o editar un frente');
                     }
                 } else {
-                    if (accion == 'infcoop') {
-                        ArmaVentanaCoop(fid);
-                        overlay.setPosition(geomfrente);
+                    if (accion == 'infcoop') {                     
+                            ArmaVentanaCoop(fid);
+                            overlay.setPosition(geomfrente);
                     }
                 }
-
+                
             }
             else {
                 if (accion == 'altacoop') { //Si la acción es para dar de alta un cooperador o dar de alta solo el frente a un cooperador existente.
@@ -1385,458 +1391,458 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
     });
 
 
+    
+    
 
-
-
-    $(".t_accion").click(function (e) {
-        var campo_accion = e.target.id;
+    $(".t_accion").click(function (e) {       
+        var campo_accion= e.target.id;
         var objUsuarioTareaAccion = {
-            "id_accion_tarea": 0,
+            "id_accion_tarea":0,
             "fid": 0,
-            "pid": 0,
-            "oid": 0,
-            "obr_clv_int": 0,
-            "cid": 0,
-            "idtarea": 0,
-            "idusu_solicita": 0,
-            "idusu_autoriza": 0,
-            "idusu_rubrica": 0,
-            "idusu_rubrica2": 0,
-            "folio_solic": '',
-            "parametro1": '',
-            "parametro2": '',
-            "parametro3": '',
-            "parametro4": '',
-            "parametro5": '',
-            "parametro6": '',
-            "parametro7": '',
-            "parametro8": '',
-            "parametro9": '',
-            "parametro10": '',
-            "parametro11": '',
-            "parametro12": '',
-            "parametro13": '',
-            "parametro14": '',
-            "parametro15": '',
-            "parametro16": '',
-            "parametro17": '',
-            "parametro18": '',
-            "parametro19": '',
-            "parametro20": ''
+            "pid":0,
+            "oid":0,
+            "obr_clv_int":0,
+            "cid":0,        
+            "idtarea":0,        
+            "idusu_solicita":0,        
+            "idusu_autoriza":0,        
+            "idusu_rubrica":0,        
+            "idusu_rubrica2":0,        
+            "folio_solic":'',
+            "parametro1":'',
+            "parametro2":'',
+            "parametro3":'',
+            "parametro4":'',
+            "parametro5":'',
+            "parametro6":'',
+            "parametro7":'',
+            "parametro8":'',
+            "parametro9":'',
+            "parametro10":'',
+            "parametro11":'',
+            "parametro12":'',
+            "parametro13":'',
+            "parametro14":'',
+            "parametro15":'',
+            "parametro16":'',
+            "parametro17":'',
+            "parametro18":'',
+            "parametro19":'',
+            "parametro20":''
         };
 
         var objHistAct = {
-            "idactividad": 0,
+            "idactividad":0,
             "estatus_actividad": 0,
-            "fecha_actividad": 0,
-            "hora_actividad": 0,
-            "idusu": 0,
-            "idaccion": 0
+            "fecha_actividad":0,
+            "hora_actividad":0,
+            "idusu":0,
+            "idaccion":0                       
         };
 
 
         var date = new Date();
         var fecha_hoy = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
-        var time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        var time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();       
 
-
-        var simbolo_accion = $("#" + campo_accion).text();
+       
+        var simbolo_accion = $("#"+campo_accion).text();
 
         objHistAct.idusu = parseInt($("#lblidusu_dato").text());
         objHistAct.idactividad = 0;
-        objHistAct.fecha_actividad = ConvertirCadenaToFecha(fecha_hoy);
-        objHistAct.hora_actividad = time
+        objHistAct.fecha_actividad = ConvertirCadenaToFecha(fecha_hoy);            
+        objHistAct.hora_actividad =   time
 
         var fid_pid = $("#lblfid_dato").text();
         var fid_1 = fid_pid.split(':')[0];
         var pid_2 = fid_pid.split(':')[1];
 
         objUsuarioTareaAccion.fid = parseInt(fid_1);
-        objUsuarioTareaAccion.pid = parseInt(pid_2);
-        objUsuarioTareaAccion.oid = parseInt($("#lbloid_dato").text());
-        objUsuarioTareaAccion.obr_clv_int = parseInt($("#lblobr_clv_int_dato").text());
-        objUsuarioTareaAccion.cid = parseInt($("#lblcid_dato").text());
+        objUsuarioTareaAccion.pid= parseInt(pid_2);
+        objUsuarioTareaAccion.oid= parseInt($("#lbloid_dato").text());
+        objUsuarioTareaAccion.obr_clv_int= parseInt($("#lblobr_clv_int_dato").text());
+        objUsuarioTareaAccion.cid= parseInt($("#lblcid_dato").text());
 
         objUsuarioTareaAccion.parametro1 = campo_accion;
         objUsuarioTareaAccion.parametro2 = obr_estatus;
 
 
-        var objFrente_Inicial = $("#bodegadatos").data("objFrente_Inicial");
-        var objValores = ObtenerValores(objFrente_Inicial, campo_accion);
+        var objFrente_Inicial = $("#bodegadatos").data("objFrente_Inicial");       
+        var objValores = ObtenerValores(objFrente_Inicial,campo_accion);
 
         objUsuarioTareaAccion.parametro4 = objValores.valor_inicial;
         objUsuarioTareaAccion.parametro5 = objValores.valor_final;
 
-        if (simbolo_accion == '>') {
-            objHistAct.estatus_actividad = 3;  /*Accion "EJECUTAR"*/
-            objHistAct.idaccion = 3;
+        if (simbolo_accion=='>') {                                   
+            objHistAct.estatus_actividad =  3;  /*Accion "EJECUTAR"*/
+            objHistAct.idaccion = 3;           
             objUsuarioTareaAccion.parametro3 = objHistAct.idaccion;
-
-            RegistrarSolicitud(objUsuarioTareaAccion, objHistAct)
-                .done(function (result) {
-                    alert(result.d);
-                }).fail(function (result) {
-                    alert("No fue posible ejecutar la TAREA");
-                });
+        
+            RegistrarSolicitud(objUsuarioTareaAccion,objHistAct)
+            .done(function (result) {
+                alert(result.d);
+            }).fail(function (result) {
+                alert("No fue posible ejecutar la TAREA");
+            });
 
         }
 
-        if (simbolo_accion == '?') {
-            objHistAct.estatus_actividad = 1;  /*Accion "EJECUTAR"*/
-            objHistAct.idaccion = 1;
+        if (simbolo_accion=='?') {
+            objHistAct.estatus_actividad =  1;  /*Accion "EJECUTAR"*/
+            objHistAct.idaccion = 1; 
             objUsuarioTareaAccion.parametro3 = objHistAct.idaccion;
-            $("#bodegadatos").data("objHistAct_storage", objHistAct);
-            $("#bodegadatos").data("objUsuarioTareaAccion_storage", objUsuarioTareaAccion);
-            $('#mask, .window').hide();
+            $("#bodegadatos").data("objHistAct_storage",objHistAct);   
+            $("#bodegadatos").data("objUsuarioTareaAccion_storage",objUsuarioTareaAccion);
+            $('#mask, .window').hide();  
             MostrarModalObservAdic();
-        }
-
+        }      
+        
     });
 
-
-
-    $(".b_generar_solicitud_sin").click(function (e) {
-        var objHistAct = $("#bodegadatos").data("objHistAct_storage");
+    
+    
+    $(".b_generar_solicitud_sin").click(function (e) {  
+        var objHistAct = $("#bodegadatos").data("objHistAct_storage");   
         var objUsuarioTareaAccion = $("#bodegadatos").data("objUsuarioTareaAccion_storage");
-        GenerarSolicitud(0);
+        GenerarSolicitud(0);     
     });
 
 
-    $(".t_propiedad").click(function (e) {
+    $(".t_propiedad").click(function (e) {       
         var etiqueta_label_sel2 = e.currentTarget.text;
-        var accion = etiqueta_label_sel2.substr(0, 1);
+        var accion = etiqueta_label_sel2.substr(0,1);
         var tarea = etiqueta_label_sel2.substr(1, etiqueta_label_sel.indexOf('_') - 1);
         PrepararCapturaDato(accion, tarea);
-
+     
     });
 
     function GenerarSolicitud(con_folio) {
-        var objActividad = $("#bodegadatos").data("objActividad");
-        var objHistAct = $("#bodegadatos").data("objHistAct");
-        var objFrenteInicial = $("#bodegadatos").data("objFrente_Inicial");
+        var objActividad =  $("#bodegadatos").data("objActividad");
+        var objHistAct =   $("#bodegadatos").data("objHistAct");
+        var objFrenteInicial =  $("#bodegadatos").data("objFrente_Inicial");
 
         var pdf = new jsPDF('p', 'mm', 'letter');
         pdf.setFontSize(12);
         pdf.setFontType('bold');
 
-
+        
 
         var tab1 = 10;
         var tab2 = 52;
         var tab3 = tab2 * 2;
         var tab4 = tab2 * 3;
         var tab5 = 208;
-        var reng_ref = 30;
+        var reng_ref = 30;        
         var reng_inc2 = 5;
 
         var date = new Date();
         var fecha_hoy = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
-        var time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        var time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();     
+        
+        pdf.line(10,15,204,15);
+        pdf.line(10,16,204,16);        
+        pdf.text(tab3 - (pdf.getTextWidth('MEMORANDUM DE OFICINA')/2),22 , 'MEMORANDUM DE OFICINA');
+        pdf.line(10,25, 204, 25);
+        pdf.line(10,26, 204, 26);
 
-        pdf.line(10, 15, 204, 15);
-        pdf.line(10, 16, 204, 16);
-        pdf.text(tab3 - (pdf.getTextWidth('MEMORANDUM DE OFICINA') / 2), 22, 'MEMORANDUM DE OFICINA');
-        pdf.line(10, 25, 204, 25);
-        pdf.line(10, 26, 204, 26);
-
-
+        
         pdf.text(tab2 - pdf.getTextWidth('PARA: MARGARITA GUEVARA MENDEZ'), reng_ref + reng_inc2 * 1, 'PARA: ');
         pdf.text(tab2 - pdf.getTextWidth('DE: '), reng_ref + reng_inc2 * 2, 'DE: ');
         pdf.text(tab2 - pdf.getTextWidth('ASUNTO: '), reng_ref + reng_inc2 * 3, 'ASUNTO: ');
         pdf.text(tab2 - pdf.getTextWidth('FECHA: '), reng_ref + reng_inc2 * 4, 'FECHA: ');
         pdf.text(tab2 - pdf.getTextWidth('CCP: ARCHIVO'), reng_ref + reng_inc2 * 5, 'CCP: ARCHIVO');
 
-        pdf.line(10, reng_ref + reng_inc2 * 6, 204, reng_ref + reng_inc2 * 6);
+        pdf.line(10,reng_ref + reng_inc2 * 6, 204, reng_ref + reng_inc2 * 6);
 
         var date = new Date();
         var fecha_hoy = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
-        var time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-        var solicitud = '';
+        var time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();     
+        var solicitud='';
         if (!con_folio) {
             solicitud = 'Prueba_';
         }
-
+        
         solicitud = solicitud + 'Solicitud_' + fecha_hoy + '.pdf';
         pdf.save(solicitud.toString());
     }
+   
 
-
-    function ObtenerValores(objFrente_Inicial, campo_accion) {
+    function ObtenerValores(objFrente_Inicial,campo_accion){
         var objValores = {
-            "valor_inicial": '',
-            "valor_final": ''
+            "valor_inicial":'',       
+            "valor_final":''
+        }
+
+        
+        if (campo_accion=='lblnomcoop_accion') {   
+            objValores.valor_inicial = $("#txtnoms_coop").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.mnombres; /*Valor anterior*/             
+        }
+
+        if (campo_accion=='lblapaterno_accion') {                
+            objValores.valor_inicial = $("#txtapaterno_coop").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.mapellidop; /*Valor anterior*/    
         }
 
 
-        if (campo_accion == 'lblnomcoop_accion') {
-            objValores.valor_inicial = $("#txtnoms_coop").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.mnombres; /*Valor anterior*/
+        if (campo_accion=='lblamaterno_accion') {                
+            objValores.valor_inicial = $("#txtamaterno_coop").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.mapellidom; /*Valor anterior*/    
         }
 
-        if (campo_accion == 'lblapaterno_accion') {
-            objValores.valor_inicial = $("#txtapaterno_coop").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.mapellidop; /*Valor anterior*/
-        }
-
-
-        if (campo_accion == 'lblamaterno_accion') {
-            objValores.valor_inicial = $("#txtamaterno_coop").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.mapellidom; /*Valor anterior*/
-        }
-
-        if (campo_accion == 'lblcalle_notific_accion') {
-            objValores.valor_inicial = $("#txtcalle_notific_coop").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.callenotif; /*Valor anterior*/
+        if (campo_accion=='lblcalle_notific_accion') {               
+            objValores.valor_inicial = $("#txtcalle_notific_coop").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.callenotif; /*Valor anterior*/    
         }
 
 
-        if (campo_accion == 'lblcolonia_notific_accion') {
-            objValores.valor_inicial = $("#txtcolonia_notific_coop").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.colnotif; /*Valor anterior*/
+        if (campo_accion=='lblcolonia_notific_accion') {                
+            objValores.valor_inicial = $("#txtcolonia_notific_coop").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.colnotif; /*Valor anterior*/    
         }
 
-        if (campo_accion == 'lblctapred_accion') {
-
-            var cta_predial = $.trim($("#txtctapred_predio").val());
-            if (cta_predial.length < 12) {
+        if (campo_accion=='lblctapred_accion') {    
+          
+            var cta_predial =  $.trim($("#txtctapred_predio").val());
+            if (cta_predial.length<12 ) {
                 alert('Cuenta predial inválida, tiene menos de  12 caractéres, se eliminara lo capturado y se asignará el campo vacío de CUENTA PREDIAL')
                 $("#txtctapred_predio").val('');
-                $("#lblnomprop_padronpred").text('');
-
+                $("#lblnomprop_padronpred").text('');          
+            
                 $("#lblcalle_notific_padronpred").text('');
                 $("#lblcolonia_notific_padronpred").text('');
-
+            
                 $("#lblcalle_noofic_padronpred").text('');
-                $("#lblcolonia_padronpred").text('');
-
+                $("#lblcolonia_padronpred").text('');           
+            
                 $("#lblusosuelo_padronpred").text('');
-
-            }
-            objValores.valor_inicial = $("#txtctapred_predio").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.ctapredial; /*Valor anterior*/
-
-
+        
+            }           
+            objValores.valor_inicial = $("#txtctapred_predio").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.ctapredial; /*Valor anterior*/    
+           
+                         
         }
 
-        if (campo_accion == 'lblcurp_accion') {
-            objValores.valor_inicial = $("#txtcurp_coop").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.mcurp; /*Valor anterior*/
+        if (campo_accion=='lblcurp_accion') {               
+            objValores.valor_inicial = $("#txtcurp_coop").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.mcurp; /*Valor anterior*/    
         }
 
-        if (campo_accion == 'lbline_accion') {
-            objValores.valor_inicial = $("#txtine_coop").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.ine; /*Valor anterior*/
-
+        if (campo_accion=='lbline_accion') {              
+            objValores.valor_inicial = $("#txtine_coop").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.ine; /*Valor anterior*/   
+            
         }
-        if (campo_accion == 'lbltel_accion') {
-
-            objValores.valor_inicial = $("#txttelefono_coop").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.telcoop; /*Valor anterior*/
-
+        if (campo_accion=='lbltel_accion') {   
+          
+            objValores.valor_inicial = $("#txttelefono_coop").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.telcoop; /*Valor anterior*/   
+            
         }
-        if (campo_accion == 'lblemail_accion') {
-            objValores.valor_inicial = $("#txtemail_coop").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.mcorreo; /*Valor anterior*/
+        if (campo_accion=='lblemail_accion') {               
+            objValores.valor_inicial = $("#txtemail_coop").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.mcorreo; /*Valor anterior*/   
         }
-        if (campo_accion == 'lblrelpred_accion') {
-            objValores.valor_inicial = $("#lstrelpred_coop").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.relacionpredio; /*Valor anterior*/
+        if (campo_accion=='lblrelpred_accion') {            
+            objValores.valor_inicial = $("#lstrelpred_coop").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.relacionpredio; /*Valor anterior*/   
         }
-        if (campo_accion == 'lbldocident_accion') {
-            objValores.valor_inicial = $("#txtdocident_coop").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.doc_identific; /*Valor anterior*/
+        if (campo_accion=='lbldocident_accion') {
+            objValores.valor_inicial = $("#txtdocident_coop").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.doc_identific; /*Valor anterior*/ 
         }
-        if (campo_accion == 'lblnoofic_accion') {
-            objValores.valor_inicial = $("#txtnumofic_predio").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.nooficial; /*Valor anterior*/
+        if (campo_accion=='lblnoofic_accion') {              
+            objValores.valor_inicial = $("#txtnumofic_predio").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.nooficial; /*Valor anterior*/ 
         }
-        if (campo_accion == 'lbllote_accion') {
-            objValores.valor_inicial = $("#txtlote_predio").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.lote; /*Valor anterior*/
+        if (campo_accion=='lbllote_accion') {              
+            objValores.valor_inicial = $("#txtlote_predio").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.lote; /*Valor anterior*/ 
         }
-        if (campo_accion == 'lblmanzana_accion') {
-            objValores.valor_inicial = $("#txtmanzana_predio").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.mzna; /*Valor anterior*/
+        if (campo_accion=='lblmanzana_accion') {             
+            objValores.valor_inicial = $("#txtmanzana_predio").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.mzna; /*Valor anterior*/ 
         }
-        if (campo_accion == 'lblctaimuvi_accion') {
-            objValores.valor_inicial = $("#txtctaimuvi_predio").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.cta_imuvi; /*Valor anterior*/
+        if (campo_accion=='lblctaimuvi_accion') {              
+            objValores.valor_inicial = $("#txtctaimuvi_predio").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.cta_imuvi; /*Valor anterior*/ 
         }
-        if (campo_accion == 'lblsapal_accion') {
-            objValores.valor_inicial = $("#txtsapal_predio").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.sapal; /*Valor anterior*/
-        }
-
-        if (campo_accion == 'lblcup_accion') {
-            objValores.valor_inicial = $("#txtcup_predio").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.cup; /*Valor anterior*/
-        }
-        if (campo_accion == 'lblr20_accion') {
-
-            objValores.valor_inicial = $("#txtr20_predio").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.r20; /*Valor anterior*/
-        }
-        if (campo_accion == 'lblaccion_tipo_predio') {
-            objValores.valor_inicial = $("#lsttipo_predio").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.tipo_predio; /*Valor anterior*/
-        }
-        if (campo_accion == 'lblmtsfte_accion') {
-
-            objValores.valor_inicial = $("#txtmtsfte_frente").val(); /*Valor actual*/
-            objValores.valor_final = objFrente_Inicial.mts_frente; /*Valor anterior*/
+        if (campo_accion=='lblsapal_accion') {                
+            objValores.valor_inicial = $("#txtsapal_predio").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.sapal; /*Valor anterior*/ 
         }
 
+        if (campo_accion=='lblcup_accion') {              
+            objValores.valor_inicial = $("#txtcup_predio").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.cup; /*Valor anterior*/ 
+        }
+        if (campo_accion=='lblr20_accion') {    
+         
+            objValores.valor_inicial = $("#txtr20_predio").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.r20; /*Valor anterior*/ 
+        }
+        if (campo_accion=='lblaccion_tipo_predio') {
+            objValores.valor_inicial = $("#lsttipo_predio").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.tipo_predio; /*Valor anterior*/             
+        }
+        if (campo_accion=='lblmtsfte_accion') {    
+          
+            objValores.valor_inicial = $("#txtmtsfte_frente").val(); /*Valor actual*/             
+            objValores.valor_final = objFrente_Inicial.mts_frente; /*Valor anterior*/             
+        }
+        
 
         return objValores;
     }
 
-    function PrepararTareasAccionesCampos_Editar(obr_estatus, monto_pagado) {
-        if (obr_estatus == '2') { /*Si la obra esta en Recaudación */
-            if ($("#bodegadatos").data("editar_nombre_coop_obr_rec") == 1) {
+    function PrepararTareasAccionesCampos_Editar(obr_estatus,monto_pagado) {
+        if (obr_estatus =='2') { /*Si la obra esta en Recaudación */
+            if ($("#bodegadatos").data("editar_nombre_coop_obr_rec")==1) {
                 $("#lblnomcoop_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_nombre_coop_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_nombre_coop_obr_rec")==1) {
                     $("#lblnomcoop_accion").text('?');
                 } else {
                     $("#lblnomcoop_accion").text('');
                 }
             }
 
-            if ($("#bodegadatos").data("editar_apaterno_coop_obr_rec") == 1) {
+            if ($("#bodegadatos").data("editar_apaterno_coop_obr_rec")==1) {
                 $("#lblapaterno_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_rec")==1) {
                     $("#lblapaterno_accion").text('?');
                 } else {
                     $("#lblapaterno_accion").text('');
                 }
             }
-
-            if ($("#bodegadatos").data("editar_amaterno_coop_obr_rec") == 1) {
+                     
+            if ($("#bodegadatos").data("editar_amaterno_coop_obr_rec")==1) {
                 $("#lblamaterno_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_rec")==1) {
                     $("#lblamaterno_accion").text('?');
                 } else {
                     $("#lblamaterno_accion").text('');
                 }
-            }
+            }          
 
-            if ($("#bodegadatos").data("editar_ctapred_predio_obr_rec") == 1) {
+            if ($("#bodegadatos").data("editar_ctapred_predio_obr_rec")==1) {
                 $("#lblctapred_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_rec")==1) {
                     $("#lblctapred_accion").text('?');
                 } else {
                     $("#lblctapred_accion").text('');
                 }
             }
 
-            if ($("#bodegadatos").data("editar_curp_coop_obr_rec") == 1) {
+            if ($("#bodegadatos").data("editar_curp_coop_obr_rec")==1) {
                 $("#lblcurp_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_curp_coop_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_curp_coop_obr_rec")==1) {
                     $("#lblcurp_accion").text('?');
                 } else {
                     $("#lblcurp_accion").text('');
                 }
             }
 
-            if ($("#bodegadatos").data("editar_ine_coop_obr_rec") == 1) {
+            if ($("#bodegadatos").data("editar_ine_coop_obr_rec")==1) {
                 $("#lbline_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_ine_coop_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_ine_coop_obr_rec")==1) {
                     $("#lbline_accion").text('?');
                 } else {
                     $("#lbline_accion").text('');
                 }
             }
-
-            if ($("#bodegadatos").data("editar_tel_coop_obr_rec") == 1) {
+                       
+            if ($("#bodegadatos").data("editar_tel_coop_obr_rec")==1) {
                 $("#lbltel_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_tel_coop_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_tel_coop_obr_rec")==1) {
                     $("#lbltel_accion").text('?');
                 } else {
                     $("#lbltel_accion").text('');
                 }
-            }
-
-            if ($("#bodegadatos").data("editar_calle_notific_coop_obr_rec") == 1) {
+            }             
+            
+            if ($("#bodegadatos").data("editar_calle_notific_coop_obr_rec")==1) {
                 $("#lblcalle_notific_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_calle_notific_coop_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_calle_notific_coop_obr_rec")==1) {
                     $("#lblcalle_notific_accion").text('?');
                 } else {
                     $("#lblcalle_notific_accion").text('');
                 }
-            }
-
-            if ($("#bodegadatos").data("editar_colonia_notific_coop_obr_rec") == 1) {
+            }              
+            
+            if ($("#bodegadatos").data("editar_colonia_notific_coop_obr_rec")==1) {
                 $("#lblcolonia_notific_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_colonia_notific_coop_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_colonia_notific_coop_obr_rec")==1) {
                     $("#lblcolonia_notific_accion").text('?');
                 } else {
                     $("#lblcolonia_notific_accion").text('');
                 }
-            }
+            }  
 
-
-            if ($("#bodegadatos").data("editar_email_coop_obr_rec") == 1) {
+            
+            if ($("#bodegadatos").data("editar_email_coop_obr_rec")==1) {
                 $("#lblemail_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_email_coop_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_email_coop_obr_rec")==1) {
                     $("#lblemail_accion").text('?');
                 } else {
                     $("#lblemail_accion").text('');
                 }
             }
 
-            if ($("#bodegadatos").data("editar_relacion_predio_coop_obr_rec") == 1) {
+            if ($("#bodegadatos").data("editar_relacion_predio_coop_obr_rec")==1) {
                 $("#lblrelpred_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_relacion_predio_coop_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_relacion_predio_coop_obr_rec")==1) {
                     $("#lblrelpred_accion").text('?');
                 } else {
                     $("#lblrelpred_accion").text('');
                 }
             }
 
-            if ($("#bodegadatos").data("editar_identific_coop_obr_rec") == 1) {
+            if ($("#bodegadatos").data("editar_identific_coop_obr_rec")==1) {
                 $("#lbldocident_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_identific_coop_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_identific_coop_obr_rec")==1) {
                     $("#lbldocident_accion").text('?');
                 } else {
                     $("#lbldocident_accion").text('');
                 }
             }
 
-            if ($("#bodegadatos").data("editar_numofic_predio_obr_rec") == 1) {
+            if ($("#bodegadatos").data("editar_numofic_predio_obr_rec")==1) {
                 $("#lblnoofic_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_numofic_predio_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_numofic_predio_obr_rec")==1) {
                     $("#lblnoofic_accion").text('?');
                 } else {
                     $("#lblnoofic_accion").text('');
                 }
             }
 
-            if ($("#bodegadatos").data("editar_lote_predio_obr_rec") == 1) {
+            if ($("#bodegadatos").data("editar_lote_predio_obr_rec")==1) {
                 $("#lbllote_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_lote_predio_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_lote_predio_obr_rec")==1) {
                     $("#lbllote_accion").text('?');
                 } else {
                     $("#lbllote_accion").text('');
                 }
             }
 
-            if ($("#bodegadatos").data("editar_mzna_predio_obr_rec") == 1) {
+            if ($("#bodegadatos").data("editar_mzna_predio_obr_rec")==1) {
                 $("#lblmanzana_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_mzna_predio_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_mzna_predio_obr_rec")==1) {
                     $("#lblmanzana_accion").text('?');
                 } else {
                     $("#lblmanzana_accion").text('');
@@ -1844,82 +1850,82 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
             }
 
 
-            if ($("#bodegadatos").data("editar_imuvi_predio_obr_rec") == 1) {
+            if ($("#bodegadatos").data("editar_imuvi_predio_obr_rec")==1) {
                 $("#lblctaimuvi_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_imuvi_predio_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_imuvi_predio_obr_rec")==1) {
                     $("#lblctaimuvi_accion").text('?');
                 } else {
                     $("#lblctaimuvi_accion").text('');
                 }
             }
 
-            if ($("#bodegadatos").data("editar_sapal_predio_obr_rec") == 1) {
+            if ($("#bodegadatos").data("editar_sapal_predio_obr_rec")==1) {
                 $("#lblsapal_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_sapal_predio_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_sapal_predio_obr_rec")==1) {
                     $("#lblsapal_accion").text('?');
                 } else {
                     $("#lblsapal_accion").text('');
                 }
             }
-
-            if ($("#bodegadatos").data("editar_cup_predio_obr_rec") == 1) {
+                         
+            if ($("#bodegadatos").data("editar_cup_predio_obr_rec")==1) {
                 $("#lblcup_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_cup_predio_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_cup_predio_obr_rec")==1) {
                     $("#lblcup_accion").text('?');
                 } else {
                     $("#lblcup_accion").text('');
                 }
             }
-
-            if ($("#bodegadatos").data("editar_r20_predio_obr_rec") == 1) {
+                         
+            if ($("#bodegadatos").data("editar_r20_predio_obr_rec")==1) {
                 $("#lblr20_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_r20_predio_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_r20_predio_obr_rec")==1) {
                     $("#lblr20_accion").text('?');
                 } else {
                     $("#lblr20_accion").text('');
                 }
             }
-
-            if ($("#bodegadatos").data("editar_tipo_predio_obr_rec") == 1) {
+                  
+            if ($("#bodegadatos").data("editar_tipo_predio_obr_rec")==1) {
                 $("#lblnomcoop_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_tipo_predio_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_tipo_predio_obr_rec")==1) {
                     $("#lblnomcoop_accion").text('?');
                 } else {
                     $("#lblnomcoop_accion").text('');
                 }
             }
 
-            if ($("#bodegadatos").data("editar_mts_frente_obr_rec") == 1) {
+            if ($("#bodegadatos").data("editar_mts_frente_obr_rec")==1) {
                 $("#lblmtsfte_accion").text('>');
             } else {
-                if ($("#bodegadatos").data("solicitar_editar_mts_frente_obr_rec") == 1) {
+                if ($("#bodegadatos").data("solicitar_editar_mts_frente_obr_rec")==1) {
                     $("#lblmtsfte_accion").text('?');
                 } else {
                     $("#lblmtsfte_accion").text('');
                 }
-            }
+            }            
 
-        } else {
-            if (obr_estatus == '4') {
-                if ($("#bodegadatos").data("editar_nombre_coop_obr_proc") == 1) {
-                    if (monto_pagado == 0) {
-                        $("#lblnomcoop_accion").text('>');
+         } else {
+            if (obr_estatus=='4') {
+                if ($("#bodegadatos").data("editar_nombre_coop_obr_proc")==1) {
+                    if (monto_pagado==0) {
+                        $("#lblnomcoop_accion").text('>');                
                     }
                     else {
-                        if ($("#bodegadatos").data("solicitar_editar_nombre_coop_obr_proc") == 1) {
+                        if ($("#bodegadatos").data("solicitar_editar_nombre_coop_obr_proc")==1) {
                             $("#lblnomcoop_accion").text('?');
                         }
                         else {
                             $("#lblnomcoop_accion").text('');
                         }
                     }
-                } else {
-                    if ($("#bodegadatos").data("solicitar_editar_nombre_coop_obr_proc") == 1) {
+                } else  {
+                    if ($("#bodegadatos").data("solicitar_editar_nombre_coop_obr_proc")==1) {
                         $("#lblnomcoop_accion").text('?');
                     }
                     else {
@@ -1927,20 +1933,20 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
                 }
 
-                if ($("#bodegadatos").data("editar_apaterno_coop_obr_rec") == 1) {
-                    if (monto_pagado == 0) {
-                        $("#lblapaterno_accion").text('>');
+                if ($("#bodegadatos").data("editar_apaterno_coop_obr_rec")==1) {
+                    if (monto_pagado==0) {
+                        $("#lblapaterno_accion").text('>');                
                     }
                     else {
-                        if ($("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_rec") == 1) {
+                        if ($("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_rec")==1) {
                             $("#lblapaterno_accion").text('?');
                         }
                         else {
                             $("#lblapaterno_accion").text('');
                         }
                     }
-                } else {
-                    if ($("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_rec") == 1) {
+                } else  {
+                    if ($("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_rec")==1) {
                         $("#lblapaterno_accion").text('?');
                     }
                     else {
@@ -1948,12 +1954,12 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
                 }
 
-                if ($("#bodegadatos").data("editar_amaterno_coop_obr_rec") == 1) {
-                    if (monto_pagado == 0) {
-                        $("#lblamaterno_accion").text('>');
+                if ($("#bodegadatos").data("editar_amaterno_coop_obr_rec")==1) {
+                    if (monto_pagado==0) {
+                        $("#lblamaterno_accion").text('>');                
                     }
                     else {
-                        if ($("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_rec") == 1) {
+                        if ($("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_rec")==1) {
                             $("#lblamaterno_accion").text('?');
                         }
                         else {
@@ -1961,7 +1967,7 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                         }
                     }
                 } else {
-                    if ($("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_rec") == 1) {
+                    if ($("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_rec")==1) {
                         $("#lblamaterno_accion").text('?');
                     }
                     else {
@@ -1970,20 +1976,20 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                 }
 
 
-                if ($("#bodegadatos").data("editar_ctapred_predio_obr_rec") == 1) {
-                    if (monto_pagado == 0) {
+                if ($("#bodegadatos").data("editar_ctapred_predio_obr_rec")==1) {
+                    if (monto_pagado==0) {
                         $("#lblctapred_accion").text('>');
                     }
                     else {
-                        if ($("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_rec") == 1) {
+                        if ($("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_rec")==1) {
                             $("#lblctapred_accion").text('?');
                         }
                         else {
                             $("#lblctapred_accion").text('');
                         }
-                    }
-                } else {
-                    if ($("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_rec") == 1) {
+                    }                                    
+                } else  {
+                    if ($("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_rec")==1) {
                         $("#lblctapred_accion").text('?');
                     }
                     else {
@@ -1991,21 +1997,21 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
                 }
 
-
-                if ($("#bodegadatos").data("editar_curp_coop_obr_rec") == 1) {
-                    if (monto_pagado == 0) {
-                        $("#lblcurp_accion").text('>');
+            
+                if ($("#bodegadatos").data("editar_curp_coop_obr_rec")==1) {                
+                    if (monto_pagado==0) {
+                        $("#lblcurp_accion").text('>');                
                     }
                     else {
-                        if ($("#bodegadatos").data("solicitar_editar_curp_coop_obr_rec") == 1) {
+                        if ($("#bodegadatos").data("solicitar_editar_curp_coop_obr_rec")==1) {
                             $("#lblcurp_accion").text('?');
                         }
                         else {
                             $("#lblcurp_accion").text('');
                         }
-                    }
-                } else {
-                    if ($("#bodegadatos").data("solicitar_editar_curp_coop_obr_rec") == 1) {
+                    }                     
+                } else  {
+                    if ($("#bodegadatos").data("solicitar_editar_curp_coop_obr_rec")==1) {
                         $("#lblcurp_accion").text('?');
                     }
                     else {
@@ -2013,32 +2019,32 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
                 }
 
-                if ($("#bodegadatos").data("editar_ine_coop_obr_rec") == 1) {
-                    if (monto_pagado == 0) {
-                        $("#lbline_accion").text('>');
+                if ($("#bodegadatos").data("editar_ine_coop_obr_rec")==1) {                    
+                    if (monto_pagado==0) {
+                        $("#lbline_accion").text('>'); 
                     }
                     else {
-                        if ($("#bodegadatos").data("solicitar_editar_ine_coop_obr_rec") == 1) {
+                        if ($("#bodegadatos").data("solicitar_editar_ine_coop_obr_rec")==1) {
                             $("#lbline_accion").text('?');
                         }
                         else {
                             $("#lbline_accion").text('');
                         }
-                    }
-                } else {
-                    if ($("#bodegadatos").data("solicitar_editar_ine_coop_obr_rec") == 1) {
+                    }       
+                } else  {
+                    if ($("#bodegadatos").data("solicitar_editar_ine_coop_obr_rec")==1) {
                         $("#lbline_accion").text('?');
                     }
                     else {
                         $("#lbline_accion").text('');
                     }
                 }
-
-                if ($("#bodegadatos").data("editar_tel_coop_obr_rec") == 1) {
-                    if (monto_pagado == 0) {
-                        $("#lbltel_accion").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_tel_coop_obr_rec") == 1) {
+                            
+                if ($("#bodegadatos").data("editar_tel_coop_obr_rec")==1) {
+                    if (monto_pagado==0) { 
+                        $("#lbltel_accion").text('>');                                    
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_tel_coop_obr_rec")==1) {
                             $("#lbltel_accion").text('?');
                         }
                         else {
@@ -2047,26 +2053,26 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
                 }
 
-                if ($("#bodegadatos").data("editar_calle_notific_coop_obr_rec") == 1) {
-                    if (monto_pagado == 0) {
-                        $("#lblcalle_notific_accion").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_calle_notific_coop_obr_rec") == 1) {
+                if ($("#bodegadatos").data("editar_calle_notific_coop_obr_rec")==1) {
+                    if (monto_pagado==0) { 
+                        $("#lblcalle_notific_accion").text('>');                                    
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_calle_notific_coop_obr_rec")==1) {
                             $("#lblcalle_notific_accion").text('?');
-                        }
+                        }   
                         else {
                             $("#lblcalle_notific_accion").text('');
                         }
                     }
                 }
+            
 
-
-                if ($("#bodegadatos").data("editar_colonia_notific_coop_obr_rec") == 1) {
-                    if (monto_pagado == 0) {
-                        $("#lblcolonia_notific_accion").text('>');
+                if ($("#bodegadatos").data("editar_colonia_notific_coop_obr_rec")==1) {
+                    if (monto_pagado==0) { 
+                        $("#lblcolonia_notific_accion").text('>');                
                     }
-                    else {
-                        if ($("#bodegadatos").data("solicitar_editar_colonia_notific_coop_obr_rec") == 1) {
+                    else  {
+                        if ($("#bodegadatos").data("solicitar_editar_colonia_notific_coop_obr_rec")==1) {
                             $("#lblcolonia_notific_accion").text('?');
                         }
                         else {
@@ -2076,14 +2082,14 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                 }
 
 
-                if ($("#bodegadatos").data("editar_email_coop_obr_rec") == 1) {
-                    if (monto_pagado == 0) {
-                        $("#lblemail_accion").text('>');
+                if ($("#bodegadatos").data("editar_email_coop_obr_rec")==1) {
+                    if (monto_pagado==0) { 
+                        $("#lblemail_accion").text('>');                
                     }
-                    else {
-                        if ($("#bodegadatos").data("solicitar_editar_email_coop_obr_rec") == 1) {
+                    else  {
+                        if ($("#bodegadatos").data("solicitar_editar_email_coop_obr_rec")==1) {
                             $("#lblemail_accion").text('?');
-                        }
+                        }   
                         else {
                             $("#lblemail_accion").text('');
                         }
@@ -2091,11 +2097,11 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                 }
 
 
-                if ($("#bodegadatos").data("editar_relacion_predio_coop_obr_rec") == 1) {
-                    if (monto_pagado == 0) {
-                        $("#lblrelpred_accion").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_relacion_predio_coop_obr_rec") == 1) {
+                if ($("#bodegadatos").data("editar_relacion_predio_coop_obr_rec")==1) {
+                    if (monto_pagado==0) {      
+                        $("#lblrelpred_accion").text('>');                
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_relacion_predio_coop_obr_rec")==1) {
                             $("#lblrelpred_accion").text('?');
                         }
                         else {
@@ -2104,12 +2110,12 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
                 }
 
-                if ($("#bodegadatos").data("editar_identific_coop_obr_rec") == 1) {
-                    if (monto_pagado == 0) {
-                        $("#lbldocident_accion").text('>');
+                if ($("#bodegadatos").data("editar_identific_coop_obr_rec")==1) {
+                    if (monto_pagado==0) { 
+                        $("#lbldocident_accion").text('>');                
                     }
-                    else {
-                        if ($("#bodegadatos").data("solicitar_editar_identific_coop_obr_rec") == 1) {
+                    else  {
+                        if ($("#bodegadatos").data("solicitar_editar_identific_coop_obr_rec")==1) {
                             $("#lbldocident_accion").text('?');
                         }
                         else {
@@ -2118,12 +2124,12 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
                 }
 
-                if ($("#bodegadatos").data("editar_numofic_predio_obr_rec") == 1) {
-                    if (monto_pagado == 0) {
-                        $("#lblnoofic_accion").text('>');
+                if ($("#bodegadatos").data("editar_numofic_predio_obr_rec")==1) {
+                    if (monto_pagado==0) { 
+                        $("#lblnoofic_accion").text('>');                
                     }
-                    else {
-                        if ($("#bodegadatos").data("solicitar_editar_numofic_predio_obr_rec") == 1) {
+                    else  {
+                        if ($("#bodegadatos").data("solicitar_editar_numofic_predio_obr_rec")==1) {
                             $("#lblnoofic_accion").text('?');
                         }
                         else {
@@ -2132,12 +2138,12 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
                 }
 
-                if ($("#bodegadatos").data("editar_lote_predio_obr_rec") == 1) {
-                    if (monto_pagado == 0) {
-                        $("#lbllote_accion").text('>');
+                if ($("#bodegadatos").data("editar_lote_predio_obr_rec")==1) {
+                    if (monto_pagado==0) { 
+                        $("#lbllote_accion").text('>');                
                     }
-                    else {
-                        if ($("#bodegadatos").data("solicitar_editar_lote_predio_obr_rec") == 1) {
+                    else  {
+                        if ($("#bodegadatos").data("solicitar_editar_lote_predio_obr_rec")==1) {
                             $("#lbllote_accion").text('?');
                         }
                         else {
@@ -2145,13 +2151,13 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                         }
                     }
                 }
+                
+                if ($("#bodegadatos").data("editar_mzna_predio_obr_rec")==1) {
+                    if (monto_pagado==0) { 
+                        $("#lblmanzana_accion").text('>');                
 
-                if ($("#bodegadatos").data("editar_mzna_predio_obr_rec") == 1) {
-                    if (monto_pagado == 0) {
-                        $("#lblmanzana_accion").text('>');
-
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_mzna_predio_obr_rec") == 1) {
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_mzna_predio_obr_rec")==1) {
                             $("#lblmanzana_accion").text('?');
                         }
                         else {
@@ -2160,24 +2166,24 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
                 }
 
-                if ($("#bodegadatos").data("editar_imuvi_predio_obr_rec") == 1) {
-                    if (monto_pagado == 0) {
-                        $("#lblctaimuvi_accion").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_imuvi_predio_obr_rec") == 1) {
+                if ($("#bodegadatos").data("editar_imuvi_predio_obr_rec")==1) {
+                    if (monto_pagado==0) { 
+                        $("#lblctaimuvi_accion").text('>');                
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_imuvi_predio_obr_rec")==1) {
                             $("#lblctaimuvi_accion").text('?');
-                        }
+                        }   
                         else {
                             $("#lblctaimuvi_accion").text('');
                         }
                     }
                 }
 
-                if ($("#bodegadatos").data("editar_sapal_predio_obr_rec") == 1) {
-                    if (monto_pagado == 0) {
-                        $("#lblsapal_accion").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_sapal_predio_obr_rec") == 1) {
+                if ($("#bodegadatos").data("editar_sapal_predio_obr_rec")==1) {
+                    if (monto_pagado==0) { 
+                        $("#lblsapal_accion").text('>');                
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_sapal_predio_obr_rec")==1) {
                             $("#lblsapal_accion").text('?');
                         }
                         else {
@@ -2186,11 +2192,11 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
                 }
 
-                if ($("#bodegadatos").data("editar_cup_predio_obr_rec") == 1) {
-                    if (monto_pagado == 0) {
-                        $("#lblcup_accion").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_cup_predio_obr_rec") == 1) {
+                if ($("#bodegadatos").data("editar_cup_predio_obr_rec")==1) {
+                    if (monto_pagado==0) { 
+                        $("#lblcup_accion").text('>');                
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_cup_predio_obr_rec")==1) {
                             $("#lblcup_accion").text('?');
                         }
                         else {
@@ -2199,13 +2205,13 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
                 }
 
-                if ($("#bodegadatos").data("editar_r20_predio_obr_rec") == 1) {
-                    if (monto_pagado == 0) {
-                        $("#lblr20_accion").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_r20_predio_obr_rec") == 1) {
+                if ($("#bodegadatos").data("editar_r20_predio_obr_rec")==1) {
+                    if (monto_pagado==0) { 
+                        $("#lblr20_accion").text('>');                
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_r20_predio_obr_rec")==1) {
                             $("#lblr20_accion").text('?');
-                        }
+                        }   
                         else {
                             $("#lblr20_accion").text('');
                         }
@@ -2213,11 +2219,11 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                 }
 
 
-                if ($("#bodegadatos").data("editar_tipo_predio_obr_rec") == 1) {
-                    if (monto_pagado == 0) {
-                        $("#lblaccion_tipo_predio").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_tipo_predio_obr_rec") == 1) {
+                if ($("#bodegadatos").data("editar_tipo_predio_obr_rec")==1) {
+                    if (monto_pagado==0) { 
+                        $("#lblaccion_tipo_predio").text('>');                
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_tipo_predio_obr_rec")==1) {
                             $("#lblaccion_tipo_predio").text('?');
                         }
                         else {
@@ -2226,44 +2232,44 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
                 }
 
-                if ($("#bodegadatos").data("editar_mts_frente_obr_rec") == 1) {
-                    if (monto_pagado == 0) {
-                        $("#lblmtsfte_accion").text('>');
+                if ($("#bodegadatos").data("editar_mts_frente_obr_rec")==1) {
+                    if (monto_pagado==0) {
+                        $("#lblmtsfte_accion").text('>');            
                     }
-                    else {
-                        if ($("#bodegadatos").data("solicitar_editar_mts_frente_obr_rec") == 1) {
+                    else {                        
+                        if ($("#bodegadatos").data("solicitar_editar_mts_frente_obr_rec")==1) {
                             $("#lblmtsfte_accion").text('?');
                         }
                         else {
                             $("#lblmtsfte_accion").text('');
                         }
                     }
-                } else {
-                    if ($("#bodegadatos").data("solicitar_editar_mts_frente_obr_rec") == 1) {
+                } else  {
+                    if ($("#bodegadatos").data("solicitar_editar_mts_frente_obr_rec")==1) {
                         $("#lblmtsfte_accion").text('?');
                     }
                     else {
                         $("#lblmtsfte_accion").text('');
                     }
-                }
+                }                
 
             } else {
-                if (obr_estatus == '5') {
-
-                    if ($("#bodegadatos").data("editar_nombre_coop_obr_cob") == 1) {
-                        if (monto_pagado == 0) {
-                            $("#lblnomcoop_accion").text('>');
+                if (obr_estatus=='5') {
+                    
+                    if ($("#bodegadatos").data("editar_nombre_coop_obr_cob")==1) {
+                        if (monto_pagado==0) {
+                            $("#lblnomcoop_accion").text('>');                
                         }
                         else {
-                            if ($("#bodegadatos").data("solicitar_editar_nombre_coop_obr_cob") == 1) {
+                            if ($("#bodegadatos").data("solicitar_editar_nombre_coop_obr_cob")==1) {
                                 $("#lblnomcoop_accion").text('?');
                             }
                             else {
                                 $("#lblnomcoop_accion").text('');
                             }
                         }
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_nombre_coop_obr_cob") == 1) {
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_nombre_coop_obr_cob")==1) {
                             $("#lblnomcoop_accion").text('?');
                         }
                         else {
@@ -2271,20 +2277,20 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                         }
                     }
 
-                    if ($("#bodegadatos").data("editar_apaterno_coop_obr_cob") == 1) {
-                        if (monto_pagado == 0) {
-                            $("#lblapaterno_accion").text('>');
+                    if ($("#bodegadatos").data("editar_apaterno_coop_obr_cob")==1) {
+                        if (monto_pagado==0) {
+                            $("#lblapaterno_accion").text('>');                
                         }
                         else {
-                            if ($("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_cob") == 1) {
+                            if ($("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_cob")==1) {
                                 $("#lblapaterno_accion").text('?');
                             }
                             else {
                                 $("#lblapaterno_accion").text('');
                             }
                         }
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_cob") == 1) {
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_cob")==1) {
                             $("#lblapaterno_accion").text('?');
                         }
                         else {
@@ -2292,12 +2298,12 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                         }
                     }
 
-                    if ($("#bodegadatos").data("editar_amaterno_coop_obr_cob") == 1) {
-                        if (monto_pagado == 0) {
-                            $("#lblamaterno_accion").text('>');
+                    if ($("#bodegadatos").data("editar_amaterno_coop_obr_cob")==1) {
+                        if (monto_pagado==0) {
+                            $("#lblamaterno_accion").text('>');                
                         }
                         else {
-                            if ($("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_cob") == 1) {
+                            if ($("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_cob")==1) {
                                 $("#lblamaterno_accion").text('?');
                             }
                             else {
@@ -2305,7 +2311,7 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                             }
                         }
                     } else {
-                        if ($("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_cob") == 1) {
+                        if ($("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_cob")==1) {
                             $("#lblamaterno_accion").text('?');
                         }
                         else {
@@ -2314,20 +2320,20 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
 
 
-                    if ($("#bodegadatos").data("editar_ctapred_predio_obr_cob") == 1) {
-                        if (monto_pagado == 0) {
+                    if ($("#bodegadatos").data("editar_ctapred_predio_obr_cob")==1) {
+                        if (monto_pagado==0) {
                             $("#lblctapred_accion").text('>');
                         }
                         else {
-                            if ($("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_cob") == 1) {
+                            if ($("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_cob")==1) {
                                 $("#lblctapred_accion").text('?');
                             }
                             else {
                                 $("#lblctapred_accion").text('');
                             }
-                        }
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_cob") == 1) {
+                        }                                    
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_cob")==1) {
                             $("#lblctapred_accion").text('?');
                         }
                         else {
@@ -2335,21 +2341,21 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                         }
                     }
 
-
-                    if ($("#bodegadatos").data("editar_curp_coop_obr_cob") == 1) {
-                        if (monto_pagado == 0) {
-                            $("#lblcurp_accion").text('>');
+            
+                    if ($("#bodegadatos").data("editar_curp_coop_obr_cob")==1) {                
+                        if (monto_pagado==0) {
+                            $("#lblcurp_accion").text('>');                
                         }
                         else {
-                            if ($("#bodegadatos").data("solicitar_editar_curp_coop_obr_cob") == 1) {
+                            if ($("#bodegadatos").data("solicitar_editar_curp_coop_obr_cob")==1) {
                                 $("#lblcurp_accion").text('?');
                             }
                             else {
                                 $("#lblcurp_accion").text('');
                             }
-                        }
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_curp_coop_obr_cob") == 1) {
+                        }                     
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_curp_coop_obr_cob")==1) {
                             $("#lblcurp_accion").text('?');
                         }
                         else {
@@ -2357,31 +2363,31 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                         }
                     }
 
-                    if ($("#bodegadatos").data("editar_ine_coop_obr_cob") == 1) {
-                        if (monto_pagado == 0) {
-                            $("#lbline_accion").text('>');
+                    if ($("#bodegadatos").data("editar_ine_coop_obr_cob")==1) {                    
+                        if (monto_pagado==0) {
+                            $("#lbline_accion").text('>'); 
                         }
                         else {
-                            if ($("#bodegadatos").data("solicitar_editar_ine_coop_obr_cob") == 1) {
+                            if ($("#bodegadatos").data("solicitar_editar_ine_coop_obr_cob")==1) {
                                 $("#lbline_accion").text('?');
                             }
                             else {
                                 $("#lbline_accion").text('');
                             }
-                        }
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_ine_coop_obr_cob") == 1) {
+                        }       
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_ine_coop_obr_cob")==1) {
                             $("#lbline_accion").text('?');
                         }
                         else {
                             $("#lbline_accion").text('');
                         }
                     }
-
-                    if ($("#bodegadatos").data("editar_tel_coop_obr_cob") == 1) {
-                        $("#lbltel_accion").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_tel_coop_obr_cob") == 1) {
+                            
+                    if ($("#bodegadatos").data("editar_tel_coop_obr_cob")==1) {
+                        $("#lbltel_accion").text('>');                
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_tel_coop_obr_cob")==1) {
                             $("#lbltel_accion").text('?');
                         }
                         else {
@@ -2389,22 +2395,22 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                         }
                     }
 
-                    if ($("#bodegadatos").data("editar_calle_notific_coop_obr_cob") == 1) {
-                        $("#lblcalle_notific_accion").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_calle_notific_coop_obr_cob") == 1) {
+                    if ($("#bodegadatos").data("editar_calle_notific_coop_obr_cob")==1) {
+                        $("#lblcalle_notific_accion").text('>');                
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_calle_notific_coop_obr_cob")==1) {
                             $("#lblcalle_notific_accion").text('?');
                         }
                         else {
                             $("#lblcalle_notific_accion").text('');
                         }
                     }
+            
 
-
-                    if ($("#bodegadatos").data("editar_colonia_notific_coop_obr_cob") == 1) {
-                        $("#lblcolonia_notific_accion").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_colonia_notific_coop_obr_cob") == 1) {
+                    if ($("#bodegadatos").data("editar_colonia_notific_coop_obr_cob")==1) {
+                        $("#lblcolonia_notific_accion").text('>');                
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_colonia_notific_coop_obr_cob")==1) {
                             $("#lblcolonia_notific_accion").text('?');
                         }
                         else {
@@ -2413,10 +2419,10 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
 
 
-                    if ($("#bodegadatos").data("editar_email_coop_obr_cob") == 1) {
-                        $("#lblemail_accion").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_email_coop_obr_cob") == 1) {
+                    if ($("#bodegadatos").data("editar_email_coop_obr_cob")==1) {
+                        $("#lblemail_accion").text('>');                
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_email_coop_obr_cob")==1) {
                             $("#lblemail_accion").text('?');
                         }
                         else {
@@ -2425,10 +2431,10 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
 
 
-                    if ($("#bodegadatos").data("editar_relacion_predio_coop_obr_cob") == 1) {
-                        $("#lblrelpred_accion").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_relacion_predio_coop_obr_cob") == 1) {
+                    if ($("#bodegadatos").data("editar_relacion_predio_coop_obr_cob")==1) {
+                        $("#lblrelpred_accion").text('>');                
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_relacion_predio_coop_obr_cob")==1) {
                             $("#lblrelpred_accion").text('?');
                         }
                         else {
@@ -2437,10 +2443,10 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
 
 
-                    if ($("#bodegadatos").data("editar_identific_coop_obr_cob") == 1) {
-                        $("#lbldocident_accion").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_identific_coop_obr_cob") == 1) {
+                    if ($("#bodegadatos").data("editar_identific_coop_obr_cob")==1) {
+                        $("#lbldocident_accion").text('>');                
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_identific_coop_obr_cob")==1) {
                             $("#lbldocident_accion").text('?');
                         }
                         else {
@@ -2449,10 +2455,10 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
 
 
-                    if ($("#bodegadatos").data("editar_numofic_predio_obr_cob") == 1) {
-                        $("#lblnoofic_accion").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_numofic_predio_obr_cob") == 1) {
+                    if ($("#bodegadatos").data("editar_numofic_predio_obr_cob")==1) {
+                        $("#lblnoofic_accion").text('>');                
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_numofic_predio_obr_cob")==1) {
                             $("#lblnoofic_accion").text('?');
                         }
                         else {
@@ -2461,10 +2467,10 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
 
 
-                    if ($("#bodegadatos").data("editar_lote_predio_obr_cob") == 1) {
-                        $("#lbllote_accion").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_lote_predio_obr_cob") == 1) {
+                    if ($("#bodegadatos").data("editar_lote_predio_obr_cob")==1) {
+                        $("#lbllote_accion").text('>');                
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_lote_predio_obr_cob")==1) {
                             $("#lbllote_accion").text('?');
                         }
                         else {
@@ -2472,10 +2478,10 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                         }
                     }
 
-                    if ($("#bodegadatos").data("editar_mzna_predio_obr_cob") == 1) {
-                        $("#lblmanzana_accion").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_mzna_predio_obr_cob") == 1) {
+                    if ($("#bodegadatos").data("editar_mzna_predio_obr_cob")==1) {
+                        $("#lblmanzana_accion").text('>');                
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_mzna_predio_obr_cob")==1) {
                             $("#lblmanzana_accion").text('?');
                         }
                         else {
@@ -2483,10 +2489,10 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                         }
                     }
 
-                    if ($("#bodegadatos").data("editar_imuvi_predio_obr_cob") == 1) {
-                        $("#lblctaimuvi_accion").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_imuvi_predio_obr_cob") == 1) {
+                    if ($("#bodegadatos").data("editar_imuvi_predio_obr_cob")==1) {
+                        $("#lblctaimuvi_accion").text('>');                
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_imuvi_predio_obr_cob")==1) {
                             $("#lblctaimuvi_accion").text('?');
                         }
                         else {
@@ -2494,10 +2500,10 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                         }
                     }
 
-                    if ($("#bodegadatos").data("editar_sapal_predio_obr_cob") == 1) {
-                        $("#lblsapal_accion").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_sapal_predio_obr_cob") == 1) {
+                    if ($("#bodegadatos").data("editar_sapal_predio_obr_cob")==1) {
+                        $("#lblsapal_accion").text('>');                
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_sapal_predio_obr_cob")==1) {
                             $("#lblsapal_accion").text('?');
                         }
                         else {
@@ -2505,10 +2511,10 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                         }
                     }
 
-                    if ($("#bodegadatos").data("editar_cup_predio_obr_cob") == 1) {
-                        $("#lblcup_accion").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_cup_predio_obr_cob") == 1) {
+                    if ($("#bodegadatos").data("editar_cup_predio_obr_cob")==1) {
+                        $("#lblcup_accion").text('>');                
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_cup_predio_obr_cob")==1) {
                             $("#lblcup_accion").text('?');
                         }
                         else {
@@ -2517,10 +2523,10 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
 
 
-                    if ($("#bodegadatos").data("editar_r20_predio_obr_cob") == 1) {
-                        $("#lblr20_accion").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_r20_predio_obr_cob") == 1) {
+                    if ($("#bodegadatos").data("editar_r20_predio_obr_cob")==1) {
+                        $("#lblr20_accion").text('>');                
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_r20_predio_obr_cob")==1) {
                             $("#lblr20_accion").text('?');
                         }
                         else {
@@ -2529,10 +2535,10 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
 
 
-                    if ($("#bodegadatos").data("editar_tipo_predio_obr_cob") == 1) {
-                        $("#lblaccion_tipo_predio").text('>');
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_tipo_predio_obr_cob") == 1) {
+                    if ($("#bodegadatos").data("editar_tipo_predio_obr_cob")==1) {
+                        $("#lblaccion_tipo_predio").text('>');                
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_tipo_predio_obr_cob")==1) {
                             $("#lblaccion_tipo_predio").text('?');
                         }
                         else {
@@ -2540,20 +2546,20 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                         }
                     }
 
-                    if ($("#bodegadatos").data("editar_mts_frente_obr_cob") == 1) {
-                        if (monto_pagado == 0) {
-                            $("#lblmtsfte_accion").text('>');
+                    if ($("#bodegadatos").data("editar_mts_frente_obr_cob")==1) {
+                        if (monto_pagado==0) {
+                            $("#lblmtsfte_accion").text('>');            
                         }
-                        else {
-                            if ($("#bodegadatos").data("solicitar_editar_mts_frente_obr_cob") == 1) {
+                        else {                        
+                            if ($("#bodegadatos").data("solicitar_editar_mts_frente_obr_cob")==1) {
                                 $("#lblmtsfte_accion").text('?');
                             }
                             else {
                                 $("#lblmtsfte_accion").text('');
                             }
                         }
-                    } else {
-                        if ($("#bodegadatos").data("solicitar_editar_mts_frente_obr_cob") == 1) {
+                    } else  {
+                        if ($("#bodegadatos").data("solicitar_editar_mts_frente_obr_cob")==1) {
                             $("#lblmtsfte_accion").text('?');
                         }
                         else {
@@ -2568,11 +2574,11 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
             }
         }
 
-        MostrarModalEditCoop();
+            MostrarModalEditCoop();        
     }
+            
 
-
-    function PreparaInterfazEliminacionFrente(objFrente, idusu) {
+    function PreparaInterfazEliminacionFrente(objFrente,idusu) {
         $("#lbleliminarfte_fid").text('fid:');
         $("#lbleliminarfte_obr_clv_int").text('obr_clv_int:');
         $("#lbleliminarfte_coop_s").text('Cooperador (SIFIDOC):');
@@ -2586,8 +2592,8 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
         $("#lbleliminarfte_programa").text('Programa:');
         $("#lbleliminarfte_obr_estatus").text('Estaus de Obra:');
         $("#lbleliminarfte_idusu").text('Id. Usuario:');
-
-        $("#bodegadatos").data("monto_pagado", objFrente.monto_capital_pagado);
+                                                                             
+        $("#bodegadatos").data("monto_pagado", objFrente.monto_capital_pagado);                                                    
         $("#lbleliminarfte_fid_d").text(objFrente.fid);
         $("#lbleliminarfte_obr_clv_int_d").text(objFrente.obr_clv_int);
         $("#lbleliminarfte_coop_s_d").text(objFrente.coop_s);
@@ -2603,11 +2609,11 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
         $("#lbleliminarfte_idusu_d").text(idusu);
 
         $("#lblelminarfte_aceptar").text('ACEPTAR');
-        $("#lbleliminarfte_cancelar").text('CANCELAR');
+        $("#lbleliminarfte_cancelar").text('CANCELAR');               
 
     }
 
-    function PreparaInterfazEdicionFrente(objFrente, idusu) {
+    function PreparaInterfazEdicionFrente(objFrente,idusu) {
         /*PERSONA DE COOPERADOR*/
         $("#txtnoms_coop").val(objFrente.mnombres);
         $("#txtapaterno_coop").val(objFrente.mapellidop);
@@ -2618,73 +2624,73 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
         $("#txtcurp_coop").val(objFrente.mcurp);
         $("#txtdocident_coop").val(objFrente.doc_identific);
 
+        
 
-
-
-        var idrel_pred = objFrente.cidrelpred;
+        
+        var idrel_pred = objFrente.cidrelpred;       
         if (isNaN(idrel_pred)) {
-            llenarRelPred_formEdit(idrel_pred, 0);
+            llenarRelPred_formEdit(idrel_pred,0);
         }
         else {
-            llenarRelPred_formEdit(idrel_pred, 'consultarelpredio');
+            llenarRelPred_formEdit(idrel_pred,'consultarelpredio');
         }
-
-        if ($("#bodegadatos").data("editar_nombre_coop")) {
+                
+        if ($("#bodegadatos").data("editar_nombre_coop")){
             $("#lblnomcoop_accion").text('>');
-        }
-        else {
+        }            
+        else  {
             $("#lblnomcoop_accion").text('?');
         }
 
-        $("#lblfid_dato").text(objFrente.fid + ':' + objFrente.pid);
+        $("#lblfid_dato").text(objFrente.fid + ':' + objFrente.pid );
         $("#lblcoop_s_dato").text(objFrente.coop_s);
         $("#lblcid_dato").text(objFrente.midcoop);
         $("#lblidusu_dato").text(idusu.toString());
 
-
-
+        
+        
         /*PREDIO*/
-
+        
         $("#txtnumofic_predio").val(objFrente.nooficial);
-        $("#txtctapred_predio").val(objFrente.ctapredial);
-
+        $("#txtctapred_predio").val(objFrente.ctapredial);       
+        
         var ctapredial = objFrente.ctapredial;
-        if (ctapredial.length == 12) {
+        if (ctapredial.length==12) {
             GetDatosPredial(ctapredial)
         }
         else {
             $("#lblnomprop_padronpred").text('');
             $("#lblcalle_notific_padronpred").text('');
-            $("#lblcolonia_notific_padronpred").text('');
+            $("#lblcolonia_notific_padronpred").text('');            
             $("#lblcalle_noofic_padronpred").text('');
-            $("#lblcolonia_padronpred").text('');
+            $("#lblcolonia_padronpred").text('');                       
             $("#lblusosuelo_padronpred").text('');
         }
 
 
         $("#txtcup_predio").val(objFrente.cup);
-        $("#txtctaimuvi_predio").val(objFrente.cta_imuvi);
+        $("#txtctaimuvi_predio").val(objFrente.cta_imuvi);        
         $("#txtsapal_predio").val(objFrente.sapal);
-        $("#txtr20_predio").val(objFrente.r20);
+        $("#txtr20_predio").val(objFrente.r20);        
         $("#txtlote_predio").val(objFrente.lote);
-        $("#txtmanzana_predio").val(objFrente.mzna);
-        $("#txtmtsfte_frente").val(objFrente.mts_frente);
-        $("#lblobr_clv_int_dato").text(objFrente.obr_clv_int);
+        $("#txtmanzana_predio").val(objFrente.mzna);        
+        $("#txtmtsfte_frente").val(objFrente.mts_frente);     
+        $("#lblobr_clv_int_dato").text(objFrente.obr_clv_int);       
 
+        
 
-
-
-
+       
+    
         var cve_uso_suelo = objFrente.cve_uso_suelo;
         if (isNaN(cve_uso_suelo)) {
-            llenarUsoPred_fomEdit(0, 'consultausospredio');
-        }
+             llenarUsoPred_fomEdit(0, 'consultausospredio');
+           }
         else {
             llenarUsoPred_formEdit(cve_uso_suelo, 'consultausospredio');
         }
-
-
-
+        
+        
+        
         /*OBRA*/
         $("#lblcalle_obra").text(objFrente.calle);
         $("#lblcolonia_obra").text(objFrente.colonia);
@@ -2698,1369 +2704,1441 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
         $("#lblprograma_obra").text(objFrente.nomprog);
         $("#lblestatus_obra").text(objFrente.cestatus);
         $("#lbloid_dato").text(objFrente.oid);
-        $("#lblobr_clv_int_dato").text(objFrente.obr_clv_int);
+        $("#lblobr_clv_int_dato").text(objFrente.obr_clv_int);      
+        
 
-
-        $("#bodegadatos").data("monto_pagado", objFrente.monto_capital_pagado);
+        $("#bodegadatos").data("monto_pagado", objFrente.monto_capital_pagado); 
 
     }
 
 
-
+    
 
 
     function RescatarReglasUsuario(idusu, accion) {
 
         ConsultaReglasUsuario(idusu, accion)
-            .done(function (r) {
-                var regla = $.trim(r.d);
-                if (regla != "<NewDataSet />") {  // Si encontró reglas para el usuario, preparar las propiedades correspondientes
-                    var reglas_usu = [];
-
-
-                    $(r.d).find("regla").each(function () {
-
-                        var objReglaUsu = {
-                            "idrol": 0,
-                            "crolnombre": '',
-                            "croldescripcion": 0,
-                            "idaccion": 0,
-                            "etiqueta_accion": 0,
-                            "idtarea": '',
-                            "etiqueta_tarea": 0,
-                            "fec_cre": 0,
-                            "musuid": '',
-                            "musunombre": '',
-                            "musucuenta": 0
-                        }
-
-                        objReglaUsu.idrol = $(this).find("idrol_r").text();
-                        objReglaUsu.crolnombre = $(this).find("crolnombre_r").text();
-                        objReglaUsu.croldescripcion = $(this).find("croldescripcion_r").text();
-                        objReglaUsu.idaccion = $(this).find("idaccion_r").text();
-                        objReglaUsu.etiqueta_accion = $(this).find("etiqueta_accion_r").text();
-                        objReglaUsu.idtarea = $(this).find("idtarea_r").text();
-                        objReglaUsu.etiqueta_tarea = $(this).find("etiqueta_tarea_r").text();
-                        objReglaUsu.fec_cre = $(this).find("fec_cre_r").text();
-                        objReglaUsu.musuid = $(this).find("musuid_r").text();
-                        objReglaUsu.musunombre = $(this).find("musunombre_r").text();
-                        objReglaUsu.musucuenta = $(this).find("musucuenta_r").text();
-                        reglas_usu.push(objReglaUsu);
-                    });
-
-
-                    /*Tarea 28: Alta de un cooperador en obra de Recaudación*/
-                    var alta_coop_obra_rec = reglas_usu.find(tarea => (tarea.idtarea == 28 && tarea.idaccion == 3));
-                    if (alta_coop_obra_rec == null) {
-                        $("#bodegadatos").data("alta_coop_obra_rec", 0);
-                    }
-                    else {
-                        $("#bodegadatos").data("alta_coop_obra_rec", 1);
-                    }
-
-                    /*Tarea 29: Alta de un cooperador en obra de Proceso*/
-
-                    var alta_coop_obra_proc = reglas_usu.find(tarea => (tarea.idtarea == 29 && tarea.idaccion == 3));
-                    if (alta_coop_obra_proc == null) {
-                        $("#bodegadatos").data("alta_coop_obra_proc", 0);
-                    }
-                    else {
-                        $("#bodegadatos").data("alta_coop_obra_proc", 1);
-                    }
-
-
-                    /*Tarea 34: Alta de un cooperador en una obra de cobranza*/
-
-                    var alta_coop_obra_cob = reglas_usu.find(tarea => (tarea.idtarea == 34 && tarea.idaccion == 3));
-                    if (alta_coop_obra_cob == null) {
-                        $("#bodegadatos").data("alta_coop_obra_cob", 0);
-                    }
-                    else {
-                        $("#bodegadatos").data("alta_coop_obra_cob", 1);
-                    }
-
-
-
-                    /*Tarea 30: Eliminar cooperador de una obra en Recaudación*/
-
-                    var eliminar_coop_obra_rec = reglas_usu.find(tarea => (tarea.idtarea == 30 && tarea.idaccion == 3));
-                    if (eliminar_coop_obra_rec == null) {
-                        $("#bodegadatos").data("eliminar_coop_obra_rec", 0);
-                    }
-                    else {
-                        $("#bodegadatos").data("eliminar_coop_obra_rec", 1);
-                    }
-
-                    /*Tarea 31: Eliminar un cooperador de una obra en Proceso*/
-
-                    var eliminar_coop_obra_proc = reglas_usu.find(tarea => (tarea.idtarea == 31 && tarea.idaccion == 3));
-                    if (eliminar_coop_obra_proc == null) {
-                        $("#bodegadatos").data("eliminar_coop_obra_proc", 0);
-                    }
-                    else {
-                        $("#bodegadatos").data("eliminar_coop_obra_proc", 1);
-                    }
-
-                    /*Tarea 36: Eliminar un cooperador de una obra en cobranza*/
-
-                    var eliminar_coop_obra_cob = reglas_usu.find(tarea => (tarea.idtarea == 36 && tarea.idaccion == 3));
-                    if (eliminar_coop_obra_cob == null) {
-                        $("#bodegadatos").data("eliminar_coop_obra_cob", 0);
-                    }
-                    else {
-                        $("#bodegadatos").data("eliminar_coop_obra_cob", 1);
-                    }
-
-
-                    /*Inicia reglas para poder Editar y Solicitar editar los datos del Cooperador de Obra en los 3 estatus*/
-
-                    var checarEditarObraRec = 0;
-                    var checarEditarObraProc = 0;
-                    var checarEditarObraCob = 0;
-
-                    var checarSolicitarEditarObraRec = 0;
-                    var checarSolicitarEditarObraProc = 0;
-                    var checarSolicitarEditarObraCob = 0;
-
-                    /*Tarea 5: Modificar el nombre del cooperador de una OBRA EN RECAUDACIÓN*/
-
-                    var editar_nombre_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 5 && tarea.idaccion == 3));
-                    if (editar_nombre_coop_obr_rec == null) {
-                        $("#bodegadatos").data("editar_nombre_coop_obr_rec", 0);
-
-                        var solicitar_editar_nombre_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 129 && tarea.idaccion == 1));
-                        if (solicitar_editar_nombre_coop_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_nombre_coop_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_nombre_coop_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_nombre_coop_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-
-                    /*Tarea 1: Modificar el apellido paterno del cooperador e una obra en recaudación*/
-
-                    var editar_apaterno_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 1 && tarea.idaccion == 3));
-                    if (editar_apaterno_coop_obr_rec == null) {
-                        $("#bodegadatos").data("editar_apaterno_coop_obr_rec", 0);
-                        var solicitar_editar_apaterno_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 125 && tarea.idaccion == 1));
-                        if (solicitar_editar_apaterno_coop_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_apaterno_coop_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-
-                    /*Tarea 3: Modificar el nombre de amaterno del cooperador de la obra recaudación*/
-
-                    var editar_amaterno_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 3 && tarea.idaccion == 3));
-                    if (editar_amaterno_coop_obr_rec == null) {
-                        $("#bodegadatos").data("editar_amaterno_coop_obr_rec", 0);
-                        var solicitar_editar_amaterno_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 127 && tarea.idaccion == 1));
-                        if (solicitar_editar_amaterno_coop_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_amaterno_coop_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-
-                    /*Tarea 6: Modificar el nombre de calle del domicilio de notificación del cooperador de la obra recaudación*/
-
-                    var editar_calle_notific_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 6 && tarea.idaccion == 3));
-                    if (editar_calle_notific_coop_obr_rec == null) {
-                        $("#bodegadatos").data("editar_calle_notific_coop_obr_rec", 0);
-                        var solicitar_editar_calle_notific_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 130 && tarea.idaccion == 1));
-                        if (solicitar_editar_calle_notific_coop_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_calle_notific_coop_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_calle_notific_coop_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_calle_notific_coop_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-                    /*Tarea 7: Modificar el nombre de colonia del domicilio de notificación del cooperador de la obra de recaudación*/
-
-                    var editar_colonia_notific_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 7 && tarea.idaccion == 3));
-                    if (editar_colonia_notific_coop_obr_rec == null) {
-                        $("#bodegadatos").data("editar_colonia_notific_coop_obr_rec", 0);
-                        var solicitar_editar_colonia_notific_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 131 && tarea.idaccion == 1));
-                        if (solicitar_editar_colonia_notific_coop_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_colonia_notific_coop_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_colonia_notific_coop_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_colonia_notific_coop_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-                    /*Tarea 8: Modificar el número oficial del domicilio de notificación del cooperador de la obra de recaudación*/
-
-                    var editar_numofic_notif_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 8 && tarea.idaccion == 3));
-                    if (editar_numofic_notif_coop_obr_rec == null) {
-                        $("#bodegadatos").data("editar_numofic_notif_coop_obr_rec", 0);
-                        var solicitar_editar_numofic_notif_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 132 && tarea.idaccion == 1));
-                        if (solicitar_editar_numofic_notif_coop_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_numofic_notif_coop_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_colonia_notific_coop_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_numofic_notif_coop_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-                    /*Tarea 9: Modificar la cuenta predial del predio de una obra en recaudación*/
-
-                    var editar_ctapred_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 9 && tarea.idaccion == 3));
-                    if (editar_ctapred_predio_obr_rec == null) {
-                        $("#bodegadatos").data("editar_ctapred_predio_obr_rec", 0);
-                        var solicitar_editar_ctapred_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 133 && tarea.idaccion == 1));
-                        if (solicitar_editar_ctapred_predio_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_ctapred_predio_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-
-                    /*Tarea 10: Modificar el CURP del cooperador del predio de una obra en recaudación*/
-
-                    var editar_curp_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 10 && tarea.idaccion == 3));
-                    if (editar_curp_coop_obr_rec == null) {
-                        $("#bodegadatos").data("editar_curp_coop_obr_rec", 0);
-                        var solicitar_editar_curp_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 134 && tarea.idaccion == 1));
-                        if (solicitar_editar_curp_coop_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_curp_coop_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_curp_coop_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_curp_coop_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-                    /*Tarea 11: Modificar el INE del cooperador de una obra en recaudación */
-
-                    var editar_ine_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 11 && tarea.idaccion == 3));
-                    if (editar_ine_coop_obr_rec == null) {
-                        $("#bodegadatos").data("editar_ine_coop_obr_rec", 0);
-                        var solicitar_editar_ine_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 135 && tarea.idaccion == 1));
-                        if (solicitar_editar_ine_coop_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_ine_coop_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_ine_coop_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_ine_coop_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-                    /*Tarea 9: Modificar el número telefónico del cooperador*/
-
-                    var editar_tel_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 9 && tarea.idaccion == 3));
-                    if (editar_tel_coop_obr_rec == null) {
-                        $("#bodegadatos").data("editar_tel_coop_obr_rec", 0);
-                        var solicitar_editar_tel_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 136 && tarea.idaccion == 1));
-                        if (solicitar_editar_tel_coop_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_tel_coop_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_tel_coop_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_tel_coop_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-                    /*Tarea 13: Modificar el email del cooperador*/
-
-                    var editar_email_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 13 && tarea.idaccion == 3));
-                    if (editar_email_coop_obr_rec == null) {
-                        $("#bodegadatos").data("editar_email_coop_obr_rec", 0);
-                        var solicitar_editar_email_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 137 && tarea.idaccion == 1));
-                        if (solicitar_editar_email_coop_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_email_coop_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_email_coop_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_email_coop_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-                    /*Tarea 9: Modificar la relación que mantiene el cooperador con el predio*/
-
-                    var editar_relacion_predio_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 14 && tarea.idaccion == 3));
-                    if (editar_relacion_predio_coop_obr_rec == null) {
-                        $("#bodegadatos").data("editar_relacion_predio_coop_obr_rec", 0);
-                        var solicitar_editar_relacion_predio_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 138 && tarea.idaccion == 1));
-                        if (solicitar_editar_relacion_predio_coop_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_relacion_predio_coop_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_relacion_predio_coop_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_relacion_predio_coop_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-                    /*Tarea 15: Modificar el documento de la identificación digital del cooperador*/
-
-                    var editar_identific_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 15 && tarea.idaccion == 3));
-                    if (editar_identific_coop_obr_rec == null) {
-                        $("#bodegadatos").data("editar_identific_coop_obr_rec", 0);
-                        var solicitar_editar_identific_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 139 && tarea.idaccion == 1));
-                        if (solicitar_editar_identific_coop_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_identific_coop_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_identific_coop_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_identific_coop_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-                    /*Tarea 4: Modificar el número oficial del Predio*/
-
-                    var editar_numofic_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 4 && tarea.idaccion == 3));
-                    if (editar_numofic_predio_obr_rec == null) {
-                        $("#bodegadatos").data("editar_numofic_predio_obr_rec", 0);
-                        var solicitar_editar_numofic_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 128 && tarea.idaccion == 1));
-                        if (solicitar_editar_numofic_predio_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_numofic_predio_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_numofic_predio_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_numofic_predio_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-                    /*Tarea 16: Modificar el número de lote del predio*/
-
-                    var editar_lote_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 16 && tarea.idaccion == 3));
-                    if (editar_lote_predio_obr_rec == null) {
-                        $("#bodegadatos").data("editar_lote_predio_obr_rec", 0);
-                        var solicitar_editar_lote_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 140 && tarea.idaccion == 1));
-                        if (solicitar_editar_lote_predio_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_lote_predio_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_lote_predio_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_lote_predio_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-                    /*Tarea 17: Modificar el número de manzana al que pertenece el predio*/
-
-                    var editar_mzna_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 17 && tarea.idaccion == 3));
-                    if (editar_mzna_predio_obr_rec == null) {
-                        $("#bodegadatos").data("editar_mzna_predio_obr_rec", 0);
-                        var solicitar_editar_mzna_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 141 && tarea.idaccion == 1));
-                        if (solicitar_editar_mzna_predio_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_mzna_predio_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_mzna_predio_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_mzna_predio_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-                    /*Tarea 18: Modificar la calve de IMUVI del cooperador*/
-
-                    var editar_imuvi_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 18 && tarea.idaccion == 3));
-                    if (editar_imuvi_predio_obr_rec == null) {
-                        $("#bodegadatos").data("editar_imuvi_predio_obr_rec", 0);
-                        var solicitar_editar_imuvi_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 142 && tarea.idaccion == 1));
-                        if (solicitar_editar_imuvi_predio_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_imuvi_predio_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_imuvi_predio_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_imuvi_predio_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-                    /*Tarea 19: Modificar el número de referencia de SAPAL */
-
-                    var editar_sapal_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 19 && tarea.idaccion == 3));
-                    if (editar_sapal_predio_obr_rec == null) {
-                        $("#bodegadatos").data("editar_sapal_predio_obr_rec", 0);
-                        var solicitar_editar_sapal_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 143 && tarea.idaccion == 1));
-                        if (solicitar_editar_sapal_predio_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_sapal_predio_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_sapal_predio_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_sapal_predio_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-
-                    /*Tarea 20: Modificar el número de referencia CUP, clave única de predio */
-
-                    var editar_cup_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 20 && tarea.idaccion == 3));
-                    if (editar_cup_predio_obr_rec == null) {
-                        $("#bodegadatos").data("editar_cup_predio_obr_rec", 0);
-                        var solicitar_editar_cup_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 144 && tarea.idaccion == 1));
-                        if (solicitar_editar_cup_predio_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_cup_predio_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_cup_predio_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_cup_predio_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-
-                    /*Tarea 21: Modificar el número de escritura r20*/
-
-                    var editar_r20_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 21 && tarea.idaccion == 3));
-                    if (editar_r20_predio_obr_rec == null) {
-                        $("#bodegadatos").data("editar_r20_predio_obr_rec", 0);
-                        var solicitar_editar_r20_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 145 && tarea.idaccion == 1));
-                        if (solicitar_editar_r20_predio_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_r20_predio_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_r20_predio_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_r20_predio_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-                    /*Tarea 22: Modificar tipo de predio  */
-
-                    var editar_tipo_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 22 && tarea.idaccion == 3));
-                    if (editar_tipo_predio_obr_rec == null) {
-                        $("#bodegadatos").data("editar_tipo_predio_obr_rec", 0);
-                        var solicitar_editar_tipo_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 146 && tarea.idaccion == 1));
-                        if (solicitar_editar_tipo_predio_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_tipo_predio_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_tipo_predio_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_tipo_predio_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-
-                    /*Tarea 2: Modificar los metros de frente del predio beneficiado  */
-
-                    var editar_mts_frente_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 2 && tarea.idaccion == 3));
-                    if (editar_mts_frente_obr_rec == null) {
-                        $("#bodegadatos").data("editar_mts_frente_obr_rec", 0);
-                        var solicitar_editar_mts_frente_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 126 && tarea.idaccion == 1));
-                        if (solicitar_editar_mts_frente_obr_rec == null) {
-                            $("#bodegadatos").data("solicitar_editar_mts_frente_obr_rec", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_mts_frente_obr_rec", 1);
-                            checarSolicitarEditarObraRec = 1;
-                        }
-
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_mts_frente_obr_rec", 1);
-                        checarEditarObraRec = 1;
-                    }
-
-
-
-
-                    /*Inicia rescate de reglas para las obra en proceso*/
-
-                    /*Tarea 5: Modificar el nombre del cooperador de una obra en proceso*/
-
-                    var editar_nombre_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 41 && tarea.idaccion == 3));
-                    if (editar_nombre_coop_obr_proc == null) {
-                        $("#bodegadatos").data("editar_nombre_coop_obr_proc", 0);
-                        var solicitar_editar_nombre_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 107 && tarea.idaccion == 1));
-                        if (solicitar_editar_nombre_coop_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_nombre_coop_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_nombre_coop_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_nombre_coop_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-
-                    /*Tarea 1: Modificar el apellido paterno del cooperador e una obra en recaudación*/
-
-                    var editar_apaterno_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 37 && tarea.idaccion == 3));
-                    if (editar_apaterno_coop_obr_proc == null) {
-                        $("#bodegadatos").data("editar_apaterno_coop_obr_proc", 0);
-                        var solicitar_editar_apaterno_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 103 && tarea.idaccion == 1));
-                        if (solicitar_editar_apaterno_coop_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_apaterno_coop_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-
-                    /*Tarea 3: Modificar el nombre de amaterno del cooperador de la obra en proceso*/
-
-                    var editar_amaterno_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 39 && tarea.idaccion == 3));
-                    if (editar_amaterno_coop_obr_proc == null) {
-                        $("#bodegadatos").data("editar_amaterno_coop_obr_proc", 0);
-                        var solicitar_editar_amaterno_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 105 && tarea.idaccion == 1));
-                        if (solicitar_editar_amaterno_coop_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_amaterno_coop_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-
-                    /*Tarea 6: Modificar el nombre de calle del domicilio de notificación del cooperador de la obra en proceso*/
-
-                    var editar_calle_notif_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 42 && tarea.idaccion == 3));
-                    if (editar_calle_notif_coop_obr_proc == null) {
-                        $("#bodegadatos").data("editar_calle_notif_coop_obr_proc", 0);
-                        var solicitar_editar_calle_notif_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 108 && tarea.idaccion == 1));
-                        if (solicitar_editar_calle_notif_coop_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_calle_notif_coop_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_calle_notif_coop_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_calle_notif_coop_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-                    /*Tarea 7: Modificar el nombre de colonia del domicilio de notificación del cooperador de la obra en proceso*/
-
-                    var editar_col_notif_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 43 && tarea.idaccion == 3));
-                    if (editar_col_notif_coop_obr_proc == null) {
-                        $("#bodegadatos").data("editar_col_notif_coop_obr_proc", 0);
-                        var solicitar_editar_col_notif_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 109 && tarea.idaccion == 1));
-                        if (solicitar_editar_col_notif_coop_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_col_notif_coop_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_col_notif_coop_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_col_notif_coop_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-                    /*Tarea 8: Modificar el número oficial del domicilio de notificación del cooperador de la obra en proceso*/
-
-                    var editar_numofic_notif_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 44 && tarea.idaccion == 3));
-                    if (editar_numofic_notif_coop_obr_proc == null) {
-                        $("#bodegadatos").data("editar_numofic_notif_coop_obr_proc", 0);
-                        var solicitar_editar_numofic_notif_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 110 && tarea.idaccion == 1));
-                        if (solicitar_editar_numofic_notif_coop_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_numofic_notif_coop_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_numofic_notif_coop_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_numofic_notif_coop_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-                    /*Tarea 9: Modificar la cuenta predial del predio dde la obra en proceso*/
-
-                    var editar_ctapred_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 45 && tarea.idaccion == 3));
-                    if (editar_ctapred_predio_obr_proc == null) {
-                        $("#bodegadatos").data("editar_ctapred_predio_obr_proc", 0);
-                        var solicitar_editar_ctapred_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 111 && tarea.idaccion == 1));
-                        if (solicitar_editar_ctapred_predio_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_ctapred_predio_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-
-                    /*Tarea 10: Modificar el CURP del cooperador del predio de la obra en proceso*/
-
-                    var editar_curp_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 46 && tarea.idaccion == 3));
-                    if (editar_curp_coop_obr_proc == null) {
-                        $("#bodegadatos").data("editar_curp_coop_obr_proc", 0);
-                        var solicitar_editar_curp_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 112 && tarea.idaccion == 1));
-                        if (solicitar_editar_curp_coop_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_curp_coop_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_curp_coop_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_curp_coop_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-                    /*Tarea 11: Modificar el INE del cooperador de la obra en proceso*/
-
-                    var editar_ine_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 47 && tarea.idaccion == 3));
-                    if (editar_ine_coop_obr_proc == null) {
-                        $("#bodegadatos").data("editar_ine_coop_obr_proc", 0);
-                        var solicitar_editar_ine_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 113 && tarea.idaccion == 1));
-                        if (solicitar_editar_ine_coop_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_ine_coop_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_ine_coop_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_ine_coop_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-                    /*Tarea 9: Modificar el número telefónico del cooperador de una obra en proceso*/
-
-                    var editar_tel_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 48 && tarea.idaccion == 3));
-                    if (editar_tel_coop_obr_proc == null) {
-                        $("#bodegadatos").data("editar_tel_coop_obr_proc", 0);
-                        var solicitar_editar_tel_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 114 && tarea.idaccion == 1));
-                        if (solicitar_editar_tel_coop_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_tel_coop_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_tel_coop_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_tel_coop_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-                    /*Tarea 13: Modificar el email del cooperador de una obra en proceso*/
-
-                    var editar_email_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 49 && tarea.idaccion == 3));
-                    if (editar_email_coop_obr_proc == null) {
-                        $("#bodegadatos").data("editar_email_coop_obr_proc", 0);
-                        var solicitar_editar_email_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 115 && tarea.idaccion == 1));
-                        if (solicitar_editar_email_coop_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_email_coop_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_email_coop_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_email_coop_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-                    /*Tarea 9: Modificar la relación que mantiene el cooperador con el predio de una obra en proceso*/
-
-                    var editar_relacion_predio_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 50 && tarea.idaccion == 3));
-                    if (editar_relacion_predio_coop_obr_proc == null) {
-                        $("#bodegadatos").data("editar_relacion_predio_coop_obr_proc", 0);
-                        var solicitar_editar_relacion_predio_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 116 && tarea.idaccion == 1));
-                        if (solicitar_editar_relacion_predio_coop_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_relacion_predio_coop_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_relacion_predio_coop_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_relacion_predio_coop_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-                    /*Tarea 15: Modificar el documento de la identificación digital del cooperador de una obra en proceso*/
-
-                    var editar_identific_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 51 && tarea.idaccion == 3));
-                    if (editar_identific_coop_obr_proc == null) {
-                        $("#bodegadatos").data("editar_identific_coop_obr_proc", 0);
-                        var solicitar_editar_identific_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 117 && tarea.idaccion == 1));
-                        if (solicitar_editar_identific_coop_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_identific_coop_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_identific_coop_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_identific_coop_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-                    /*Tarea 4: Modificar el número oficial del Predio de una obra en proceso*/
-
-                    var editar_numofic_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 40 && tarea.idaccion == 3));
-                    if (editar_numofic_predio_obr_proc == null) {
-                        $("#bodegadatos").data("editar_numofic_predio_obr_proc", 0);
-                        var solicitar_editar_numofic_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 106 && tarea.idaccion == 1));
-                        if (solicitar_editar_numofic_predio_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_numofic_predio_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_numofic_predio_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_numofic_predio_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-                    /*Tarea 16: Modificar el número de lote del predio de una obra en proceso*/
-
-                    var editar_lote_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 52 && tarea.idaccion == 3));
-                    if (editar_lote_predio_obr_proc == null) {
-                        $("#bodegadatos").data("editar_lote_predio_obr_proc", 0);
-                        var solicitar_editar_lote_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 118 && tarea.idaccion == 1));
-                        if (solicitar_editar_lote_predio_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_lote_predio_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_lote_predio_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_lote_predio_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-                    /*Tarea 17: Modificar el número de manzana al que pertenece el predio de una obra en proceso*/
-
-                    var editar_mzna_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 53 && tarea.idaccion == 3));
-                    if (editar_mzna_predio_obr_proc == null) {
-                        $("#bodegadatos").data("editar_mzna_predio_obr_proc", 0);
-                        var solicitar_editar_mzna_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 119 && tarea.idaccion == 1));
-                        if (solicitar_editar_mzna_predio_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_mzna_predio_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_mzna_predio_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_mzna_predio_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-                    /*Tarea 18: Modificar la calve de IMUVI del cooperador de una obra en proceso*/
-
-                    var editar_imuvi_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 54 && tarea.idaccion == 3));
-                    if (editar_imuvi_predio_obr_proc == null) {
-                        $("#bodegadatos").data("editar_imuvi_predio_obr_proc", 0);
-                        var solicitar_editar_imuvi_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 120 && tarea.idaccion == 1));
-                        if (solicitar_editar_imuvi_predio_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_imuvi_predio_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_imuvi_predio_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_imuvi_predio_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-                    /*Tarea 19: Modificar el número de referencia de SAPAL de una obra en proceso*/
-
-                    var editar_sapal_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 55 && tarea.idaccion == 3));
-                    if (editar_sapal_predio_obr_proc == null) {
-                        $("#bodegadatos").data("editar_sapal_predio_obr_proc", 0);
-                        var solicitar_editar_sapal_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 121 && tarea.idaccion == 1));
-                        if (solicitar_editar_sapal_predio_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_sapal_predio_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_sapal_predio_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_sapal_predio_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-
-                    /*Tarea 20: Modificar el número de referencia CUP, clave única de predio de una obra en proceso*/
-
-                    var editar_cup_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 56 && tarea.idaccion == 3));
-                    if (editar_cup_predio_obr_proc == null) {
-                        $("#bodegadatos").data("editar_cup_predio_obr_proc", 0);
-                        var solicitar_editar_cup_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 122 && tarea.idaccion == 1));
-                        if (solicitar_editar_cup_predio_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_cup_predio_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_cup_predio_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_cup_predio_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-
-                    /*Tarea 21: Modificar el número de escritura r20 de una obra en proceso*/
-
-                    var editar_r20_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 57 && tarea.idaccion == 3));
-                    if (editar_r20_predio_obr_proc == null) {
-                        $("#bodegadatos").data("editar_r20_predio_obr_proc", 0);
-                        var solicitar_editar_r20_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 123 && tarea.idaccion == 1));
-                        if (solicitar_editar_r20_predio_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_r20_predio_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_r20_predio_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_r20_predio_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-                    /*Tarea 22: Modificar tipo de predio de una obra én proceso */
-
-                    var editar_tipo_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 58 && tarea.idaccion == 3));
-                    if (editar_tipo_predio_obr_proc == null) {
-                        $("#bodegadatos").data("editar_tipo_predio_obr_proc", 0);
-                        var solicitar_editar_tipo_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 124 && tarea.idaccion == 1));
-                        if (solicitar_editar_tipo_predio_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_tipo_predio_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_tipo_predio_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_tipo_predio_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-
-                    /*Tarea 2: Modificar los metros de frente del predio beneficiado por una obra en proceso */
-
-                    var editar_mts_frente_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 38 && tarea.idaccion == 3));
-                    if (editar_mts_frente_obr_proc == null) {
-                        $("#bodegadatos").data("editar_mts_frente_obr_proc", 0);
-                        var solicitar_editar_mts_frente_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 104 && tarea.idaccion == 1));
-                        if (solicitar_editar_mts_frente_obr_proc == null) {
-                            $("#bodegadatos").data("solicitar_editar_mts_frente_obr_proc", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_mts_frente_obr_proc", 1);
-                            checarSolicitarEditarObraProc = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_mts_frente_obr_proc", 1);
-                        checarEditarObraProc = 1;
-                    }
-
-
-
-                    /*Inicia rescate de reglas para las obra en cobranza*/
-
-                    /*Tarea 5: Modificar el nombre del cooperador de una obra en cobranza*/
-
-                    var editar_nombre_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 63 && tarea.idaccion == 3));
-                    if (editar_nombre_coop_obr_cob == null) {
-                        $("#bodegadatos").data("editar_nombre_coop_obr_cob", 0);
-                        var solicitar_editar_nombre_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 85 && tarea.idaccion == 1));
-                        if (solicitar_editar_nombre_coop_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_nombre_coop_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_nombre_coop_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_nombre_coop_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-
-                    /*Tarea 1: Modificar el apellido paterno del cooperador e una obra en cobranza*/
-
-                    var editar_apaterno_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 59 && tarea.idaccion == 3));
-                    if (editar_apaterno_coop_obr_cob == null) {
-                        $("#bodegadatos").data("editar_apaterno_coop_obr_cob", 0);
-                        var solicitar_editar_apaterno_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 81 && tarea.idaccion == 1));
-                        if (solicitar_editar_apaterno_coop_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_apaterno_coop_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-
-                    /*Tarea 3: Modificar el nombre de amaterno del cooperador de la obra en cobranza*/
-
-                    var editar_amaterno_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 61 && tarea.idaccion == 3));
-                    if (editar_amaterno_coop_obr_cob == null) {
-                        $("#bodegadatos").data("editar_amaterno_coop_obr_cob", 0);
-                        var solicitar_editar_amaterno_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 83 && tarea.idaccion == 1));
-                        if (solicitar_editar_amaterno_coop_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_amaterno_coop_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-
-                    /*Tarea 6: Modificar el nombre de calle del domicilio de notificación del cooperador de la obra en cobranza*/
-
-                    var editar_calle_notif_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 64 && tarea.idaccion == 3));
-                    if (editar_calle_notif_coop_obr_cob == null) {
-                        $("#bodegadatos").data("editar_calle_notif_coop_obr_cob", 0);
-                        var solicitar_editar_calle_notif_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 86 && tarea.idaccion == 1));
-                        if (solicitar_editar_calle_notif_coop_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_calle_notif_coop_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_calle_notif_coop_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_calle_notif_coop_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-                    /*Tarea 7: Modificar el nombre de colonia del domicilio de notificación del cooperador de la obra en cobranza*/
-
-                    var editar_col_notif_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 65 && tarea.idaccion == 3));
-                    if (editar_col_notif_coop_obr_cob == null) {
-                        $("#bodegadatos").data("editar_col_notif_coop_obr_cob", 0);
-                        var solicitar_editar_col_notif_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 87 && tarea.idaccion == 1));
-                        if (solicitar_editar_col_notif_coop_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_col_notif_coop_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_col_notif_coop_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_col_notif_coop_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-                    /*Tarea 8: Modificar el número oficial del domicilio de notificación del cooperador de la obra en cobranza*/
-
-                    var editar_numofic_notif_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 66 && tarea.idaccion == 3));
-                    if (editar_numofic_notif_coop_obr_cob == null) {
-                        $("#bodegadatos").data("editar_numofic_notif_coop_obr_cob", 0);
-                        var solicitar_editar_numofic_notif_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 88 && tarea.idaccion == 1));
-                        if (solicitar_editar_numofic_notif_coop_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_numofic_notif_coop_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_numofic_notif_coop_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_numofic_notif_coop_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-                    /*Tarea 9: Modificar la cuenta predial del predio dde la obra en proceso*/
-
-                    var editar_ctapred_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 67 && tarea.idaccion == 3));
-                    if (editar_ctapred_predio_obr_cob == null) {
-                        $("#bodegadatos").data("editar_ctapred_predio_obr_cob", 0);
-                        var solicitar_editar_ctapred_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 89 && tarea.idaccion == 1));
-                        if (solicitar_editar_ctapred_predio_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_ctapred_predio_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-
-                    /*Tarea 10: Modificar el CURP del cooperador del predio de la obra en cobranza*/
-
-                    var editar_curp_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 68 && tarea.idaccion == 3));
-                    if (editar_curp_coop_obr_cob == null) {
-                        $("#bodegadatos").data("editar_curp_coop_obr_cob", 0);
-                        var solicitar_editar_curp_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 90 && tarea.idaccion == 1));
-                        if (solicitar_editar_curp_coop_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_curp_coop_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_curp_coop_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_curp_coop_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-                    /*Tarea 11: Modificar el INE del cooperador de la obra en proceso*/
-
-                    var editar_ine_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 69 && tarea.idaccion == 3));
-                    if (editar_ine_coop_obr_cob == null) {
-                        $("#bodegadatos").data("editar_ine_coop_obr_cob", 0);
-                        var solicitar_editar_ine_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 91 && tarea.idaccion == 1));
-                        if (solicitar_editar_ine_coop_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_ine_coop_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_ine_coop_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_ine_coop_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-                    /*Tarea 9: Modificar el número telefónico del cooperador de una obra en cobranza*/
-
-                    var editar_tel_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 70 && tarea.idaccion == 3));
-                    if (editar_tel_coop_obr_cob == null) {
-                        $("#bodegadatos").data("editar_tel_coop_obr_cob", 0);
-                        var solicitar_editar_tel_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 92 && tarea.idaccion == 1));
-                        if (solicitar_editar_tel_coop_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_tel_coop_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_tel_coop_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_tel_coop_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-                    /*Tarea 13: Modificar el email del cooperador de una obra en cobranza*/
-
-                    var editar_email_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 71 && tarea.idaccion == 3));
-                    if (editar_email_coop_obr_cob == null) {
-                        $("#bodegadatos").data("editar_email_coop_obr_cob", 0);
-                        var solicitar_editar_email_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 93 && tarea.idaccion == 1));
-                        if (solicitar_editar_email_coop_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_email_coop_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_email_coop_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_email_coop_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-                    /*Tarea 9: Modificar la relación que mantiene el cooperador con el predio de una obra en cobranza*/
-
-                    var editar_relacion_predio_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 72 && tarea.idaccion == 3));
-                    if (editar_relacion_predio_coop_obr_cob == null) {
-                        $("#bodegadatos").data("editar_relacion_predio_coop_obr_cob", 0);
-                        var solicitar_editar_relacion_predio_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 94 && tarea.idaccion == 1));
-                        if (solicitar_editar_relacion_predio_coop_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_relacion_predio_coop_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_relacion_predio_coop_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_relacion_predio_coop_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-                    /*Tarea 15: Modificar el documento de la identificación digital del cooperador de una obra en cobranza*/
-
-                    var editar_identific_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 73 && tarea.idaccion == 3));
-                    if (editar_identific_coop_obr_cob == null) {
-                        $("#bodegadatos").data("editar_identific_coop_obr_cob", 0);
-                        var solicitar_editar_identific_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 95 && tarea.idaccion == 1));
-                        if (solicitar_editar_identific_coop_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_identific_coop_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_identific_coop_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_identific_coop_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-                    /*Tarea 4: Modificar el número oficial del Predio de una obra en cobranza*/
-
-                    var editar_numofic_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 62 && tarea.idaccion == 3));
-                    if (editar_numofic_predio_obr_cob == null) {
-                        $("#bodegadatos").data("editar_numofic_predio_obr_cob", 0);
-                        var solicitar_editar_numofic_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 84 && tarea.idaccion == 1));
-                        if (solicitar_editar_numofic_predio_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_numofic_predio_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_numofic_predio_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_numofic_predio_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-                    /*Tarea 16: Modificar el número de lote del predio de una obra en cobranza*/
-
-                    var editar_lote_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 74 && tarea.idaccion == 3));
-                    if (editar_lote_predio_obr_cob == null) {
-                        $("#bodegadatos").data("editar_lote_predio_obr_cob", 0);
-                        var solicitar_editar_lote_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 96 && tarea.idaccion == 1));
-                        if (solicitar_editar_lote_predio_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_lote_predio_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_lote_predio_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_lote_predio_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-                    /*Tarea 17: Modificar el número de manzana al que pertenece el predio de una obra en cobranza*/
-
-                    var editar_mzna_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 75 && tarea.idaccion == 3));
-                    if (editar_mzna_predio_obr_cob == null) {
-                        $("#bodegadatos").data("editar_mzna_predio_obr_cob", 0);
-                        var solicitar_editar_mzna_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 97 && tarea.idaccion == 1));
-                        if (solicitar_editar_mzna_predio_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_mzna_predio_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_mzna_predio_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_mzna_predio_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-                    /*Tarea 18: Modificar la calve de IMUVI del cooperador de una obra en cobranza*/
-
-                    var editar_imuvi_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 76 && tarea.idaccion == 3));
-                    if (editar_imuvi_predio_obr_cob == null) {
-                        $("#bodegadatos").data("editar_imuvi_predio_obr_cob", 0);
-                        var solicitar_editar_imuvi_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 98 && tarea.idaccion == 1));
-                        if (solicitar_editar_imuvi_predio_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_imuvi_predio_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_imuvi_predio_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_imuvi_predio_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-                    /*Tarea 19: Modificar el número de referencia de SAPAL de una obra en cobranza*/
-
-                    var editar_sapal_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 77 && tarea.idaccion == 3));
-                    if (editar_sapal_predio_obr_cob == null) {
-                        $("#bodegadatos").data("editar_sapal_predio_obr_cob", 0);
-                        var solicitar_editar_sapal_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 99 && tarea.idaccion == 1));
-                        if (solicitar_editar_sapal_predio_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_sapal_predio_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_sapal_predio_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_sapal_predio_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-
-                    /*Tarea 20: Modificar el número de referencia CUP, clave única de predio de una obra en cobranza*/
-
-                    var editar_cup_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 78 && tarea.idaccion == 3));
-                    if (editar_cup_predio_obr_cob == null) {
-                        $("#bodegadatos").data("editar_cup_predio_obr_cob", 0);
-                        var solicitar_editar_cup_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 100 && tarea.idaccion == 1));
-                        if (solicitar_editar_cup_predio_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_cup_predio_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_cup_predio_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_cup_predio_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-
-                    /*Tarea 21: Modificar el número de escritura r20 de una obra en cobranza*/
-
-                    var editar_r20_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 79 && tarea.idaccion == 3));
-                    if (editar_r20_predio_obr_cob == null) {
-                        $("#bodegadatos").data("editar_r20_predio_obr_cob", 0);
-                        var solicitar_editar_r20_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 101 && tarea.idaccion == 1));
-                        if (solicitar_editar_r20_predio_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_r20_predio_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_r20_predio_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_r20_predio_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-                    /*Tarea 22: Modificar tipo de predio de una obra en cobranza */
-
-                    var editar_tipo_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 80 && tarea.idaccion == 3));
-                    if (editar_tipo_predio_obr_cob == null) {
-                        $("#bodegadatos").data("editar_tipo_predio_obr_cob", 0);
-                        var solicitar_editar_tipo_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 102 && tarea.idaccion == 1));
-                        if (solicitar_editar_tipo_predio_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_tipo_predio_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_tipo_predio_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_tipo_predio_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-
-                    /*Tarea 2: Modificar los metros de frente del predio beneficiado por una obra en cobranza */
-
-                    var editar_mts_frente_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 60 && tarea.idaccion == 3));
-                    if (editar_mts_frente_obr_cob == null) {
-                        $("#bodegadatos").data("editar_mts_frente_obr_cob", 0);
-                        var solicitar_editar_mts_frente_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 82 && tarea.idaccion == 1));
-                        if (solicitar_editar_mts_frente_obr_cob == null) {
-                            $("#bodegadatos").data("solicitar_editar_mts_frente_obr_cob", 0);
-                        }
-                        else {
-                            $("#bodegadatos").data("solicitar_editar_mts_frente_obr_cob", 1);
-                            checarSolicitarEditarObraCob = 1;
-                        }
-                    }
-                    else {
-                        $("#bodegadatos").data("editar_mts_frente_obr_cob", 1);
-                        checarEditarObraCob = 1;
-                    }
-
-
-                    $("#bodegadatos").data("checarEditarObraRec", checarEditarObraRec); /*Globaliza el indicador de si el usuario puede editar al menos un campo una obra en recaudacion*/
-                    $("#bodegadatos").data("checarEditarObraProc", checarEditarObraProc); /*Globaliza el indicador de si el usuario puede editar al menos un campo una obra en proceso*/
-                    $("#bodegadatos").data("checarEditarObraCob", checarEditarObraCob)    /*Globaliza el indicador de si el usuario puede editar al menos un campo una obra en Cobranza*/
-
-                    $("#bodegadatos").data("checarSolicitarEditarObraRec", checarSolicitarEditarObraRec); /*Globaliza el indicador de si el usuario puede solicitar editar al menos un campo obra en recaudacion*/
-                    $("#bodegadatos").data("checarSolicitarEditarObraProc", checarSolicitarEditarObraProc); /*Globaliza el indicador de si el usuario puede editar al menos solicitar editar un campo de una obra en proceso*/
-                    $("#bodegadatos").data("checarSolicitarEditarObraCob", checarSolicitarEditarObraCob)    /*Globaliza el indicador de si el usuario puede al menos solicitar editar un campo de una obra en Cobranza*/
-                }
-
-            }).fail(function (r) {
-                alert("No fué posible consultar las reglas del usuario.");
-            });
-
-
+                .done(function (r) {
+                    var regla = $.trim(r.d);
+                    if (regla != "<NewDataSet />") {  // Si encontró reglas para el usuario, preparar las propiedades correspondientes
+                        var reglas_usu = [];
+
+
+                        $(r.d).find("regla").each(function () {
+
+                            var objReglaUsu = {
+                                "idrol": 0,
+                                "crolnombre": '',
+                                "croldescripcion": 0,
+                                "idaccion": 0,
+                                "etiqueta_accion": 0,
+                                "idtarea": '',
+                                "etiqueta_tarea": 0,
+                                "fec_cre": 0,
+                                "musuid": '',
+                                "musunombre": '',
+                                "musucuenta": 0
+                            }
+
+                            objReglaUsu.idrol = $(this).find("idrol_r").text();
+                            objReglaUsu.crolnombre = $(this).find("crolnombre_r").text();
+                            objReglaUsu.croldescripcion = $(this).find("croldescripcion_r").text();
+                            objReglaUsu.idaccion = $(this).find("idaccion_r").text();
+                            objReglaUsu.etiqueta_accion = $(this).find("etiqueta_accion_r").text();
+                            objReglaUsu.idtarea = $(this).find("idtarea_r").text();
+                            objReglaUsu.etiqueta_tarea = $(this).find("etiqueta_tarea_r").text();
+                            objReglaUsu.fec_cre = $(this).find("fec_cre_r").text();
+                            objReglaUsu.musuid = $(this).find("musuid_r").text();
+                            objReglaUsu.musunombre = $(this).find("musunombre_r").text();
+                            objReglaUsu.musucuenta = $(this).find("musucuenta_r").text();
+                            reglas_usu.push(objReglaUsu);
+                        });
+
+                        
+                        /*Tarea 28: Alta de un cooperador en obra de Recaudación*/
+                            var alta_coop_obra_rec = reglas_usu.find(tarea => (tarea.idtarea == 28 && tarea.idaccion==3));
+                            if (alta_coop_obra_rec==null)
+                                {
+                                  $("#bodegadatos").data("alta_coop_obra_rec", 0);
+                                }
+                            else{                                 
+                                  $("#bodegadatos").data("alta_coop_obra_rec", 1);
+                            }
+                        
+                        /*Tarea 29: Alta de un cooperador en obra de Proceso*/
+
+                            var alta_coop_obra_proc = reglas_usu.find(tarea => (tarea.idtarea == 29 && tarea.idaccion==3));
+                            if (alta_coop_obra_proc==null)
+                            {
+                                $("#bodegadatos").data("alta_coop_obra_proc", 0);
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("alta_coop_obra_proc", 1);
+                            }
+
+                        
+                        /*Tarea 34: Alta de un cooperador en una obra de cobranza*/
+
+                            var alta_coop_obra_cob = reglas_usu.find(tarea => (tarea.idtarea == 34 && tarea.idaccion==3));
+                            if (alta_coop_obra_cob==null)
+                            {
+                                $("#bodegadatos").data("alta_coop_obra_cob", 0);
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("alta_coop_obra_cob", 1);
+                            }
+
+
+
+                        /*Tarea 30: Eliminar cooperador de una obra en Recaudación*/
+
+                            var eliminar_coop_obra_rec = reglas_usu.find(tarea => (tarea.idtarea == 30 && tarea.idaccion==3));
+                            if (eliminar_coop_obra_rec==null)
+                            {
+                                $("#bodegadatos").data("eliminar_coop_obra_rec", 0);
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("eliminar_coop_obra_rec", 1);
+                            }
+
+                        /*Tarea 31: Eliminar un cooperador de una obra en Proceso*/
+
+                            var eliminar_coop_obra_proc = reglas_usu.find(tarea => (tarea.idtarea == 31 && tarea.idaccion==3));
+                            if (eliminar_coop_obra_proc==null)
+                            {
+                                $("#bodegadatos").data("eliminar_coop_obra_proc", 0);
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("eliminar_coop_obra_proc", 1);
+                            }
+
+                        /*Tarea 36: Eliminar un cooperador de una obra en cobranza*/
+
+                            var eliminar_coop_obra_cob = reglas_usu.find(tarea => (tarea.idtarea == 36 && tarea.idaccion==3));
+                            if (eliminar_coop_obra_cob==null)
+                            {
+                                $("#bodegadatos").data("eliminar_coop_obra_cob", 0);
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("eliminar_coop_obra_cob", 1);
+                            }
+
+
+                        /*Inicia reglas para poder Editar y Solicitar editar los datos del Cooperador de Obra en los 3 estatus*/
+
+                            var checarEditarObraRec =  0;
+                            var checarEditarObraProc =  0;
+                            var checarEditarObraCob =  0;
+
+                            var checarSolicitarEditarObraRec =  0;
+                            var checarSolicitarEditarObraProc =  0;
+                            var checarSolicitarEditarObraCob =  0;
+
+                        /*Tarea 5: Modificar el nombre del cooperador de una OBRA EN RECAUDACIÓN*/
+
+                            var editar_nombre_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 5 && tarea.idaccion==3));
+                            if (editar_nombre_coop_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_nombre_coop_obr_rec", 0);
+                                
+                                var solicitar_editar_nombre_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 129 && tarea.idaccion==1));
+                                if (solicitar_editar_nombre_coop_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_nombre_coop_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_nombre_coop_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_nombre_coop_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+
+                        /*Tarea 1: Modificar el apellido paterno del cooperador e una obra en recaudación*/
+
+                            var editar_apaterno_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 1 && tarea.idaccion==3));
+                            if (editar_apaterno_coop_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_apaterno_coop_obr_rec", 0);
+                                var solicitar_editar_apaterno_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 125 && tarea.idaccion==1));
+                                if (solicitar_editar_apaterno_coop_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_apaterno_coop_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+
+                        /*Tarea 3: Modificar el nombre de amaterno del cooperador de la obra recaudación*/
+
+                            var editar_amaterno_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 3 && tarea.idaccion==3));
+                            if (editar_amaterno_coop_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_amaterno_coop_obr_rec", 0);
+                                var solicitar_editar_amaterno_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 127 && tarea.idaccion==1));
+                                if (solicitar_editar_amaterno_coop_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_amaterno_coop_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+
+                        /*Tarea 6: Modificar el nombre de calle del domicilio de notificación del cooperador de la obra recaudación*/
+
+                            var editar_calle_notific_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 6 && tarea.idaccion==3));
+                            if (editar_calle_notific_coop_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_calle_notific_coop_obr_rec", 0);
+                                var solicitar_editar_calle_notific_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 130 && tarea.idaccion==1));
+                                if (solicitar_editar_calle_notific_coop_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_calle_notific_coop_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_calle_notific_coop_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_calle_notific_coop_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+                        /*Tarea 7: Modificar el nombre de colonia del domicilio de notificación del cooperador de la obra de recaudación*/
+
+                            var editar_colonia_notific_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 7 && tarea.idaccion==3));
+                            if (editar_colonia_notific_coop_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_colonia_notific_coop_obr_rec", 0);
+                                var solicitar_editar_colonia_notific_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 131 && tarea.idaccion==1));
+                                if (solicitar_editar_colonia_notific_coop_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_colonia_notific_coop_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_colonia_notific_coop_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_colonia_notific_coop_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+                        /*Tarea 8: Modificar el número oficial del domicilio de notificación del cooperador de la obra de recaudación*/
+
+                            var editar_numofic_notif_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 8 && tarea.idaccion==3));
+                            if (editar_numofic_notif_coop_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_numofic_notif_coop_obr_rec", 0);
+                                var solicitar_editar_numofic_notif_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 132 && tarea.idaccion==1));
+                                if (solicitar_editar_numofic_notif_coop_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_numofic_notif_coop_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_colonia_notific_coop_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_numofic_notif_coop_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+                        /*Tarea 9: Modificar la cuenta predial del predio de una obra en recaudación*/
+
+                            var editar_ctapred_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 9 && tarea.idaccion==3));
+                            if (editar_ctapred_predio_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_ctapred_predio_obr_rec", 0);
+                                var solicitar_editar_ctapred_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 133 && tarea.idaccion==1));
+                                if (solicitar_editar_ctapred_predio_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_ctapred_predio_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+
+                        /*Tarea 10: Modificar el CURP del cooperador del predio de una obra en recaudación*/
+
+                            var editar_curp_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 10 && tarea.idaccion==3));
+                            if (editar_curp_coop_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_curp_coop_obr_rec", 0);
+                                var solicitar_editar_curp_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 134 && tarea.idaccion==1));
+                                if (solicitar_editar_curp_coop_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_curp_coop_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_curp_coop_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_curp_coop_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+                        /*Tarea 11: Modificar el INE del cooperador de una obra en recaudación */
+
+                            var editar_ine_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 11 && tarea.idaccion==3));
+                            if (editar_ine_coop_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_ine_coop_obr_rec", 0);
+                                var solicitar_editar_ine_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 135 && tarea.idaccion==1));
+                                if (solicitar_editar_ine_coop_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_ine_coop_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_ine_coop_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_ine_coop_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+                        /*Tarea 9: Modificar el número telefónico del cooperador*/
+
+                            var editar_tel_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 9 && tarea.idaccion==3));
+                            if (editar_tel_coop_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_tel_coop_obr_rec", 0);
+                                var solicitar_editar_tel_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 136 && tarea.idaccion==1));
+                                if (solicitar_editar_tel_coop_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_tel_coop_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_tel_coop_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_tel_coop_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+                        /*Tarea 13: Modificar el email del cooperador*/
+
+                            var editar_email_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 13 && tarea.idaccion==3));
+                            if (editar_email_coop_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_email_coop_obr_rec", 0);
+                                var solicitar_editar_email_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 137 && tarea.idaccion==1));
+                                if (solicitar_editar_email_coop_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_email_coop_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_email_coop_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_email_coop_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+                        /*Tarea 9: Modificar la relación que mantiene el cooperador con el predio*/
+
+                            var editar_relacion_predio_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 14 && tarea.idaccion==3));
+                            if (editar_relacion_predio_coop_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_relacion_predio_coop_obr_rec", 0);
+                                var solicitar_editar_relacion_predio_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 138 && tarea.idaccion==1));
+                                if (solicitar_editar_relacion_predio_coop_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_relacion_predio_coop_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_relacion_predio_coop_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_relacion_predio_coop_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+                        /*Tarea 15: Modificar el documento de la identificación digital del cooperador*/
+
+                            var editar_identific_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 15 && tarea.idaccion==3));
+                            if (editar_identific_coop_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_identific_coop_obr_rec", 0);
+                                var solicitar_editar_identific_coop_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 139 && tarea.idaccion==1));
+                                if (solicitar_editar_identific_coop_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_identific_coop_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_identific_coop_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_identific_coop_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+                        /*Tarea 4: Modificar el número oficial del Predio*/
+
+                            var editar_numofic_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 4 && tarea.idaccion==3));
+                            if (editar_numofic_predio_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_numofic_predio_obr_rec", 0);
+                                var solicitar_editar_numofic_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 128 && tarea.idaccion==1));
+                                if (solicitar_editar_numofic_predio_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_numofic_predio_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_numofic_predio_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_numofic_predio_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+                        /*Tarea 16: Modificar el número de lote del predio*/
+
+                            var editar_lote_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 16 && tarea.idaccion==3));
+                            if (editar_lote_predio_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_lote_predio_obr_rec", 0);
+                                var solicitar_editar_lote_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 140 && tarea.idaccion==1));
+                                if (solicitar_editar_lote_predio_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_lote_predio_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_lote_predio_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_lote_predio_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+                        /*Tarea 17: Modificar el número de manzana al que pertenece el predio*/
+
+                            var editar_mzna_predio_obr_rec= reglas_usu.find(tarea => (tarea.idtarea == 17 && tarea.idaccion==3));
+                            if (editar_mzna_predio_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_mzna_predio_obr_rec", 0);
+                                var solicitar_editar_mzna_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 141 && tarea.idaccion==1));
+                                if (solicitar_editar_mzna_predio_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_mzna_predio_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_mzna_predio_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_mzna_predio_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+                        /*Tarea 18: Modificar la calve de IMUVI del cooperador*/
+
+                            var editar_imuvi_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 18 && tarea.idaccion==3));
+                            if (editar_imuvi_predio_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_imuvi_predio_obr_rec", 0);
+                                var solicitar_editar_imuvi_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 142 && tarea.idaccion==1));
+                                if (solicitar_editar_imuvi_predio_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_imuvi_predio_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_imuvi_predio_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_imuvi_predio_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+                        /*Tarea 19: Modificar el número de referencia de SAPAL */
+
+                            var editar_sapal_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 19 && tarea.idaccion==3));
+                            if (editar_sapal_predio_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_sapal_predio_obr_rec", 0);
+                                var solicitar_editar_sapal_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 143 && tarea.idaccion==1));
+                                if (solicitar_editar_sapal_predio_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_sapal_predio_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_sapal_predio_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_sapal_predio_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+
+                        /*Tarea 20: Modificar el número de referencia CUP, clave única de predio */
+
+                            var editar_cup_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 20 && tarea.idaccion==3));
+                            if (editar_cup_predio_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_cup_predio_obr_rec", 0);
+                                var solicitar_editar_cup_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 144 && tarea.idaccion==1));
+                                if (solicitar_editar_cup_predio_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_cup_predio_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_cup_predio_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_cup_predio_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+
+                        /*Tarea 21: Modificar el número de escritura r20*/
+
+                            var editar_r20_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 21 && tarea.idaccion==3));
+                            if (editar_r20_predio_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_r20_predio_obr_rec", 0);
+                                var solicitar_editar_r20_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 145 && tarea.idaccion==1));
+                                if (solicitar_editar_r20_predio_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_r20_predio_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_r20_predio_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_r20_predio_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+                        /*Tarea 22: Modificar tipo de predio  */
+
+                            var editar_tipo_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 22 && tarea.idaccion==3));
+                            if (editar_tipo_predio_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_tipo_predio_obr_rec", 0);
+                                var solicitar_editar_tipo_predio_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 146 && tarea.idaccion==1));
+                                if (solicitar_editar_tipo_predio_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_tipo_predio_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_tipo_predio_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_tipo_predio_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+
+                        /*Tarea 2: Modificar los metros de frente del predio beneficiado  */
+
+                            var editar_mts_frente_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 2 && tarea.idaccion==3));
+                            if (editar_mts_frente_obr_rec==null)
+                            {
+                                $("#bodegadatos").data("editar_mts_frente_obr_rec", 0);
+                                var solicitar_editar_mts_frente_obr_rec = reglas_usu.find(tarea => (tarea.idtarea == 126 && tarea.idaccion==1));
+                                if (solicitar_editar_mts_frente_obr_rec==null) {
+                                    $("#bodegadatos").data("solicitar_editar_mts_frente_obr_rec", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_mts_frente_obr_rec", 1);
+                                    checarSolicitarEditarObraRec=1;
+                                }
+
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_mts_frente_obr_rec", 1);
+                                checarEditarObraRec = 1;
+                            }
+
+
+
+
+                        /*Inicia rescate de reglas para las obra en proceso*/
+
+                        /*Tarea 5: Modificar el nombre del cooperador de una obra en proceso*/
+
+                            var editar_nombre_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 41 && tarea.idaccion==3));
+                            if (editar_nombre_coop_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_nombre_coop_obr_proc", 0);
+                                var solicitar_editar_nombre_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 107 && tarea.idaccion==1));
+                                if (solicitar_editar_nombre_coop_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_nombre_coop_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_nombre_coop_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_nombre_coop_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+
+                        /*Tarea 1: Modificar el apellido paterno del cooperador e una obra en recaudación*/
+
+                            var editar_apaterno_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 37 && tarea.idaccion==3));
+                            if (editar_apaterno_coop_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_apaterno_coop_obr_proc", 0);
+                                var solicitar_editar_apaterno_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 103 && tarea.idaccion==1));
+                                if (solicitar_editar_apaterno_coop_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_apaterno_coop_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+
+                        /*Tarea 3: Modificar el nombre de amaterno del cooperador de la obra en proceso*/
+
+                            var editar_amaterno_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 39 && tarea.idaccion==3));
+                            if (editar_amaterno_coop_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_amaterno_coop_obr_proc", 0);
+                                var solicitar_editar_amaterno_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 105 && tarea.idaccion==1));
+                                if (solicitar_editar_amaterno_coop_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_amaterno_coop_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+
+                        /*Tarea 6: Modificar el nombre de calle del domicilio de notificación del cooperador de la obra en proceso*/
+
+                            var editar_calle_notif_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 42 && tarea.idaccion==3));
+                            if (editar_calle_notif_coop_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_calle_notif_coop_obr_proc", 0);
+                                var solicitar_editar_calle_notif_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 108 && tarea.idaccion==1));
+                                if (solicitar_editar_calle_notif_coop_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_calle_notif_coop_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_calle_notif_coop_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_calle_notif_coop_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+                        /*Tarea 7: Modificar el nombre de colonia del domicilio de notificación del cooperador de la obra en proceso*/
+
+                            var editar_col_notif_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 43 && tarea.idaccion==3));
+                            if (editar_col_notif_coop_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_col_notif_coop_obr_proc", 0);
+                                var solicitar_editar_col_notif_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 109 && tarea.idaccion==1));
+                                if (solicitar_editar_col_notif_coop_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_col_notif_coop_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_col_notif_coop_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_col_notif_coop_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+                        /*Tarea 8: Modificar el número oficial del domicilio de notificación del cooperador de la obra en proceso*/
+
+                            var editar_numofic_notif_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 44 && tarea.idaccion==3));
+                            if (editar_numofic_notif_coop_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_numofic_notif_coop_obr_proc", 0);
+                                var solicitar_editar_numofic_notif_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 110 && tarea.idaccion==1));
+                                if (solicitar_editar_numofic_notif_coop_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_numofic_notif_coop_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_numofic_notif_coop_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_numofic_notif_coop_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+                        /*Tarea 9: Modificar la cuenta predial del predio dde la obra en proceso*/
+
+                            var editar_ctapred_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 45 && tarea.idaccion==3));
+                            if (editar_ctapred_predio_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_ctapred_predio_obr_proc", 0);
+                                var solicitar_editar_ctapred_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 111 && tarea.idaccion==1));
+                                if (solicitar_editar_ctapred_predio_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_ctapred_predio_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+
+                        /*Tarea 10: Modificar el CURP del cooperador del predio de la obra en proceso*/
+
+                            var editar_curp_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 46 && tarea.idaccion==3));
+                            if (editar_curp_coop_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_curp_coop_obr_proc", 0);
+                                var solicitar_editar_curp_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 112 && tarea.idaccion==1));
+                                if (solicitar_editar_curp_coop_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_curp_coop_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_curp_coop_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_curp_coop_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+                        /*Tarea 11: Modificar el INE del cooperador de la obra en proceso*/
+
+                            var editar_ine_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 47 && tarea.idaccion==3));
+                            if (editar_ine_coop_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_ine_coop_obr_proc", 0);
+                                var solicitar_editar_ine_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 113 && tarea.idaccion==1));
+                                if (solicitar_editar_ine_coop_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_ine_coop_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_ine_coop_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_ine_coop_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+                        /*Tarea 9: Modificar el número telefónico del cooperador de una obra en proceso*/
+
+                            var editar_tel_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 48 && tarea.idaccion==3));
+                            if (editar_tel_coop_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_tel_coop_obr_proc", 0);
+                                var solicitar_editar_tel_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 114 && tarea.idaccion==1));
+                                if (solicitar_editar_tel_coop_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_tel_coop_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_tel_coop_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_tel_coop_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+                        /*Tarea 13: Modificar el email del cooperador de una obra en proceso*/
+
+                            var editar_email_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 49 && tarea.idaccion==3));
+                            if (editar_email_coop_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_email_coop_obr_proc", 0);
+                                var solicitar_editar_email_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 115 && tarea.idaccion==1));
+                                if (solicitar_editar_email_coop_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_email_coop_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_email_coop_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_email_coop_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+                        /*Tarea 9: Modificar la relación que mantiene el cooperador con el predio de una obra en proceso*/
+
+                            var editar_relacion_predio_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 50 && tarea.idaccion==3));
+                            if (editar_relacion_predio_coop_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_relacion_predio_coop_obr_proc", 0);
+                                var solicitar_editar_relacion_predio_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 116 && tarea.idaccion==1));
+                                if (solicitar_editar_relacion_predio_coop_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_relacion_predio_coop_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_relacion_predio_coop_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_relacion_predio_coop_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+                        /*Tarea 15: Modificar el documento de la identificación digital del cooperador de una obra en proceso*/
+
+                            var editar_identific_coop_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 51 && tarea.idaccion==3));
+                            if (editar_identific_coop_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_identific_coop_obr_proc", 0);
+                                var solicitar_editar_identific_coop_obr_proc= reglas_usu.find(tarea => (tarea.idtarea == 117 && tarea.idaccion==1));
+                                if (solicitar_editar_identific_coop_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_identific_coop_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_identific_coop_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_identific_coop_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+                        /*Tarea 4: Modificar el número oficial del Predio de una obra en proceso*/
+
+                            var editar_numofic_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 40 && tarea.idaccion==3));
+                            if (editar_numofic_predio_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_numofic_predio_obr_proc", 0);
+                                var solicitar_editar_numofic_predio_obr_proc= reglas_usu.find(tarea => (tarea.idtarea == 106 && tarea.idaccion==1));
+                                if (solicitar_editar_numofic_predio_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_numofic_predio_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_numofic_predio_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_numofic_predio_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+                        /*Tarea 16: Modificar el número de lote del predio de una obra en proceso*/
+
+                            var editar_lote_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 52 && tarea.idaccion==3));
+                            if (editar_lote_predio_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_lote_predio_obr_proc", 0);
+                                var solicitar_editar_lote_predio_obr_proc= reglas_usu.find(tarea => (tarea.idtarea == 118 && tarea.idaccion==1));
+                                if (solicitar_editar_lote_predio_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_lote_predio_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_lote_predio_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_lote_predio_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+                        /*Tarea 17: Modificar el número de manzana al que pertenece el predio de una obra en proceso*/
+
+                            var editar_mzna_predio_obr_proc= reglas_usu.find(tarea => (tarea.idtarea == 53 && tarea.idaccion==3));
+                            if (editar_mzna_predio_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_mzna_predio_obr_proc", 0);
+                                var solicitar_editar_mzna_predio_obr_proc= reglas_usu.find(tarea => (tarea.idtarea == 119 && tarea.idaccion==1));
+                                if (solicitar_editar_mzna_predio_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_mzna_predio_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_mzna_predio_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_mzna_predio_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+                        /*Tarea 18: Modificar la calve de IMUVI del cooperador de una obra en proceso*/
+
+                            var editar_imuvi_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 54 && tarea.idaccion==3));
+                            if (editar_imuvi_predio_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_imuvi_predio_obr_proc", 0);
+                                var solicitar_editar_imuvi_predio_obr_proc= reglas_usu.find(tarea => (tarea.idtarea == 120 && tarea.idaccion==1));
+                                if (solicitar_editar_imuvi_predio_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_imuvi_predio_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_imuvi_predio_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_imuvi_predio_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+                        /*Tarea 19: Modificar el número de referencia de SAPAL de una obra en proceso*/
+
+                            var editar_sapal_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 55 && tarea.idaccion==3));
+                            if (editar_sapal_predio_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_sapal_predio_obr_proc", 0);
+                                var solicitar_editar_sapal_predio_obr_proc= reglas_usu.find(tarea => (tarea.idtarea == 121 && tarea.idaccion==1));
+                                if (solicitar_editar_sapal_predio_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_sapal_predio_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_sapal_predio_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_sapal_predio_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+
+                        /*Tarea 20: Modificar el número de referencia CUP, clave única de predio de una obra en proceso*/
+
+                            var editar_cup_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 56 && tarea.idaccion==3));
+                            if (editar_cup_predio_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_cup_predio_obr_proc", 0);
+                                var solicitar_editar_cup_predio_obr_proc= reglas_usu.find(tarea => (tarea.idtarea == 122 && tarea.idaccion==1));
+                                if (solicitar_editar_cup_predio_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_cup_predio_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_cup_predio_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_cup_predio_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+
+                        /*Tarea 21: Modificar el número de escritura r20 de una obra en proceso*/
+
+                            var editar_r20_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 57 && tarea.idaccion==3));
+                            if (editar_r20_predio_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_r20_predio_obr_proc", 0);
+                                var solicitar_editar_r20_predio_obr_proc= reglas_usu.find(tarea => (tarea.idtarea == 123 && tarea.idaccion==1));
+                                if (solicitar_editar_r20_predio_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_r20_predio_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_r20_predio_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_r20_predio_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+                        /*Tarea 22: Modificar tipo de predio de una obra én proceso */
+
+                            var editar_tipo_predio_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 58 && tarea.idaccion==3));
+                            if (editar_tipo_predio_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_tipo_predio_obr_proc", 0);
+                                var solicitar_editar_tipo_predio_obr_proc= reglas_usu.find(tarea => (tarea.idtarea == 124 && tarea.idaccion==1));
+                                if (solicitar_editar_tipo_predio_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_tipo_predio_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_tipo_predio_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_tipo_predio_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+
+                        /*Tarea 2: Modificar los metros de frente del predio beneficiado por una obra en proceso */
+
+                            var editar_mts_frente_obr_proc = reglas_usu.find(tarea => (tarea.idtarea == 38 && tarea.idaccion==3));
+                            if (editar_mts_frente_obr_proc==null)
+                            {
+                                $("#bodegadatos").data("editar_mts_frente_obr_proc", 0);
+                                var solicitar_editar_mts_frente_obr_proc= reglas_usu.find(tarea => (tarea.idtarea == 104 && tarea.idaccion==1));
+                                if (solicitar_editar_mts_frente_obr_proc==null) {
+                                    $("#bodegadatos").data("solicitar_editar_mts_frente_obr_proc", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_mts_frente_obr_proc", 1);
+                                    checarSolicitarEditarObraProc=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_mts_frente_obr_proc", 1);
+                                checarEditarObraProc = 1;
+                            }
+                            
+
+
+                        /*Inicia rescate de reglas para las obra en cobranza*/
+
+                        /*Tarea 5: Modificar el nombre del cooperador de una obra en cobranza*/
+
+                            var editar_nombre_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 63 && tarea.idaccion==3));
+                            if (editar_nombre_coop_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_nombre_coop_obr_cob", 0);
+                                var solicitar_editar_nombre_coop_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 85 && tarea.idaccion==1));
+                                if (solicitar_editar_nombre_coop_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_nombre_coop_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_nombre_coop_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_nombre_coop_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+
+                        /*Tarea 1: Modificar el apellido paterno del cooperador e una obra en cobranza*/
+
+                            var editar_apaterno_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 59 && tarea.idaccion==3));
+                            if (editar_apaterno_coop_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_apaterno_coop_obr_cob", 0);
+                                var solicitar_editar_apaterno_coop_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 81 && tarea.idaccion==1));
+                                if (solicitar_editar_apaterno_coop_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_apaterno_coop_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_apaterno_coop_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+
+                        /*Tarea 3: Modificar el nombre de amaterno del cooperador de la obra en cobranza*/
+
+                            var editar_amaterno_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 61 && tarea.idaccion==3));
+                            if (editar_amaterno_coop_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_amaterno_coop_obr_cob", 0);
+                                var solicitar_editar_amaterno_coop_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 83 && tarea.idaccion==1));
+                                if (solicitar_editar_amaterno_coop_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_amaterno_coop_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_amaterno_coop_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+
+                        /*Tarea 6: Modificar el nombre de calle del domicilio de notificación del cooperador de la obra en cobranza*/
+
+                            var editar_calle_notif_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 64 && tarea.idaccion==3));
+                            if (editar_calle_notif_coop_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_calle_notif_coop_obr_cob", 0);
+                                var solicitar_editar_calle_notif_coop_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 86 && tarea.idaccion==1));
+                                if (solicitar_editar_calle_notif_coop_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_calle_notif_coop_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_calle_notif_coop_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_calle_notif_coop_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+                        /*Tarea 7: Modificar el nombre de colonia del domicilio de notificación del cooperador de la obra en cobranza*/
+
+                            var editar_col_notif_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 65 && tarea.idaccion==3));
+                            if (editar_col_notif_coop_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_col_notif_coop_obr_cob", 0);
+                                var solicitar_editar_col_notif_coop_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 87 && tarea.idaccion==1));
+                                if (solicitar_editar_col_notif_coop_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_col_notif_coop_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_col_notif_coop_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_col_notif_coop_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+                        /*Tarea 8: Modificar el número oficial del domicilio de notificación del cooperador de la obra en cobranza*/
+
+                            var editar_numofic_notif_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 66 && tarea.idaccion==3));
+                            if (editar_numofic_notif_coop_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_numofic_notif_coop_obr_cob", 0);
+                                var solicitar_editar_numofic_notif_coop_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 88 && tarea.idaccion==1));
+                                if (solicitar_editar_numofic_notif_coop_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_numofic_notif_coop_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_numofic_notif_coop_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_numofic_notif_coop_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+                        /*Tarea 9: Modificar la cuenta predial del predio dde la obra en proceso*/
+
+                            var editar_ctapred_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 67 && tarea.idaccion==3));
+                            if (editar_ctapred_predio_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_ctapred_predio_obr_cob", 0);
+                                var solicitar_editar_ctapred_predio_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 89 && tarea.idaccion==1));
+                                if (solicitar_editar_ctapred_predio_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_ctapred_predio_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_ctapred_predio_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+
+                        /*Tarea 10: Modificar el CURP del cooperador del predio de la obra en cobranza*/
+
+                            var editar_curp_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 68 && tarea.idaccion==3));
+                            if (editar_curp_coop_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_curp_coop_obr_cob", 0);
+                                var solicitar_editar_curp_coop_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 90 && tarea.idaccion==1));
+                                if (solicitar_editar_curp_coop_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_curp_coop_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_curp_coop_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_curp_coop_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+                        /*Tarea 11: Modificar el INE del cooperador de la obra en proceso*/
+
+                            var editar_ine_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 69 && tarea.idaccion==3));
+                            if (editar_ine_coop_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_ine_coop_obr_cob", 0);
+                                var solicitar_editar_ine_coop_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 91 && tarea.idaccion==1));
+                                if (solicitar_editar_ine_coop_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_ine_coop_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_ine_coop_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_ine_coop_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+                        /*Tarea 9: Modificar el número telefónico del cooperador de una obra en cobranza*/
+
+                            var editar_tel_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 70 && tarea.idaccion==3));
+                            if (editar_tel_coop_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_tel_coop_obr_cob", 0);
+                                var solicitar_editar_tel_coop_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 92 && tarea.idaccion==1));
+                                if (solicitar_editar_tel_coop_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_tel_coop_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_tel_coop_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_tel_coop_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+                        /*Tarea 13: Modificar el email del cooperador de una obra en cobranza*/
+
+                            var editar_email_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 71 && tarea.idaccion==3));
+                            if (editar_email_coop_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_email_coop_obr_cob", 0);
+                                var solicitar_editar_email_coop_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 93 && tarea.idaccion==1));
+                                if (solicitar_editar_email_coop_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_email_coop_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_email_coop_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_email_coop_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+                        /*Tarea 9: Modificar la relación que mantiene el cooperador con el predio de una obra en cobranza*/
+
+                            var editar_relacion_predio_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 72 && tarea.idaccion==3));
+                            if (editar_relacion_predio_coop_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_relacion_predio_coop_obr_cob", 0);
+                                var solicitar_editar_relacion_predio_coop_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 94 && tarea.idaccion==1));
+                                if (solicitar_editar_relacion_predio_coop_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_relacion_predio_coop_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_relacion_predio_coop_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_relacion_predio_coop_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+                        /*Tarea 15: Modificar el documento de la identificación digital del cooperador de una obra en cobranza*/
+
+                            var editar_identific_coop_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 73 && tarea.idaccion==3));
+                            if (editar_identific_coop_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_identific_coop_obr_cob", 0);
+                                var solicitar_editar_identific_coop_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 95 && tarea.idaccion==1));
+                                if (solicitar_editar_identific_coop_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_identific_coop_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_identific_coop_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_identific_coop_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+                        /*Tarea 4: Modificar el número oficial del Predio de una obra en cobranza*/
+
+                            var editar_numofic_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 62 && tarea.idaccion==3));
+                            if (editar_numofic_predio_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_numofic_predio_obr_cob", 0);
+                                var solicitar_editar_numofic_predio_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 84 && tarea.idaccion==1));
+                                if (solicitar_editar_numofic_predio_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_numofic_predio_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_numofic_predio_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_numofic_predio_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+                        /*Tarea 16: Modificar el número de lote del predio de una obra en cobranza*/
+
+                            var editar_lote_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 74 && tarea.idaccion==3));
+                            if (editar_lote_predio_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_lote_predio_obr_cob", 0);
+                                var solicitar_editar_lote_predio_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 96 && tarea.idaccion==1));
+                                if (solicitar_editar_lote_predio_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_lote_predio_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_lote_predio_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_lote_predio_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+                        /*Tarea 17: Modificar el número de manzana al que pertenece el predio de una obra en cobranza*/
+
+                            var editar_mzna_predio_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 75 && tarea.idaccion==3));
+                            if (editar_mzna_predio_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_mzna_predio_obr_cob", 0);
+                                var solicitar_editar_mzna_predio_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 97 && tarea.idaccion==1));
+                                if (solicitar_editar_mzna_predio_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_mzna_predio_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_mzna_predio_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_mzna_predio_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+                        /*Tarea 18: Modificar la calve de IMUVI del cooperador de una obra en cobranza*/
+
+                            var editar_imuvi_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 76 && tarea.idaccion==3));
+                            if (editar_imuvi_predio_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_imuvi_predio_obr_cob", 0);
+                                var solicitar_editar_imuvi_predio_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 98 && tarea.idaccion==1));
+                                if (solicitar_editar_imuvi_predio_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_imuvi_predio_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_imuvi_predio_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_imuvi_predio_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+                        /*Tarea 19: Modificar el número de referencia de SAPAL de una obra en cobranza*/
+
+                            var editar_sapal_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 77 && tarea.idaccion==3));
+                            if (editar_sapal_predio_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_sapal_predio_obr_cob", 0);
+                                var solicitar_editar_sapal_predio_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 99 && tarea.idaccion==1));
+                                if (solicitar_editar_sapal_predio_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_sapal_predio_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_sapal_predio_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_sapal_predio_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+
+                        /*Tarea 20: Modificar el número de referencia CUP, clave única de predio de una obra en cobranza*/
+
+                            var editar_cup_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 78 && tarea.idaccion==3));
+                            if (editar_cup_predio_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_cup_predio_obr_cob", 0);
+                                var solicitar_editar_cup_predio_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 100 && tarea.idaccion==1));
+                                if (solicitar_editar_cup_predio_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_cup_predio_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_cup_predio_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_cup_predio_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+
+                        /*Tarea 21: Modificar el número de escritura r20 de una obra en cobranza*/
+
+                            var editar_r20_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 79 && tarea.idaccion==3));
+                            if (editar_r20_predio_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_r20_predio_obr_cob", 0);
+                                var solicitar_editar_r20_predio_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 101 && tarea.idaccion==1));
+                                if (solicitar_editar_r20_predio_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_r20_predio_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_r20_predio_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_r20_predio_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+                        /*Tarea 22: Modificar tipo de predio de una obra en cobranza */
+
+                            var editar_tipo_predio_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 80 && tarea.idaccion==3));
+                            if (editar_tipo_predio_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_tipo_predio_obr_cob", 0);
+                                var solicitar_editar_tipo_predio_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 102 && tarea.idaccion==1));
+                                if (solicitar_editar_tipo_predio_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_tipo_predio_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_tipo_predio_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_tipo_predio_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+
+                        /*Tarea 2: Modificar los metros de frente del predio beneficiado por una obra en cobranza */
+
+                            var editar_mts_frente_obr_cob = reglas_usu.find(tarea => (tarea.idtarea == 60 && tarea.idaccion==3));
+                            if (editar_mts_frente_obr_cob==null)
+                            {
+                                $("#bodegadatos").data("editar_mts_frente_obr_cob", 0);
+                                var solicitar_editar_mts_frente_obr_cob= reglas_usu.find(tarea => (tarea.idtarea == 82 && tarea.idaccion==1));
+                                if (solicitar_editar_mts_frente_obr_cob==null) {
+                                    $("#bodegadatos").data("solicitar_editar_mts_frente_obr_cob", 0);
+                                }
+                                else {
+                                    $("#bodegadatos").data("solicitar_editar_mts_frente_obr_cob", 1);
+                                    checarSolicitarEditarObraCob=1;
+                                }
+                            }
+                            else{                                 
+                                $("#bodegadatos").data("editar_mts_frente_obr_cob", 1);
+                                checarEditarObraCob = 1;
+                            }
+                            
+                            
+                            $("#bodegadatos").data("checarEditarObraRec", checarEditarObraRec); /*Globaliza el indicador de si el usuario puede editar al menos un campo una obra en recaudacion*/                            
+                            $("#bodegadatos").data("checarEditarObraProc", checarEditarObraProc); /*Globaliza el indicador de si el usuario puede editar al menos un campo una obra en proceso*/                            
+                            $("#bodegadatos").data("checarEditarObraCob", checarEditarObraCob)    /*Globaliza el indicador de si el usuario puede editar al menos un campo una obra en Cobranza*/                            
+
+                            $("#bodegadatos").data("checarSolicitarEditarObraRec", checarSolicitarEditarObraRec); /*Globaliza el indicador de si el usuario puede solicitar editar al menos un campo obra en recaudacion*/                            
+                            $("#bodegadatos").data("checarSolicitarEditarObraProc", checarSolicitarEditarObraProc); /*Globaliza el indicador de si el usuario puede editar al menos solicitar editar un campo de una obra en proceso*/                            
+                            $("#bodegadatos").data("checarSolicitarEditarObraCob", checarSolicitarEditarObraCob)    /*Globaliza el indicador de si el usuario puede al menos solicitar editar un campo de una obra en Cobranza*/        
+                    }
+
+                }).fail(function (r) {
+                    alert("No fué posible consultar las reglas del usuario.");
+                });
+
+       
 
     }
 
@@ -4117,36 +4195,36 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
     /*evento para llenar el list de calles*/
 
     $('#button').on('toolbarItemClick',
-        function (event, buttonClicked) {
-            map.removeInteraction(draw);
-            $('#map').css('cursor', 'default');
-            accion = buttonClicked.id;
-            if (accion == 'altacoop') {
-                HabilitarCajasTexto(false);
-                draw = new ol.interaction.Draw({
-                    source: vSourceFrentes,
-                    type: 'Point'
-                });
-                map.addInteraction(draw);
-            }
-            if (accion == 'editcoop') {
-                HabilitarCajasTexto(false);
-                $('#map').css('cursor', 'alias');
+           function (event, buttonClicked) {
+               map.removeInteraction(draw);
+               $('#map').css('cursor', 'default');
+               accion = buttonClicked.id;
+               if (accion == 'altacoop') {
+                   HabilitarCajasTexto(false);
+                   draw = new ol.interaction.Draw({
+                       source: vSourceFrentes,
+                       type: 'Point'
+                   });
+                   map.addInteraction(draw);
+               }
+               if (accion == 'editcoop') {
+                   HabilitarCajasTexto(false);
+                   $('#map').css('cursor', 'alias');
 
-            }
-            if (accion == 'elimcoop') {
-                $('#map').css('cursor', 'pointer');
-            }
-            if (accion == 'infcoop') {
-                $('#map').css('cursor', 'help');
-            }
-            if (accion == 'exportar') {
-                $('#map').css('cursor', 'progress');
-                Exportar_pdf('a5', '150');/*formato,resolución*/
-                $('#map').css('cursor', 'default');
-            }
+               }
+               if (accion == 'elimcoop') {                  
+                   $('#map').css('cursor', 'pointer');
+               }
+               if (accion == 'infcoop') {
+                   $('#map').css('cursor', 'help');
+               }
+               if (accion == 'exportar') {
+                   $('#map').css('cursor', 'progress');
+                   Exportar_pdf('a5', '150');/*formato,resolución*/
+                   $('#map').css('cursor', 'default');
+               }
 
-        });
+           });
 
     /*Prepara la barra de herramientas*/
     $('#button').toolbar({
@@ -4198,9 +4276,9 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
     });
 
 
-    $(".b_aceptar_observ_adic").click(function (e) {
-        $("#bodegadatos").data("observ_adic", $("#txtobserv_adic").val());
-        $('#mask, .window').hide();
+    $(".b_aceptar_observ_adic").click(function (e) {                
+        $("#bodegadatos").data("observ_adic",$("#txtobserv_adic").val()); 
+        $('#mask, .window').hide();       
     });
 
 
@@ -4210,55 +4288,55 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
             var idcoop = $("#cmbNombresReg").val();
             $("#bodegadatos").data("idcoop", idcoop);
             ConsultaCoop(idcoop, 'infcoop')
-                .done(function (r) {
-                    var cadena2 = $.trim(r.d);
-                    if (cadena2 != "<NewDataSet />") {
-                        $(r.d).find("coops").each(function () {
-                            var apaterno = $(this).find("mapellidopr").text();
-                            var amaterno = $(this).find("mapellidomr").text();
-                            var nombres = $(this).find("mnombresr").text();
-                            var nomficha = $(this).find("mnomfichar").text();
-                            var correo = $(this).find("mcorreor").text();
-                            var secfno = parseInt($(this).find("secfnor").text());
-                            var ssfcno = parseInt($(this).find("ssfcno").text());
-                            var clacno = parseInt($(this).find("clacno").text());
-                            var callecoop = $(this).find("mcallecoopr").text();
-                            var colcoop = $(this).find("mcolcoopr").text();
-                            var nooficial = $(this).find("mnooficial_extr").text();
-                            var telcoop = $(this).find("mtelcoopr").text();
-                            var curp = $(this).find("mcurpr").text();
-                            var ine = $(this).find("iner").text();
-                            var numrelpredio = $(this).find("mrelacionpredior").text();
-                            var relpredio = $(this).find("crelacionpredior").text();
-                            var usrcre = parseInt($(this).find("pusrcrer").text());
-                            var feccre = ArreglaFecha($(this).find("pfecha_crr").text());
-                            var usrmod = parseInt($(this).find("pusrmodr").text());
-                            var fecmod = ArreglaFecha($(this).find("pfecmodr").text());
-                            var nom_archivo = $(this).find("doc_identificr").text();
-                            if (secfno != '') {
-                                $("#calle").val(clacno);
-                            }
-                            $("#apaterno").val(apaterno);
-                            $("#amaterno").val(amaterno);
-                            $("#nombrescoop").val(nombres);
-                            $("#nomfichacoop").val(nomficha);
-                            $("#telcoop").val(telcoop);
-                            $("#emailcoop").val(correo);
-                            $("#curp").val(curp);
-                            $("#ine").val(ine);
-                            $("#txtcallenotif").val(callecoop);
-                            $("#txtnooficnotif").val(nooficial);
-                            $("#txtcolnotif").val(colcoop);
-                            $("#archivo").text(nom_archivo);
-                            llenarRelPred(numrelpredio, 'consultarelpredio');
-                        })
-                    }
-                    else {
-                        alert("El cooperador no contiene datos");
-                    }
-                }).fail(function (r) {
-                    alert("No fue posible consultar los datos del cooperador");
-                });
+                               .done(function (r) {
+                                   var cadena2 = $.trim(r.d);
+                                   if (cadena2 != "<NewDataSet />") {
+                                       $(r.d).find("coops").each(function () {
+                                           var apaterno = $(this).find("mapellidopr").text();
+                                           var amaterno = $(this).find("mapellidomr").text();
+                                           var nombres = $(this).find("mnombresr").text();
+                                           var nomficha = $(this).find("mnomfichar").text();
+                                           var correo = $(this).find("mcorreor").text();
+                                           var secfno = parseInt($(this).find("secfnor").text());
+                                           var ssfcno = parseInt($(this).find("ssfcno").text());
+                                           var clacno = parseInt($(this).find("clacno").text());
+                                           var callecoop = $(this).find("mcallecoopr").text();
+                                           var colcoop = $(this).find("mcolcoopr").text();
+                                           var nooficial = $(this).find("mnooficial_extr").text();
+                                           var telcoop = $(this).find("mtelcoopr").text();
+                                           var curp = $(this).find("mcurpr").text();
+                                           var ine = $(this).find("iner").text();
+                                           var numrelpredio = $(this).find("mrelacionpredior").text();
+                                           var relpredio = $(this).find("crelacionpredior").text();
+                                           var usrcre = parseInt($(this).find("pusrcrer").text());
+                                           var feccre = ArreglaFecha($(this).find("pfecha_crr").text());
+                                           var usrmod = parseInt($(this).find("pusrmodr").text());
+                                           var fecmod = ArreglaFecha($(this).find("pfecmodr").text());
+                                           var nom_archivo = $(this).find("doc_identificr").text();
+                                           if (secfno != '') {
+                                               $("#calle").val(clacno);
+                                           }
+                                           $("#apaterno").val(apaterno);
+                                           $("#amaterno").val(amaterno);
+                                           $("#nombrescoop").val(nombres);
+                                           $("#nomfichacoop").val(nomficha);
+                                           $("#telcoop").val(telcoop);
+                                           $("#emailcoop").val(correo);
+                                           $("#curp").val(curp);
+                                           $("#ine").val(ine);
+                                           $("#txtcallenotif").val(callecoop);
+                                           $("#txtnooficnotif").val(nooficial);
+                                           $("#txtcolnotif").val(colcoop);
+                                           $("#archivo").text(nom_archivo);
+                                           llenarRelPred(numrelpredio, 'consultarelpredio');
+                                       })
+                                   }
+                                   else {
+                                       alert("El cooperador no contiene datos");
+                                   }
+                               }).fail(function (r) {
+                                   alert("No fue posible consultar los datos del cooperador");
+                               });
         }
     });
 
@@ -4294,23 +4372,23 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
 
 
 
-
+    
 
     $(".boton_accion_eliminar_fte").click(function (e) {
-        var fid = $("#lbleliminarfte_fid_d").text();
-        var idusu = $("#lbleliminarfte_idusu_d").text();
+        var fid =  $("#lbleliminarfte_fid_d").text();
+        var idusu =  $("#lbleliminarfte_idusu_d").text();
 
         EliminarFrente(fid, idusu)
-        borrapuntosinregistrarseBD();
+        borrapuntosinregistrarseBD();       
     });
 
     $(".salir").click(function (e) {
-
+       
         $('#mask, .window').hide();
 
     });
 
-
+    
 
 
 
@@ -4327,29 +4405,29 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
 
     });
 
-
+    
     $(".window .boton_cancelar_edit_coop").click(function (e) {
-
+       
         $('#mask, .window').hide();
 
     });
 
     function EnviarCalidad() {
         SolicitaPresup(idsol, idanu)
-            .done(function (r) {
-                var resp = r.d;
-                var arr = resp.split(":");
-                var haycoops = parseInt(arr[2]);
-                if (haycoops) {
-                    alert("Presupuesto solicitado");
-                }
-                else {
-                    alert("El número de cooperadores capturados no es sufiente para solicitar un presupuesto, la política indica que deben ser 50% + 1 de metros capturados, por lo tanto deben capturar más cooperadores");
-                }
+                .done(function (r) {
+                    var resp = r.d;
+                    var arr = resp.split(":");
+                    var haycoops = parseInt(arr[2]);
+                    if (haycoops) {
+                        alert("Presupuesto solicitado");
+                    }
+                    else {
+                        alert("El número de cooperadores capturados no es sufiente para solicitar un presupuesto, la política indica que deben ser 50% + 1 de metros capturados, por lo tanto deben capturar más cooperadores");
+                    }
 
-            }).fail(function (r) {
-                alert("No fué posible solicitar el presupuesto de la zona");
-            });
+                }).fail(function (r) {
+                    alert("No fué posible solicitar el presupuesto de la zona");
+                });
     }
 
 
@@ -4416,31 +4494,31 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
             if ($.trim($("#ctapred").val()) != "") {
                 if (hayprop) {
                     RevisaCuentaPredial(objPredio)
-                        .done(function (r) {
-                            var cadena = $.trim(r.d);
-                            if (cadena != "<NewDataSet />") {
-                                $(r.d).find("Predio").each(function () { /*Si la cuenta predial tiene datos relacionados debemos validar si el predio */
-                                    var ctapredial = $(this).find("ctapredialr").text();
-                                    var pidr = parseInt($(this).find("pidr").text());
-                                    if (pid != pidr) {  // Si el predio encontrado con la cuenta predial es el mismo donde se dió clic (porque un predio puede tener dos o mas frentes)
-                                        alert("La cuenta predial: " + ctapredial + ' se encuentra registrada con el predio: ' + pidr + ' por lo tanto no es posible registrar el cooperador')
-                                    }
-                                    else {
-                                        if (validarcoop()) {  /*Valida que los datos del cooperador sean correctos*/
-                                            AsignaCoop(idcoop, accion);
-                                        }
-                                    }
-                                })
-                            }
-                            else {/*Se capturó una cuenta predial pero no se ha usado en otro predio del SIGFIDOC*/
-                                if (validarcoop()) {  /*Valida que los datos del cooperador sean correctos*/
-                                    AsignaCoop(idcoop, accion);
+                    .done(function (r) {
+                        var cadena = $.trim(r.d);
+                        if (cadena != "<NewDataSet />") {
+                            $(r.d).find("Predio").each(function () { /*Si la cuenta predial tiene datos relacionados debemos validar si el predio */
+                                var ctapredial = $(this).find("ctapredialr").text();
+                                var pidr = parseInt($(this).find("pidr").text());
+                                if (pid != pidr) {  // Si el predio encontrado con la cuenta predial es el mismo donde se dió clic (porque un predio puede tener dos o mas frentes)
+                                    alert("La cuenta predial: " + ctapredial + ' se encuentra registrada con el predio: ' + pidr + ' por lo tanto no es posible registrar el cooperador')
                                 }
+                                else {
+                                    if (validarcoop()) {  /*Valida que los datos del cooperador sean correctos*/
+                                        AsignaCoop(idcoop, accion);
+                                    }
+                                }
+                            })
+                        }
+                        else {/*Se capturó una cuenta predial pero no se ha usado en otro predio del SIGFIDOC*/
+                            if (validarcoop()) {  /*Valida que los datos del cooperador sean correctos*/
+                                AsignaCoop(idcoop, accion);
                             }
+                        }
 
-                        }).fail(function (r) {
-                            alert("No fue posible consultar la cuenta predial");
-                        });
+                    }).fail(function (r) {
+                        alert("No fue posible consultar la cuenta predial");
+                    });
                 }
                 else {
                     alert("La cuenta predial capturada no pertenece al padrón de predial, por lo tanto no es posible dar de alta el frente con dicha cuenta");
@@ -4632,18 +4710,18 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
 
         $('#mask, .window').hide();
         AccionFrente(objFrente) //*Tener cuidado ya que elimina fisicamente el registro.
-            .done(function (r) {
-                var features = vSourceFrentes.getFeatures();
-                for (var i = 0; i < (features.length - 1); i++) {
-                    if (features[i].get('fid') == fid) {
-                        break;
-                    }
+        .done(function (r) {
+            var features = vSourceFrentes.getFeatures();
+            for (var i = 0; i < (features.length - 1) ; i++) {
+                if (features[i].get('fid') == fid) {
+                    break;
                 }
-                vSourceFrentes.removeFeature(features[i])
-                alert("Frente eliminado correctamente")
-            }).fail(function (response) {
-                alert("El frente no se ha podido eliminar");
-            });
+            }
+            vSourceFrentes.removeFeature(features[i])
+            alert("Frente eliminado correctamente")
+        }).fail(function (response) {
+            alert("El frente no se ha podido eliminar");
+        });
     }
 
 
@@ -4722,172 +4800,172 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                         if (ctapredialr) {
                             var ctapredial, nomprop, dompred, domprop, manzana, lote, tipopred;
                             ConsultaPredial(ctapredialr)
-                                .done(function (xml) {
-                                    ctapredial = $.trim($("CtaPred", xml).text());
-                                    if (ctapredial) {
-                                        nomprop = $.trim($("NomProp", xml).text());
-                                        dompred = 'Calle: ' + $.trim($("DomPred", xml).text()) + ' ' + $.trim($("NumExt", xml).text()) + ' ' + $.trim($("LetraExt", xml).text()) + ' ' + $.trim($("NumInt", xml).text()) + ' Colonia: ' + $.trim($("ColPred", xml).text());
-                                        domprop = 'Calle: ' + $.trim($("DomProp", xml).text()) + ' ' + $.trim($("NumExtP", xml).text()) + ' ' + $.trim($("LetraExtP", xml).text()) + ' ' + $.trim($("NumIntP", xml).text()) + ' Colonia: ' + $.trim($("ColProp", xml).text());
-                                        manzana = $.trim($("Manzana", xml).text());
-                                        lote = $.trim($("Lote", xml).text());
-                                        tipopred = $.trim($("TipPred", xml).text());
-                                        content.innerHTML = '<table class="letratabla"><tr><th>Metros</th><th>CoopID</th><th>pID</th><th>fID</th></tr>'
-                                            + '<tr><td>' + mtsfter + '</td><td>' + cidr + '</td><td>' + pidr + '</td><td>' + fid + '<td></tr>'
-                                            + '<tr><th colspan=4>DATOS DEL COOPERADOR</th></tr>'
-                                            + '<tr><td colspan=2>Cooperador:</td><td colspan=2>' + nomficha + '</td></tr>'
-                                            + '<tr><td colspan=2>Domic. Coop (FIDOC):</td><td colspan=2>' + domanuencia + '</td></tr>'
-                                            + '<tr><td colspan=2>Tel:</td><td colspan=2>' + telcoop + '</td><td>'
-                                            + '<tr><td colspan=2>Relación cooperador:</td><td colspan=2>' + relpredio + '</td></tr>'
-                                            + '<tr><th colspan=4>DATOS DEL PREDIO (PADRON PREDIAL)</th></tr>'
-                                            + '<tr><td colspan=2>Cta_Predial:</td><td colspan=2>' + ctapredialr + '</td></tr>'
-                                            + '<tr><td colspan=2>Propietario:</td><td colspan=2>' + nomprop + '</td></tr>'
-                                            + '<tr><td colspan=2>Domic. Predio</td><td colspan=2>' + dompred + '</td></tr>'
-                                            + '<tr><td colspan=2>Domic. Prop.</td><td colspan=2>' + domprop + '</td></tr>'
-                                            + '<tr><td colspan=2>Manzana:</td><td colspan=2>' + manzana + '</td></tr>'
-                                            + '<tr><td colspan=2>Lote:</td><td colspan=2>' + lote + '</td></tr>'
-                                            + '<tr><td colspan=2>Uso predio (PREDIAL):</td><td colspan=2>' + tipopred + '</td></tr>'
-                                            + '<tr><th colspan=4>DATOS DEL PREDIO FIDOC</th></tr>'
-                                            + '<tr><td colspan=2>Uso_Predio (FIDOC):</td><td colspan=2>' + usopredior + '</td></tr>'
-                                            + '<tr><td colspan=2>No. Oficial:</td><td colspan=2>' + nooficialr + '</td></tr>'
-                                            + '<tr><td colspan=2>CUP:</td><td colspan=2>' + cupr + '</td></tr>'
-                                            + '<tr><td colspan=2>CTA_IMUVI:</td><td colspan=2>' + ctaimuvir + '</td></tr>'
-                                            + '<tr><td colspan=2>R20:</td><td colspan=2>' + r20r + '</td></tr>'
-                                            + '<tr><td colspan=2>Cta. SAPAL:</td><td colspan=2>' + sapalr + '</td></tr>'
-                                            + '<tr><td colspan=2>Manzana:</td><td colspan=2>' + mznar + '</td></tr>'
-                                            + '<tr><td colspan=2>Lote:</td><td colspan=2>' + loter + '</td></tr>'
-                                            + '</table>'
-                                    }
-                                    else {
-                                        alert("No se tiene cuenta predial registrada");
-                                    }
-                                })
-                                .fail(function (r) {
-                                    alert("No pudieron consultarse los datos de predial");
-                                });
+                            .done(function (xml) {
+                                ctapredial = $.trim($("CtaPred", xml).text());
+                                if (ctapredial) {
+                                    nomprop = $.trim($("NomProp", xml).text());
+                                    dompred = 'Calle: ' + $.trim($("DomPred", xml).text()) + ' ' + $.trim($("NumExt", xml).text()) + ' ' + $.trim($("LetraExt", xml).text()) + ' ' + $.trim($("NumInt", xml).text()) + ' Colonia: ' + $.trim($("ColPred", xml).text());
+                                    domprop = 'Calle: ' + $.trim($("DomProp", xml).text()) + ' ' + $.trim($("NumExtP", xml).text()) + ' ' + $.trim($("LetraExtP", xml).text()) + ' ' + $.trim($("NumIntP", xml).text()) + ' Colonia: ' + $.trim($("ColProp", xml).text());
+                                    manzana = $.trim($("Manzana", xml).text());
+                                    lote = $.trim($("Lote", xml).text());
+                                    tipopred = $.trim($("TipPred", xml).text());
+                                    content.innerHTML = '<table class="letratabla"><tr><th>Metros</th><th>CoopID</th><th>pID</th><th>fID</th></tr>'
+                                                      + '<tr><td>' + mtsfter + '</td><td>' + cidr + '</td><td>' + pidr + '</td><td>' + fid + '<td></tr>'
+                                                      + '<tr><th colspan=4>DATOS DEL COOPERADOR</th></tr>'
+                                                      + '<tr><td colspan=2>Cooperador:</td><td colspan=2>' + nomficha + '</td></tr>'
+                                                      + '<tr><td colspan=2>Domic. Coop (FIDOC):</td><td colspan=2>' + domanuencia + '</td></tr>'
+                                                      + '<tr><td colspan=2>Tel:</td><td colspan=2>' + telcoop + '</td><td>'
+                                                      + '<tr><td colspan=2>Relación cooperador:</td><td colspan=2>' + relpredio + '</td></tr>'
+                                                      + '<tr><th colspan=4>DATOS DEL PREDIO (PADRON PREDIAL)</th></tr>'
+                                                      + '<tr><td colspan=2>Cta_Predial:</td><td colspan=2>' + ctapredialr + '</td></tr>'
+                                                      + '<tr><td colspan=2>Propietario:</td><td colspan=2>' + nomprop + '</td></tr>'
+                                                      + '<tr><td colspan=2>Domic. Predio</td><td colspan=2>' + dompred + '</td></tr>'
+                                                      + '<tr><td colspan=2>Domic. Prop.</td><td colspan=2>' + domprop + '</td></tr>'
+                                                      + '<tr><td colspan=2>Manzana:</td><td colspan=2>' + manzana + '</td></tr>'
+                                                      + '<tr><td colspan=2>Lote:</td><td colspan=2>' + lote + '</td></tr>'
+                                                      + '<tr><td colspan=2>Uso predio (PREDIAL):</td><td colspan=2>' + tipopred + '</td></tr>'
+                                                      + '<tr><th colspan=4>DATOS DEL PREDIO FIDOC</th></tr>'
+                                                      + '<tr><td colspan=2>Uso_Predio (FIDOC):</td><td colspan=2>' + usopredior + '</td></tr>'
+                                                      + '<tr><td colspan=2>No. Oficial:</td><td colspan=2>' + nooficialr + '</td></tr>'
+                                                      + '<tr><td colspan=2>CUP:</td><td colspan=2>' + cupr + '</td></tr>'
+                                                      + '<tr><td colspan=2>CTA_IMUVI:</td><td colspan=2>' + ctaimuvir + '</td></tr>'
+                                                      + '<tr><td colspan=2>R20:</td><td colspan=2>' + r20r + '</td></tr>'
+                                                      + '<tr><td colspan=2>Cta. SAPAL:</td><td colspan=2>' + sapalr + '</td></tr>'
+                                                      + '<tr><td colspan=2>Manzana:</td><td colspan=2>' + mznar + '</td></tr>'
+                                                      + '<tr><td colspan=2>Lote:</td><td colspan=2>' + loter + '</td></tr>'
+                                                      + '</table>'
+                                }
+                                else {
+                                    alert("No se tiene cuenta predial registrada");
+                                }
+                            })
+                            .fail(function (r) {
+                                alert("No pudieron consultarse los datos de predial");
+                            });
                         }
                         else {
                             content.innerHTML = '<table class="letratabla"><tr><th>Metros</th><th>CoopID</th><th>pID</th><th>fID</th></tr>'
-                                + '<tr><td>' + mtsfter + '</td><td>' + cidr + '</td><td>' + pidr + '</td><td>' + fid + '<td></tr>'
-                                + '<tr><th colspan=4>DATOS DEL COOPERADOR</th></tr>'
-                                + '<tr><td colspan=2>Cooperador:</td><td colspan=2>' + nomficha + '</td></tr>'
-                                + '<tr><td colspan=2>Domic. Coop (FIDOC):</td><td colspan=2>' + domanuencia + '</td></tr>'
-                                + '<tr><td colspan=2>Tel:</td><td colspan=2>' + telcoop + '</td></tr>'
-                                + '<tr><td colspan=2>Relación cooperador:</td><td colspan=2>' + relpredio + '</td></tr>'
-                                + '<tr><th colspan=4>DATOS DEL PREDIO (PADRON PREDIAL)</th></tr>'
-                                + '<tr><td colspan=2>Cta_Predial:</td><td colspan=2>' + 'NO CAPTURADA' + '</td></tr>'
-                                + '<tr><td colspan=2>Propietario:</td><td colspan=2>' + nomprop + '</td></tr>'
-                                + '<tr><td colspan=2>Domic. Predio</td><td colspan=2>' + dompred + '</td></tr>'
-                                + '<tr><td colspan=2>Domic. Prop.</td><td colspan=2>' + domprop + '</td></tr>'
-                                + '<tr><td colspan=2>Manzana:</td><td colspan=2>' + manzana + '</td></tr>'
-                                + '<tr><td colspan=2>Lote:</td><td colspan=2>' + lote + '</td></tr>'
-                                + '<tr><td colspan=2>Uso predio (PREDIAL):</td><td colspan=2>' + tipopred + '</td></tr>'
-                                + '<tr><th colspan=4>DATOS DEL PREDIO FIDOC</th></tr>'
-                                + '<tr><td colspan=2>Uso_Predio (FIDOC):</td><td colspan=2>' + usopredior + '</td></tr>'
-                                + '<tr><td colspan=2>No. Oficial:</td><td colspan=2>' + nooficialr + '</td></tr>'
-                                + '<tr><td colspan=2>CUP:</td><td colspan=2>' + cupr + '</td></tr>'
-                                + '<tr><td colspan=2>CTA_IMUVI:</td><td colspan=2>' + ctaimuvir + '</td></tr>'
-                                + '<tr><td colspan=2>R20:</td><td colspan=2>' + r20r + '</td></tr>'
-                                + '<tr><td colspan=2>Cta. SAPAL:</td><td colspan=2>' + sapalr + '</td></tr>'
-                                + '<tr><td colspan=2>Manzana:</td><td colspan=2>' + mznar + '</td></tr>'
-                                + '<tr><td colspan=2>Lote:</td><td colspan=2>' + loter + '</td></tr>'
-                                + '</table>'
+                                                      + '<tr><td>' + mtsfter + '</td><td>' + cidr + '</td><td>' + pidr + '</td><td>' + fid + '<td></tr>'
+                                                      + '<tr><th colspan=4>DATOS DEL COOPERADOR</th></tr>'
+                                                      + '<tr><td colspan=2>Cooperador:</td><td colspan=2>' + nomficha + '</td></tr>'
+                                                      + '<tr><td colspan=2>Domic. Coop (FIDOC):</td><td colspan=2>' + domanuencia + '</td></tr>'
+                                                      + '<tr><td colspan=2>Tel:</td><td colspan=2>' + telcoop + '</td></tr>'
+                                                      + '<tr><td colspan=2>Relación cooperador:</td><td colspan=2>' + relpredio + '</td></tr>'
+                                                      + '<tr><th colspan=4>DATOS DEL PREDIO (PADRON PREDIAL)</th></tr>'
+                                                      + '<tr><td colspan=2>Cta_Predial:</td><td colspan=2>' + 'NO CAPTURADA' + '</td></tr>'
+                                                      + '<tr><td colspan=2>Propietario:</td><td colspan=2>' + nomprop + '</td></tr>'
+                                                      + '<tr><td colspan=2>Domic. Predio</td><td colspan=2>' + dompred + '</td></tr>'
+                                                      + '<tr><td colspan=2>Domic. Prop.</td><td colspan=2>' + domprop + '</td></tr>'
+                                                      + '<tr><td colspan=2>Manzana:</td><td colspan=2>' + manzana + '</td></tr>'
+                                                      + '<tr><td colspan=2>Lote:</td><td colspan=2>' + lote + '</td></tr>'
+                                                      + '<tr><td colspan=2>Uso predio (PREDIAL):</td><td colspan=2>' + tipopred + '</td></tr>'
+                                                      + '<tr><th colspan=4>DATOS DEL PREDIO FIDOC</th></tr>'
+                                                      + '<tr><td colspan=2>Uso_Predio (FIDOC):</td><td colspan=2>' + usopredior + '</td></tr>'
+                                                      + '<tr><td colspan=2>No. Oficial:</td><td colspan=2>' + nooficialr + '</td></tr>'
+                                                      + '<tr><td colspan=2>CUP:</td><td colspan=2>' + cupr + '</td></tr>'
+                                                      + '<tr><td colspan=2>CTA_IMUVI:</td><td colspan=2>' + ctaimuvir + '</td></tr>'
+                                                      + '<tr><td colspan=2>R20:</td><td colspan=2>' + r20r + '</td></tr>'
+                                                      + '<tr><td colspan=2>Cta. SAPAL:</td><td colspan=2>' + sapalr + '</td></tr>'
+                                                      + '<tr><td colspan=2>Manzana:</td><td colspan=2>' + mznar + '</td></tr>'
+                                                      + '<tr><td colspan=2>Lote:</td><td colspan=2>' + loter + '</td></tr>'
+                                                      + '</table>'
 
 
                         }
                     }
                     else {
                         ConsultaCoop(cidr, 'infcoop')
-                            .done(function (r) {
-                                $(r.d).find("coops").each(function () {
-                                    nomficha = $(this).find("mnomfichar").text();
-                                    callecoop = $(this).find("mcallecoopr").text();
-                                    colcoop = $(this).find("mcolcoopr").text();
-                                    nooficial = $(this).find("mnooficial_extr").text();
-                                    telcoop = $(this).find("mtelcoopr").text();
-                                    relpredio = $(this).find("crelacionpredior").text();
-                                    usrcre = parseInt($(this).find("usrcrer").text());
-                                    feccre = ArreglaFecha($(this).find("feccrer").text());
-                                    usrmod = parseInt($(this).find("usrmodr").text());
-                                    fecmod = ArreglaFecha($(this).find("fecmodr").text());
-                                    domanuencia = callecoop + ' ' + nooficial + ' ' + colcoop;
+                        .done(function (r) {
+                            $(r.d).find("coops").each(function () {
+                                nomficha = $(this).find("mnomfichar").text();
+                                callecoop = $(this).find("mcallecoopr").text();
+                                colcoop = $(this).find("mcolcoopr").text();
+                                nooficial = $(this).find("mnooficial_extr").text();
+                                telcoop = $(this).find("mtelcoopr").text();
+                                relpredio = $(this).find("crelacionpredior").text();
+                                usrcre = parseInt($(this).find("usrcrer").text());
+                                feccre = ArreglaFecha($(this).find("feccrer").text());
+                                usrmod = parseInt($(this).find("usrmodr").text());
+                                fecmod = ArreglaFecha($(this).find("fecmodr").text());
+                                domanuencia = callecoop + ' ' + nooficial + ' ' + colcoop;
 
-                                    if (ctapredialr) {
-                                        var ctapredial, nomprop, dompred, domprop, manzana, lote, tipopred;
-                                        ConsultaPredial(ctapredialr)
-                                            .done(function (xml) {
-                                                ctapredial = $.trim($("CtaPred", xml).text());
-                                                if (ctapredial) {
-                                                    nomprop = $.trim($("NomProp", xml).text());
-                                                    dompred = 'Calle: ' + $.trim($("DomPred", xml).text()) + ' ' + $.trim($("NumExt", xml).text()) + ' ' + $.trim($("LetraExt", xml).text()) + ' ' + $.trim($("NumInt", xml).text()) + ' Colonia: ' + $.trim($("ColPred", xml).text());
-                                                    domprop = 'Calle: ' + $.trim($("DomProp", xml).text()) + ' ' + $.trim($("NumExtP", xml).text()) + ' ' + $.trim($("LetraExtP", xml).text()) + ' ' + $.trim($("NumIntP", xml).text()) + ' Colonia: ' + $.trim($("ColProp", xml).text());
-                                                    manzana = $.trim($("Manzana", xml).text());
-                                                    lote = $.trim($("Lote", xml).text());
-                                                    tipopred = $.trim($("TipPred", xml).text());
-                                                    content.innerHTML = '<table class="letratabla"><tr><th>Metros</th><th>CoopID</th><th>pID</th><th>fID</th></tr>'
-                                                        + '<tr><td>' + mtsfter + '</td><td>' + cidr + '</td><td>' + pidr + '</td><td>' + fid + '<td></tr>'
-                                                        + '<tr><th colspan=4>DATOS DEL COOPERADOR</th></tr>'
-                                                        + '<tr><td colspan=2>Cooperador:</td><td colspan=2>' + nomficha + '</td></tr>'
-                                                        + '<tr><td colspan=2>Domic. Coop (FIDOC):</td><td colspan=2>' + domanuencia + '</td></tr>'
-                                                        + '<tr><td colspan=2>Tel:</td><td colspan=2>' + telcoop + '</td><td>'
-                                                        + '<tr><td colspan=2>Relación cooperador:</td><td colspan=2>' + relpredio + '</td></tr>'
-                                                        + '<tr><th colspan=4>DATOS DEL PREDIO (PADRON PREDIAL)</th></tr>'
-                                                        + '<tr><td colspan=2>Cta_Predial:</td><td colspan=2>' + ctapredialr + '</td></tr>'
-                                                        + '<tr><td colspan=2>Propietario:</td><td colspan=2>' + nomprop + '</td></tr>'
-                                                        + '<tr><td colspan=2>Domic. Predio</td><td colspan=2>' + dompred + '</td></tr>'
-                                                        + '<tr><td colspan=2>Domic. Prop.</td><td colspan=2>' + domprop + '</td></tr>'
-                                                        + '<tr><td colspan=2>Manzana:</td><td colspan=2>' + manzana + '</td></tr>'
-                                                        + '<tr><td colspan=2>Lote:</td><td colspan=2>' + lote + '</td></tr>'
-                                                        + '<tr><td colspan=2>Uso predio (PREDIAL):</td><td colspan=2>' + tipopred + '</td></tr>'
-                                                        + '<tr><th colspan=4>DATOS DEL PREDIO FIDOC</th></tr>'
-                                                        + '<tr><td colspan=2>Uso_Predio (FIDOC):</td><td colspan=2>' + usopredior + '</td></tr>'
-                                                        + '<tr><td colspan=2>No. Oficial:</td><td colspan=2>' + nooficialr + '</td></tr>'
-                                                        + '<tr><td colspan=2>CUP:</td><td colspan=2>' + cupr + '</td></tr>'
-                                                        + '<tr><td colspan=2>CTA_IMUVI:</td><td colspan=2>' + ctaimuvir + '</td></tr>'
-                                                        + '<tr><td colspan=2>R20:</td><td colspan=2>' + r20r + '</td></tr>'
-                                                        + '<tr><td colspan=2>Cta. SAPAL:</td><td colspan=2>' + sapalr + '</td></tr>'
-                                                        + '<tr><td colspan=2>Manzana:</td><td colspan=2>' + mznar + '</td></tr>'
-                                                        + '<tr><td colspan=2>Lote:</td><td colspan=2>' + loter + '</td></tr>'
-                                                        + '</table>'
-                                                }
-                                                else {
-                                                    alert("No se tiene cuenta predial registrada");
-                                                }
-                                            })
-                                            .fail(function (r) {
-                                                alert("No pudieron consultarse los datos de predial");
-                                            });
-                                    }
-                                    else {
-                                        content.innerHTML = '<table class="letratabla"><tr><th>Metros</th><th>CoopID</th><th>pID</th><th>fID</th></tr>'
-                                            + '<tr><td>' + mtsfter + '</td><td>' + cidr + '</td><td>' + pidr + '</td><td>' + fid + '<td></tr>'
-                                            + '<tr><th colspan=4>DATOS DEL COOPERADOR</th></tr>'
-                                            + '<tr><td colspan=2>Cooperador:</td><td colspan=2>' + nomficha + '</td></tr>'
-                                            + '<tr><td colspan=2>Domic. Coop (FIDOC):</td><td colspan=2>' + domanuencia + '</td></tr>'
-                                            + '<tr><td colspan=2>Tel:</td><td colspan=2>' + telcoop + '</td></tr>'
-                                            + '<tr><td colspan=2>Relación cooperador:</td><td colspan=2>' + relpredio + '</td></tr>'
-                                            + '<tr><th colspan=4>DATOS DEL PREDIO (PADRON PREDIAL)</th></tr>'
-                                            + '<tr><td colspan=2>Cta_Predial:</td><td colspan=2>' + 'NO CAPTURADA' + '</td></tr>'
-                                            + '<tr><td colspan=2>Propietario:</td><td colspan=2>' + nomprop + '</td></tr>'
-                                            + '<tr><td colspan=2>Domic. Predio</td><td colspan=2>' + dompred + '</td></tr>'
-                                            + '<tr><td colspan=2>Domic. Prop.</td><td colspan=2>' + domprop + '</td></tr>'
-                                            + '<tr><td colspan=2>Manzana:</td><td colspan=2>' + manzana + '</td></tr>'
-                                            + '<tr><td colspan=2>Lote:</td><td colspan=2>' + lote + '</td></tr>'
-                                            + '<tr><td colspan=2>Uso predio (PREDIAL):</td><td colspan=2>' + tipopred + '</td></tr>'
-                                            + '<tr><th colspan=4>DATOS DEL PREDIO FIDOC</th></tr>'
-                                            + '<tr><td colspan=2>Uso_Predio (FIDOC):</td><td colspan=2>' + usopredior + '</td></tr>'
-                                            + '<tr><td colspan=2>No. Oficial:</td><td colspan=2>' + nooficialr + '</td></tr>'
-                                            + '<tr><td colspan=2>CUP:</td><td colspan=2>' + cupr + '</td></tr>'
-                                            + '<tr><td colspan=2>CTA_IMUVI:</td><td colspan=2>' + ctaimuvir + '</td></tr>'
-                                            + '<tr><td colspan=2>R20:</td><td colspan=2>' + r20r + '</td></tr>'
-                                            + '<tr><td colspan=2>Cta. SAPAL:</td><td colspan=2>' + sapalr + '</td></tr>'
-                                            + '<tr><td colspan=2>Manzana:</td><td colspan=2>' + mznar + '</td></tr>'
-                                            + '<tr><td colspan=2>Lote:</td><td colspan=2>' + loter + '</td></tr>'
-                                            + '</table>'
-                                    }
-                                })
-                            }).fail(function (r) {
-                                alert("No fue posible consultar los datos del cooperador");
+                                if (ctapredialr) {
+                                    var ctapredial, nomprop, dompred, domprop, manzana, lote, tipopred;
+                                    ConsultaPredial(ctapredialr)
+                                    .done(function (xml) {
+                                        ctapredial = $.trim($("CtaPred", xml).text());
+                                        if (ctapredial) {
+                                            nomprop = $.trim($("NomProp", xml).text());
+                                            dompred = 'Calle: ' + $.trim($("DomPred", xml).text()) + ' ' + $.trim($("NumExt", xml).text()) + ' ' + $.trim($("LetraExt", xml).text()) + ' ' + $.trim($("NumInt", xml).text()) + ' Colonia: ' + $.trim($("ColPred", xml).text());
+                                            domprop = 'Calle: ' + $.trim($("DomProp", xml).text()) + ' ' + $.trim($("NumExtP", xml).text()) + ' ' + $.trim($("LetraExtP", xml).text()) + ' ' + $.trim($("NumIntP", xml).text()) + ' Colonia: ' + $.trim($("ColProp", xml).text());
+                                            manzana = $.trim($("Manzana", xml).text());
+                                            lote = $.trim($("Lote", xml).text());
+                                            tipopred = $.trim($("TipPred", xml).text());
+                                            content.innerHTML = '<table class="letratabla"><tr><th>Metros</th><th>CoopID</th><th>pID</th><th>fID</th></tr>'
+                                                              + '<tr><td>' + mtsfter + '</td><td>' + cidr + '</td><td>' + pidr + '</td><td>' + fid + '<td></tr>'
+                                                              + '<tr><th colspan=4>DATOS DEL COOPERADOR</th></tr>'
+                                                              + '<tr><td colspan=2>Cooperador:</td><td colspan=2>' + nomficha + '</td></tr>'
+                                                              + '<tr><td colspan=2>Domic. Coop (FIDOC):</td><td colspan=2>' + domanuencia + '</td></tr>'
+                                                              + '<tr><td colspan=2>Tel:</td><td colspan=2>' + telcoop + '</td><td>'
+                                                              + '<tr><td colspan=2>Relación cooperador:</td><td colspan=2>' + relpredio + '</td></tr>'
+                                                              + '<tr><th colspan=4>DATOS DEL PREDIO (PADRON PREDIAL)</th></tr>'
+                                                              + '<tr><td colspan=2>Cta_Predial:</td><td colspan=2>' + ctapredialr + '</td></tr>'
+                                                              + '<tr><td colspan=2>Propietario:</td><td colspan=2>' + nomprop + '</td></tr>'
+                                                              + '<tr><td colspan=2>Domic. Predio</td><td colspan=2>' + dompred + '</td></tr>'
+                                                              + '<tr><td colspan=2>Domic. Prop.</td><td colspan=2>' + domprop + '</td></tr>'
+                                                              + '<tr><td colspan=2>Manzana:</td><td colspan=2>' + manzana + '</td></tr>'
+                                                              + '<tr><td colspan=2>Lote:</td><td colspan=2>' + lote + '</td></tr>'
+                                                              + '<tr><td colspan=2>Uso predio (PREDIAL):</td><td colspan=2>' + tipopred + '</td></tr>'
+                                                              + '<tr><th colspan=4>DATOS DEL PREDIO FIDOC</th></tr>'
+                                                              + '<tr><td colspan=2>Uso_Predio (FIDOC):</td><td colspan=2>' + usopredior + '</td></tr>'
+                                                              + '<tr><td colspan=2>No. Oficial:</td><td colspan=2>' + nooficialr + '</td></tr>'
+                                                              + '<tr><td colspan=2>CUP:</td><td colspan=2>' + cupr + '</td></tr>'
+                                                              + '<tr><td colspan=2>CTA_IMUVI:</td><td colspan=2>' + ctaimuvir + '</td></tr>'
+                                                              + '<tr><td colspan=2>R20:</td><td colspan=2>' + r20r + '</td></tr>'
+                                                              + '<tr><td colspan=2>Cta. SAPAL:</td><td colspan=2>' + sapalr + '</td></tr>'
+                                                              + '<tr><td colspan=2>Manzana:</td><td colspan=2>' + mznar + '</td></tr>'
+                                                              + '<tr><td colspan=2>Lote:</td><td colspan=2>' + loter + '</td></tr>'
+                                                              + '</table>'
+                                        }
+                                        else {
+                                            alert("No se tiene cuenta predial registrada");
+                                        }
+                                    })
+                                    .fail(function (r) {
+                                        alert("No pudieron consultarse los datos de predial");
+                                    });
+                                }
+                                else {
+                                    content.innerHTML = '<table class="letratabla"><tr><th>Metros</th><th>CoopID</th><th>pID</th><th>fID</th></tr>'
+                                                              + '<tr><td>' + mtsfter + '</td><td>' + cidr + '</td><td>' + pidr + '</td><td>' + fid + '<td></tr>'
+                                                              + '<tr><th colspan=4>DATOS DEL COOPERADOR</th></tr>'
+                                                              + '<tr><td colspan=2>Cooperador:</td><td colspan=2>' + nomficha + '</td></tr>'
+                                                              + '<tr><td colspan=2>Domic. Coop (FIDOC):</td><td colspan=2>' + domanuencia + '</td></tr>'
+                                                              + '<tr><td colspan=2>Tel:</td><td colspan=2>' + telcoop + '</td></tr>'
+                                                              + '<tr><td colspan=2>Relación cooperador:</td><td colspan=2>' + relpredio + '</td></tr>'
+                                                              + '<tr><th colspan=4>DATOS DEL PREDIO (PADRON PREDIAL)</th></tr>'
+                                                              + '<tr><td colspan=2>Cta_Predial:</td><td colspan=2>' + 'NO CAPTURADA' + '</td></tr>'
+                                                              + '<tr><td colspan=2>Propietario:</td><td colspan=2>' + nomprop + '</td></tr>'
+                                                              + '<tr><td colspan=2>Domic. Predio</td><td colspan=2>' + dompred + '</td></tr>'
+                                                              + '<tr><td colspan=2>Domic. Prop.</td><td colspan=2>' + domprop + '</td></tr>'
+                                                              + '<tr><td colspan=2>Manzana:</td><td colspan=2>' + manzana + '</td></tr>'
+                                                              + '<tr><td colspan=2>Lote:</td><td colspan=2>' + lote + '</td></tr>'
+                                                              + '<tr><td colspan=2>Uso predio (PREDIAL):</td><td colspan=2>' + tipopred + '</td></tr>'
+                                                              + '<tr><th colspan=4>DATOS DEL PREDIO FIDOC</th></tr>'
+                                                              + '<tr><td colspan=2>Uso_Predio (FIDOC):</td><td colspan=2>' + usopredior + '</td></tr>'
+                                                              + '<tr><td colspan=2>No. Oficial:</td><td colspan=2>' + nooficialr + '</td></tr>'
+                                                              + '<tr><td colspan=2>CUP:</td><td colspan=2>' + cupr + '</td></tr>'
+                                                              + '<tr><td colspan=2>CTA_IMUVI:</td><td colspan=2>' + ctaimuvir + '</td></tr>'
+                                                              + '<tr><td colspan=2>R20:</td><td colspan=2>' + r20r + '</td></tr>'
+                                                              + '<tr><td colspan=2>Cta. SAPAL:</td><td colspan=2>' + sapalr + '</td></tr>'
+                                                              + '<tr><td colspan=2>Manzana:</td><td colspan=2>' + mznar + '</td></tr>'
+                                                              + '<tr><td colspan=2>Lote:</td><td colspan=2>' + loter + '</td></tr>'
+                                                              + '</table>'
+                                }
                             })
+                        }).fail(function (r) {
+                            alert("No fue posible consultar los datos del cooperador");
+                        })
                     }
                 })
 
@@ -4904,7 +4982,7 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
     }
 
     function ConsultaPredial(ctapredial) {
-        var urlctapred = "http://201.116.205.135:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapredial;
+        var urlctapred = "http://192.168.1.175:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapredial;
         var text;
         return $.ajax({
             url: urlctapred,
@@ -4925,7 +5003,7 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
             type: "POST",
             dataType: "json",
             contentType: "application/json",
-            url: "../../WebServices/WebServiceFrente.asmx/GetFrente",
+            url: "http://192.1.126.122/fidoc/WebServices/WebServiceFrente.asmx/GetFrente",
             data: "{objFrente:" + stringData + "}"
         });
     }
@@ -4942,13 +5020,13 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
             type: 'POST',
             dataType: 'json',
             contentType: 'application/json; utf-8',
-            url: "../../WebServices/WebServiceCoop.asmx/GetCoop",
+            url: "http://192.1.126.122/fidoc/WebServices/WebServiceCoop.asmx/GetCoop",
             data: "{objCoop:" + stringData + "}"
         });
     }
 
     function RecargaCapaFrentes(obr_clv_int) {
-        var url = geoserverConfig.host +'/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Afrentes&maxFeatures=50&outputFormat=application%2Fjson&CQL_FILTER=obr_clv_int=' + obr_clv_int.toString() + ' AND activo = 1';
+        var url = 'http://172.17.11.169:8080/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc1:frentes&outputFormat=application%2Fjson&CQL_FILTER=obr_clv_int=' + obr_clv_int.toString() + ' AND activo = 1';
 
         return $.ajax({
             url: url,
@@ -4961,19 +5039,19 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
 
     }
 
-    function ConsultaReglasUsuario(idusu, accion) {
+    function ConsultaReglasUsuario(idusu,accion) {        
 
         return $.ajax({
             type: 'POST',
             dataType: 'json',
             contentType: 'application/json; utf-8',
-            url: "../../WebServices/WebServiceRolAccionTarea.asmx/GetUsuAccionTarea",
-            data: "{'idusu':'" + idusu + "','accion':'" + accion + "'}",
+            url: "http://192.1.126.122/fidoc/WebServices/WebServiceRolAccionTarea.asmx/GetUsuAccionTarea",
+            data: "{'idusu':'" + idusu + "','accion':'" + accion  + "'}",
         });
     }
 
 
-
+    
 
 
 
@@ -5201,9 +5279,7 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     if (parseInt(idcoop) == 0) {
                         var msgresultCoop = r.d;
                         var msgresultCoop = msgresultCoop.split(":");
-                        // Aqui se obtiene el midcoop de la insercion correspondiente
                         idcoop = parseInt(msgresultCoop[1]);
-                        console.log("midcoop: "+idcoop);
                         objFrente.cid = idcoop;
                     }
 
@@ -5212,107 +5288,71 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
 
                     ValidacionGuardadoArchivo(doc_identific, objCoop.doc);
                     ActualizaPredio(objPredio)
-                        .done(function (r) {
-                            AccionFrente(objFrente)
-                                .done(function (r) {
-                                    mensaje = r.d;
-                                    console.log(r.d);
-                                    arr_mensaje = mensaje.split(":");
-                                    fid = arr_mensaje[1];
-                                    coopid = arr_mensaje[2];
-                                    console.log("Fid: "+fid);
-                                    console.log("Coopid: "+coopid);
-                                    console.log("Pid: "+objFrente.pid);
-                                    console.log("obr_clv_int: "+objFrente.obr_clv_int);
-                                    console.log("obrafidoc: "+objFrente.obrafidoc);
-                                    // Construir el objeto de datos correctamente
-                                    let data_WS_obra = {
-                                        pPageSize: 20,
-                                        pCurrentPage: 1,
-                                        pSortColumn: "b.obr_clv_int", // Asumo que es una cadena
-                                        pSortOrder: "asc", // Asumo que es una cadena
-                                        pFiltro: ",,," + objFrente.obr_clv_int + "," // Construir la cadena de filtro
-                                    };
+                      .done(function (r) {
+                          AccionFrente(objFrente)
+                          .done(function (r) {
+                              mensaje = r.d;
+                              /*arr_mensaje = mensaje.split(":");
+                              objCoopAccess.coo_clv1 = arr_mensaje[2];
+                              objCoopAccess.coo_clv = objCoopAccess.coo_obr + objCoopAccess.coo_clv1;
 
-                                    $.ajax({
-                                        type: 'POST',
-                                        url: "../../WebServices/WebServiceObras.asmx/GetObra_psql",
-                                        data: JSON.stringify(data_WS_obra), // Convertir el objeto a JSON
-                                        contentType: 'application/json; utf-8',
-                                        dataType: 'json',
-                                        success: function (data) {
-                                            if (data.d != null) {
-                                                //console.log(data.d.Items[0].id);
-                                                console.log(data.d.Items[0].row);
-                                                console.log(data.d.Items[0].row[46]);
-                                            }
-                                        },
-                                        error: function (responseText, textStatus, errorThrown) {
-                                            alert(textStatus + responseText + errorThrown);
-                                        }
-                                    });
-
-                                    /*arr_mensaje = mensaje.split(":");
-                                    objCoopAccess.coo_clv1 = arr_mensaje[2];
-                                    objCoopAccess.coo_clv = objCoopAccess.coo_obr + objCoopAccess.coo_clv1;
-      
-                                    if (coopid_seleccionado == '000') { /*Si seleccionó crear un nuevo cooperador
-                                        objCoopAccess.accion = 1;
-                                    } else {
-                                        objCoopAccess.accion = 2;
-                                        objCoopAccess.coo_clv = objCoopAccess.coo_obr + coopid_seleccionado;
-                                    }*/
-                                    $("#bodegadatos").data("idcoop", "");
-                                    RecargaCapaFrentes(objFrente.obr_clv_int)
-                                        .done(function (result) {
-                                            var format = vSourceFrentes.getFormat();
-                                            vSourceFrentes.forEachFeature(function (feature) {
-                                                vSourceFrentes.removeFeature(feature)
-                                            });
-                                            var features = format.readFeatures(result);
-                                            vSourceFrentes.addFeatures(features);
-
-                                        }).fail(function (response) {
-                                            console.log("Error, no fue posible mostrar la capa de frentes");
-                                        });
-                                    /* objCoopAccess.coo_dec = 1;  /*Para activar el campo a 1 y que no aparezca
-                                     GuardarCoopAccess(objCoopAccess)
-                                      .done(function (r) {
-                                          console.log("Se guardó el frente en ACCESS");
-                                          $("#bodegadatos").data("idcoop", "");
-                                          RecargaCapaFrentes(objFrente.obr_clv_int)
-                                             .done(function (result) {
-                                                 var format = vSourceFrentes.getFormat();
-                                                 vSourceFrentes.forEachFeature(function (feature) {
-                                                     vSourceFrentes.removeFeature(feature)
-                                                 });
-                                                 var features = format.readFeatures(result);
-                                                 vSourceFrentes.addFeatures(features);
-                                             }).fail(function (response) {
-                                                 console.log("Error, no fue posible mostrar la capa de frentes");
-                                             });
-       
+                              if (coopid_seleccionado == '000') { /*Si seleccionó crear un nuevo cooperador
+                                  objCoopAccess.accion = 1;
+                              } else {
+                                  objCoopAccess.accion = 2;
+                                  objCoopAccess.coo_clv = objCoopAccess.coo_obr + coopid_seleccionado;
+                              }*/
+                              $("#bodegadatos").data("idcoop", "");
+                              RecargaCapaFrentes(objFrente.obr_clv_int)
+                                 .done(function (result) {
+                                     var format = vSourceFrentes.getFormat();
+                                     vSourceFrentes.forEachFeature(function (feature) {
+                                         vSourceFrentes.removeFeature(feature)
+                                     });
+                                     var features = format.readFeatures(result);
+                                     vSourceFrentes.addFeatures(features);
+                                     
+                                 }).fail(function (response) {
+                                     console.log("Error, no fue posible mostrar la capa de frentes");
+                                 });
+                             /* objCoopAccess.coo_dec = 1;  /*Para activar el campo a 1 y que no aparezca
+                              GuardarCoopAccess(objCoopAccess)
+                               .done(function (r) {
+                                   console.log("Se guardó el frente en ACCESS");
+                                   $("#bodegadatos").data("idcoop", "");
+                                   RecargaCapaFrentes(objFrente.obr_clv_int)
+                                      .done(function (result) {
+                                          var format = vSourceFrentes.getFormat();
+                                          vSourceFrentes.forEachFeature(function (feature) {
+                                              vSourceFrentes.removeFeature(feature)
+                                          });
+                                          var features = format.readFeatures(result);
+                                          vSourceFrentes.addFeatures(features);
                                       }).fail(function (response) {
-                                          alert("Error, no fue posible guardar cooperador en BD de ACCESS");
-                                      });*/
-                                })
-                                .fail(function (x) {
-                                    alert("No fué posible guardar los datos del frente en BD PostgresSQL");
-                                });
-                        })
-                        .fail(function (x) {
-                            alert("No fue posible actualizar los datos del predio");
-                        });
+                                          console.log("Error, no fue posible mostrar la capa de frentes");
+                                      });
+
+                               }).fail(function (response) {
+                                   alert("Error, no fue posible guardar cooperador en BD de ACCESS");
+                               });*/
+                          })
+                          .fail(function (x) {
+                              alert("No fué posible guardar los datos del frente en BD PostgresSQL");
+                          });
+                      })
+                   .fail(function (x) {
+                       alert("No fue posible actualizar los datos del predio");
+                   });
                 })
-                .fail(function (x) {
-                    alert("No fué posible guardar los datos del cooperador...");
-                });
+              .fail(function (x) {
+                  alert("No fué posible guardar los datos del cooperador...");
+              });
 
             $('#mask, .window').hide();
         }
 
         if (accion == 'editcoop') {
-            objCoopAccess.accion = 2;  /*Actualización de cooperador en ACCESS */
+            objCoopAccess.accion = 2;  /*Actualización de cooperador en ACCESS */           
             objCoop.nomarchivo_ident = idcoop.toString() + '_IDENT.pdf';
             InsertarCoop(objCoop)
                 .done(function (r) {
@@ -5323,31 +5363,31 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                     }
                     ValidacionGuardadoArchivo(doc_identific, objCoop.nomarchivo_ident);
                     ActualizaPredio(objPredio)
-                        .done(function (r) {
-                            AccionFrente(objFrente)
-                                .done(function (r) {
-                                    objCoopAccess.coo_dec = 1;
+                         .done(function (r) {
+                             AccionFrente(objFrente)
+                              .done(function (r) {
+                                  objCoopAccess.coo_dec = 1;
 
-                                    GuardarCoopAccess(objCoopAccess)
-                                        .done(function (r) {
-                                            console.log("Se guardó el frente")
-                                        })
-                                        .fail(function (x) {
-                                            alert("No fué posible guardar los datos del cooperador en ACCESS")
-                                        })
+                                  GuardarCoopAccess(objCoopAccess)
+                                  .done(function (r) {
+                                      console.log("Se guardó el frente")
+                                  })
+                                  .fail(function (x) {
+                                      alert("No fué posible guardar los datos del cooperador en ACCESS")
+                                  })
 
-                                })
-                                .fail(function (x) {
-                                    alert("No fué posible guardar los datos del frente")
-                                })
-                        })
-                        .fail(function (x) {
-                            console.log("No fué posible guardar los datos del predio")
-                        })
+                              })
+                              .fail(function (x) {
+                                  alert("No fué posible guardar los datos del frente")
+                              })
+                         })
+                    .fail(function (x) {
+                        console.log("No fué posible guardar los datos del predio")
+                    })
                 })
-                .fail(function (x) {
-                    alert("No fué posible guardar los datos del cooperador...");
-                });
+              .fail(function (x) {
+                  alert("No fué posible guardar los datos del cooperador...");
+              });
             $('#mask, .window').hide();
         }
 
@@ -5367,7 +5407,7 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
     function borrapuntosinregistrarseBD() {
         var features = vSourceFrentes.getFeatures();
         var fid;
-        for (var i = 0; i < (features.length - 1); i++) {
+        for (var i = 0; i < (features.length - 1) ; i++) {
             fid = features[i].get('fid');
             if (!fid) {
                 break;
@@ -5389,7 +5429,7 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
             type: "POST",
             dataType: "json",
             contentType: "application/json",
-            url: "../../WebServices/WebServicePredio.asmx/GetPredio",
+            url: "http://192.1.126.122/fidoc/WebServices/WebServicePredio.asmx/GetPredio",
             data: "{objPredio:" + stringData + "}"
         });
     }
@@ -5404,7 +5444,7 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
 
         return $.ajax({
             type: 'POST',
-            url: "../../WebServices/WebServiceFrente.asmx/ActFrente",
+            url: "http://192.1.126.122/fidoc/WebServices/WebServiceFrente.asmx/ActFrente",
             data: "{objFrente:" + stringData + "}",
             contentType: 'application/json; utf-8',
             dataType: 'json',
@@ -5449,32 +5489,32 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
 
 
         RevisaCuentaPredial(objPredio)
-            .done(function (r) {
-                $(r.d).find("Predio").each(function () {
-                    var tipo_predio = parseInt($(this).find("usopredior").text());
-                    $("#ctapred").val($(this).find("ctapredialr").text());
-                    $("#ctaimuvi").val($(this).find("ctaimuvir").text());
-                    $("#cup").val($(this).find("cupr").text());
-                    $("#recsapal").val($(this).find("sapalr").text());
-                    $("#nooficial").val($(this).find("nooficialr").text());
-                    $("#r20").val($(this).find("r20r").text());
-                    $("#txtmzna").val($(this).find("mznar").text());
-                    $("#txtlote").val($(this).find("loter").text());
-                    if (isNaN(tipo_predio)) {
-                        llenarUsoPred(0, 'consultausospredio');
-                    }
-                    else {
-                        llenarUsoPred(tipo_predio, 'consultausospredio');
-                    }
+        .done(function (r) {
+            $(r.d).find("Predio").each(function () {
+                var tipo_predio = parseInt($(this).find("usopredior").text());
+                $("#ctapred").val($(this).find("ctapredialr").text());
+                $("#ctaimuvi").val($(this).find("ctaimuvir").text());
+                $("#cup").val($(this).find("cupr").text());
+                $("#recsapal").val($(this).find("sapalr").text());
+                $("#nooficial").val($(this).find("nooficialr").text());
+                $("#r20").val($(this).find("r20r").text());
+                $("#txtmzna").val($(this).find("mznar").text());
+                $("#txtlote").val($(this).find("loter").text());
+                if (isNaN(tipo_predio)) {
+                    llenarUsoPred(0, 'consultausospredio');
+                }
+                else {
+                    llenarUsoPred(tipo_predio, 'consultausospredio');
+                }
 
-                    if ($("#ctapred").val() != '') {
-                        callWebServicePred();
-                    }
-                })
+                if ($("#ctapred").val() != '') {
+                    callWebServicePred();
+                }
+            })
 
-            }).fail(function (r) {
-                alert("No fue posible consultar los datos del predio");
-            });
+        }).fail(function (r) {
+            alert("No fue posible consultar los datos del predio");
+        });
 
     }
 
@@ -5488,7 +5528,7 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
             type: "POST",
             dataType: "json",
             contentType: "application/json",
-            url: "../../WebServices/WebServicePredio.asmx/GetPredio",
+            url: "http://192.1.126.122/fidoc/WebServices/WebServicePredio.asmx/GetPredio",
             data: "{objPredio:" + stringData + "}"
         });
     }
@@ -5500,7 +5540,7 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
 
         return $.ajax({
             type: 'POST',
-            url: "../../WebServices/WebServiceCoop.asmx/RegCoop_Access",
+            url: "http://192.1.126.122/fidoc/WebServices/WebServiceCoop.asmx/RegCoop_Access",
             data: "{objCoopS:" + stringData + "}",
             contentType: 'application/json; utf-8',
             dataType: 'json',
@@ -5521,13 +5561,13 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
 
         return $.ajax({
             type: 'POST',
-            url: "../../WebServices/WebServiceCoop.asmx/GuardarCoop",
+            url: "http://192.1.126.122/fidoc/WebServices/WebServiceCoop.asmx/GuardarCoop",
             data: "{objCoop:" + stringData + "}",
             contentType: 'application/json; utf-8',
             dataType: 'json',
             sucess: function (data) {
                 if (data.d != null) {
-                    console.log(data.d);
+                    console.log("Se guardo el cooperador correctamente")
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -5536,11 +5576,11 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
     }
 
 
-    function LeerFrente(accion, fid) { /**/
+    function LeerFrente(accion,fid) { /**/       
 
         return $.ajax({
             type: 'POST',
-            url: "../../WebServices/WebServiceFrente.asmx/GetFrenteFinanc",
+            url: "http://192.1.126.122/fidoc/WebServices/WebServiceFrente.asmx/GetFrenteFinanc",
             data: "{'accion':'" + accion + "','fid':'" + fid + "'}",
             contentType: 'application/json; utf-8',
             dataType: 'json',
@@ -5559,9 +5599,9 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
             type: "POST",
             dataType: "json",
             contentType: "application/json",
-            data: "{obr_clv:" + obr_clv + "}",
-            url: "../../WebServices/WebServiceCoop.asmx/GetCoopSIFIDOC",
-            /*url: "../../WebServices/WebServiceCoop.asmx/GetCoopSIFIDOC",*/
+            data: "{obr_clv:" + obr_clv + "}",                        
+            url: "http://192.1.126.122/fidoc/WebServices/WebServiceCoop.asmx/GetCoopSIFIDOC",
+            /*url: "http://192.1.126.122/fidoc/WebServices/WebServiceCoop.asmx/GetCoopSIFIDOC",*/
             success: function (data) {
                 var elementos = 0;
                 $("#lstcoopssifidoc").html('');
@@ -5579,10 +5619,10 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                 option_adicional.html('Nuevo COOP en SIFIDOC');
                 option_adicional.val('000');
                 $("#lstcoopssifidoc").append(option_adicional);
-                if (obr_clv != '') {
+                if (obr_clv !='') {
                     $("#lstcoopssifidoc").val(coopid);
                 }
-
+    
             },
             error: function (xhr) {
                 console.log(xhr.responseText);
@@ -5635,7 +5675,7 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
         var predios = vectorPredios.getFeatures();
         var prop_obra = obra[0].values_;
 
-
+         
         var prop_pred = predios[0].values_;
         var numFrentes = vectorFrentes.getSource().getFeatures().length;
 
@@ -5669,15 +5709,15 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
             var x = Object.assign(prop_frente);
             total_mts = total_mts + prop_frente.mts_frente;
             result.push([prop_frente.fid,
-            prop_frente.obr_clv + prop_frente.coopid,
-            prop_frente.mts_frente,
-            prop_frente.pid,
-            prop_frente.nooficial,
-            prop_frente.ctaimuvi,
-            prop_frente.ctapredial,
-            prop_frente.sapal,
-            prop_frente.r20,
-            prop_frente.cup]);
+                         prop_frente.obr_clv + prop_frente.coopid,
+                         prop_frente.mts_frente,
+                         prop_frente.pid,
+                         prop_frente.nooficial,
+                         prop_frente.ctaimuvi,
+                         prop_frente.ctapredial,
+                         prop_frente.sapal,
+                         prop_frente.r20,
+                         prop_frente.cup]);
         }
 
 

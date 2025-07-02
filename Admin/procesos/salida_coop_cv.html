@@ -820,7 +820,7 @@
             pdf.text(tab2 + margen_resp, reng_base + inc * 3, objencabezado.tipo_obra);
             pdf.text(tab2 + margen_resp, reng_base + inc * 8, objencabezado.noofic);
             pdf.text(tab2 + margen_resp, reng_base + inc * 9, objencabezado.ctapredial);
-            pdf.text(tab2 + margen_resp, reng_base + inc * 11, objencabezado.fecinip + ' - ' + objencabezado.fecvencp);
+            pdf.text(tab2 + margen_resp, reng_base + inc * 12, objencabezado.fecinip + ' - ' + objencabezado.fecvencp);
 
 
 
@@ -2782,7 +2782,7 @@
 
                     if (ctapredial.length == 12) {
                         $("#lbltitulo_overload").text("Datos del Padrón de Predial:");
-                        var urlctapred = "http://201.116.205.135:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapredial;
+                        var urlctapred = "http://192.168.1.175:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapredial;
                         try {
                             $.get(urlctapred, function (xml) {                        
                                 xmlDoc = $.parseXML(xml),

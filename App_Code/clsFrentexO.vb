@@ -1,6 +1,6 @@
 ﻿Public Class clsFrentexO
     Private _oid As Integer = 0
-    Private _obr_clv_int As Integer = 0
+    Private _obr_clv_int As String = String.Empty
     Private _obr_clv As String = String.Empty
     Private _calle As String = String.Empty
     Private _colonia As String = String.Empty
@@ -47,11 +47,11 @@
         End Set
     End Property
 
-    Public Property obr_clv_int() As Integer
+    Public Property obr_clv_int() As String
         Get
             Return _obr_clv_int
         End Get
-        Set(ByVal Value As Integer)
+        Set(ByVal Value As String)
             _obr_clv_int = Value
         End Set
     End Property

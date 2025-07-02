@@ -618,7 +618,7 @@
             pdf.text(2, 73, 'C.P. 37480');
             pdf.text(2, 74, 'León Gto.');
 
-            pdf.text(22 -  pdf.getTextWidth('Tel. Oficina: 477-470-86-15 al 18')/2, 70, 'Tel. Oficina: 477-470-86-15 al 18');
+            pdf.text(22 -  pdf.getTextWidth('Tel. Oficina: 477-100-92-28')/2, 70, 'Tel. Oficina: 477-100-92-28');
             pdf.text(22 -  pdf.getTextWidth('fidoc.leon.gob.mx')/2, 71, 'fidoc.leon.gob.mx');
 
             var img_facebook = new Image();
@@ -670,7 +670,7 @@
         pdf.text(columna_pie, row_ini_pie + reng_adic * 5, 'León Gto.');
 
         pdf.text(107 - pdf.getTextWidth('Horarios de atención: Lunes a Viernes, 8:00 hrs - 15:30 hrs') / 2, row_ini_pie + reng_adic * 1, 'Horarios de atención: Lunes a Viernes, 8:00 hrs - 15:30 hrs');
-        pdf.text(107 - pdf.getTextWidth('Tel. Oficina: 477-470-86-15 al 18') / 2, row_ini_pie + reng_adic * 2, 'Tel. Oficina: 477-470-86-15 al 18');
+        pdf.text(107 - pdf.getTextWidth('Tel. Oficina: 477-100-92-28') / 2, row_ini_pie + reng_adic * 2, 'Tel. Oficina: 477-100-92-28');
         pdf.text(107 - pdf.getTextWidth('fidoc.leon.gob.mx') / 2, row_ini_pie + reng_adic * 3, 'fidoc.leon.gob.mx');
 
         var img_facebook = new Image();
@@ -802,6 +802,9 @@
 
             
             /*Valores del lado Derecho*/
+            if(objencabezado.obra_status == '8'){
+                pdf.text(tab4 + margen_resp, reng_base + inc / 2, 'OBRA CANCELADA');
+            }
             pdf.text(tab4 + margen_resp, reng_base + inc * 8, objencabezado.uso_predio);
             pdf.text(tab4 + margen_resp, reng_base + inc * 9, objencabezado.num_pagos);
             pdf.text(tab4 + margen_resp, reng_base + inc * 10, objencabezado.mts_fte);
@@ -874,6 +877,7 @@
                                        objpago.fecha = $(this).find("fec_mov_as400r").text();
                                        objpago.monto = $(this).find("monto_movr").text();
                                        objpago.monto_txt = $(this).find("monto_movr").text();
+                                       objpago.tipo_mov_sifidoc = $(this).find("tipo_mov_sifidocr").text();
                                        objpagos.push(objpago);
                                    });
                                    
@@ -904,9 +908,24 @@
 
                                        pdf.setFontSize(7);
                                        pdf.setFontType('normal');
-                                       pdf.text(tab2 - pdf.getTextWidth("Pago:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' '), reng_base + inc * (17 + pagos_mostrados), "Pago:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' ');
+                                       if(objpagos[index].tipo_mov_sifidoc==="1"){
+                                        pdf.text(tab2 - pdf.getTextWidth("Pago:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' '), reng_base + inc * (17 + pagos_mostrados), "Pago:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' ');
+                                       }
+                                       else if (objpagos[index].tipo_mov_sifidoc==="5"){
+                                        pdf.text(tab2 - pdf.getTextWidth("Recargo:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' '), reng_base + inc * (17 + pagos_mostrados), "Recargo:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' ');
+                                       }
+                                       else if (objpagos[index].tipo_mov_sifidoc==="6"){
+                                        pdf.text(tab2 - pdf.getTextWidth("Gastos R:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' '), reng_base + inc * (17 + pagos_mostrados), "Gastos R:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' ');
+                                       }
+                                       else if (objpagos[index].tipo_mov_sifidoc==="7"){
+                                        pdf.text(tab2 - pdf.getTextWidth("Gastos E:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' '), reng_base + inc * (17 + pagos_mostrados), "Gastos E:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' ');
+                                       }
                                        pdf.setFontSize(8);
-                                       pdf.text(tab4 - pdf.getTextWidth(FormatoMoneda(objpagos[index].monto_txt) + ' '), reng_base + inc * (17 + pagos_mostrados), FormatoMoneda(objpagos[index].monto_txt) + ' ');                                       
+                                       if(objpagos[index].tipo_mov_sifidoc==="1"){
+                                        pdf.text(tab4 - pdf.getTextWidth(FormatoMoneda(objpagos[index].monto_txt) + ' '), reng_base + inc * (17 + pagos_mostrados), FormatoMoneda(objpagos[index].monto_txt) + ' ');                                       
+                                       }else{
+                                        pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(objpagos[index].monto_txt) + ' '), reng_base + inc * (17 + pagos_mostrados), FormatoMoneda(objpagos[index].monto_txt) + ' ');                                       
+                                       }
                                        pagos_mostrados = pagos_mostrados + 1;                                      
 
                                        index++;
@@ -989,9 +1008,9 @@
             
             pdf.text(tab4 - pdf.getTextWidth('TOTAL A PAGAR: '), reng_base + inc * 41.2, 'TOTAL A PAGAR: ');
 
-            if (objcuerpo.saldo_total <= 0.9) {
+            /* if (objcuerpo.saldo_total <= 0.9) {
                 objcuerpo.saldo_total = 0;
-            } 
+            }  */
 
             pdf.text(204 - pdf.getTextWidth(FormatoMoneda(objcuerpo.saldo_total) + ' '), reng_base + inc * 41.2, FormatoMoneda(objcuerpo.saldo_total) + ' ');
             
@@ -2365,7 +2384,7 @@
                 pdf.text(columna_pie + 36, row_ini_pie + reng_adic * 10.5, 'León Gto.');
 
                 pdf.text(107 - pdf.getTextWidth('Horarios de atención: Lunes a Viernes, 8:00 hrs - 15:30 hrs') / 2, row_ini_pie + reng_adic * 8.5, 'Horarios de atención: Lunes a Viernes, 8:00 hrs - 15:30 hrs');
-                pdf.text(107 - pdf.getTextWidth('Tel. Oficina: 477-470-86-15 al 18') / 2, row_ini_pie + reng_adic * 9.5, 'Tel. Oficina: 477-470-86-15 al 18');
+                pdf.text(107 - pdf.getTextWidth('Tel. Oficina: 477-100-92-28') / 2, row_ini_pie + reng_adic * 9.5, 'Tel. Oficina: 477-100-92-28');
                 pdf.text(107 - pdf.getTextWidth('fidoc.leon.gob.mx') / 2, row_ini_pie + reng_adic * 10.5, 'fidoc.leon.gob.mx');
 
 

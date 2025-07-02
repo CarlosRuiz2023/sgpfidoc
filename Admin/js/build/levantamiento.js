@@ -414,7 +414,7 @@ function limpiarDatosPredio() {
 function callWebServicePred() {
     var ctapred = $("#ctapred").val();
     if (ctapred) {
-        var urlctapred = "http://201.116.205.135:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
+        var urlctapred = "http://192.168.1.175:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
         try {
             $.get(urlctapred, function (xml) {
                 xmlDoc = $.parseXML(xml),
@@ -1546,7 +1546,7 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
     }
 
     function ConsultaPredial(ctapredial) {
-        var urlctapred = "http://201.116.205.135:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapredial;
+        var urlctapred = "http://192.168.1.175:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapredial;
         var text;
         return $.ajax({
             url: urlctapred,

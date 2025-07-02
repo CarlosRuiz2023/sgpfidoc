@@ -516,6 +516,7 @@
                                             var data = result.d;
                                             var no_tiene_permiso = data.split(":");
                                             var no_tiene = parseInt(no_tiene_permiso[1]);
+                                            //!no_tiene
                                             if (!no_tiene) {
                                                 if (objActCostoObra.IdProg != '29') {
                                                     if (objActCostoObra.IdComite == '0') {
@@ -566,6 +567,7 @@
                                         var data = result.d;
                                         var no_tiene_permiso = data.split(":");
                                         var no_tiene = parseInt(no_tiene_permiso[1]);
+                                        //!no_tiene
                                         if (!no_tiene) {
                                             if (parseInt(objActCostoObra.IdComite) > 0) {
                                                 if (parseInt(objActCostoObra.IdAsamblea) > 0) {

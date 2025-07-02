@@ -673,6 +673,7 @@ function Buscar_obra() {
          datatype: function () {
              $.ajax(
                {
+                //TODO: Curioso porque al dejarlo como local no me aparecen ciertas obras recien creadas
                    url: "../../WebServices/WebServiceObras.asmx/GetObra_psql", //PageMethod
                    data: "{'pPageSize':'" + $('#grid').getGridParam("rowNum") +
                    "','pCurrentPage':'" + $('#grid').getGridParam("page") +
@@ -1440,7 +1441,7 @@ function Buscar_obra() {
                                   var no_tiene_permiso = data.split(":");
                                   var no_tiene = parseInt(no_tiene_permiso[1]);
                                   //!no_tiene
-                                  if (true) {
+                                  if (!no_tiene) {
                                       var opcion = confirm("Desea realmente cambiar la obra: " + objObra.obr_clv + ' a estatus de PROCESO.');
                                       if (opcion == true) {
                                           $.extend({}, "accion", objObra);
@@ -1494,7 +1495,7 @@ function Buscar_obra() {
                                   var no_tiene_permiso = data.split(":");
                                   var no_tiene = parseInt(no_tiene_permiso[1]);
                                   //!no_tiene
-                                  if (true) {                                        
+                                  if (!no_tiene) {                                        
                                       $.extend({}, "accion", objObraTerm);
                                       objObraTerm.accion = 6;
                                       AccionRegistroObra(objObraTerm);
@@ -1637,7 +1638,8 @@ function Buscar_obra() {
                             }
 
                             if (cellValue) {
-                                if (obr_estatus == 2) {
+                                //obr_estatus == 2
+                                if (true) {
                                     var idusu_aux = $("#bodegadatos").data("idusu").split(":")[1];
                                     ConsultaPermisoEjecutarTarea(idusu_aux, 150, 3)
                                         .done(function (result) {
@@ -2261,6 +2263,7 @@ function LeerCooperadores(obr_clv_int) {
 
  return  $.ajax(
            {
+            //TODO: Descozco porque trabaja de esta manera los WS, de forma local esta pasando algo
                url: "../../WebServices/WebServiceFrente.asmx/GetFrentexO", //PageMethod
                data: "{'pPageSize':'" + '10000' +
                      "','pCurrentPage':'" + '1' +
@@ -2317,6 +2320,7 @@ function MostrarCoops_vwcoops4(obr_clv_int, idusu, accion) {
 function CancelarObra_psql(objObra) {
 
     var stringData = JSON.stringify(objObra);
+    console.log(stringData);
     //TODO:
     return $.ajax({
         type: 'POST',
@@ -3448,14 +3452,31 @@ $(document).ready(function () {
 
                                 $.ajax({
                                     type: 'POST',
-                                    url: geoserverConfig.fidoc_ws + "/api/obra",
+                                    url: "http://localhost:3500/api/obras/access/agregar",
                                     data: JSON.stringify(terceraPeticionData), // Convertir el objeto a JSON
                                     contentType: 'application/json; utf-8',
                                     dataType: 'json',
                                     success: function (data) {
                                         if (data != null) {       
                                             console.log(data);
-                                            alert('Obra registrada en las 3 BDs.');
+                                            alert('Obra registrada en Access');
+                                        }
+                                    },
+                                    error: function (responseText, textStatus, errorThrown) {
+                                        alert(textStatus + responseText + errorThrown);
+                                    }
+                                });
+
+                                $.ajax({
+                                    type: 'POST',
+                                    url: "http://localhost:3500/api/obras/sql/agregar",
+                                    data: JSON.stringify(terceraPeticionData), // Convertir el objeto a JSON
+                                    contentType: 'application/json; utf-8',
+                                    dataType: 'json',
+                                    success: function (data) {
+                                        if (data != null) {       
+                                            console.log(data);
+                                            alert('Obra registrada en SQLServer.');
                                         }
                                     },
                                     error: function (responseText, textStatus, errorThrown) {
