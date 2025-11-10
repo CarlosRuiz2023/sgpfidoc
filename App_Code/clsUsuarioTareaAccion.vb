@@ -5,7 +5,7 @@
     Private _pid As Integer = 0
     Private _oid As Integer = 0
     Private _obr_clv_int As Integer = 0
-    Private _cid As Integer = 0
+    Private _cid As Long = 0
     Private _idtarea As Integer = 0
     Private _idusu_solicita As Integer = 0
     Private _idusu_autoriza As Integer = 0
@@ -79,11 +79,11 @@
             _obr_clv_int = Value
         End Set
     End Property
-    Public Property cid() As Integer
+    Public Property cid() As Long
         Get
             Return _cid
         End Get
-        Set(ByVal Value As Integer)
+        Set(ByVal Value As Long)
             _cid = Value
         End Set
     End Property

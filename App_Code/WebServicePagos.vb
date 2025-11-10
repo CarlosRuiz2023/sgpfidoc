@@ -65,32 +65,21 @@ Public Class WebServicePagos
     <WebMethod(Description:="ACTUALIZAR PAGOS")>
     <ScriptMethod(ResponseFormat:=ResponseFormat.Json, XmlSerializeString:=True)>
     Public Function GetActPagosAS400(fec_inicial As String, fec_final As String) As String
-
         Dim constr_psql As String = ConfigurationManager.ConnectionStrings("cf5").ConnectionString
-
-        Dim numerror As Integer = 0
-        Dim messerror As String = Nothing
         Dim mensaje As String = Nothing
-
         Dim odbc_dbLector As OdbcDataReader
         Dim command As New OdbcCommand
         Dim pagos_json As String
 
-        Dim conn As New OdbcConnection("DSN=QDSN_LEON;UID=CFUENTES;PWD=Fidoc_7;LONGDATACOMPAT=1;")
-        conn.Open()
-
-        'Dim myDB2Command As iDB2Command = New iDB2Command("SELECT '{""Pagos"":[{""Cooperador"":""3203024001035  "",""Nombre"":""TORRES JAIME  MA. DE LA LUZ"",""Fecha"":20170117,""Importe"":100.00,""LetraRecibo"":""AA"",""Recibo"":2911},{""Cooperador"":""3203024001035  "",""Nombre"":""TORRES JAIME  MA. DE LA LUZ"",""Fecha"":20170117,""Importe"":1000.00,""LetraRecibo"":""AA"",""Recibo"":2912},{""Cooperador"":""3203024001035  "",""Nombre"":""TORRES JAIME  MA. DE LA LUZ"",""Fecha"":20170117,""Importe"":400.00,""LetraRecibo"":""AA"",""Recibo"":2913}],""Error"":{""Id:"":""0"",""Descripcion"":""""}}' AS PAGOS FROM sysibm.sysdummy1", db2Conexion)
-        'Dim myDB2Command As iDB2Command = New iDB2Command("SELECT LCSFIDOC.FNC_PAGOS_FIDOC(20231006, 20231106) AS PAGOS  FROM sysibm.sysdummy1", db2Conexion)
-        'Dim _strSql = "SELECT trim(LCSFIDOC.FNC_PAGOS_FIDOC(20231103, 20231103)) AS PAGOS  FROM sysibm.sysdummy1"
-        'Dim _strSql = "SELECT CLOB(LCSFIDOC.FNC_PAGOS_FIDOC(20231006,20231106))  AS PAGOS  FROM sysibm.sysdummy1"
-
-        command = conn.CreateCommand()
-        command.CommandText = "SELECT CLOB(LCSFIDOC.FNC_PAGOS_FIDOC(" + fec_inicial + "," + fec_final + "))  AS PAGOS  FROM sysibm.sysdummy1"
-        command.Prepare()
-        command.CommandTimeout = 0
-        odbc_dbLector = command.ExecuteReader()
-
         Try
+            Dim conn As New OdbcConnection("DSN=QDSN_LEON;UID=CFUENTES;PWD=Fidoc_9;LONGDATACOMPAT=1;")
+            conn.Open()
+
+            command = conn.CreateCommand()
+            command.CommandText = "SELECT CLOB(LCSFIDOC.FNC_PAGOS_FIDOC(" + fec_inicial + "," + fec_final + "))  AS PAGOS  FROM sysibm.sysdummy1"
+            command.Prepare()
+            command.CommandTimeout = 0
+            odbc_dbLector = command.ExecuteReader()
 
             If (odbc_dbLector.Read) Then
                 pagos_json = odbc_dbLector.GetValue(0)
@@ -98,96 +87,121 @@ Public Class WebServicePagos
                 pagos_json = pagos_json.Replace("Ã\u001", "Ñ")
                 pagos_json = pagos_json.Replace("Ã\u0081", "")
                 pagos_json = pagos_json.Trim()
-
-                ' Agrega esto para ver el JSON en la ventana de salida
-                System.Diagnostics.Debug.WriteLine("JSON Retornado: " & pagos_json)
             Else
                 pagos_json = ""
             End If
 
             Using con As New NpgsqlConnection(constr_psql)
                 Using cmd As New NpgsqlCommand()
-
-                    Dim pagosT = JsonConvert.DeserializeObject(Of clsPagosTesoreria)(pagos_json)
                     cmd.Connection = con
                     con.Open()
 
-                    'cmd.CommandText = "delete from public2.pagos_tesoreria"
-                    cmd.CommandText = "delete from public2.pagos_temp"
+                    ' *** LOCK A NIVEL DE BASE DE DATOS - CRÍTICO ***
+                    ' Este número debe ser único para esta función
+                    cmd.CommandText = "SELECT pg_advisory_lock(987654321)"
                     cmd.ExecuteNonQuery()
 
-                    Dim num_pagos = pagosT.Pagos.Count
+                    Try
+                        ' Limpieza de tabla temporal
+                        cmd.CommandText = "DELETE FROM public2.pagos_temp"
+                        cmd.ExecuteNonQuery()
 
-                    If (num_pagos) Then
+                        Dim pagosT = JsonConvert.DeserializeObject(Of clsPagosTesoreria)(pagos_json)
+                        Dim num_pagos = pagosT.Pagos.Count
+                        Dim pagos_insertados As Integer = 0
+                        Dim pagos_duplicados As Integer = 0
 
-                        For Each item As clsPagoTesoreria In pagosT.Pagos
-                            Dim coop_s As String = item.Cooperador.Substring(10, 3)
-                            Dim obra_s As String = item.Cooperador.Substring(0, 10)
-                            Dim year_fec_as400_txt As String = (item.Fecha.ToString).Substring(0, 4)
-                            Dim mes_fec_as400_txt As String = (item.Fecha.ToString).Substring(4, 2)
-                            Dim dia_fec_as400_txt As String = (item.Fecha.ToString).Substring(6, 2)
-                            Dim fec_as400 As String = dia_fec_as400_txt + "/" + mes_fec_as400_txt + "/" + year_fec_as400_txt
-                            Dim usu_fidoc As String = "admin"
-                            Dim importe = item.Importe.ToString()
-                            Dim tipo_mov As String = "1"
-                            Dim obra_coop_s As String = item.Cooperador.ToString()
-                            Dim fid As String = "0"
-                            Dim usucre As String = "admin"
-                            Dim p2_recibo As String = item.Recibo.ToString
-                            Dim recibo = item.LetraRecibo.ToString() + p2_recibo.PadLeft(8, "0"c)
-                            Dim obr_clv_int = "0"
-                            Dim mov_activo As String = "1"
-                            Dim nombre = item.Nombre.ToString()
-                            Dim elemento = fec_as400 + recibo
+                        If (num_pagos > 0) Then
+                            For Each item As clsPagoTesoreria In pagosT.Pagos
+                                Dim coop_s As String = item.Cooperador.Substring(10, 3)
+                                Dim obra_s As String = item.Cooperador.Substring(0, 10)
+                                Dim year_fec_as400_txt As String = (item.Fecha.ToString).Substring(0, 4)
+                                Dim mes_fec_as400_txt As String = (item.Fecha.ToString).Substring(4, 2)
+                                Dim dia_fec_as400_txt As String = (item.Fecha.ToString).Substring(6, 2)
+                                Dim fec_as400 As String = year_fec_as400_txt + "-" + mes_fec_as400_txt + "-" + dia_fec_as400_txt
+                                Dim fecha_datetime As DateTime = DateTime.ParseExact(fec_as400, "yyyy-MM-dd", Nothing)
+                                Dim usu_fidoc As String = "admin"
+                                Dim importe = item.Importe.ToString()
+                                Dim tipo_mov As String = "1"
+                                Dim obra_coop_s As String = item.Cooperador.ToString()
+                                Dim fid As String = "0"
+                                Dim usucre As String = "admin"
+                                Dim p2_recibo As String = item.Recibo.ToString
+                                Dim recibo = item.LetraRecibo.ToString() + p2_recibo.PadLeft(8, "0"c)
+                                Dim obr_clv_int = "0"
+                                Dim mov_activo As String = "1"
+                                Dim elemento = fec_as400 + recibo
 
-                            'Dim a = "insert into public2.pagos_tesoreria (cooperador,nombre,fecha,importe,letrarecibo) values ('" + coop_s + "','" + nombre + "','" + fec_as400 + "'," + importe + ",'" + recibo + "');"
-                            'cmd.CommandText = "insert into public2.pagos_tesoreria (cooperador,nombre,fecha,importe,letrarecibo) values ('" + coop_s + "','" + nombre + "','" + fec_as400 + "'," + importe + ",'" + recibo + "');"
+                                ' VALIDACIÓN dentro del lock
+                                cmd.CommandText = "SELECT COUNT(*) FROM public2.movtos_financ WHERE folio_cajas = @folio_pago"
+                                cmd.Parameters.Clear()
+                                cmd.Parameters.AddWithValue("@folio_pago", recibo)
+                                Dim existe_pago As Integer = Convert.ToInt32(cmd.ExecuteScalar())
 
-                            System.Diagnostics.Debug.WriteLine("coop_s: " & coop_s)
-                            System.Diagnostics.Debug.WriteLine("obra_s: " & obra_s)
-                            System.Diagnostics.Debug.WriteLine("year_fec_as400_txt: " & year_fec_as400_txt)
-                            System.Diagnostics.Debug.WriteLine("mes_fec_as400_txt: " & mes_fec_as400_txt)
-                            System.Diagnostics.Debug.WriteLine("dia_fec_as400_txt: " & dia_fec_as400_txt)
-                            System.Diagnostics.Debug.WriteLine("fec_as400: " & fec_as400)
-                            System.Diagnostics.Debug.WriteLine("usu_fidoc: " & usu_fidoc)
-                            System.Diagnostics.Debug.WriteLine("importe: " & importe)
-                            System.Diagnostics.Debug.WriteLine("tipo_mov: " & tipo_mov)
-                            System.Diagnostics.Debug.WriteLine("obra_coop_s: " & obra_coop_s)
-                            System.Diagnostics.Debug.WriteLine("fid: " & fid)
-                            System.Diagnostics.Debug.WriteLine("usucre: " & usucre)
-                            System.Diagnostics.Debug.WriteLine("p2_recibo: " & p2_recibo)
-                            System.Diagnostics.Debug.WriteLine("recibo: " & recibo)
-                            System.Diagnostics.Debug.WriteLine("obr_clv_int: " & obr_clv_int)
-                            System.Diagnostics.Debug.WriteLine("mov_activo: " & mov_activo)
-                            System.Diagnostics.Debug.WriteLine("nombre: " & nombre)
-                            System.Diagnostics.Debug.WriteLine("elemento: " & elemento)
+                                If existe_pago = 0 Then
+                                    cmd.CommandText = "INSERT INTO public2.pagos_temp (elemento,mov_obra_sifidoc,mov_coop_sifidoc,fec_mov_as400,usu_fidoc,monto_abono_sifidoc,tipo_mov_sifidoc,fec_aplic_mov,clave_sifidoc,fid,usucre,folio_pago,coo_clv2,obr_clv_int,mov_activo) VALUES (@elemento,@obra_s,@coop_s,@fec_as400,@usu_fidoc,@importe,@tipo_mov,@fec_aplic_mov,@obra_coop_s,@fid,@usucre,@recibo,@coop_s2,@obr_clv_int,@mov_activo)"
+                                    cmd.Parameters.Clear()
+                                    cmd.Parameters.AddWithValue("@elemento", elemento)
+                                    cmd.Parameters.AddWithValue("@obra_s", obra_s)
+                                    cmd.Parameters.AddWithValue("@coop_s", coop_s)
+                                    cmd.Parameters.AddWithValue("@fec_as400", fecha_datetime)
+                                    cmd.Parameters.AddWithValue("@usu_fidoc", usu_fidoc)
+                                    cmd.Parameters.AddWithValue("@importe", Convert.ToDecimal(importe))
+                                    cmd.Parameters.AddWithValue("@tipo_mov", Convert.ToInt32(tipo_mov))
+                                    cmd.Parameters.AddWithValue("@fec_aplic_mov", fecha_datetime)
+                                    cmd.Parameters.AddWithValue("@obra_coop_s", obra_coop_s)
+                                    cmd.Parameters.AddWithValue("@fid", Convert.ToInt32(fid))
+                                    cmd.Parameters.AddWithValue("@usucre", usucre)
+                                    cmd.Parameters.AddWithValue("@recibo", recibo)
+                                    cmd.Parameters.AddWithValue("@coop_s2", Convert.ToInt64(coop_s))
+                                    cmd.Parameters.AddWithValue("@obr_clv_int", Convert.ToInt32(obr_clv_int))
+                                    cmd.Parameters.AddWithValue("@mov_activo", Convert.ToInt32(mov_activo))
+                                    cmd.ExecuteNonQuery()
+                                    pagos_insertados += 1
+                                Else
+                                    pagos_duplicados += 1
+                                End If
+                            Next
 
-                            cmd.CommandText = "insert into public2.pagos_temp (elemento,mov_obra_sifidoc,mov_coop_sifidoc,fec_mov_as400,usu_fidoc,monto_abono_sifidoc,tipo_mov_sifidoc,fec_aplic_mov,clave_sifidoc,fid,usucre,folio_pago,coo_clv2,obr_clv_int,mov_activo) values ('" + elemento + "','" + obra_s + "','" + coop_s + "','" + fec_as400 + "','" + usu_fidoc + "'," + importe + "," + tipo_mov + ",'" + fec_as400 + "','" + obra_coop_s + "'," + fid + ",'" + usucre + "','" + recibo + "'," + coop_s + "," + obr_clv_int + "," + mov_activo + ");"
+                            cmd.CommandText = "DELETE FROM public2.pagos_temp a USING public2.pagos_temp b WHERE a.ctid < b.ctid AND a.folio_pago = b.folio_pago"
                             cmd.ExecuteNonQuery()
-                        Next
-                        cmd.CommandText = "update pagos_temp as a set fid = b.fid from public2.frentes as b  WHERE a.clave_sifidoc = (b.obra_sifidoc || b.coopid);"
+
+                            cmd.CommandText = "SELECT COUNT(*) FROM public2.pagos_temp"
+                            cmd.Parameters.Clear()
+                            Dim registros_temp As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+
+                            If registros_temp > 0 Then
+                                cmd.CommandText = "UPDATE pagos_temp AS a SET fid = b.fid FROM public2.frentes AS b WHERE a.clave_sifidoc = (b.obra_sifidoc || b.coopid)"
+                                cmd.Parameters.Clear()
+                                cmd.ExecuteNonQuery()
+
+                                cmd.CommandText = "INSERT INTO public2.movtos_financ (mov_obra_sifidoc,mov_coop_sifidoc,fec_mov_as400,usu_sifidoc,monto_abono_sifidoc,tipo_mov_sifidoc,fec_aplic_mov,clave_sifidoc,fid,usucre,folio_cajas,monto_mov,tipo_mov,cactivo) SELECT a.mov_obra_sifidoc,a.mov_coop_sifidoc,a.fec_mov_as400,a.usu_fidoc,a.monto_abono_sifidoc,a.tipo_mov_sifidoc,a.fec_aplic_mov,a.clave_sifidoc,a.fid,a.usucre,a.folio_pago,a.monto_abono_sifidoc,a.tipo_mov_sifidoc,1 FROM pagos_temp AS a WHERE NOT EXISTS (SELECT 1 FROM public2.movtos_financ WHERE folio_cajas = a.folio_pago)"
+                                cmd.Parameters.Clear()
+                                cmd.ExecuteNonQuery()
+
+                                cmd.CommandText = "INSERT INTO public3.movimientos (mov_obr,mov_coop,mov_fecha,mov_usu,mov_cap,mov_nor,mov_mora,mov_tipo,mov_fecha_cap,mov_ndep,mov_clv1,mov_greq,mov_gejec,mov_recargos,mov_capital,mov_devolver,fid,cactivo) SELECT a.mov_obra_sifidoc,a.mov_coop_sifidoc,a.fec_mov_as400,a.usu_fidoc,a.monto_abono_sifidoc,0,0,a.tipo_mov_sifidoc,a.fec_aplic_mov,a.folio_pago,a.mov_obra_sifidoc || a.mov_coop_sifidoc,0,0,0,0,0,a.fid,1 FROM pagos_temp AS a LEFT JOIN public3.movimientos AS b ON a.folio_pago = b.mov_ndep WHERE b.mov_ndep IS NULL"
+                                cmd.Parameters.Clear()
+                                cmd.ExecuteNonQuery()
+
+                                mensaje = "PAGOS ACTUALIZADOS. Insertados: " & pagos_insertados & ", Duplicados: " & pagos_duplicados
+                            Else
+                                mensaje = "NO HAY PAGOS NUEVOS. Duplicados: " & pagos_duplicados
+                            End If
+                        Else
+                            mensaje = "NO SE ENCONTRARON PAGOS"
+                        End If
+
+                    Finally
+                        ' *** SIEMPRE LIBERAR EL LOCK ***
+                        cmd.CommandText = "SELECT pg_advisory_unlock(987654321)"
+                        cmd.Parameters.Clear()
                         cmd.ExecuteNonQuery()
+                    End Try
 
-                        cmd.CommandText = "insert into public2.movtos_financ (mov_obra_sifidoc,mov_coop_sifidoc,fec_mov_as400,usu_sifidoc,monto_abono_sifidoc,tipo_mov_sifidoc,fec_aplic_mov,clave_sifidoc,fid,usucre,folio_cajas,monto_mov,tipo_mov,cactivo) select a.mov_obra_sifidoc,a.mov_coop_sifidoc,a.fec_mov_as400,a.usu_fidoc,a.monto_abono_sifidoc,a.tipo_mov_sifidoc,a.fec_aplic_mov,a.clave_sifidoc,a.fid,a.usucre,a.folio_pago,a.monto_abono_sifidoc,a.tipo_mov_sifidoc,1 as cactivo from pagos_temp as a left join movtos_financ as b on a.folio_pago = b.folio_cajas where b.folio_cajas is null;"
-                        cmd.ExecuteNonQuery()
-
-                        cmd.CommandText = "insert into public3.movimientos (mov_obr,mov_coop,mov_fecha,mov_usu,mov_cap,mov_nor,mov_mora,mov_tipo,mov_fecha_cap,mov_ndep,mov_clv1,mov_greq,mov_gejec,mov_recargos,mov_capital,mov_devolver,fid,cactivo) select a.mov_obra_sifidoc,a.mov_coop_sifidoc,a.fec_mov_as400,a.usu_fidoc,a.monto_abono_sifidoc,0 as mov_nor,0 as mov_mora,a.tipo_mov_sifidoc,a.fec_aplic_mov,a.folio_pago,a.mov_obra_sifidoc || a.mov_coop_sifidoc as mov_clv1,0 as mov_greq,0 as mov_gejec,0 as mov_recargos,0 as mov_capital,0 as mov_devolver,a.fid, 1 as cactivo from pagos_temp as a left join public3.movimientos as b on a.folio_pago = b.mov_ndep where b.mov_ndep is null;"
-                        cmd.ExecuteNonQuery()
-
-                        cmd.Dispose()
-                        con.Close()
-
-                        mensaje = "PAGOS ACTUALIZADOS CORRECTAMENTE"
-                    Else
-
-                        mensaje = "NO SE ENCONTRARON PAGOS PARA ACTUALIZAR"
-
-                    End If
-
-
+                    cmd.Dispose()
+                    con.Close()
                 End Using
             End Using
-
 
             odbc_dbLector.Close()
             command.Dispose()
@@ -196,18 +210,15 @@ Public Class WebServicePagos
             Return mensaje
 
         Catch ex As Exception
-
             Return "Error " & ex.Message
-
         End Try
-
     End Function
 
     <WebMethod(Description:="OBTENER PAGOS")>
     <ScriptMethod(ResponseFormat:=ResponseFormat.Json, XmlSerializeString:=True)>
     Public Function GetPagosAS400(fec_inicial As String, fec_final As String) As String
         Dim pagos_json As String = ""
-        Dim conn As New OdbcConnection("DSN=QDSN_LEON;UID=CFUENTES;PWD=Fidoc_7;LONGDATACOMPAT=1;")
+        Dim conn As New OdbcConnection("DSN=QDSN_LEON;UID=CFUENTES;PWD=Fidoc_9;LONGDATACOMPAT=1;")
         Try
             conn.Open()
             Dim command As New OdbcCommand("SELECT CLOB(LCSFIDOC.FNC_PAGOS_FIDOC(" & fec_inicial & "," & fec_final & ")) AS PAGOS FROM sysibm.sysdummy1", conn)

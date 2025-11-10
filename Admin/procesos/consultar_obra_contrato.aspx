@@ -159,7 +159,7 @@
                 mes = fecha.substr(3, 2);
                 ano = fecha.substr(6, 4);
                 // Año no viciesto y es febrero y el dia es mayor a 28 
-                if ((ano % 4 != 0) && (mes == 02) && (dia > 28)) { fecha = fecha.substr(0, 2) + "/"; }
+                if ((ano % 4 != 0) && (mes == '02') && (dia > 28)) { fecha = fecha.substr(0, 2) + "/"; }
             }
             return (fecha);
         }
@@ -598,7 +598,7 @@
                  rowList: [5, 10, 20], //Variable PageSize DropDownList. 
                  viewrecords: true, //Show the RecordCount in the pager.
                  multiselect: false,
-                 sortname: "b.obr_clv_int", //login SortColumn
+                 sortname: "b.obr_clv", //login SortColumn
                  sortorder: "asc", //login SortOrder.
                  width: "1900",
                  height: "800",

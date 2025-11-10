@@ -938,7 +938,7 @@
 
         function ConsultarPagos_psql(fid, accion) {
             return $.ajax({
-                url: "http://192.1.126.122/fidoc/WebServices/WebServiceMovs.asmx/GetPagos",
+                url: "../../WebServices/WebServiceMovs.asmx/GetPagos",
                 data: "{'fid':'" + fid + "','accion':'" + accion + "'}",
                 type: "POST",
                 dataType: "json",
@@ -1086,7 +1086,7 @@
                 type: 'POST',
                 dataType: "json",
                 contentType: "application/json",
-                url: "http://192.1.126.122/fidoc/WebServices/WebServicePagos.asmx/InsertarPagosPsql",
+                url: "../../WebServices/WebServicePagos.asmx/InsertarPagosPsql",
                 data: "{'pagos':'" + strPagos + "','idusu':'" + idusu + "'}",
                 sucess: function (data) {
                     if (data.d != null) {
@@ -1107,7 +1107,7 @@
                 type: "POST",
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
-                url: "http://192.1.126.122/fidoc/WebServices/WebServicePagos.asmx/GetActPagosAS400",
+                url: "../../WebServices/WebServicePagos.asmx/GetActPagosAS400",
                 data: "{'fec_inicial':'" + fecini + "','fec_final':'" + fecfin + "'}",
                 success: function (data) {
                     alert(data.d);
@@ -1134,7 +1134,7 @@
                 type: "POST",
                 dataType: "json",
                 contentType: "application/json",
-                url: "http://192.1.126.122/fidoc/WebServices/WebServiceCoop.asmx/GetPagosCoopSIFIDOC",
+                url: "../../WebServices/WebServiceCoop.asmx/GetPagosCoopSIFIDOC",
                 data: "{'coo_clv':'" + coopid + "'}",
                 success: function (data) {
                     var elementos = 0;
@@ -1184,7 +1184,7 @@
         function ConsultarFrenteFinanc(fid, accion) {
             $.ajax(
                {
-                   url: "http://192.1.126.122/fidoc/WebServices/WebServiceFrente.asmx/GetFrenteFinanc", //PageMethod
+                   url: "../../WebServices/WebServiceFrente.asmx/GetFrenteFinanc", //PageMethod
                    data: "{'accion':'" + accion
                           + "','fid':'" + fid + "'}", //PageMethod Parametros de entrada                       
                    dataType: "json",
@@ -1268,7 +1268,7 @@
         function ConsultarRolUsuario(idusu, accion) {
             $.ajax(
                {
-                   url: "http://192.1.126.122/fidoc/WebServices/WebServiceUsuario.asmx/GetRolUsuario", //PageMethod
+                   url: "../../WebServices/WebServiceUsuario.asmx/GetRolUsuario", //PageMethod
                    data: "{'accion':'" + accion
                           + "','idusu':'" + idusu + "'}", //PageMethod Parametros de entrada                       
                    dataType: "json",
@@ -1446,7 +1446,7 @@
                      datatype: function () {
                          $.ajax(
                            {
-                               url: "http://192.1.126.122/fidoc/WebServices/WebServiceMovs.asmx/GetMovsGrid2_psql", //PageMethod
+                               url: "../../WebServices/WebServiceMovs.asmx/GetMovsGrid2_psql", //PageMethod
                                data: "{'pPageSize':'" + $('#grid').getGridParam("rowNum") +
                                "','pCurrentPage':'" + $('#grid').getGridParam("page") +
                                "','pSortColumn':'" + $('#grid').getGridParam("sortname") +
@@ -1784,7 +1784,7 @@
                 type: 'POST',
                 dataType: 'json',
                 contentType: 'application/json; utf-8',
-                url: "http://192.1.126.122/fidoc/WebServices/WebServiceTarea.asmx/RegistraEjecuta_Tarea",
+                url: "../../WebServices/WebServiceTarea.asmx/RegistraEjecuta_Tarea",
                 data: "{objUsuarioTareaAccion:" + stringData + ",objHistAct:" + stringData2 + "}"
             });
         }
@@ -1795,7 +1795,7 @@
                 type: 'POST',
                 dataType: 'json',
                 contentType: 'application/json; utf-8',
-                url: "http://192.1.126.122/fidoc/WebServices/WebServiceTarea.asmx/ConsultaPermisoTarea",
+                url: "../../WebServices/WebServiceTarea.asmx/ConsultaPermisoTarea",
                 data: "{'idusu':'" + idusu + "','idtarea':'" + idtarea + "','idaccion':'" + idaccion + "'}"
             });
         }
@@ -1895,7 +1895,7 @@
             var stringData = JSON.stringify(enviarObj);
             return $.ajax({
                 type: 'POST',
-                url: "http://192.1.126.122/fidoc/WebServices/WebServiceFrente.asmx/ActDesctoAplicar",
+                url: "../../WebServices/WebServiceFrente.asmx/ActDesctoAplicar",
                 data: "{objFrenteFinanc:" + stringData + "}",
                 contentType: 'application/json; utf-8',
                 dataType: 'json',
@@ -2566,7 +2566,7 @@
                       <td class="titulo_modulo" colspan="2">EMISION DE FICHA DE PAGO</td>
                   </tr>   
                   <tr>
-                      <td class="c">Monto de la Ficha de Pago: $ </td><td><input type="text" name="emitir_ficpag" id="txtemitir_ficpag" size="10" maxlength="7" onkeyup = "this.value=formateacantidad(this.value);"/></td>
+                      <td class="c">Monto de la Ficha de Pago: $ </td><td><input type="text" name="emitir_ficpag" id="txtemitir_ficpag" size="10" maxlength="9" onkeyup = "this.value=formateacantidad(this.value);"/></td>
                   </tr>
                    <tr>
                       <td class="c">Cantidad mínima de aportación: $ </td><td><label id="lblaportacion_mensual"></label></td>

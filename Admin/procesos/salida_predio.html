@@ -87,10 +87,13 @@
     <script src="../../js/ol/v6.3.1/build/ol.js"></script>
    <link type="text/css" rel="stylesheet" href="../css/cupertino/jquery-ui-1.7.2.custom.css" />
    <link type="text/css" rel="stylesheet" href="../css/cupertino/ui.jqgrid.css" />
-   <link rel="stylesheet" href="../js/ol/v6.3.1/css/ol.css" type="text/css"/>
-   <!--script src="../../Global/config.js"></!--script-->   
+   <link rel="stylesheet" href="../../js/ol/v6.3.1/css/ol.css" type="text/css"/>
+   <script src="../../Global/config.js"></script>
+   
     
-    <script type="text/javascript">
+    
+    <script type="module">
+        import urls from "../../Global/config.js";
         function recuperarParametro(campo) {
             var RE = new RegExp("[&?]" + campo + "=([^&]*)&");
             var href = location.href + "&";
@@ -370,28 +373,36 @@
             var vectorsourceFrente = new ol.source.Vector({
                 format: new ol.format.GeoJSON(),
                 url: function (extent) {
-                    return 'http://localhost:8080/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_frentes_salida1&outputFormat=application%2Fjson&CQL_FILTER=pid=' + pid_entrada
+                    return urls.geoserver +'/geoserver/sigFidoc/ows?service=WFS&' +
+                    'version=1.0.0&request=GetFeature&typeName=sigFidoc1:vw_frentes_salida1&' +
+                    'outputFormat=application%2Fjson&CQL_FILTER=pid=' + pid_entrada
                 }
             });
 
             var vectorsourcePredioComp = new ol.source.Vector({
                 format: new ol.format.GeoJSON(),
                 url: function (extent) {
-                    return 'http://localhost:8080/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_frentes_salida2&outputFormat=application%2Fjson&CQL_FILTER=oid=' + oid_entrada
+                    return urls.geoserver +'/geoserver/sigFidoc/ows?service=WFS&' +
+                    'version=1.0.0&request=GetFeature&typeName=sigFidoc1:vw_predios_salida2&' +
+                    'outputFormat=application%2Fjson&CQL_FILTER=oid=' + oid_entrada 
                 }
             });
 
             var vectorsourceObra = new ol.source.Vector({
                 format: new ol.format.GeoJSON(),
                 url: function (extent) {
-                    return 'http://localhost:8080/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_frentes_salida1&outputFormat=application%2Fjson&CQL_FILTER=pid=' + pid_entrada
+                    return urls.geoserver +'/geoserver/sigFidoc/ows?service=WFS&' +
+                    'version=1.0.0&request=GetFeature&typeName=sigFidoc1:vw_obras_salida1&' +
+                    'outputFormat=application%2Fjson&CQL_FILTER=pid=' + pid_entrada
                 }
             });
             
             var vectorsourcePredio = new ol.source.Vector({
                 format: new ol.format.GeoJSON(),
                 url: function (extent) {
-                    return 'http://localhost:8080/geoserver/sigFidoc/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sigFidoc%3Avw_frentes_salida1&outputFormat=application%2Fjson&CQL_FILTER=pid=' + pid_entrada
+                    return urls.geoserver +'/geoserver/sigFidoc/ows?service=WFS&' +
+                    'version=1.0.0&request=GetFeature&typeName=sigFidoc1:vw_predios_salida1&' +
+                    'outputFormat=application%2Fjson&CQL_FILTER=pid=' + pid_entrada
                 }
             });
 
@@ -444,9 +455,9 @@
                         var feature = evt.feature;
                         var coords = feature.getGeometry().getCoordinates();
                         var coord = feature.getGeometry().getExtent();
-                        centro = ol.extent.getCenter(coord);
-                        x = centro[0];
-                        y = centro[1];
+                        var centro = ol.extent.getCenter(coord);
+                        var x = centro[0];
+                        var y = centro[1];
                         map.getView().setCenter(centro);
                         LlenarDatosPredio(feature.getProperties());
 
@@ -743,7 +754,7 @@
 
         function callWebServicePred(ctapred) {            
             if (ctapred) {
-                var urlctapred = "http://192.168.1.175:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
+                var urlctapred = "http://201.116.205.135:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
                 try {
                     $.get(urlctapred, function (xml) {
                         xmlDoc = $.parseXML(xml),

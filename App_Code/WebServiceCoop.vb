@@ -127,7 +127,7 @@ Public Class WebServiceCoop
     <ScriptMethod(ResponseFormat:=ResponseFormat.Json, XmlSerializeString:=True)>
     Public Function GuardarCoop(objCoop As clsCoop) As String
         Dim constr As String = ConfigurationManager.ConnectionStrings("cf5").ConnectionString
-        Dim idcoopx As Integer = 0
+        Dim idcoopx As String = ""
         Dim numerror As Integer = 0
         Dim messerror As String = Nothing
 
@@ -478,20 +478,24 @@ Public Class WebServiceCoop
         strSQL2 = ""
         Dim transaction As OleDbTransaction = Nothing
 
+        System.Diagnostics.Debug.WriteLine("objCoopS.accion: " & objCoopS.accion)
+
         If objCoopS.accion = 1 Then 'Alta de un cooperador en access
 
             'strSQL = "insert into cooperador (coo_clv,coo_pat,coo_mat,coo_nom,coo_nof,coo_call,coo_num,coo_col,coo_ciu,coo_est,coo_cp,coo_tel,coo_lote,coo_ant,coo_npag,coo_venc1,coo_obr,coo_mts,coo_inc,coo_clv1,coo_pred,coo_nombre,coo_pagos,coo_cargos,coo__gto_req,coo_gto_ejec,coo_notificado,coo_requerido,coo_ejecutado,coo_ultimoaviso,coo_propx,coo_rfc,coo_fiscal,coo_razonsoc,coo_grupo,coo_fecgrupo,coo_dec,coo_transferida)  values('"
             'strSQL = strSQL & objCoopS.coo_clv & "','" & objCoopS.coo_pat & "','" & objCoopS.coo_mat & "','" & objCoopS.coo_nom & "','" & objCoopS.coo_nof & "','" & objCoopS.coo_call & "','" & objCoopS.coo_num & "','" & objCoopS.coo_col & "','" & objCoopS.coo_ciu & "','" & objCoopS.coo_est & "','" & objCoopS.coo_cp & "','" & objCoopS.coo_tel & "','" & objCoopS.coo_lote & "'," & objCoopS.coo_ant & "," & objCoopS.coo_npag & ",'" & objCoopS.coo_venc1 & "','" & objCoopS.coo_obr & "'," & objCoopS.coo_mts & "," & objCoopS.coo_inc & ",'"
             'strSQL = strSQL & objCoopS.coo_clv1 & "','" & objCoopS.coo_pred & "','" & objCoopS.coo_nombre & "'," & objCoopS.coo_pagos & "," & objCoopS.coo_cargos & "," & objCoopS.coo_gto_req & "," & objCoopS.coo_gto_ejec & ",'" & objCoopS.coo_notificado & "','" & objCoopS.coo_requerido & "','" & objCoopS.coo_ejecutado & "','" & objCoopS.coo_ultimoaviso & "'," & objCoopS.coo_propx & ",'" & objCoopS.coo_rfc & "','" & objCoopS.coo_fiscal & "','" & objCoopS.coo_razonsoc & "','" & objCoopS.coo_grupo & "','" & objCoopS.coo_fecgrupo & "'," & objCoopS.coo_dec & "," & objCoopS.coo_transferida & ");"
 
-            strSQL = "insert into cooperador (coo_clv,coo_pat,coo_mat,coo_nom,coo_nof,coo_npag,coo_venc1,coo_obr,coo_mts,coo_clv1,coo_pred,coo_nombre,coo_dec,coo_rfc,coo_fiscal,coo_razonsoc) "
-            strSQL = strSQL & " values ('" & objCoopS.coo_clv & "','" & objCoopS.coo_pat & "','" & objCoopS.coo_mat & "','" & objCoopS.coo_nom & "','" & objCoopS.coo_nof & "'," & objCoopS.coo_npag & ",'" & objCoopS.coo_venc1 & "','" & objCoopS.coo_obr & "'," & objCoopS.coo_mts & ",'" & objCoopS.coo_clv1 & "','" & objCoopS.coo_pred & "','" & objCoopS.coo_nombre & "','" & objCoopS.coo_dec & "','                ','                                                                                                                                                      ','                                                                                                    '" & ");"
+            strSQL = "INSERT INTO cooperador (coo_clv,coo_pat,coo_mat,coo_nom,coo_nof,coo_call,coo_num,coo_col,coo_ciu,coo_est,coo_cp,coo_tel,coo_lote,coo_ant,coo_npag,coo_venc1,coo_obr,coo_mts,coo_inc,coo_clv1,coo_pred,coo_nombre,coo_pagos,coo_cargos,coo__gto_req,coo_gto_ejec,coo_notificado,coo_requerido,coo_ejecutado,coo_ultimoaviso,coo_propx,coo_rfc,coo_fiscal,coo_razonsoc,coo_grupo,coo_fecgrupo,coo_dec,coo_transferida)"
+            strSQL = strSQL & "VALUES('" & objCoopS.coo_clv & "','" & objCoopS.coo_pat & "','" & objCoopS.coo_mat & "','" & objCoopS.coo_nom & "','" & objCoopS.coo_num & "','" & objCoopS.coo_call & "','','" & objCoopS.coo_col & "','LEON DE LOS ALDAMA','GUA','','" & objCoopS.coo_tel & "','1',0.0," & objCoopS.coo_npag & ",'" & objCoopS.coo_venc1 & "','" & objCoopS.coo_obr & "'," & objCoopS.coo_mts & ",0.0,'" & objCoopS.coo_clv1 & "','" & objCoopS.coo_pred & "','" & objCoopS.coo_pat & " " & objCoopS.coo_mat & " " & objCoopS.coo_nom & "',0.0,0.0,0.0,0.0,'01/01/1900','01/01/1900','01/01/1900','01/01/1900',False,'0','0','0','0','01/01/1900',0,False)"
 
         End If
 
         If objCoopS.accion = 2 Then 'Actualización de un cooperador en acces
 
-            strSQL = "update cooperador set coo_pat='" & objCoopS.coo_pat & "', coo_mat='" & objCoopS.coo_mat & "', coo_nom='" & objCoopS.coo_nom & "', coo_nof='" & objCoopS.coo_nof & "'," & "coo_mts=" & objCoopS.coo_mts & ",coo_pred='" & objCoopS.coo_pred & "', coo_nombre='" & objCoopS.coo_nombre & "', coo_dec=" & objCoopS.coo_dec & " where coo_clv ='" & objCoopS.coo_clv & "' and coo_obr='" & objCoopS.coo_obr & "';"
+            'strSQL = "update cooperador set coo_pat='" & objCoopS.coo_pat & "', coo_mat='" & objCoopS.coo_mat & "', coo_nom='" & objCoopS.coo_nom & "', coo_nof='" & objCoopS.coo_nof & "'," & "coo_mts=" & objCoopS.coo_mts & ",coo_pred='" & objCoopS.coo_pred & "', coo_nombre='" & objCoopS.coo_nombre & "', coo_dec=" & objCoopS.coo_dec & " where coo_clv ='" & objCoopS.coo_clv & "' and coo_obr='" & objCoopS.coo_obr & "';"
+            strSQL = "UPDATE cooperador SET coo_pat='" & objCoopS.coo_pat & "',coo_mat='" & objCoopS.coo_mat & "',coo_nom='" & objCoopS.coo_nom & "',coo_nof='" & objCoopS.coo_num & "',coo_call='" & objCoopS.coo_call & "',coo_num='" & objCoopS.coo_num & "',coo_col='" & objCoopS.coo_col & "',coo_cp ='',coo_tel='" & objCoopS.coo_tel & "',coo_npag=" & objCoopS.coo_npag & ",coo_venc1='" & objCoopS.coo_venc1 & "',coo_mts=" & objCoopS.coo_mts & ",coo_pred='" & objCoopS.coo_pred & "' WHERE coo_clv = '" & objCoopS.coo_clv & "'"
+            System.Diagnostics.Debug.WriteLine("Query generada: " & strSQL)
 
 
         End If
@@ -763,7 +767,7 @@ Public Class WebServiceCoop
                                    pSortColumn As String,
                                    pSortOrder As String,
                                    fid As Integer,
-                                   obr_clv_int As Integer,
+                                   obr_clv_int As Long,
                                    coo_clv_txt As String,
                                    amaterno As String,
                                    apaterno As String,
@@ -896,7 +900,7 @@ Public Class WebServiceCoop
                         coop.obr_opergob = ValidarDBNull(row.Item("out_obr_opergob"), "cadena")
                         coop.obr_fec_ini_proc = ValidarDBNull(row.Item("out_obr_fec_ini_proc"), "fecha")
                         coop.obr_fec_ini_cob = ValidarDBNull(row.Item("out_obr_fec_ini_cob"), "fecha")
-                        coop.obr_clv_int_obra = ValidarDBNull(row.Item("out_obr_clv_int_obra"), "entero")
+                        coop.obr_clv_int_obra = ValidarDBNull(row.Item("out_obr_clv_int_obra"), "cadena")
                         coop.obr_prog2 = ValidarDBNull(row.Item("out_obr_prog2"), "entero")
                         coop.nomprog = ValidarDBNull(row.Item("out_nomprog"), "cadena")
                         coop.progdescrip = ValidarDBNull(row.Item("out_progdescrip"), "cadena")
@@ -1713,7 +1717,7 @@ Public Class WebServiceCoop
 
     <WebMethod(Description:="Retorna registro de cooperadores por obra")> _
     <ScriptMethod(ResponseFormat:=ResponseFormat.Json, XmlSerializeString:=True)>
-    Public Function GetCoopsxObra_psql(obr_clv_int As Integer, coop_excluir As Integer, accion As Integer) As String
+    Public Function GetCoopsxObra_psql(obr_clv_int As String, coop_excluir As Integer, accion As Integer) As String
         Dim constr As String = ConfigurationManager.ConnectionStrings("cf5").ConnectionString
         Dim dt As DataSet = New DataSet()
 

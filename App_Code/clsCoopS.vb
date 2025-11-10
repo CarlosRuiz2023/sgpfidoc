@@ -20,7 +20,7 @@
     Private _inc As Double = 0
     Private _did As Integer = 0
     Private _factor_act_pago As Double = 0
-    Private _obr_clv_int As Integer = 0
+    Private _obr_clv_int As Long = 0
     Private _coo_clv2 As Integer = 0
     Private _activo As Integer = 0
     Private _capital As Double = 0
@@ -58,7 +58,7 @@
     Private _obr_opergob As String = String.Empty
     Private _obr_fec_ini_proc As Date
     Private _obr_fec_ini_cob As Date
-    Private _obr_clv_int_obra As Integer = 0
+    Private _obr_clv_int_obra As String = String.Empty
     Private _obr_prog2 As Integer = 0
     Private _nomprog As String = String.Empty
     Private _progdescrip As String = String.Empty
@@ -584,11 +584,11 @@
             _obr_fec_ini_cob = Value
         End Set
     End Property
-    Public Property obr_clv_int_obra() As Integer
+    Public Property obr_clv_int_obra() As String
         Get
             Return _obr_clv_int_obra
         End Get
-        Set(ByVal Value As Integer)
+        Set(ByVal Value As String)
             _obr_clv_int_obra = Value
         End Set
     End Property

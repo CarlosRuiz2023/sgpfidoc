@@ -1,5 +1,4 @@
-﻿Imports System.IO
-Imports System.Web.Services
+﻿Imports System.Web.Services
 Imports Newtonsoft.Json.Linq
 
 
@@ -23,9 +22,10 @@ Public Class WebServiceFileUpload
             Dim ruta2 As String
             If request IsNot Nothing Then
                 Dim nombre As String = String.Format("{0}", json.Item("nomarchivo"))
-                ruta2 = HttpContext.Current.Server.MapPath("..\Admin\temp")
-                ruta = "C:\Users\utileria6\Desktop\Compartida\CodigoFuente\pruebas\sgpfidoc_v1\sgpfidoc_v1\Admin\temp\" + nombre
-                Dim filePath = Path.Combine(Server.MapPath("~/Admin/temp"), nombre)
+                'ruta2 = HttpContext.Current.Server.MapPath("..\Admin\temp")'
+                ruta = "C:\SGPFidoc2025\Admin\temp\" + nombre '
+                'ruta = "C:\Users\utileria6\Desktop\Compartida\CodigoFuente\pruebas\sgpfidoc_v1\sgpfidoc_v1\Admin\temp\" + nombre
+                'Dim filePath = Path.Combine(Server.MapPath("~/Admin/temp"), nombre)'
                 request.SaveAs(ruta)
                 Return True
             Else

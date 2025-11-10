@@ -4,7 +4,7 @@
     Private _longitud As Double = 0
     Private _latitud As Double = 0
     Private _mts As Double = 0
-    Private _cid As Integer = 0
+    Private _cid As Long = 0
     Private _coopid As String = String.Empty
     Private _pid As Integer = 0
     Private _oid As Integer = 0
@@ -72,11 +72,11 @@
             _mts = Value
         End Set
     End Property
-    Public Property cid() As Integer
+    Public Property cid() As Long
         Get
             Return _cid
         End Get
-        Set(ByVal Value As Integer)
+        Set(ByVal Value As Long)
             _cid = Value
         End Set
     End Property

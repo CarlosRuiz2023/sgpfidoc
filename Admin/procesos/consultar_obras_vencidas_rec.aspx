@@ -1061,7 +1061,7 @@
 
             return $.ajax({
                 type: "POST",
-                url: "http://192.1.126.122/fidoc/WebServices/WebServiceFileUpload.asmx/GuardarArchivo",
+                url: "../../WebServices/WebServiceFileUpload.asmx/GuardarArchivo",
                 contentType: false,
                 processData: false,
                 data: formdata

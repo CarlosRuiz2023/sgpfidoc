@@ -53,7 +53,7 @@ Public Class WebServiceRolAccionTarea
         Dim ds As DataSet = New DataSet()
 
         Using con As New NpgsqlConnection(constr)
-            Using cmd As New NpgsqlCommand("sp_usu_accion_tarea_q", con)
+            Using cmd As New NpgsqlCommand("public2.sp_usu_accion_tarea_q", con)
                 Dim adapt As NpgsqlDataAdapter = New NpgsqlDataAdapter(cmd)
                 cmd.CommandType = CommandType.StoredProcedure
                 cmd.Parameters.AddWithValue("@idusu_in", idusu)

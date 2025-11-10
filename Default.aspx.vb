@@ -5,7 +5,7 @@ Partial Class Admin_Default
 
     Private objUsuarioEN As New clsUsuarios
     Public funcion As New funciones
-   
+
 
     Protected Sub btnDefault_Click1(sender As Object, e As ImageClickEventArgs) Handles btnDefault.Click
         objUsuarioEN.Usuario = txtUsuario.Text

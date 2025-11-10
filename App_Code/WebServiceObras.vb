@@ -61,7 +61,7 @@ Public Class WebServiceObras
                         obra.evid_pub1 = ValidarDBNull(row.Item("out_evid_pub1"), "cadena")
                         obra.obr_fec_pub2 = ValidarDBNull(row.Item("out_obr_fec_pub2"), "fecha")
                         obra.evid_pub2 = ValidarDBNull(row.Item("out_evid_pub2"), "cadena")
-                        obra.col_clv2 = ValidarDBNull(row.Item("out_col_clv2"), "cadena")
+                        obra.col_clv2 = ValidarDBNull(row.Item("out_col_clv2"), "entero")
                         obra.limite1 = ValidarDBNull(row.Item("out_limite1"), "cadena")
                         obra.limite2 = ValidarDBNull(row.Item("out_limite2"), "cadena")
                         obra.col_nom = ValidarDBNull(row.Item("out_col_nom"), "cadena")
@@ -98,6 +98,7 @@ Public Class WebServiceObras
                         obra.evid_obra_proc = ValidarDBNull(row.Item("out_obr_evid_proc"), "cadena")
                         obra.evid_termino_obra = ValidarDBNull(row.Item("out_obr_evid_termino"), "cadena")
                         obra.obr_nat = ValidarDBNull(row.Item("out_obr_nat"), "cadena")
+                        System.Diagnostics.Debug.WriteLine("Valor de col_clv2: " & obra.col_clv2)
                         obras.Add(obra)
                     Next row
                 End If
@@ -767,11 +768,14 @@ Public Class WebServiceObras
 
         End If
         If objObraS.accion = 0 Then
-            strSQL = "insert into obra (obr_clv,obr_call,obr_col,obr_tramo,obr_fecha,obr_cost,obr_stat,obr_sis,obr_programa,obr_cuentac,obr_digagr,obr_fecinip,obr_fecvenp,obr_npago,obr_opergob,obr_numera,obr_contab) values ('" & objObraS.obr_clv & "','" & objObraS.obr_call & "','" & objObraS.obr_col & "','" & objObraS.obr_tramo & "','" & objObraS.obr_fecha & "'," & objObraS.obr_cost & ",'" & objObraS.obr_stat & "','" & objObraS.obr_sis & "','" & objObraS.obr_programa & "','" & objObraS.obr_cuentac & "','" & objObraS.obr_digagr + "','" & objObraS.obr_fecinip & "','" & objObraS.obr_fecvenp & "'," & objObraS.obr_npago & ",'" & objObraS.obr_opergob & "','0','0')"
+            'strSQL = "insert into obra (obr_clv,obr_call,obr_col,obr_tramo,obr_fecha,obr_cost,obr_stat,obr_sis,obr_programa,obr_cuentac,obr_digagr,obr_fecinip,obr_fecvenp,obr_npago,obr_opergob,obr_numera,obr_contab) values ('" & objObraS.obr_clv & "','" & objObraS.obr_call & "','" & objObraS.obr_col & "','" & objObraS.obr_tramo & "','" & objObraS.obr_fecha & "'," & objObraS.obr_cost & ",'" & objObraS.obr_stat & "','" & objObraS.obr_sis & "','" & objObraS.obr_programa & "','" & objObraS.obr_cuentac & "','" & objObraS.obr_digagr + "','" & objObraS.obr_fecinip & "','" & objObraS.obr_fecvenp & "'," & objObraS.obr_npago & ",'" & objObraS.obr_opergob & "','0','0')"
+            strSQL2 = "INSERT INTO obra (obr_clv,obr_call,obr_col,obr_cost,obr_stat,obr_tramo,obr_fecha,obr_sis,col_nom,obr_programa,obr_fecinip,obr_fecvenp,obr_npago,obr_opergob,obr_cuentac,obr_digagr,obr_mts,obr_numera,obr_contab) VALUES('" & objObraS.obr_clv & "','" & objObraS.obr_call & "','" & objObraS.obr_col & "'," & objObraS.obr_cost & ",'" & objObraS.obr_stat & "','" & objObraS.obr_tramo & "','" & objObraS.obr_fecha & "','" & objObraS.obr_sis & "','" & objObraS.col_nom & "','" & objObraS.obr_programa & "','" & objObraS.obr_fecinip & "','" & objObraS.obr_fecvenp & "'," & objObraS.obr_npago & ",'" & objObraS.obr_opergob & "','0','',0,'0','0')"
+
+            System.Diagnostics.Debug.WriteLine(strSQL2)
 
             Using con As New OleDbConnection(constr)
                 Dim cmd As OleDbCommand = con.CreateCommand()
-                cmd.CommandText = strSQL
+                cmd.CommandText = strSQL2
                 Dim adapt As New OleDbDataAdapter(cmd)
                 Try
                     con.Open()
@@ -953,7 +957,7 @@ Public Class WebServiceObras
 
     <WebMethod(Description:="Retorna el estatus de una anuencia teniendo su idanu")>
     <ScriptMethod(ResponseFormat:=ResponseFormat.Json, XmlSerializeString:=True)>
-    Public Function GetObra2_psql(accion As Integer, obr_clv_int As Integer) As String
+    Public Function GetObra2_psql(accion As Integer, obr_clv_int As Long) As String
         Dim constr As String = ConfigurationManager.ConnectionStrings("cf5").ConnectionString
         Dim dt As DataSet = New DataSet()
 
@@ -1234,6 +1238,65 @@ Public Class WebServiceObras
             End If
         End If
         Return ValidarDBNull
+    End Function
+
+    <WebMethod(Description:="Actualizar estatus y opergob de una OBRA_SIFIDOC")>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json, XmlSerializeString:=True)>
+    Public Function cambiarEstatusObraSIFIDOC(obr_stat As Integer, obr_opergob As String, obr_clv As String) As Object
+        Dim constr As String = ConfigurationManager.ConnectionStrings("cf6").ConnectionString
+        Dim filasAfectadas As Integer = 0
+
+        Try
+            Using con As New OleDbConnection(constr)
+                con.Open()
+
+                ' Consulta principal
+                Dim strSQL1 As String = "UPDATE obra " &
+                                        "SET obr_stat = " & obr_stat & ", " &
+                                        "    obr_cuentac = '" & obr_opergob & "', " &
+                                        "    obr_opergob = '" & obr_opergob & "' " &
+                                        "WHERE obr_clv = '" & obr_clv & "'"
+
+                Using cmd As New OleDbCommand(strSQL1, con)
+                    filasAfectadas += cmd.ExecuteNonQuery()
+                End Using
+
+                ' Si el estatus es 8 => ejecutar más actualizaciones
+                If obr_stat = 8 Then
+
+                    ' Construir nueva clave: "89" + todo excepto los 2 primeros dígitos
+                    Dim nueva_clv As String = "89" & obr_clv.Substring(2)
+                    ' Ejemplo de segunda consulta
+                    Dim strSQL2 As String = "UPDATE obra " &
+                                            "SET obr_cost = 0.00001 " &
+                                            ", obr_clv = '" & nueva_clv & "'" &
+                                            " WHERE obr_clv = '" & obr_clv & "'"
+
+                    Using cmd As New OleDbCommand(strSQL2, con)
+                        filasAfectadas += cmd.ExecuteNonQuery()
+                    End Using
+
+                    ' Ejemplo de tercera consulta
+                    Dim strSQL3 As String = "UPDATE cooperador " &
+                                            "SET coo_obr = '" & nueva_clv & "'" &
+                                            ", coo_clv = '" & nueva_clv & "'+coo_clv1" &
+                                            " WHERE coo_obr = '" & obr_clv & "'"
+
+                    Using cmd As New OleDbCommand(strSQL3, con)
+                        filasAfectadas += cmd.ExecuteNonQuery()
+                    End Using
+                End If
+            End Using
+
+            If filasAfectadas > 0 Then
+                Return New With {.code = 200, .message = "Actualización correcta"}
+            Else
+                Return New With {.code = 404, .message = "No se encontró la obra"}
+            End If
+
+        Catch ex As Exception
+            Return New With {.code = 500, .message = "Error: " & ex.Message}
+        End Try
     End Function
 
 End Class

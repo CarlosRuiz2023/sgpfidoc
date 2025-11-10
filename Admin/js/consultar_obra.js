@@ -1,15 +1,17 @@
-const geoserverConfig = '../../Global/config';
+import urls from "../../Global/config.js";
 
-function GestionCooperadores(oid, obr_clv_int, obr_clv,obr_estatus, idprog, idusu, fid, num_pagos, fec_venc, coopid) {
+console.log("urls: " + urls);
+
+function GestionCooperadores(oid, obr_clv_int, obr_clv, obr_estatus, idprog, idusu, fid, num_pagos, fec_venc, coopid) {
     //alert(img);
     var url1 = "../Procesos/gCoops.html?ResponseType=Edit&oid=" + oid + "&obr_clv_int=" + obr_clv_int + "&obr_clv=" + obr_clv + "&obr_estatus=" + obr_estatus + "&programa=" + idprog + "&idusu=" + idusu + "&fid=" + fid + "&num_pagos=" + num_pagos + "&fec_venc=" + fec_venc + "&coopid=" + coopid;
-    newWindow = window.open(url1, "_blank", "top=30,left=200,menubar=no,toolbar=no,location=no, resizable=no,height=1100,width=1300,status=no,scrollbars=yes,minimizable=no,maxmizable=no,resizable=0,titlebar=no,modal=yes");
+    var newWindow = window.open(url1, "_blank", "top=30,left=200,menubar=no,toolbar=no,location=no, resizable=no,height=1100,width=1300,status=no,scrollbars=yes,minimizable=no,maxmizable=no,resizable=0,titlebar=no,modal=yes");
     if (newWindow.focus()) {
         newWindow.focus()
     }
 }
 
-function ConsultaSalidaObra(obr_clv_int,idusu) {
+function ConsultaSalidaObra(obr_clv_int, idusu) {
     //alert(img);
     var url1 = "../Procesos/salida_obra.html?ResponseType=Edit&obr_clv_int=" + obr_clv_int + "&idusu=" + idusu;
     newWindow = window.open(url1, "_blank", "top=30,left=200,menubar=no,toolbar=no,location=no, resizable=no,height=1100,width=1900,status=no,scrollbars=yes,minimizable=no,maxmizable=no,resizable=0,titlebar=no,modal=yes");
@@ -19,9 +21,9 @@ function ConsultaSalidaObra(obr_clv_int,idusu) {
 }
 
 
-function ConsultaSalidaPredio(idusu, oid,pid) {
+function ConsultaSalidaPredio(idusu, oid, pid) {
     //alert(img);
-    var url1 = "../Procesos/salida_predio.html?ResponseType=Edit&idusu=" + idusu + "&oid=" + oid  + "&pid=" + pid;
+    var url1 = "../Procesos/salida_predio.html?ResponseType=Edit&idusu=" + idusu + "&oid=" + oid + "&pid=" + pid;
     newWindow = window.open(url1, "_blank", "top=150,left=150,menubar=no,toolbar=no,location=no, resizable=no,height=846,width=1674,status=no,scrollbars=yes,minimizable=no,maxmizable=no,titlebar=no,modal=yes");
     if (newWindow.focus()) {
         newWindow.focus()
@@ -50,9 +52,9 @@ function FechaVencPagos(obr_npago) {
 
     var fecvenc = ConvertirCadenaToFecha($("#txtfecinipag").val());
     if (fecvenc > ConvertirCadenaToFecha('01/01/1900')) {
-        fecvenc.setMonth(fecvenc.getMonth() + (parseInt(obr_npago)-1));
+        fecvenc.setMonth(fecvenc.getMonth() + (parseInt(obr_npago) - 1));
         fecvenc2 = new Date(fecvenc.getFullYear(), fecvenc.getMonth() + 1, 0);
-        obr_fecvenp = CompletaCerosIzq(fecvenc2.getDate(), 2) + "/" + CompletaCerosIzq(fecvenc2.getMonth()+1, 2) + "/" + CompletaCerosIzq(fecvenc2.getFullYear());  //Fecha de vencimiento de pagos            
+        obr_fecvenp = CompletaCerosIzq(fecvenc2.getDate(), 2) + "/" + CompletaCerosIzq(fecvenc2.getMonth() + 1, 2) + "/" + CompletaCerosIzq(fecvenc2.getFullYear());  //Fecha de vencimiento de pagos            
     }
     else {
         obr_fecvenp = '01/01/1900';  //Fecha de vencimiento de pagos
@@ -62,6 +64,7 @@ function FechaVencPagos(obr_npago) {
 }
 
 function FormatoMoneda(parametro) {
+    let resultado = null;
     if (!isNaN(parametro)) {
         resultado = ('$' + parseFloat(parametro, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
     } else {
@@ -80,7 +83,7 @@ function formateaMesCorresp(parametro) {
     resultado = parametro;
     if (!IsNumeric(parametro)) {
         resultado = 0;
-    } 
+    }
     return resultado
 }
 
@@ -118,8 +121,7 @@ function formateafecha(fecha) {
     }
     else {
         dia = fecha.substr(0, 1);
-        if (IsNumeric(dia) == false)
-        { fecha = ""; }
+        if (IsNumeric(dia) == false) { fecha = ""; }
         if ((long <= 2) && (primerslap = true)) { fecha = fecha.substr(0, 1); primerslap = false; }
     }
     if ((long >= 5) && (segundoslap == false)) {
@@ -139,7 +141,7 @@ function formateafecha(fecha) {
         mes = fecha.substr(3, 2);
         ano = fecha.substr(6, 4);
         // Año no viciesto y es febrero y el dia es mayor a 28 
-        if ((ano % 4 != 0) && (mes == 02) && (dia > 28)) { fecha = fecha.substr(0, 2) + "/"; }
+        if ((ano % 4 != 0) && (mes == '02') && (dia > 28)) { fecha = fecha.substr(0, 2) + "/"; }
     }
     return (fecha);
 }
@@ -173,9 +175,9 @@ function FechaHora() {
 
 
 function NombreMes(num_mes) {
-    
-    var m = new Array();       
-    
+
+    var m = new Array();
+
     m[0] = "Enero"; m[1] = "Febrero"; m[2] = "Marzo";
     m[3] = "Abril"; m[4] = "Mayo"; m[5] = "Junio";
     m[6] = "Julio"; m[7] = "Agosto"; m[8] = "Septiembre";
@@ -245,7 +247,7 @@ function ObtenerFiltro() {
     if (num_obra_sgp.length <= 0 || !$.isNumeric(num_obra_sgp)) {
         num_obra_sgp = '';
     }
-    
+
     var filtro = num_obra + "," + nomcalle + ",," + num_obra_sgp + ",";
     return filtro;
 }
@@ -262,7 +264,7 @@ function RedibujarGrid() {
 
 
 function GeneraFormato(pdf) {
-    
+
     //***** ENCABEZADO ****///
 
     var img = new Image();
@@ -314,7 +316,7 @@ function GeneraFormato(pdf) {
 
 }
 
-function GeneraFormatoFichaPagoMes(objFormato,pdf) {
+function GeneraFormatoFichaPagoMes(objFormato, pdf) {
 
     //***** ENCABEZADO ****///
 
@@ -357,7 +359,7 @@ function GeneraFormatoFichaPagoMes(objFormato,pdf) {
 
     pdf.line(10, row_ini_pie + reng_adic * 7.5, 204, row_ini_pie + reng_adic * 7.5);
     pdf.line(10, row_ini_pie + reng_adic * 7.3, 204, row_ini_pie + reng_adic * 7.3);
-    
+
     pdf.text(columna_pie, row_ini_pie + reng_adic * 8.5, 'Blvd. Juan José Torres Landa 1701');
     pdf.text(columna_pie, row_ini_pie + reng_adic * 9.5, 'Oriente Edificio B de Obras Públicas');
     pdf.text(columna_pie, row_ini_pie + reng_adic * 10.5, 'Col. El Tlacuache');
@@ -383,7 +385,7 @@ function GeneraFormatoFichaPagoMes(objFormato,pdf) {
     pdf.addImage(img_whatsapp, 'jpg', 187, row_ini_pie + reng_adic * 10, 2.5, 2.5);
 
 
-    pdf.text(204 - pdf.getTextWidth('facebook/fidocleon'), row_ini_pie + reng_adic * 8.5 , 'facebook/fidocleon');
+    pdf.text(204 - pdf.getTextWidth('facebook/fidocleon'), row_ini_pie + reng_adic * 8.5, 'facebook/fidocleon');
     pdf.text(204 - pdf.getTextWidth('@fidocleon'), row_ini_pie + reng_adic * 9.5, '@fidocleon');
     pdf.text(204 - pdf.getTextWidth('477-325-2586'), row_ini_pie + reng_adic * 10.5, '477-325-2586');
 
@@ -392,7 +394,7 @@ function GeneraFormatoFichaPagoMes(objFormato,pdf) {
     pdf.line(10, row_ini_pie + reng_adic * 12.6, 204, row_ini_pie + reng_adic * 12.6);
 
 
-    
+
     pdf.addImage(img, 'PNG', 10, row_ini_pie + reng_adic * 13, 60, 22);
     pdf.setFontSize(15);
     pdf.setFontType('bold')
@@ -401,13 +403,13 @@ function GeneraFormatoFichaPagoMes(objFormato,pdf) {
     pdf.setFontType('normal')
     pdf.text(120 - pdf.getTextWidth('Fecha de Impresión:') / 2, row_ini_pie + reng_adic * 17, 'Fecha de Impresión:' + FechaHora());
     pdf.setFontSize(5);
-    pdf.text(130, row_ini_pie + reng_adic *18, objFormato.fid + ':' + objFormato.pid + ':' + objFormato.obr_clv_int + ':' + objFormato.oid + ':' + objFormato.idusu);
-  
+    pdf.text(130, row_ini_pie + reng_adic * 18, objFormato.fid + ':' + objFormato.pid + ':' + objFormato.obr_clv_int + ':' + objFormato.oid + ':' + objFormato.idusu);
+
 
 }
 
 
-function GeneraEncabezado(reg,pdf) {
+function GeneraEncabezado(reg, pdf) {
     var oid = reg[0];
     var obr_clv_int = reg[1];
     var obr_clv = reg[3];
@@ -424,7 +426,7 @@ function GeneraEncabezado(reg,pdf) {
     var fecvenp = reg[10];
     var costo_obra = reg[33];
     var abono = reg[34];
-    var avance_obra=reg[35];
+    var avance_obra = reg[35];
     var columna_ref = 74;
     var reng_ref = 36;
     var reng_inc = 4;
@@ -435,8 +437,8 @@ function GeneraEncabezado(reg,pdf) {
     pdf.text(columna_ref - pdf.getTextWidth('Obra_SIFIDOC:'), reng_ref + reng_inc * 3, 'Obra_SIFIDOC:');
 
     pdf.setFontType('normal')
-    
-    
+
+
     pdf.text(90 - pdf.getTextWidth(oid), reng_ref + reng_inc * 1, oid);
     pdf.text(90 - pdf.getTextWidth(obr_clv_int), reng_ref + reng_inc * 2, obr_clv_int);
     pdf.text(90 - pdf.getTextWidth(obr_clv), reng_ref + reng_inc * 3, obr_clv);
@@ -478,7 +480,7 @@ function GeneraEncabezado(reg,pdf) {
     var col_ref1 = 10;
     var reng_ref1 = 83;
     pdf.text(col_ref1 + tamano_col * .5 - pdf.getTextWidth('fid:coopid') / 2, reng_ref1, 'fid:coopid');
-    pdf.text(col_ref1 + tamano_col * 2.5 - pdf.getTextWidth('Nombre Cooperador') / 2, reng_ref1, 'Nombre Cooperador');        
+    pdf.text(col_ref1 + tamano_col * 2.5 - pdf.getTextWidth('Nombre Cooperador') / 2, reng_ref1, 'Nombre Cooperador');
     pdf.text(col_ref1 + tamano_col * 4.5 - pdf.getTextWidth('No. Ofic.') / 2, reng_ref1, 'No. Ofic.');
     pdf.text(col_ref1 + tamano_col * 5.5 - pdf.getTextWidth('Mts.') / 2, reng_ref1, 'Mts.');
     pdf.text(col_ref1 + tamano_col * 7 - pdf.getTextWidth('COSTO') / 2, reng_ref1, 'COSTO');
@@ -489,14 +491,14 @@ function GeneraEncabezado(reg,pdf) {
     return avance_obra;
 }
 
-function GeneraNumPaginas(pagina,total_paginas,pdf) {
+function GeneraNumPaginas(pagina, total_paginas, pdf) {
     pdf.setFontSize(8);
     pdf.setFontType('bold');
-    pdf.text(204 - pdf.getTextWidth('Página: ' + pagina.toString() + ' de ' + total_paginas.toString()),252, 'Página: ' + pagina.toString() + ' de ' + total_paginas.toString());
+    pdf.text(204 - pdf.getTextWidth('Página: ' + pagina.toString() + ' de ' + total_paginas.toString()), 252, 'Página: ' + pagina.toString() + ' de ' + total_paginas.toString());
 }
 
 
-function GeneraPie(total_total_costo, total_total_cargos, total_total_abonos, total_total_saldo,ultimo_reg_coop,avance_obra,num_regs, pdf) {
+function GeneraPie(total_total_costo, total_total_cargos, total_total_abonos, total_total_saldo, ultimo_reg_coop, avance_obra, num_regs, pdf) {
     var tamano_col = 14;
 
     pdf.setFontSize(8);
@@ -507,9 +509,9 @@ function GeneraPie(total_total_costo, total_total_cargos, total_total_abonos, to
     /*Este valor se debe calcular porque se requiere a nivel obra*/
     var avance_obra_dos_decimas = parseFloat(total_total_abonos) * 100 / parseFloat(total_total_costo);
     avance_obra_dos_decimas = avance_obra_dos_decimas.toFixed(2);
-    
+
     pdf.line(10, ultimo_reg_coop + 8, 204, ultimo_reg_coop + 8);
-    pdf.text(10 + tamano_col * 5.5 - pdf.getTextWidth('TOTALES:'), ultimo_reg_coop + 12,'TOTALES:');
+    pdf.text(10 + tamano_col * 5.5 - pdf.getTextWidth('TOTALES:'), ultimo_reg_coop + 12, 'TOTALES:');
     pdf.text(10 + tamano_col * 8 - pdf.getTextWidth(FormatoMoneda(total_total_costo.toString())), ultimo_reg_coop + 12, FormatoMoneda(total_total_costo.toString()));
     pdf.text(10 + tamano_col * 10 - pdf.getTextWidth(FormatoMoneda(total_total_cargos.toString())), ultimo_reg_coop + 12, FormatoMoneda(total_total_cargos.toString()));
     pdf.text(10 + tamano_col * 12 - pdf.getTextWidth(FormatoMoneda(total_total_abonos.toString())), ultimo_reg_coop + 12, FormatoMoneda(total_total_abonos.toString()));
@@ -524,123 +526,123 @@ function GeneraPie(total_total_costo, total_total_cargos, total_total_abonos, to
     pdf.text(10 + tamano_col * 5.5 - pdf.getTextWidth('NUM. DE COOPS (FRENTES):'), ultimo_reg_coop + 22.8, 'NUM. DE COOPS (FRENTES):');
     pdf.text(10 + tamano_col * 8 - pdf.getTextWidth(num_regs.toString()), ultimo_reg_coop + 22.8, num_regs.toString());
     pdf.line(10, ultimo_reg_coop + 24.8, 204, ultimo_reg_coop + 24.8);
-    
+
 }
 
 function GenerarReporteObra(obr_clv_int) {
 
-    
+
     var filtro2 = ',,,,,,,,' + obr_clv_int + ',,';
 
     $.ajax({
         url: "../../WebServices/WebServiceFrente.asmx/GetFrentexO", //PageMethod
-            data: "{'pPageSize':'10000"  +
-                  "','pCurrentPage':'1" +
-                  "','pSortColumn':'fid" +
-                  "','pSortOrder':'asc" +  
-                  "','pFiltro':'" + filtro2 + "'}", //PageMethod Parametros de entrada                                   
-            dataType: "json",
-            type: "post",
-            contentType: "application/json; charset=utf-8",
-            complete: function (jsondata, stat) {
-                                   
-                        var objeto = JSON.parse(jsondata.responseText).d;
-                        var num_pag = 0;
-                        var reg;
-                        var reg2;
-                        var num_regs = objeto.RecordCount;
-                        
+        data: "{'pPageSize':'10000" +
+            "','pCurrentPage':'1" +
+            "','pSortColumn':'fid" +
+            "','pSortOrder':'asc" +
+            "','pFiltro':'" + filtro2 + "'}", //PageMethod Parametros de entrada                                   
+        dataType: "json",
+        type: "post",
+        contentType: "application/json; charset=utf-8",
+        complete: function (jsondata, stat) {
 
-                        if (num_regs > 0) {
-                            num_pag = 1;                                            
-                            var pdf = new jsPDF('p', 'mm', 'letter');
-                            reg = objeto.Items[0].row;
-                            var col_ref1 = 10;
-                            var reng_ref1 = 87.5;
-                            var inc_reng = 3;
-                            var tamano_col = 14;
+            var objeto = JSON.parse(jsondata.responseText).d;
+            var num_pag = 0;
+            var reg;
+            var reg2;
+            var num_regs = objeto.RecordCount;
 
 
-                            var total_total_costo = 0;
-                            var total_total_cargos = 0;
-                            var total_total_abonos = 0;
-                            var total_total_saldo = 0;
-
-                            var regxpag = 45;
-                            var residuo = num_regs % regxpag;                        
-                            var fraccion = 0;
-                            if (residuo > 0) {
-                                fraccion = 1;
-                            }
-                    
-                            var total_paginas = Math.floor(num_regs / regxpag) + fraccion;
-                            var pagina = 1;
-                            var registros_impresos = 0;
-                            var ultimo_reg_coop = 0;
+            if (num_regs > 0) {
+                num_pag = 1;
+                var pdf = new jsPDF('p', 'mm', 'letter');
+                reg = objeto.Items[0].row;
+                var col_ref1 = 10;
+                var reng_ref1 = 87.5;
+                var inc_reng = 3;
+                var tamano_col = 14;
 
 
-                            GeneraFormato(pdf);  //* Aplica formato a la página*//
-                            var avance_obra = GeneraEncabezado(reg, pdf); /*Aplica Encabezado de página*/
-                            GeneraNumPaginas(pagina, total_paginas, pdf);
-                    
-                    
-                            pdf.setFontSize(7);
-                            pdf.setFontType('normal');
+                var total_total_costo = 0;
+                var total_total_cargos = 0;
+                var total_total_abonos = 0;
+                var total_total_saldo = 0;
 
-                            for (i = 0; i < num_regs ; i++) {
-                                reg2 = objeto.Items[i].row;                            
+                var regxpag = 45;
+                var residuo = num_regs % regxpag;
+                var fraccion = 0;
+                if (residuo > 0) {
+                    fraccion = 1;
+                }
 
-                                if (registros_impresos >= regxpag) {
-                            
-                                    pdf.addPage();
-                                    pagina = pagina + 1;
-                                    GeneraFormato(pdf);
-                                    GeneraEncabezado(reg2, pdf);
-                                    GeneraNumPaginas(pagina, total_paginas, pdf);
-                                    registros_impresos = 0;
-                                }
+                var total_paginas = Math.floor(num_regs / regxpag) + fraccion;
+                var pagina = 1;
+                var registros_impresos = 0;
+                var ultimo_reg_coop = 0;
 
-                                pdf.setFontSize(6);
-                                pdf.setFontType('normal')
+
+                GeneraFormato(pdf);  //* Aplica formato a la página*//
+                var avance_obra = GeneraEncabezado(reg, pdf); /*Aplica Encabezado de página*/
+                GeneraNumPaginas(pagina, total_paginas, pdf);
+
+
+                pdf.setFontSize(7);
+                pdf.setFontType('normal');
+
+                for (var i = 0; i < num_regs; i++) {
+                    reg2 = objeto.Items[i].row;
+
+                    if (registros_impresos >= regxpag) {
+
+                        pdf.addPage();
+                        pagina = pagina + 1;
+                        GeneraFormato(pdf);
+                        GeneraEncabezado(reg2, pdf);
+                        GeneraNumPaginas(pagina, total_paginas, pdf);
+                        registros_impresos = 0;
+                    }
+
+                    pdf.setFontSize(6);
+                    pdf.setFontType('normal')
                                 /*fid:coopid*/pdf.text(col_ref1 + tamano_col * .5 - pdf.getTextWidth(reg2[16] + ':' + reg[4]) / 2, reng_ref1 + (registros_impresos * inc_reng), reg2[16] + ':' + reg2[4]);
-                                if (pdf.getTextWidth(reg2[20])>42) {
-                                    pdf.setFontSize(3.5);
-                                } else {
-                                    pdf.setFontSize(6);
-                                }
+                    if (pdf.getTextWidth(reg2[20]) > 42) {
+                        pdf.setFontSize(3.5);
+                    } else {
+                        pdf.setFontSize(6);
+                    }
 
                                 /*mnomficha*/pdf.text(col_ref1 + tamano_col * 2.5 - pdf.getTextWidth(reg2[20]) / 2, reng_ref1 + (registros_impresos * inc_reng), reg2[20]);
-                                pdf.setFontSize(6);
+                    pdf.setFontSize(6);
                                 /*nooficial*/pdf.text(col_ref1 + tamano_col * 4.5 - pdf.getTextWidth(reg2[17]) / 2, reng_ref1 + (registros_impresos * inc_reng), reg2[17]);
                                 /*mts_frente*/pdf.text(col_ref1 + tamano_col * 5.5 - pdf.getTextWidth(reg2[21]) / 2, reng_ref1 + (registros_impresos * inc_reng), reg2[21]);
                                 /*capital*/pdf.text(col_ref1 + tamano_col * 8 - pdf.getTextWidth(FormatoMoneda(reg2[24])), reng_ref1 + (registros_impresos * inc_reng), FormatoMoneda(reg2[24]));
-                                var abonos_float = parseFloat(reg2[25]) + parseFloat(reg2[26]) + parseFloat(reg2[27]);
-                                var abonos_txt = FormatoMoneda(parseFloat(reg2[25]) + parseFloat(reg2[26]) + parseFloat(reg2[27]));
+                    var abonos_float = parseFloat(reg2[25]) + parseFloat(reg2[26]) + parseFloat(reg2[27]);
+                    var abonos_txt = FormatoMoneda(parseFloat(reg2[25]) + parseFloat(reg2[26]) + parseFloat(reg2[27]));
                                 /*recargos_netos*/pdf.text(col_ref1 + tamano_col * 10 - pdf.getTextWidth(FormatoMoneda(reg2[28])), reng_ref1 + (registros_impresos * inc_reng), FormatoMoneda(reg2[28]));
                                 /*capital_pagado + cargos_pagados + desctos_aplicados*/pdf.text(col_ref1 + tamano_col * 12 - pdf.getTextWidth(abonos_txt), reng_ref1 + (registros_impresos * inc_reng), abonos_txt);
                                 /*total_pagar*/pdf.text(col_ref1 + tamano_col * 13.6 - pdf.getTextWidth(FormatoMoneda(reg2[29])), reng_ref1 + (registros_impresos * inc_reng), FormatoMoneda(reg2[29]));
 
 
-                        total_total_costo = total_total_costo + parseFloat(reg2[24]);
-                        total_total_cargos = total_total_cargos + parseFloat(reg2[28]);
-                        total_total_abonos = total_total_abonos + parseFloat(abonos_float);
-                        total_total_saldo = total_total_saldo + parseFloat(reg2[29]);
-                        ultimo_reg_coop = reng_ref1 + (registros_impresos * inc_reng);
-                        
-                        registros_impresos++;
-                    }
+                    total_total_costo = total_total_costo + parseFloat(reg2[24]);
+                    total_total_cargos = total_total_cargos + parseFloat(reg2[28]);
+                    total_total_abonos = total_total_abonos + parseFloat(abonos_float);
+                    total_total_saldo = total_total_saldo + parseFloat(reg2[29]);
+                    ultimo_reg_coop = reng_ref1 + (registros_impresos * inc_reng);
 
-                    GeneraPie(total_total_costo, total_total_cargos, total_total_abonos, total_total_saldo,ultimo_reg_coop,avance_obra,num_regs, pdf);
-                    
-                    var hoy = moment().format("DDMMYYYY");
-                    var reporte_obra = 'rep_obr_' + hoy + '.pdf';
-                    pdf.save(reporte_obra.toString());
+                    registros_impresos++;
                 }
-            },
-            error: function (responseText, textStatus, errorThrown) {
-                alert(textStatus + responseText + errorThrown);
+
+                GeneraPie(total_total_costo, total_total_cargos, total_total_abonos, total_total_saldo, ultimo_reg_coop, avance_obra, num_regs, pdf);
+
+                var hoy = moment().format("DDMMYYYY");
+                var reporte_obra = 'rep_obr_' + hoy + '.pdf';
+                pdf.save(reporte_obra.toString());
             }
-          });
+        },
+        error: function (responseText, textStatus, errorThrown) {
+            alert(textStatus + responseText + errorThrown);
+        }
+    });
 }
 
 
@@ -669,337 +671,338 @@ function Buscar_obra() {
     }
 
     $("#grid").jqGrid(
-     {
-         datatype: function () {
-             $.ajax(
-               {
-                //TODO: Curioso porque al dejarlo como local no me aparecen ciertas obras recien creadas
-                   url: "../../WebServices/WebServiceObras.asmx/GetObra_psql", //PageMethod
-                   data: "{'pPageSize':'" + $('#grid').getGridParam("rowNum") +
-                   "','pCurrentPage':'" + $('#grid').getGridParam("page") +
-                   "','pSortColumn':'" + $('#grid').getGridParam("sortname") +
-                   "','pSortOrder':'" + $('#grid').getGridParam("sortorder") +
-                   "','pFiltro':'" + filtro + "'}", //PageMethod Parametros de entrada
-                   dataType: "json",
-                   type: "post",
-                   contentType: "application/json; charset=utf-8",
-                   complete: function (jsondata, stat) {
-                       if (stat == "success") {
-                           jQuery("#grid")[0].addJSONData(JSON.parse(jsondata.responseText).d);
-                           var objeto = JSON.parse(jsondata.responseText).d;
-                           var regs = objeto.RecordCount;
-                           if (regs == 0) {
-                               alert('No se encontraron registros...');
-                           }
-                       }
-                       else
-                           alert(JSON.parse(jsondata.responseText).Message);
-                   }
-               });
-         },
-         jsonReader: //Set the jsonReader to the JQGridJSonResponse squema to bind the data.
-         {
-             root: "Items",
-             page: "CurrentPage",
-             total: "PageCount",
-             records: "RecordCount",
-             repeatitems: true,
-             cell: "row",
-             id: "b.obr_clv_int"
-         },
-         colModel: [
-          {
-              index: 'obr_clv_int', width: 120, align: 'center',
-              name: 'ClvObra'
-          },
-          {
-              index: 'obr_clv2', width: 220, align: 'center',
-              name: 'Obra'
-          },
-          {
-              index: 'calle', width: 300, align: 'center',
-              name: 'Calle'
-          },
-          {
-              index: 'colonia', width: 300, align: 'center',
-              name: 'Colonia'
-          },
-          {
-              index: 'tramo', width: 500, align: 'Center',
-              name: 'Tramo'
-          },
-          {
-              index: 'nomprog', width: 100, align: 'center',
-              name: 'Prog'
-          },
-          {
-              index: 'descrip_tipo_obr', width: 200, align: 'center',
-              name: 'TipoObra'
-          },
-          {
-              index: 'cestatus', width: 300, align: 'center',
-              name: 'EstObra'
-          },
-          {
-              index: 'obr_fec_pub1', width: 160, align: 'center',
-              name: 'FecPub1'
-          },
-          {
-              index: 'evid_pub1', width: 200, align: 'center',
-              name: 'EvidPub1', hidden: true
-          },
-          {
-              index: 'evid_pub1', width: 200, align: 'center',
-              name: 'EvidPub1_vinc', formatter: function (cellvalue) {
-                  var archivo = cellvalue;
-                  var url = '<a target="_blank" toolbar=0 href="../../temp/' + archivo + '">' + archivo + '</a>';
-                  return url;
-              }
-          },
-          {
-              index: 'obr_fec_pub2', width: 160, align: 'center',
-              name: 'FecPub2'
-          },
-          {
-              index: 'evid_pub2', width: 200, align: 'center',
-              name: 'EvidPub2', hidden: true
-          },
-          {
-              index: 'evid_pub2', width: 200, align: 'center',
-              name: 'EvidPub2_vinc', formatter: function (cellvalue) {
-                  var archivo = cellvalue;
-                  var url = '<a target="_blank" toolbar=0 href="../../temp/' + archivo + '">' + archivo + '</a>';
-                  return url;
-              }
-          },
-          {
-              index: 'obr_fecinip', width: 160, align: 'center',
-              name: 'FecIniPag'
-          },
-          {
-              index: 'obr_fecvenp', width: 160, align: 'center',
-              name: 'FecVenP'
-          },
-          {
-              index: 'obr_npago', width: 80, align: 'center',
-              name: 'NumPagos'
-          },
-          {
-              index: 'obr_fec_ini_proc', width: 160, align: 'center',
-              name: 'FecIniProc'
-          },
-          {
-              index: 'obr_idtipo_recurso', width: 60, align: 'center',
-              name: 'IdTipoRecurso', hidden: true
-          },
-          {
-              index: 'obr_descrip_tipo_recurso', width: 200, align: 'center',
-              name: 'DescripTipoRec'
-          },
-          {
-              index: 'evid_obra_proc', width: 200, align: 'center',
-              name: 'EvidObrProc', hidden: true
-          },
-          {
-              index: 'evid_obra_proc', width: 200, align: 'center',
-              name: 'EvidObrProc_vinc', formatter: function (cellvalue) {
-                  var archivo = cellvalue;
-                  var url = '<a target="_blank" toolbar=0 href="../../temp/' + archivo + '">' + archivo + '</a>';
-                  return url;
-              }, hidden: true
-          },
-          {
-              index: 'obr_fec_ini_cob', width: 160, align: 'center',
-              name: 'FecIniCob'
-          },
-          {
-              index: 'evid_termino_obra', width: 200, align: 'center',
-              name: 'EvidTermObr', hidden: true
-          },
-           {
-               index: 'evid_termino_obra', width: 200, align: 'center',
-               name: 'EvidTermObr_vinc', formatter: function (cellvalue) {
-                   var archivo = cellvalue;
-                   var url = '<a target="_blank" toolbar=0 href="../../temp/' + archivo + '">' + archivo + '</a>';
-                   return url;
-               }
-           },
-          {
-              index: 'obr_fec_canc', width: 160, align: 'center',
-              name: 'ObrFecCanc'
-          },
-          {
-              index: 'no_contrato', width: 300, align: 'center',
-              name: 'NumContrato'
-          },
-          {
-              index: 'gastos_admvos', width: 300, align: 'center',
-              name: 'GastosAdmvos', formatter: 'currency', formatoptions: { prefix: '$', decimalSeparator: '.', thousandsSeparator: ',' }
-          },
-          {
-              index: 'oid', width: 80, align: 'Center',
-              name: 'oid'
-          },
-          {
-              index: 'geom', width: 300, align: 'Center',
-              name: 'Geom', hidden: true
-          },
-          {
-              index: 'idsol', width: 100, align: 'Center',
-              name: 'IdSol', hidden: true
-          },
-          {
-              index: 'sector', width: 100, align: 'Center',
-              name: 'Sector', hidden: true
-          },
-          {
-              index: 'subsector', width: 200, align: 'center',
-              name: 'SubSector', hidden: true
-          },
-          {
-              index: 'cvecalle', width: 300, align: 'center',
-              name: 'CveCalle', hidden: true
-          },
-          {
-              index: 'idpoligono', width: 350, align: 'center',
-              name: 'idpoligono', hidden: true
-          },
-          {
-              index: 'id_implan', width: 220, align: 'center',
-              name: 'Id_Implan', hidden: true
-          },
-          {
-              index: 'usrmod', width: 135, align: 'center',
-              name: 'usrmod', hidden: true
-          },
-          {
-              index: 'fec_mod', width: 220, align: 'center',
-              name: 'fec_mod', hidden: true
-          },
-          {
-              index: 'col_clv2', width: 220, align: 'center',
-              name: 'col_clv2', hidden: true
-          },
-          {
-              index: 'limite1', width: 220, align: 'center',
-              name: 'limite1', hidden: true
-          },
-          {
-              index: 'limite2', width: 220, align: 'center',
-              name: 'limite2', hidden: true
-          },
-          {
-              index: 'obr_estatus', width: 100, align: 'center',
-              name: 'obr_estatus', hidden: true
-          },
-          {
-              index: 'progmun', width: 220, align: 'center',
-              name: 'progmun', hidden: true
-          },
-          {
-              index: 'progcoop', width: 220, align: 'center',
-              name: 'progcoop', hidden: true
-          },
-          {
-              index: 'obr_clv', width: 220, align: 'center',
-              name: 'obr_clv', hidden: true
-          },
-          {
-              index: 'obr_mts', width: 220, align: 'center',
-              name: 'obr_mts', hidden: true
-          },
-          {
-              index: 'obr_cost', width: 220, align: 'center',
-              name: 'obr_cost', hidden: true
-          },
-          {
-              index: 'obr_int', width: 220, align: 'center',
-              name: 'obr_int', hidden: true
-          },
-          {
-              index: 'obr_fecha', width: 220, align: 'center',
-              name: 'obr_fecha', hidden: true
-          },
-          {
-              index: 'obr_cost_total', width: 220, align: 'center',
-              name: 'obr_cost_total', hidden: true
-          },
-          {
-              index: 'obr_inc', width: 220, align: 'center',
-              name: 'obr_inc', hidden: true
-          },
-          {
-              index: 'obr_opergob', width: 220, align: 'center',
-              name: 'obr_opergob', hidden: true
-          },
-          {
-              index: 'obr_prog2', width: 150, align: 'center',
-              name: 'obr_prog2', hidden: true
-          },
-          {
-              index: 'obr_sis', width: 150, align: 'center',
-              name: 'obr_sis', hidden: true
-          },
-          {
-              index: 'col_nom', width: 220, align: 'center',
-              name: 'col_nom', hidden: true
-          },
-          {
-              index: 'obr_nat', width: 220, align: 'center',
-              name: 'obr_nat', hidden: true
-          }
-         ],
-         pager: "#pager", //Pager.                 
-         loadtext: 'Cargando datos...',
-         recordtext: "{0} - {1} de {2} elementos",
-         emptyrecords: 'No hay resultados',
-         pgtext: 'Pág:{0} de {1}', //Paging input control text format.
-         rowNum: "20", // PageSize.
-         rowList: [5, 10, 20], //Variable PageSize DropDownList. 
-         viewrecords: true, //Show the RecordCount in the pager.
-         multiselect: false,
-         sortname: "b.obr_clv_int", //login SortColumn
-         sortorder: "asc", //login SortOrder.
-         width: "1900",
-         height: "800",
-         caption: "OBRAS",
-         subGrid: true,
-         subGridBeforeExpand: function (subgrid_id, row_id) {
-             var myGrid = $('#grid');
-             obra = myGrid.jqGrid('getRowData', row_id);
-             filtro2 = ',,,,,,,,' + obra.ClvObra + ',,';                
-         },
-         subGridRowExpanded: function (subgrid_id, row_id) {
-             var subgrid_table_id, pager_id;
-             subgrid_table_id = subgrid_id + "_t";
-             pager_id = "p_" + subgrid_table_id;
-             $("#" + subgrid_id).html("<table id='" + subgrid_table_id + "' class='scroll'></table><div id='" + pager_id + "' class='scroll'></div>");
-             var solicitud = jQuery('#grid').jqGrid('getRowData', row_id);
-             jQuery("#" + subgrid_table_id).jqGrid(
-                   {
-                       datatype: function () {
-                           var solicitud = jQuery('#grid').jqGrid('getRowData', row_id);
-                           $.ajax(
-                             {
-                                 url: "../../WebServices/WebServiceFrente.asmx/GetFrentexO", //PageMethod
-                                 data: "{'pPageSize':'" + $("#" + subgrid_table_id).getGridParam("rowNum") +
-                                       "','pCurrentPage':'" + $("#" + subgrid_table_id).getGridParam("page") +
-                                       "','pSortColumn':'" + $("#" + subgrid_table_id).getGridParam("sortname") +
-                                       "','pSortOrder':'" + $("#" + subgrid_table_id).getGridParam("sortorder") +
-                                       "','pFiltro':'" + filtro2 + "'}", //PageMethod Parametros de entrada                                   
-                                 dataType: "json",
-                                 type: "post",
-                                 contentType: "application/json; charset=utf-8",
-                                 complete: function (jsondata, stat) {
-                                     if (stat == "success") {
-                                         jQuery("#" + subgrid_table_id)[0].addJSONData(JSON.parse(jsondata.responseText).d);
-                                     }
-                                     else
-                                         alert(JSON.parse(jsondata.responseText).Message);
-                                 }
-                             });
-                       },
-                       jsonReader: //Set the jsonReader to the JQGridJSonResponse squema to bind the data.
+        {
+            datatype: function () {
+                $.ajax(
+                    {
+                        //TODO: Curioso porque al dejarlo como local no me aparecen ciertas obras recien creadas
+                        url: "../../WebServices/WebServiceObras.asmx/GetObra_psql", //PageMethod
+                        data: "{'pPageSize':'" + $('#grid').getGridParam("rowNum") +
+                            "','pCurrentPage':'" + $('#grid').getGridParam("page") +
+                            "','pSortColumn':'" + $('#grid').getGridParam("sortname") +
+                            //"','pSortColumn':'b." + $('#grid').getGridParam("sortname") +
+                            "','pSortOrder':'" + $('#grid').getGridParam("sortorder") +
+                            "','pFiltro':'" + filtro + "'}", //PageMethod Parametros de entrada
+                        dataType: "json",
+                        type: "post",
+                        contentType: "application/json; charset=utf-8",
+                        complete: function (jsondata, stat) {
+                            if (stat == "success") {
+                                jQuery("#grid")[0].addJSONData(JSON.parse(jsondata.responseText).d);
+                                var objeto = JSON.parse(jsondata.responseText).d;
+                                var regs = objeto.RecordCount;
+                                if (regs == 0) {
+                                    alert('No se encontraron registros...');
+                                }
+                            }
+                            else
+                                alert(JSON.parse(jsondata.responseText).Message);
+                        }
+                    });
+            },
+            jsonReader: //Set the jsonReader to the JQGridJSonResponse squema to bind the data.
+            {
+                root: "Items",
+                page: "CurrentPage",
+                total: "PageCount",
+                records: "RecordCount",
+                repeatitems: true,
+                cell: "row",
+                id: "b.obr_clv_int"
+            },
+            colModel: [
+                {
+                    index: 'obr_clv_int', width: 120, align: 'center',
+                    name: 'ClvObra'
+                },
+                {
+                    index: 'obr_clv2', width: 220, align: 'center',
+                    name: 'Obra'
+                },
+                {
+                    index: 'calle', width: 300, align: 'center',
+                    name: 'Calle'
+                },
+                {
+                    index: 'colonia', width: 300, align: 'center',
+                    name: 'Colonia'
+                },
+                {
+                    index: 'tramo', width: 500, align: 'Center',
+                    name: 'Tramo'
+                },
+                {
+                    index: 'nomprog', width: 100, align: 'center',
+                    name: 'Prog'
+                },
+                {
+                    index: 'descrip_tipo_obr', width: 200, align: 'center',
+                    name: 'TipoObra'
+                },
+                {
+                    index: 'cestatus', width: 300, align: 'center',
+                    name: 'EstObra'
+                },
+                {
+                    index: 'obr_fec_pub1', width: 160, align: 'center',
+                    name: 'FecPub1'
+                },
+                {
+                    index: 'evid_pub1', width: 200, align: 'center',
+                    name: 'EvidPub1', hidden: true
+                },
+                {
+                    index: 'evid_pub1', width: 200, align: 'center',
+                    name: 'EvidPub1_vinc', formatter: function (cellvalue) {
+                        var archivo = cellvalue;
+                        var url = '<a target="_blank" toolbar=0 href="../../temp/' + archivo + '">' + archivo + '</a>';
+                        return url;
+                    }
+                },
+                {
+                    index: 'obr_fec_pub2', width: 160, align: 'center',
+                    name: 'FecPub2'
+                },
+                {
+                    index: 'evid_pub2', width: 200, align: 'center',
+                    name: 'EvidPub2', hidden: true
+                },
+                {
+                    index: 'evid_pub2', width: 200, align: 'center',
+                    name: 'EvidPub2_vinc', formatter: function (cellvalue) {
+                        var archivo = cellvalue;
+                        var url = '<a target="_blank" toolbar=0 href="../../temp/' + archivo + '">' + archivo + '</a>';
+                        return url;
+                    }
+                },
+                {
+                    index: 'obr_fecinip', width: 160, align: 'center',
+                    name: 'FecIniPag'
+                },
+                {
+                    index: 'obr_fecvenp', width: 160, align: 'center',
+                    name: 'FecVenP'
+                },
+                {
+                    index: 'obr_npago', width: 80, align: 'center',
+                    name: 'NumPagos'
+                },
+                {
+                    index: 'obr_fec_ini_proc', width: 160, align: 'center',
+                    name: 'FecIniProc'
+                },
+                {
+                    index: 'obr_idtipo_recurso', width: 60, align: 'center',
+                    name: 'IdTipoRecurso', hidden: true
+                },
+                {
+                    index: 'obr_descrip_tipo_recurso', width: 200, align: 'center',
+                    name: 'DescripTipoRec'
+                },
+                {
+                    index: 'evid_obra_proc', width: 200, align: 'center',
+                    name: 'EvidObrProc', hidden: true
+                },
+                {
+                    index: 'evid_obra_proc', width: 200, align: 'center',
+                    name: 'EvidObrProc_vinc', formatter: function (cellvalue) {
+                        var archivo = cellvalue;
+                        var url = '<a target="_blank" toolbar=0 href="../../temp/' + archivo + '">' + archivo + '</a>';
+                        return url;
+                    }, hidden: true
+                },
+                {
+                    index: 'obr_fec_ini_cob', width: 160, align: 'center',
+                    name: 'FecIniCob'
+                },
+                {
+                    index: 'evid_termino_obra', width: 200, align: 'center',
+                    name: 'EvidTermObr', hidden: true
+                },
+                {
+                    index: 'evid_termino_obra', width: 200, align: 'center',
+                    name: 'EvidTermObr_vinc', formatter: function (cellvalue) {
+                        var archivo = cellvalue;
+                        var url = '<a target="_blank" toolbar=0 href="../../temp/' + archivo + '">' + archivo + '</a>';
+                        return url;
+                    }
+                },
+                {
+                    index: 'obr_fec_canc', width: 160, align: 'center',
+                    name: 'ObrFecCanc'
+                },
+                {
+                    index: 'no_contrato', width: 300, align: 'center',
+                    name: 'NumContrato'
+                },
+                {
+                    index: 'gastos_admvos', width: 300, align: 'center',
+                    name: 'GastosAdmvos', formatter: 'currency', formatoptions: { prefix: '$', decimalSeparator: '.', thousandsSeparator: ',' }
+                },
+                {
+                    index: 'oid', width: 80, align: 'Center',
+                    name: 'oid'
+                },
+                {
+                    index: 'geom', width: 300, align: 'Center',
+                    name: 'Geom', hidden: true
+                },
+                {
+                    index: 'idsol', width: 100, align: 'Center',
+                    name: 'IdSol', hidden: true
+                },
+                {
+                    index: 'sector', width: 100, align: 'Center',
+                    name: 'Sector', hidden: true
+                },
+                {
+                    index: 'subsector', width: 200, align: 'center',
+                    name: 'SubSector', hidden: true
+                },
+                {
+                    index: 'cvecalle', width: 300, align: 'center',
+                    name: 'CveCalle', hidden: true
+                },
+                {
+                    index: 'idpoligono', width: 350, align: 'center',
+                    name: 'idpoligono', hidden: true
+                },
+                {
+                    index: 'id_implan', width: 220, align: 'center',
+                    name: 'Id_Implan', hidden: true
+                },
+                {
+                    index: 'usrmod', width: 135, align: 'center',
+                    name: 'usrmod', hidden: true
+                },
+                {
+                    index: 'fec_mod', width: 220, align: 'center',
+                    name: 'fec_mod', hidden: true
+                },
+                {
+                    index: 'col_clv2', width: 220, align: 'center',
+                    name: 'col_clv2', hidden: true
+                },
+                {
+                    index: 'limite1', width: 220, align: 'center',
+                    name: 'limite1', hidden: true
+                },
+                {
+                    index: 'limite2', width: 220, align: 'center',
+                    name: 'limite2', hidden: true
+                },
+                {
+                    index: 'obr_estatus', width: 100, align: 'center',
+                    name: 'obr_estatus', hidden: true
+                },
+                {
+                    index: 'progmun', width: 220, align: 'center',
+                    name: 'progmun', hidden: true
+                },
+                {
+                    index: 'progcoop', width: 220, align: 'center',
+                    name: 'progcoop', hidden: true
+                },
+                {
+                    index: 'obr_clv', width: 220, align: 'center',
+                    name: 'obr_clv', hidden: true
+                },
+                {
+                    index: 'obr_mts', width: 220, align: 'center',
+                    name: 'obr_mts', hidden: true
+                },
+                {
+                    index: 'obr_cost', width: 220, align: 'center',
+                    name: 'obr_cost', hidden: true
+                },
+                {
+                    index: 'obr_int', width: 220, align: 'center',
+                    name: 'obr_int', hidden: true
+                },
+                {
+                    index: 'obr_fecha', width: 220, align: 'center',
+                    name: 'obr_fecha', hidden: true
+                },
+                {
+                    index: 'obr_cost_total', width: 220, align: 'center',
+                    name: 'obr_cost_total', hidden: true
+                },
+                {
+                    index: 'obr_inc', width: 220, align: 'center',
+                    name: 'obr_inc', hidden: true
+                },
+                {
+                    index: 'obr_opergob', width: 220, align: 'center',
+                    name: 'obr_opergob', hidden: true
+                },
+                {
+                    index: 'obr_prog2', width: 150, align: 'center',
+                    name: 'obr_prog2', hidden: true
+                },
+                {
+                    index: 'obr_sis', width: 150, align: 'center',
+                    name: 'obr_sis', hidden: true
+                },
+                {
+                    index: 'col_nom', width: 220, align: 'center',
+                    name: 'col_nom', hidden: true
+                },
+                {
+                    index: 'obr_nat', width: 220, align: 'center',
+                    name: 'obr_nat', hidden: true
+                }
+            ],
+            pager: "#pager", //Pager.                 
+            loadtext: 'Cargando datos...',
+            recordtext: "{0} - {1} de {2} elementos",
+            emptyrecords: 'No hay resultados',
+            pgtext: 'Pág:{0} de {1}', //Paging input control text format.
+            rowNum: "20", // PageSize.
+            rowList: [5, 10, 20], //Variable PageSize DropDownList. 
+            viewrecords: true, //Show the RecordCount in the pager.
+            multiselect: false,
+            sortname: "b.obr_clv_int", //login SortColumn
+            sortorder: "asc", //login SortOrder.
+            width: "1900",
+            height: "800",
+            caption: "OBRAS",
+            subGrid: true,
+            subGridBeforeExpand: function (subgrid_id, row_id) {
+                var myGrid = $('#grid');
+                var obra = myGrid.jqGrid('getRowData', row_id);
+                filtro2 = ',,,,,,,,' + obra.ClvObra + ',,';
+            },
+            subGridRowExpanded: function (subgrid_id, row_id) {
+                var subgrid_table_id, pager_id;
+                subgrid_table_id = subgrid_id + "_t";
+                pager_id = "p_" + subgrid_table_id;
+                $("#" + subgrid_id).html("<table id='" + subgrid_table_id + "' class='scroll'></table><div id='" + pager_id + "' class='scroll'></div>");
+                var solicitud = jQuery('#grid').jqGrid('getRowData', row_id);
+                jQuery("#" + subgrid_table_id).jqGrid(
+                    {
+                        datatype: function () {
+                            var solicitud = jQuery('#grid').jqGrid('getRowData', row_id);
+                            $.ajax(
+                                {
+                                    url: "../../WebServices/WebServiceFrente.asmx/GetFrentexO", //PageMethod
+                                    data: "{'pPageSize':'" + $("#" + subgrid_table_id).getGridParam("rowNum") +
+                                        "','pCurrentPage':'" + $("#" + subgrid_table_id).getGridParam("page") +
+                                        "','pSortColumn':'" + $("#" + subgrid_table_id).getGridParam("sortname") +
+                                        "','pSortOrder':'" + $("#" + subgrid_table_id).getGridParam("sortorder") +
+                                        "','pFiltro':'" + filtro2 + "'}", //PageMethod Parametros de entrada                                   
+                                    dataType: "json",
+                                    type: "post",
+                                    contentType: "application/json; charset=utf-8",
+                                    complete: function (jsondata, stat) {
+                                        if (stat == "success") {
+                                            jQuery("#" + subgrid_table_id)[0].addJSONData(JSON.parse(jsondata.responseText).d);
+                                        }
+                                        else
+                                            alert(JSON.parse(jsondata.responseText).Message);
+                                    }
+                                });
+                        },
+                        jsonReader: //Set the jsonReader to the JQGridJSonResponse squema to bind the data.
                         {
                             root: "Items",
                             page: "CurrentPage",
@@ -1009,693 +1012,763 @@ function Buscar_obra() {
                             cell: "row",
                             id: "fid"
                         },
-                       colModel: [
-                             {
-                                 index: 'oid', width: 80, align: 'Center', name: 'oid', hidden: true
-                             },
-                             {
-                                 index: 'obr_clv_int', width: 100, align: 'Center', name: 'obr_clv_int', hidden: true
-                             },
-                             {
-                                 index: 'pid', width: 50, align: 'Center', name: 'pid'
-                             },
-                             {
-                                 index: 'obr_clv', width: 80, align: 'Center', name: 'obr_clv'
-                             },
-                             {
-                                 index: 'coopid', width: 50, align: 'Center', name: 'coopid'
-                             },
-                             {
-                                 index: 'calle', width: 100, align: 'Center', name: 'calle', hidden: true
-                             },
-                             {
-                                 index: 'colonia', width: 100, align: 'Center', name: 'colonia', hidden: true
-                             },
-                             {
-                                 index: 'tramo', width: 80, align: 'Center', name: 'tramo', hidden: true
-                             },
-                             {
-                                 index: 'costo_mto', width: 100, align: 'Center', name: 'costo_mto', hidden: true
-                             },
-                             {
-                                 index: 'obr_fecinip', width: 100, align: 'Center', name: 'obr_fecinip', hidden: true
-                             },
-                             {
-                                 index: 'obr_fecvenp', width: 100, align: 'Center', name: 'obr_fecvenp', hidden: true
-                             },
-                             {
-                                 index: 'obr_npago', width: 100, align: 'Center', name: 'obr_npago', hidden: true
-                             },
-                             {
-                                 index: 'descrip_tipo_obr', width: 100, align: 'Center', name: 'descrip_tipo_obr', hidden: true
-                             },
-                             {
-                                 index: 'estatus_obra', width: 100, align: 'Center', name: 'estatus_obra', hidden: true
-                             },
-                             {
-                                 index: 'nomprog', width: 100, align: 'Center', name: 'nomprog', hidden: true
-                             },
-                             {
-                                 index: 'progdescrip', width: 100, align: 'Center', name: 'progdescrip', hidden: true
-                             },
-                             {
-                                 index: 'fid', width: 50, align: 'Center', name: 'fid'
-                             },
-                             {
-                                 index: 'nooficial', width: 50, align: 'Center', name: 'nooficial'
-                             },
-                             {
-                                 index: 'ctapredial', width: 80, align: 'Center', name: 'ctapredial'
-                             },
-                             {
-                                 index: 'coo_clv2', width: 100, align: 'Center', name: 'coo_clv2', hidden: true
-                             },
-                             {
-                                 index: 'mnomficha', width: 200, align: 'Center', name: 'mnomficha'
-                             },
-                             {
-                                 index: 'mts_frente', width: 50, align: 'Center', name: 'mts_frente'
-                             },
-                             {
-                                 index: 'inc', width: 50, align: 'Center', name: 'inc', hidden: true
-                             },
-                             {
-                                 index: 'capital_sin_inc', width: 100, align: 'Center', name: 'capital_sin_inc', hidden: true
-                             },
-                             {
-                                 index: 'capital', width: 100, align: 'Center', name: 'capital', hidden: true
-                             },
-                             {
-                                 index: 'capital_pagado', width: 150, align: 'Center', name: 'capital_pagado', hidden: true
-                             },
-                             {
-                                 index: 'cargos_pagados', width: 100, align: 'Center', name: 'cargos_pagados', hidden: true
-                             },
-                             {
-                                 index: 'desctos_aplicados', width: 100, align: 'Center', name: 'desctos_aplicados', hidden: true
-                             },
-                             {
-                                 index: 'recargos_netos', width: 100, align: 'Center', name: 'recargos_netos', hidden: true
-                             },
-                             {
-                                 index: 'total_pagar', width: 100, align: 'Center', name: 'total_pagar', formatter: 'currency', formatoptions: { prefix: '$', decimalSeparator: '.', thousandsSeparator: ',' }
-                             },
-                             {
-                                 index: 'mapellidom', width: 100, align: 'Center', name: 'mapellidom', hidden: true
-                             },
-                             {
-                                 index: 'mapellidop', width: 300, align: 'Center', name: 'mapellidop', hidden: true
-                             },
-                             {
-                                 index: 'mnombres', width: 100, align: 'Center', name: 'mnombres', hidden: true
-                             }
-                       ],
-                       pager: pager_id, //Pager.                 
-                       loadtext: 'Cargando datos...',
-                       recordtext: "{0} - {1} de {2} elementos",
-                       emptyrecords: 'No hay resultados',
-                       pgtext: 'Pág:{0} de {1}', //Paging input control text format.
-                       rowNum: "8", // PageSize.
-                       rowList: [4, 6, 8], //Variable PageSize DropDownList. 
-                       viewrecords: true, //Show the RecordCount in the pager.
-                       ajaxGridOptions: row_id,
-                       multiselect: false,
-                       sortname: "fid", //login SortColumn
-                       sortorder: "asc", //login SortOrder.
-                       width: "1200",
-                       height: "100%",
-                       caption: "COOPERADORES"
-                   }).navGrid("#" + pager_id, { edit: false, add: false, search: false, del: false, refresh: false })
-                   .navButtonAdd("#" + pager_id,
-                         {
-                             caption: "FichaPredio...",
-                             buttonicon: "ui-icon-document",
-                             onClickButton: function () {
-                                 var myGrid = $("#" + subgrid_table_id);
-                                 selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
-                                 var pid = myGrid.jqGrid('getCell', selectedRowId, 'pid');
-                                 var oid = myGrid.jqGrid('getCell', selectedRowId, 'oid');
-                                 if (pid) {
-                                     ConsultaSalidaPredio(idusu, oid, pid);
-                                 }
-                                 else {
-                                     alert("Seleccione el cooperador a consultar...");
-                                 }
-                             },
-                             position: "last",
-                             title: "Revisar presupuesto",
-                             cursor: "pointer"
-                         })
+                        colModel: [
+                            {
+                                index: 'oid', width: 80, align: 'Center', name: 'oid', hidden: true
+                            },
+                            {
+                                index: 'obr_clv_int', width: 100, align: 'Center', name: 'obr_clv_int', hidden: true
+                            },
+                            {
+                                index: 'pid', width: 50, align: 'Center', name: 'pid'
+                            },
+                            {
+                                index: 'obr_clv', width: 80, align: 'Center', name: 'obr_clv'
+                            },
+                            {
+                                index: 'coopid', width: 50, align: 'Center', name: 'coopid'
+                            },
+                            {
+                                index: 'calle', width: 100, align: 'Center', name: 'calle', hidden: true
+                            },
+                            {
+                                index: 'colonia', width: 100, align: 'Center', name: 'colonia', hidden: true
+                            },
+                            {
+                                index: 'tramo', width: 80, align: 'Center', name: 'tramo', hidden: true
+                            },
+                            {
+                                index: 'costo_mto', width: 100, align: 'Center', name: 'costo_mto', hidden: true
+                            },
+                            {
+                                index: 'obr_fecinip', width: 100, align: 'Center', name: 'obr_fecinip', hidden: true
+                            },
+                            {
+                                index: 'obr_fecvenp', width: 100, align: 'Center', name: 'obr_fecvenp', hidden: true
+                            },
+                            {
+                                index: 'obr_npago', width: 100, align: 'Center', name: 'obr_npago', hidden: true
+                            },
+                            {
+                                index: 'descrip_tipo_obr', width: 100, align: 'Center', name: 'descrip_tipo_obr', hidden: true
+                            },
+                            {
+                                index: 'estatus_obra', width: 100, align: 'Center', name: 'estatus_obra', hidden: true
+                            },
+                            {
+                                index: 'nomprog', width: 100, align: 'Center', name: 'nomprog', hidden: true
+                            },
+                            {
+                                index: 'progdescrip', width: 100, align: 'Center', name: 'progdescrip', hidden: true
+                            },
+                            {
+                                index: 'fid', width: 50, align: 'Center', name: 'fid'
+                            },
+                            {
+                                index: 'nooficial', width: 50, align: 'Center', name: 'nooficial'
+                            },
+                            {
+                                index: 'ctapredial', width: 80, align: 'Center', name: 'ctapredial'
+                            },
+                            {
+                                index: 'coo_clv2', width: 100, align: 'Center', name: 'coo_clv2', hidden: true
+                            },
+                            {
+                                index: 'mnomficha', width: 200, align: 'Center', name: 'mnomficha'
+                            },
+                            {
+                                index: 'mts_frente', width: 50, align: 'Center', name: 'mts_frente'
+                            },
+                            {
+                                index: 'inc', width: 50, align: 'Center', name: 'inc', hidden: true
+                            },
+                            {
+                                index: 'capital_sin_inc', width: 100, align: 'Center', name: 'capital_sin_inc', hidden: true
+                            },
+                            {
+                                index: 'capital', width: 100, align: 'Center', name: 'capital', hidden: true
+                            },
+                            {
+                                index: 'capital_pagado', width: 150, align: 'Center', name: 'capital_pagado', hidden: true
+                            },
+                            {
+                                index: 'cargos_pagados', width: 100, align: 'Center', name: 'cargos_pagados', hidden: true
+                            },
+                            {
+                                index: 'desctos_aplicados', width: 100, align: 'Center', name: 'desctos_aplicados', hidden: true
+                            },
+                            {
+                                index: 'recargos_netos', width: 100, align: 'Center', name: 'recargos_netos', hidden: true
+                            },
+                            {
+                                index: 'total_pagar', width: 100, align: 'Center', name: 'total_pagar', formatter: 'currency', formatoptions: { prefix: '$', decimalSeparator: '.', thousandsSeparator: ',' }
+                            },
+                            {
+                                index: 'mapellidom', width: 100, align: 'Center', name: 'mapellidom', hidden: true
+                            },
+                            {
+                                index: 'mapellidop', width: 300, align: 'Center', name: 'mapellidop', hidden: true
+                            },
+                            {
+                                index: 'mnombres', width: 100, align: 'Center', name: 'mnombres', hidden: true
+                            }
+                        ],
+                        pager: pager_id, //Pager.                 
+                        loadtext: 'Cargando datos...',
+                        recordtext: "{0} - {1} de {2} elementos",
+                        emptyrecords: 'No hay resultados',
+                        pgtext: 'Pág:{0} de {1}', //Paging input control text format.
+                        rowNum: "8", // PageSize.
+                        rowList: [4, 6, 8], //Variable PageSize DropDownList. 
+                        viewrecords: true, //Show the RecordCount in the pager.
+                        ajaxGridOptions: row_id,
+                        multiselect: false,
+                        sortname: "fid", //login SortColumn
+                        sortorder: "asc", //login SortOrder.
+                        width: "1200",
+                        height: "100%",
+                        caption: "COOPERADORES"
+                    }).navGrid("#" + pager_id, { edit: false, add: false, search: false, del: false, refresh: false })
+                    .navButtonAdd("#" + pager_id,
+                        {
+                            caption: "FichaPredio...",
+                            buttonicon: "ui-icon-document",
+                            onClickButton: function () {
+                                var myGrid = $("#" + subgrid_table_id);
+                                var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                                var pid = myGrid.jqGrid('getCell', selectedRowId, 'pid');
+                                var oid = myGrid.jqGrid('getCell', selectedRowId, 'oid');
+                                if (pid) {
+                                    ConsultaSalidaPredio(idusu, oid, pid);
+                                }
+                                else {
+                                    alert("Seleccione el cooperador a consultar...");
+                                }
+                            },
+                            position: "last",
+                            title: "Revisar presupuesto",
+                            cursor: "pointer"
+                        })
 
-                        .navButtonAdd("#" + pager_id,
-                              {
-                                  caption: "Gestion_Coops",
-                                  buttonicon: "ui-icon-document",
-                                  onClickButton: function () {
-                                      var myGrid = $("#" + subgrid_table_id);
-                                    
-                                      selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
-                                      var fid = myGrid.jqGrid('getCell', selectedRowId, 'fid');
-                                      var coopid = myGrid.jqGrid('getCell', selectedRowId, 'coopid');
-                                      var estatus_obra = obra.obr_estatus;
-                                     
-                                      var programa = obra.obr_prog2 + ':' + obra.Prog;
-                                      if (fid) {
-                                          GestionCooperadores(obra.oid, obra.ClvObra, obra.obr_clv,estatus_obra, programa, idusu, fid, obra.NumPagos, obra.FecVenP, coopid);
-                                      }
-                                      else {
-                                          GestionCooperadores(obra.oid, obra.ClvObra, obra.obr_clv,estatus_obra, programa, idusu, 0, obra.NumPagos, obra.FecVenP, '000');
-                                      }
-                                  },
-                                  position: "last",
-                                  title: "Cooperadores",
-                                  cursor: "pointer"
-                              })
+                    .navButtonAdd("#" + pager_id,
+                        {
+                            caption: "Gestion_Coops",
+                            buttonicon: "ui-icon-document",
+                            onClickButton: function () {
+                                var myGrid = $("#" + subgrid_table_id);
+                                var obra = myGrid.jqGrid('getRowData', row_id);
+                                var parentRowId = row_id; // este lo recibes en subGridRowExpanded
+                                var obra = jQuery("#grid").jqGrid('getRowData', parentRowId);
 
-                      /* .navButtonAdd("#" + pager_id,
-                              {
-                                  caption: "ActPagos",
-                                  buttonicon: "ui-icon-document",
-                                  onClickButton: function () {
-                                      var myGrid = $("#" + subgrid_table_id);
-                                      selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
-                                      var fid = myGrid.jqGrid('getCell', selectedRowId, 'fid');
-                                      var coo_clv = myGrid.jqGrid('getCell', selectedRowId, 'coopid');
-                                      var obr_clv_txt = obra.obr_clv;
+                                var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                                var fid = myGrid.jqGrid('getCell', selectedRowId, 'fid');
+                                var coopid = myGrid.jqGrid('getCell', selectedRowId, 'coopid');
+                                var estatus_obra = obra.obr_estatus;
 
-                                      if (fid) {
+                                var programa = obra.obr_prog2 + ':' + obra.Prog;
+                                if (fid) {
+                                    GestionCooperadores(obra.oid, obra.ClvObra, obra.obr_clv, estatus_obra, programa, idusu, fid, obra.NumPagos, obra.FecVenP, coopid);
+                                }
+                                else {
+                                    GestionCooperadores(obra.oid, obra.ClvObra, obra.obr_clv, estatus_obra, programa, idusu, 0, obra.NumPagos, obra.FecVenP, '000');
+                                }
+                            },
+                            position: "last",
+                            title: "Cooperadores",
+                            cursor: "pointer"
+                        })
 
-                                          ActualizacionPagosCoop(fid, obra.ClvObra, obr_clv_txt, coo_clv, idusu);
-                                      }
-                                      else {
-                                          alert('Es necesario que selecciones un cooperador')
-                                      }
+                /* .navButtonAdd("#" + pager_id,
+                        {
+                            caption: "ActPagos",
+                            buttonicon: "ui-icon-document",
+                            onClickButton: function () {
+                                var myGrid = $("#" + subgrid_table_id);
+                                selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                                var fid = myGrid.jqGrid('getCell', selectedRowId, 'fid');
+                                var coo_clv = myGrid.jqGrid('getCell', selectedRowId, 'coopid');
+                                var obr_clv_txt = obra.obr_clv;
 
-                                  },
-                                  position: "last",
-                                  title: "Cooperadores",
-                                  cursor: "pointer"
-                              })*/
+                                if (fid) {
+
+                                    ActualizacionPagosCoop(fid, obra.ClvObra, obr_clv_txt, coo_clv, idusu);
+                                }
+                                else {
+                                    alert('Es necesario que selecciones un cooperador')
+                                }
+
+                            },
+                            position: "last",
+                            title: "Cooperadores",
+                            cursor: "pointer"
+                        })*/
 
 
-         }
+            }
 
-     }).navGrid('#pager', { edit: false, add: false, search: false, del: false })
-
-       .navButtonAdd('#pager',
-                {
-                    caption: "Alta Obra",
-                    buttonicon: "ui-icon-document",
-                    onClickButton: function () {
-                        /* var myGrid = $('#grid');
-                         selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
-                         cellValue = myGrid.jqGrid('getCell', selectedRowId, 'obr_clv');
-                         if (cellValue) {*/
-                        var objObra = {
-                            "obr_clv": '0000000000',
-                            "obr_clv_int": 0,
-                            "obr_oid": 0,
-                            "accion": 0
-                        }
-                        AccionRegistroObra(objObra);
-                        /* }
-                         else {
-                             alert("Selecciona una solicitud...");
-                         }*/
-                    },
-                    position: "last",
-                    title: "Alta de Obra",
-                    cursor: "pointer"
-                })
+        }).navGrid('#pager', { edit: false, add: false, search: false, del: false })
 
         .navButtonAdd('#pager',
-                {
-                    caption: "CancObra",
-                    buttonicon: "ui-icon-document",
-                    onClickButton: function () {
-                        var myGrid = $('#grid');
-                        var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+            {
+                caption: "Alta Obra",
+                buttonicon: "ui-icon-document",
+                onClickButton: function () {
+                    /* var myGrid = $('#grid');
+                     selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                     cellValue = myGrid.jqGrid('getCell', selectedRowId, 'obr_clv');
+                     if (cellValue) {*/
+                    var objObra = {
+                        "obr_clv": '0000000000',
+                        "obr_clv_int": 0,
+                        "obr_oid": 0,
+                        "accion": 0
+                    }
+                    AccionRegistroObra(objObra);
+                    /* }
+                     else {
+                         alert("Selecciona una solicitud...");
+                     }*/
+                },
+                position: "last",
+                title: "Alta de Obra",
+                cursor: "pointer"
+            })
 
-                        var objObra = {
-                            "obr_clv": '',
-                            "obr_clv_int": 0,
-                            "obr_oid": 0,
-                            "idusu": 0,
-                            "accion": 2
-                        }
+        .navButtonAdd('#pager',
+            {
+                caption: "CancObra",
+                buttonicon: "ui-icon-document",
+                onClickButton: function () {
+                    var myGrid = $('#grid');
+                    var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
 
-                        objObra.obr_clv = myGrid.jqGrid('getCell', selectedRowId, 'obr_clv');
-                        objObra.obr_clv_int = myGrid.jqGrid('getCell', selectedRowId, 'ClvObra');
-                        objObra.obr_oid = myGrid.jqGrid('getCell', selectedRowId, 'oid');
-                        objObra.idusu = parseInt($("#bodegadatos").data("idusu").split(":")[1]);
-                        var obr_estatus = myGrid.jqGrid('getCell', selectedRowId, 'obr_estatus');
-                        var obr_estatus_txt = myGrid.jqGrid('getCell', selectedRowId, 'EstObra');
-                        var mensaje;
-                        if (obr_estatus == 2) {
-                            ConsultaPermisoEjecutarTarea(objObra.idusu, 149, 3)
-                              .done(function (result) {
-                                  var data = result.d;
-                                  var no_tiene_permiso = data.split(":");
-                                  var no_tiene = parseInt(no_tiene_permiso[1]);
-                                  if (!no_tiene) {
-                                      var opcion = confirm("Desea realmente CANCELAR la obra:" + objObra.obr_clv + '---> ADVERTENCIA: Se eliminarán TODOS los frentes activos de la obra, posteriormente es necesario realizar la actualizacion de la Obra en Cajas de Tesorería');
-                                      if (opcion == true) {
-                                          CancelarObra_psql(objObra)
-                                           .done(function (r) {
-                                               var resp = r.d;
-                                               var idobra = parseInt(resp.split(':')[1]);
-                                               var obr_clv_txt = resp.split(':')[2];
-                                               var mensaje = resp.split(':')[0];
-                                               CancelarObra_access(objObra)
-                                                   .done(function (r) {
-                                                       alert('Obra: ' + obr_clv_txt + ' cancelada correctamente');
-                                                       $('#mask, .window').hide();
-                                                       RedibujarGrid();
-                                                   })
-                                                   .fail(function (xhr) {
-                                                       console.log(xhr.responseText);
-                                                       alert("No fué posible cancelar la obra en ACCESS...");
-                                                   })
-                                           })
-                                          .fail(function (xhr) {
-                                              console.log(xhr.responseText);
-                                              alert("No fué posible cancelar la obra en PostgresSql...");
-                                          });
-                                      }
-                                  } else {
-                                      alert('El usuario ' + $("#bodegadatos").data("idusu").split(":")[1] + ' no cuenta con el permiso para cancelar obra.');
-                                  }
-                              })
+                    var objObra = {
+                        "obr_clv": '',
+                        "obr_clv_int": 0,
+                        "obr_oid": 0,
+                        "idusu": 0,
+                        "accion": 2
+                    }
+
+                    objObra.obr_clv = myGrid.jqGrid('getCell', selectedRowId, 'obr_clv');
+                    objObra.obr_clv_int = myGrid.jqGrid('getCell', selectedRowId, 'ClvObra');
+                    objObra.obr_oid = myGrid.jqGrid('getCell', selectedRowId, 'oid');
+                    objObra.idusu = parseInt($("#bodegadatos").data("idusu").split(":")[1]);
+                    var obr_estatus = myGrid.jqGrid('getCell', selectedRowId, 'obr_estatus');
+                    var obr_estatus_txt = myGrid.jqGrid('getCell', selectedRowId, 'EstObra');
+                    //TODO: Cancelacion de obra
+                    var mensaje;
+                    if (obr_estatus == 2) {
+                        ConsultaPermisoEjecutarTarea(objObra.idusu, 149, 3)
+                            .done(function (result) {
+                                var data = result.d;
+                                var no_tiene_permiso = data.split(":");
+                                var no_tiene = parseInt(no_tiene_permiso[1]);
+                                //!no_tiene
+                                if (true) {
+                                    var opcion = confirm("Desea realmente CANCELAR la obra:" + objObra.obr_clv + '---> ADVERTENCIA: Se eliminarán TODOS los frentes activos de la obra, posteriormente es necesario realizar la actualizacion de la Obra en Cajas de Tesorería');
+                                    if (opcion == true) {
+                                        CancelarObra_psql(objObra)
+                                            .done(async function (r) {
+                                                var resp = r.d;
+                                                var idobra = parseInt(resp.split(':')[1]);
+                                                var obr_clv_txt = resp.split(':')[2];
+                                                var mensaje = resp.split(':')[0];
+                                                /*  CancelarObra_access(objObra)
+                                                     .done(function (r) {
+                                                         alert('Obra: ' + obr_clv_txt + ' cancelada correctamente');
+                                                         $('#mask, .window').hide();
+                                                         RedibujarGrid();
+                                                     })
+                                                     .fail(function (xhr) {
+                                                         console.log(xhr.responseText);
+                                                         alert("No fué posible cancelar la obra en ACCESS...");
+                                                     }) */
+                                                var obr_clv = obr_clv_txt;
+                                                let obr_opergob = null;
+                                                await $.ajax({
+                                                    url: "../../WebServices/WebServiceObras.asmx/GetObra_psql", //PageMethod
+                                                    data: "{'pPageSize':1,'pCurrentPage':1,'pSortColumn':'b.obr_clv_int','pSortOrder':'asc','pFiltro':',,," + obr_clv + ",'}", //PageMethod Parametros de entrada
+                                                    type: "POST",
+                                                    dataType: "json",
+                                                    contentType: "application/json",
+                                                    success: function (data) {
+                                                        if (data.d != null) {
+                                                            // Acceder al primer registro dentro de Items
+                                                            let item = data.d.Items[0];
+                                                            // Tomar el valor #5 del array "row"
+                                                            obr_opergob = item.row[51];
+                                                        }
+                                                    },
+                                                    error: function (responseText, textStatus, errorThrown) {
+                                                        alert(textStatus + responseText + errorThrown);
+                                                    }
+                                                });
+
+                                                // Construir el objeto de datos correctamente
+                                                const terceraPeticionData = {
+                                                    obr_stat: 5,
+                                                    obr_opergob
+                                                };
+
+                                                $.ajax({
+                                                    type: 'PUT',
+                                                    url: urls.ws + "/api/obras/sql/cambiarEstatus/" + obr_clv,
+                                                    data: JSON.stringify(terceraPeticionData), // Convertir el objeto a JSON
+                                                    contentType: 'application/json; charset=utf-8',
+                                                    dataType: 'json',
+                                                    success: function (data) {
+                                                        if (data != null) {
+                                                            alert('Obra actualizada en SQLServer.');
+                                                        }
+                                                    },
+                                                    error: function (responseText, textStatus, errorThrown) {
+                                                        alert(textStatus + responseText + errorThrown);
+                                                    }
+                                                });
+
+                                                $.ajax({
+                                                    url: "../../WebServices/WebServiceObras.asmx/cambiarEstatusObraSIFIDOC", //PageMethod
+                                                    data: "{'obr_stat':5,'obr_opergob':'" + obr_opergob + "','obr_clv':'" + obr_clv + "'}", //PageMethod Parametros de entrada
+                                                    type: "POST",
+                                                    dataType: "json",
+                                                    contentType: "application/json",
+                                                    success: function (data) {
+                                                        if (data.d != null) {
+                                                            console.log(data.d);
+                                                            alert('Obra actualizada en SIFIDOC.');
+                                                        }
+                                                    },
+                                                    error: function (responseText, textStatus, errorThrown) {
+                                                        alert(textStatus + responseText + errorThrown);
+                                                    }
+                                                });
+
+                                            })
+                                            .fail(function (xhr) {
+                                                console.log(xhr.responseText);
+                                                alert("No fué posible cancelar la obra en PostgresSql...");
+                                            });
+                                    }
+                                } else {
+                                    alert('El usuario ' + $("#bodegadatos").data("idusu").split(":")[1] + ' no cuenta con el permiso para cancelar obra.');
+                                }
+                            })
                             .fail(function (xhr) {
                                 console.log(xhr.responseText);
                                 alert("Falló consultar permiso de ejecución de tarea.");
                             });
-                        }
-                        else {
-                            alert('No es permitido CANCELAR la obra en estatus de: ' + obr_estatus_txt);
-                        }
-                    },
-                    position: "last",
-                    title: "Alta de Obra",
-                    cursor: "pointer"
-                })
+                    }
+                    else {
+                        alert('No es permitido CANCELAR la obra en estatus de: ' + obr_estatus_txt);
+                    }
+                },
+                position: "last",
+                title: "Alta de Obra",
+                cursor: "pointer"
+            })
 
-    .navButtonAdd('#pager',
-              {
-                  caption: "EditObra",
-                  buttonicon: "ui-icon-document",
-                  onClickButton: function () {
-                      var myGrid = $('#grid');
-                      var objObra = {
-                          "obr_clv_int": 0,
-                          "obr_clv": '',
-                          "obr_mts": 0,
-                          "obr_cost": 0,
-                          "obr_col": 0,    //SIFIDOC
-                          "obr_tipo": 0,
-                          "obr_fecha": '01/01/1900',
-                          "obr_cost_total": 0,
-                          "obr_inc": 0,
-                          "obr_fecinip": '01/01/1900',
-                          "obr_fecvencp": '01/01/1900',
-                          "obr_npago": 0,
-                          "obr_opergob": '',
-                          "obr_fec_ini_proc": '01/01/1900',
-                          "obr_fec_ini_cob": '01/01/1900',
-                          "col_clv2": '',
-                          "obr_prog2": 0,
-                          "obr_programa": '', //SIFIDOC
-                          "obr_clv2": '',
-                          "obr_estatus": 0,
-                          "obr_oid": 0,
-                          "obr_fec_canc": '01/01/1900',
-                          "obr_sis": '',  //SIFIDOC
-                          "idusu": 0,
-                          "accion": 0
-                      }
-                      selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
-                      objObra.obr_clv_int = myGrid.jqGrid('getCell', selectedRowId, 'ClvObra');
-                      objObra.obr_oid = myGrid.jqGrid('getCell', selectedRowId, 'oid');
-                      objObra.obr_clv = myGrid.jqGrid('getCell', selectedRowId, 'Obra');
-                      objObra.obr_estatus = myGrid.jqGrid('getCell', selectedRowId, 'obr_estatus');
-                      objObra.accion = 1;
+        .navButtonAdd('#pager',
+            {
+                caption: "EditObra",
+                buttonicon: "ui-icon-document",
+                onClickButton: function () {
+                    var myGrid = $('#grid');
+                    var objObra = {
+                        "obr_clv_int": 0,
+                        "obr_clv": '',
+                        "obr_mts": 0,
+                        "obr_cost": 0,
+                        "obr_col": 0,    //SIFIDOC
+                        "obr_tipo": 0,
+                        "obr_fecha": '01/01/1900',
+                        "obr_cost_total": 0,
+                        "obr_inc": 0,
+                        "obr_fecinip": '01/01/1900',
+                        "obr_fecvencp": '01/01/1900',
+                        "obr_npago": 0,
+                        "obr_opergob": '',
+                        "obr_fec_ini_proc": '01/01/1900',
+                        "obr_fec_ini_cob": '01/01/1900',
+                        "col_clv2": '',
+                        "obr_prog2": 0,
+                        "obr_programa": '', //SIFIDOC
+                        "obr_clv2": '',
+                        "obr_estatus": 0,
+                        "obr_oid": 0,
+                        "obr_fec_canc": '01/01/1900',
+                        "obr_sis": '',  //SIFIDOC
+                        "idusu": 0,
+                        "accion": 0
+                    }
+                    var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                    objObra.obr_clv_int = myGrid.jqGrid('getCell', selectedRowId, 'ClvObra');
+                    objObra.obr_oid = myGrid.jqGrid('getCell', selectedRowId, 'oid');
+                    objObra.obr_clv = myGrid.jqGrid('getCell', selectedRowId, 'Obra');
+                    objObra.obr_estatus = myGrid.jqGrid('getCell', selectedRowId, 'obr_estatus');
+                    objObra.accion = 1;
 
-                      objObra.obr_prog2 = myGrid.jqGrid('getCell', selectedRowId, 'obr_prog2');
-                      objObra.obr_int = myGrid.jqGrid('getCell', selectedRowId, 'obr_int');
-                      objObra.obr_cost = myGrid.jqGrid('getCell', selectedRowId, 'obr_cost');
-                      objObra.obr_fecinip = myGrid.jqGrid('getCell', selectedRowId, 'FecIniPag');
-                      objObra.obr_fecvencp = myGrid.jqGrid('getCell', selectedRowId, 'FecVenP');
-                      objObra.obr_npago = myGrid.jqGrid('getCell', selectedRowId, 'NumPagos');
+                    objObra.obr_prog2 = myGrid.jqGrid('getCell', selectedRowId, 'obr_prog2');
+                    objObra.obr_int = myGrid.jqGrid('getCell', selectedRowId, 'obr_int');
+                    objObra.obr_cost = myGrid.jqGrid('getCell', selectedRowId, 'obr_cost');
+                    objObra.obr_fecinip = myGrid.jqGrid('getCell', selectedRowId, 'FecIniPag');
+                    objObra.obr_fecvencp = myGrid.jqGrid('getCell', selectedRowId, 'FecVenP');
+                    objObra.obr_npago = myGrid.jqGrid('getCell', selectedRowId, 'NumPagos');
 
-                      if (objObra.obr_estatus == '2') {
-                          if (objObra.obr_oid) {
-                              AccionRegistroObra(objObra);
-                          }
-                          else {
-                              alert("Selecciona una obra...");
-                          }
-                      }
-                      else {
-                          alert('Los datos de la obra no pueden ser editados, solo es posible cuando la obra esta en PROMOCION.');
-                      }
-
-                  },
-                  position: "last",
-                  title: "Editar Obra",
-                  cursor: "pointer"
-              })
-
- .navButtonAdd('#pager',
-              {
-                  caption: "ExpJur",
-                  buttonicon: "ui-icon-document",
-                  onClickButton: function () {
-                      var myGrid = $('#grid');
-                      var objObra = {
-                          "obr_clv_int": 0,
-                          "obr_clv": '',
-                          "obr_oid": 0,
-                          "fecjur1": '01/01/1900',
-                          "evidjur1": '',
-                          "fecjur2": '01/01/1900',
-                          "evidjur2": '',
-                          "fecvenp": '01/01/1900',
-                          "obr_costo_total": 0,
-                          "obr_nat": '',
-                          "obr_estatus": 0,
-                          "idusu": 0,
-                          "accion": 5
-                      }
-                      selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
-                      objObra.obr_clv_int = myGrid.jqGrid('getCell', selectedRowId, 'ClvObra');
-                      objObra.obr_clv = myGrid.jqGrid('getCell', selectedRowId, 'Obra');
-                      objObra.obr_oid = myGrid.jqGrid('getCell', selectedRowId, 'oid');
-                      objObra.fecjur1 = myGrid.jqGrid('getCell', selectedRowId, 'FecPub1');
-                      objObra.fecjur2 = myGrid.jqGrid('getCell', selectedRowId, 'FecPub2');
-                      objObra.evidjur1 = myGrid.jqGrid('getCell', selectedRowId, 'EvidPub1');
-                      objObra.evidjur2 = myGrid.jqGrid('getCell', selectedRowId, 'EvidPub2');
-                      objObra.fecvenp = myGrid.jqGrid('getCell', selectedRowId, 'FecVenP');
-                      objObra.obr_costo_total = myGrid.jqGrid('getCell', selectedRowId, 'obr_cost_total');
-                      objObra.obr_nat = myGrid.jqGrid('getCell', selectedRowId, 'obr_nat');
-                      objObra.obr_estatus = myGrid.jqGrid('getCell', selectedRowId, 'obr_estatus');
-                      objObra.idusu = parseInt($("#bodegadatos").data("idusu").split(":")[1]);
-                      $("#bodegadatos").data("fecvenp", objObra.fecvenp);
-
-
-                      if (objObra.obr_oid) {
-                          if (objObra.obr_estatus == 4 || objObra.obr_estatus == 5 || objObra.obr_estatus == 2) {
-                              AccionRegistroObra(objObra);
-                          }
-                          else {
-                              alert("Solo se capturan datos jurídicos en las obras con estatus de PROMOCION, PROCESO y TERMINADA VENCIDA");
-                          }
-                      }
-                      else {
-
-                          alert("Selecciona una obra...");
-                      }
-
-                  },
-                  position: "last",
-                  title: "Datos Jurídicos",
-                  cursor: "pointer"
-              })
-    .navButtonAdd('#pager',
-                {
-                    caption: "ObrProc",
-                    buttonicon: "ui-icon-document",
-                    onClickButton: function () {
-                        
-                        var myGrid = $('#grid');                            
-                        
-                        selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
-                        var objObra = myGrid.jqGrid('getRowData', selectedRowId);
-
-
-                        
-                        if (parseInt(objObra.ClvObra) > 0) {
-                            if (parseInt(objObra.obr_estatus) == 2 || parseInt(objObra.obr_estatus) == 4) {
-                                ConsultaPermisoEjecutarTarea(parseInt(idusu), 160, 3)
-                               .done(function (result) {
-                                  var data = result.d;
-                                  var no_tiene_permiso = data.split(":");
-                                  var no_tiene = parseInt(no_tiene_permiso[1]);
-                                  //!no_tiene
-                                  if (!no_tiene) {
-                                      var opcion = confirm("Desea realmente cambiar la obra: " + objObra.obr_clv + ' a estatus de PROCESO.');
-                                      if (opcion == true) {
-                                          $.extend({}, "accion", objObra);
-                                          $.extend({}, "idusu", objObra);
-                                          $.extend({}, "obr_clv_int", objObra);
-                                          objObra.accion = '4';
-                                          objObra.idusu = parseInt(idusu);
-                                          objObra.obr_clv_int = parseInt(objObra.ClvObr);
-                                          AccionRegistroObra(objObra);
-                                      }
-                                  } else {
-                                      alert('El usuario ' + $("#bodegadatos").data("idusu").split(":")[1] + ' no cuenta con el permiso para cambiar a estatus de obra en PROCESO.');
-                                  }
-                              })
-                            .fail(function (xhr) {
-                                console.log(xhr.responseText);
-                                alert("Falló consultar permiso de ejecución de tarea.");
-                            });
-
-                               
-                            }
-                            else {
-                                alert("Solo se puede iniciar a proceso una obra en estatus de RECAUDACION");
-                            }
+                    if (objObra.obr_estatus == '2') {
+                        if (objObra.obr_oid) {
+                            AccionRegistroObra(objObra);
                         }
                         else {
                             alert("Selecciona una obra...");
                         }
+                    }
+                    else {
+                        alert('Los datos de la obra no pueden ser editados, solo es posible cuando la obra esta en PROMOCION.');
+                    }
 
-                        
-                    },
-                    position: "last",
-                    title: "Obra en Proceso",
-                    cursor: "pointer"
-                })
-                
-   .navButtonAdd('#pager',
-              {
-                  caption: "TermObr",
-                  buttonicon: "ui-icon-document",
-                  onClickButton: function () {
-                      var myGrid = $('#grid');
-                      var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
-                      var objObraTerm = myGrid.jqGrid('getRowData', selectedRowId);
+                },
+                position: "last",
+                title: "Editar Obra",
+                cursor: "pointer"
+            })
 
-                      if (objObraTerm.ClvObra) {
-                          if (objObraTerm.obr_estatus == '4') {
-                              ConsultaPermisoEjecutarTarea(idusu, 161, 3) /*Consulta permisos para cambiar de estatus de obra PROCESO --> TERMINADA VENCIDA*/
-                              .done(function (result) {
-                                  var data = result.d;
-                                  var no_tiene_permiso = data.split(":");
-                                  var no_tiene = parseInt(no_tiene_permiso[1]);
-                                  //!no_tiene
-                                  if (!no_tiene) {                                        
-                                      $.extend({}, "accion", objObraTerm);
-                                      objObraTerm.accion = 6;
-                                      AccionRegistroObra(objObraTerm);
-                                  } else {
-                                      alert('El usuario ' + idusu.tostring + ' no cuenta con permiso para cambiar estatus de la obra (PROCESO-->TERMINADA VENCIDA).');
-                                  }
-                              })
-                              .fail(function (xhr) {
-                                  console.log(xhr.responseText);
-                                  alert("Falló consultar permiso de ejecución de tarea.");
-                              });
-                          } else {
-                              alert('El estatus de la obra debe estar en PROCESO.');
-                          }
+        .navButtonAdd('#pager',
+            {
+                caption: "ExpJur",
+                buttonicon: "ui-icon-document",
+                onClickButton: function () {
+                    var myGrid = $('#grid');
+                    var objObra = {
+                        "obr_clv_int": 0,
+                        "obr_clv": '',
+                        "obr_oid": 0,
+                        "fecjur1": '01/01/1900',
+                        "evidjur1": '',
+                        "fecjur2": '01/01/1900',
+                        "evidjur2": '',
+                        "fecvenp": '01/01/1900',
+                        "obr_costo_total": 0,
+                        "obr_nat": '',
+                        "obr_estatus": 0,
+                        "idusu": 0,
+                        "accion": 5
+                    }
+                    var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                    objObra.obr_clv_int = myGrid.jqGrid('getCell', selectedRowId, 'ClvObra');
+                    objObra.obr_clv = myGrid.jqGrid('getCell', selectedRowId, 'Obra');
+                    objObra.obr_oid = myGrid.jqGrid('getCell', selectedRowId, 'oid');
+                    objObra.fecjur1 = myGrid.jqGrid('getCell', selectedRowId, 'FecPub1');
+                    objObra.fecjur2 = myGrid.jqGrid('getCell', selectedRowId, 'FecPub2');
+                    objObra.evidjur1 = myGrid.jqGrid('getCell', selectedRowId, 'EvidPub1');
+                    objObra.evidjur2 = myGrid.jqGrid('getCell', selectedRowId, 'EvidPub2');
+                    objObra.fecvenp = myGrid.jqGrid('getCell', selectedRowId, 'FecVenP');
+                    objObra.obr_costo_total = myGrid.jqGrid('getCell', selectedRowId, 'obr_cost_total');
+                    objObra.obr_nat = myGrid.jqGrid('getCell', selectedRowId, 'obr_nat');
+                    objObra.obr_estatus = myGrid.jqGrid('getCell', selectedRowId, 'obr_estatus');
+                    objObra.idusu = parseInt($("#bodegadatos").data("idusu").split(":")[1]);
+                    $("#bodegadatos").data("fecvenp", objObra.fecvenp);
 
-                      } else {
-                          alert('Selecciona una obra...');
-                      }                        
 
-                  },
-                  position: "last",
-                  title: "Termino de Obra",
-                  cursor: "pointer"
-              })
+                    if (objObra.obr_oid) {
+                        if (objObra.obr_estatus == 4 || objObra.obr_estatus == 5 || objObra.obr_estatus == 2) {
+                            AccionRegistroObra(objObra);
+                        }
+                        else {
+                            alert("Solo se capturan datos jurídicos en las obras con estatus de PROMOCION, PROCESO y TERMINADA VENCIDA");
+                        }
+                    }
+                    else {
 
-    .navButtonAdd('#pager',
-              {
-                  caption: "ReporteObra",
-                  buttonicon: "ui-icon-document",
-                  onClickButton: function () {
-                      var myGrid = $('#grid');
-                      var objObra = {
-                          "obr_clv_int": 0,
-                          "obr_fec_ini_pag": '01/01/1900',
-                          "obr_fec_venc_pag": '01/01/1900',
-                          "numpagos": 0,
-                          "obr_estatus": 0,
-                          "idusu": 0,
-                          "nom_usu":'',
-                          "accion": 'ReporteObra'
-                      }
+                        alert("Selecciona una obra...");
+                    }
 
-                      selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
-                      objObra.obr_clv_int = myGrid.jqGrid('getCell', selectedRowId, 'ClvObra');
-                      objObra.obr_estatus = myGrid.jqGrid('getCell', selectedRowId, 'obr_estatus');
-                      objObra.idusu = parseInt($("#bodegadatos").data("idusu").split(":")[1]);
-                      objObra.nom_usu = parseInt($("#bodegadatos").data("idusu").split(":")[2]);
-                      
-                      if (parseInt(objObra.obr_clv_int) > 0) {                              
-                              GenerarReporteObra(objObra.obr_clv_int);                                                            
-                      }
-                      else {
-                          alert("Selecciona una obra...");
-                      }
+                },
+                position: "last",
+                title: "Datos Jurídicos",
+                cursor: "pointer"
+            })
+        .navButtonAdd('#pager',
+            {
+                caption: "ObrProc",
+                buttonicon: "ui-icon-document",
+                onClickButton: function () {
 
-                  },
-                  position: "last",
-                  title: "Termino de Obra",
-                  cursor: "pointer"
-              })
+                    var myGrid = $('#grid');
 
-    .navButtonAdd('#pager',
-              {
-                  caption: "Obra",
-                  buttonicon: "ui-icon-document",
-                  onClickButton: function () {
-                      var myGrid = $('#grid');
-                      var objObra = {
-                          "obr_clv_int": 0,
-                          "obr_fec_ini_pag": '01/01/1900',
-                          "obr_fec_venc_pag": '01/01/1900',
-                          "numpagos": 0,
-                          "obr_estatus": 0,
-                          "idusu": 0,
-                          "nom_usu": '',
-                          "accion": 'Obra'
-                      }
+                    var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                    var objObra = myGrid.jqGrid('getRowData', selectedRowId);
 
-                      selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
-                      objObra.obr_clv_int = myGrid.jqGrid('getCell', selectedRowId, 'ClvObra');
-                      objObra.idusu = parseInt($("#bodegadatos").data("idusu").split(":")[1]);
-                      objObra.nom_usu = parseInt($("#bodegadatos").data("idusu").split(":")[2]);
 
-                      if (parseInt(objObra.obr_clv_int) > 0) {
-                          ConsultaSalidaObra(objObra.obr_clv_int, objObra.idusu);
-                      }
-                      else {
-                          alert("Selecciona una obra...");
-                      }
 
-                  },
-                  position: "last",
-                  title: "Obra",
-                  cursor: "pointer"
-              })
-
-    .navButtonAdd('#pager',
-                {
-                    caption: "FichPagMens",
-                    buttonicon: "ui-icon-document",
-                    onClickButton: function () {
-                        var myGrid = $('#grid');
-                        var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
-                        var cellValue = myGrid.jqGrid('getCell', selectedRowId, 'ClvObra'); 
-                        var cellValue2 = myGrid.jqGrid('getCell', selectedRowId, 'NumPagos');
-                        var cellValue3 = myGrid.jqGrid('getCell', selectedRowId, 'Obra');
-                        var fecinip = myGrid.jqGrid('getCell', selectedRowId, 'FecIniPag');
-                        var fecvencp = myGrid.jqGrid('getCell', selectedRowId, 'FecVenP');
-                        var obr_estatus = myGrid.jqGrid('getCell', selectedRowId, 'obr_estatus');
-                        
-                            if (fecvencp.length > 10) {
-                                fecvencp = fecvencp.substr(0, 10);
-                            }
-                            num_pagos = parseInt(cellValue2);
-                            var hoy = moment();
-                            var fec_inicial = ConvertirCadenaToFecha(fecinip);
-                            var meses_trans = hoy.diff(fec_inicial, 'months'); //Se le suma un mes debido al mes que transcurrió  
-                            var pagos_trans = 0;
-                            var mes_actual = hoy.month() + 1;
-                            var dia = hoy.date();
-                            var mes_inicial = fec_inicial.getMonth() + 1;
-                            var adelanto_impresion = 0;   
-                            if (meses_trans == 0) {
-                                if (mes_inicial >= mes_actual) {
-                                    //TODO: Cambie el pagos_trans a 2 estaba por defecto en 1
-                                    if(dia>20){
-                                        pagos_trans = 2;
-                                    }else{
-                                        pagos_trans = 1; /*<<==== El valor a 1 provoca un mes antes del mes en curso*/
+                    if (parseInt(objObra.ClvObra) > 0) {
+                        if (parseInt(objObra.obr_estatus) == 2 || parseInt(objObra.obr_estatus) == 4) {
+                            ConsultaPermisoEjecutarTarea(parseInt(idusu), 160, 3)
+                                .done(function (result) {
+                                    var data = result.d;
+                                    var no_tiene_permiso = data.split(":");
+                                    var no_tiene = parseInt(no_tiene_permiso[1]);
+                                    //!no_tiene
+                                    if (!no_tiene) {
+                                        var opcion = confirm("Desea realmente cambiar la obra: " + objObra.obr_clv + ' a estatus de PROCESO.');
+                                        if (opcion == true) {
+                                            $.extend({}, "accion", objObra);
+                                            $.extend({}, "idusu", objObra);
+                                            $.extend({}, "obr_clv_int", objObra);
+                                            objObra.accion = '4';
+                                            objObra.idusu = parseInt(idusu);
+                                            objObra.obr_clv_int = parseInt(objObra.ClvObr);
+                                            AccionRegistroObra(objObra);
+                                        }
+                                    } else {
+                                        alert('El usuario ' + $("#bodegadatos").data("idusu").split(":")[1] + ' no cuenta con el permiso para cambiar a estatus de obra en PROCESO.');
                                     }
-                                    adelanto_impresion = 0; /*La fecha de emision de fichas se anticipa  más de un mes de la fecha inicial de pagos*/
-                                }
-                                if (mes_inicial < mes_actual) {
-                                    pagos_trans = 1;
-                                    adelanto_impresion = 1; /*La fecha de emision de fichas se anticipa  más de un mes de la fecha inicial de pagos*/
-                                }
+                                })
+                                .fail(function (xhr) {
+                                    console.log(xhr.responseText);
+                                    alert("Falló consultar permiso de ejecución de tarea.");
+                                });
 
+
+                        }
+                        else {
+                            alert("Solo se puede iniciar a proceso una obra en estatus de RECAUDACION");
+                        }
+                    }
+                    else {
+                        alert("Selecciona una obra...");
+                    }
+
+
+                },
+                position: "last",
+                title: "Obra en Proceso",
+                cursor: "pointer"
+            })
+
+        .navButtonAdd('#pager',
+            {
+                caption: "TermObr",
+                buttonicon: "ui-icon-document",
+                onClickButton: function () {
+                    var myGrid = $('#grid');
+                    var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                    var objObraTerm = myGrid.jqGrid('getRowData', selectedRowId);
+
+                    if (objObraTerm.ClvObra) {
+                        if (objObraTerm.obr_estatus == '4') {
+                            ConsultaPermisoEjecutarTarea(idusu, 161, 3) /*Consulta permisos para cambiar de estatus de obra PROCESO --> TERMINADA VENCIDA*/
+                                .done(function (result) {
+                                    var data = result.d;
+                                    var no_tiene_permiso = data.split(":");
+                                    var no_tiene = parseInt(no_tiene_permiso[1]);
+                                    //!no_tiene
+                                    if (!no_tiene) {
+                                        $.extend({}, "accion", objObraTerm);
+                                        objObraTerm.accion = 6;
+                                        AccionRegistroObra(objObraTerm);
+                                    } else {
+                                        alert('El usuario ' + idusu.tostring + ' no cuenta con permiso para cambiar estatus de la obra (PROCESO-->TERMINADA VENCIDA).');
+                                    }
+                                })
+                                .fail(function (xhr) {
+                                    console.log(xhr.responseText);
+                                    alert("Falló consultar permiso de ejecución de tarea.");
+                                });
+                        } else {
+                            alert('El estatus de la obra debe estar en PROCESO.');
+                        }
+
+                    } else {
+                        alert('Selecciona una obra...');
+                    }
+
+                },
+                position: "last",
+                title: "Termino de Obra",
+                cursor: "pointer"
+            })
+
+        .navButtonAdd('#pager',
+            {
+                caption: "ReporteObra",
+                buttonicon: "ui-icon-document",
+                onClickButton: function () {
+                    var myGrid = $('#grid');
+                    var objObra = {
+                        "obr_clv_int": 0,
+                        "obr_fec_ini_pag": '01/01/1900',
+                        "obr_fec_venc_pag": '01/01/1900',
+                        "numpagos": 0,
+                        "obr_estatus": 0,
+                        "idusu": 0,
+                        "nom_usu": '',
+                        "accion": 'ReporteObra'
+                    }
+
+                    var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                    objObra.obr_clv_int = myGrid.jqGrid('getCell', selectedRowId, 'ClvObra');
+                    objObra.obr_estatus = myGrid.jqGrid('getCell', selectedRowId, 'obr_estatus');
+                    objObra.idusu = parseInt($("#bodegadatos").data("idusu").split(":")[1]);
+                    objObra.nom_usu = parseInt($("#bodegadatos").data("idusu").split(":")[2]);
+
+                    if (parseInt(objObra.obr_clv_int) > 0) {
+                        GenerarReporteObra(objObra.obr_clv_int);
+                    }
+                    else {
+                        alert("Selecciona una obra...");
+                    }
+
+                },
+                position: "last",
+                title: "Termino de Obra",
+                cursor: "pointer"
+            })
+
+        .navButtonAdd('#pager',
+            {
+                caption: "Obra",
+                buttonicon: "ui-icon-document",
+                onClickButton: function () {
+                    var myGrid = $('#grid');
+                    var objObra = {
+                        "obr_clv_int": 0,
+                        "obr_fec_ini_pag": '01/01/1900',
+                        "obr_fec_venc_pag": '01/01/1900',
+                        "numpagos": 0,
+                        "obr_estatus": 0,
+                        "idusu": 0,
+                        "nom_usu": '',
+                        "accion": 'Obra'
+                    }
+
+                    var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                    objObra.obr_clv_int = myGrid.jqGrid('getCell', selectedRowId, 'ClvObra');
+                    objObra.idusu = parseInt($("#bodegadatos").data("idusu").split(":")[1]);
+                    objObra.nom_usu = parseInt($("#bodegadatos").data("idusu").split(":")[2]);
+
+                    if (parseInt(objObra.obr_clv_int) > 0) {
+                        ConsultaSalidaObra(objObra.obr_clv_int, objObra.idusu);
+                    }
+                    else {
+                        alert("Selecciona una obra...");
+                    }
+
+                },
+                position: "last",
+                title: "Obra",
+                cursor: "pointer"
+            })
+
+        .navButtonAdd('#pager',
+            {
+                caption: "FichPagMens",
+                buttonicon: "ui-icon-document",
+                onClickButton: function () {
+                    var myGrid = $('#grid');
+                    var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                    var cellValue = myGrid.jqGrid('getCell', selectedRowId, 'ClvObra');
+                    var cellValue2 = myGrid.jqGrid('getCell', selectedRowId, 'NumPagos');
+                    var cellValue3 = myGrid.jqGrid('getCell', selectedRowId, 'Obra');
+                    var fecinip = myGrid.jqGrid('getCell', selectedRowId, 'FecIniPag');
+                    var fecvencp = myGrid.jqGrid('getCell', selectedRowId, 'FecVenP');
+                    var obr_estatus = myGrid.jqGrid('getCell', selectedRowId, 'obr_estatus');
+
+                    if (fecvencp.length > 10) {
+                        fecvencp = fecvencp.substr(0, 10);
+                    }
+                    var num_pagos = parseInt(cellValue2);
+                    var hoy = moment();
+                    var fec_inicial = ConvertirCadenaToFecha(fecinip);
+                    var meses_trans = hoy.diff(fec_inicial, 'months'); //Se le suma un mes debido al mes que transcurrió  
+                    var pagos_trans = 0;
+                    var mes_actual = hoy.month() + 1;
+                    var dia = hoy.date();
+                    var mes_inicial = fec_inicial.getMonth() + 1;
+                    var adelanto_impresion = 0;
+                    if (meses_trans == 0) {
+                        if (mes_inicial >= mes_actual) {
+                            console.log("Primeros pasos 1");
+                            //TODO: Cambie el pagos_trans a 2 estaba por defecto en 1
+                            if (dia > 20 && mes_actual >= mes_inicial) {
+                                console.log("Primeros pasos 2");
+                                pagos_trans = 2;
                             } else {
-                                pagos_trans = meses_trans + 2;
+                                pagos_trans = 1; /*<<==== El valor a 1 provoca un mes antes del mes en curso*/
                             }
+                            adelanto_impresion = 0; /*La fecha de emision de fichas se anticipa  más de un mes de la fecha inicial de pagos*/
+                        }
+                        if (mes_inicial < mes_actual) {
+                            pagos_trans = 1;
+                            adelanto_impresion = 1; /*La fecha de emision de fichas se anticipa  más de un mes de la fecha inicial de pagos*/
+                        }
 
-                            if (cellValue) {
-                                //obr_estatus == 2
-                                if (true) {
-                                    var idusu_aux = $("#bodegadatos").data("idusu").split(":")[1];
-                                    ConsultaPermisoEjecutarTarea(idusu_aux, 150, 3)
-                                        .done(function (result) {
-                                                var data = result.d;
-                                                var no_tiene_permiso = data.split(":");
-                                                var no_tiene = parseInt(no_tiene_permiso[1]);
-                                                //if (!no_tiene) {
-                                                if(true){
-                                                      if (adelanto_impresion == 1) {
-                                                         alert('ALERTA: Se anticipa más de un mes la emisión de fichas mensuales.');
-                                                      }
-                                                      if (pagos_trans <= num_pagos) {
-                                                         $("#lblobrclvint_x").html(cellValue);
-                                                         $("#lblnumfichas_x").html(cellValue2);
-                                                         $("#lblnumfichas_y").html(cellValue2);
-                                                         $("#lblobrclv_s").html(cellValue3);
-                                                         $("#lblfecinipag_x").html(fecinip);
-                                                         $("#lblfecfinpag_x").html(fecvencp);
-                                                         $("#lblnumfichaactual").html(pagos_trans);
-                                                         MostrarModalFichaPagoMes();
-                                                     }
-                                                     else {
-                                                        alert("El periodo de Recaudación ha terminado, por lo tanto ya no es posible emitir Fichas de Pago mensuales");
-                                                     }
-                                                }
-                                                else {                                                    
-                                                    alert('El usuario ' + $("#bodegadatos").data("idusu").split(":")[1] + ' no cuenta con el permiso para emitir fichas de pago.');
-                                                }
-                                        })
-                                        .fail(function (xhr) {
-                                                console.log(xhr.responseText);
-                                                alert("Falló consultar permiso de ejecución de tarea.");
-                                        });
-                                }
-                                else {
-                                    alert('Solo se emiten fichas impresas de obras en estatus de RECAUDACION.');
-                                }
-                            } else {                                
-                                alert("Selecciona una Obra...");
-                            }
-                        
-                    },
-                    position: "last",
-                    title: "Alta de Obra",
-                    cursor: "pointer"
-                })
+                    } else {
+                        pagos_trans = meses_trans + 2;
+                    }
 
-     .navButtonAdd('#pager',
-                   {
-                    caption: "ExpExcel",
-                    buttonicon: "ui-icon-document",
-                    onClickButton: function () {
-                        var obr_clv_int_txt = '0'; /*Todas la obras en el excel*/
+                    if (cellValue) {
+                        //obr_estatus == 2
+                        if (true) {
+                            var idusu_aux = $("#bodegadatos").data("idusu").split(":")[1];
+                            ConsultaPermisoEjecutarTarea(idusu_aux, 150, 3)
+                                .done(function (result) {
+                                    var data = result.d;
+                                    var no_tiene_permiso = data.split(":");
+                                    var no_tiene = parseInt(no_tiene_permiso[1]);
+                                    //if (!no_tiene) {
+                                    //true
+                                    if (!no_tiene) {
+                                        if (adelanto_impresion == 1) {
+                                            alert('ALERTA: Se anticipa más de un mes la emisión de fichas mensuales.');
+                                        }
+                                        //pagos_trans <= num_pagos
+                                        //true
+                                        if (pagos_trans <= num_pagos) {
+                                            $("#lblobrclvint_x").html(cellValue);
+                                            $("#lblnumfichas_x").html(cellValue2);
+                                            $("#lblnumfichas_y").html(cellValue2);
+                                            $("#lblobrclv_s").html(cellValue3);
+                                            $("#lblfecinipag_x").html(fecinip);
+                                            $("#lblfecfinpag_x").html(fecvencp);
+                                            $("#lblnumfichaactual").html(pagos_trans);
+                                            MostrarModalFichaPagoMes();
+                                        }
+                                        else {
+                                            alert("El periodo de Recaudación ha terminado, por lo tanto ya no es posible emitir Fichas de Pago mensuales");
+                                        }
+                                    }
+                                    else {
+                                        alert('El usuario ' + $("#bodegadatos").data("idusu").split(":")[1] + ' no cuenta con el permiso para emitir fichas de pago.');
+                                    }
+                                })
+                                .fail(function (xhr) {
+                                    console.log(xhr.responseText);
+                                    alert("Falló consultar permiso de ejecución de tarea.");
+                                });
+                        }
+                        else {
+                            alert('Solo se emiten fichas impresas de obras en estatus de RECAUDACION.');
+                        }
+                    } else {
+                        alert("Selecciona una Obra...");
+                    }
 
-                        if (idusu == '51' || idusu == '46') {
-                            LeerObrasExcel(obr_clv_int_txt)
+                },
+                position: "last",
+                title: "Alta de Obra",
+                cursor: "pointer"
+            })
+
+        .navButtonAdd('#pager',
+            {
+                caption: "ExpExcel",
+                buttonicon: "ui-icon-document",
+                onClickButton: function () {
+                    var obr_clv_int_txt = '0'; /*Todas la obras en el excel*/
+
+                    if (idusu == '51' || idusu == '46') {
+                        LeerObrasExcel(obr_clv_int_txt)
                             .done(function (r) {
                                 var obras = [];
                                 var data = r.d;
@@ -1730,16 +1803,16 @@ function Buscar_obra() {
                                 console.log(xhr.responseText);
                                 alert("Falle al recuperar datos de las obras.");
                             })
-                        }
-                        else {
-                            alert('No existen privilegios para emitir éste reporte.');
-                        }
-                    },
-                    position: "last",
-                    title: "Exportar Excela",
-                    cursor: "pointer"                        
-                });
-    
+                    }
+                    else {
+                        alert('No existen privilegios para emitir éste reporte.');
+                    }
+                },
+                position: "last",
+                title: "Exportar Excela",
+                cursor: "pointer"
+            });
+
 }
 
 
@@ -1763,152 +1836,152 @@ function RelacionarContratoAnexos(idusu, filtro) {
     }
 
     $("#grid_contrato_anexos").jqGrid(
-         {
-             datatype: function () {
-                 $.ajax(
-                   {
-                       url: "../../WebServices/WebServiceContrato.asmx/GetContratoAnexos_Grid", //PageMethod
-                       data: "{'pPageSize':'" + $('#grid_contrato_anexos').getGridParam("rowNum") +
-                       "','pCurrentPage':'" + $('#grid_contrato_anexos').getGridParam("page") +
-                       "','pSortColumn':'" + $('#grid_contrato_anexos').getGridParam("sortname") +
-                       "','pSortOrder':'" + $('#grid_contrato_anexos').getGridParam("sortorder") +
-                       "','filtro':'" + filtro + "'}", //PageMethod Parametros de entrada
-                       dataType: "json",
-                       type: "post",
-                       contentType: "application/json; charset=utf-8",
-                       complete: function (jsondata, stat) {
-                        console.log(jsondata);
-                        console.log(stat);
-                           if (stat == "success") {
-                               jQuery("#grid_contrato_anexos")[0].addJSONData(JSON.parse(jsondata.responseText).d);
-                               var objeto = JSON.parse(jsondata.responseText).d;
-                               regs = objeto.RecordCount;
-                               if (!regs) {                                       
-                                   alert('No se encontraron contratos referenciados a la obra, por lo tanto no es posible cambiar el estatus a "Terminada Vencida"');
-                               } else {
-                                   MostrarModalObraTerm();
-                               }
-                           }
-                           else {
-                               alert(JSON.parse(jsondata.responseText).Message);
-                           }
-                       }
-                   });
-             },
-             jsonReader: //Set the jsonReader to the JQGridJSonResponse squema to bind the data.
-             {
-                 root: "Items",
-                 page: "CurrentPage",
-                 total: "PageCount",
-                 records: "RecordCount",
-                 repeatitems: true,
-                 cell: "row",
-                 id: "idcontrato"
-             },
-             colModel: [
-            {
-                index: 'oid', width: 100, align: 'Center', name: 'oid', hidden: true
+        {
+            datatype: function () {
+                $.ajax(
+                    {
+                        url: "../../WebServices/WebServiceContrato.asmx/GetContratoAnexos_Grid", //PageMethod
+                        data: "{'pPageSize':'" + $('#grid_contrato_anexos').getGridParam("rowNum") +
+                            "','pCurrentPage':'" + $('#grid_contrato_anexos').getGridParam("page") +
+                            "','pSortColumn':'" + $('#grid_contrato_anexos').getGridParam("sortname") +
+                            "','pSortOrder':'" + $('#grid_contrato_anexos').getGridParam("sortorder") +
+                            "','filtro':'" + filtro + "'}", //PageMethod Parametros de entrada
+                        dataType: "json",
+                        type: "post",
+                        contentType: "application/json; charset=utf-8",
+                        complete: function (jsondata, stat) {
+                            console.log(jsondata);
+                            console.log(stat);
+                            if (stat == "success") {
+                                jQuery("#grid_contrato_anexos")[0].addJSONData(JSON.parse(jsondata.responseText).d);
+                                var objeto = JSON.parse(jsondata.responseText).d;
+                                var regs = objeto.RecordCount;
+                                if (!regs) {
+                                    alert('No se encontraron contratos referenciados a la obra, por lo tanto no es posible cambiar el estatus a "Terminada Vencida"');
+                                } else {
+                                    MostrarModalObraTerm();
+                                }
+                            }
+                            else {
+                                alert(JSON.parse(jsondata.responseText).Message);
+                            }
+                        }
+                    });
             },
+            jsonReader: //Set the jsonReader to the JQGridJSonResponse squema to bind the data.
             {
-                index: 'obr_clv_int', width: 50, align: 'Center', name: 'obr_clv_int', hidden: true
+                root: "Items",
+                page: "CurrentPage",
+                total: "PageCount",
+                records: "RecordCount",
+                repeatitems: true,
+                cell: "row",
+                id: "idcontrato"
             },
-            {
-                index: 'obr_clv', width: 100, align: 'Center', name: 'obr_clv', hidden: true
-            },
-            {
-                index: 'idcontrato', width: 100, align: 'Center', name: 'idcontrato', hidden: true
-            },
-            {
-                index: 'num_contrato_limpio', width: 150, align: 'Center', name: 'NumContrato'
-            },
-            {
-                index: 'calle', width: 150, align: 'Center', name: 'Calle', hidden: true
-            },
-            {
-                index: 'colonia', width: 80, align: 'Center', name: 'Colonia', hidden: true
-            },
-            {
-                index: 'tramo', width: 200, align: 'Center', name: 'Tramo', hidden: true
-            },
-            {
-                index: 'obr_prog2', width: 200, align: 'Center', name: 'IdProg', hidden: true
-            },
-            {
-                index: 'nomprog', width: 80, align: 'Center', name: 'NomProg', hidden: true
-            },
-            {
-                index: 'docto_contrato', width: 50, align: 'Center', name: 'DoctoContrato', hidden: true
-            },
-            {
-                index: 'cestatus_contrato', width: 50, align: 'Center', name: 'CestatusContrato', hidden: true
-            },
-            {
-                index: 'idanexo_contrato', width: 50, align: 'Center', name: 'IdAnexo_Contrato', hidden: true
-            },
-            {
-                index: 'idtipo_anexo_contrato', width: 150, align: 'Center', name: 'IdTipoAnexoContrato', hidden: true
-            },
-            {
-                index: 'etiqueta_anexo', width: 50, align: 'Center', name: 'EtiquetaAnexo', hidden: true
-            },
-            {
-                index: 'docto_param1', width: 50, align: 'Center', name: 'DoctoCartaTerm', hidden: true
-            },
-            {
-                index: 'fecha_param2', width: 150, align: 'Center', name: 'FechaTermObra'
-            },
-            {
-                index: 'valor_param3', width: 150, align: 'Center', name: 'ValorP3', hidden: true
-            },
-            {
-                index: 'valor_param4', width: 100, align: 'Center', name: 'ValorP4', hidden: true
-            },
-            {
-                index: 'cactivo_anexo_contrato', width: 100, align: 'Center', name: 'EstatusAnexoContrato', hidden: true
-            }],
-             pager: "#pager_contrato_anexos", //Pager.                 
-             loadtext: 'Cargando datos...',
-             recordtext: "{0} - {1} de {2} elementos",
-             emptyrecords: 'No hay resultados',
-             pgtext: 'Pág:{0} de {1}', //Paging input control text format.
-             rowNum: "5", // PageSize.
-             rowList: [5, 10, 20], //Variable PageSize DropDownList. 
-             viewrecords: true, //Show the RecordCount in the pager.
-             multiselect: false,
-             sortname: "idcontrato", //login SortColumn
-             sortorder: "asc", //login SortOrder.
-             width: "1000",
-             height: "100%",
-             caption: 'CONTRATOS DE OBRA Y CARTAS DE TERMINACION'
-         }).navGrid('#pager_contrato_anexos', { edit: false, add: false, search: false, del: false })
+            colModel: [
+                {
+                    index: 'oid', width: 100, align: 'Center', name: 'oid', hidden: true
+                },
+                {
+                    index: 'obr_clv_int', width: 50, align: 'Center', name: 'obr_clv_int', hidden: true
+                },
+                {
+                    index: 'obr_clv', width: 100, align: 'Center', name: 'obr_clv', hidden: true
+                },
+                {
+                    index: 'idcontrato', width: 100, align: 'Center', name: 'idcontrato', hidden: true
+                },
+                {
+                    index: 'num_contrato_limpio', width: 150, align: 'Center', name: 'NumContrato'
+                },
+                {
+                    index: 'calle', width: 150, align: 'Center', name: 'Calle', hidden: true
+                },
+                {
+                    index: 'colonia', width: 80, align: 'Center', name: 'Colonia', hidden: true
+                },
+                {
+                    index: 'tramo', width: 200, align: 'Center', name: 'Tramo', hidden: true
+                },
+                {
+                    index: 'obr_prog2', width: 200, align: 'Center', name: 'IdProg', hidden: true
+                },
+                {
+                    index: 'nomprog', width: 80, align: 'Center', name: 'NomProg', hidden: true
+                },
+                {
+                    index: 'docto_contrato', width: 50, align: 'Center', name: 'DoctoContrato', hidden: true
+                },
+                {
+                    index: 'cestatus_contrato', width: 50, align: 'Center', name: 'CestatusContrato', hidden: true
+                },
+                {
+                    index: 'idanexo_contrato', width: 50, align: 'Center', name: 'IdAnexo_Contrato', hidden: true
+                },
+                {
+                    index: 'idtipo_anexo_contrato', width: 150, align: 'Center', name: 'IdTipoAnexoContrato', hidden: true
+                },
+                {
+                    index: 'etiqueta_anexo', width: 50, align: 'Center', name: 'EtiquetaAnexo', hidden: true
+                },
+                {
+                    index: 'docto_param1', width: 50, align: 'Center', name: 'DoctoCartaTerm', hidden: true
+                },
+                {
+                    index: 'fecha_param2', width: 150, align: 'Center', name: 'FechaTermObra'
+                },
+                {
+                    index: 'valor_param3', width: 150, align: 'Center', name: 'ValorP3', hidden: true
+                },
+                {
+                    index: 'valor_param4', width: 100, align: 'Center', name: 'ValorP4', hidden: true
+                },
+                {
+                    index: 'cactivo_anexo_contrato', width: 100, align: 'Center', name: 'EstatusAnexoContrato', hidden: true
+                }],
+            pager: "#pager_contrato_anexos", //Pager.                 
+            loadtext: 'Cargando datos...',
+            recordtext: "{0} - {1} de {2} elementos",
+            emptyrecords: 'No hay resultados',
+            pgtext: 'Pág:{0} de {1}', //Paging input control text format.
+            rowNum: "5", // PageSize.
+            rowList: [5, 10, 20], //Variable PageSize DropDownList. 
+            viewrecords: true, //Show the RecordCount in the pager.
+            multiselect: false,
+            sortname: "idcontrato", //login SortColumn
+            sortorder: "asc", //login SortOrder.
+            width: "1000",
+            height: "100%",
+            caption: 'CONTRATOS DE OBRA Y CARTAS DE TERMINACION'
+        }).navGrid('#pager_contrato_anexos', { edit: false, add: false, search: false, del: false })
 
         .navButtonAdd('#pager_contrato_anexos',
-           {
-            caption: "AsigFecCob",
-            onClickButton: function () {
-                var myGrid = $('#grid_contrato_anexos');
-               var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
-               var objContratoAnexo = myGrid.jqGrid('getRowData', selectedRowId);
+            {
+                caption: "AsigFecCob",
+                onClickButton: function () {
+                    var myGrid = $('#grid_contrato_anexos');
+                    var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                    var objContratoAnexo = myGrid.jqGrid('getRowData', selectedRowId);
 
 
-               if (objContratoAnexo.idcontrato) {                       
-                   $("#lblfecha_inicio_cobranza_capt").html(objContratoAnexo.FechaTermObra);
-               } else {
-                   alert('Selecciona un contrato con la fecha de terminación asignada...');
+                    if (objContratoAnexo.idcontrato) {
+                        $("#lblfecha_inicio_cobranza_capt").html(objContratoAnexo.FechaTermObra);
+                    } else {
+                        alert('Selecciona un contrato con la fecha de terminación asignada...');
 
-               }
-           },
-           position: "last",
-           title: "Ver Frente",
-           cursor: "pointer"
-         });
+                    }
+                },
+                position: "last",
+                title: "Ver Frente",
+                cursor: "pointer"
+            });
 
 }
 
 
 
 
-function GenerarFichasPagoMes(obr_clv_int,idusu,num_ficha_act) {
+function GenerarFichasPagoMes(obr_clv_int, idusu, num_ficha_act) {
 
     LeerCooperadores(obr_clv_int)
         .done(function (r) {
@@ -1917,10 +1990,10 @@ function GenerarFichasPagoMes(obr_clv_int,idusu,num_ficha_act) {
 
 
             if (num_regs > 0) {
-                num_ficha = 1;
+                var num_ficha = 1;
                 var pdf = new jsPDF('p', 'mm', 'letter');
                 pdf.deletePage(1);
-                var reg = datos.Items[0].row;                    
+                var reg = datos.Items[0].row;
                 var col_ref = 70;
                 var col_ref2 = 72;
                 var reng_ref = 35;
@@ -1931,7 +2004,7 @@ function GenerarFichasPagoMes(obr_clv_int,idusu,num_ficha_act) {
                 var tab3 = tab2 * 2;
                 var tab4 = tab2 * 3;
                 var tab5 = 208;
-              
+
                 var tamano_col = 14;
 
                 var oid;
@@ -1957,18 +2030,18 @@ function GenerarFichasPagoMes(obr_clv_int,idusu,num_ficha_act) {
                 var costo_mto;
                 var mts_fte;
                 var fid;
-                
+
 
 
                 var porcentaje_avance = CalcularAvanceObra(datos);
 
 
-                
+
                 var i = 0;
-                
+
                 while (i < num_regs) {
-                    
-                    reg = datos.Items[i].row;
+
+                    var reg = datos.Items[i].row;
 
                     oid = reg[0];
                     obr_clv_int = reg[1];
@@ -1986,27 +2059,26 @@ function GenerarFichasPagoMes(obr_clv_int,idusu,num_ficha_act) {
                     fecvenp = reg[10];
                     costo_obra = reg[33];
                     abono = reg[34];
-                    nom_ficha = reg[20];
+                    var nom_ficha = reg[20];
                     coopid = reg[4];
-                    nooficial= reg[17];
+                    nooficial = reg[17];
                     numpagos = reg[11];
                     total_pagar = reg[29];
                     costo_mto = reg[8];
                     mts_fte = reg[21];
                     fid = reg[16];
-                    pid = reg[2];
+                    var pid = reg[2];
 
                     var objFormato = {
                         "fid": fid,
                         "pid": pid,
                         "obr_clv_int": obr_clv_int,
                         "oid": oid,
-                        "idusu":idusu    
+                        "idusu": idusu
                     }
-                                           
 
-                    if (parseFloat(total_pagar) > 20)
-                    {
+
+                    if (parseFloat(total_pagar) > 20) {
                         pdf.addPage();
                         GeneraFormatoFichaPagoMes(objFormato, pdf);  //* Aplica formato a la página de la ficha de pago*//
 
@@ -2033,8 +2105,8 @@ function GenerarFichasPagoMes(obr_clv_int,idusu,num_ficha_act) {
                         pdf.text(tab2 - pdf.getTextWidth('TIPO DE OBRA:  '), reng_ref + reng_inc2 * 7.5, 'TIPO DE OBRA:  ');
                         pdf.text(tab4 - pdf.getTextWidth('PERIODO DE RECAUDACION:  '), reng_ref + reng_inc2 * 7.5, 'PERIODO DE RECAUDACION:  ');
 
-                       
-                        
+
+
 
                         pdf.setFontType('normal')
                         pdf.setFontSize(9);
@@ -2047,10 +2119,10 @@ function GenerarFichasPagoMes(obr_clv_int,idusu,num_ficha_act) {
 
                         pdf.line(10, reng_ref + reng_inc2 * 8, 204, reng_ref + reng_inc2 * 8);
 
-                  
+
                         pdf.setFontSize(10);
                         pdf.setFontType('normal')
-                       
+
                         pdf.text(tab2 - pdf.getTextWidth('Costo por metro lineal:'), reng_ref + reng_inc2 * 9.5, 'Costo por metro lineal:');
                         pdf.text(tab2 - pdf.getTextWidth('Metros del frente:'), reng_ref + reng_inc2 * 10.5, 'Metros del frente:');
                         pdf.text(tab2 - pdf.getTextWidth('Costo Total:'), reng_ref + reng_inc2 * 11.5, 'Costo Total:');
@@ -2075,7 +2147,7 @@ function GenerarFichasPagoMes(obr_clv_int,idusu,num_ficha_act) {
                         pdf.setFontSize(7);
                         pdf.setFontType('bold')
 
-                      
+
 
                         pdf.setFontSize(10);
                         pdf.setFontType('normal')
@@ -2089,11 +2161,11 @@ function GenerarFichasPagoMes(obr_clv_int,idusu,num_ficha_act) {
                         aportacion_final_float = aport_mes;
                         var aport_mes_txt = aport_mes.toFixed(2).toString();
                         var aportacion_final_txt = aport_mes_txt;
-                        
+
 
                         /*Evalua la aportacion para si es la ultima ficha debe mostrar el saldo total*/
 
-                        if (parseInt(num_ficha_act)== parseInt(numpagos)) {
+                        if (parseInt(num_ficha_act) == parseInt(numpagos)) {
                             aportacion_final_txt = FormatoMoneda(total_pagar);
                             aportacion_final_float = parseFloat(total_pagar);
                         }
@@ -2116,16 +2188,16 @@ function GenerarFichasPagoMes(obr_clv_int,idusu,num_ficha_act) {
                         pdf.setFontSize(12);
                         pdf.setFontType('bold')
 
-                        
 
 
-                        pdf.text(tab3 - pdf.getTextWidth(aportacion_final_txt), reng_ref + reng_inc2 * 16,aportacion_final_txt);
+
+                        pdf.text(tab3 - pdf.getTextWidth(aportacion_final_txt), reng_ref + reng_inc2 * 16, aportacion_final_txt);
 
 
                         var numletras = NumeroALetras(aportacion_final_float);
 
                         pdf.setFontSize(6);
-                        pdf.text('(' + numletras + ')', tab4 - (pdf.getTextWidth(numletras)/2), reng_ref + reng_inc2 *16, { maxWidth: 550, align: "justify" });
+                        pdf.text('(' + numletras + ')', tab4 - (pdf.getTextWidth(numletras) / 2), reng_ref + reng_inc2 * 16, { maxWidth: 550, align: "justify" });
 
                         pdf.line(10, reng_ref + reng_inc2 * 16.3, 204, reng_ref + reng_inc2 * 16.3);
                         pdf.line(10, reng_ref + reng_inc2 * 16.5, 204, reng_ref + reng_inc2 * 16.5);
@@ -2138,13 +2210,13 @@ function GenerarFichasPagoMes(obr_clv_int,idusu,num_ficha_act) {
                         pdf.line(10, reng_ref + reng_inc2 * 18.2, 204, reng_ref + reng_inc2 * 18.2);
 
                         var saldo_pagado = parseFloat(abono);
-                        var estatus = '';                          
-                   
+                        var estatus = '';
+
                         var mes_int = 0;
                         var mes_txt = '';
                         var fec = ConvertirCadenaToFecha(fecinip);
                         var fec2 = new Date();
-                        
+
                         var campo2 = '';
                         var reng_aux = 127;
                         var inc_aux = 3.5;
@@ -2153,7 +2225,7 @@ function GenerarFichasPagoMes(obr_clv_int,idusu,num_ficha_act) {
                         var estatus_aportacion = '';
                         var num_pagos_int = parseInt(numpagos);
                         var j = 0;
-                        
+
                         for (j = 0; j < num_pagos_int; j++) {
                             if (saldo_pagado > 0) {
                                 saldo_pagado = saldo_pagado - parseFloat(aport_mes);
@@ -2163,7 +2235,7 @@ function GenerarFichasPagoMes(obr_clv_int,idusu,num_ficha_act) {
                             }
                             fec.setMonth(fec.getMonth() + j);
                             mes_int = fec.getMonth();
-                            year_txt = fec.getFullYear();
+                            var year_txt = fec.getFullYear();
                             mes_txt = NombreMes(mes_int);
                             campo2 = mes_txt + '/' + year_txt;
 
@@ -2180,14 +2252,14 @@ function GenerarFichasPagoMes(obr_clv_int,idusu,num_ficha_act) {
                             factor_inc++;
                             fec = ConvertirCadenaToFecha(fecinip);
                             pdf.text(tab_aux, reng_aux + inc_aux * factor_inc, estatus_aportacion);
-                        
+
                         }
 
                         pdf.setFontSize(10);
                         pdf.setFontType('bold')
 
-                        
-                       
+
+
                         pdf.text(tab2 - pdf.getTextWidth('No. de Cuenta:  '), reng_ref + reng_inc2 * 40, 'No. de Cuenta:  ');
                         pdf.text(tab2 - pdf.getTextWidth('Nombre de Cooperador:  '), reng_ref + reng_inc2 * 41, 'Nombre de Cooperador:  ');
                         pdf.text(tab4 - pdf.getTextWidth('Recibo de pago:  '), reng_ref + reng_inc2 * 40, 'Recibo de pago:  ');
@@ -2195,7 +2267,7 @@ function GenerarFichasPagoMes(obr_clv_int,idusu,num_ficha_act) {
                         pdf.text(tab2, reng_ref + reng_inc2 * 40, obr_clv + ' ' + coopid);
                         pdf.text(tab2, reng_ref + reng_inc2 * 41, nom_ficha);
                         pdf.text(tab5 - pdf.getTextWidth('Recibo de pago:  '), reng_ref + reng_inc2 * 40, num_ficha_act + ' de ' + numpagos);
-                        
+
                         pdf.line(10, reng_ref + reng_inc2 * 42.5, 204, reng_ref + reng_inc2 * 42.5);
 
                         pdf.setFontSize(10);
@@ -2206,24 +2278,24 @@ function GenerarFichasPagoMes(obr_clv_int,idusu,num_ficha_act) {
                         pdf.setFontSize(5);
                         pdf.text('(' + numletras + ')', tab4 - (pdf.getTextWidth(numletras) / 2), reng_ref + reng_inc2 * 43.5, { maxWidth: 550, align: "justify" });
 
-                        pdf.line(10, reng_ref + reng_inc2 * 44, 204, reng_ref + reng_inc2 * 44);                           
-                        
-                    }                        
+                        pdf.line(10, reng_ref + reng_inc2 * 44, 204, reng_ref + reng_inc2 * 44);
 
-                 
-                    i++;                       
-                } 
+                    }
+
+
+                    i++;
+                }
 
                 var hoy = moment().format("DDMMYYYY");
                 var fichas = obr_clv_int.toString() + '_' + hoy + '.pdf';
                 pdf.save(fichas.toString());
-              }
+            }
 
-            alert('Cooperadores leídos correctamente');                  
+            alert('Cooperadores leídos correctamente');
         })
         .fail(function (xhr) {
-              console.log(xhr.responseText);
-              alert("No fué posible leer los cooperadores...");
+            console.log(xhr.responseText);
+            alert("No fué posible leer los cooperadores...");
         })
 }
 
@@ -2233,15 +2305,15 @@ function CalcularAvanceObra(datos) {
     var total_total_metros = 0;
     var costo_metro = 0;
 
-    for (i = 0; i < num_regs ; i++) {
-        reg = datos.Items[i].row;
+    for (var i = 0; i < num_regs; i++) {
+        var reg = datos.Items[i].row;
 
         total_total_pagado = total_total_pagado + parseFloat(reg[34]);
         total_total_metros = total_total_metros + parseFloat(reg[21]);
         costo_metro = parseFloat(reg[8]);
     }
     var costo_obra = total_total_metros * costo_metro;
-    avance_obra = (total_total_pagado * 100) / costo_obra;
+    var avance_obra = (total_total_pagado * 100) / costo_obra;
     return avance_obra.toFixed(2);
 }
 
@@ -2259,21 +2331,21 @@ function ConsultaPermisoEjecutarTarea(idusu, idtarea, idaccion) {
 function LeerCooperadores(obr_clv_int) {
 
     var filtro3 = ',,,,,,,,' + obr_clv_int + ',,';
-    
 
- return  $.ajax(
-           {
+
+    return $.ajax(
+        {
             //TODO: Descozco porque trabaja de esta manera los WS, de forma local esta pasando algo
-               url: "../../WebServices/WebServiceFrente.asmx/GetFrentexO", //PageMethod
-               data: "{'pPageSize':'" + '10000' +
-                     "','pCurrentPage':'" + '1' +
-                     "','pSortColumn':'" + 'fid' +
-                     "','pSortOrder':'" + 'asc' +
-                     "','pFiltro':'" + filtro3 + "'}", //PageMethod Parametros de entrada                                   
-               dataType: "json",
-               type: "post",
-               contentType: "application/json; charset=utf-8"
-           });
+            url: "../../WebServices/WebServiceFrente.asmx/GetFrentexO", //PageMethod
+            data: "{'pPageSize':'" + '10000' +
+                "','pCurrentPage':'" + '1' +
+                "','pSortColumn':'" + 'fid' +
+                "','pSortOrder':'" + 'asc' +
+                "','pFiltro':'" + filtro3 + "'}", //PageMethod Parametros de entrada                                   
+            dataType: "json",
+            type: "post",
+            contentType: "application/json; charset=utf-8"
+        });
 }
 
 /* function LeerEstatusAportaciones(fid,accion) {
@@ -2288,17 +2360,17 @@ function LeerCooperadores(obr_clv_int) {
            });        
 
 }*/
-    function LeerObrasExcel(obr_clv_int_txt) {
+function LeerObrasExcel(obr_clv_int_txt) {
     return $.ajax({
         url: "../../WebServices/WebServiceObras.asmx/GetObra_rep1", //PageMethod
         data: "{'obr_clv_int_txt':'" + obr_clv_int_txt + "'}", //PageMethod Parametros de entrada
         type: "POST",
         dataType: "json",
         contentType: "application/json",
-        success: function (data) {                
-                if (data.d != null) {
-                    console.log(data.d);
-                }                
+        success: function (data) {
+            if (data.d != null) {
+                console.log(data.d);
+            }
         },
         error: function (responseText, textStatus, errorThrown) {
             alert(textStatus + responseText + errorThrown);
@@ -2309,7 +2381,7 @@ function LeerCooperadores(obr_clv_int) {
 
 function MostrarCoops_vwcoops4(obr_clv_int, idusu, accion) {
     var url1 = "../../Procesos/gcoops_vwcoops_4.html?ResponseType=Edit&obr_clv_int=" + obr_clv_int + "&idusu=" + idusu + "&accion=" + accion;
-    newWindow = window.open(url1, "_blank", "top=30,left=200,menubar=no,toolbar=no,location=no, resizable=no,height=1100,width=1300,status=no,scrollbars=yes,minimizable=no,maxmizable=no,resizable=0,titlebar=no,modal=yes");
+    var newWindow = window.open(url1, "_blank", "top=30,left=200,menubar=no,toolbar=no,location=no, resizable=no,height=1100,width=1300,status=no,scrollbars=yes,minimizable=no,maxmizable=no,resizable=0,titlebar=no,modal=yes");
     if (newWindow.focus()) {
         newWindow.focus()
     }
@@ -2443,18 +2515,18 @@ $(document).ready(function () {
     $(".posicion_boton_accion_ficha_pago_mes").click(function () { //Actualizar datos en el registro  
 
         var obr_clv_int = $("#lblobrclvint_x").html();
-        var num_ficha_act = $("#lblnumfichaactual").html();                        
+        var num_ficha_act = $("#lblnumfichaactual").html();
         var usuario = $("#bodegadatos").data("idusu");
         var idusu = usuario.split(":")[1];
 
-        GenerarFichasPagoMes(obr_clv_int,idusu, num_ficha_act);
+        GenerarFichasPagoMes(obr_clv_int, idusu, num_ficha_act);
     });
 
     $(".genera_num_contrato").click(function () { //Actualizar datos en el registro  
         var num_captura = $("#txt_num_contrato").val();
         $("#lblnum_contrato_completo").html(CreaNumeroContrato(num_captura));
     });
-    
+
 
     $(".asignar_contrato").click(function () { //Actualizar datos en el registro  
         var idcontrato = $("#lstcontratos").val();
@@ -2473,8 +2545,8 @@ $(document).ready(function () {
             height: 250,
             colNames: ['IdContrato', 'NumContrato'],
             colModel: [
-             { name: 'idcont', index: 'idcont', width: 60, align: "center" },
-             { name: 'num_cont', index: 'num_cont', width: 90, align: "center" }
+                { name: 'idcont', index: 'idcont', width: 60, align: "center" },
+                { name: 'num_cont', index: 'num_cont', width: 90, align: "center" }
             ],
             caption: "CONTRATOS ASIGNADOS",
             pager: '#pager_id_contrato', //Pager.                 
@@ -2492,8 +2564,8 @@ $(document).ready(function () {
 
 
         var ids = jQuery("#grid_contratos").getDataIDs();
-        
-        if (ids.length > 0) {                
+
+        if (ids.length > 0) {
             var i = 0;
             var encontrado = 0;
             var rowData;
@@ -2507,13 +2579,13 @@ $(document).ready(function () {
                 i = i + 1;
             }
         } else {
-            if ($("#bodegadatos").data("quedan_registros")==1) {
+            if ($("#bodegadatos").data("quedan_registros") == 1) {
                 jQuery("#grid_contratos").jqGrid('navButtonAdd', '#pager_id_contrato', {
                     caption: "QuitarContrato",
                     buttonicon: "ui-icon-document",
                     onClickButton: function () {
                         var myGrid = $("#grid_contratos");
-                        selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
+                        var selectedRowId = myGrid.jqGrid('getGridParam', 'selrow');
                         var idcont_sel = myGrid.jqGrid('getCell', selectedRowId, 'idcont');
                         if (idcont_sel) {
                             ids = jQuery("#grid_contratos").getDataIDs();
@@ -2530,7 +2602,7 @@ $(document).ready(function () {
                     title: "Eliminar Contrato",
                     cursor: "pointer"
                 });
-            }                
+            }
         }
 
         if (!encontrado) {
@@ -2541,13 +2613,13 @@ $(document).ready(function () {
             }
         }
 
-     
+
     });
 
-    
 
 
-    function ValidarRegistroObraS(accion, idusu) {
+
+    async function ValidarRegistroObraS(accion, idusu) {
 
         if (validarObraS(accion)) {   /*Valida que los datos del documento sean correctos incluyendo el archivo capturado sea del tipo PDF y menor a 1 MB*/
             /*Reunir parámetros para guardar el levantamiento capturado en el server*/
@@ -2556,6 +2628,7 @@ $(document).ready(function () {
             var usuario = parseInt(idusu);
 
             if (accion == 0) {  /*Alta de nueva obra, escribe una nueva obra*/
+                //TODO: Parece ser este el lugar donde se llevara el CRUD de obras hacia los diferentes ambientes
 
                 /*Generar clave de obra*/
 
@@ -2583,8 +2656,9 @@ $(document).ready(function () {
                 /*13*/var obr_fec_ini_cob = ConvertirCadenaToFecha('01/01/1900');
                 /*14*/var obr_clv_int = 0; /*Clave principal e la obra*/
 
-                /*15 var col_clv2 = $("#lstcolonias_s").val();   clave de la colonia catalogo de SIFIDOC*/
-                var col_clv2 = 0
+                //var col_clv2 = $("#lstcolonias_s").val();   /*clave de la colonia catalogo de SIFIDOC*/
+                //console.log("col_clv2: "+col_clv2);
+                var col_clv2 = '001';
 
                 /*16*/var obr_prog2 = parseInt($("#lstprograma").val());  // Clave del programa catalogo:  public2.programa
                 /*16*/var obr_programa_sifidoc = $("#lstprograma_s").val();  // Clave del programa catalogo SIFIDOC:  
@@ -2638,90 +2712,92 @@ $(document).ready(function () {
                 var obr_fecinip_sifidoc = $("#txtfecinipag").val(); //Fecha inicio de pagos                   
                 var obr_fecvencp_sifidoc = $("#lblfecvenc").val();  //Fecha de vencimiento de pagos
                 var obr_numera = '';
-                
 
                 RegistrarObraBD_psql(obr_clv_int,
-                                obr_clv,
-                                obr_mts,
-                                obr_cost,
-                                obr_tipo,
-                                obr_fecha,
-                                obr_cost_total,
-                                obr_inc,
-                                obr_fecinip,
-                                obr_fecvencp,
-                                obr_npago,
-                                obr_opergob,
-                                obr_fec_ini_proc,
-                                obr_fec_ini_cob,
-                                col_clv2,
-                                obr_prog2,
-                                obr_clv2,
-                                obr_status,
-                                obr_oid,
-                                obr_fec_canc,
-                                obr_sis,
-                                usuario,
-                                accion)
-                .done(function (r) {
-                    var resp = r.d;
-                    var mensaje = resp.split(':')[0];
-                    alert(mensaje);//No se da de alta en acccess     
-                    
-                    $('#mask, .window').hide();
-                    RedibujarGrid();
-                   
-                   var idobra = parseInt(resp.split(':')[1]);
-                    if (idobra) {
-                        /* if (obr_clv == '0000000000') {
-                            RegistrarObraBD_access(obr_clv_txt,
-                                             obr_call,
-                                             obr_col,
-                                             obr_mts,
-                                             obr_cost,
-                                             obr_stat,
-                                             obr_int,
-                                             obr_tramo,
-                                             obr_fecha_sifidoc,
-                                             obr_cost_total,
-                                             obr_inc,
-                                             obr_contab,
-                                             obr_sis,
-                                             col_nom,
-                                             obr_digito,
-                                             obr_programa_sifidoc,
-                                             obr_cuentac,
-                                             obr_digagr,
-                                             obr_fecinip_sifidoc,
-                                             obr_fecvencp_sifidoc,
-                                             obr_npago,
-                                             obr_numera,
-                                             obr_opergob + obr_clv_txt.substr(6, 4),
-                                             accion)
-                            .done(function (r) {
-                                alert('Obra: ' + obr_clv_txt + ' registrada correctamente');
+                    obr_clv,
+                    obr_mts,
+                    obr_cost,
+                    obr_tipo,
+                    obr_fecha,
+                    obr_cost_total,
+                    obr_inc,
+                    obr_fecinip,
+                    obr_fecvencp,
+                    obr_npago,
+                    obr_opergob,
+                    obr_fec_ini_proc,
+                    obr_fec_ini_cob,
+                    col_clv2,
+                    obr_prog2,
+                    obr_clv2,
+                    obr_status,
+                    obr_oid,
+                    obr_fec_canc,
+                    obr_sis,
+                    usuario,
+                    accion)
+                    .done(function (r) {
+                        var resp = r.d;
+                        var mensaje = resp.split(':')[0];
+                        alert(mensaje);//No se da de alta en acccess     
+
+                        $('#mask, .window').hide();
+                        RedibujarGrid();
+
+                        //var idobra = parseInt(resp.split(':')[1]);
+                        /* if (idobra) {
+                             if (obr_clv == '0000000000') {
+                                RegistrarObraBD_access(obr_clv_txt,
+                                                 obr_call,
+                                                 obr_col,
+                                                 obr_mts,
+                                                 obr_cost,
+                                                 obr_stat,
+                                                 obr_int,
+                                                 obr_tramo,
+                                                 obr_fecha_sifidoc,
+                                                 obr_cost_total,
+                                                 obr_inc,
+                                                 obr_contab,
+                                                 obr_sis,
+                                                 col_nom,
+                                                 obr_digito,
+                                                 obr_programa_sifidoc,
+                                                 obr_cuentac,
+                                                 obr_digagr,
+                                                 obr_fecinip_sifidoc,
+                                                 obr_fecvencp_sifidoc,
+                                                 obr_npago,
+                                                 obr_numera,
+                                                 obr_opergob + obr_clv_txt.substr(6, 4),
+                                                 accion)
+                                .done(function (r) {
+                                    alert('Obra: ' + obr_clv_txt + ' registrada correctamente');
+                                    $('#mask, .window').hide();
+                                    RedibujarGrid();
+                                })
+                                .fail(function (xhr) {
+                                    console.log(xhr.responseText);
+                                    alert("No fué posible registrar la obra en ACCESS...");
+                                });
+                            } else {
+                                alert('Obra: ' + obr_clv + ' registrada correctamente');
+                                console.log('La obra ' + obr_clv + 'se encontraba registrada en ACCESS');
                                 $('#mask, .window').hide();
                                 RedibujarGrid();
-                            })
-                            .fail(function (xhr) {
-                                console.log(xhr.responseText);
-                                alert("No fué posible registrar la obra en ACCESS...");
-                            });
+                            }
                         } else {
-                            alert('Obra: ' + obr_clv + ' registrada correctamente');
-                            console.log('La obra ' + obr_clv + 'se encontraba registrada en ACCESS');
-                            $('#mask, .window').hide();
-                            RedibujarGrid();
+                            alert(mensaje);//No se da de alta en acccess                           
                         } */
-                    } else {
-                        alert(mensaje);//No se da de alta en acccess                           
-                    }
-                   
-                })
-                .fail(function (xhr) {
-                    console.log(xhr.responseText);
-                    alert("No fué posible registrar la obra en PostgresSql...");
-                });
+                        // Concatenar
+                        /* obr_clv = obr_clv + idobra;
+                        obr_clv = obr_clv.slice(-10); */
+
+                    })
+                    .fail(function (xhr) {
+                        console.log(xhr.responseText);
+                        alert("No fué posible registrar la obra en PostgresSql...");
+                    });
             }
 
 
@@ -2740,7 +2816,8 @@ $(document).ready(function () {
 
                 var col_clv2 = $("#lstcolonias_s").val();   //clave de la colonia catalogo de SIFIDOC
                 var obr_programa_sifidoc = $("#lstprograma_s").val();  // Clave del programa catalogo SIFIDOC:                   
-                var obr_sis = parseInt($("#lstsistema_s").val());  // Clave del sistema catalogo SIFIDOC:  public2.programa
+                //var obr_sis = parseInt($("#lstsistema_s").val());  // Clave del sistema catalogo SIFIDOC:  public2.programa
+                var obr_sis = undefined;
 
                 var obr_fecinip_sifidoc = $("#txtfecinipag").val();
                 var obr_fecvencp_sifidoc = $("#lblfecvenc").html();
@@ -2760,70 +2837,70 @@ $(document).ready(function () {
                 var usuario = parseInt(idusu);
 
                 RegistrarObraBD_psql(obr_clv_int,
-                                '',
-                                0,
-                                obr_cost,
-                                obr_tipo,
-                                ConvertirCadenaToFecha('01/01/1900'),
-                                0,
-                                0,
-                                ConvertirCadenaToFecha($("#txtfecinipag").val()),
-                                ConvertirCadenaToFecha($("#lblfecvenc").html()),
-                                obr_npago,
-                                '',
-                                ConvertirCadenaToFecha('01/01/1900'),
-                                ConvertirCadenaToFecha('01/01/1900'),
-                                col_clv2,
-                                obr_prog2,
-                                obr_clv,
-                                0,
-                                0,
-                                ConvertirCadenaToFecha('01/01/1900'),
-                                obr_sis,
-                                usuario,
-                                accion)
-                .done(function (r) {
-                    var resp = r.d;
-                    var obr_clv_txt = resp.split(':')[2];
-                    RegistrarObraBD_access(obr_clv_txt,
-                                          '',
-                                          col_clv2,
-                                          0,
-                                          obr_cost,
-                                          0,
-                                          0,
-                                          '',
-                                          '',
-                                          0,
-                                          0,
-                                          '',
-                                          obr_sis,
-                                          '',
-                                          '',
-                                          obr_programa_sifidoc,
-                                          '',
-                                          '',
-                                          obr_fecinip_sifidoc,
-                                          obr_fecvencp_sifidoc,
-                                          obr_npago,
-                                          '',
-                                          '',
-                                          accion)
-                       .done(function (r) {
-                           alert('Obra: ' + obr_clv_txt + ' actualizada correctamente');
-                           $('#mask, .window').hide();
-                           RedibujarGrid();
-                       })
-                       .fail(function (xhr) {
-                           console.log(xhr.responseText);
-                           alert("No fué posible actualizar la obra en ACCESS...");
-                       })
+                    '',
+                    0,
+                    obr_cost,
+                    obr_tipo,
+                    ConvertirCadenaToFecha('01/01/1900'),
+                    0,
+                    0,
+                    ConvertirCadenaToFecha($("#txtfecinipag").val()),
+                    ConvertirCadenaToFecha($("#lblfecvenc").html()),
+                    obr_npago,
+                    '',
+                    ConvertirCadenaToFecha('01/01/1900'),
+                    ConvertirCadenaToFecha('01/01/1900'),
+                    col_clv2,
+                    obr_prog2,
+                    obr_clv,
+                    0,
+                    0,
+                    ConvertirCadenaToFecha('01/01/1900'),
+                    obr_sis,
+                    usuario,
+                    accion)
+                    .done(function (r) {
+                        var resp = r.d;
+                        var obr_clv_txt = resp.split(':')[2];
+                        RegistrarObraBD_access(obr_clv_txt,
+                            '',
+                            col_clv2,
+                            0,
+                            obr_cost,
+                            0,
+                            0,
+                            '',
+                            '',
+                            0,
+                            0,
+                            '',
+                            obr_sis,
+                            '',
+                            '',
+                            obr_programa_sifidoc,
+                            '',
+                            '',
+                            obr_fecinip_sifidoc,
+                            obr_fecvencp_sifidoc,
+                            obr_npago,
+                            '',
+                            '',
+                            accion)
+                            .done(function (r) {
+                                alert('Obra: ' + obr_clv_txt + ' actualizada correctamente');
+                                $('#mask, .window').hide();
+                                RedibujarGrid();
+                            })
+                            .fail(function (xhr) {
+                                console.log(xhr.responseText);
+                                alert("No fué posible actualizar la obra en ACCESS...");
+                            })
 
-                })
-                .fail(function (xhr) {
-                    console.log(xhr.responseText);
-                    alert("No fué posible registrar la obra en PostgresSql...");
-                });
+                    })
+                    .fail(function (xhr) {
+                        console.log(xhr.responseText);
+                        alert("No fué posible registrar la obra en PostgresSql...");
+                    });
 
             }
 
@@ -2833,56 +2910,114 @@ $(document).ready(function () {
 
             if (validarObraProc()) {
 
-              
-                
+
+
                 var obr_clv_int_txt = $("#lblobr_clv_int_proc").html();
                 var oid = parseInt($("#lbloid_proc").html());
-               /* var f = new Date();
-                
-                var anio = f.getFullYear();
-                var anio_txt = anio.toString();*/
-                
+                /* var f = new Date();
+                 
+                 var anio = f.getFullYear();
+                 var anio_txt = anio.toString();*/
+
                 /*var ctacont = '22530 0000 0004 00' + anio_txt.substr(2,2) + ' ';*/
-                
+
                 var feciniproc = ConvertirCadenaToFecha($("#txtfeciniproc").val());
                 var feciniproc_txt = $("#txtfeciniproc").val();
-                
-                
+
+
                 var num_contrato = '';
                 var i = 0;
                 var ids = jQuery("#grid_contratos").getDataIDs();
-                while (i<ids.length) {
+                while (i < ids.length) {
                     num_contrato = num_contrato + ids[i] + ',';
                     i = i + 1;
-                }                   
+                }
                 var idtipo_recurso_obra = $("#lsttipo_recurso").val();
-                var objObraProc = {      
-                    "oid":oid,                
+                var objObraProc = {
+                    "oid": oid,
                     "obr_clv_int": parseInt(obr_clv_int_txt),
-                    "obra_s":$("#lblobra_s").html(),
+                    "obra_s": $("#lblobra_s").html(),
                     "fec_ini_proc": ConvertirCadenaToFecha($("#txtfeciniproc").val()),
                     "idtipo_recurso": idtipo_recurso_obra,
-                    "descrip":'',
-                    "gastos_admvos": parseFloat($("#txtgastos_admvos").val()),                
+                    "descrip": '',
+                    "gastos_admvos": parseFloat($("#txtgastos_admvos").val()),
                     "num_contratos": num_contrato,
                     "idusu": idusu,
-                    "fec_mod":ConvertirCadenaToFecha('01/01/1900'),
-                    "cactivo":1,
+                    "fec_mod": ConvertirCadenaToFecha('01/01/1900'),
+                    "cactivo": 1,
                     "accion": accion
                 }
 
-                
-                    RegistrarIniProcObr_psql(objObraProc)
-                     .done(function (r) {
-                         alert('La obra seleccionada ha sido cambiada de estatus a PROCESO satisfactoriamente');
-                         $('#mask, .window').hide();
-                         RedibujarGrid();
-                     })
-                     .fail(function (xhr) {
-                         console.log(xhr.responseText);
-                         alert("No fué posible cambiar estatus la obra a proceso en postgresSQL...");
+                await RegistrarIniProcObr_psql(objObraProc)
+                    .done(function (r) {
+                        alert('La obra seleccionada ha sido cambiada de estatus a PROCESO satisfactoriamente');
+                        $('#mask, .window').hide();
+                        RedibujarGrid();
                     })
-                
+                    .fail(function (xhr) {
+                        console.log(xhr.responseText);
+                        alert("No fué posible cambiar estatus la obra a proceso en postgresSQL...");
+                    });
+
+                var obr_clv = $("#lblobra_s").html();
+                let obr_opergob = null;
+                await $.ajax({
+                    url: "../../WebServices/WebServiceObras.asmx/GetObra_psql", //PageMethod
+                    data: "{'pPageSize':1,'pCurrentPage':1,'pSortColumn':'b.obr_clv_int','pSortOrder':'asc','pFiltro':',,," + obr_clv + ",'}", //PageMethod Parametros de entrada
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (data) {
+                        if (data.d != null) {
+                            // Acceder al primer registro dentro de Items
+                            let item = data.d.Items[0];
+                            // Tomar el valor #5 del array "row"
+                            obr_opergob = item.row[51];
+                        }
+                    },
+                    error: function (responseText, textStatus, errorThrown) {
+                        alert(textStatus + responseText + errorThrown);
+                    }
+                });
+
+                // Construir el objeto de datos correctamente
+                const terceraPeticionData = {
+                    obr_stat: 4,
+                    obr_opergob
+                };
+
+                $.ajax({
+                    type: 'PUT',
+                    url: urls.ws + "/api/obras/sql/cambiarEstatus/" + obr_clv,
+                    data: JSON.stringify(terceraPeticionData), // Convertir el objeto a JSON
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data != null) {
+                            alert('Obra actualizada en SQLServer.');
+                        }
+                    },
+                    error: function (responseText, textStatus, errorThrown) {
+                        alert(textStatus + responseText + errorThrown);
+                    }
+                });
+
+                $.ajax({
+                    url: "../../WebServices/WebServiceObras.asmx/cambiarEstatusObraSIFIDOC", //PageMethod
+                    data: "{'obr_stat':4,'obr_opergob':'" + obr_opergob + "','obr_clv':'" + obr_clv + "'}", //PageMethod Parametros de entrada
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (data) {
+                        if (data.d != null) {
+                            console.log(data.d);
+                            alert('Obra actualizada en SIFIDOC.');
+                        }
+                    },
+                    error: function (responseText, textStatus, errorThrown) {
+                        alert(textStatus + responseText + errorThrown);
+                    }
+                });
 
             }
         }
@@ -2919,15 +3054,15 @@ $(document).ready(function () {
                 var nom_file_pub2 = obr_clv_int + '_evid_pub2.pdf';
 
                 RegistrarExpJurObr_psql(obr_clv_int, fecpub1, fecpub2, nom_file_pub1, file_evidpub1, nom_file_pub2, file_evidpub2, obr_costo_total, obr_nat, idusu, accion)
-                     .done(function (r) {
-                         alert('Obra: ' + obr_clv + ' ' + 'Datos juridicos guardados');
-                         $('#mask, .window').hide();
-                         RedibujarGrid();
-                     })
-                     .fail(function (xhr) {
-                         console.log(xhr.responseText);
-                         alert("No fué posible los datos jurídicos de la obra en postgresSQL...");
-                     })
+                    .done(function (r) {
+                        alert('Obra: ' + obr_clv + ' ' + 'Datos juridicos guardados');
+                        $('#mask, .window').hide();
+                        RedibujarGrid();
+                    })
+                    .fail(function (xhr) {
+                        console.log(xhr.responseText);
+                        alert("No fué posible los datos jurídicos de la obra en postgresSQL...");
+                    })
 
             }
         }
@@ -2935,9 +3070,9 @@ $(document).ready(function () {
 
         if (accion == 6) { /*Cambio de estatus de obra de proceso a terminada vencida*/
 
-            if (validarObrTerm()) {                    
+            if (validarObrTerm()) {
 
-                var id_tipo_recurso= parseInt($("#lblid_tipo_recurso").html());                    
+                var id_tipo_recurso = parseInt($("#lblid_tipo_recurso").html());
                 var fec_ini_cob = $("#lblfecha_inicio_cobranza_capt").html();
                 var oid_in = $("#lbloid_obra_term").html();
 
@@ -2949,24 +3084,84 @@ $(document).ready(function () {
                     "evid_termino_obra": '',
                     "idusu": idusu,
                     "accion": accion
-                }                    
-            
+                }
+
                 if (confirm("¿Desea aplicar el cambio de estatus PROCESO --> COBRANZA?")) {
 
-                    RegistrarObrTerm_psql(objObraTerm)
-                     .done(function (r) {                            
-                             alert('Obra establecida en TERMINADA VENCIDA correctamente');
-                             $('#mask, .window').hide();
-                             RedibujarGrid();                            
-                     })
-                     .fail(function (xhr) {
-                         console.log(xhr.responseText);
-                         alert("No fué posible registrar la fecha de termino de la obra en postgresSQL...");
-                     })
+                    await RegistrarObrTerm_psql(objObraTerm)
+                        .done(function (r) {
+                            alert('Obra establecida en TERMINADA VENCIDA correctamente');
+                            $('#mask, .window').hide();
+                            RedibujarGrid();
+                        })
+                        .fail(function (xhr) {
+                            console.log(xhr.responseText);
+                            alert("No fué posible registrar la fecha de termino de la obra en postgresSQL...");
+                        })
 
                 } else {
                     console.log("El usuario no acepto registrar los parámetros de obra en Terminada Vencida");
                 }
+
+                var obr_clv = $("#lblobra_s").html();
+                let obr_opergob = null;
+                await $.ajax({
+                    url: "../../WebServices/WebServiceObras.asmx/GetObra_psql", //PageMethod
+                    data: "{'pPageSize':1,'pCurrentPage':1,'pSortColumn':'b.obr_clv_int','pSortOrder':'asc','pFiltro':',,," + obr_clv + ",'}", //PageMethod Parametros de entrada
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (data) {
+                        if (data.d != null) {
+                            // Acceder al primer registro dentro de Items
+                            let item = data.d.Items[0];
+                            // Tomar el valor #5 del array "row"
+                            obr_opergob = item.row[51];
+                        }
+                    },
+                    error: function (responseText, textStatus, errorThrown) {
+                        alert(textStatus + responseText + errorThrown);
+                    }
+                });
+
+                // Construir el objeto de datos correctamente
+                const terceraPeticionData = {
+                    obr_stat: 5,
+                    obr_opergob
+                };
+
+                $.ajax({
+                    type: 'PUT',
+                    url: urls.ws + "/api/obras/sql/cambiarEstatus/" + obr_clv,
+                    data: JSON.stringify(terceraPeticionData), // Convertir el objeto a JSON
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data != null) {
+                            alert('Obra actualizada en SQLServer.');
+                        }
+                    },
+                    error: function (responseText, textStatus, errorThrown) {
+                        alert(textStatus + responseText + errorThrown);
+                    }
+                });
+
+                $.ajax({
+                    url: "../../WebServices/WebServiceObras.asmx/cambiarEstatusObraSIFIDOC", //PageMethod
+                    data: "{'obr_stat':5,'obr_opergob':'" + obr_opergob + "','obr_clv':'" + obr_clv + "'}", //PageMethod Parametros de entrada
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (data) {
+                        if (data.d != null) {
+                            console.log(data.d);
+                            alert('Obra actualizada en SIFIDOC.');
+                        }
+                    },
+                    error: function (responseText, textStatus, errorThrown) {
+                        alert(textStatus + responseText + errorThrown);
+                    }
+                });
             }
         }
 
@@ -2976,14 +3171,14 @@ $(document).ready(function () {
 
     function validarObrTerm() {
         var valid = true;
-        
+
         var fec_obrterm = ConvertirCadenaToFecha($("#lblfeciniproc_obra_term").html());
         var feciniproc = ConvertirCadenaToFecha($("#lblfecha_inicio_cobranza_capt").html());
 
         //fec_obrterm >= feciniproc
         if (false) {
             valid = false;
-            alert('Las fecha de término de obra debe ser mayor a la fecha de inicio de proceso de obra');                
+            alert('Las fecha de término de obra debe ser mayor a la fecha de inicio de proceso de obra');
         }
         else {
             valid = true;
@@ -3139,11 +3334,13 @@ $(document).ready(function () {
         var ids = jQuery("#grid_contratos").getDataIDs();
 
         if (parseFloat($("#txtgastos_admvos").val()) > 0) {
-            if (ids.length>0) {
+            if (ids.length > 0) {
                 var x = ConvertirCadenaToFecha(fec_ini_proc_txt);
-                if (fec_ini_proc_txt!='' || fec_ini_proc_txt.length == 10) {
+                //fec_ini_proc_txt!='' || fec_ini_proc_txt.length == 10
+                if (true) {
                     var y = ConvertirCadenaToFecha(fec_fin_pag_txt);
-                    if (x > y) {
+                    //x > y
+                    if (true) {
                         valid = true;
                     }
                     else {
@@ -3222,7 +3419,6 @@ $(document).ready(function () {
     function RegistrarObrTerm_psql(objObraTerm) {
 
         var stringData = JSON.stringify(objObraTerm);
-        //TODO:
         return $.ajax({
             type: 'POST',
             url: "../../WebServices/WebServiceObras.asmx/RegObra_PostgresSql",
@@ -3230,7 +3426,7 @@ $(document).ready(function () {
             contentType: 'application/json; utf-8',
             dataType: 'json',
             success: function (data) {
-                if (data.d != null) {                        
+                if (data.d != null) {
                     console.log(data.d);
                 }
             },
@@ -3286,8 +3482,8 @@ $(document).ready(function () {
             data: "{objObraProc:" + stringData + "}",
             contentType: 'application/json; utf-8',
             dataType: 'json',
-            success: function (data) {                    
-                    console.log(data.d);                    
+            success: function (data) {
+                console.log(data.d);
             },
             error: function (responseText, textStatus, errorThrown) {
                 alert(textStatus + responseText + errorThrown);
@@ -3297,12 +3493,12 @@ $(document).ready(function () {
     };
 
     function RegistrarInicProcObr_access(obr_clv_int_txt,
-                                        ctacont,
-                                        feciniproc_txt,
-                                        obr_estatus,
-                                        estatus_actual,
-                                        usuario,
-                                        accion) {
+        ctacont,
+        feciniproc_txt,
+        obr_estatus,
+        estatus_actual,
+        usuario,
+        accion) {
 
         var enviarObj = {
             "obr_clv": obr_clv_int_txt,
@@ -3337,28 +3533,28 @@ $(document).ready(function () {
 
 
     function RegistrarObraBD_psql(obr_clv_int,
-                              obr_clv,
-                             obr_mts,
-                             obr_cost,
-                             obr_tipo,
-                             obr_fecha,
-                             obr_cost_total,
-                             obr_inc,
-                             obr_fecinip,
-                             obr_fecvencp,
-                             obr_npago,
-                             obr_opergob,
-                             obr_fec_ini_proc,
-                             obr_fec_ini_cob,
-                             col_clv2,
-                             obr_prog2,
-                             obr_clv2,
-                             obr_status,
-                             obr_oid,
-                             obr_fec_canc,
-                             obr_sis,
-                             idusu,
-                             accion) {
+        obr_clv,
+        obr_mts,
+        obr_cost,
+        obr_tipo,
+        obr_fecha,
+        obr_cost_total,
+        obr_inc,
+        obr_fecinip,
+        obr_fecvencp,
+        obr_npago,
+        obr_opergob,
+        obr_fec_ini_proc,
+        obr_fec_ini_cob,
+        col_clv2,
+        obr_prog2,
+        obr_clv2,
+        obr_status,
+        obr_oid,
+        obr_fec_canc,
+        obr_sis,
+        idusu,
+        accion) {
 
         var enviarObj = {
             "obr_clv_int": obr_clv_int,
@@ -3390,7 +3586,7 @@ $(document).ready(function () {
 
 
 
-        var stringData = JSON.stringify(enviarObj); 
+        var stringData = JSON.stringify(enviarObj);
         return $.ajax({
             type: 'POST',
             url: "../../WebServices/WebServiceObras.asmx/RegObra_PostgresSql",
@@ -3420,7 +3616,7 @@ $(document).ready(function () {
                         contentType: 'application/json; utf-8',
                         dataType: 'json',
                         success: function (data) {
-                            if (data.d != null) {       
+                            if (data.d != null) {
                                 const obr_clv = data.d.Items[0].row[1];
                                 const obr_call = data.d.Items[0].row[2];
                                 const obr_cost = data.d.Items[0].row[46];
@@ -3432,57 +3628,141 @@ $(document).ready(function () {
                                 const obr_npago = data.d.Items[0].row[16];
                                 const obr_opergob = data.d.Items[0].row[51];
 
-                                // Construir el objeto de datos correctamente
-                                const terceraPeticionData = {
-                                    obr_clv,
-                                    obr_call,
-                                    obr_col: '',
-                                    obr_cost,
-                                    obr_stat: '2',
-                                    obr_tramo,
-                                    obr_fecha,
-                                    obr_sis:'',
-                                    col_nom,
-                                    obr_programa,
-                                    obr_fecinip: obr_fecha,
-                                    obr_fecvenp,
-                                    obr_npago,
-                                    obr_opergob
-                                };
+                                if (accion == 0) {
+                                    // Construir el objeto de datos correctamente
+                                    const terceraPeticionData = {
+                                        obr_clv,
+                                        obr_call,
+                                        obr_col: '001',
+                                        obr_cost: parseInt(obr_cost),
+                                        obr_stat: '2',
+                                        obr_tramo,
+                                        obr_fecha,
+                                        obr_sis: '',
+                                        col_nom,
+                                        obr_programa,
+                                        obr_fecinip: obr_fecha,
+                                        obr_fecvenp,
+                                        obr_npago: parseInt(obr_npago),
+                                        obr_opergob
+                                    };
 
-                                $.ajax({
-                                    type: 'POST',
-                                    url: "http://localhost:3500/api/obras/access/agregar",
-                                    data: JSON.stringify(terceraPeticionData), // Convertir el objeto a JSON
-                                    contentType: 'application/json; utf-8',
-                                    dataType: 'json',
-                                    success: function (data) {
-                                        if (data != null) {       
-                                            console.log(data);
-                                            alert('Obra registrada en Access');
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: urls.ws + "/api/obras/sql/agregar",
+                                        data: JSON.stringify(terceraPeticionData), // Convertir el objeto a JSON
+                                        contentType: 'application/json; charset=utf-8',
+                                        dataType: 'json',
+                                        success: function (data) {
+                                            if (data != null) {
+                                                RegistrarObraBD_access(obr_clv,
+                                                    obr_call,
+                                                    data.data.obr_col,
+                                                    obr_mts,
+                                                    obr_cost,
+                                                    "2",
+                                                    0,
+                                                    obr_tramo,
+                                                    obr_fecha,
+                                                    obr_cost_total,
+                                                    obr_inc,
+                                                    data.data.obr_opergob,
+                                                    obr_sis,
+                                                    data.data.col_nom,
+                                                    0,
+                                                    data.data.obr_programa,
+                                                    '',
+                                                    '',
+                                                    obr_fecha,
+                                                    obr_fecvenp,
+                                                    obr_npago,
+                                                    '',
+                                                    data.data.obr_opergob,
+                                                    accion)
+                                                    .done(function (r) {
+                                                        alert('Obra: ' + obr_clv + ' registrada correctamente en Access');
+                                                        $('#mask, .window').hide();
+                                                        RedibujarGrid();
+                                                    })
+                                                    .fail(function (xhr) {
+                                                        console.log(xhr.responseText);
+                                                        alert("No fué posible registrar la obra en ACCESS...");
+                                                    });
+                                                alert('Obra registrada correctamente en SQLServer.');
+                                            }
+                                        },
+                                        error: function (responseText, textStatus, errorThrown) {
+                                            alert(textStatus + responseText + errorThrown);
                                         }
-                                    },
-                                    error: function (responseText, textStatus, errorThrown) {
-                                        alert(textStatus + responseText + errorThrown);
-                                    }
-                                });
+                                    });
+                                } else {
+                                    // Construir el objeto de datos correctamente
+                                    const terceraPeticionData = {
+                                        obr_clv,
+                                        obr_call,
+                                        obr_col: '001',
+                                        obr_cost: parseInt(obr_cost),
+                                        obr_stat: '2',
+                                        obr_tramo,
+                                        obr_fecha,
+                                        obr_sis: '',
+                                        col_nom,
+                                        obr_programa,
+                                        obr_fecinip: obr_fecha,
+                                        obr_fecvenp,
+                                        obr_npago: parseInt(obr_npago),
+                                        obr_opergob
+                                    };
 
-                                $.ajax({
-                                    type: 'POST',
-                                    url: "http://localhost:3500/api/obras/sql/agregar",
-                                    data: JSON.stringify(terceraPeticionData), // Convertir el objeto a JSON
-                                    contentType: 'application/json; utf-8',
-                                    dataType: 'json',
-                                    success: function (data) {
-                                        if (data != null) {       
-                                            console.log(data);
-                                            alert('Obra registrada en SQLServer.');
+                                    $.ajax({
+                                        type: 'PUT',
+                                        url: urls.ws + "/api/obras/sql/actualizar/" + obr_clv,
+                                        data: JSON.stringify(terceraPeticionData), // Convertir el objeto a JSON
+                                        contentType: 'application/json; charset=utf-8',
+                                        dataType: 'json',
+                                        success: function (data) {
+                                            if (data != null) {
+                                                RegistrarObraBD_access(obr_clv,
+                                                    obr_call,
+                                                    data.data.obr_col,
+                                                    obr_mts,
+                                                    obr_cost,
+                                                    "2",
+                                                    0,
+                                                    obr_tramo,
+                                                    obr_fecha,
+                                                    obr_cost_total,
+                                                    obr_inc,
+                                                    data.data.obr_opergob,
+                                                    obr_sis,
+                                                    data.data.col_nom,
+                                                    0,
+                                                    data.data.obr_programa,
+                                                    '',
+                                                    '',
+                                                    obr_fecha,
+                                                    obr_fecvenp,
+                                                    obr_npago,
+                                                    '',
+                                                    data.data.obr_opergob,
+                                                    accion)
+                                                    .done(function (r) {
+                                                        alert('Obra: ' + obr_clv + ' actualizada correctamente en Access');
+                                                        $('#mask, .window').hide();
+                                                        RedibujarGrid();
+                                                    })
+                                                    .fail(function (xhr) {
+                                                        console.log(xhr.responseText);
+                                                        alert("No fué posible actualizar la obra en ACCESS...");
+                                                    });
+                                                alert('Obra actualizada correctamente en SQLServer.');
+                                            }
+                                        },
+                                        error: function (responseText, textStatus, errorThrown) {
+                                            alert(textStatus + responseText + errorThrown);
                                         }
-                                    },
-                                    error: function (responseText, textStatus, errorThrown) {
-                                        alert(textStatus + responseText + errorThrown);
-                                    }
-                                });
+                                    });
+                                }
                             }
                         },
                         error: function (responseText, textStatus, errorThrown) {
@@ -3499,29 +3779,29 @@ $(document).ready(function () {
     };
 
     function RegistrarObraBD_access(obr_clv,
-                                    obr_call,
-                                    obr_col,
-                                    obr_mts,
-                                    obr_cost,
-                                    obr_stat,
-                                    obr_int,
-                                    obr_tramo,
-                                    obr_fecha,
-                                    obr_costo_total,
-                                    obr_inc,
-                                    obr_contab,
-                                    obr_sis,
-                                    col_nom,
-                                    obr_digito,
-                                    obr_programa,
-                                    obr_cuentac,
-                                    obr_digagr,
-                                    obr_fecinip,
-                                    obr_fecvenp,
-                                    obr_npago,
-                                    obr_numera,
-                                    obr_opergob,
-                                    accion) {
+        obr_call,
+        obr_col,
+        obr_mts,
+        obr_cost,
+        obr_stat,
+        obr_int,
+        obr_tramo,
+        obr_fecha,
+        obr_costo_total,
+        obr_inc,
+        obr_contab,
+        obr_sis,
+        col_nom,
+        obr_digito,
+        obr_programa,
+        obr_cuentac,
+        obr_digagr,
+        obr_fecinip,
+        obr_fecvenp,
+        obr_npago,
+        obr_numera,
+        obr_opergob,
+        accion) {
 
         var enviarObj = {
             "obr_clv": obr_clv,
@@ -3621,7 +3901,7 @@ $(document).ready(function () {
         $('#mask, .window').hide();
     });
 
-    
+
 
     //if mask is clicked
     $('#mask').click(function () {
@@ -3656,7 +3936,7 @@ function AccionRegistroObra(objObra) { // accion=0 --->nuevo registro; accion = 
 
 
     var date = new Date();
-    obr_fecha_hoy = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
+    var obr_fecha_hoy = date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
 
     //Preparación de interfaz para dar de alta la obra.  accion ==0
     var usuario = $("#bodegadatos").data("idusu");
@@ -3679,7 +3959,7 @@ function AccionRegistroObra(objObra) { // accion=0 --->nuevo registro; accion = 
         llenarPrograma(objObra.accion, 0);
 
         /*llenarObrasSIFIDOC(objObra.obr_clv);*/
-        
+
         llenarTipoObra(objObra.accion, 0);
         llenarUbicObra(objObra.accion, 0);
         llenarEstatusObra('infestatusobra', 2);
@@ -3734,7 +4014,7 @@ function AccionRegistroObra(objObra) { // accion=0 --->nuevo registro; accion = 
         $("#lblnomtramo").html(objObra.Tramo);
         $("#lblprog").html(objObra.Prog);
         $("#lblestatus_obra").html(objObra.EstObra);
-        $("#lblaccion_proc").html(objObra.accion);            
+        $("#lblaccion_proc").html(objObra.accion);
         $("#lblfecinirec").html(objObra.FecIniPag);
         $("#lblfecfinrec").html(objObra.FecVenP);
         $("#lblidusu_proc").html(objObra.idusu);
@@ -3742,7 +4022,7 @@ function AccionRegistroObra(objObra) { // accion=0 --->nuevo registro; accion = 
         $("#lbltipo_obra").html(objObra.TipoObra);
         $("#lbloid_proc").html(objObra.oid);
         $("#lblobra_s").html(objObra.Obra);
-        $("#lblobr_clv_int_proc").html(objObra.ClvObra);           
+        $("#lblobr_clv_int_proc").html(objObra.ClvObra);
         $("#txtnum_contrato").val(objObra.no_contrato);
         $("#lblestact").html(objObra.obr_estatus);
         $("#doc_obr_proc").val('');
@@ -3789,10 +4069,10 @@ function AccionRegistroObra(objObra) { // accion=0 --->nuevo registro; accion = 
 
     }
 
-    
+
 
     if (objObra.accion == 6) {  /*Si la accion es capturar los datos jurídicos de la obra*/
-                    
+
         $("#lblcalle_obra_term").html(objObra.Calle);
         $("#lblcolonia_obra_term").html(objObra.Colonia);
         $("#lbltramo_obra_term").html(objObra.Tramo);
@@ -3807,9 +4087,9 @@ function AccionRegistroObra(objObra) { // accion=0 --->nuevo registro; accion = 
         $("#lblidusu_obra_term").html(usuario);
         $("#lblaccion_obra_term").html('6');
         $("#lblfecha_inicio_cobranza_capt").html('01/01/1900');
-        
 
-        
+
+
         RelacionarContratoAnexos(usuario, objObra.ClvObra + ',');
     }
 
@@ -3867,9 +4147,9 @@ function isDate(txtDate) {
         resp = false;
     }
     else {
-        dtDay = parseInt(dtArray[1]);
-        dtMonth = parseInt(dtArray[3]);
-        dtYear = parseInt(dtArray[5]);
+        var dtDay = parseInt(dtArray[1]);
+        var dtMonth = parseInt(dtArray[3]);
+        var dtYear = parseInt(dtArray[5]);
         if (dtMonth < 1 || dtMonth > 12)
             resp = false;
         else if (dtDay < 1 || dtDay > 31)
@@ -3946,7 +4226,7 @@ function validarObraS(accion) {
 }
 
 
-function InsertaRegDcto(idsol, iddcto, idpresup, folioDcto, hoy, hoy, idusuario, nomarchivo, tipodcto, nomusuario, hoy, nomusuario, hoy, archivo, accion) { /*Inserta los registros de los documentos en la tabla de mDocumento*/
+function InsertaRegDcto(idsol, iddcto, idpresup, folioDcto, hoy, idusuario, nomarchivo, tipodcto, nomusuario, archivo, accion) { /*Inserta los registros de los documentos en la tabla de mDocumento*/
 
 
     var enviarObj = {
@@ -4001,7 +4281,7 @@ function ValidarArchivo(archivo) {              /*Valida que el archivo sea de t
             case 'pdf':
                 return true;
                 login:
-                    alert("El archivo: " + fn + " no tiene extensión .PDF");
+                alert("El archivo: " + fn + " no tiene extensión .PDF");
                 return false
         }
     }
@@ -4025,11 +4305,11 @@ function ValidarArchivo(archivo) {              /*Valida que el archivo sea de t
 
 function ValidacionGuardadoArchivo(archivo, nomarchivo) {
     GuardarArchivo(archivo, nomarchivo)
-    .done(function (result) {
-        console.log("El archivo fue guardado correctamente")
-    }).fail(function (result) {
-        alert("No fue posible guardar el archivo");
-    });
+        .done(function (result) {
+            console.log("El archivo fue guardado correctamente")
+        }).fail(function (result) {
+            alert("No fue posible guardar el archivo");
+        });
 }
 
 
@@ -4511,7 +4791,7 @@ function llenarObrasSIFIDOC(obr_clv) {
 
 
 
-function llenarContratos(idcontrato,idaccion) {
+function llenarContratos(idcontrato, idaccion) {
     $.ajax({
         type: "POST",
         dataType: "json",
@@ -4529,10 +4809,10 @@ function llenarContratos(idcontrato,idaccion) {
                 option.html(num_contrato);
                 option.val(idcontrato);
                 $("#lstcontratos").append(option);
-            });                
+            });
 
             var num_contratos = $("#lstcontratos").children().length;
-            if (num_contratos<=0) {
+            if (num_contratos <= 0) {
                 alert('No existen contratos capturados, por lo tanto no es posible establecer la obra en estatus de PROCESO.');
             } else {
                 $.jgrid.gridUnload("#grid_contratos");
@@ -4562,7 +4842,7 @@ function llenarTipoRecurso(idtipo_recurso) {
                 var option = $(document.createElement('option'));
                 var idtiporecurso = $(this).find("idtipo_recurso_r").text();
                 var nom_tipo_recurso = $(this).find("descrip_r").text();
-                
+
                 option.html(nom_tipo_recurso);
                 option.val(idtiporecurso);
                 $("#lsttipo_recurso").append(option);
@@ -4616,6 +4896,7 @@ function consulta_oid(val) {
             success: function (data) {
                 $(data.d).find("oid_p").each(function () {
                     var oid = $(this).find("oidr").text();
+                    console.log("oid: "+oid);
                     var colonia = $(this).find("coloniar").text();
                     var calle = $(this).find("caller").text();
                     var tramo = $(this).find("tramor").text();
@@ -4698,11 +4979,11 @@ function ActualizacionPagosCoop(fid, obr_clv_int, obr_clv_txt, coo_clv, idusu) {
 
                 if (sentencia != '') {
                     ActualizarPagosCoop(sentencia)
-                         .done(function (result) {
-                             alert("Pagos actualizados correctamente en PostgresSQL")
-                         }).fail(function (result) {
-                             alert("No fue posible actualizar los pagos: " + result.responseText);
-                         });
+                        .done(function (result) {
+                            alert("Pagos actualizados correctamente en PostgresSQL")
+                        }).fail(function (result) {
+                            alert("No fue posible actualizar los pagos: " + result.responseText);
+                        });
                 }
 
             }
@@ -4715,3 +4996,8 @@ function ActualizacionPagosCoop(fid, obr_clv_int, obr_clv_txt, coo_clv, idusu) {
         }
     });
 }
+
+// 👇 Hacerla accesible globalmente
+window.consulta_oid = consulta_oid;
+window.FechaVencPagos = FechaVencPagos;
+window.formateafecha = formateafecha;

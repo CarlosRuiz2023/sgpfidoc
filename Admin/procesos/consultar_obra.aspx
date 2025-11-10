@@ -4,7 +4,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">    
 
-<script type="text/javascript" src="../js/consultar_obra.js"></script>
+<script type="module" src="../js/consultar_obra.js"></script>
+<script type="module" src="../../Global/config.js"></script>
+
 
 </asp:Content>
 

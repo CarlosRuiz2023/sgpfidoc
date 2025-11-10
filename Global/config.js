@@ -1,7 +1,10 @@
 ﻿// Global/config.js
-const geoserverConfig = {
-    host: 'http://localhost:8080',
-    fidoc_ws: 'http://localhost:3000'
+const urls = {
+    //geoserver: 'http://localhost:8080',
+    //ws: 'http://localhost:5003',
+    geoserver: 'http://172.17.11.168:8080',
+    ws: 'http://ioxc.leon.gob.mx/fidoc',
 };
 
-export default geoserverConfig;
+
+export default urls;
