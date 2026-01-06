@@ -1,7 +1,5 @@
 import urls from "../../Global/config.js";
 
-console.log("urls: " + urls);
-
 function GestionCooperadores(oid, obr_clv_int, obr_clv, obr_estatus, idprog, idusu, fid, num_pagos, fec_venc, coopid) {
     //alert(img);
     var url1 = "../Procesos/gCoops.html?ResponseType=Edit&oid=" + oid + "&obr_clv_int=" + obr_clv_int + "&obr_clv=" + obr_clv + "&obr_estatus=" + obr_estatus + "&programa=" + idprog + "&idusu=" + idusu + "&fid=" + fid + "&num_pagos=" + num_pagos + "&fec_venc=" + fec_venc + "&coopid=" + coopid;
@@ -92,9 +90,9 @@ function IsNumeric(valor) {
 
     var log = valor.length;
     var sw = "S";
-    for (x = 0; x < log; x++) {
-        v1 = valor.substr(x, 1);
-        v2 = parseInt(v1);
+    for (var x = 0; x < log; x++) {
+        var v1 = valor.substr(x, 1);
+        var v2 = parseInt(v1);
         //Compruebo si es un valor numérico 
         if (isNaN(v2)) {
             if (v1 != ".") {

@@ -917,7 +917,11 @@
                             else if (objpagos[index].tipo_mov_sifidoc === "7") {
                                 pdf.text(tab2 - pdf.getTextWidth("Gastos E:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' '), reng_base + inc * (17 + pagos_mostrados), "Gastos E:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' ');
                             }
+                            else if (objpagos[index].tipo_mov_sifidoc === "8") {
+                                pdf.text(tab2 - pdf.getTextWidth("Recargos C:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' '), reng_base + inc * (17 + pagos_mostrados), "Recargo C:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' ');
+                            }
                             else if (objpagos[index].tipo_mov_sifidoc === "10") {
+                                console.log("Entro")
                                 pdf.text(tab2 - pdf.getTextWidth("Devolucion:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' '), reng_base + inc * (17 + pagos_mostrados), "Devolucion:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' ');
                             }
                             else if (objpagos[index].tipo_mov_sifidoc === "16") {
@@ -929,6 +933,7 @@
                             } else {
                                 pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(objpagos[index].monto_txt) + ' '), reng_base + inc * (17 + pagos_mostrados), FormatoMoneda(objpagos[index].monto_txt) + ' ');
                             }
+                            console.log("No entro");
                             pagos_mostrados = pagos_mostrados + 1;
 
                             index++;
