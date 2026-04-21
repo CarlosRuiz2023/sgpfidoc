@@ -72,7 +72,7 @@ Public Class WebServicePagos
         Dim pagos_json As String
 
         Try
-            Dim conn As New OdbcConnection("DSN=QDSN_LEON;UID=CFUENTES;PWD=Fidoc_1;LONGDATACOMPAT=1;")
+            Dim conn As New OdbcConnection("DSN=QDSN_LEON;UID=CFUENTES;PWD=pluma1;LONGDATACOMPAT=1;")
             conn.Open()
 
             command = conn.CreateCommand()
@@ -218,7 +218,7 @@ Public Class WebServicePagos
     <ScriptMethod(ResponseFormat:=ResponseFormat.Json, XmlSerializeString:=True)>
     Public Function GetPagosAS400(fec_inicial As String, fec_final As String) As String
         Dim pagos_json As String = ""
-        Dim conn As New OdbcConnection("DSN=QDSN_LEON;UID=CFUENTES;PWD=Fidoc_1;LONGDATACOMPAT=1;")
+        Dim conn As New OdbcConnection("DSN=QDSN_LEON;UID=CFUENTES;PWD=pluma1;LONGDATACOMPAT=1;")
         Try
             conn.Open()
             Dim command As New OdbcCommand("SELECT CLOB(LCSFIDOC.FNC_PAGOS_FIDOC(" & fec_inicial & "," & fec_final & ")) AS PAGOS FROM sysibm.sysdummy1", conn)

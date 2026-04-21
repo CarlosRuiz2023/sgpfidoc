@@ -4,8 +4,8 @@
 var accion = 'infcoop';
 var draw, select = null;
 
-$(document).ready(function() {
-    $(document).on('input', '#txtctapred_predio', function() {
+$(document).ready(function () {
+    $(document).on('input', '#txtctapred_predio', function () {
         var valor = $(this).val();
         if (valor.length == 12) {
             GetDatosPredial(valor);
@@ -610,7 +610,7 @@ function limpiarDatosPredio() {
 function callWebServicePred() {
     var ctapred = $("#ctapred").val();
     if (ctapred) {
-        var urlctapred = "http://201.116.205.135:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
+        var urlctapred = "http://192.168.1.175:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
         try {
             $.get(urlctapred, function (xml) {
                 var xmlDoc = $.parseXML(xml),
@@ -657,7 +657,7 @@ function callWebServicePred() {
 
 function checaCtaPred(ctapred) {
     var hayprop = '';
-    var urlctapred = "http://201.116.205.135:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
+    var urlctapred = "http://192.168.1.175:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
     try {
         $.get(urlctapred, function (xml) {
             var xmlDoc = $.parseXML(xml),
@@ -744,7 +744,7 @@ function GetPredio(ctapredial) {
 
 function GetDatosPredial(ctapred) {
     if (ctapred.length == 12) {
-        var urlctapred = "http://201.116.205.135:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
+        var urlctapred = "http://192.168.1.175:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
         try {
             $.get(urlctapred, function (xml) {
                 var xmlDoc = $.parseXML(xml),
@@ -757,21 +757,34 @@ function GetDatosPredial(ctapred) {
                             var data = result.d;
                             var ctapredial_valida = 0;
                             var dato_predial = ($("#lblfid_dato").text()).split(':');
-
                             var pid_actual = parseInt(dato_predial[1]);
 
                             if (data != '<NewDataSet />') {
+                                var predios_duplicados = [];
+
                                 $(data).find("predio").each(function () {
-                                    var pid_encontrado = $(this).find("pidr").text();
-                                    if (parseInt(pid_encontrado) == pid_actual) {
-                                        const mensaje = "La cuenta predial actual: " + ctapred +
-                                            " se encuentra registrada con el predio: " + pid_encontrado +
-                                            ".\n¿Aún así desea registrar el predio?";
-                                        if (confirm(mensaje)) {
-                                            ctapredial_valida = 1;
-                                        }
+                                    var pid_encontrado = parseInt($(this).find("pidr").text());
+
+                                    // ✅ Solo agrega a duplicados si es un predio DIFERENTE al actual
+                                    if (pid_encontrado !== pid_actual) {
+                                        predios_duplicados.push(pid_encontrado);
                                     }
                                 });
+
+                                if (predios_duplicados.length > 0) {
+                                    // Hay otros predios con esa cuenta predial
+                                    const mensaje = "La cuenta predial: " + ctapred +
+                                        " ya se encuentra registrada en el(los) predio(s): " +
+                                        predios_duplicados.join(', ') +
+                                        ".\n¿Aún así desea registrar el predio?";
+
+                                    if (confirm(mensaje)) {
+                                        ctapredial_valida = 1;
+                                    }
+                                } else {
+                                    // Solo existe en el predio actual o no existe, es válida
+                                    ctapredial_valida = 1;
+                                }
 
                             } else {
                                 ctapredial_valida = 1;
@@ -4931,7 +4944,7 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
     }
 
     function ConsultaPredial(ctapredial) {
-        var urlctapred = "http://201.116.205.135:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapredial;
+        var urlctapred = "http://192.168.1.175:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapredial;
         var text;
         return $.ajax({
             url: urlctapred,
@@ -5257,6 +5270,9 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                                             url: urls.ws + `/api/cooperadores/sql/agregar/`,
                                             data: JSON.stringify(terceraPeticionData), // Convertir el objeto a JSON
                                             contentType: 'application/json; charset=utf-8',
+                                            xhrFields: {
+                                                withCredentials: true
+                                            },
                                             dataType: 'json',
                                             success: function (data) {
                                                 if (data != null) {
@@ -5385,9 +5401,12 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
             if (cta_predial.length === 12) {
                 $.ajax({
                     type: 'PUT',
-                    url: urls.geoserver + `/api/cooperadores/sql/actualizar/${objCoopAccess.coo_clv}`,
+                    url: urls.ws + `/api/cooperadores/sql/actualizar/${objCoopAccess.coo_clv}`,
                     data: JSON.stringify(terceraPeticionData), // Convertir el objeto a JSON
                     contentType: 'application/json; charset=utf-8',
+                    xhrFields: {
+                        withCredentials: true
+                    },
                     dataType: 'json',
                     success: function (data) {
                         if (data != null) {
@@ -5395,7 +5414,10 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                         }
                     },
                     error: function (responseText, textStatus, errorThrown) {
-                        alert(textStatus + responseText + errorThrown);
+                        alert('Error');
+                        console.log({ textStatus });
+                        console.log({ responseText });
+                        console.log({ errorThrown });
                     }
                 });
             }

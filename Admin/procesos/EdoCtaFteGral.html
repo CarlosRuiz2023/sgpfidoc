@@ -547,7 +547,7 @@
 
         function callWebServicePred(ctapred) {
 
-            var urlctapred = "http://201.116.205.135:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
+            var urlctapred = "http://192.168.1.175:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapred;
             try {
                 $.get(urlctapred, function (xml) {
                     xmlDoc = $.parseXML(xml),

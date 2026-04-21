@@ -2782,7 +2782,7 @@
 
                     if (ctapredial.length == 12) {
                         $("#lbltitulo_overload").text("Datos del Padrón de Predial:");
-                        var urlctapred = "http://201.116.205.135:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapredial;
+                        var urlctapred = "http://192.168.1.175:8081/ccgleon/IIC/wss_DatPredial.php?sCtaPred=" + ctapredial;
                         try {
                             $.get(urlctapred, function (xml) {                        
                                 xmlDoc = $.parseXML(xml),
