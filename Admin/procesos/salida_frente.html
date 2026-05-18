@@ -183,8 +183,8 @@
     <script src="../js/moment.js"></script>
     <script type="text/javascript" src="../js/NumerosLetras.js"></script>
 
-    <script>
-
+    <script type="module">
+        import urls from "../../Global/config.js";
 
         function NomDia(f) {
             var dia = f.getDate();
@@ -198,6 +198,8 @@
 
         function fecha_ini_AS400() {
             var d = new Date();
+            var day;
+            var month;
 
             var nom_dia = NomDia(d);
             if (nom_dia == 'Lunes') {
@@ -239,10 +241,9 @@
         }
 
         function FormatoMoneda(parametro) {
+            var resultado = 0;
             if (!isNaN(parametro)) {
                 resultado = ('$' + parseFloat(parametro, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
-            } else {
-                resultado = 0;
             }
             return resultado
         }
@@ -282,6 +283,24 @@
                 }
             }
             if (sw == "S") { return true; } else { return false; }
+        }
+
+        function CalcularAvanceObra(datos) {
+            var num_regs = datos.RecordCount;
+            var total_total_pagado = 0;
+            var total_total_metros = 0;
+            var costo_metro = 0;
+
+            for (var i = 0; i < num_regs; i++) {
+                var reg = datos.Items[i].row;
+
+                total_total_pagado = total_total_pagado + parseFloat(reg[34]);
+                total_total_metros = total_total_metros + parseFloat(reg[21]);
+                costo_metro = parseFloat(reg[8]);
+            }
+            var costo_obra = total_total_metros * costo_metro;
+            var avance_obra = (total_total_pagado * 100) / costo_obra;
+            return avance_obra.toFixed(2);
         }
 
         function FechaHora() {
@@ -921,7 +940,6 @@
                                 pdf.text(tab2 - pdf.getTextWidth("Recargos C:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' '), reng_base + inc * (17 + pagos_mostrados), "Recargo C:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' ');
                             }
                             else if (objpagos[index].tipo_mov_sifidoc === "10") {
-                                console.log("Entro")
                                 pdf.text(tab2 - pdf.getTextWidth("Devolucion:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' '), reng_base + inc * (17 + pagos_mostrados), "Devolucion:" + (index + 1) + "|" + objpagos[index].folio + '|' + objpagos[index].fecha.substr(0, 10) + ' ');
                             }
                             else if (objpagos[index].tipo_mov_sifidoc === "16") {
@@ -933,7 +951,6 @@
                             } else {
                                 pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(objpagos[index].monto_txt) + ' '), reng_base + inc * (17 + pagos_mostrados), FormatoMoneda(objpagos[index].monto_txt) + ' ');
                             }
-                            console.log("No entro");
                             pagos_mostrados = pagos_mostrados + 1;
 
                             index++;
@@ -1133,8 +1150,8 @@
 
         function ActualizarPagosTesoreria() {
 
-            fecini = fecha_ini_AS400();
-            fecfin = fecha_fin_AS400();
+            var fecini = fecha_ini_AS400();
+            var fecfin = fecha_fin_AS400();
 
             return $.ajax({
                 type: "POST",
@@ -2005,17 +2022,6 @@
             });
         }
 
-
-        function ConsultaPermisoEjecutarTarea(idusu, idtarea, idaccion) {
-            return $.ajax({
-                type: 'POST',
-                dataType: 'json',
-                contentType: 'application/json; utf-8',
-                url: "../../WebServices/WebServiceTarea.asmx/ConsultaPermisoTarea",
-                data: "{'idusu':'" + idusu + "','idtarea':'" + idtarea + "','idaccion':'" + idaccion + "'}"
-            });
-        }
-
         function CalcularDescto(porcentaje_descto) {
             var saldo_total = parseFloat($("#bodegadatos").data("saldo_total"));
             var descto_por_aplicar = 0;
@@ -2132,7 +2138,7 @@
 
         };
 
-        function GeneraFichaPago(monto_aportacion) {
+        async function GeneraFichaPago(monto_aportacion) {
             var pdf = new jsPDF('p', 'mm', 'letter');
 
             var col_ref = 70;
@@ -2188,6 +2194,11 @@
             var obr_fecivenp = $("#bodegadatos").data("fecvencpag");
             var descrip_tipo_obr = $("#bodegadatos").data("tipo_obra");
             var estatus_obra;
+            var porcentaje_avance;
+            var promotor;
+            var telefono_promotor;
+            var delegacion;
+            var id_usuario;
             var nomprog = $("#lblnomprog").text();
 
             var fecinip = $("#bodegadatos").data("fecinipag");
@@ -2198,12 +2209,54 @@
             var costo_mto = $("#bodegadatos").data("costo_mto");
             var mts_fte = $("#bodegadatos").data("mts_fte");
 
+            var filtro3 = ',,,,,,,,' + obr_clv_int + ',,';
+
+            await $.ajax({
+                url: "../../WebServices/WebServiceFrente.asmx/GetFrentexO",
+                data: "{'pPageSize':'10000'" +
+                    ",'pCurrentPage':'1'" +
+                    ",'pSortColumn':'fid'" +
+                    ",'pSortOrder':'asc'" +
+                    ",'pFiltro':'" + filtro3 + "'}",
+                dataType: "json",
+                type: "post",
+                contentType: "application/json; charset=utf-8"
+            })
+                .done(function (r) {
+                    var datos = r.d;
+                    // Aquí obtienes el porcentaje
+                    porcentaje_avance = CalcularAvanceObra(datos);
+                });
+            await $.ajax({
+                type: 'POST',
+                url: urls.ws + `/api/obras/obtenerPromotorPorObraPostgreSQL/${obr_clv}`,
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (data) {
+                    if (data != null) {
+                        promotor = data.data[0].musunombre;
+                        telefono_promotor = data.data[0].telefono;
+                        delegacion = data.data[0].name;
+                        id_usuario = data.data[0].id_usuario;
+                    }
+                },
+                error: function (responseText, textStatus, errorThrown) {
+                    alert(textStatus + responseText + errorThrown);
+                }
+            });
+
             var objFormato = {
                 "fid": fid,
                 "pid": pid,
                 "obr_clv_int": obr_clv_int,
                 "oid": oid,
-                "idusu": idusu
+                "idusu": idusu,
+                "fecha_vencimiento": fecvenp,
+                "porcentaje_avance": porcentaje_avance,
+                "promotor": promotor,
+                "telefono_promotor": telefono_promotor,
+                "delegacion": delegacion,
+                "id_usuario": id_usuario
             }
 
             GeneraFormatoFichaPago(objFormato, pdf);
@@ -2361,21 +2414,67 @@
             //**** PIE *****///
             pdf.setFontSize(6);
 
-
-
-
-
             pdf.setFontSize(10);
-            pdf.setFontType('normal')
+            pdf.setFontType('normal');
+
+            // Mostrar leyenda solo si está próxima a vencer (<= 6 meses)
+            if (objFormato.fecha_vencimiento) {
+
+                var hoy = new Date();
+
+                // Convertir dd/MM/yyyy -> Date
+                var partes = objFormato.fecha_vencimiento.split('/');
+
+                var fechaVencimiento = new Date(
+                    partes[2],        // año
+                    partes[1] - 1,    // mes (0-11)
+                    partes[0]         // día
+                );
+
+                // Diferencia en meses
+                var diferenciaMeses =
+                    (fechaVencimiento.getFullYear() - hoy.getFullYear()) * 12 +
+                    (fechaVencimiento.getMonth() - hoy.getMonth());
+
+                if (diferenciaMeses <= 6 && diferenciaMeses >= 0) {
+
+                    pdf.setFontSize(12);
+                    pdf.setTextColor(255, 140, 0); // naranja
+
+                    var leyenda = `El plazo de promoción esta a punto de vencer ${fechaVencimiento.toDateString()}, le recordamos ponerse al corriente en su cuenta acorde al convenio de adhesión de lo contrario esta promoción podría ser cancelada.`;
+
+                    // Obtener ancho de hoja
+                    var pageWidth = pdf.internal.pageSize.getWidth();
+
+                    pdf.text(
+                        leyenda,
+                        pageWidth / 2, // centro real
+                        row_ini_pie - (reng_adic * 11),
+                        {
+                            maxWidth: 190,
+                            align: "center"
+                        }
+                    );
+
+                    // Regresar color negro
+                    pdf.setTextColor(0, 0, 0);
+                    pdf.setFontSize(9);
+
+                    pdf.rect(156 - 2 - (pdf.getTextWidth('El avance de su obra es de: ' + objFormato.porcentaje_avance + ' %') / 2), 45 + 5 * 9.5, 65, 7);
+                    pdf.text((156 - pdf.getTextWidth('El avance de su obra es de: ' + objFormato.porcentaje_avance + ' %') / 2), 45 + 5 * 10.3, 'El avance de su obra es de: ' + objFormato.porcentaje_avance + ' %');
+                }
+            }
+
             var texto = 'Favor de presentar esta ficha en cualquier Caja de Tesorería Municipal y realizar la aportación que corresponde. '
 
-            pdf.text(texto, 15, row_ini_pie - (reng_adic * 8), { maxWidth: 190, align: "justify" });
+            // Obtener ancho de hoja
+            var pageWidth = pdf.internal.pageSize.getWidth();
+            pdf.text(texto, pageWidth / 2, row_ini_pie - (reng_adic * 7), { maxWidth: 190, align: "center" });
 
             pdf.setFontSize(8);
             pdf.text(104 - pdf.getTextWidth('A T E N T A M E N T E') / 2, row_ini_pie - (reng_adic * 5), 'A T E N T A M E N T E');
             pdf.text(104 - pdf.getTextWidth('AREA DE PROMOCION') / 2, row_ini_pie - (reng_adic * 3), 'AREA DE PROMOCION');
             pdf.text(104 - pdf.getTextWidth('FIDEICOMISO DE OBRAS POR COOPERACION') / 2, row_ini_pie - reng_adic * 2, 'FIDEICOMISO DE OBRAS POR COOPERACION');
-
 
             pdf.setFontSize(6);
             pdf.setFontType('normal')
@@ -2388,12 +2487,14 @@
             pdf.text(columna_pie, row_ini_pie + reng_adic * 10.5, 'Col. El Tlacuache');
             pdf.text(columna_pie + 20, row_ini_pie + reng_adic * 10.5, 'C.P. 37480');
             pdf.text(columna_pie + 36, row_ini_pie + reng_adic * 10.5, 'León Gto.');
+            pdf.text(columna_pie, row_ini_pie + reng_adic * 11.5, "Delegacion: " + objFormato.delegacion);
 
             pdf.text(107 - pdf.getTextWidth('Horarios de atención: Lunes a Viernes, 8:00 hrs - 15:30 hrs') / 2, row_ini_pie + reng_adic * 8.5, 'Horarios de atención: Lunes a Viernes, 8:00 hrs - 15:30 hrs');
             pdf.text(107 - pdf.getTextWidth('Tel. Oficina: 477-100-92-28') / 2, row_ini_pie + reng_adic * 9.5, 'Tel. Oficina: 477-100-92-28');
             pdf.text(107 - pdf.getTextWidth('fidoc.leon.gob.mx') / 2, row_ini_pie + reng_adic * 10.5, 'fidoc.leon.gob.mx');
-
-
+            if (objFormato.id_usuario != null && objFormato.id_usuario != undefined && objFormato.id_usuario != 23) {
+                pdf.text(107 - pdf.getTextWidth("Promotor: " + objFormato.promotor) / 2, row_ini_pie + reng_adic * 11.5, "Promotor: " + objFormato.promotor);
+            }
 
             var img_facebook = new Image();
             img_facebook.src = "../imagenes/face.png";
@@ -2407,16 +2508,16 @@
             img_whatsapp.src = "../imagenes/whatsapp.jpg";
             pdf.addImage(img_whatsapp, 'jpg', 187, row_ini_pie + reng_adic * 10, 2.5, 2.5);
 
-
             pdf.text(204 - pdf.getTextWidth('facebook/fidocleon'), row_ini_pie + reng_adic * 8.5, 'facebook/fidocleon');
             pdf.text(204 - pdf.getTextWidth('@fidocleon'), row_ini_pie + reng_adic * 9.5, '@fidocleon');
             pdf.text(204 - pdf.getTextWidth('477-325-2586'), row_ini_pie + reng_adic * 10.5, '477-325-2586');
+            if (objFormato.id_usuario != null && objFormato.id_usuario != undefined) {
+                pdf.text(204 - pdf.getTextWidth("Telefono promotor: " + objFormato.telefono_promotor), row_ini_pie + reng_adic * 11.5, "Telefono promotor: " + objFormato.telefono_promotor);
+            }
 
             pdf.line(10, row_ini_pie + reng_adic * 12.2, 204, row_ini_pie + reng_adic * 12.2);
             pdf.line(10, row_ini_pie + reng_adic * 12.4, 204, row_ini_pie + reng_adic * 12.4);
             pdf.line(10, row_ini_pie + reng_adic * 12.6, 204, row_ini_pie + reng_adic * 12.6);
-
-
 
             pdf.addImage(img, 'PNG', 10, row_ini_pie + reng_adic * 13, 60, 22);
             pdf.setFontSize(15);
@@ -2440,12 +2541,8 @@
             var idusu = recuperarParametro("idusu");
             $("#bodegadatos").data("idusu", idusu);
 
-
             ConsultarRolUsuario(idusu, 'consulta');
             ConsultarFrenteFinanc(fid, 'consulta');
-
-
-
 
             $(".genera_descto_1").click(function () {
                 $("#lbltipodescto").text('(POR PRONTO PAGO)');
@@ -2457,7 +2554,6 @@
                     CalcularDescto(porcentje_descto);
                 }
             });
-
 
             $(".pasa_fecha").click(function () {
 
@@ -2473,8 +2569,6 @@
                     }
                 }
             });
-
-
 
             $(".genera_descto_2").click(function () {
 
@@ -2555,8 +2649,6 @@
                 LlenarGridMovs('01/01/1900', hoy, fid);
             });
 
-
-
             $(".aplicar_descto_art24").click(function (e) {
                 var fid = $("#bodegadatos").data("fid");
                 var idusu = $("#bodegadatos").data("idusu");
@@ -2615,7 +2707,6 @@
                 } else {
                     alert('La cuenta no es factible para aplicar un descuento');
                 }
-
 
             });
 
@@ -2754,7 +2845,6 @@
                 }
             });
 
-
             $(".accion_cancelar_aplicar_descto_esp").click(function (e) {
                 $('#mask, .window').hide();
             });
@@ -2762,8 +2852,6 @@
             $(".accion_cerrar_aplicar_descto_esp").click(function (e) {
                 window.location.reload();
             });
-
-
 
             $(".edo_cta").click(function (e) {
                 GenerarEdoCta2();
@@ -2776,7 +2864,6 @@
                 var idusu = $("#bodegadatos").data("idusu");
 
                 $("#lblaportacion_mensual").text("" + aportacion_mensual.toFixed(2));
-
 
                 var hoy = moment();
                 var fecvenp = ConvertirCadenaToFecha($("#bodegadatos").data("fecvencpag"));
@@ -2835,13 +2922,6 @@
                 }
             });
 
-
-
-
-
-
-
-
             $(".accion_cancelar_emitir_ficpag").click(function (e) {
                 //Cancel the link behavior
                 //e.preventlogin();
@@ -2862,6 +2942,9 @@
             });
 
         });
+        // 👇 Hacerla accesible globalmente
+        window.ConsultaPermisoEjecutarTarea = ConsultaPermisoEjecutarTarea;
+        window.formateacantidad = formateacantidad;
     </script>
 </head>
 
@@ -3203,51 +3286,58 @@
     </div>
 
     <!-- Overlay bloqueador con spinner y texto -->
-<div id="overlay-carga" style="display:none;">
-  <div class="contenido-carga">
-    <div class="spinner"></div>
-    <p>Actualizando pagos de tesorería...</p>
-  </div>
-</div>
+    <div id="overlay-carga" style="display:none;">
+        <div class="contenido-carga">
+            <div class="spinner"></div>
+            <p>Actualizando pagos de tesorería...</p>
+        </div>
+    </div>
 
-<style>
-  #overlay-carga {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-family: Arial, sans-serif;
-  }
+    <style>
+        #overlay-carga {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
 
-  .contenido-carga {
-    text-align: center;
-  }
+        .contenido-carga {
+            text-align: center;
+        }
 
-  .spinner {
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid #3498db;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 15px auto;
-    animation: spin 1s linear infinite;
-  }
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px auto;
+            animation: spin 1s linear infinite;
+        }
 
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
 
-  #overlay-carga p {
-    font-size: 18px;
-    margin: 0;
-  }
-</style>
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #overlay-carga p {
+            font-size: 18px;
+            margin: 0;
+        }
+    </style>
 
 </body>
 

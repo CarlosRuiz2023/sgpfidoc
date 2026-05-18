@@ -363,12 +363,14 @@ function GeneraFormatoFichaPagoMes(objFormato, pdf) {
     pdf.text(columna_pie, row_ini_pie + reng_adic * 10.5, 'Col. El Tlacuache');
     pdf.text(columna_pie + 20, row_ini_pie + reng_adic * 10.5, 'C.P. 37480');
     pdf.text(columna_pie + 36, row_ini_pie + reng_adic * 10.5, 'León Gto.');
+    pdf.text(columna_pie, row_ini_pie + reng_adic * 11.5, 'Delegacion: ' + objFormato.delegacion);
 
     pdf.text(107 - pdf.getTextWidth('Horarios de atención: Lunes a Viernes, 8:00 hrs - 15:30 hrs') / 2, row_ini_pie + reng_adic * 8.5, 'Horarios de atención: Lunes a Viernes, 8:00 hrs - 15:30 hrs');
     pdf.text(107 - pdf.getTextWidth('Tel. Oficina: 477-100-92-28') / 2, row_ini_pie + reng_adic * 9.5, 'Tel. Oficina: 477-100-92-28');
     pdf.text(107 - pdf.getTextWidth('fidoc.leon.gob.mx') / 2, row_ini_pie + reng_adic * 10.5, 'fidoc.leon.gob.mx');
-
-
+    if (objFormato.id_usuario != null && objFormato.id_usuario != undefined && objFormato.id_usuario != 23) {
+        pdf.text(107 - pdf.getTextWidth('Promotor: ' + objFormato.promotor) / 2, row_ini_pie + reng_adic * 11.5, 'Promotor: ' + objFormato.promotor);
+    }
 
     var img_facebook = new Image();
     img_facebook.src = "../imagenes/face.png";
@@ -386,6 +388,9 @@ function GeneraFormatoFichaPagoMes(objFormato, pdf) {
     pdf.text(204 - pdf.getTextWidth('facebook/fidocleon'), row_ini_pie + reng_adic * 8.5, 'facebook/fidocleon');
     pdf.text(204 - pdf.getTextWidth('@fidocleon'), row_ini_pie + reng_adic * 9.5, '@fidocleon');
     pdf.text(204 - pdf.getTextWidth('477-325-2586'), row_ini_pie + reng_adic * 10.5, '477-325-2586');
+    if (objFormato.id_usuario != null && objFormato.id_usuario != undefined) {
+        pdf.text(204 - 2 - pdf.getTextWidth('Telefono promotor: ' + objFormato.telefono_promotor), row_ini_pie + reng_adic * 11.5, 'Telefono promotor: ' + objFormato.telefono_promotor);
+    }
 
     pdf.line(10, row_ini_pie + reng_adic * 12.2, 204, row_ini_pie + reng_adic * 12.2);
     pdf.line(10, row_ini_pie + reng_adic * 12.4, 204, row_ini_pie + reng_adic * 12.4);
@@ -2029,267 +2034,326 @@ function GenerarFichasPagoMes(obr_clv_int, idusu, num_ficha_act) {
                 var mts_fte;
                 var fid;
 
-
-
                 var porcentaje_avance = CalcularAvanceObra(datos);
 
+                var promotor;
+                var telefono_promotor;
+                var delegacion;
+                var id_usuario;
+                obr_clv = reg[3];
 
-
-                var i = 0;
-
-                while (i < num_regs) {
-
-                    var reg = datos.Items[i].row;
-
-                    oid = reg[0];
-                    obr_clv_int = reg[1];
-                    obr_clv = reg[3];
-                    calle = reg[5];
-                    colonia = reg[6];
-                    tramo = reg[7];
-                    obr_fecinip = reg[9];
-                    obr_fecivenp = reg[10];
-                    descrip_tipo_obr = reg[12];
-                    estatus_obra = reg[13];
-                    nomprog = reg[14];
-                    progdescrip = reg[15];
-                    fecinip = reg[9];
-                    fecvenp = reg[10];
-                    costo_obra = reg[33];
-                    abono = reg[34];
-                    var nom_ficha = reg[20];
-                    coopid = reg[4];
-                    nooficial = reg[17];
-                    numpagos = reg[11];
-                    total_pagar = reg[29];
-                    costo_mto = reg[8];
-                    mts_fte = reg[21];
-                    fid = reg[16];
-                    var pid = reg[2];
-
-                    var objFormato = {
-                        "fid": fid,
-                        "pid": pid,
-                        "obr_clv_int": obr_clv_int,
-                        "oid": oid,
-                        "idusu": idusu
-                    }
-
-
-                    if (parseFloat(total_pagar) > 20) {
-                        pdf.addPage();
-                        GeneraFormatoFichaPagoMes(objFormato, pdf);  //* Aplica formato a la página de la ficha de pago*//
-
-                        pdf.setFontSize(10);
-                        pdf.setFontType('bold')
-                        pdf.line(10, reng_ref + reng_inc2 * .1, 204, reng_ref + reng_inc2 * .1);
-
-                        pdf.text(tab2 - pdf.getTextWidth('No. de Cuenta:  '), reng_ref + reng_inc2 * 1, 'No. de Cuenta:  ');
-                        pdf.text(tab2 - pdf.getTextWidth('Nombre de Cooperador:  '), reng_ref + reng_inc2 * 2, 'Nombre de Cooperador:  ');
-                        pdf.text(tab4 - pdf.getTextWidth('Recibo de pago:  '), reng_ref + reng_inc2 * 1, 'Recibo de pago:  ');
-
-                        pdf.text(tab2, reng_ref + reng_inc2 * 1, obr_clv + ' ' + coopid);
-                        pdf.text(tab2, reng_ref + reng_inc2 * 2, nom_ficha);
-                        pdf.text(tab5 - pdf.getTextWidth('Recibo de pago:  '), reng_ref + reng_inc2 * 1, num_ficha_act + ' de ' + numpagos);
-
-                        pdf.line(10, reng_ref + reng_inc2 * 2.5, 204, reng_ref + reng_inc2 * 2.5);
-
-                        pdf.setFontSize(9);
-                        pdf.setFontType('bold')
-                        pdf.text(tab2 - pdf.getTextWidth('CALLE y No.:   '), reng_ref + reng_inc2 * 3.5, 'CALLE y NO.:   ');
-                        pdf.text(tab2 - pdf.getTextWidth('COLONIA: '), reng_ref + reng_inc2 * 4.5, 'COLONIA: ');
-                        pdf.text(tab2 - pdf.getTextWidth('TRAMO: '), reng_ref + reng_inc2 * 5.5, 'TRAMO: ');
-                        pdf.text(tab2 - pdf.getTextWidth('PROGRAMA:  '), reng_ref + reng_inc2 * 6.5, 'PROGRAMA:  ');
-                        pdf.text(tab2 - pdf.getTextWidth('TIPO DE OBRA:  '), reng_ref + reng_inc2 * 7.5, 'TIPO DE OBRA:  ');
-                        pdf.text(tab4 - pdf.getTextWidth('PERIODO DE RECAUDACION:  '), reng_ref + reng_inc2 * 7.5, 'PERIODO DE RECAUDACION:  ');
-
-
-
-
-                        pdf.setFontType('normal')
-                        pdf.setFontSize(9);
-                        pdf.text(tab2, reng_ref + reng_inc2 * 3.5, calle + ' ' + nooficial);
-                        pdf.text(tab2, reng_ref + reng_inc2 * 4.5, colonia);
-                        pdf.text(tab2, reng_ref + reng_inc2 * 5.5, tramo);
-                        pdf.text(tab2, reng_ref + reng_inc2 * 6.5, nomprog + '  (' + progdescrip + ')');
-                        pdf.text(tab2, reng_ref + reng_inc2 * 7.5, descrip_tipo_obr);
-                        pdf.text(tab4, reng_ref + reng_inc2 * 7.5, fecinip + '-' + fecvenp);
-
-                        pdf.line(10, reng_ref + reng_inc2 * 8, 204, reng_ref + reng_inc2 * 8);
-
-
-                        pdf.setFontSize(10);
-                        pdf.setFontType('normal')
-
-                        pdf.text(tab2 - pdf.getTextWidth('Costo por metro lineal:'), reng_ref + reng_inc2 * 9.5, 'Costo por metro lineal:');
-                        pdf.text(tab2 - pdf.getTextWidth('Metros del frente:'), reng_ref + reng_inc2 * 10.5, 'Metros del frente:');
-                        pdf.text(tab2 - pdf.getTextWidth('Costo Total:'), reng_ref + reng_inc2 * 11.5, 'Costo Total:');
-                        pdf.text(tab2 - pdf.getTextWidth('Total Aportado:'), reng_ref + reng_inc2 * 12.5, 'Total Aportado:');
-                        pdf.setFontSize(8);
-                        pdf.text(tab2 - pdf.getTextWidth('Meses vencidos sin aportación:'), reng_ref + reng_inc2 * 13.5, 'Meses vencidos sin aportación:');
-                        pdf.setFontSize(10);
-                        pdf.text(tab2 - pdf.getTextWidth('Saldo:'), reng_ref + reng_inc2 * 14.5, 'Saldo:');
-
-                        pdf.line(10, reng_ref + reng_inc2 * 15, 204, reng_ref + reng_inc2 * 15);
-
-                        pdf.setFontSize(12);
-                        pdf.setFontType('bold')
-                        pdf.text(tab2 - pdf.getTextWidth('Aportación del Mes:'), reng_ref + reng_inc2 * 16, 'Aportación del Mes:');
-
-                        pdf.setFontSize(9);
-                        pdf.rect(tab4 - 2 - (pdf.getTextWidth('El avance de su obra es de: ' + porcentaje_avance + ' %') / 2), reng_ref + reng_inc2 * 9.5, 65, 7);
-                        pdf.text((tab4 - pdf.getTextWidth('El avance de su obra es de: ' + porcentaje_avance + ' %') / 2), reng_ref + reng_inc2 * 10.3, 'El avance de su obra es de: ' + porcentaje_avance + ' %');
-
-
-
-                        pdf.setFontSize(7);
-                        pdf.setFontType('bold')
-
-
-
-                        pdf.setFontSize(10);
-                        pdf.setFontType('normal')
-                        pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(costo_mto)), reng_ref + reng_inc2 * 9.5, FormatoMoneda(costo_mto));
-                        pdf.text(tab3 - pdf.getTextWidth(mts_fte), reng_ref + reng_inc2 * 10.5, mts_fte);
-                        pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(costo_obra)), reng_ref + reng_inc2 * 11.5, FormatoMoneda(costo_obra));
-                        pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(abono)), reng_ref + reng_inc2 * 12.5, FormatoMoneda(abono));
-
-                        var aportacion_final_float = 0;
-                        var aport_mes = parseFloat(costo_obra) / parseInt(numpagos);
-                        aportacion_final_float = aport_mes;
-                        var aport_mes_txt = aport_mes.toFixed(2).toString();
-                        var aportacion_final_txt = aport_mes_txt;
-
-
-                        /*Evalua la aportacion para si es la ultima ficha debe mostrar el saldo total*/
-
-                        if (parseInt(num_ficha_act) == parseInt(numpagos)) {
-                            aportacion_final_txt = FormatoMoneda(total_pagar);
-                            aportacion_final_float = parseFloat(total_pagar);
+                ObtenerPromotorPorObraPostgreSQL(obr_clv)
+                    .done(function (data) {
+                        if (data != null) {
+                            promotor = data.data[0].musunombre;
+                            telefono_promotor = data.data[0].telefono;
+                            delegacion = data.data[0].name;
+                            id_usuario = data.data[0].id_usuario;
                         }
 
+                        var i = 0;
+
+                        while (i < num_regs) {
+
+                            reg = datos.Items[i].row;
+
+                            oid = reg[0];
+                            obr_clv_int = reg[1];
+                            obr_clv = reg[3];
+                            calle = reg[5];
+                            colonia = reg[6];
+                            tramo = reg[7];
+                            obr_fecinip = reg[9];
+                            obr_fecivenp = reg[10];
+                            descrip_tipo_obr = reg[12];
+                            estatus_obra = reg[13];
+                            nomprog = reg[14];
+                            progdescrip = reg[15];
+                            fecinip = reg[9];
+                            fecvenp = reg[10];
+                            costo_obra = reg[33];
+                            abono = reg[34];
+                            var nom_ficha = reg[20];
+                            coopid = reg[4];
+                            nooficial = reg[17];
+                            numpagos = reg[11];
+                            total_pagar = reg[29];
+                            costo_mto = reg[8];
+                            mts_fte = reg[21];
+                            fid = reg[16];
+                            var pid = reg[2];
+
+                            var objFormato = {
+                                "fid": fid,
+                                "pid": pid,
+                                "obr_clv_int": obr_clv_int,
+                                "oid": oid,
+                                "idusu": idusu,
+                                "promotor": promotor,
+                                "telefono_promotor": telefono_promotor,
+                                "delegacion": delegacion,
+                                "id_usuario": id_usuario,
+                                "fecha_vencimiento": fecvenp
+                            }
+
+                            if (parseFloat(total_pagar) > 20) {
+                                pdf.addPage();
+                                GeneraFormatoFichaPagoMes(objFormato, pdf);  //* Aplica formato a la página de la ficha de pago*//
+
+                                pdf.setFontSize(10);
+                                pdf.setFontType('bold')
+                                pdf.line(10, reng_ref + reng_inc2 * .1, 204, reng_ref + reng_inc2 * .1);
+
+                                pdf.text(tab2 - pdf.getTextWidth('No. de Cuenta:  '), reng_ref + reng_inc2 * 1, 'No. de Cuenta:  ');
+                                pdf.text(tab2 - pdf.getTextWidth('Nombre de Cooperador:  '), reng_ref + reng_inc2 * 2, 'Nombre de Cooperador:  ');
+                                pdf.text(tab4 - pdf.getTextWidth('Recibo de pago:  '), reng_ref + reng_inc2 * 1, 'Recibo de pago:  ');
+
+                                pdf.text(tab2, reng_ref + reng_inc2 * 1, obr_clv + ' ' + coopid);
+                                pdf.text(tab2, reng_ref + reng_inc2 * 2, nom_ficha);
+                                pdf.text(tab5 - pdf.getTextWidth('Recibo de pago:  '), reng_ref + reng_inc2 * 1, num_ficha_act + ' de ' + numpagos);
+
+                                pdf.line(10, reng_ref + reng_inc2 * 2.5, 204, reng_ref + reng_inc2 * 2.5);
+
+                                pdf.setFontSize(9);
+                                pdf.setFontType('bold')
+                                pdf.text(tab2 - pdf.getTextWidth('CALLE y No.:   '), reng_ref + reng_inc2 * 3.5, 'CALLE y NO.:   ');
+                                pdf.text(tab2 - pdf.getTextWidth('COLONIA: '), reng_ref + reng_inc2 * 4.5, 'COLONIA: ');
+                                pdf.text(tab2 - pdf.getTextWidth('TRAMO: '), reng_ref + reng_inc2 * 5.5, 'TRAMO: ');
+                                pdf.text(tab2 - pdf.getTextWidth('PROGRAMA:  '), reng_ref + reng_inc2 * 6.5, 'PROGRAMA:  ');
+                                pdf.text(tab2 - pdf.getTextWidth('TIPO DE OBRA:  '), reng_ref + reng_inc2 * 7.5, 'TIPO DE OBRA:  ');
+                                pdf.text(tab4 - pdf.getTextWidth('PERIODO DE RECAUDACION:  '), reng_ref + reng_inc2 * 7.5, 'PERIODO DE RECAUDACION:  ');
 
 
-                        var cantidad_completa = parseInt(num_ficha_act) - 1;
-                        cantidad_completa = cantidad_completa * aport_mes;
 
-                        var cantidad_lleva = parseFloat(abono);
-                        var meses_sin_aportacion = (cantidad_completa - cantidad_lleva) / aport_mes;
-                        if (meses_sin_aportacion < 0) {
-                            meses_sin_aportacion = 0;
+
+                                pdf.setFontType('normal')
+                                pdf.setFontSize(9);
+                                pdf.text(tab2, reng_ref + reng_inc2 * 3.5, calle + ' ' + nooficial);
+                                pdf.text(tab2, reng_ref + reng_inc2 * 4.5, colonia);
+                                pdf.text(tab2, reng_ref + reng_inc2 * 5.5, tramo);
+                                pdf.text(tab2, reng_ref + reng_inc2 * 6.5, nomprog + '  (' + progdescrip + ')');
+                                pdf.text(tab2, reng_ref + reng_inc2 * 7.5, descrip_tipo_obr);
+                                pdf.text(tab4, reng_ref + reng_inc2 * 7.5, fecinip + '-' + fecvenp);
+
+                                pdf.line(10, reng_ref + reng_inc2 * 8, 204, reng_ref + reng_inc2 * 8);
+
+
+                                pdf.setFontSize(10);
+                                pdf.setFontType('normal')
+
+                                pdf.text(tab2 - pdf.getTextWidth('Costo por metro lineal:'), reng_ref + reng_inc2 * 9.5, 'Costo por metro lineal:');
+                                pdf.text(tab2 - pdf.getTextWidth('Metros del frente:'), reng_ref + reng_inc2 * 10.5, 'Metros del frente:');
+                                pdf.text(tab2 - pdf.getTextWidth('Costo Total:'), reng_ref + reng_inc2 * 11.5, 'Costo Total:');
+                                pdf.text(tab2 - pdf.getTextWidth('Total Aportado:'), reng_ref + reng_inc2 * 12.5, 'Total Aportado:');
+                                pdf.setFontSize(8);
+                                pdf.text(tab2 - pdf.getTextWidth('Meses vencidos sin aportación:'), reng_ref + reng_inc2 * 13.5, 'Meses vencidos sin aportación:');
+                                pdf.setFontSize(10);
+                                pdf.text(tab2 - pdf.getTextWidth('Saldo:'), reng_ref + reng_inc2 * 14.5, 'Saldo:');
+
+                                pdf.line(10, reng_ref + reng_inc2 * 15, 204, reng_ref + reng_inc2 * 15);
+
+                                pdf.setFontSize(12);
+                                pdf.setFontType('bold')
+                                pdf.text(tab2 - pdf.getTextWidth('Aportación del Mes:'), reng_ref + reng_inc2 * 16, 'Aportación del Mes:');
+
+                                pdf.setFontSize(9);
+                                pdf.rect(tab4 - 2 - (pdf.getTextWidth('El avance de su obra es de: ' + porcentaje_avance + ' %') / 2), reng_ref + reng_inc2 * 9.5, 65, 7);
+                                pdf.text((tab4 - pdf.getTextWidth('El avance de su obra es de: ' + porcentaje_avance + ' %') / 2), reng_ref + reng_inc2 * 10.3, 'El avance de su obra es de: ' + porcentaje_avance + ' %');
+
+                                // Mostrar leyenda solo si está próxima a vencer (<= 6 meses)
+                                if (objFormato.fecha_vencimiento) {
+
+                                    var hoy = new Date();
+
+                                    // Convertir dd/MM/yyyy -> Date
+                                    var partes = objFormato.fecha_vencimiento.split('/');
+
+                                    var fechaVencimiento = new Date(
+                                        partes[2],        // año
+                                        partes[1] - 1,    // mes (0-11)
+                                        partes[0]         // día
+                                    );
+
+                                    // Diferencia en meses
+                                    var diferenciaMeses =
+                                        (fechaVencimiento.getFullYear() - hoy.getFullYear()) * 12 +
+                                        (fechaVencimiento.getMonth() - hoy.getMonth());
+
+                                    if (diferenciaMeses <= 6 && diferenciaMeses >= 0) {
+
+                                        pdf.setFontSize(8);
+                                        pdf.setTextColor(255, 140, 0); // naranja
+
+                                        var leyenda = `El plazo de promoción esta a punto de vencer ${fechaVencimiento.toDateString()}, le recordamos ponerse al corriente en su cuenta acorde al convenio de adhesión de lo contrario esta promoción podría ser cancelada.`;
+
+                                        // Posición
+                                        var x = 157; // centro aproximado
+                                        var y = reng_ref + reng_inc2 * 12; // MÁS ABAJO
+
+                                        pdf.text(
+                                            leyenda,
+                                            x,
+                                            y,
+                                            {
+                                                maxWidth: 80, // MÁS ANGOSTO
+                                                align: "center"
+                                            }
+                                        );
+                                        /* pdf.text((tab4 - 2 - pdf.getTextWidth(leyenda) / 2), reng_ref + reng_inc2 * 12.3, leyenda); */
+                                    }
+                                }
+
+                                // Regresar color negro
+                                pdf.setTextColor(0, 0, 0);
+                                pdf.setFontSize(7);
+                                pdf.setFontType('bold')
+
+                                pdf.setFontSize(10);
+                                pdf.setFontType('normal')
+                                pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(costo_mto)), reng_ref + reng_inc2 * 9.5, FormatoMoneda(costo_mto));
+                                pdf.text(tab3 - pdf.getTextWidth(mts_fte), reng_ref + reng_inc2 * 10.5, mts_fte);
+                                pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(costo_obra)), reng_ref + reng_inc2 * 11.5, FormatoMoneda(costo_obra));
+                                pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(abono)), reng_ref + reng_inc2 * 12.5, FormatoMoneda(abono));
+
+                                var aportacion_final_float = 0;
+                                var aport_mes = parseFloat(costo_obra) / parseInt(numpagos);
+                                aportacion_final_float = aport_mes;
+                                var aport_mes_txt = aport_mes.toFixed(2).toString();
+                                var aportacion_final_txt = aport_mes_txt;
+
+
+                                /*Evalua la aportacion para si es la ultima ficha debe mostrar el saldo total*/
+
+                                if (parseInt(num_ficha_act) == parseInt(numpagos)) {
+                                    aportacion_final_txt = FormatoMoneda(total_pagar);
+                                    aportacion_final_float = parseFloat(total_pagar);
+                                }
+
+
+
+                                var cantidad_completa = parseInt(num_ficha_act) - 1;
+                                cantidad_completa = cantidad_completa * aport_mes;
+
+                                var cantidad_lleva = parseFloat(abono);
+                                var meses_sin_aportacion = (cantidad_completa - cantidad_lleva) / aport_mes;
+                                if (meses_sin_aportacion < 0) {
+                                    meses_sin_aportacion = 0;
+                                }
+                                var meses_sin_aportaciones_txt = Math.floor(meses_sin_aportacion).toString();
+
+                                pdf.text(tab3 - pdf.getTextWidth(meses_sin_aportaciones_txt), reng_ref + reng_inc2 * 13.5, meses_sin_aportaciones_txt);
+                                pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(total_pagar)), reng_ref + reng_inc2 * 14.5, FormatoMoneda(total_pagar));
+
+                                pdf.setFontSize(12);
+                                pdf.setFontType('bold')
+
+
+
+
+                                pdf.text(tab3 - pdf.getTextWidth(aportacion_final_txt), reng_ref + reng_inc2 * 16, aportacion_final_txt);
+
+
+                                var numletras = NumeroALetras(aportacion_final_float);
+
+                                pdf.setFontSize(6);
+                                pdf.text('(' + numletras + ')', tab4 - (pdf.getTextWidth(numletras) / 2), reng_ref + reng_inc2 * 16, { maxWidth: 550, align: "justify" });
+
+                                pdf.line(10, reng_ref + reng_inc2 * 16.3, 204, reng_ref + reng_inc2 * 16.3);
+                                pdf.line(10, reng_ref + reng_inc2 * 16.5, 204, reng_ref + reng_inc2 * 16.5);
+
+                                pdf.text(104 - pdf.getTextWidth('HISTORIAL DE APORTACIONES') / 2, reng_ref + reng_inc2 * 17.3, 'HISTORIAL DE APORTACIONES');
+                                pdf.text(tab2 - pdf.getTextWidth('No.Aport  | Mes/Año  |  Estatus'), reng_ref + reng_inc2 * 18, 'No.Aport  | Mes/Año  |  Estatus');
+                                pdf.text(104 - pdf.getTextWidth('No.Aport  |  Mes/Año  |  Estatus'), reng_ref + reng_inc2 * 18, 'No.Aport  | Mes/Año  |  Estatus');
+                                pdf.text(tab4 - pdf.getTextWidth('No.Aport  |  Mes/Año  |  Estatus'), reng_ref + reng_inc2 * 18, 'No.Aport  | Mes/Año  |  Estatus');
+
+                                pdf.line(10, reng_ref + reng_inc2 * 18.2, 204, reng_ref + reng_inc2 * 18.2);
+
+                                var saldo_pagado = parseFloat(abono);
+                                var estatus = '';
+
+                                var mes_int = 0;
+                                var mes_txt = '';
+                                var fec = ConvertirCadenaToFecha(fecinip);
+                                var fec2 = new Date();
+
+                                var campo2 = '';
+                                var reng_aux = 127;
+                                var inc_aux = 3.5;
+                                var factor_inc = 0;
+                                var tab_aux = 20;
+                                var estatus_aportacion = '';
+                                var num_pagos_int = parseInt(numpagos);
+                                var j = 0;
+
+                                for (j = 0; j < num_pagos_int; j++) {
+                                    if (saldo_pagado > 0) {
+                                        saldo_pagado = saldo_pagado - parseFloat(aport_mes);
+                                        estatus = 'SI APORTADO';
+                                    } else {
+                                        estatus = 'NO APORTADO';
+                                    }
+                                    fec.setMonth(fec.getMonth() + j);
+                                    mes_int = fec.getMonth();
+                                    var year_txt = fec.getFullYear();
+                                    mes_txt = NombreMes(mes_int);
+                                    campo2 = mes_txt + '/' + year_txt;
+
+                                    if (j == 8) {
+                                        tab_aux = 73;
+                                        factor_inc = 0;
+                                    }
+
+                                    if (j == 16) {
+                                        tab_aux = 130;
+                                        factor_inc = 0;
+                                    }
+                                    estatus_aportacion = (j + 1).toString() + '  :  ' + mes_txt + '/' + year_txt + '  :  ' + estatus;
+                                    factor_inc++;
+                                    fec = ConvertirCadenaToFecha(fecinip);
+                                    pdf.text(tab_aux, reng_aux + inc_aux * factor_inc, estatus_aportacion);
+
+                                }
+
+                                pdf.setFontSize(10);
+                                pdf.setFontType('bold')
+
+
+
+                                pdf.text(tab2 - pdf.getTextWidth('No. de Cuenta:  '), reng_ref + reng_inc2 * 40, 'No. de Cuenta:  ');
+                                pdf.text(tab2 - pdf.getTextWidth('Nombre de Cooperador:  '), reng_ref + reng_inc2 * 41, 'Nombre de Cooperador:  ');
+                                pdf.text(tab4 - pdf.getTextWidth('Recibo de pago:  '), reng_ref + reng_inc2 * 40, 'Recibo de pago:  ');
+
+                                pdf.text(tab2, reng_ref + reng_inc2 * 40, obr_clv + ' ' + coopid);
+                                pdf.text(tab2, reng_ref + reng_inc2 * 41, nom_ficha);
+                                pdf.text(tab5 - pdf.getTextWidth('Recibo de pago:  '), reng_ref + reng_inc2 * 40, num_ficha_act + ' de ' + numpagos);
+
+                                pdf.line(10, reng_ref + reng_inc2 * 42.5, 204, reng_ref + reng_inc2 * 42.5);
+
+                                pdf.setFontSize(10);
+                                pdf.setFontType('bold')
+                                pdf.text(tab2 - pdf.getTextWidth('Total de Aportación:'), reng_ref + reng_inc2 * 43.5, 'Total de Aportación:');
+                                pdf.text(tab3 - pdf.getTextWidth(aportacion_final_txt), reng_ref + reng_inc2 * 43.5, aportacion_final_txt);
+
+                                pdf.setFontSize(5);
+                                pdf.text('(' + numletras + ')', tab4 - (pdf.getTextWidth(numletras) / 2), reng_ref + reng_inc2 * 43.5, { maxWidth: 550, align: "justify" });
+
+                                pdf.line(10, reng_ref + reng_inc2 * 44, 204, reng_ref + reng_inc2 * 44);
+
+                            }
+
+
+                            i++;
                         }
-                        var meses_sin_aportaciones_txt = Math.floor(meses_sin_aportacion).toString();
 
-                        pdf.text(tab3 - pdf.getTextWidth(meses_sin_aportaciones_txt), reng_ref + reng_inc2 * 13.5, meses_sin_aportaciones_txt);
-                        pdf.text(tab3 - pdf.getTextWidth(FormatoMoneda(total_pagar)), reng_ref + reng_inc2 * 14.5, FormatoMoneda(total_pagar));
-
-                        pdf.setFontSize(12);
-                        pdf.setFontType('bold')
-
-
-
-
-                        pdf.text(tab3 - pdf.getTextWidth(aportacion_final_txt), reng_ref + reng_inc2 * 16, aportacion_final_txt);
-
-
-                        var numletras = NumeroALetras(aportacion_final_float);
-
-                        pdf.setFontSize(6);
-                        pdf.text('(' + numletras + ')', tab4 - (pdf.getTextWidth(numletras) / 2), reng_ref + reng_inc2 * 16, { maxWidth: 550, align: "justify" });
-
-                        pdf.line(10, reng_ref + reng_inc2 * 16.3, 204, reng_ref + reng_inc2 * 16.3);
-                        pdf.line(10, reng_ref + reng_inc2 * 16.5, 204, reng_ref + reng_inc2 * 16.5);
-
-                        pdf.text(104 - pdf.getTextWidth('HISTORIAL DE APORTACIONES') / 2, reng_ref + reng_inc2 * 17.3, 'HISTORIAL DE APORTACIONES');
-                        pdf.text(tab2 - pdf.getTextWidth('No.Aport  | Mes/Año  |  Estatus'), reng_ref + reng_inc2 * 18, 'No.Aport  | Mes/Año  |  Estatus');
-                        pdf.text(104 - pdf.getTextWidth('No.Aport  |  Mes/Año  |  Estatus'), reng_ref + reng_inc2 * 18, 'No.Aport  | Mes/Año  |  Estatus');
-                        pdf.text(tab4 - pdf.getTextWidth('No.Aport  |  Mes/Año  |  Estatus'), reng_ref + reng_inc2 * 18, 'No.Aport  | Mes/Año  |  Estatus');
-
-                        pdf.line(10, reng_ref + reng_inc2 * 18.2, 204, reng_ref + reng_inc2 * 18.2);
-
-                        var saldo_pagado = parseFloat(abono);
-                        var estatus = '';
-
-                        var mes_int = 0;
-                        var mes_txt = '';
-                        var fec = ConvertirCadenaToFecha(fecinip);
-                        var fec2 = new Date();
-
-                        var campo2 = '';
-                        var reng_aux = 127;
-                        var inc_aux = 3.5;
-                        var factor_inc = 0;
-                        var tab_aux = 20;
-                        var estatus_aportacion = '';
-                        var num_pagos_int = parseInt(numpagos);
-                        var j = 0;
-
-                        for (j = 0; j < num_pagos_int; j++) {
-                            if (saldo_pagado > 0) {
-                                saldo_pagado = saldo_pagado - parseFloat(aport_mes);
-                                estatus = 'SI APORTADO';
-                            } else {
-                                estatus = 'NO APORTADO';
-                            }
-                            fec.setMonth(fec.getMonth() + j);
-                            mes_int = fec.getMonth();
-                            var year_txt = fec.getFullYear();
-                            mes_txt = NombreMes(mes_int);
-                            campo2 = mes_txt + '/' + year_txt;
-
-                            if (j == 8) {
-                                tab_aux = 73;
-                                factor_inc = 0;
-                            }
-
-                            if (j == 16) {
-                                tab_aux = 130;
-                                factor_inc = 0;
-                            }
-                            estatus_aportacion = (j + 1).toString() + '  :  ' + mes_txt + '/' + year_txt + '  :  ' + estatus;
-                            factor_inc++;
-                            fec = ConvertirCadenaToFecha(fecinip);
-                            pdf.text(tab_aux, reng_aux + inc_aux * factor_inc, estatus_aportacion);
-
-                        }
-
-                        pdf.setFontSize(10);
-                        pdf.setFontType('bold')
-
-
-
-                        pdf.text(tab2 - pdf.getTextWidth('No. de Cuenta:  '), reng_ref + reng_inc2 * 40, 'No. de Cuenta:  ');
-                        pdf.text(tab2 - pdf.getTextWidth('Nombre de Cooperador:  '), reng_ref + reng_inc2 * 41, 'Nombre de Cooperador:  ');
-                        pdf.text(tab4 - pdf.getTextWidth('Recibo de pago:  '), reng_ref + reng_inc2 * 40, 'Recibo de pago:  ');
-
-                        pdf.text(tab2, reng_ref + reng_inc2 * 40, obr_clv + ' ' + coopid);
-                        pdf.text(tab2, reng_ref + reng_inc2 * 41, nom_ficha);
-                        pdf.text(tab5 - pdf.getTextWidth('Recibo de pago:  '), reng_ref + reng_inc2 * 40, num_ficha_act + ' de ' + numpagos);
-
-                        pdf.line(10, reng_ref + reng_inc2 * 42.5, 204, reng_ref + reng_inc2 * 42.5);
-
-                        pdf.setFontSize(10);
-                        pdf.setFontType('bold')
-                        pdf.text(tab2 - pdf.getTextWidth('Total de Aportación:'), reng_ref + reng_inc2 * 43.5, 'Total de Aportación:');
-                        pdf.text(tab3 - pdf.getTextWidth(aportacion_final_txt), reng_ref + reng_inc2 * 43.5, aportacion_final_txt);
-
-                        pdf.setFontSize(5);
-                        pdf.text('(' + numletras + ')', tab4 - (pdf.getTextWidth(numletras) / 2), reng_ref + reng_inc2 * 43.5, { maxWidth: 550, align: "justify" });
-
-                        pdf.line(10, reng_ref + reng_inc2 * 44, 204, reng_ref + reng_inc2 * 44);
-
-                    }
-
-
-                    i++;
-                }
-
-                var hoy = moment().format("DDMMYYYY");
-                var fichas = obr_clv_int.toString() + '_' + hoy + '.pdf';
-                pdf.save(fichas.toString());
+                        var hoy = moment().format("DDMMYYYY");
+                        var fichas = obr_clv_int.toString() + '_' + hoy + '.pdf';
+                        pdf.save(fichas.toString());
+                    })
+                    .fail(function (xhr) {
+                        console.log(xhr.responseText);
+                        alert("No fué posible leer los cooperadores...");
+                    })
             }
-
-            alert('Cooperadores leídos correctamente');
         })
         .fail(function (xhr) {
             console.log(xhr.responseText);
@@ -2330,7 +2394,6 @@ function LeerCooperadores(obr_clv_int) {
 
     var filtro3 = ',,,,,,,,' + obr_clv_int + ',,';
 
-
     return $.ajax(
         {
             //TODO: Descozco porque trabaja de esta manera los WS, de forma local esta pasando algo
@@ -2344,6 +2407,15 @@ function LeerCooperadores(obr_clv_int) {
             type: "post",
             contentType: "application/json; charset=utf-8"
         });
+}
+
+function ObtenerPromotorPorObraPostgreSQL(obr_clv) {
+    return $.ajax({
+        type: 'POST',
+        url: urls.ws + `/api/obras/obtenerPromotorPorObraPostgreSQL/${obr_clv}`,
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json'
+    });
 }
 
 /* function LeerEstatusAportaciones(fid,accion) {
@@ -2516,7 +2588,6 @@ $(document).ready(function () {
         var num_ficha_act = $("#lblnumfichaactual").html();
         var usuario = $("#bodegadatos").data("idusu");
         var idusu = usuario.split(":")[1];
-
         GenerarFichasPagoMes(obr_clv_int, idusu, num_ficha_act);
     });
 
@@ -4894,7 +4965,7 @@ function consulta_oid(val) {
             success: function (data) {
                 $(data.d).find("oid_p").each(function () {
                     var oid = $(this).find("oidr").text();
-                    console.log("oid: "+oid);
+                    console.log("oid: " + oid);
                     var colonia = $(this).find("coloniar").text();
                     var calle = $(this).find("caller").text();
                     var tramo = $(this).find("tramor").text();
