@@ -3,6 +3,7 @@
 /*Variables globales*/
 var accion = 'infcoop';
 var draw, select = null;
+let procesandoCoop = false;
 
 $(document).ready(function () {
     $(document).on('input', '#txtctapred_predio', function () {
@@ -4395,6 +4396,35 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
 
     $(".window .posicion_boton_accion_coop").click(function (e) {
 
+        // Evitar doble click
+        if (procesandoCoop) return;
+
+        procesandoCoop = true;
+
+        // Referencia al botón clickeado
+        const $btn = $(this);
+
+        // Guardar texto original
+        const textoOriginal = $btn.html();
+
+        // Deshabilitar y mostrar cargando
+        $btn
+            .prop("disabled", true)
+            .addClass("btn-loading")
+            .html(`
+            <span class="spinner-btn"></span>
+            Procesando...
+        `);
+
+        function liberarBoton() {
+            procesandoCoop = false;
+
+            // Restaurar botón original
+            $btn
+                .prop("disabled", false)
+                .removeClass("btn-loading")
+                .html(textoOriginal);
+        }
 
         var fid = $("#bodegadatos").data("fid");
         var pid = $("#bodegadatos").data("pid");
@@ -4464,38 +4494,47 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                                         if (confirm(mensaje)) {
                                             // Si el usuario da Aceptar
                                             if (validarcoop()) {  /*Valida que los datos del cooperador sean correctos*/
-                                                AsignaCoop(idcoop, accion);
+                                                AsignaCoop(idcoop, accion, liberarBoton);
+                                            } else {
+                                                liberarBoton();
                                             }
                                         }
                                     } else {/*Se capturó una cuenta predial pero no se ha usado en otro predio del SIGFIDOC*/
                                         if (validarcoop()) {  /*Valida que los datos del cooperador sean correctos*/
-                                            AsignaCoop(idcoop, accion);
+                                            AsignaCoop(idcoop, accion, liberarBoton);
+                                        } else {
+                                            liberarBoton();
                                         }
                                     }
                                 })
                             } else {
                                 if (validarcoop()) {  /*Valida que los datos del cooperador sean correctos*/
-                                    AsignaCoop(idcoop, accion);
+                                    AsignaCoop(idcoop, accion, liberarBoton);
+                                } else {
+                                    liberarBoton();
                                 }
                             }
                         }).fail(function (r) {
                             alert("No fue posible consultar la cuenta predial");
+                            liberarBoton();
                         });
                 }
                 else {
                     alert("La cuenta predial capturada no pertenece al padrón de predial, por lo tanto no es posible dar de alta el frente con dicha cuenta");
+                    liberarBoton();
                 }
 
             }
             else {   /*Cuando NO existe una cuenta predial capturada*/
                 if (validarcoop()) {   /*Valida que los datos del cooperador sean correctos*/
                     alert("El frente será dado de alta, sin embargo no podrá ser considerado para PAE porque no se asignó CUENTA PREDIAL válida");
-                    AsignaCoop(idcoop, accion);
+                    AsignaCoop(idcoop, accion, liberarBoton);
                 }
             }
         }
         else {
             EliminarFrente(fid, usrcre);
+
         }
         map.updateSize();
     });
@@ -5018,7 +5057,7 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
 
 
 
-    function AsignaCoop(idcoop, accion) {
+    function AsignaCoop(idcoop, accion, liberarBoton) {
 
         /*Datos auxiliares o comunes*/
         var oid = $("#lbloid").html();
@@ -5298,24 +5337,30 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                                                     });
                                                     var features = format.readFeatures(result);
                                                     vSourceFrentes.addFeatures(features);
+                                                    liberarBoton();
                                                 }).fail(function (response) {
                                                     console.log("Error, no fue posible mostrar la capa de frentes");
+                                                    liberarBoton();
                                                 });
 
                                         }).fail(function (response) {
                                             alert("Error, no fue posible guardar cooperador en BD de ACCESS");
+                                            liberarBoton();
                                         });
                                 })
                                 .fail(function (x) {
                                     alert("No fué posible guardar los datos del frente en BD PostgresSQL");
+                                    liberarBoton();
                                 });
                         })
                         .fail(function (x) {
                             alert("No fue posible actualizar los datos del predio");
+                            liberarBoton();
                         });
                 })
                 .fail(function (x) {
                     alert("No fué posible guardar los datos del cooperador...");
+                    liberarBoton();
                 });
 
             $('#mask, .window').hide();
@@ -5435,15 +5480,16 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                             });
                             var features = format.readFeatures(result);
                             vSourceFrentes.addFeatures(features);
+                            liberarBoton();
                         }).fail(function (response) {
                             console.log("Error, no fue posible mostrar la capa de frentes");
+                            liberarBoton();
                         });
-
                 }).fail(function (response) {
                     alert("Error, no fue posible guardar cooperador en BD de ACCESS");
+                    liberarBoton();
                 });
         }
-
     }
 
 
