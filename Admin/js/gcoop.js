@@ -1399,7 +1399,7 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                         limpiarDatosCoop();
                         limpiarDatosFrente();
                         limpiarDatosPredio();
-                        llenarNombresCoops(0, accion);
+                        //llenarNombresCoops(0, accion);
                         llenarRelPred(0, 'consultarelpredio');
                         /*llenarCoopsSIFIDOC(obr_clv, '000')*/
                         MostrarModalAltaCoop();
@@ -4484,29 +4484,43 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                         .done(function (r) {
                             var cadena = $.trim(r.d);
                             if (cadena != "<NewDataSet />") {
-                                $(r.d).find("Predio").each(function () { /*Si la cuenta predial tiene datos relacionados debemos validar si el predio */
+                                let predioConflicto = false;
+                                let pidConflicto = null;
+                                let ctaConflicto = null;
+
+                                // Solo busca si HAY conflicto, no actúes dentro del each
+                                $(r.d).find("Predio").each(function () {
                                     var ctapredial = $(this).find("ctapredialr").text();
                                     var pidr = parseInt($(this).find("pidr").text());
                                     if (pid != pidr) {
-                                        const mensaje = "La cuenta predial: " + ctapredial +
-                                            " se encuentra registrada con el predio: " + pidr +
-                                            ".\n¿Aún así desea registrar el predio?";
-                                        if (confirm(mensaje)) {
-                                            // Si el usuario da Aceptar
-                                            if (validarcoop()) {  /*Valida que los datos del cooperador sean correctos*/
-                                                AsignaCoop(idcoop, accion, liberarBoton);
-                                            } else {
-                                                liberarBoton();
-                                            }
-                                        }
-                                    } else {/*Se capturó una cuenta predial pero no se ha usado en otro predio del SIGFIDOC*/
-                                        if (validarcoop()) {  /*Valida que los datos del cooperador sean correctos*/
-                                            AsignaCoop(idcoop, accion, liberarBoton);
+                                        predioConflicto = true;
+                                        pidConflicto = pidr;
+                                        ctaConflicto = ctapredial;
+                                        return false; // ← rompe el .each() en el primer conflicto
+                                    }
+                                });
+
+                                if (predioConflicto) {
+                                    const mensaje = "La cuenta predial: " + ctaConflicto +
+                                        " se encuentra registrada con el predio: " + pidConflicto +
+                                        ".\n¿Aún así desea registrar el predio?";
+                                    if (confirm(mensaje)) {
+                                        if (validarcoop()) {
+                                            AsignaCoop(idcoop, accion, liberarBoton); // ← UNA sola vez
                                         } else {
                                             liberarBoton();
                                         }
+                                    } else {
+                                        liberarBoton(); // ← también liberar si cancela el confirm
                                     }
-                                })
+                                } else {
+                                    // No hay conflicto
+                                    if (validarcoop()) {
+                                        AsignaCoop(idcoop, accion, liberarBoton); // ← UNA sola vez
+                                    } else {
+                                        liberarBoton();
+                                    }
+                                }
                             } else {
                                 if (validarcoop()) {  /*Valida que los datos del cooperador sean correctos*/
                                     AsignaCoop(idcoop, accion, liberarBoton);
@@ -4529,6 +4543,8 @@ $(document).ready(function () {  //**INICIA SCRIPT PRINCIPAL**/
                 if (validarcoop()) {   /*Valida que los datos del cooperador sean correctos*/
                     alert("El frente será dado de alta, sin embargo no podrá ser considerado para PAE porque no se asignó CUENTA PREDIAL válida");
                     AsignaCoop(idcoop, accion, liberarBoton);
+                }else{
+                    liberarBoton();
                 }
             }
         }
